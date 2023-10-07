@@ -26,7 +26,52 @@
 
 <body>
     <?php include ("../partials/header.php") ?>
+    <script>
+  
+  jQuery(function($){
+
+      var $navbar=$('.header');
+      $(window).scroll(function(event){
+          var $current=$(this).scrollTop();
+
+          if($current >190){
+              $navbar.addClass('navbar-color');
+          }else{
+              $navbar.removeClass('navbar-color');
+          }
+
+      });
+  });
+
+</script>
+
+    <!-- body intro starts -->
+    
+
+
+
+
+    <div class="gridboxes1">
+        <div class="box1" style="background-color:#dfdede;">
+          <h2>WORKOUT</h2>
+          <p>With our latest equipments and efficient coaches.</p>
+        </div>
+        <div class="box2" style="background-color:#cb3737;">
+          <h2 style="color: azure;">NUTRITION</h2>
+          <p style="color: azure;">A meal plan designed to suit you and your goal.</p>
+        </div>
+      </div>
+
+
+
+
+
+
 </body>
+
+
+
+
 
 <script src="/js/index.js">
 
