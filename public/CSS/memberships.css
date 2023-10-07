@@ -27,4 +27,19 @@ h6 i
     color:green;
     padding:8px;
 }
+.img-text
+{
+    position:absolute;
+    top:60%;
+    left:18%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    padding:20px;
+    background-color:transparent;
+}
+.img-text h1{
+    font-size:50px;
+    color:white;
+    margin:0;
+}
 

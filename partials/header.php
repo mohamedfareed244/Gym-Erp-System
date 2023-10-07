@@ -26,9 +26,7 @@
     </header>
     <!-- image starts -->
 
-    <section id="welcome-image">
-        <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
-    </section>
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

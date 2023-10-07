@@ -31,11 +31,16 @@
 <body>
     <!-- include header -->
 <?php include ("../partials/header.php") ?>
+     <!-- add image -->
+    <section id="welcome-image">
+        <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
+        <div class="img-text">
+             <!-- title over image -->
+            <h1 >Memberships</h1>
+        </div>
+    </section>
 
 <div class="container py-5">
-
-    <!-- title -->
-    <h1 >Memberships</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 

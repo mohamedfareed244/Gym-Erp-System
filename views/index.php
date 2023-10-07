@@ -25,7 +25,12 @@
 </head>
 
 <body>
+     <!-- include header -->
     <?php include ("../partials/header.php") ?>
+    <!-- add image -->
+    <section id="welcome-image">
+        <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
+    </section>
     
     <!-- body intro starts -->
     
@@ -58,6 +63,7 @@
 <script src="/js/index.js">
 
 </script>
+<!-- include footer -->
 <?php include ('../partials/footer.php') ?>
 
 </html>
