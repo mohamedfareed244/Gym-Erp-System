@@ -12,214 +12,179 @@ body {
 }
 
 
-.navigation {
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 999999;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(rgba(0, 0, 0, 0.7), transparent); /* Gradient black and transparent background */
-}
 
 
-    
-
-
-
-/* .navigation>.container {
-    background: #ffffff;
-    max-width: 90%;
-    /* margin: auto; */
-    /* z-index: 999999;
-}
-*/ 
-
-
-.navigation .navbar .logo-toggle-container {
-    position: absolute;
-    left: 50%;
-    top: 10px;
-    transform: translateX(-50%);
-}
-
-.navigation .navbar .logo-toggle-container a {
-    display: block;
-}
-
-.navigation .navbar .logo-toggle-container a img {
-    width: 275px;
-    padding-left: 70px;
-    padding-top: 8px;
-}
-
-.navigation .menu {
-    text-align: right;
-}
-
-.navigation .menu li {
-    display: inline-block;
-    padding: 43px 10px;
-}
-
-
-.navigation .menu li a {
-    display: block;
-    padding: 0px 5px;
-    text-decoration: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-        'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    font-size: 12.5px;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
-
-/* 
-.navigation .menu li:nth-child(5),
-.navigation .menu li:nth-child(6),
-.navigation .menu li:nth-child(7),
-.navigation .menu li:nth-child(8) {
-        padding-right: 20px;
-} */
-
-.navigation .menu li ul {
-    position: absolute;
-    display: block;
-    width: 150px;
-    background: #000000;
-}
-
-.navigation .menu li ul li {
-    display: none;
-    text-align: left;
-    width: 100%;
-    padding: 10 0px;
-    border-top: 1px solid #bbbbbb;
-
-}
-
-.navigation .menu li ul li:nth-child(3) {
-    border-bottom: 1px solid #bbbbbb;
-}
-
-.navigation .menu li:focus-within>ul li,
-.navigation .menu li:hover>ul li {
-    display: initial;
-}
-
-
-.navigation .menu li:nth-child(1) {
-    float: left;
-    
-}
-
-.navigation .menu li:nth-child(2),
-.navigation .menu li:nth-child(3),
-.navigation .menu li:nth-child(4),
-.navigation .menu li:nth-child(5),
-.navigation .menu li:nth-child(6),
-.navigation .menu li:nth-child(7) 
-    {
-
-    float: right;
-}
-
-
-
-.navigation .menu li a:hover {
-    color: #b63232;
-    transition: 0.5s ease;
-}
-
-.navigation .menu li a:active {
-    color: #b63232;
-}
-
-/* responsive nav bar start */
-@media screen and (min-width:1500px) {
-    .navigation .menu {
-        display: block !important;
-        height: auto !important;
-    }
-
-}
-
-@media screen and (max-width:1150px) {
-    .navigation .navbar .logo-toggle-container {
-        position: static;
-        transform: translateX(0%);
-    }
-
-    .navigation .navbar .logo-toggle-container a {
-        width: 80%;
-    }
-
-    .navigation .navbar .logo-toggle-container .toggle-box {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        display: block;
-        padding: 15px 9px;
-        cursor: pointer;
-    }
-
-    .navigation .navbar .logo-toggle-container .toggle-box span {
-        display: block;
-        max-width: 90%;
-        margin: 5px auto;
-        height: 3px;
-        display: block;
-        width: 25px;
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        background-color: black;
-
-    }
-
-    .navigation .navbar .logo-toggle-container .toggle-box span:last-child {
-        margin-bottom: 0;
-    }
-
-    .navigation .menu {
-        text-align: left;
-        display: none;
-        width: 100%;
-    }
-
-    .navigation .menu li {
-        display: block;
-        float: none !important;
-        padding: 0 0px;
-        border-bottom: 1px solid #bbbbbb;
-        left: 0;
-    }
-
-    .navigation .menu li ul {
-        width: 100%;
-        left: 0;
-    }
-}
-
-
-.navigation .navbar {
-    background-color: transparent;
-    transition: background-color 0.5s ease;
-    position: relative;
+.header {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999999;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.7); /* Transparent black background */
+    padding: 1.3rem 10%;
 
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+    left: -220px;
+    margin-left: 20px;
+    letter-spacing: 1px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.navbar a:hover{
+    color: rgb(222, 60, 60);
+}
+
+.navbar a::before {
+
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(222, 60, 60);
+    transition: .6s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+.logo img {
+    position: relative;
+    left: -56px;
+    width: 235px;
+    height: 55px;
+}
+
+.icons {
+    position: absolute;
+    font-size: 2.6rem;
+    right: 16%;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+
+
+#home::before {
+
+    width: 100%;
 
 }
 
 
-.navigation .navbar.scrolled {
-    background-color: rgb(0, 0, 0);
+
+.navbar-color {
+    background-color: #1e2227;
+    transition: .15s;
+}
+
+#check {
+    display: none;
+}
+
+.header::before {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+@media(max-width:1100px) {
+    .header {
+        padding: 1.3rem 5%;
+    }
+}
+
+@media(max-width:600px) {
+    .navbar {
+        position: relative;
+        padding-left: 175px;
+    }
+    #gym-title{
+        padding-left: 50px;
+    }
+
+}
+
+
+@media(max-width:1084px) {
+    .icons {
+        display: inline-flex;
+    }
+
+   
+    .navbar a:hover::before {
+        width: 0;
+    }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    }
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    }
+
+    #home::before {
+
+        width: 0;
+
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: #12141858;
+        backdrop-filter: blur(120px);
+        transition: .3s ease;
+        overflow: hidden;
+
+    }
+
+    #check:checked~.navbar {
+        height: 24.5rem;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.3rem 0;
+        text-align: center;
+    }
+}
+
+
+#gym-title{
+    font-size: 22px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(231, 55, 55);
+    font-weight: bolder;
+    text-shadow: #010916;
+    transform: translateX(-50px);
 }
 
 
@@ -228,18 +193,8 @@ body {
 .main-img {
     width: 100%;
     height: auto;
-    max-height: 100vh; 
-    object-fit: contain; 
+    max-height: 100vh;
+    object-fit: contain;
     position: relative;
-
-}
-
-.container{
-position: absolute;
-  margin: 20px;
-  width: auto;
-  z-index: 999999;
-  padding-right: 50px;
-  margin-top: -30px;
 
 }
