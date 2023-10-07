@@ -38,5 +38,25 @@
         });
     </script>
 
+<script>
+  
+  jQuery(function($){
+
+      var $navbar=$('.header');
+      $(window).scroll(function(event){
+          var $current=$(this).scrollTop();
+
+          if($current >190){
+              $navbar.addClass('navbar-color');
+          }else{
+              $navbar.removeClass('navbar-color');
+          }
+
+      });
+  });
+
+</script>
+
+
 </body>
     
