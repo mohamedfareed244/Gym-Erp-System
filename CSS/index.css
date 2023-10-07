@@ -208,13 +208,13 @@ body::-webkit-scrollbar {
   }
   
   body::-webkit-scrollbar-thumb {
-    background-color: rgb(24, 24, 24);    /* color of the scroll thumb */
+    background-color: rgb(31, 31, 31);    /* color of the scroll thumb */
   }
   
 
 
 .fcontainer {
-    background-color: #000000;
+    background-color: rgb(31, 31, 31);    /* color of the scroll thumb */
     margin: auto;
 }
 
