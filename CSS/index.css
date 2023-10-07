@@ -14,28 +14,26 @@ body {
 
 .navigation {
     width: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Transparent black background */
     position: sticky;
     top: 0;
     z-index: 999999;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);    
-
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), transparent); /* Gradient black and transparent background */
 }
 
-.navigation>.container {
+
+    
+
+
+
+/* .navigation>.container {
     background: #ffffff;
     max-width: 90%;
-    margin: auto;
-    z-index: 999999;
-
-
+    /* margin: auto; */
+    /* z-index: 999999;
 }
+*/ 
 
-.navigation .navbar {
-    position: relative;
-    z-index: 999999;
-
-}
 
 .navigation .navbar .logo-toggle-container {
     position: absolute;
@@ -74,7 +72,7 @@ body {
     font-weight: 600;
     font-size: 12.5px;
     letter-spacing: 1px;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* 
@@ -89,7 +87,7 @@ body {
     position: absolute;
     display: block;
     width: 150px;
-    background: #fff;
+    background: #000000;
 }
 
 .navigation .menu li ul li {
@@ -212,10 +210,16 @@ body {
     left: 0;
     width: 100%;
     z-index: 999999;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.7); /* Transparent black background */
+
+    
+
 }
 
+
 .navigation .navbar.scrolled {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
 }
 
 
@@ -226,4 +230,16 @@ body {
     height: auto;
     max-height: 100vh; 
     object-fit: contain; 
+    position: relative;
+
+}
+
+.container{
+position: absolute;
+  margin: 20px;
+  width: auto;
+  z-index: 999999;
+  padding-right: 50px;
+  margin-top: -30px;
+
 }
