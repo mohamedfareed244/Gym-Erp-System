@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="icon" type="image/x-icon" href="../public/Images/dfav.png" />
+
+
+    <link rel="stylesheet" type="text/css" href="../public/CSS/index.css">
+
+    <!--icons/boostrap/jqueary-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="../public/Images/dfav.png" />
+
+
+    <title>ProFit Gym</title>
+
+</head>
+
+<body>
+    <!-- Navigation Bar Start -->
+    <header class="header">
+        <a id="gym-title">ProFit Gym</a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <span class="material-symbols-outlined" id="menu-icon">
+                menu
+            </span>
+            <span class="material-symbols-outlined" id="close-icon">
+                close
+            </span>
+        </label>
+        <nav class="navbar">
+            <a href="/" id="home">HOME</a>
+            <a href="#" id="classes"> CLASSES</a>
+            <a href="#" id="memberships">MEMBERSHIPS</a>
+
+            <a href="#" id="facilities">FACILITIES</a>
+            <a href="#" id="contactus">CONTACT US</a>
+            <a href="#"><i class="ri-account-circle-line"></i></a>
+        </nav>
+    </header>
+    <!-- Navigation Bar End -->
+
+    <!-- Main Content Start -->
+    <!-- image start -->
+    <section id="welcome-image">
+        <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".navigation .navbar .logo-toggle-container .toggle-box").click(function () {
+                $(".navigation .menu").stop().slideToggle();
+            });
+        });
+    </script>
+    <!-- Main Content End -->
+    <!-- image End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>About us</h4>
+                    <ul>
+                        <p>Welcome to Proft Gym, your ultimate fitness destination. We're passionate about helping you
+                            achieve your fitness goals and lead a healthier, happier life.</p>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">memberships</a></li>
+                        <li><a href="#">classes</a></li>
+                        <li><a href="#">contact us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+</body>
+
+<script src="/js/index.js"></script>
+
+</html>
