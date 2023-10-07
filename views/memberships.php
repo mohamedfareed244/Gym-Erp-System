@@ -20,13 +20,107 @@
     <link rel="icon" type="image/x-icon" href="../public/Images/dfav.png" />
   
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../public/CSS/memberships.css">
     <title>ProFit Gym</title>
 
 </head>
 
 <body>
 <?php include ("../partials/header.php") ?>
+
+<div class="container py-5">
+    <h1 >Memberships</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+
+    <div class="col">
+       <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">1 MONTH</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Limited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>2 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>1 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>1 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 1,000</h5>
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">2 MONTHS</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Limited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>4 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>2 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>2 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 2,500</h5>
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">3 MONTHS</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>5 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>3 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>3 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 3,500</h5>
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">4 MONTHS + 2 MONTHS FREE</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>6 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>5 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>5 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 5,500</h5>
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">6 MONTHS + 3 MONTHS</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>8 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>7 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>7 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 7,500</h5>
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">8 MONTHS + 4 MONTHS FREE</h5>
+          <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits</h6>
+          <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>10 Invitations</h6>
+          <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>9 Inbody</h6>
+          <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>9 Private Training Session</h6>
+          <h5 class="card-text" id="price">for L.E 9,000</h5>
+          </div>
+        </div>
+    </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+
 <?php include ("../partials/footer.php") ?>
 
 
