@@ -74,13 +74,13 @@ body {
     letter-spacing: 1.3px;
     color: #000000;
 }
-
+/* 
 .navigation .menu li:nth-child(5),
 .navigation .menu li:nth-child(6),
 .navigation .menu li:nth-child(7),
 .navigation .menu li:nth-child(8) {
         padding-right: 20px;
-}
+} */
 
 .navigation .menu li ul{
     position: absolute;
@@ -110,7 +110,8 @@ body {
 .navigation .menu li:nth-child(1),
 .navigation .menu li:nth-child(2),
 .navigation .menu li:nth-child(3), 
-.navigation .menu li:nth-child(4) {
+.navigation .menu li:nth-child(4),
+.navigation .menu li:nth-child(5)  {
     float: left;
 }
 
@@ -188,18 +189,5 @@ body {
         left: 0;
     }
 }
-
-
-.navigation .navbar {
-    background-color: transparent; 
-    transition: background-color 0.5s ease;
-    position: sticky;
-    z-index: 999999;
-}
-
-.navigation .navbar.scrolled {
-    background-color: black; 
-}
-
 
 
