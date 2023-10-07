@@ -20,6 +20,7 @@
     <link rel="icon" type="image/x-icon" href="../public/Images/dfav.png" />
   
 
+    <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="../public/CSS/memberships.css">
@@ -28,13 +29,17 @@
 </head>
 
 <body>
+    <!-- include header -->
 <?php include ("../partials/header.php") ?>
 
 <div class="container py-5">
+
+    <!-- title -->
     <h1 >Memberships</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
+    <!-- first membership -->
     <div class="col">
        <div class="card">
           <div class="card-body">
@@ -48,6 +53,7 @@
         </div>
     </div>
 
+    <!-- second membership -->
     <div class="col">
         <div class="card">
           <div class="card-body">
@@ -61,6 +67,7 @@
         </div>
     </div>
 
+    <!-- third membership -->
     <div class="col">
         <div class="card">
           <div class="card-body">
@@ -74,6 +81,7 @@
         </div>
     </div>
 
+    <!-- fourth membership -->
     <div class="col">
         <div class="card">
           <div class="card-body">
@@ -87,6 +95,7 @@
         </div>
     </div>
 
+    <!-- fifth membership -->
     <div class="col">
         <div class="card">
           <div class="card-body">
@@ -100,6 +109,7 @@
         </div>
     </div>
 
+    <!-- sixth membership -->
     <div class="col">
         <div class="card">
           <div class="card-body">
@@ -118,9 +128,11 @@
 </div>
 
 
+<!-- script for bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
+<!-- include footer -->
 <?php include ("../partials/footer.php") ?>
 
 
