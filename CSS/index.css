@@ -16,7 +16,7 @@ body {
     width: 100%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
     position: sticky;
-    z-index: 999999; 
+    z-index: 999999;
 
 }
 
@@ -24,14 +24,14 @@ body {
     background: #ffffff;
     max-width: 90%;
     margin: auto;
-    z-index: 999999; 
+    z-index: 999999;
 
-    
+
 }
 
 .navigation .navbar {
     position: relative;
-    z-index: 999999; 
+    z-index: 999999;
 
 }
 
@@ -74,6 +74,7 @@ body {
     letter-spacing: 1px;
     color: #000000;
 }
+
 /* 
 .navigation .menu li:nth-child(5),
 .navigation .menu li:nth-child(6),
@@ -82,36 +83,43 @@ body {
         padding-right: 20px;
 } */
 
-.navigation .menu li ul{
+.navigation .menu li ul {
     position: absolute;
     display: block;
     width: 150px;
     background: #fff;
 }
-.navigation .menu li ul li{
+
+.navigation .menu li ul li {
     display: none;
     text-align: left;
     width: 100%;
     padding: 10 0px;
     border-top: 1px solid #bbbbbb;
-    
-}
-.navigation .menu li ul li:nth-child(3)
-{
-    border-bottom: 1px solid #bbbbbb;   
+
 }
 
-.navigation .menu li:focus-within > ul li
-,.navigation .menu li:hover > ul li{
+.navigation .menu li ul li:nth-child(3) {
+    border-bottom: 1px solid #bbbbbb;
+}
+
+.navigation .menu li:focus-within>ul li,
+.navigation .menu li:hover>ul li {
     display: initial;
 }
 
 
-.navigation .menu li:nth-child(1),
+.navigation .menu li:nth-child(1) {
+    float: left;
+    
+}
+
 .navigation .menu li:nth-child(2),
-.navigation .menu li:nth-child(3), 
+.navigation .menu li:nth-child(3),
 .navigation .menu li:nth-child(4),
-.navigation .menu li:nth-child(5)  {
+.navigation .menu li:nth-child(5),
+.navigation .menu li:nth-child(6) {
+
     float: right;
 }
 
@@ -121,6 +129,7 @@ body {
     color: #b63232;
     transition: 0.5s ease;
 }
+
 .navigation .menu li a:active {
     color: #b63232;
 }
@@ -183,9 +192,9 @@ body {
         border-bottom: 1px solid #bbbbbb;
         left: 0;
     }
-    .navigation .menu li ul
-    {
-        width: 100%; 
+
+    .navigation .menu li ul {
+        width: 100%;
         left: 0;
     }
 }
@@ -194,7 +203,7 @@ body {
 .navigation .navbar {
     background-color: transparent;
     transition: background-color 0.5s ease;
-    position: sticky;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
