@@ -1,12 +1,12 @@
 body {
-    padding-top: 70px; /* Adjust this value according to your navigation bar height */
+    padding-top: 70px; 
 }
 
 .navbar {
     background-color: transparent;
-    transition: background-color 0.5s ease; /* Smooth transition effect */
+    transition: background-color 0.5s ease; 
 }
 
 .navbar.scrolled {
-    background-color: black; /* Change the background color upon scrolling */
+    background-color: black; 
 }
