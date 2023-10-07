@@ -18,7 +18,7 @@
 
             <a href="#" id="facilities">FACILITIES</a>
             <a href="#" id="contactus">CONTACT US</a>
-            <a href="#"><i class="ri-account-circle-line"></i></a>
+            <a href="../views/signup.php"><i class="ri-account-circle-line"></i></a>
 
 
             
