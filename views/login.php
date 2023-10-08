@@ -46,7 +46,7 @@
                                 </div>
 
                                 <h6 class="h5 mb-0" style="color:white;">Welcome back!</h6>
-                                <p class="text-muted mt-2 mb-5" style="color:white;">Enter your email address and password to access admin panel.</p>
+                                <p class="text-muted mt-2 mb-5" style="color:white;">Enter your email address and password to access your account.</p>
 
                                 <form style="width:100%;">
                                     <div class="form-group">
@@ -57,8 +57,7 @@
                                         <label for="exampleInputPassword1" style="color:white;">Password</label>
                                         <input type="password" class="form-control" id="exampleInputPassword1">
                                     </div>
-                                    <button type="submit" class="btn btn-theme" style="color:white;">Login</button>
-                                    <a href="#l" class="forgot-link float-right text-primary" style="color:white;">Forgot password?</a>
+                                    <button type="submit" class="btn-theme" style="color:white;">Login</button>
                                 </form>
                             </div>
                         </div>
@@ -78,7 +77,7 @@
             </div>
             <!-- end card -->
 
-            <p class="text-center mt-3 mb-0" style="color:white;">Don't have an account? <a href="register.html" class="text-primary ml-1">register</a></p>
+            <p class="register">Don't have an account? <a href="register.html" class="text-primary ml-1">Register</a></p>
 
             <!-- end row -->
 
