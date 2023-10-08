@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Age" style="color:white;">Age</label>
-                                        <input type="number" class="form-control" id="exampleInputAge">
+                                        <input type="number" class="form-control" id="exampleInputAge" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Weight" style="color:white;">Weight <span class="notreq">(Not Required)</span></label>
@@ -78,15 +78,15 @@
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Email" style="color:white;">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail">
+                                        <input type="email" class="form-control" id="exampleInputEmail" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Password" style="color:white;">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword">
+                                        <input type="password" class="form-control" id="exampleInputPassword" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="ConfPassword" style="color:white;">Confirm Password</label>
-                                        <input type="password" class="form-control" id="exampleInputConfPassword">
+                                        <input type="password" class="form-control" id="exampleInputConfPassword" required>
                                     </div>
                                     <button type="submit" class="btn-theme">SIGN UP</button>
                                 </form>
