@@ -49,15 +49,15 @@
                                 <p class="text-muted mt-2 mb-5" style="color:white;">Enter your email address and password to access your account.</p>
 
                                 <form style="width:100%;">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color:white;">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1">
+                                    <div class="form-group mb-5">
+                                        <label for="Email" style="color:white;">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail">
                                     </div>
                                     <div class="form-group mb-5">
-                                        <label for="exampleInputPassword1" style="color:white;">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                        <label for="Password" style="color:white;">Password</label>
+                                        <input type="password" class="form-control" id="Password">
                                     </div>
-                                    <button type="submit" class="btn-theme" style="color:white;">Login</button>
+                                    <button type="submit" class="btn-theme" >SIGN IN</button>
                                 </form>
                             </div>
                         </div>
