@@ -13,7 +13,7 @@
         </label>
         <nav class="navbar">
             <a href="../views/index.php" id="home">HOME</a>
-            <a href="#" id="classes"> CLASSES</a>
+            <a href="../views/classes.php" id="classes"> CLASSES</a>
             <a href="../views/memberships.php" id="memberships">MEMBERSHIPS</a>
 
             <a href="#" id="facilities">FACILITIES</a>

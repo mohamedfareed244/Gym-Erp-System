@@ -34,8 +34,7 @@
         <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
         <div class="img-text">
             <!-- title over image -->
-            <h1>Our Classes</h1>
-            <h2>Home > Classes</h2>
+            <h1 class="classes">Classes</h1>
         </div>
     </section>
 

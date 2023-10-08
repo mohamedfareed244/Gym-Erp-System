@@ -19,7 +19,7 @@
     text-align: center;
     padding-top: 15px;
     padding-bottom: 15px;
-    color: red;
+    color: rgb(231, 55, 55);
     text-shadow: 0 5 10 rgba(0, 0, 0, .2);
     font-size: 40px;
 }
@@ -63,7 +63,7 @@
 .container .card-container .card:hover{
     box-shadow: 0 10px 15px rgba(0, 0, 0, .3);
     transform: scale(1.03);
-    background-color: red;
+    background-color:rgb(231, 55, 55);
 }
 
 .img-text
@@ -85,8 +85,14 @@
 
 .img-text h2{
     font-size:20px;
-    color:red;
+    color:rgb(231, 55, 55);
     margin:0;
+}
+
+.classes
+{
+    position:relative;
+    right:40%;
 }
 
 @media (max-width:768px){
