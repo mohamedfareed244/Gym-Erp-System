@@ -33,7 +33,7 @@
   <?php include("../partials/header.php") ?>
   <!-- add image -->
   <section id="welcome-image">
-    <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
+    <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">
     <div class="img-text">
       <!-- title over image -->
       <h1>Memberships</h1>
