@@ -64,6 +64,25 @@
 
     <!-- main content end -->
 
+
+    <!-- info starts -->
+
+    <section id="info">
+        <div class="info-content">
+            <div class="info-text">
+                <h1 class="infoh1">8 YEARS EXPERIENCE</h1>
+                <p class="infop">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor aliquam nisi,
+                    eu
+                    tincidunt ligula bibendum sit amet. Vivamus hendrerit euismod tristique. Nullam in ipsum id orci
+                    porta dapibus. Pellentesque feugiat vel nulla eu tempus. Duis non risus vel ligula volutpat
+                    suscipit.</p>
+            </div>
+            <div class="info-image">
+                <img src="../public/Images/infopic2.jpg" alt="Image info">
+            </div>
+        </div>
+    </section>
+
 </body>
 
 <script src="/js/index.js"></script>

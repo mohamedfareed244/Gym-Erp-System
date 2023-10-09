@@ -387,6 +387,50 @@ body::-webkit-scrollbar-thumb {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* ends */
+
+
+/* info starts */
+.info-content {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    transform: translateY(-220px);
+
+}
+
+.infoh1{
+    font-size: 65px;
+    transform: translateY(-100px);
+}
+.infop{
+    transform: translateY(-50px);
+    color: #333335;
+}
+
+.info-text {
+    flex: 1; /* Grow to fill available space */
+    padding: 70px;
+}
+
+.info-image {
+    flex-shrink: 0; /* Prevent the image from shrinking */
+    max-width: 50%; 
+    padding-right: 150px;
+}
+
+.info-image img {
+    max-width: 100%; 
+    height: auto;
+    
+    /* width: auto\9;  */
+}
+
+
+
+
+
+/* info ends */
 
 @media(max-width:1084px) {
 
