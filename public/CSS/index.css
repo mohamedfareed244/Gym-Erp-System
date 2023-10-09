@@ -304,8 +304,8 @@ body::-webkit-scrollbar-thumb {
     /* Adjust the percentage as needed */
     /* max-width: calc(33.33% - 40px); Adjust the percentage as needed */
     padding: 20px;
-    padding-top: 120px;
-    padding-bottom: 180px;
+    padding-top: 150px;
+    padding-bottom: 415px;
     text-align: center;
 }
 
@@ -358,7 +358,7 @@ body::-webkit-scrollbar-thumb {
 
 
 .italic-line {
-    transform: translateY(-210px);
+    /* transform: translateY(-100px); */
 }
 
 
@@ -366,7 +366,7 @@ body::-webkit-scrollbar-thumb {
     background: #24262b;
     color: #dcdcdc;
     text-align: center;
-    transform: translateY(-300px);
+    /* transform: translateY(-100px); */
     padding-bottom: 50px;
 
 
@@ -395,7 +395,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transform: translateY(-220px);
+    transform: translateY(-460px);
 
 }
 
