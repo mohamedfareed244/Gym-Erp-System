@@ -57,7 +57,7 @@
 
     <div class="italic-line-data">
         <h1>🙶</h1>
-        <p> The hard part isn’t getting your body in shape. The hard part is getting your mind in shape. </p>
+        <p> The hard part isn’t getting your body in shape.  The hard part is getting your mind in shape. </p>
     </div>
 
 

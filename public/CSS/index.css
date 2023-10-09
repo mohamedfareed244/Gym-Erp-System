@@ -348,7 +348,7 @@ body::-webkit-scrollbar-thumb {
 
 .italic-line-data{
     background: #24262b;
-    color:#ffffff;
+    color:#dcdcdc;
     text-align: center;
     transform: translateY(-300px);
     padding-bottom: 50px;
@@ -366,6 +366,7 @@ body::-webkit-scrollbar-thumb {
     padding-bottom: 50px;
     transform: translateY(-50px);
     text-transform:uppercase;
+    letter-spacing: 1px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
