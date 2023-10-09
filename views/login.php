@@ -44,12 +44,12 @@
                                     <form style="width:100%;">
                                         <div class="form-group mb-5">
                                             <label for="Email" style="color:white;">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail">
+                                            <input type="email" class="form-control" id="exampleInputEmail" required>
                                         </div>
-                                        <div class="row">
-								<!-- <span class="fa fa-lock"></span> -->
-								<input type="password" name="password" id="password" class="form__input" placeholder="Password">
-							</div>
+                                        <div class="form-group mb-5">
+                                            <label for="Password" style="color:white;">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword" required>
+                                        </div>
                                         <button type="submit" class="btn-theme">SIGN IN</button>
                                     </form>
                                 </div>
