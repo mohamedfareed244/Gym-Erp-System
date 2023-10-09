@@ -68,7 +68,7 @@
 .img-text
 {
     position:absolute;
-    top:60%;
+    top:100%;
     left:18%;
     transform:translate(-50%,-50%);
     text-align:center;
@@ -80,5 +80,6 @@
     color:white;
     margin:0;
 }
+
 
 
