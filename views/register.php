@@ -36,6 +36,47 @@ include ("../partials/header.php");
 include_once "../includes/dbh.inc.php";
 ?>
 
+<?php
+
+
+ $Fname_error="";
+ //grap data from user if form was submitted 
+
+ if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+    if (empty($_POST["Fname"])) {
+        $Fname_error = "Please enter your first name.";
+        echo "Condition triggered"; // Debug output
+    } else {
+        $Fname = $_POST["Fname"];
+    }
+	//$Fname=htmlspecialchars($_POST["Fname"]);
+	$Lname=htmlspecialchars($_POST["Lname"]);
+    $Age=htmlspecialchars($_POST["Age"]);
+    $Weight=htmlspecialchars($_POST["Weight"]);
+    $Height=htmlspecialchars($_POST["Height"]);
+	$Email=htmlspecialchars($_POST["Email"]);
+	$Password=htmlspecialchars($_POST["Password"]);
+	$ConfPassword=htmlspecialchars($_POST["ConfPassword"]);
+
+    if(isset($_POST["gender"]))
+    {
+        $Gender=$_POST["gender"];
+    }
+
+    //insert it to database 
+	$sql="insert into users(Fname,Lname,Gender,Age,Weight,Height,Email,Password) 
+	values('$Fname','$Lname','$Gender','$Age','$Weight','$Height','$Email','$Password')";
+	$result=mysqli_query($conn,$sql);
+
+    echo($result);
+    //redirect the user back to index.php 
+	if($result)	{
+		header("Location:login.php");
+	}
+}
+
+?>
+
 <div id="main-wrapper" class="container">
     <div class="row justify-content-center">
         <div class="col-xl-10">
@@ -51,10 +92,11 @@ include_once "../includes/dbh.inc.php";
                                 <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
                                 <p class="text-muted mt-2 mb-5" style="color:white;">Create an Account.</p>
 
-                                <form style="width:100%;" action="" method="post">
+                                <form method="post" style="width:100%;" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                     <div class="form-group mb-5">
                                         <label for="Fname" style="color:white;">First Name</label>
                                         <input type="text" class="form-control" id="exampleInputFname" name="Fname" required>
+                                        <span class="error"><?php echo $Fname_error; ?></span>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Lname" style="color:white;">Last Name</label>
@@ -91,7 +133,7 @@ include_once "../includes/dbh.inc.php";
                                         <label for="ConfPassword" style="color:white;">Confirm Password</label>
                                         <input type="password" class="form-control" id="exampleInputConfPassword" name="ConfPassword" required>
                                     </div>
-                                    <button type="submit" class="btn-theme">SIGN UP</button>
+                                    <input type="submit" value="SIGN UP" class="btn-theme">
                                 </form>
                             </div>
                         </div>
@@ -121,38 +163,7 @@ include_once "../includes/dbh.inc.php";
     <!-- Row -->
 </div>
 
-<?php
 
- //grap data from user if form was submitted 
-
- if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
-	$Fname=htmlspecialchars($_POST["Fname"]);
-	$Lname=htmlspecialchars($_POST["Lname"]);
-    $Age=htmlspecialchars($_POST["Age"]);
-    $Weight=htmlspecialchars($_POST["Weight"]);
-    $Height=htmlspecialchars($_POST["Height"]);
-	$Email=htmlspecialchars($_POST["Email"]);
-	$Password=htmlspecialchars($_POST["Password"]);
-	$ConfPassword=htmlspecialchars($_POST["ConfPassword"]);
-
-    if(isset($_POST["gender"]))
-    {
-        $Gender=$_POST["gender"];
-    }
-
-    //insert it to database 
-	$sql="insert into users(Fname,Lname,Gender,Age,Weight,Height,Email,Password) 
-	values('$Fname','$Lname','$Gender','$Age','$Weight','$Height','$Email','$Password')";
-	$result=mysqli_query($conn,$sql);
-
-    echo($result);
-    //redirect the user back to index.php 
-	if($result)	{
-		header("Location:login.php");
-	}
-}
-
-?>
 
 
 

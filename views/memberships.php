@@ -26,6 +26,7 @@
   <link rel="stylesheet" type="text/css" href="../public/CSS/memberships.css">
   <title>ProFit Gym</title>
 
+
 </head>
 
 <body>
