@@ -24,7 +24,7 @@
     <?php include("../partials/header.php") ?>
     <!-- header image -->
     <section id="welcome-image">
-        <img src="../public/Images/bckgrnd.jpg" alt="Home Image" class="main-img">
+        <img src="../public/Images/bckgrnd.png" alt="Home Image" class="main-img">
     </section>
     <!-- navbar end -->
 
