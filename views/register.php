@@ -31,7 +31,10 @@
 
 <body style="background-color:rgb(31, 31, 31);">
     <!-- include header -->
-<?php include ("../partials/header.php") ?>
+<?php 
+include ("../partials/header.php");
+include_once "../includes/dbh.inc.php";
+?>
 
 <div id="main-wrapper" class="container">
     <div class="row justify-content-center">
@@ -48,14 +51,14 @@
                                 <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
                                 <p class="text-muted mt-2 mb-5" style="color:white;">Create an Account.</p>
 
-                                <form style="width:100%;">
+                                <form style="width:100%;" action="" method="post">
                                     <div class="form-group mb-5">
                                         <label for="Fname" style="color:white;">First Name</label>
-                                        <input type="text" class="form-control" id="exampleInputFname" required>
+                                        <input type="text" class="form-control" id="exampleInputFname" name="Fname" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Lname" style="color:white;">Last Name</label>
-                                        <input type="text" class="form-control" id="exampleInputLname" required>
+                                        <input type="text" class="form-control" id="exampleInputLname" name="Lname" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Gender" style="color:white;">Gender</label><br>
@@ -66,29 +69,29 @@
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Age" style="color:white;">Age</label>
-                                        <input type="number" class="form-control" id="exampleInputAge" required>
+                                        <input type="number" class="form-control" id="exampleInputAge" name="Age" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Weight" style="color:white;">Weight <span class="notreq">(Not Required)</span></label>
-                                        <input type="number" class="form-control" id="exampleInputWeight" step="any">
+                                        <input type="number" class="form-control" id="exampleInputWeight" name="Weight" step="any">
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Height" style="color:white;">Height<span class="notreq">(Not Required)</span></label>
-                                        <input type="number" class="form-control" id="exampleInputHeight" step="any">
+                                        <input type="number" class="form-control" id="exampleInputHeight" name="Height" step="any">
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Email" style="color:white;">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail" required>
+                                        <input type="email" class="form-control" id="exampleInputEmail" name="Email" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="Password" style="color:white;">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword" required>
+                                        <input type="password" class="form-control" id="exampleInputPassword" name="Password" required>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="ConfPassword" style="color:white;">Confirm Password</label>
-                                        <input type="password" class="form-control" id="exampleInputConfPassword" required>
+                                        <input type="password" class="form-control" id="exampleInputConfPassword" name="ConfPassword" required>
                                     </div>
-                                    <button type="submit" class="btn-theme">SIGN UP</button>
+                                    <input type="submit" class="btn-theme">SIGN UP</button>
                                 </form>
                             </div>
                         </div>
@@ -118,6 +121,38 @@
     <!-- Row -->
 </div>
 
+<?php
+
+ //grap data from user if form was submitted 
+
+ if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+	$Fname=htmlspecialchars($_POST["Fname"]);
+	$Lname=htmlspecialchars($_POST["Lname"]);
+    $Age=htmlspecialchars($_POST["Age"]);
+    $Weight=htmlspecialchars($_POST["Weight"]);
+    $Height=htmlspecialchars($_POST["Height"]);
+	$Email=htmlspecialchars($_POST["Email"]);
+	$Password=htmlspecialchars($_POST["Password"]);
+	$ConfPassword=htmlspecialchars($_POST["ConfPassword"]);
+
+    if(isset($_POST["gender"]))
+    {
+        $Gender=$_POST["gender"];
+    }
+
+    //insert it to database 
+	$sql="insert into users(Fname,Lname,Gender,Age,Weight,Height,Email,Password) 
+	values('$Fname','$Lname','$Gender','$Age','$Weight','$Height','$Email','$Password')";
+	$result=mysqli_query($conn,$sql);
+
+    echo($result);
+    //redirect the user back to index.php 
+	if($result)	{
+		header("Location:login.php");
+	}
+}
+
+?>
 
 
 
