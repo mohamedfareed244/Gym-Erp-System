@@ -17,7 +17,7 @@
             <a href="../views/memberships.php" id="memberships">MEMBERSHIPS</a>
 
             <a href="../views/facilities.php" id="facilities">FACILITIES</a>
-            <a href="#" id="contactus">CONTACT US</a>
+            <a href="../views/contactus.php" id="contactus">CONTACT US</a>
             <a href="../views/login.php"><i class="ri-account-circle-line"></i></a>
 
 
