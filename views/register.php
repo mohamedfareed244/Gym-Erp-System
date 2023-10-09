@@ -36,7 +36,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="mb-5">
-                                        <h3 class="h4 font-weight-bold text-theme">Register</h3>
+                                        <h3 class="h3 font-weight-bold text-theme pt-5">Register</h3>
                                     </div>
 
                                     <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
@@ -85,7 +85,7 @@
                                         <button type="submit" class="btn-theme">SIGN UP</button>
                                     </form>
                                     <p class="h7 mt-3 mb-1" style="color:white">Already have an account? <a href="login.php" class="text-primary ml-1">Login</a></p>
-                                        
+
                                 </div>
                             </div>
 
@@ -142,7 +142,6 @@
             header("Location:login.php");
         }
     }
-
     ?>
 
 </body>
