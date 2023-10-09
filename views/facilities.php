@@ -7,6 +7,7 @@
     <title>Facilites</title>
 
     <!--css/icons/boostrap/jquery/fonts/images start-->
+   
     <link rel="stylesheet" type="text/css" href="../public/CSS/header.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/facilites.css">
@@ -20,6 +21,7 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    
 </head>
 
 <body>
@@ -27,12 +29,13 @@
     <?php include("../partials/header.php") ?>
     <!-- add image -->
     <section id="welcome-image">
-        <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">
-        <div class="img-text">
-            <!-- title over image -->
-            <h1 class="classes">Facilites</h1>
-        </div>
-    </section>
+    <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">
+    <div class="img-text">
+      <!-- title over image -->
+      <h1>Facilities</h1>
+    </div>
+  </section>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-xl-4 facimgs col align-self-center">
