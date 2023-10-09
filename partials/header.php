@@ -1,9 +1,9 @@
 
     <!-- Navigation Bar Start -->
-    <header class="header">
-        <a id="gym-title">ProFit Gym</a>
+    <header class="gymheader">
+        <a id="gymtitle">ProFit Gym</a>
         <input type="checkbox" id="check">
-        <label for="check" class="icons">
+        <label for="check" class="gymicons">
             <span class="material-symbols-outlined" id="menu-icon" >
                 menu
                 </span>
@@ -11,12 +11,12 @@
                     close
                     </span>
         </label>
-        <nav class="navbar">
+        <nav class="gymnavbar">
             <a href="../views/index.php" id="home">HOME</a>
             <a href="../views/classes.php" id="classes"> CLASSES</a>
             <a href="../views/memberships.php" id="memberships">MEMBERSHIPS</a>
 
-            <a href="#" id="facilities">FACILITIES</a>
+            <a href="../views/facilities.php" id="facilities">FACILITIES</a>
             <a href="#" id="contactus">CONTACT US</a>
             <a href="../views/login.php"><i class="ri-account-circle-line"></i></a>
 
@@ -55,6 +55,4 @@
 
 </script>
 
-
-</body>
     

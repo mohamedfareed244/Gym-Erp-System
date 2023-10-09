@@ -1,0 +1,254 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+        'Helvetica Neue', sans-serif;
+}
+
+
+/* Navigation Bar Start */
+.gymheader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.3rem 10%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.gymnavbar a {
+    position: relative;
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+    left: -220px;
+    margin-left: 20px;
+    letter-spacing: 1px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.gymnavbar a:hover {
+    color: rgb(222, 60, 60);
+}
+
+.gymnavbar a::before {
+
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(222, 60, 60);
+    transition: .6s;
+}
+
+.gymnavbar a:hover::before {
+    width: 100%;
+}
+
+#gymtitle {
+    font-size: 22px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(231, 55, 55);
+    font-weight: bolder;
+    text-shadow: #010916;
+    transform: translateX(-50px);
+}
+
+.gymicons {
+    position: absolute;
+    font-size: 2.6rem;
+    right: 16%;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+#home::before {
+
+    width: 100%;
+
+}
+
+.gymnavbar-color {
+    background-color: #1e2227;
+    transition: .15s;
+}
+
+#check {
+    display: none;
+}
+
+.gymheader::before {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 20%, transparent 70%);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+@media(max-width:1100px) {
+    .gymheader {
+        padding: 1.3rem 5%;
+    }
+}
+
+@media(max-width:600px) {
+    .gymnavbar {
+        position: relative;
+        padding-left: 175px;
+    }
+
+    #gymtitle {
+        padding-left: 50px;
+    }
+
+}
+
+@media(max-width:600px) {
+    .gymicons {
+        display: inline-flex;
+    }
+
+
+    .gymnavbar a:hover::before {
+        width: 0;
+    }
+
+    #check:checked~.gymicons #menu-icon {
+        display: none;
+    }
+
+    .gymicons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.gymicons #close-icon {
+        display: block;
+    }
+
+    #home::before {
+
+        width: 0;
+
+    }
+
+    .gymnavbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: #12141858;
+        backdrop-filter: blur(120px);
+        transition: .3s ease;
+        overflow: hidden;
+
+    }
+
+    #check:checked~.gymnavbar {
+        height: 24.5rem;
+    }
+
+    .gymnavbar a {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.3rem 0;
+        text-align: center;
+    }
+
+    #gymtitle {
+        margin-left: 20px;
+    }
+}
+
+@media(max-width:1084px) {
+    .gymicons {
+        display: inline-flex;
+    }
+
+
+    .gymnavbar a:hover::before {
+        width: 0;
+    }
+
+    #check:checked~.gymicons #menu-icon {
+        display: none;
+    }
+
+    .gymicons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.gymicons #close-icon {
+        display: block;
+    }
+
+    #home::before {
+
+        width: 0;
+
+    }
+
+    .gymnavbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: #12141858;
+        backdrop-filter: blur(120px);
+        transition: .3s ease;
+        overflow: hidden;
+
+    }
+
+    #check:checked~.gymnavbar {
+        height: 24.5rem;
+    }
+
+    .gymnavbar a {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.3rem 0;
+        text-align: center;
+    }
+
+    #gymtitle {
+        padding-left: 30px;
+    }
+}
+
+/* Navigation Bar End */
+
+body::-webkit-scrollbar {
+    width: 10px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: rgb(224, 224, 224);
+    /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(31, 31, 31);
+    /* color of the scroll thumb */
+}
+
+
