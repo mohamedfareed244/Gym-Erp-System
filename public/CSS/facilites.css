@@ -1,0 +1,25 @@
+.facimgs{
+    overflow: hidden;
+    height: 300px;
+    padding: 14px;
+    transition: .7s;
+   
+}
+.facimgs:hover{
+    cursor: pointer;
+background-color: red;
+border-radius: 20px 0px 20px 0px;
+}
+.imgs{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 0px 20px 0px;
+}
+p{
+    font-weight: bold;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+.classes{
+text-align: center;
+}
