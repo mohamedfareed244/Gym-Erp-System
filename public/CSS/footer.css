@@ -5,27 +5,27 @@
     padding: 30px 0;
 }
 
-.footercontainer {
+.footer-container {
     max-width: 95%;
     margin: auto;
 }
 
-.footercontainer .footerrow {
+.footer-container .footer-row {
     display: flex;
     flex-wrap: wrap;
 }
 
-.footercol ul {
+.footer-col ul {
     list-style: none;
     padding: 0;
 }
 
-.footercol {
+.footer-col {
     width: 25%;
     padding: 0 15px;
 }
 
-.footercol h4 {
+.footer-col h4 {
     font-size: 18px;
     color: #ffffff;
     text-transform: capitalize;
@@ -34,7 +34,7 @@
     position: relative;
 }
 
-.footercol h4::before {
+.footer-col h4::before {
     content: '';
     position: absolute;
     left: 0;
@@ -45,11 +45,11 @@
     width: 50px;
 }
 
-.footercol ul li:not(:last-child) {
+.footer-col ul li:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.footercol ul li a {
+.footer-col ul li a {
     font-size: 16px;
     text-transform: capitalize;
     color: #ffffff;
@@ -60,7 +60,7 @@
     transition: all 0.3s ease;
 }
 
-.footercol ul p {
+.footer-col ul p {
     font-size: 16px;
     width: 70%;
     text-transform: capitalize;
@@ -71,12 +71,12 @@
     display: block;
 }
 
-.footercol ul li a:hover {
+.footer-col ul li a:hover {
     color: #ffffff;
     padding-left: 8px;
 }
 
-.footercol .social-links a {
+.footer-col .social-links a {
     display: inline-block;
     height: 40px;
     width: 40px;
@@ -89,21 +89,21 @@
     transition: all 0.5s ease;
 }
 
-.footercol .social-links a:hover {
+.footer-col .social-links a:hover {
     color: #24262b;
     background-color: #ffffff;
 }
 
 /*responsive*/
 @media(max-width: 767px) {
-    .footercol {
+    .footer-col {
         width: 50%;
         margin-bottom: 30px;
     }
 }
 
 @media(max-width: 574px) {
-    .footercol {
+    .footer-col {
         width: 100%;
     }
 }

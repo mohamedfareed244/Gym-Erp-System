@@ -1,14 +1,13 @@
-.container
-{
-    height:200%;
+.registercontainer {
+    height: 100%;
 }
-.notreq
-{
-    padding:7px;
-    color:rgb(231, 55, 55);
-    font-size:13px;
+
+.notreq {
+    padding: 7px;
+    color: rgb(231, 55, 55);
+    font-size: 13px;
 }
-.gender
-{
-    color:white;
+
+.gender {
+    color: white;
 }

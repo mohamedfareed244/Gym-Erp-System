@@ -16,8 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
-    <!-- to access font awesome cdn icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
     <title>ProFit Gym</title>
 
 </head>
@@ -28,7 +27,7 @@
     include("../partials/header.php");
     ?>
 
-    <div id="main-wrapper" class="container">
+    <div id="main-wrapper" class="registercontainer">
         <div class="row justify-content-center">
             <div class="col-xl-10">
                 <div class="card border-0">
@@ -85,6 +84,8 @@
                                         </div>
                                         <button type="submit" class="btn-theme">SIGN UP</button>
                                     </form>
+                                    <p class="h7 mt-3 mb-1" style="color:white">Already have an account? <a href="login.php" class="text-primary ml-1">Login</a></p>
+                                        
                                 </div>
                             </div>
 
@@ -103,7 +104,6 @@
                 </div>
                 <!-- end card -->
 
-                <p class="register">Already have an account? <a href="login.php" class="text-primary ml-1">Login</a></p>
 
                 <!-- end row -->
 
