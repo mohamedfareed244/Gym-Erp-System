@@ -77,7 +77,7 @@
             </div>
             <!-- end card -->
 
-            <p class="register">Don't have an account? <a href="register.php" class="text-primary ml-1">Register</a></p>
+            <p class="register">Don't have an account? <a href="register.php" class="text-primary ml-1">Register Now!</a></p>
 
             <!-- end row -->
 
