@@ -91,7 +91,7 @@ include_once "../includes/dbh.inc.php";
                                         <label for="ConfPassword" style="color:white;">Confirm Password</label>
                                         <input type="password" class="form-control" id="exampleInputConfPassword" name="ConfPassword" required>
                                     </div>
-                                    <input type="submit" class="btn-theme">SIGN UP</button>
+                                    <button type="submit" class="btn-theme">SIGN UP</button>
                                 </form>
                             </div>
                         </div>
