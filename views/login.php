@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--css/icons/boostrap/jquery/fonts/images start-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../public/CSS/header.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/login.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
 
@@ -23,7 +23,6 @@
 <body style="background-color:rgb(31, 31, 31);">
     <!-- include header -->
     <?php include("../partials/header.php") ?>
-
 
     <div id="main-wrapper" class="container">
         <div class="row justify-content-center">
@@ -79,20 +78,11 @@
         <!-- Row -->
     </div>
 
-
-
+    <!-- include footer -->
+    <?php include("../partials/footer.php") ?>
 
 </body>
 
-<!-- include footer -->
-<?php include("../partials/footer.php") ?>
-
-
-
-<script src="../js/index.js">
-
-</script>
-
-
+<script src="../js/index.js"></script>
 
 </html>

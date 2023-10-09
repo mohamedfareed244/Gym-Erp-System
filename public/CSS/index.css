@@ -1,4 +1,3 @@
-
 /* Main Content Start */
 /* image start */
 .main-img {
@@ -27,6 +26,7 @@
         /* Adjust as needed */
     }
 }
+
 /* Main Content End */
 
 /* grid 1 starts */
@@ -188,14 +188,14 @@
         display: none;
     }
 
-    
+
     img.resp-img {
         display: block;
         max-width: 520px;
         height: auto;
         margin-left: 12px;
 
-        
+
     }
 }
 

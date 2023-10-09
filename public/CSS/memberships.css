@@ -1,3 +1,33 @@
+
+/* Main Content Start */
+/* image start */
+.main-img {
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
+    position: relative;
+
+}
+
+/* #welcome-image {
+    padding-bottom: 500px;
+} */
+
+/* For screens with a maximum width of 1084px */
+@media (max-width: 1084px) {
+    .main-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    #welcome-image {
+        padding-bottom: 300px;
+        /* Adjust as needed */
+    }
+}
+
 .card
 {
     border-radius:30px;
@@ -8,7 +38,7 @@
     padding:20px;
     margin-top:-10px;
 }
-h6 i
+ .col h6 i
 {
   margin-right:10px;
   color:green;
