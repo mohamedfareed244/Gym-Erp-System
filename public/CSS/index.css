@@ -94,8 +94,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 20%, transparent 70%);
+    backdrop-filter: blur(10px);
     z-index: -1;
 }
 
@@ -243,6 +244,22 @@ body {
     position: relative;
 
 }
+#welcome-image{
+    padding-bottom: 500px;
+}
+/* For screens with a maximum width of 1084px */
+@media (max-width: 1084px) {
+    .main-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    #welcome-image {
+        padding-bottom: 300px; /* Adjust as needed */
+    }
+}
+
 
 body::-webkit-scrollbar {
     width: 10px;
@@ -263,46 +280,46 @@ body::-webkit-scrollbar-thumb {
 
 
 /* grid 1 starts */
-/* .gridboxes1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Minimum height of the viewport */
-/* position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-  
-} */
 
 .gridboxes1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    /* Minimum height of the viewport */
+    min-height: 153vh; 
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     bottom: 0;
-
-    padding-left: 285px;
-
-    transform: translateY(150px);
 }
 
 .box1,
 .box2 {
-    flex: 0 0 50%;
+    flex: 0 0 40%;
     padding: 20px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-
     text-align: center;
+}
+
+.box1 {
+    background-color: #aaa;
+}
+
+.box2 {
+    background-color: #cb3737;
+}
+
+
+@media(max-width:1084px) {
+
+    .gridboxes1{
+        transform: translateY(-250px);
+        
+
+    }
 
 }
+
+
 
 /* grid end */
 
