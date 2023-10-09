@@ -66,6 +66,7 @@
                  you'll be motivated to push your limits and achieve new levels of cardiovascular health.</p>
         </div>
        
+        
         <div class="col-lg-4 col-xl-4 facimgs col align-self-center" >
             <img src="../public/Images/cardio_area.jpeg" alt="" class="imgs" >
         </div>
