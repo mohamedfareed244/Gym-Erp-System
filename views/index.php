@@ -85,12 +85,14 @@
             </div>
         </div>
     </section>
+    
+    <!-- include footer -->
+    <?php include('../partials/footer.php') ?>
 
 </body>
 
 <script src="/js/index.js"></script>
 
-<!-- include footer -->
-<?php include('../partials/footer.php') ?>
+
 
 </html>
