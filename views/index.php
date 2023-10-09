@@ -27,14 +27,21 @@
 
     <!-- main content starts -->
     <div class="gridboxes1">
-        <div class="box1" style="background-color:#dfdede;">
-            <h2>WORKOUT</h2>
-            <p>With our latest equipments and efficient coaches.</p>
-        </div>
-        <div class="box2" style="background-color:#cb3737;">
+    <div class="box1" >
+        <h2 style="color: azure;">RECOVERY</h2>
+        <p style="color: azure;">Relax and rejuvenate in our recovery facilities.</p>
+    </div>
+    <div class="box2" >
             <h2 style="color: azure;">NUTRITION</h2>
             <p style="color: azure;">A meal plan designed to suit you and your goal.</p>
         </div>
+        <div class="box3" >
+            <h2>WORKOUT</h2>
+            <p>With our latest equipments and efficient coaches.</p>
+        </div>
+        
+      
+        
     </div>
     <!-- main content end -->
 
