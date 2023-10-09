@@ -30,8 +30,13 @@
         <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">
         <div class="img-text">
             <!-- title over image -->
-            <h1 class="classes">Classes</h1>
+            <h1 class="classes">Facilites</h1>
         </div>
     </section>
+    <div class="row">
+        <div class="col-lg-9">
+            <img src="../public/" alt="">
+        </div>
+    </div>
 </body>
 </html>
