@@ -11,9 +11,9 @@
                 <div class="footercol">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#">memberships</a></li>
-                        <li><a href="#">classes</a></li>
-                        <li><a href="#">contact us</a></li>
+                        <li><a href="../views/memberships.php">memberships</a></li>
+                        <li><a href="../views/classes.php">classes</a></li>
+                        <li><a href="../views/contactus.php">contact us</a></li>
                     </ul>
                 </div>
                 <div class="footercol">

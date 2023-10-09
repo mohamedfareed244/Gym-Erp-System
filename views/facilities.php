@@ -7,7 +7,6 @@
     <title>Facilites</title>
 
     <!--css/icons/boostrap/jquery/fonts/images start-->
-   
     <link rel="stylesheet" type="text/css" href="../public/CSS/header.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/facilites.css">
