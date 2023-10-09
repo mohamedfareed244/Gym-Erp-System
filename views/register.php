@@ -42,7 +42,7 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="mb-5">
-                                    <h3 class="h4 font-weight-bold text-theme">Login</h3>
+                                    <h3 class="h4 font-weight-bold text-theme">Register</h3>
                                 </div>
 
                                 <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
