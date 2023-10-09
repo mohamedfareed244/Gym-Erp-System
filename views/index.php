@@ -78,7 +78,9 @@
                     suscipit.</p>
             </div>
             <div class="info-image">
-                <img src="../public/Images/infopic2.jpg" alt="Image info">
+                <img src="../public/Images/infopic2.jpg" alt="Image info" class="none-resp-img">
+                <img src="../public/Images/infopic.jpg" alt="Image info" class="resp-img">
+
             </div>
         </div>
     </section>
