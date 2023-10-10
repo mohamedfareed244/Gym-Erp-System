@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.come/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
 
@@ -85,7 +86,81 @@
             </div>
         </div>
     </section>
-    
+
+
+
+<!-- reviews section -->
+
+
+    <section class="rsec">
+        <div class="rheading"><h1>What Our Clients Say</h1></div>
+        <div class="wrapper">
+            <div class="box">
+                <i class="fas fa-quote-left quote"></i>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum corporis voluptas voluptatem? Eaque voluptate esse voluptatem amet iusto ducimus ratione distinctio autem officia nesciunt optio, quas possimus aperiam dolor mollitia.</p>
+                <div class="content">
+                    <div class="info">
+                        <div class="name">Laila Nabil</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="rimage">
+                        <img src="../public/Images/reviewer2.jpg" alt="profile picture">
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-quote-left quote"></i>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum corporis voluptas voluptatem? Eaque voluptate esse voluptatem amet iusto ducimus ratione distinctio autem officia nesciunt optio, quas possimus aperiam dolor mollitia.</p>
+                <div class="content">
+                    <div class="info">
+                        <div class="name">Malak Helmy</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="rimage">
+                        <img src="../public/Images/reviewer1.jpeg" alt="">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <i class="fas fa-quote-left quote"></i>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum corporis voluptas voluptatem? Eaque voluptate esse voluptatem amet iusto ducimus ratione distinctio autem officia nesciunt optio, quas possimus aperiam dolor mollitia.</p>
+                <div class="content">
+                    <div class="info">
+                        <div class="name">Jana Hani</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="rimage">
+                        <img src="../public/Images/reviewer2.jpg" alt="pp">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- include footer -->
     <?php include('../partials/footer.php') ?>
 

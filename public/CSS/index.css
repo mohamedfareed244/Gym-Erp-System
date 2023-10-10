@@ -1,5 +1,8 @@
 /* Main Content Start */
 /* image start */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 .main-img {
     width: 100%;
     height: auto;
@@ -12,6 +15,100 @@
 /* #welcome-image {
     padding-bottom: 500px;
 } */
+
+/* reviews section */
+
+.rsec{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1d1e21;
+    display: grid;
+    height: 100%;
+    place-items: center;
+    flex-wrap: wrap;
+}
+
+.rheading{
+    color: #b83f3f;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.wrapper{
+    max-width: 1200px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box{
+    padding: 25px;
+    margin: 10px;
+}
+
+.wrapper .box{
+   background: #b83f3f;
+   border-radius: 3px;
+   padding: 25px;
+   width: calc(33%-10px);
+}
+
+.wrapper .box .content{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrapper .box i.quote{
+    font-size: 20px;
+}
+
+.wrapper .box .info .name{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.wrapper .box .info .stars{
+    margin-top: 2px;
+}
+
+.wrapper .box .content .rimage{
+    height: 75px;
+    width: 75px;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.wrapper .box .content .rimage img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+
+@media (max-width: 1045px){
+    .wrapper .box{
+        width: calc(50%-10px);
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 702px){
+    .wrapper .box{
+        width: 100%;
+    }
+}
+
+
+
+
+
+
 
 /* For screens with a maximum width of 1084px */
 @media (max-width: 1084px) {
