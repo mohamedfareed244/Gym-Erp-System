@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js">
     <script src="https://kit.fontawesome.come/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
@@ -89,11 +91,69 @@
 
 
 
-<!-- reviews section -->
+    <!-- coaches section -->
+
+    <section class="coaches">
+        <div class="cheading">
+            <h1>Meet Our Coaches</h1>
+        </div>
+        <div class="home-container">
+            <div class="profile-card">
+                <div class="img">
+                    <img src="../public/Images/coach1.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Ahmed Amr</h3>
+                    <p>Fitness Trainer</p>
+                    <div class="social-links">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="img">
+                    <img src="../public/Images/coach2.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Ramy Ehab</h3>
+                    <p>Fitness Trainer</p>
+                    <div class="social-links">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="img">
+                    <img src="../public/Images/coach3.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Rawan Mostafa</h3>
+                    <p>Fitness Trainer</p>
+                    <div class="social-links">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- reviews section -->
 
 
     <section class="rsec">
-        <div class="rheading"><h1>What Our Clients Say</h1></div>
+        <div class="rheading">
+            <h1>What Our Clients Say</h1>
+        </div>
         <div class="wrapper">
             <div class="box">
                 <i class="fas fa-quote-left quote"></i>
