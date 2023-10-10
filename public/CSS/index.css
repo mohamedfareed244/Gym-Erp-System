@@ -2,6 +2,7 @@
 /* image start */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 .main-img {
     width: 100%;
@@ -16,9 +17,125 @@
     padding-bottom: 500px;
 } */
 
+
+
+
+/* coaches section*/
+
+.coaches {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+    background-color: #b83f3f;
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+}
+
+.home-container {
+    width: 100%;
+    height: 100vh;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b83f3f;
+}
+
+.profile-card {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    background-color: #1d1e21;
+    padding: 30px;
+    border-radius: 50%;
+    box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
+    transition: .6s;
+    margin: 0 25px;
+}
+
+.profile-card:hover {
+    border-radius: 10px;
+    height: 260px;
+}
+
+.profile-card .img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: .6s;
+    z-index: 99;
+}
+
+.profile-card:hover img {
+    border-radius: 10px;
+    transform: translateY(-60px);
+}
+
+.img img {
+    width: 100%;
+    border-radius: 50%;
+    transition: .6s;
+}
+
+.profile-card:hover img{
+    border-radius: 10px;
+  }
+
+.caption {
+    text-align: center;
+    transform: translateY(-80px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .6s;
+}
+
+.profile-card:hover .caption {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.caption h3 {
+    font-size: 21px;
+    color: #b83f3f;
+    font-weight: 600;
+}
+
+.caption p {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 2px 0 12px 0;
+}
+
+.caption .social-links i {
+    font-size: 21px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: #333;
+    transition: all .4s;
+}
+
+.caption .social-links i:hover {
+    color: #b83f3f;
+}
+
+.cheading{
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+
+
+
+
+
 /* reviews section */
 
-.rsec{
+.rsec {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -30,13 +147,13 @@
     flex-wrap: wrap;
 }
 
-.rheading{
+.rheading {
     color: #b83f3f;
     font-size: 30px;
     font-weight: bold;
 }
 
-.wrapper{
+.wrapper {
     max-width: 1200px;
     padding: 0 20px;
     display: flex;
@@ -44,46 +161,46 @@
     justify-content: space-between;
 }
 
-.box{
+.box {
     padding: 25px;
     margin: 10px;
 }
 
-.wrapper .box{
-   background: #b83f3f;
-   border-radius: 3px;
-   padding: 25px;
-   width: calc(33%-10px);
+.wrapper .box {
+    background: #b83f3f;
+    border-radius: 3px;
+    padding: 25px;
+    width: calc(33%-10px);
 }
 
-.wrapper .box .content{
+.wrapper .box .content {
     padding-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.wrapper .box i.quote{
+.wrapper .box i.quote {
     font-size: 20px;
 }
 
-.wrapper .box .info .name{
+.wrapper .box .info .name {
     font-size: 17px;
     font-weight: 600;
 }
 
-.wrapper .box .info .stars{
+.wrapper .box .info .stars {
     margin-top: 2px;
 }
 
-.wrapper .box .content .rimage{
+.wrapper .box .content .rimage {
     height: 75px;
     width: 75px;
     padding: 3px;
     border-radius: 50%;
 }
 
-.wrapper .box .content .rimage img{
+.wrapper .box .content .rimage img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -91,15 +208,15 @@
     border: 3px solid black;
 }
 
-@media (max-width: 1045px){
-    .wrapper .box{
+@media (max-width: 1045px) {
+    .wrapper .box {
         width: calc(50%-10px);
         margin: 10px 0;
     }
 }
 
-@media (max-width: 702px){
-    .wrapper .box{
+@media (max-width: 702px) {
+    .wrapper .box {
         width: 100%;
     }
 }
