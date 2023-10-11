@@ -26,23 +26,23 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Poppins;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #b83f3f;
     align-items: center;
     justify-content: center;
     place-items: center;
+    font-weight: bold;
 }
 
 .cheading h1{
     text-align: center;
     text-transform: uppercase;
     font-size: 50px;
-    letter-spacing: 1px;
     transform: translateY(100px);
 }
 
 .home-container {
-    width: 70%;
+    width: 100%;
     height: 100vh;
     display: inline-flex;
     align-items: center;
@@ -52,14 +52,15 @@
 
 .profile-card {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     background-color: #1d1e21;
     padding: 30px;
     border-radius: 50%;
     box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
     transition: .6s;
     margin: 0 25px;
+    transform: translateY(-50px);
 }
 
 .profile-card:hover {
@@ -253,6 +254,19 @@
     #welcome-image {
         padding-bottom: 300px;
         /* Adjust as needed */
+    }
+    .home-container{
+        flex-wrap: wrap;
+        
+    }
+    .profile-card{
+        width: 20%;
+        height: 20%;
+        transform: translateY(50px);
+    }
+
+    .rsec{
+        
     }
 }
 
