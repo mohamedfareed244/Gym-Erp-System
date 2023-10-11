@@ -32,6 +32,7 @@
     justify-content: center;
     place-items: center;
     font-weight: bold;
+    transform: translateY(-300px);
 }
 
 .cheading h1{
@@ -161,6 +162,7 @@
     height: 100%;
     place-items: center;
     flex-wrap: wrap;
+    padding-bottom: 200px;
 }
 
 .rheading {
@@ -265,9 +267,20 @@
         transform: translateY(50px);
     }
 
-    .rsec{
-        
+    .wrapper{
+        flex-wrap: wrap;
+        background-color: #1d1e21;
+        padding-bottom: 50px;
+
+
+
     }
+    .rsec{
+        margin-bottom: 550px;
+        background-color: #1d1e21;
+
+    }
+    
 }
 
 /* Main Content End */
