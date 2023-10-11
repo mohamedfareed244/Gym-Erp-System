@@ -14,6 +14,7 @@
                         <li><a href="../views/memberships.php">memberships</a></li>
                         <li><a href="../views/classes.php">classes</a></li>
                         <li><a href="../views/contactus.php">contact us</a></li>
+                        <li><a href="../views/facilities.php">Facilites</a></li>
                     </ul>
                 </div>
                 <div class="footercol">
