@@ -33,6 +33,22 @@
   </section>
 
   <div class="container py-5">
+    <h2>Details:</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+Gyms today offer a plethora of membership options, each tailored to cater to the unique needs and goals of their members. These diverse memberships come with a range of features that enable individuals to embark on their fitness journeys with precision and flexibility. Whether it's access to cutting-edge exercise equipment, specialized fitness classes, personal training sessions, or exclusive amenities like saunas and swimming pools, gym-goers have the opportunity to craft their ideal fitness experience.
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+Furthermore, these memberships are not just about physical transformation; they play a pivotal role in enhancing overall health and well-being. Regular exercise at the gym is linked to numerous health benefits, including improved cardiovascular health, increased muscular strength, and enhanced flexibility. Beyond the physical aspect, the gym environment fosters motivation, offering a supportive community where individuals can connect with others who share their aspirations. This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+Gym memberships, with their diverse features and comprehensive approach to health and fitness, have become invaluable tools for people looking to lead healthier, happier lives. They provide the resources and guidance necessary for individuals to achieve their fitness goals and promote well-being in all aspects of life.This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
+
+</div>
+</div>
+
+  <div class="container py-5">
+    <h2>Types:</h2>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 

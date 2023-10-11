@@ -52,11 +52,6 @@
 
 }
 
-.facimgs:hover {
-    cursor: pointer;
-    background-color: red;
-    border-radius: 20px 0px 20px 0px;
-}
 
 .container{
     margin-top:10%;
@@ -67,26 +62,13 @@
     border-radius: 20px 0px 20px 0px;
 }
 p{
-    font-weight: bold;
     font-size: 15px;
     font-family: sans-serif;
 }
+.facilites-desc
+{
+    margin-top:50px;
+}
 .classes{
 text-align: center;
-}
-
-.img-text {
-    position: absolute;
-    top: 80%;
-    left: 18%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    padding: 20px;
-    background-color: transparent;
-}
-
-.img-text h1 {
-    font-size: 50px;
-    color: white;
-    margin: 0;
 }
