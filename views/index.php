@@ -226,7 +226,7 @@
 
 </body>
 
-<script src="/js/index.js"></script>
+<script src="../public/js/index.js"></script>
 
 
 

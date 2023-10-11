@@ -33,8 +33,16 @@
     place-items: center;
 }
 
+.cheading h1{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 50px;
+    letter-spacing: 1px;
+    transform: translateY(100px);
+}
+
 .home-container {
-    width: 100%;
+    width: 70%;
     height: 100vh;
     display: inline-flex;
     align-items: center;
@@ -105,14 +113,21 @@
     font-size: 15px;
     font-weight: 500;
     margin: 2px 0 12px 0;
+    color: #b55353;
+    transform: translateY(-25px);
+
+
 }
 
 .caption .social-links i {
     font-size: 21px;
     margin: 0 3px;
     cursor: pointer;
-    color: #333;
+    color: #434343;
     transition: all .4s;
+    transform: translateY(-22px);
+
+    
 }
 
 .caption .social-links i:hover {
