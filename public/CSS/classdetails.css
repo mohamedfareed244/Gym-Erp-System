@@ -6,7 +6,7 @@
 }
 
 .class-name-box {
-    background: rgba(255, 255, 255, 0.7); 
+    background: rgba(255, 255, 255, 0.6); 
     color: #000000; 
     padding: 10px 20px;
     position: absolute;
@@ -53,4 +53,14 @@
     margin-top: 10px;
 }
 
+.availspaces {
+    font-weight: bold;
+}
 
+.available {
+    color: rgb(26, 115, 26); 
+}
+
+.unavailable {
+    color: red
+}

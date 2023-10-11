@@ -55,14 +55,31 @@
                 <p class="class-instructor"><strong>Instructor:</strong> Malouka</p>
                 <p class="class-time"><strong>Time:</strong> 7:00 AM - 8:30 AM</p>
                 <p class="class-date"><strong>Date:</strong> Every Monday and Wednesday</p>
-                <p class="class-participants"><strong>Limit of Participants:</strong> 20</p>
                 <p class="class-level"><strong>Level:</strong> Moderate</p>
+                <p class="class-participants"><strong>Limit of Participants:</strong> 20</p>
+                <div class="class-availability">
+                    <p class="availspaces" id="availability-text"><strong>Availability:</strong> <span
+                            id="availability-count">10</span> Places Left</p>
+                </div>
+
 
             </div>
         </div>
     </section>
 
 
+
+
+    <script>
+        const availabilityCount = 10; // testing lehad ma n connect b database
+        const availabilityText = document.getElementById("availability-text");
+
+        if (availabilityCount > 0) {
+            availabilityText.classList.add("available");
+        } else {
+            availabilityText.classList.add("unavailable");
+        }
+    </script>
 
     <!-- include footer -->
     <?php include('../partials/footer.php') ?>
