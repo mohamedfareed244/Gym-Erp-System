@@ -35,12 +35,14 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="mb-5">
+                                        <!-- title -->
                                         <h3 class="h4 font-weight-bold text-theme">Login</h3>
                                     </div>
 
                                     <h6 class="h5 mb-0" style="color:white;">Welcome back!</h6>
                                     <p class="text-muted mt-2 mb-5" style="color:white;">Enter your email address and password to access your account.</p>
 
+                                    <!-- beginning of form -->
                                     <form style="width:100%;">
                                         <div class="form-group mb-5">
                                             <label for="Email" style="color:white;">Email address</label>
@@ -51,18 +53,22 @@
                                             <input type="password" class="form-control" id="exampleInputPassword" required>
                                         </div>
                                         <button type="submit" class="btn-theme">SIGN IN</button>
+                                        <!-- end of form -->
                                     </form>
                                 </div>
                             </div>
-
+                            
+                            <!-- beginning of image -->
                             <div class="col-lg-6 d-none d-lg-inline-block">
                                 <div class="account-block rounded-right">
                                     <div class="overlay rounded-right"></div>
                                     <div class="account-testimonial">
+                                        <!-- text over image -->
                                         <p class="lead text-white">"The only bad workout is the one that didn't happen."</p>
                                     </div>
                                 </div>
                             </div>
+                            <!-- end of image -->
                         </div>
 
                     </div>

@@ -36,12 +36,14 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="mb-5">
+                                        <!-- title -->
                                         <h3 class="h3 font-weight-bold text-theme pt-5">Register</h3>
                                     </div>
 
                                     <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
                                     <p class="text-muted mt-2 mb-5" style="color:white;">Create an Account.</p>
-
+ 
+                                    <!-- beginning of form -->
                                     <form style="width:100%;" action="" method="post">
                                         <div class="form-group mb-5">
                                             <label for="Fname" style="color:white;">First Name</label>
@@ -83,20 +85,24 @@
                                             <input type="password" class="form-control" id="exampleInputConfPassword" name="ConfPassword" required>
                                         </div>
                                         <button type="submit" class="btn-theme">SIGN UP</button>
+                                        <!-- end of form -->
                                     </form>
                                     <p class="h7 mt-3 mb-1" style="color:white">Already have an account? <a href="login.php" class="text-primary ml-1">Login</a></p>
 
                                 </div>
                             </div>
 
+                            <!-- beginning of image -->
                             <div class="col-lg-6 d-none d-lg-inline-block">
                                 <div class="account-block rounded-right">
                                     <div class="overlay rounded-right"></div>
                                     <div class="account-testimonial">
+                                        <!-- text over image -->
                                         <p class="lead text-white">"Push harder than yesterday when you want a different tommorow."</p>
                                     </div>
                                 </div>
                             </div>
+                            <!-- end of form -->
                         </div>
 
                     </div>
@@ -137,7 +143,7 @@
         $result = mysqli_query($conn, $sql);
 
         echo ($result);
-        //redirect the user back to index.php 
+        //direct the user back to login.php 
         if ($result) {
             header("Location:login.php");
         }

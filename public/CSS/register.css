@@ -1,17 +1,12 @@
+
+/* height of register body*/
 .registercontainer {
     height: 200%;
 }
 
-.notreq {
-    padding: 7px;
-    color: rgb(231, 55, 55);
-    font-size: 13px;
-}
 
+/* change color of text next to the gender radio buttons */
 .gender {
     color: white;
 }
-.error
-{
-    color:red;
-}
+
