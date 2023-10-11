@@ -42,7 +42,7 @@
     <section id="class-intro">
         <div class="class-name-box">
 
-            <h2 class="class-name"> You're Viewing: Yoga Class</h2>
+            <h2 class="class-name"> Yoga Class</h2>
         </div>
     </section>
 
