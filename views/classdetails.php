@@ -52,20 +52,55 @@
     <section class="class-details">
         <div class="class-item">
             <div class="class-info">
-                <p class="class-instructor"><strong>Instructor:</strong> Malouka</p>
                 <p class="class-time"><strong>Time:</strong> 7:00 AM - 8:30 AM</p>
                 <p class="class-date"><strong>Date:</strong> Every Monday and Wednesday</p>
                 <p class="class-level"><strong>Level:</strong> Moderate</p>
                 <p class="class-participants"><strong>Limit of Participants:</strong> 20</p>
                 <div class="class-availability">
-                    <p class="availspaces" id="availability-text"><strong>Availability:</strong> <span
-                            id="availability-count">10</span> Places Left</p>
+                    <p class="availspaces" id="availability-text"><strong>Availability:</strong>
+                        <span id="availability-count">10</span> Places Left
+                    </p>
                 </div>
 
+                <button class="reserve-class">Reserve Now</button>
 
             </div>
         </div>
     </section>
+
+
+
+    <section id="class-snippet">
+    <h3 class="class-instructor"><strong>Instructors:</strong></h3>
+    <div class="instructors-container">
+        <div class="instructor">
+            <div class="instructor-image">
+                <img src="../public/Images/coach1.jpg" alt="Instructor 1">
+            </div>
+            <div class="instructor-details">
+                <h2>Instructor 1</h2>
+            </div>
+        </div>
+        <div class="instructor">
+            <div class="instructor-image">
+                <img src="../public/Images/coach2.jpg" alt="Instructor 2">
+            </div>
+            <div class="instructor-details">
+                <h2>Instructor 2</h2>
+            </div>
+        </div>
+    </div>
+
+        <p>Experience the transformative power of yoga in our serene and
+            welcoming studio. Led by expert instructors, our yoga classes
+            offer a holistic approach to well-being, combining physical
+            postures, breathing techniques, and meditation. Suitable for
+            all levels, our classes provide a perfect opportunity to enhance
+            flexibility, reduce stress, and find inner balance. Reserve your
+            spot and embark on a journey to a healthier mind and body. </p>
+
+    </section>
+
 
 
 
