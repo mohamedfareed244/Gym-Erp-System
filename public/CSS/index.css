@@ -32,7 +32,7 @@
     justify-content: center;
     place-items: center;
     font-weight: bold;
-    transform: translateY(-300px);
+    transform: translateY(-350px);
 }
 
 .cheading h1{
@@ -162,7 +162,8 @@
     height: 100%;
     place-items: center;
     flex-wrap: wrap;
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
+    transform: translateY(-450px);
 }
 
 .rheading {
@@ -259,6 +260,7 @@
     }
     .home-container{
         flex-wrap: wrap;
+        padding-bottom: 200px;
         
     }
     .profile-card{
