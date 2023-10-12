@@ -33,62 +33,62 @@
     </section>
 
     <div class="container py-5">
-    <h2>Details:</h2>
+        <h2>Details:</h2>
 
-<div class="classinfo">
-Gyms today offer an array of fitness classes that extend well beyond traditional workout routines. These classes serve as dynamic platforms for individuals to not only improve their physical fitness but also relax, explore new experiences, and forge meaningful connections. From yoga and Pilates to high-intensity interval training (HIIT) and dance workouts, gym classes cater to diverse interests and skill levels.
-</div>
-<div class="classinfo">
-One of the most significant advantages of these classes is their potential to promote relaxation and stress relief. Yoga and meditation classes, for example, provide a sanctuary of tranquility amid the hustle and bustle of daily life. They offer an opportunity to unwind, focus on breathing, and achieve a sense of inner peace. Similarly, dance and group fitness classes infuse fun and energy into workouts, making them enjoyable experiences that can release endorphins and boost mood.
-</div>
-<div class="classinfo">
-In the social sphere, classes at the gym serve as natural meeting grounds for like-minded individuals. Participants often bond over shared goals and experiences, creating a sense of community and support. These connections not only foster accountability and motivation but also provide an opportunity to make new friends who share an interest in health and fitness.
+        <div class="classinfo">
+            Gyms today offer an array of fitness classes that extend well beyond traditional workout routines. These classes serve as dynamic platforms for individuals to not only improve their physical fitness but also relax, explore new experiences, and forge meaningful connections. From yoga and Pilates to high-intensity interval training (HIIT) and dance workouts, gym classes cater to diverse interests and skill levels.
+        </div>
+        <div class="classinfo">
+            One of the most significant advantages of these classes is their potential to promote relaxation and stress relief. Yoga and meditation classes, for example, provide a sanctuary of tranquility amid the hustle and bustle of daily life. They offer an opportunity to unwind, focus on breathing, and achieve a sense of inner peace. Similarly, dance and group fitness classes infuse fun and energy into workouts, making them enjoyable experiences that can release endorphins and boost mood.
+        </div>
+        <div class="classinfo">
+            In the social sphere, classes at the gym serve as natural meeting grounds for like-minded individuals. Participants often bond over shared goals and experiences, creating a sense of community and support. These connections not only foster accountability and motivation but also provide an opportunity to make new friends who share an interest in health and fitness.
 
-</div>
-</div>
+        </div>
+    </div>
 
 
     <div class="container py-5">
         <h2>Types:</h1>
-        <div class="card-container">
+            <div class="card-container">
 
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/yoga.jpg">
+                    <h3>Power Yoga Class</h3>
+                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
+                </div>
+
             </div>
-
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/yoga.jpg">
-                <h3>Power Yoga Class</h3>
-                <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a series of held postures to build strength, stability, and stamina. Class ends with gentle stretches to improve flexibility.</p>
-            </div>
-
-        </div>
     </div>
 
     <?php include("../partials/footer.php") ?>

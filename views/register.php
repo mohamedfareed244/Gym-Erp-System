@@ -42,7 +42,7 @@
 
                                     <h6 class="h5 mb-0" style="color:white;">Welcome!</h6>
                                     <p class="text-muted mt-2 mb-5" style="color:white;">Create an Account.</p>
- 
+
                                     <!-- beginning of form -->
                                     <form style="width:100%;" action="" method="post">
                                         <div class="form-group mb-5">
@@ -149,7 +149,7 @@
         }
     }
     ?>
-    
+
     <!-- include footer -->
     <?php include("../partials/footer.php") ?>
 
