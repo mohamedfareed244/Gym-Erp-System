@@ -3,7 +3,6 @@
 
 .contact-container {
     background-image: url("../Images/Capture.PNG");
-
     position: relative;
     max-width: 100%;
     min-height: 100vh;
@@ -140,7 +139,7 @@ textarea.contact-input {
 
 .contact-btn:hover {
     color: white;
-    background-color:rgb(231, 55, 55);
+    background-color: rgb(231, 55, 55);
     border: none;
 }
 
@@ -234,7 +233,7 @@ textarea.contact-input {
     width: 35px;
     height: 35px;
     border-radius: 5px;
-    background: linear-gradient(45deg,#24262b, #40444d);
+    background: linear-gradient(45deg, #24262b, #40444d);
     color: #fff;
     text-align: center;
     line-height: 35px;
