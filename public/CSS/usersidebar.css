@@ -14,9 +14,13 @@
      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 20%, transparent 70%);
     z-index:100;
     transition: all 0.5s ease;
-    margin-top:4%;
-    
 }
+
+.sidebar.close .whole
+{
+    margin-top:140%;
+}
+
 
 .sidebar.close{
     width:78px;

@@ -21,6 +21,7 @@
 
 <body>
     <!-- navbar start -->
+    <?php include("../partials/usersidebar.php") ?>
     <?php include("../partials/header.php") ?>
     <!-- header image -->
     <section id="welcome-image">
