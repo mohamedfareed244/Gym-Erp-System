@@ -26,7 +26,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Clients</a></li>
-                    <li><a href="#">Add</a></li>
+                    <li><a href="../views/addclient.php">Add</a></li>
                     <li><a href="#">Edit</a></li>
                     <li><a href="#">Details</a></li>
                 </ul>
