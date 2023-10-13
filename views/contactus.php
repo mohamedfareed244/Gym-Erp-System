@@ -87,11 +87,6 @@
                         <label class="contact-lbl" for="">Phone</label>
                         <span>Phone</span>
                     </div>
-                    <div class="contact-input-container textarea">
-                        <textarea name="message" class="contact-input"></textarea>
-                        <label class="contact-lbl" for="">Message</label>
-                        <span>Message</span>
-                    </div>
                     <input type="submit" value="Send" class="contact-btn" />
                 </form>
             </div>
