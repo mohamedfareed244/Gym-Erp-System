@@ -71,15 +71,23 @@
             <li>
                 <div class="icon-link">
                 <a href="#">
-                <i class='bx bxs-lock-alt'></i>
-                <span class="link-name">Membership packages</span>
+                <i class='fas fa-cog'></i>
+                <span class="link-name">packages</span>
                 </a>
+                <i class='bx bx-chevron-down arrow'></i>
                 </div>
-                <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Add</a></li>
-                    <li><a href="#"></a></li>
+                <ul class="sub-menu">
+                    <li><a  class="link-name" href="#">packages</a></li>
+                    <li><a href="#">view membership packages </a></li>
+                    <li><a href="#">Add membership packages </a></li>
+                    <li><a href="#">delete membership packages </a></li>
+                    <li><a href="#">view pt packages </a></li>
+                    <li><a href="#">add pt packages </a></li>
+                    <li><a href="#">delete pt packages </a></li>
+                   
                 </ul>
             </li>
+            
             <li>
                 <div class="icon-link">
                 <a href="#">
