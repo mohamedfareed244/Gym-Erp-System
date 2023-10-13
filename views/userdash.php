@@ -22,7 +22,7 @@
     <?php include("../partials/usersidebar.php") ?>
 
 
-
+    <?php include("../partials/footer.php") ?>
 </body>
 
 
