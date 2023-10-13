@@ -5,22 +5,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Client | Profit </title>
-        <!--css/icons/boostrap/jquery/fonts/images start-->
-        <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/adminsidebar.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.come/a076d05399.js"></script>
-    <!--css/icons/boostrap/jquery/fonts/images end-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">  
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <div class="column">
-        <div class="col-lg-4 col-xl-5 col-sm-4">
-        <?php require("../partials/adminsidebar.php") ?>
-     
+<?php require("../partials/adminsidebar.php")?>
+  
+<div id="add-body">
+<div class="container">
+    <div class="row">
+        <form action="" class="row">
+        <div class="col-lg-4 col-md-12" >
+            <label for="name">Name : </label>
+            <input type="text" name="name" id="name">
         </div>
-      
-   
+        <div class="col-lg-4 col-md-12">
+            <label for="name">phone : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <label for="name">Email : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <br>
+        <br>
+        <div class="col-lg-4 col-md-12">
+            <label for="name">National id  : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <label for="name">Age : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <label for="name"> Weight : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <br>
+        <br>
+
+        <div class="col-lg-4 col-md-12">
+            <label for="name"> Height : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <label for="name"> Address : </label>
+            <textarea name="name" id="" cols="80" rows="1"></textarea>
+            
+        </div>
+        <div class="col-lg-9 col-md-12">
+        <input type="submit" value="Add client" id="add-btn">
+            
+        </div>
+       
+        </form>
+       
+        
+        <div class="col-12">
+            <span>New Client id : <b>12345</b></span>
+        </div>
     </div>
+</div>
+</div>
+           
+    
+
+    
 </body>
 </html>

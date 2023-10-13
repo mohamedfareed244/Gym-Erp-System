@@ -1,6 +1,7 @@
 <div class="sidebar close">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <div class="logo-details">
+ 
+   
+        <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name" style="font-weight:300">Admin</span>
     </div>
@@ -9,6 +10,32 @@
             <a href="#">
                 <i class='bx bxs-grid-alt'></i>
                 <span class="link-name">Profile</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a  class="link-name" href="#">Profile</a></li>
+                </ul>
+            </li>
+            </li>
+            <li>
+                <div class="icon-link">
+                   <a href="#">
+                   <i class='fas fa-user-friends'></i>
+                   <span class="link-name">Clients</span>
+                   </a>
+                   <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a  class="link-name" href="#">Clients</a></li>
+                    <li><a href="../views/addclient.php">Add</a></li>
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Details</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                <a href="#">
+                <i class='fas fa-id-badge'></i>
+                <span class="link-name">coaches</span>
             </a>
             <ul class="sub-menu blank">
                 <li><a class="link-name" href="#">Profile</a></li>
