@@ -16,6 +16,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     
+    
 </head>
 
 <body>
@@ -23,9 +24,61 @@
     <?php include("../partials/usersidebar.php") ?>
 
 
-    <div class="profile">
-           
-    </div>
+  <div class="profile">
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 6</div>
+            <img src="../public/Images/free_weight.webp" class="imgslides" style="width:600px; height:400px;">
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 6</div>
+            <img src="../public/Images/Gym-HD-Desktop.jpg" class="imgslides" style="width:600px; height:400px;">
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 6</div>
+            <img src="../public/Images/infopic.jpg"  class="imgslides" style="width:600px; height:400px;">
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 6</div>
+            <img src="../public/Images/lockers.jpeg"  class="imgslides" style="width:600px; height:400px;">
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">5 / 6</div>
+            <img src="../public/Images/Gym-Images.jpg"  class="imgslides" style="width:600px; height:400px;">
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">6 / 6</div>
+            <img src="../public/Images/cardio_area.jpeg"  class="imgslides" style="width:600px; height:400px;">
+        </div>
+        </div>
+        <div class="gettinginshape">
+        <p class="line1">GETTING</p>
+        <p class="line2">IN</p>
+        <p class="line3">SHAPE</p>
+        </div>
+        <div class="greeting">
+            <p class="hello">Hello Jana! </p>
+        </div>
+        <div class="membership-details">
+            <p class="currpackage">Current Package:</p>
+            <div class="membership-title">2 MONTHS</div>
+            <div class="dates">
+            <div class="date">
+            <p>Start Date:</p>
+            <div class="start-date">21-06-2023</div>
+            </div>
+            <div class="date">
+            <p>End Date:</p>
+            <div class="end-date">21-08-2023</div>
+           </div>
+           </div>
+        </div>
+
+</div>
+
+
+
+    <script src="../public/js/slider.js"></script>
 
     <?php include("../partials/footer.php") ?>
 </body>
