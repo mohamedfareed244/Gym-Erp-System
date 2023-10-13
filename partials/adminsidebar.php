@@ -25,7 +25,7 @@
             <li>
                 <div class="icon-link">
                    <a href="#">
-                   <i class='bx bxs-book-add'></i>
+                   <i class='fas fa-user-friends'></i>
                    <span class="link-name">Clients</span>
                    </a>
                    <i class='bx bx-chevron-down arrow'></i>
@@ -40,7 +40,7 @@
             <li>
                 <div class="icon-link">
                 <a href="#">
-                <i class='bx bxs-message-alt-detail'></i>
+                <i class='fas fa-id-badge'></i>
                 <span class="link-name">coaches</span>
                 </a>
                 <i class='bx bx-chevron-down arrow'></i>
@@ -56,7 +56,7 @@
             <li>
                 <div class="icon-link">
                 <a href="#">
-                <i class='bx bxs-leaf'></i>
+                <i class='fas fa-id-badge'></i>
                 <span class="link-name">Admin</span>
                 </a>
                 <i class='bx bx-chevron-down arrow'></i>
