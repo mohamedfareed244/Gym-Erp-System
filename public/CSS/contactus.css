@@ -2,8 +2,10 @@
 
 
 .contact-container {
+    background-image: url("../Images/Capture.PNG");
+
     position: relative;
-    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     padding: 3rem;
     display: flex;

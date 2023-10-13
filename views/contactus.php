@@ -24,10 +24,7 @@
 
     <!-- include header -->
     <?php include("../partials/header.php") ?>
-
-
     <div class="contact-container">
-        <img src="img/shape.png" class="square" alt="" />
         <div class="contact-form1">
             <div class="contact-info">
                 <h3 class="contact-title">Let's get in touch</h3>
