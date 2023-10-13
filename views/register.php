@@ -53,12 +53,12 @@
 
                 </div>
                 <div class="signup-input-container">
-                    <input type="number" name="weight" id="weight" class="signup-input"  required min="40" max="250"/>
+                    <input type="number" name="weight" id="weight" class="signup-input" min="40" max="250"/>
                     <label class="signup-lbl" for="">Weight</label>
                     <span>Weight</span>
                 </div>
                 <div class="signup-input-container">
-                    <input type="number" name="height" id="height" class="signup-input" />
+                    <input type="number" name="height" id="height" class="signup-input" min="140" max="250"/>
                     <label class="signup-lbl" for="">Height</label>
                     <span>Height</span>
                 </div>
