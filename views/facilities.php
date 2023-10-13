@@ -9,7 +9,6 @@
     <!--css/icons/boostrap/jquery/fonts/images start-->
     <link rel="stylesheet" type="text/css" href="../public/CSS/header.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/facilites.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -23,17 +22,11 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <style>
-        ol,ul{
-    padding-left: 0;
-}
-        </style>
 
 </head>
 
 <body>
     <!-- navbar -->
-    <?php include("../partials/usersidebar.php") ?>
     <?php include("../partials/header.php") ?>
     <!-- add image -->
     <section id="welcome-image">

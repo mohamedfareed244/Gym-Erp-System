@@ -1,5 +1,4 @@
 <div class="sidebar close">
-    <div class="whole">
         <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name">Welcome Back</span>
@@ -92,20 +91,16 @@
                     <li><a  class="link-name" href="#">Logout</a></li>
                 </ul>
             </li>
-            <!-- <li>
-                <div class="icon-link">
-                 <section class="home-section">
+
+        </ul> 
+        
+</div>
+        <section class="home-section">
                     <div class="home-content">
                       <i class='bx bx-menu'></i>
                     </div>
                  </section>
-                </div>
-            </li> -->
 
-        </ul> 
-
-</div>
-    </div>
 
 
     <script>
