@@ -42,21 +42,7 @@
             </ul>
         </li>
         </li>
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class='fas fa-user-friends'></i>
-                    <span class="link-name">Clients</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="#">Clients</a></li>
-                <li><a href="#">Add</a></li>
-                <li><a href="#">Delete</a></li>
-                <li><a href="#">Details</a></li>
-            </ul>
-        </li>
+    
         <li>
             <div class="icon-link">
                 <a href="../views/coachesadmin.php">

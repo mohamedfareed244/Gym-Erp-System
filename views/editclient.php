@@ -18,6 +18,11 @@
 <div id="add-body">
 <div class="container">
     <div class="row">
+        <div class="col-12">
+            <b>Edit client </b>
+        </div>
+       
+        <hr>
       <form action="" class="row">
         <div class="col-5">
         <label for="search">client id : </label>
@@ -36,6 +41,8 @@
        
         
       </form>
+      <br>
+    <br>
       <hr>
         <form action="" class="row">
         
