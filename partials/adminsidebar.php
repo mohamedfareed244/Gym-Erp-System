@@ -1,4 +1,12 @@
 <div class="sidebar close">
+     <!--css/icons/boostrap/jquery/fonts/images start-->
+     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.come/a076d05399.js"></script>
+    <!--css/icons/boostrap/jquery/fonts/images end-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name">Welcome Back</span>
@@ -38,35 +46,38 @@
                 <i class='bx bx-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a  class="link-name" href="#">Details</a></li>
-                    <li><a href="#">Package</a></li>
-                    <li><a href="#">Class</a></li>
-                    <li><a href="#">Personal Training</a></li>
+                    <li><a  class="link-name" href="#">coaches</a></li>
+                    <li><a href="#">Classes</a></li>
+                    <li><a href="#">Free pt sessions </a></li>
+                    <li><a href="#">Pt clients </a></li>
+                   
                 </ul>
             </li>
             <li>
                 <div class="icon-link">
                 <a href="#">
                 <i class='bx bxs-leaf'></i>
-                <span class="link-name">Diet Plan</span>
+                <span class="link-name">Admin</span>
                 </a>
                 <i class='bx bx-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a  class="link-name" href="#">Diet Plan</a></li>
-                    <li><a href="#">View</a></li>
-                    <li><a href="#">Book</a></li>
+                    <li><a  class="link-name" href="#">Admin </a></li>
+                    <li><a href="#">Add Employees </a></li>
+                   
+                    <li><a href="#">sales report</a></li>
                 </ul>
             </li>
             <li>
                 <div class="icon-link">
                 <a href="#">
                 <i class='bx bxs-lock-alt'></i>
-                <span class="link-name">Freeze</span>
+                <span class="link-name">Membership packages</span>
                 </a>
                 </div>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Freeze</a></li>
+                    <li><a  class="link-name" href="#">Add</a></li>
+                    <li><a href="#"></a></li>
                 </ul>
             </li>
             <li>
