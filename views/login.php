@@ -30,12 +30,12 @@
             <form action="../views/index.php" autocomplete="off">
                 <h3 class="login-title">Log In</h3>
                 <div class="login-input-container">
-                    <input type="email" name="email" class="login-input" />
+                    <input type="email" name="email" class="login-input" required/>
                     <label class="login-lbl" for="">Email</label>
                     <span>Email</span>
                 </div>
                 <div class="login-input-container">
-                    <input type="password" name="password" class="login-input" />
+                    <input type="password" name="password" class="login-input" required/>
                     <label class="login-lbl" for="">Password</label>
                     <span>Password</span>
                 </div>
