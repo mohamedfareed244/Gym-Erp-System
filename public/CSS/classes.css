@@ -1,6 +1,5 @@
 
 
-/* Main Content Start */
 /* image start */
 .main-img {
     width: 100%;
@@ -11,21 +10,22 @@
 
 }
 
-/* #welcome-image {
-    padding-bottom: 500px;
-} */
-
-h2{
-    color:rgb(222, 60, 60);
+.img-text {
+    position: absolute;
+    top: 75%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    background-color: transparent;
 }
 
-
-.classinfo
-
-{
-    margin-bottom:60px;
+.img-text h1 {
+    font-size: 50px;
+    color: white;
+    margin: 0;
 }
-/* For screens with a maximum width of 1084px */
+
 @media (max-width: 1084px) {
     .main-img {
         max-width: 100%;
@@ -38,11 +38,9 @@ h2{
         /* Adjust as needed */
     }
 }
+
 /* Main Content End */
-.container {
-    padding: 15x 9%;
-    padding-bottom: 100px;
-}
+
 
 .container .heading {
     text-align: center;

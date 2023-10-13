@@ -117,8 +117,6 @@
     margin: 2px 0 12px 0;
     color: #b55353;
     transform: translateY(-25px);
-
-
 }
 
 .caption .social-links i {
@@ -128,8 +126,6 @@
     color: #434343;
     transition: all .4s;
     transform: translateY(-22px);
-
-    
 }
 
 .caption .social-links i:hover {
@@ -240,13 +236,6 @@
     }
 }
 
-
-
-
-
-
-
-/* For screens with a maximum width of 1084px */
 @media (max-width: 1084px) {
     .main-img {
         max-width: 100%;
