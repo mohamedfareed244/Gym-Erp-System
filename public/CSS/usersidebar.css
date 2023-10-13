@@ -16,11 +16,6 @@
     transition: all 0.5s ease;
 }
 
-.sidebar.close .whole
-{
-    margin-top:10%;
-}
-
 
 .sidebar.close{
     width:78px;
@@ -35,7 +30,7 @@
 
 .sidebar .logo-details i{
     font-size:30px;
-    color:white;
+    color:#b83f3f;
     height:50px;
     min-width:78px;
     text-align:center;
@@ -124,7 +119,7 @@
 }
 
 .sidebar .nav-links li a .link-name:hover{
-    color:grey;
+    color:#b83f3f;
 }
 
 .sidebar .nav-links li .sub-menu{
