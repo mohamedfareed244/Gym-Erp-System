@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../public/CSS/header.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/login.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/loginform.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -22,68 +22,29 @@
 
 </head>
 
-<body style="background-color:rgb(31, 31, 31);">
+<body>
     <!-- include header -->
     <?php include("../partials/header.php") ?>
-
-    <div id="main-wrapper" class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-10">
-                <div class="card border-0">
-                    <div class="card-body p-0">
-                        <div class="row no-gutters">
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="mb-5">
-                                        <!-- title -->
-                                        <h3 class="h4 font-weight-bold text-theme">Login</h3>
-                                    </div>
-
-                                    <h6 class="h5 mb-0" style="color:white;">Welcome back!</h6>
-                                    <p class="text-muted mt-2 mb-5" style="color:white;">Enter your email address and password to access your account.</p>
-
-                                    <!-- beginning of form -->
-                                    <form style="width:100%;">
-                                        <div class="form-group mb-5">
-                                            <label for="Email" style="color:white;">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail" required>
-                                        </div>
-                                        <div class="form-group mb-5">
-                                            <label for="Password" style="color:white;">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword" required>
-                                        </div>
-                                        <button type="submit" class="btn-theme">SIGN IN</button>
-                                        <!-- end of form -->
-                                    </form>
-                                </div>
-                            </div>
-                            
-                            <!-- beginning of image -->
-                            <div class="col-lg-6 d-none d-lg-inline-block">
-                                <div class="account-block rounded-right">
-                                    <div class="overlay rounded-right"></div>
-                                    <div class="account-testimonial">
-                                        <!-- text over image -->
-                                        <p class="lead text-white">"The only bad workout is the one that didn't happen."</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of image -->
-                        </div>
-
-                    </div>
-                    <!-- end card-body -->
+    <div class="login-container">
+        <div class="login-form1">
+            <form action="../views/index.php" autocomplete="off">
+                <h3 class="login-title">Log In</h3>
+                <div class="login-input-container">
+                    <input type="email" name="email" class="login-input" required/>
+                    <label class="login-lbl" for="">Email</label>
+                    <span>Email</span>
                 </div>
-                <!-- end card -->
-
-                <p class="register">Don't have an account? <a href="register.php" class="text-primary ml-1">Register Now!</a></p>
-
-                <!-- end row -->
-
-            </div>
-            <!-- end col -->
+                <div class="login-input-container">
+                    <input type="password" name="password" class="login-input" required/>
+                    <label class="login-lbl" for="">Password</label>
+                    <span>Password</span>
+                </div>
+                <input type="submit" value="Login" class="login-btn" />
+                <p class="register-text">Don't Have an Account? <a class="register-link" href="../views/register.php">Register Now</a></p>
+            </form>
         </div>
-        <!-- Row -->
+
+    </div>
     </div>
 
     <!-- include footer -->
@@ -91,6 +52,25 @@
 
 </body>
 
-<script src="../js/index.js"></script>
+<script>
+    const inputs = document.querySelectorAll(".login-input");
+
+    function focusFunc() {
+        let parent = this.parentNode;
+        parent.classList.add("focus");
+    }
+
+    function blurFunc() {
+        let parent = this.parentNode;
+        if (this.value == "") {
+            parent.classList.remove("focus");
+        }
+    }
+
+    inputs.forEach((input) => {
+        input.addEventListener("focus", focusFunc);
+        input.addEventListener("blur", blurFunc);
+    });
+</script>
 
 </html>

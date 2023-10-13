@@ -12,14 +12,11 @@
   <link rel="stylesheet" type="text/css" href="../public/CSS/memberships.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">  
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <!--css/icons/boostrap/jquery/fonts/images end-->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
   <title>ProFit Gym</title>
-
-
 
 </head>
 
@@ -38,17 +35,17 @@
   <div class="container py-5">
     <h2>Details:</h2>
 
-<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-Gyms today offer a plethora of membership options, each tailored to cater to the unique needs and goals of their members. These diverse memberships come with a range of features that enable individuals to embark on their fitness journeys with precision and flexibility. Whether it's access to cutting-edge exercise equipment, specialized fitness classes, personal training sessions, or exclusive amenities like saunas and swimming pools, gym-goers have the opportunity to craft their ideal fitness experience.
-</div>
-<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-Furthermore, these memberships are not just about physical transformation; they play a pivotal role in enhancing overall health and well-being. Regular exercise at the gym is linked to numerous health benefits, including improved cardiovascular health, increased muscular strength, and enhanced flexibility. Beyond the physical aspect, the gym environment fosters motivation, offering a supportive community where individuals can connect with others who share their aspirations. This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
-</div>
-<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-Gym memberships, with their diverse features and comprehensive approach to health and fitness, have become invaluable tools for people looking to lead healthier, happier lives. They provide the resources and guidance necessary for individuals to achieve their fitness goals and promote well-being in all aspects of life.This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
+    <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+      Gyms today offer a plethora of membership options, each tailored to cater to the unique needs and goals of their members. These diverse memberships come with a range of features that enable individuals to embark on their fitness journeys with precision and flexibility. Whether it's access to cutting-edge exercise equipment, specialized fitness classes, personal training sessions, or exclusive amenities like saunas and swimming pools, gym-goers have the opportunity to craft their ideal fitness experience.
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+      Furthermore, these memberships are not just about physical transformation; they play a pivotal role in enhancing overall health and well-being. Regular exercise at the gym is linked to numerous health benefits, including improved cardiovascular health, increased muscular strength, and enhanced flexibility. Beyond the physical aspect, the gym environment fosters motivation, offering a supportive community where individuals can connect with others who share their aspirations. This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+      Gym memberships, with their diverse features and comprehensive approach to health and fitness, have become invaluable tools for people looking to lead healthier, happier lives. They provide the resources and guidance necessary for individuals to achieve their fitness goals and promote well-being in all aspects of life.This social aspect encourages consistency and accountability, making it easier to maintain a regular exercise routine.
 
-</div>
-</div>
+    </div>
+  </div>
 
   <div class="container py-5">
     <h2>Types:</h2>
@@ -163,7 +160,7 @@ Gym memberships, with their diverse features and comprehensive approach to healt
 
   <!-- include footer -->
   <?php include("../partials/footer.php") ?>
-  
+
   <!-- script for bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
