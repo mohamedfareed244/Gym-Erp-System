@@ -20,8 +20,8 @@ input{
   }
   }
   hr{
-    margin-top: 10px;
-   border: 2px solid black;
+  
+   border-top: 2px solid rgb(0, 0, 0);
   }
   #add-btn{
 text-align: center;
