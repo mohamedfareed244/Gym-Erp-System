@@ -19,6 +19,7 @@
 <div id="add-body">
 <div class="container">
     <div class="row">
+        <form action="" class="row">
         <div class="col-lg-4 col-md-12" >
             <label for="name">Name : </label>
             <input type="text" name="name" id="name">
@@ -54,7 +55,19 @@
         </div>
         <div class="col-lg-4 col-md-12">
             <label for="name"> Address : </label>
-            <input type="text" name="name" id="name">
+            <textarea name="name" id="" cols="80" rows="1"></textarea>
+            
+        </div>
+        <div class="col-lg-9 col-md-12">
+        <input type="submit" value="Add client" id="add-btn">
+            
+        </div>
+       
+        </form>
+       
+        
+        <div class="col-12">
+            <span>New Client id : <b>12345</b></span>
         </div>
     </div>
 </div>
