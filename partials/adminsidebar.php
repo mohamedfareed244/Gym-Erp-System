@@ -27,22 +27,13 @@
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Clients</a></li>
                     <li><a href="../views/addclient.php">Add</a></li>
-                    <li><a href="../views/editclient.php">Edit</a></li>
+                    <li><a href="../views/client.php">Edit</a></li>
                     <li><a href="#">Details</a></li>
                 </ul>
             </li>
-            <li>
-                <div class="icon-link">
-                <a href="#">
-                <i class='fas fa-id-badge'></i>
-                <span class="link-name">coaches</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link-name" href="#">Profile</a></li>
-            </ul>
-        </li>
-        </li>
-    
+       
+              </li>
+      
         <li>
             <div class="icon-link">
                 <a href="../views/coachesadmin.php">
