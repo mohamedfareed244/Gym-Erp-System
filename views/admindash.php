@@ -5,7 +5,8 @@
     <!--css/icons/boostrap/jquery/fonts/images start-->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/admindash.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/userdash.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -19,110 +20,9 @@
 </head>
 
 <body>
-    <div id="viewport">
-        <!-- Sidebar -->
-        <div id="sidebar">
-            <header>
-                <a href="#">Admin Dashboard</a>
-            </header>
-            <ul class="nav">
-                <li>
-                    <a href="#">
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Clients
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Coaches
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Memberships
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Classes
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Services
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Contact
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Return to Homepage
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- Content -->
-        <div id="content">
-            <!-- Main content Start-->
-                <table class="gymclasses">
-                    <tr class="classes-row">
-                        <th>A Week Classes</th>
-                        <th>1/2 Period</th>
-                        <th>3/4 Period</th>
-                        <th>5/6 Period</th>
-                        <th>7th Period</th>
-                        <th>8th Period</th>
-                    </tr>
-                    <tr class="classes-row">
-                        <td class="classes-day">Monday</td>
-                        <td>Cardio</td>
-                        <td> </td>
-                        <td>Yoga</td>
-                        <td></td>
-                        <td>Core Workouts</td>
-                    </tr>
-                    <tr class="classes-row">
-                        <td class="classes-day">Tuesday</td>
-                        <td>Pilates</td>
-                        <td></td>
-                        <td>Yoga</td>
-                        <td>Cardio</td>
-                        <td></td>
-                    </tr>
-                    <tr class="classes-row">
-                        <td class="classes-day">Wednesday</td>
-                        <td>Pilates</td>
-                        <td>Cardio</td>
-                        <td>Core Workouts</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="classes-row">
-                        <td class="classes-day">Thursday</td>
-                        <td>Core Workouts</td>
-                        <td></td>
-                        <td>Weight Training</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="classes-row">
-                        <td class="classes-day">Friday</td>
-                        <td>weight Training</td>
-                        <td></td>
-                        <td></td>
-                        <td>Yoga</td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-            <!-- Main content end -->
-        </div>
+    <?php include("../partials/adminsidebar.php") ?>
+    <div class="container">
+        
+    </div>
     </div>
 </body>

@@ -2,11 +2,9 @@
 /* image start */
 .main-img {
     width: 100%;
-    height: auto;
-    max-height: 100vh;
+    height: 100%;
     object-fit: contain;
     position: relative;
-
 }
 
 .img-text {
@@ -25,11 +23,6 @@
     margin: 0;
 }
 
-/* #welcome-image {
-    padding-bottom: 500px;
-} */
-
-/* For screens with a maximum width of 1084px */
 @media (max-width: 1084px) {
     .main-img {
         max-width: 100%;

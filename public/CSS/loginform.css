@@ -2,21 +2,21 @@
 
 
 
-.signup-container {
+.login-container {
     background-image: url("../Images/Capture.PNG");
     position: relative;
     width: 100%;
     max-height: 100vh;
     padding: 10%;
-    padding-top: 30%;
-    padding-bottom: 25%;
+    padding-top: 25%;
+    padding-bottom: 20%;
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
 }
 
-.signup-form1 {
+.login-form1 {
     width: 70%;
     background-color: rgba(31, 31, 31);
     border-radius: 10px;
@@ -29,7 +29,7 @@ form {
     margin: 6%;
 }
 
-.signup-title {
+.login-title {
     color: #fff;
     font-weight: 500;
     font-size: 1.5rem;
@@ -38,12 +38,12 @@ form {
     text-align: center;
 }
 
-.signup-input-container {
+.login-input-container {
     position: relative;
     margin: 1rem 0;
 }
 
-.signup-input {
+.login-input {
     width: 85%;
     outline: none;
     border: 2px solid #fafafa;
@@ -57,7 +57,7 @@ form {
     transition: 0.3s;
 }
 
-.signup-input-container .signup-lbl {
+.login-input-container .login-lbl {
     position: absolute;
     top: 50%;
     left: 9%;
@@ -71,12 +71,12 @@ form {
     transition: 0.5s;
 }
 
-.signup-input-container.textarea .signup-lbl {
+.login-input-container.textarea .login-lbl {
     top: 1rem;
     transform: translateY(0);
 }
 
-.signup-btn {
+.login-btn {
     width: 85%;
     padding: 0.6rem;
     background-color: #24262b;
@@ -92,13 +92,13 @@ form {
     margin: 0;
 }
 
-.signup-btn:hover {
+.login-btn:hover {
     color: white;
     background-color: rgb(231, 55, 55);
     border: none;
 }
 
-.signup-input-container span {
+.login-input-container span {
     position: absolute;
     top: 0;
     left: 10%;
@@ -110,8 +110,8 @@ form {
     z-index: 500;
 }
 
-.signup-input-container span:before,
-.signup-input-container span:after {
+.login-input-container span:before,
+.login-input-container span:after {
     content: "";
     position: absolute;
     width: 10%;
@@ -123,23 +123,23 @@ form {
     transform: translateY(-50%);
 }
 
-.signup-input-container span:before {
+.login-input-container span:before {
     left: 50%;
 }
 
-.signup-input-container span:after {
+.login-input-container span:after {
     right: 50%;
 }
 
-.signup-input-container.focus .signup-lbl {
+.login-input-container.focus .login-lbl {
     top: 0;
     transform: translateY(-50%);
     left: 10%;
     font-size: 0.8rem;
 }
 
-.signup-input-container.focus span:before,
-.signup-input-container.focus span:after {
+.login-input-container.focus span:before,
+.login-input-container.focus span:after {
     width: 50%;
     opacity: 1;
 }
@@ -148,37 +148,31 @@ form {
     margin-top: 5px;
     color: rgb(203, 203, 203);
 }
-.gender-lbl{
-    color: white;
-    padding: 4px;
-}
-.notreq{
-    color: aqua;
-}
+
 @media (max-width: 480px) {
-    .signup-container{
+    .login-container{
         width: 100%;
         padding-top: 30%;
         padding-bottom: 25%;
     }
 
-    .signup-form1{
+    .login-form1{
         width: 100%;
         height: 100%;
         font-size: 11px;
     }
-    .signup-lbl{
+    .login-lbl{
         font-size: 10px;
     }
-    .signup-title {
+    .login-title {
         font-size: 1.15rem;
     }
 
-    .signup-input {
+    .login-input {
         padding: 0.45rem 1.2rem;
     }
 
-    .signup-btn {
+    .login-btn {
         padding: 0.45rem 1.2rem;
     }
 }
