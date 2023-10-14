@@ -34,24 +34,24 @@
     <!-- main content starts -->
     <div class="gridboxes1">
         <div class="box1">
-            <h2 style="color: azure;">RECOVERY</h2>
-            <p style="color: azure;">Relax and rejuvenate in our recovery facilities.</p>
+            <h2 style="color: azure;" class="animate-on-scroll">RECOVERY</h2>
+            <p style="color: azure;" class="animate-on-scroll">Relax and rejuvenate in our recovery facilities.</p>
         </div>
         <div class="box2">
-            <h2 style="color: azure;">NUTRITION</h2>
-            <p style="color: azure;">A meal plan designed to suit you and your goal.</p>
+            <h2 style="color: azure;" class="animate-on-scroll">NUTRITION</h2>
+            <p style="color: azure;" class="animate-on-scroll">A meal plan designed to suit you and your goal.</p>
         </div>
 
         <div class="box3">
-            <h2>WORKOUT</h2>
-            <p>With our latest equipments and efficient coaches.</p>
+            <h2 class="animate-on-scroll">WORKOUT</h2>
+            <p class="animate-on-scroll">With our latest equipments and efficient coaches.</p>
         </div>
 
     </div>
 
 
 
-    <div class="italic-line">
+    <div class="italic-line" >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#24262b" fill-opacity="1" d="M0,192L1440,96L1440,320L0,320Z"></path>
         </svg>
@@ -61,7 +61,7 @@
 
     <div class="italic-line-data">
         <h1>🙶</h1>
-        <p> The hard part isn’t getting your body in shape. The hard part is getting your mind in shape. </p>
+        <p class="animate-on-scroll"> The hard part isn’t getting your body in shape. The hard part is getting your mind in shape. </p>
     </div>
 
 
@@ -74,14 +74,14 @@
     <section id="info">
         <div class="info-content">
             <div class="info-text">
-                <h1 class="infoh1">8 YEARS EXPERIENCE</h1>
-                <p class="infop">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor aliquam nisi,
+                <h1 class="infoh1 animate-on-scroll">8 YEARS EXPERIENCE</h1>
+                <p class="infop animate-on-scroll">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor aliquam nisi,
                     eu
                     tincidunt ligula bibendum sit amet. Vivamus hendrerit euismod tristique. Nullam in ipsum id orci
                     porta dapibus. Pellentesque feugiat vel nulla eu tempus. Duis non risus vel ligula volutpat
                     suscipit.</p>
             </div>
-            <div class="info-image">
+            <div class="info-image animate-on-scroll">
                 <img src="../public/Images/infopic2.jpg" alt="Image info" class="none-resp-img">
                 <img src="../public/Images/infopic.jpg" alt="Image info" class="resp-img">
 
@@ -94,7 +94,7 @@
     <!-- coaches section -->
 
     <section class="coaches">
-        <div class="cheading">
+        <div class="cheading animate-on-scroll">
             <h1>Meet Our Coaches</h1>
         </div>
         <div class="home-container">
@@ -151,10 +151,10 @@
 
 
     <section class="rsec">
-        <div class="rheading">
+        <div class="rheading animate-on-scroll">
             <h1>What Our Clients Say</h1>
         </div>
-        <div class="wrapper">
+        <div class="wrapper animate-on-scroll">
             <div class="box">
                 <i class="fas fa-quote-left quote"></i>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum corporis voluptas voluptatem? Eaque
@@ -227,9 +227,13 @@
         </div>
     </section>
 
+
+
+
     <!-- include footer -->
     <?php include('../partials/footer.php') ?>
 
+    <script src="../public/js/index.js"> </script>
 </body>
 
 </html>

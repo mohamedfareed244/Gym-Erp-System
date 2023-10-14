@@ -37,7 +37,7 @@
 
 .cheading h1{
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-size: 50px;
     transform: translateY(100px);
 }
@@ -461,3 +461,19 @@
 }
 
 /* grid end */
+
+
+
+/* attempting to animate the window */
+
+
+.animate-on-scroll {  /*elements hidden before */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
