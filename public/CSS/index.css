@@ -116,7 +116,7 @@
     font-weight: 500;
     margin: 2px 0 12px 0;
     color: #b55353;
-    transform: translateY(-25px);
+    transform: translateY(-10px);
 }
 
 .caption .social-links i {
@@ -125,7 +125,7 @@
     cursor: pointer;
     color: #434343;
     transition: all .4s;
-    transform: translateY(-22px);
+    transform: translateY(-20px);
 }
 
 .caption .social-links i:hover {
@@ -288,15 +288,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    margin-top: -5px;
+    margin-top: -50px;
 }
 
 .box1,
 .box2,
 .box3 {
     flex: 0 0 calc(33.33% - 40px);
-    /* Adjust the percentage as needed */
-    /* max-width: calc(33.33% - 40px); Adjust the percentage as needed */
+    /* max-width: calc(33.33% - 40px); */
     padding: 20px;
     padding-top: 140px;
     padding-bottom: 415px;
