@@ -54,8 +54,8 @@
                     </div>
                 </div>
             </div>
- <!-- second membership -->
- <div class="col">
+            <!-- second membership -->
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">2 MONTHS</h5>
@@ -167,7 +167,6 @@
 <?php include("../partials/footer.php") ?>
 
 
-<script src="../public/js/index.js"></script>
 
 
 
