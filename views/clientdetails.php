@@ -228,7 +228,35 @@
         </tbody>
 </table>
       </div>
-      
+      <hr>
+      <h2>Financials </h2>
+      <div id="tablediv">
+        <table class="table">
+        <thead>
+        <tr>
+      <th scope="col">Package Name </th>
+      <th scope="col"> Date </th>
+      <th scope="col">Amount </th>
+      <th scope="col">Paid </th>
+      <th scope="col">Remain </th>
+      <th scope="col">Due </th>
+      <th scope="col">Sales </th>
+    </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2 months </td>
+                <td>09-09-2023</td>
+                <td>3000</td>
+                <td>2000</td>
+                <td>1000</td>
+                <td>01-10-2023</td>
+                <td>Mohamed fareed </td>
+
+            </tr>
+        </tbody>
+        </table>
+      </div>
         </div>
     </div>
 </body>
