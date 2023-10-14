@@ -67,6 +67,10 @@
     width: 20%;
     margin-left: 3%;
 }
+.modify-coaches-btn :hover {
+    background-color: #b83f3f;
+    transition: 1s ease;
+}
 
 @media (max-width: 890px) {
     .table {
