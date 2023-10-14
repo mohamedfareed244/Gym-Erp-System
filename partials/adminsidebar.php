@@ -61,6 +61,8 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
+                <li><a href="#">Add employee</a></li>
+                <li><a href="#">edit employee</a></li>
                 <li><a href="#">Attendance</a></li>
                 <li><a href="#">Sales target</a></li>
             </ul>
@@ -75,8 +77,8 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Admin </a></li>
-                <li><a href="#">Add Employees </a></li>
-
+                <li><a href="#">Add Admin</a></li>
+                <li><a href="#">Remove Admin</a></li>
                 <li><a href="#">Sales report</a></li>
             </ul>
         </li>
