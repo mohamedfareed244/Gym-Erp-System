@@ -199,3 +199,13 @@ img {
   padding: 210px;
   transform: translateY(-200px);
 }
+
+.hello-classes {
+  font-size: 24px; 
+  display: flex;
+  align-items: center; 
+}
+
+.hello-classes i {
+  margin-right: 10px; 
+}
