@@ -50,6 +50,21 @@
 
             </ul>
         </li>
+        
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='fa fa-building'></i>
+                    <span class="link-name">HR</span>
+                </a>
+                <i class='bx bx-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link-name" href="#">HR </a></li>
+                <li><a href="#">Attendance</a></li>
+                <li><a href="#">Sales target</a></li>
+            </ul>
+        </li>
         <li>
             <div class="icon-link">
                 <a href="#">
