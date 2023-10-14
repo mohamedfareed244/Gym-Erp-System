@@ -3,6 +3,7 @@
     width: 93%;
     height: 30%;
     float: right;
+    overflow: auto;
 }
 input{
     border-radius: 12px;
@@ -37,7 +38,7 @@ height: 30px;
   max-height: 100px;
  }
  #tablediv{
-  border: 2px solid red;
-  height: 200px;
-  overflow: none;
+
+  max-height: 400px;
+  overflow: auto;
  }
