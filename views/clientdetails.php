@@ -194,6 +194,36 @@
       </div>
       <hr>
       <h2>Classes </h2>
+      <div id="tablediv">
+      <table class="table overflow-auto mh-10">
+        <thead>
+        <tr>
+      <th scope="col">class name</th>
+      <th scope="col"> Date </th>
+      <th scope="col">from</th>
+      <th scope="col">to </th>
+      <th scope="col">Status </th>
+      <th scope="col">coach name  </th>
+      <th scope="col">fees </th>
+      <th scope="col">paid </th>
+    </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            
+        </tbody>
+</table>
+      </div>
+      
         </div>
     </div>
 </body>
