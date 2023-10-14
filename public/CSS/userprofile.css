@@ -1,45 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-.profile{
-    height:250vh;
-    position:relative;
-    left:220px;
-    width:calc(100% - 220px);
-    transition: all 0.5s ease;
+.profile {
+  height: 250vh;
+  position: relative;
+  left: 220px;
+  width: calc(100% - 220px);
+  transition: all 0.5s ease;
 
 
 }
 
- .sidebar.close ~ .profile{
-    left:5px;
-    width:calc(100% - 5px);
-} 
-
-.gymfooter{
-    position:relative;
-    left:240px;
-    width:calc(100% - 240px);
-    transition: all 0.5s ease;
-    
+.sidebar.close~.profile {
+  left: 5px;
+  width: calc(100% - 5px);
 }
 
-.sidebar.close ~ .gymfooter{
-    left:70px;
-    width:calc(100% - 70px);
+.gymfooter {
+  position: relative;
+  left: 240px;
+  width: calc(100% - 240px);
+  transition: all 0.5s ease;
+
+}
+
+.sidebar.close~.gymfooter {
+  left: 70px;
+  width: calc(100% - 70px);
 }
 
 
 .mySlides {
-    display: none
+  display: none
 }
+
 img {
-    vertical-align: middle;
+  vertical-align: middle;
 }
+
 /* Slideshow container */
 .slideshow-container {
-   text-align:center;
-   margin-bottom: 5%;
+  text-align: center;
+  margin-bottom: 5%;
 }
 
 /* Number text (1/3 etc) */
@@ -51,8 +53,8 @@ img {
   top: 0;
 }
 
-.imgslides{
-    border-radius:7%;
+.imgslides {
+  border-radius: 7%;
 }
 
 
@@ -63,117 +65,151 @@ img {
   animation-name: fade;
   animation-duration: 1.5s;
 }
+
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+
+  to {
+    opacity: 1
+  }
 }
+
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+
+  to {
+    opacity: 1
+  }
 }
+
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-@media only screen and (max-width: 500px) {
-  .text {font-size: 14px}
-}
+  .text {
+    font-size: 11px
+  }
+
+  @media only screen and (max-width: 500px) {
+    .text {
+      font-size: 14px
+    }
+  }
 }
 
 .gettinginshape {
-    width:100%;
-    background-color:#434343;
-    margin-bottom:5%;
+  width: 100%;
+  background-color: #434343;
+  margin-bottom: 5%;
 
-  }
-  
-  .line1 {
-    font-size: 15vh;
-    position:relative;
-    left:25%;
-  }
-  
-  .line2 {
-    font-size: 15vh;
-    position:relative;
-    left:43%;
-  }
+}
 
-  .line3 {
-    font-size: 15vh;
-    position:relative;
-    left:53%;
-  }
+.line1 {
+  font-size: 15vh;
+  position: relative;
+  left: 25%;
+}
 
-  .line1,.line2,.line3{
-    color:#b83f3f;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight:500;
-  }
-  .reminders{
-    display:flex;
-  }
+.line2 {
+  font-size: 15vh;
+  position: relative;
+  left: 43%;
+}
 
-  .reminder + .reminder {
-    margin-left: 20px; /* Add margin between reminders */
+.line3 {
+  font-size: 15vh;
+  position: relative;
+  left: 53%;
+}
+
+.line1,
+.line2,
+.line3 {
+  color: #b83f3f;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+}
+
+.reminders {
+  display: flex;
+}
+
+.reminder+.reminder {
+  margin-left: 20px;
+  /* Add margin between reminders */
 }
 
 
 
-  .membership-details,.reminder {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    text-align: center;
-    width:20%;
-    position:relative;
-    left:15%;
-    margin-bottom:5%;
-  
-}
-.reminder-title{
-    position:relative;
-    left:15%;
-    margin-bottom:1%;
+.membership-details,
+.reminder {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  text-align: center;
+  width: 20%;
+  position: relative;
+  left: 15%;
+  margin-bottom: 5%;
+
 }
 
-.reminder-title i{
-    color:#b83f3f;
-    padding:7px;
+.reminder-title {
+  position: relative;
+  left: 15%;
+  margin-bottom: 1%;
 }
 
-.currpackage,.class,.ptsession{
-    font-size:24px;
+.reminder-title i {
+  color: #b83f3f;
+  padding: 7px;
 }
-.ptsession-coach{
-    font-size:19px;
+
+.currpackage,
+.class,
+.ptsession {
+  font-size: 24px;
 }
-.membership-title,.class-title,.ptsession-coachname {
-    font-weight: bold;
-    color: #b83f3f;
-    margin-bottom: 10px;
-    font-size:22px;
+
+.ptsession-coach {
+  font-size: 19px;
+}
+
+.membership-title,
+.class-title,
+.ptsession-coachname {
+  font-weight: bold;
+  color: #b83f3f;
+  margin-bottom: 10px;
+  font-size: 22px;
 }
 
 .dates {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
 }
 
 .start-date,
-.end-date,.class-date,.class-time,.ptsession-date,.ptsession-time {
-    font-weight: normal;
+.end-date,
+.class-date,
+.class-time,
+.ptsession-date,
+.ptsession-time {
+  font-weight: normal;
 }
 
-.greeting{
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:24px;
-    font-style:bold;
-    position:relative;
-    left:15%;
-    margin-bottom:3%;
+.greeting {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 24px;
+  font-style: bold;
+  position: relative;
+  left: 15%;
+  margin-bottom: 3%;
 }
 
 
@@ -181,7 +217,7 @@ img {
 
 
 
-.rem-info{
+.rem-info {
   justify-content: space-between;
   font-size: 18px;
   margin-top: 10px;
@@ -190,23 +226,26 @@ img {
 
 
 
-.actual-rem{
-  color:#b83f3f;
+.actual-rem {
+  color: #b83f3f;
   margin-bottom: 10px;
 }
 
-.pack-sum{
+.pack-sum {
   padding: 210px;
   transform: translateY(-200px);
 }
 
 .hello-classes,
-.hello-pack {
-  font-size: 24px; 
+.hello-pack,
+.hello-pt {
+  font-size: 24px;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
-.hello-classes i, .hello-pack i {
-  margin-right: 10px; 
+.hello-classes i,
+.hello-pt i,
+.hello-pack i {
+  margin-right: 10px;
 }
