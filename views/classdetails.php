@@ -71,25 +71,25 @@
 
 
     <section id="class-snippet">
-    <h3 class="class-instructor"><strong>Instructors:</strong></h3>
-    <div class="instructors-container">
-        <div class="instructor">
-            <div class="instructor-image">
-                <img src="../public/Images/coach1.jpg" alt="Instructor 1">
+        <h3 class="class-instructor"><strong>Instructors:</strong></h3>
+        <div class="instructors-container">
+            <div class="instructor">
+                <div class="instructor-image">
+                    <img src="../public/Images/coach1.jpg" alt="Instructor 1">
+                </div>
+                <div class="instructor-details">
+                    <h2>Instructor 1</h2>
+                </div>
             </div>
-            <div class="instructor-details">
-                <h2>Instructor 1</h2>
+            <div class="instructor">
+                <div class="instructor-image">
+                    <img src="../public/Images/coach2.jpg" alt="Instructor 2">
+                </div>
+                <div class="instructor-details">
+                    <h2>Instructor 2</h2>
+                </div>
             </div>
         </div>
-        <div class="instructor">
-            <div class="instructor-image">
-                <img src="../public/Images/coach2.jpg" alt="Instructor 2">
-            </div>
-            <div class="instructor-details">
-                <h2>Instructor 2</h2>
-            </div>
-        </div>
-    </div>
 
         <p>Experience the transformative power of yoga in our serene and
             welcoming studio. Led by expert instructors, our yoga classes
@@ -106,14 +106,14 @@
 
 
     <script>
-        const availabilityCount = 10; // testing lehad ma n connect b database
-        const availabilityText = document.getElementById("availability-text");
+    const availabilityCount = 10; // testing lehad ma n connect b database
+    const availabilityText = document.getElementById("availability-text");
 
-        if (availabilityCount > 0) {
-            availabilityText.classList.add("available");
-        } else {
-            availabilityText.classList.add("unavailable");
-        }
+    if (availabilityCount > 0) {
+        availabilityText.classList.add("available");
+    } else {
+        availabilityText.classList.add("unavailable");
+    }
     </script>
 
     <!-- include footer -->

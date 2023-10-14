@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 .profile{
-    height:150vh;
+    height:250vh;
     position:relative;
     left:220px;
     width:calc(100% - 220px);
     transition: all 0.5s ease;
-    display:flex;
+
 
 }
 
@@ -38,8 +38,8 @@ img {
 }
 /* Slideshow container */
 .slideshow-container {
-  position: relative;
-  left:13%;
+   text-align:center;
+   margin-bottom: 5%;
 }
 
 /* Number text (1/3 etc) */
@@ -80,24 +80,28 @@ img {
 }
 
 .gettinginshape {
-    position:relative;
-    left:15%;
+    width:100%;
+    background-color:#434343;
+    margin-bottom:5%;
+
   }
   
   .line1 {
     font-size: 15vh;
+    position:relative;
+    left:25%;
   }
   
   .line2 {
-    font-size: 13vh;
+    font-size: 15vh;
     position:relative;
-    left:50%;
+    left:43%;
   }
 
   .line3 {
     font-size: 15vh;
     position:relative;
-    left:70%;
+    left:53%;
   }
 
   .line1,.line2,.line3{
@@ -105,25 +109,47 @@ img {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight:500;
   }
+  .reminders{
+    display:flex;
+  }
 
-  .membership-details {
-    position:relative;
-    top:50%;
-    right:67%;
+  .reminder + .reminder {
+    margin-left: 20px; /* Add margin between reminders */
+}
+
+
+
+  .membership-details,.reminder {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 14px;
     text-align: center;
-    width:18%;
-    height:18%;
+    width:20%;
+    position:relative;
+    left:15%;
+    margin-bottom:5%;
+  
+}
+.reminder-title{
+    position:relative;
+    left:15%;
+    margin-bottom:1%;
 }
 
-.currpackage{
+.reminder-title i{
+    color:#b83f3f;
+    padding:7px;
+}
+
+.currpackage,.class,.ptsession{
     font-size:24px;
 }
-.membership-title {
+.ptsession-coach{
+    font-size:19px;
+}
+.membership-title,.class-title,.ptsession-coachname {
     font-weight: bold;
     color: #b83f3f;
     margin-bottom: 10px;
@@ -137,17 +163,17 @@ img {
 }
 
 .start-date,
-.end-date {
+.end-date,.class-date,.class-time,.ptsession-date,.ptsession-time {
     font-weight: normal;
 }
 
 .greeting{
-    position:relative;
-    top:40%;
-    right:56%;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size:24px;
     font-style:bold;
+    position:relative;
+    left:15%;
+    margin-bottom:3%;
 }
 
 
