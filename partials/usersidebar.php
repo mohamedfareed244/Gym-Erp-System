@@ -10,7 +10,7 @@
                 <span class="link-name">Profile</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Profile</a></li>
+                    <li><a  class="link-name" href="../views/userprofile.php">Profile</a></li>
                 </ul>
             </li>
             </li>
@@ -24,7 +24,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Booking</a></li>
-                    <li><a href="#">Package</a></li>
+                    <li><a href="../views/packagebooking.php">Package</a></li>
                     <li><a href="#">Class</a></li>
                     <li><a href="#">Personal Trainer</a></li>
                 </ul>
