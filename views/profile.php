@@ -39,7 +39,62 @@
 <hr>
 <h3>Account : </h3>
 <form action="" class="row">
-    
+    <div class="col-lg-2 ">
+<span>username : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" name="" id="" value="Mohamed Fareed" class="un">
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="col-lg-2 ">
+<span>Password : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="password" name="" id="" value="Mohamed Fareed" class="un">
+        <a href="">change ? </a>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="col-lg-2 ">
+<span>Email : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" name="" id="" value="Mohamed@gmail.com" class="un">
+        
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="col-lg-2 ">
+<span>Job Title : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" name="" id="" value="Administrator" class="un">
+        
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="col-lg-2 ">
+<span>Salary : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" name="" id="" value="3000" class="un">
+        
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="col-lg-2 ">
+<span>Attendance for current month : </span>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" name="" id="" value="10 Days" class="un">
+        
+    </div>
 </form>
     </div>
 </body>
