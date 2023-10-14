@@ -37,7 +37,11 @@
     </section>
 
     <div class="container py-5">
-        <h2>Details:</h2>
+        <h2 style=" font-size: 22px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgb(176, 37, 37);
+    letter-spacing: -1px;">Details:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
             Gyms today offer a plethora of membership options, each tailored to cater to the unique needs and goals of
@@ -65,7 +69,11 @@
     </div>
 
     <div class="container py-5">
-        <h2>Types:</h2>
+        <h2 style=" font-size: 22px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgb(176, 37, 37);
+    letter-spacing: -1px;">Types:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
