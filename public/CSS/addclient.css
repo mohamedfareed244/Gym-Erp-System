@@ -33,3 +33,11 @@ border: none;
 border-radius: 10px;
 height: 30px;
   }
+ tbody{
+  max-height: 100px;
+ }
+ #tablediv{
+  border: 2px solid red;
+  height: 200px;
+  overflow: none;
+ }
