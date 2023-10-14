@@ -9,10 +9,10 @@
         <li>
             <a href="#">
                 <i class='bx bxs-grid-alt'></i>
-                <span class="link-name">Profile</span>
+                <span class="link-name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Profile</a></li>
+                    <li><a  class="link-name" href="#">Dashboard</a></li>
                 </ul>
             </li>
             </li>
@@ -105,7 +105,7 @@
         <li>
             <div class="icon-link">
                 <a href="#">
-                    <i class='bx bxs-cog'></i>
+                    <i class='far fa-user-circle'></i>
                     <span class="link-name">Account</span>
                 </a>
             </div>
