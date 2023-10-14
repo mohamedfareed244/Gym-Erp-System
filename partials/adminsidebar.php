@@ -104,13 +104,13 @@
 
         <li>
             <div class="icon-link">
-                <a href="#">
+                <a href="../views/profile.php">
                     <i class='far fa-user-circle'></i>
                     <span class="link-name">Account</span>
                 </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link-name" href="#">Account</a></li>
+                <li><a class="link-name" href="../views/profile.php">Account</a></li>
             </ul>
         </li>
         <li>
