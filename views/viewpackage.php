@@ -46,13 +46,13 @@
 
             <div class="rem-info">
                 <p>Remaining Invitations:</p>
-                <p class="actual-rem">2 Out of 4 Invitations Left.</p>
+                <p class="actual-rem">2 Out of 4 Invitations Left</p>
                 <p>Remaining Inbodies:</p>
-                <p class="actual-rem"> 2 Out of 4 Inbodies Left.</p>
+                <p class="actual-rem"> 2 Out of 4 Inbodies Left</p>
                 <p>Remaining PT Sessions: </p>
-                <p class="actual-rem">2 Out of 2 PT Sessions Left.</p>
+                <p class="actual-rem">2 Out of 2 PT Sessions Left</p>
                 <p>Remaining Freeze Attempts: </p>
-                <p class="actual-rem">3 Weeks Out of 5 Left.</p>
+                <p class="actual-rem">3 Weeks Out of 5 Left</p>
 
 
 
