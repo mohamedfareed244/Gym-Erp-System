@@ -37,7 +37,11 @@
     </section>
 
     <div class="container py-5">
-        <h2>Details:</h2>
+        <h2 style=" font-size: 22px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgb(176, 37, 37);
+    letter-spacing: -1px;">Details:</h2>
 
         <div class="classinfo">
             Gyms today offer an array of fitness classes that extend well beyond traditional workout routines. These
@@ -63,7 +67,11 @@
 
 
     <div class="container py-5">
-        <h2>Types:</h1>
+        <h2 style=" font-size: 22px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgb(176, 37, 37);
+    letter-spacing: -1px;">Types:</h1>
             <div class="card-container">
 
                 <div class="card">
