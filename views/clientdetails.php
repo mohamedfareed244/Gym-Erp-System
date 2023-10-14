@@ -219,11 +219,148 @@
             <td>120</td>
             <td class="bg-danger">not paid </td>
             </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
+            <tr>
+            <td>yoga</td>
+            <td>09-09-2023</td>
+            <td>9:00pm</td>
+            <td>11:00pm</td>
+            <td class="bg-success text-white">attended</td>
+            <td>Mohamed fareed</td>
+            <td>120</td>
+            <td class="bg-danger">not paid </td>
+            </tr>
             
         </tbody>
 </table>
       </div>
-      
+      <hr>
+      <h2>Financials </h2>
+      <div id="tablediv">
+        <table class="table">
+        <thead>
+        <tr>
+      <th scope="col"> Package Name </th>
+      <th scope="col"> Date </th>
+      <th scope="col"> Amount </th>
+      <th scope="col"> Paid </th>
+      <th scope="col"> Remain </th>
+      <th scope="col"> Due Date </th>
+      <th scope="col"> Sales </th>
+    </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2 months </td>
+                <td>09-09-2023</td>
+                <td>3000</td>
+                <td>2000</td>
+                <td>1000</td>
+                <td>01-10-2023</td>
+                <td>Mohamed Fareed</td>
+            </tr>
+        </tbody>
+        </table>
+      </div>
         </div>
     </div>
 </body>
