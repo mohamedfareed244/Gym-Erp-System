@@ -28,7 +28,7 @@
     <div class="profile">
 
         <div class="greeting">
-            <p class="hello" style="font-weight: bold;">Your Package Details </p>
+        <p class="hello-pack"><i class="fas fa-box"></i> Your Package Details</p>
         </div>
         <div class="membership-details">
             <p class="currpackage">Current Package:</p>

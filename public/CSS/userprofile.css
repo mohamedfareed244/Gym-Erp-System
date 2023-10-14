@@ -200,12 +200,13 @@ img {
   transform: translateY(-200px);
 }
 
-.hello-classes {
+.hello-classes,
+.hello-pack {
   font-size: 24px; 
   display: flex;
   align-items: center; 
 }
 
-.hello-classes i {
+.hello-classes i, .hello-pack i {
   margin-right: 10px; 
 }
