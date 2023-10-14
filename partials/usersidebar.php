@@ -40,7 +40,7 @@
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Details</a></li>
                     <li><a href="../views/viewpackage.php">Package</a></li>
-                    <li><a href="#">Class</a></li>
+                    <li><a href="../views/viewclasses.php">Class</a></li>
                     <li><a href="#">Personal Training</a></li>
                 </ul>
             </li>
