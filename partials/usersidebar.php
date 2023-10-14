@@ -60,7 +60,7 @@
             </li>
             <li>
                 <div class="icon-link">
-                <a href="#">
+                <a href="../views/reqfreeze.php">
                 <i class='bx bxs-lock-alt'></i>
                 <span class="link-name">Freeze</span>
                 </a>
