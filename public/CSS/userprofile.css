@@ -178,3 +178,24 @@ img {
 
 
 
+
+
+
+.rem-info{
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 10px;
+
+}
+
+
+
+.actual-rem{
+  color:#b83f3f;
+  margin-bottom: 10px;
+}
+
+.pack-sum{
+  padding: 210px;
+  transform: translateY(-200px);
+}
