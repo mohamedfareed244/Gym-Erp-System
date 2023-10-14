@@ -1,7 +1,7 @@
 <div class="sidebar close">
- 
-   
-        <div class="logo-details">
+
+
+    <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name" style="font-weight:300">Admin</span>
     </div>
@@ -10,30 +10,30 @@
             <a href="#">
                 <i class='bx bxs-grid-alt'></i>
                 <span class="link-name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link-name" href="#">Dashboard</a></li>
+            </ul>
+        </li>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='fas fa-user-friends'></i>
+                    <span class="link-name">Clients</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Dashboard</a></li>
-                </ul>
-            </li>
-            </li>
-            <li>
-                <div class="icon-link">
-                   <a href="#">
-                   <i class='fas fa-user-friends'></i>
-                   <span class="link-name">Clients</span>
-                   </a>
-                   <i class='bx bx-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a  class="link-name" href="#">Clients</a></li>
-                    <li><a href="../views/addclient.php">Add</a></li>
-                    <li><a href="../views/editclient.php">Edit</a></li>
-                    <li><a href="../views/clientdetails.php">Details</a></li>
-                </ul>
-            </li>
-       
-              </li>
-      
+                <i class='bx bx-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link-name" href="#">Clients</a></li>
+                <li><a href="../views/addclient.php">Add</a></li>
+                <li><a href="../views/editclient.php">Edit</a></li>
+                <li><a href="../views/clientdetails.php">Details</a></li>
+            </ul>
+        </li>
+
+        </li>
+
         <li>
             <div class="icon-link">
                 <a href="../views/coachesadmin.php">
@@ -50,7 +50,7 @@
 
             </ul>
         </li>
-        
+
         <li>
             <div class="icon-link">
                 <a href="#">
@@ -122,6 +122,17 @@
             </div>
             <ul class="sub-menu blank">
                 <li><a class="link-name" href="#">Logout</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-home'></i>
+                    <span class="link-name">Return to Homepage</span>
+                </a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link-name" href="../views/index.php">Return to Homepage</a></li>
             </ul>
         </li>
 
