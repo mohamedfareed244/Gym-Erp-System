@@ -17,49 +17,108 @@
 
 <body>
     <?php include("../partials/adminsidebar.php") ?>
-    <div class="container">
+    <div class="coaches-container">
         <h1 class="coaches-title">Coaches</h1>
-        <table id="coaches-table" class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Class</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-title="ID">1</td>
-                    <td data-title="Name">Sandy Mohammed</td>
-                    <td data-title="Class">Body Pump</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">2</td>
-                    <td data-title="Name">Kenzy Khaled</td>
-                    <td data-title="Class">Yoga</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">3</td>
-                    <td data-title="Name">Carmen Ahmed</td>
-                    <td data-title="Class">Aerobics</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">4</td>
-                    <td data-title="Name">Ziad Sherif</td>
-                    <td data-title="Class">Core</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">5</td>
-                    <td data-title="Name">Saad Omar</td>
-                    <td data-title="Class">Body Attack</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="modify-coaches">
-            <button class="modify-coaches-btn" id="add-coach"> Add Coach</button>
-            <button class="modify-coaches-btn" id="edit-coach"> Edit Coach</button>
-            <button class="modify-coaches-btn" id="delete-coach"> Delete Coach</button>
+        <div class="coaches-main-content">
+            <table class="coaches-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Class</th>
+                        <th>Phone</th>
+                        <th>Salary</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Karim Ayman</td>
+                        <td>example@gmail.com</td>
+                        <td>Body Attack</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
+                        <td>011111111</td>
+                        <td>
+                            <button class="btn">Edit</button>
+                            <button class="btn btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>Mervat Mohammed</td>
+                        <td>example@gmail.com</td>
+                        <td>Yoga</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
+                        <td>011111111</td>
+                        <td>
+                            <button class="btn">Edit</button>
+                            <button class="btn btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>Hannah Ahmed</td>
+                        <td>example@gmail.com</td>
+                        <td>Pilates</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
+                        <td>011111111</td>
+                        <td>
+                            <button class="btn">Edit</button>
+                            <button class="btn btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <label class="coaches-title" id="add-coach-lbl">Add a Coach</label>
+        <form class="add-coaches">
+            <div class="coaches-inputs">
+                <div class="group">
+                    <input class="coach-name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Full Name</label>
+                </div>
+                <div class="group">
+                    <input class="coach-name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Email</label>
+                </div>
+
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Class</label>
+                </div>
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Salary</label>
+                </div>
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Address</label>
+                </div>
+                <div class="group">
+                    <input class="coach-phone" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Phone</label>
+                </div>
+            </div>
+            <input type="submit" value="ADD COACH" class="add-coach-btn" />
+        </form>
+
+    </div>
     </div>
     </div>
 </body>

@@ -45,8 +45,7 @@
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Coaches</a></li>
                 <li><a href="#">Classes</a></li>
-                <li><a href="#">Free pt sessions </a></li>
-                <li><a href="#">Pt clients </a></li>
+                <li><a href="../views/ptsessions.php">Pt clients </a></li>
 
             </ul>
         </li>
