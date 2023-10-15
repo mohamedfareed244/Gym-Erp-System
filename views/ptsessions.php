@@ -43,18 +43,22 @@
                 <table class="table overflow-auto mh-10">
                     <thead>
                         <tr>
+                            <th scope="col">Client ID</th>
                             <th scope="col">Client Name</th>
+                            <th scope="col">Client Phone</th>
                             <th scope="col">Session Date </th>
                             <th scope="col">Duration</th>
                             <th scope="col">Time </th>
-                            <th scope="col">Price </th>
+                            <th scope="col">Payment </th>
                             <th scope="col">Coach Name </th>
 
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">Amira Hamdy</th>
+                            <th scope="row">12345</th>
+                            <th>Amira Hamdy</th>
+                            <td>011111111</td>
                             <td>02-09-2023</td>
                             <td>1.5 hr</td>
                             <td>3:00pm</td>
@@ -62,7 +66,9 @@
                             <td>Mohamed fareed</td>
                         </tr>
                         <tr>
-                            <th scope="row">Nadine Mounir</th>
+                            <th scope="row">12345</th>
+                            <th>Nadine Mounir</th>
+                            <td>011111111</td>
                             <td>02-09-2023</td>
                             <td>1.5 hr</td>
                             <td>3:00pm</td>
@@ -70,7 +76,9 @@
                             <td>Ahmed Hassan</td>
                         </tr>
                         <tr>
-                            <th scope="row">Ahmed Sherif</th>
+                            <th scope="row">12345</th>
+                            <th>Ahmed Sherif</th>
+                            <td>011111111</td>
                             <td>02-10-2023</td>
                             <td>2 hr</td>
                             <td>5:00pm</td>
@@ -78,7 +86,9 @@
                             <td>Shorouk Ahmed</td>
                         </tr>
                         <tr>
-                            <th scope="row">Eslam Sameh</th>
+                            <th scope="row">12345</th>
+                            <th>Eslam Sameh</th>
+                            <td>011111111</td>
                             <td>02-09-2023</td>
                             <td>1.5 hr</td>
                             <td>3:00pm</td>
@@ -87,8 +97,56 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
+            <h4>Add a Private Training Session</h2>
+                <div class="row">
+                    <form action="" class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name">Client Name : </label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name">Client Phone : </label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name">Session Date: </label>
+                            <input type="date" name="name" id="name">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name">Duration : </label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name"> Time : </label>
+                            <input type="time" name="name" id="name">
+                        </div>
+                        <br>
+                        <br>
+
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name"> Height : </label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="payment">Choose Payment Details:</label>
+                            <select name="payment">
+                                <option value="free">Free</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="name">Coach Name : </label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="col-lg-9 col-md-12">
+                            <input type="submit" value="Add Pt Session" id="add-btn">
+                        </div>
+                    </form>
+
+                </div>
         </div>
     </div>
 </body>
