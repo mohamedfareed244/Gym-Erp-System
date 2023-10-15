@@ -85,6 +85,7 @@
     width: 70px;
     color: white;
     background-color: #00A8E8;
+    margin-bottom: 5px;
 }
 
 .btn-delete {
@@ -96,24 +97,26 @@
 }
 
 @media (max-width: 1280px) {
-    .coaches-title {
-        margin-left: 10%;
-    }
-
-    .coaches-table {
-        margin-left: 10%;
-    }
+    
 
 }
 
 @media (max-width: 660px) {
-    .coaches-title {
-        margin: 0 0 0 20%;
+    .coaches-container{
+        overflow: hidden;
+    }
+    .coaches-title , #add-coaches-lbl{
+        margin: 0 0 0 10%;
         font-size: 25px;
     }
+    .coaches-table{
+        width: 80;
+        font-size: 13px;
+        margin: 0 5% 0 5%;
+    }
 
-    .coaches-table {
-        margin-left: 15%;
+    .group input, .group-lbl, .bar {
+        margin-left: 10%;
         font-size: 13px;
     }
 

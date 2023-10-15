@@ -24,15 +24,21 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Class</th>
                         <th>Phone</th>
+                        <th>Salary</th>
+                        <th>Address</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Karim Ayman</td>
+                        <td>example@gmail.com</td>
                         <td>Body Attack</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
                         <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
@@ -42,7 +48,10 @@
                     <tr>
 
                         <td>Mervat Mohammed</td>
+                        <td>example@gmail.com</td>
                         <td>Yoga</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
                         <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
@@ -52,7 +61,10 @@
                     <tr>
 
                         <td>Hannah Ahmed</td>
+                        <td>example@gmail.com</td>
                         <td>Pilates</td>
+                        <td>50000</td>
+                        <td>New Cairo City</td>
                         <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
@@ -64,24 +76,44 @@
         </div>
         <label class="coaches-title" id="add-coach-lbl">Add a Coach</label>
         <form class="add-coaches">
-            <div class="group">
-                <input class="coach-name" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="group-lbl">Name</label>
-            </div>
+            <div class="coaches-inputs">
+                <div class="group">
+                    <input class="coach-name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Full Name</label>
+                </div>
+                <div class="group">
+                    <input class="coach-name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Email</label>
+                </div>
 
-            <div class="group">
-                <input class="coach-class" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="group-lbl">Class</label>
-            </div>
-            <div class="group">
-                <input class="coach-phone" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="group-lbl">Phone</label>
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Class</label>
+                </div>
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Salary</label>
+                </div>
+                <div class="group">
+                    <input class="coach-class" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Address</label>
+                </div>
+                <div class="group">
+                    <input class="coach-phone" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="group-lbl">Phone</label>
+                </div>
             </div>
             <input type="submit" value="ADD COACH" class="add-coach-btn" />
         </form>
