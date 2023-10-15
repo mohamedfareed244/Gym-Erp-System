@@ -19,28 +19,31 @@
 <body>
 <?php require("../partials/adminsidebar.php")?>
 <div id="add-body">
+    <h3>Add Employee </h3>
+    <br>
+    <hr>
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <label for="name">Display Name : </label>
                 <input type="text">
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <label for="name">Full Name : </label>
                 <input type="text">
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <label for="name">Phone : </label>
                 <input type="text">
             </div>
             <br>
             <br>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <label for="name">Email : </label>
                 <input type="text">
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
             <label for="jobs">Choose job title :</label>
 
 <select name="jobs" id="jobs">
@@ -51,7 +54,21 @@
   
 </select>
             </div>
-            
+            <div class="col-lg-4 col-sm-12">
+                <label for="name">Salary : </label>
+                <input type="text">
+            </div>
+            <br>
+            <br>
+            <div class="col-lg-12 col-sm-12">
+                <label for="name">Address : </label>
+                <input type="text" id="emp-addr">
+            </div>
+            <br>
+            <br>
+            <div class="col-lg-4 col-sm-12">
+                <input type="submit" value="Add Employee" id="add-btn">
+            </div>
         </div>
     </div>
 </div>

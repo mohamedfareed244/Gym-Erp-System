@@ -19,7 +19,11 @@ input{
 
   #add-body{
     width: 85%;
+
   }
+  #emp-addr{
+    width: 100%;
+     }
   }
   hr{
   
@@ -56,4 +60,7 @@ height: 30px;
  .un{
   background-color: transparent;
 
+ }
+ #emp-addr{
+width: 60%;
  }
