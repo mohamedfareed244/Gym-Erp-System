@@ -54,7 +54,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Diet Plan</a></li>
-                    <li><a href="#">View</a></li>
+                    <li><a href="../views/viewdietplan.php">View</a></li>
                     <li><a href="../views/bookdietplan.php">Book</a></li>
                 </ul>
             </li>

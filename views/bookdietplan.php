@@ -134,6 +134,15 @@
                         </ul>
 
                     </div>
+                    <div class="dietplan-duration">
+                        <h2>Duration:</h2>
+                        <ul>
+                            <li>
+                                <p>1 month</p>
+                            </li>
+                        </ul>
+
+                    </div>
                     <button class="reserve-class">Reserve Now</button>
 
                 </div>
