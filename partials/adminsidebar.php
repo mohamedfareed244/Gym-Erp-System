@@ -61,7 +61,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
-                <li><a href="#">Add employee</a></li>
+                <li><a href="../views/addemployee.php">Add employee</a></li>
                 <li><a href="#">edit employee</a></li>
                 <li><a href="#">Attendance</a></li>
                 <li><a href="#">Sales target</a></li>

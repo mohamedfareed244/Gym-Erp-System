@@ -19,7 +19,41 @@
 <body>
 <?php require("../partials/adminsidebar.php")?>
 <div id="add-body">
-    
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <label for="name">Display Name : </label>
+                <input type="text">
+            </div>
+            <div class="col-4">
+                <label for="name">Full Name : </label>
+                <input type="text">
+            </div>
+            <div class="col-4">
+                <label for="name">Phone : </label>
+                <input type="text">
+            </div>
+            <br>
+            <br>
+            <div class="col-4">
+                <label for="name">Email : </label>
+                <input type="text">
+            </div>
+            <div class="col-4">
+            <label for="jobs">Choose job title :</label>
+
+<select name="jobs" id="jobs">
+<option value="">Select job</option>
+  <option value="salesperson"> Sales Person</option>
+  <option value="fitnessmanager"> Fitness Manager </option>
+  <option value="hr">HR</option>
+  
+</select>
+            </div>
+            
+        </div>
+    </div>
 </div>
 </body>
 </html>
