@@ -55,7 +55,7 @@
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Diet Plan</a></li>
                     <li><a href="#">View</a></li>
-                    <li><a href="../views/adddietplan.php">Book</a></li>
+                    <li><a href="../views/bookdietplan.php">Book</a></li>
                 </ul>
             </li>
             <li>
@@ -88,7 +88,7 @@
                 </a>
                 </div>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Logout</a></li>
+                    <li><a  class="link-name" href="../views/index.php">Logout</a></li>
                 </ul>
             </li>
 

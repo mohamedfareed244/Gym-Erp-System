@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/classes.css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/adddietplan.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/bookdietplan.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
