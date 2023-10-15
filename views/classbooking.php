@@ -33,9 +33,8 @@
     letter-spacing: -1px;
     margin-bottom:3%;">Types:</h2>
         <div class="card-container">
-
+        <img src="../public/Images/yoga.jpg" style="width:310px; height:240px;">
             <div class="card">
-                <img src="../public/Images/yoga.jpg" style="width:310px; height:240px;">
                 <h3>Power Yoga Class</h3>
                 <section class="class-details">
                     <div class="class-item">

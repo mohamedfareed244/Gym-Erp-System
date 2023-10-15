@@ -55,7 +55,7 @@
                 <ul class="sub-menu">
                     <li><a  class="link-name" href="#">Diet Plan</a></li>
                     <li><a href="#">View</a></li>
-                    <li><a href="#">Book</a></li>
+                    <li><a href="../views/adddietplan.php">Book</a></li>
                 </ul>
             </li>
             <li>
