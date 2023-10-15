@@ -66,7 +66,7 @@
                 </a>
                 </div>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Freeze</a></li>
+                    <li><a  class="link-name" href="../views/reqfreeze.php">Freeze</a></li>
                 </ul>
             </li>
             <li>
@@ -82,7 +82,7 @@
             </li>
             <li>
                 <div class="icon-link">
-                <a href="#">
+                <a href="../views/index.php">
                 <i class='bx bx-log-out'></i>
                 <span class="link-name">Logout</span>
                 </a>

@@ -171,7 +171,8 @@ img {
 
 .currpackage,
 .class,
-.ptsession {
+.ptsession,
+.dietplan {
   font-size: 24px;
 }
 
@@ -181,7 +182,8 @@ img {
 
 .membership-title,
 .class-title,
-.ptsession-coachname {
+.ptsession-coachname,
+.dietplan-name {
   font-weight: bold;
   color: #b83f3f;
   margin-bottom: 10px;
@@ -199,7 +201,9 @@ img {
 .class-date,
 .class-time,
 .ptsession-date,
-.ptsession-time {
+.ptsession-time,
+.dietplan-duration,
+.dietplan-expirydate {
   font-weight: normal;
 }
 

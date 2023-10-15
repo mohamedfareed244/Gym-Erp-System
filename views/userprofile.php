@@ -105,6 +105,20 @@
                     </div>
                 </div>
             </div>
+            <div class="reminder">
+                <p class="dietplan">Diet Plan:</p>
+                <div class="dietplan-name">Intermittent Fasting</div>
+                <div class="dates">
+                    <div class="date">
+                        <p>Duration:</p>
+                        <div class="dietplan-duration">1 Month</div>
+                    </div>
+                    <div class="time">
+                        <p>Expiry Date:</p>
+                        <div class="dietplan-expirydate">25-11-2023</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
