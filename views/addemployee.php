@@ -66,9 +66,12 @@
             </div>
             <br>
             <br>
+            <hr>
+            <br><br>
             <div class="col-lg-4 col-sm-12">
                 <input type="submit" value="Add Employee" id="add-btn">
             </div>
+            
         </div>
     </div>
 </div>
