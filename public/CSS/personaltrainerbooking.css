@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.container{
+    height:180vh;
+    position:relative;
+    left:310px;
+    width:calc(100% - 310px);
+    transition: all 0.5s ease;
+    margin-bottom:3%;
+
+}
+
+ .sidebar.close ~ .container{
+    left:170px;
+    width:calc(100% - 170px);
+} 
+
+.gymfooter{
+    position:relative;
+    left:240px;
+    width:calc(100% - 240px);
+    transition: all 0.5s ease;
+    
+}
+
+.sidebar.close ~ .gymfooter{
+    left:70px;
+    width:calc(100% - 70px);
+}
+
+.container .card-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width:30%;
+}
+
+.container .card-container .card{
+    width:60%;
+    height:20%;
+}
+
+.available-times{
+    
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  text-align: center;
+  width: 35%;
+  margin-bottom: 3%;
+
+}
+
+.avail-times{
+  margin-bottom: 3%; 
+}
+
+.day{
+    font-weight: bold;
+    color: #b83f3f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+
+  .time,.end-date{
+    font-weight: normal;
+  }
+
+  .container .available-times:hover{
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .3);
+    transform: scale(1.03);
+  }
+
+  #trainer-booking{
+    background-color: transparent;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+#trainer-booking:hover {
+    background-color: #000000;
+    color: white;
+}
+
+#all-avail-times{
+    position:relative;
+    left:25%;
+    bottom:85%;
+    display:none;
+}
+
+#trainer-booking{
+  background-color: transparent;
+  padding: 8px;
+  border: 1px solid rgb(51, 51, 51);
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+#trainer-booking:hover {
+  background-color: rgb(51, 51, 51);
+  color:white;
+}
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  text-align: center;
+}
+
+.close-popup {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+#confirm-free-button,#confirm-package-button {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+#confirm-free-button:hover,#confirm-package-button:hover {
+  background-color: #424242;
+}
+
+#trainer-booking{
+  background-color: transparent;
+  padding: 8px;
+  border: 1px solid rgb(62, 62, 62);
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: 10px;
+}
+
+#trainer-booking:hover {
+  background-color: rgb(62, 62, 62);
+  color: white;
+}
+
+

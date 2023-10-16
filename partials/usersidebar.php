@@ -26,7 +26,7 @@
                     <li><a  class="link-name" href="#">Booking</a></li>
                     <li><a href="../views/packagebooking.php">Package</a></li>
                     <li><a href="../views/classbooking.php">Class</a></li>
-                    <li><a href="#">Personal Trainer</a></li>
+                    <li><a href="../views/personaltrainerbooking.php">Personal Trainer</a></li>
                 </ul>
             </li>
             <li>

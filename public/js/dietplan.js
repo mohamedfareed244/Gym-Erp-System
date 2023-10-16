@@ -1,7 +1,4 @@
-
-
-
-    // Get references to the card elements
+ // Get references to the card elements
     const cards = document.querySelectorAll('.card');
 
     // Get reference to the details section
