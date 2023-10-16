@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" href="../public/CSS/admindesign.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -37,9 +38,9 @@
                         <td>Karim Ayman</td>
                         <td>example@gmail.com</td>
                         <td>Body Attack</td>
+                        <td>011111111</td>
                         <td>50000</td>
                         <td>New Cairo City</td>
-                        <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -50,9 +51,9 @@
                         <td>Mervat Mohammed</td>
                         <td>example@gmail.com</td>
                         <td>Yoga</td>
+                        <td>011111111</td>
                         <td>50000</td>
                         <td>New Cairo City</td>
-                        <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -63,9 +64,9 @@
                         <td>Hannah Ahmed</td>
                         <td>example@gmail.com</td>
                         <td>Pilates</td>
+                        <td>011111111</td>
                         <td>50000</td>
                         <td>New Cairo City</td>
-                        <td>011111111</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -75,48 +76,42 @@
             </table>
         </div>
         <label class="coaches-title" id="add-coach-lbl">Add a Coach</label>
-        <form class="add-coaches">
-            <div class="coaches-inputs">
-                <div class="group">
-                    <input class="coach-name" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Full Name</label>
+        <div class="coaches row">
+            <form action="" class="row">
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-name">Coach Name : </label>
+                    <input type="text" name="coach-name" id="coach-name">
                 </div>
-                <div class="group">
-                    <input class="coach-name" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Email</label>
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-email">Coach Email : </label>
+                    <input type="text" name="coach-email" id="coach-email">
                 </div>
+                <br>
+                <br>
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-class">Class : </label>
+                    <input type="text" name="coach-class" id="coach-class">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-phone">Phone : </label>
+                    <input type="text" name="coach-phone" id="coach-phone">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-salary">Salary : </label>
+                    <input type="text" name="coach-salary" id="coach-salary">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label for="coach-address">Address : </label>
+                    <input type="text" name="coach-address" id="coach-address">
+                </div>
+                <br>
+                <br>
+                <div class="col-lg-9 col-md-12">
+                    <input type="submit" value="Add Pt Session" id="add-btn">
+                </div>
+            </form>
 
-                <div class="group">
-                    <input class="coach-class" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Class</label>
-                </div>
-                <div class="group">
-                    <input class="coach-class" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Salary</label>
-                </div>
-                <div class="group">
-                    <input class="coach-class" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Address</label>
-                </div>
-                <div class="group">
-                    <input class="coach-phone" type="text" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="group-lbl">Phone</label>
-                </div>
-            </div>
-            <input type="submit" value="ADD COACH" class="add-coach-btn" />
-        </form>
+        </div>
 
     </div>
     </div>

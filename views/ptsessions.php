@@ -20,16 +20,13 @@
     <div id="add-body">
         <div class="container">
             <form action="" class="row">
-                <div class="col-5">
-                    <label for="search">client id : </label>
-                    <input type="text" name="search">
-
-
+                <div class="col-lg-4 col-md-12">
+                    <label for="search">Client Id : </label>
+                    <input type="text" name="name" id="name">
                 </div>
-                <div class="col-5">
-                    <label for="search1">client phone : </label>
-                    <input type="text" name="search1">
-
+                <div class="col-lg-4 col-md-12">
+                    <label for="search1">Client Phone : </label>
+                    <input type="text" name="name" id="name">
                 </div>
                 <div class="col-2">
                     <input type="submit" value="Search" id="add-btn">
@@ -98,52 +95,54 @@
                     </tbody>
                 </table>
             </div>
+            <br>
+            <br>
             <h4>Add a Private Training Session</h2>
-                <div class="row">
-                    <form action="" class="row">
+            <br>
+                <div class="pt row">
+                    <form action="" class="pt row">
                         <div class="col-lg-4 col-md-12">
-                            <label for="name">Client Name : </label>
-                            <input type="text" name="name" id="name">
+                            <label for="session-client">Client Name : </label>
+                            <input type="text" name="session-client" id="session-client">
                         </div>
                         <div class="col-lg-4 col-md-12">
-                            <label for="name">Client Phone : </label>
-                            <input type="text" name="name" id="name">
+                            <label for="session-phone">Client Phone : </label>
+                            <input type="text" name="session-phone" id="session-phone">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="session-date">Session Date: </label>
+                            <input type="date" name="session-date" id="session-date">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="session-duration">Duration : </label>
+                            <input type="text" name="session-duration" id="session-duration">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <label for="session-time"> Time : </label>
+                            <input type="time" name="session-time" id="session-time">
                         </div>
                         <br>
                         <br>
                         <div class="col-lg-4 col-md-12">
-                            <label for="name">Session Date: </label>
-                            <input type="date" name="name" id="name">
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <label for="name">Duration : </label>
-                            <input type="text" name="name" id="name">
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <label for="name"> Time : </label>
-                            <input type="time" name="name" id="name">
-                        </div>
-                        <br>
-                        <br>
-
-                        <div class="col-lg-4 col-md-12">
-                            <label for="name"> Height : </label>
-                            <input type="text" name="name" id="name">
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <label for="payment">Choose Payment Details:</label>
-                            <select name="payment">
+                            <label for="session-payment">Choose Payment Details:</label>
+                            <select class="session-payment" name="session-payment">
                                 <option value="free">Free</option>
                                 <option value="paid">Paid</option>
                             </select>
                         </div>
                         <div class="col-lg-4 col-md-12">
-                            <label for="name">Coach Name : </label>
-                            <input type="text" name="name" id="name">
+                            <label for="session-coach">Coach Name : </label>
+                            <input type="text" name="session-coach" id="session-">
                         </div>
+                        <br>
+                        <br>
                         <div class="col-lg-9 col-md-12">
                             <input type="submit" value="Add Pt Session" id="add-btn">
                         </div>
+                        <br>
+                        <br>
                     </form>
 
                 </div>
