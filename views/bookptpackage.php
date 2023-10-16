@@ -26,8 +26,8 @@
     <div class="profile">
 
         <div class="greeting">
-        <p class="class">Personal Trainer:</p>
-                <div class="class-title">Sara Maged</div>
+            <p class="class">Personal Trainer:</p>
+            <div class="class-title">Sara Maged</div>
         </div>
 
         <div class="reminders">
@@ -70,7 +70,7 @@
 
 
 
-        
+
             <div class="reminder">
                 <div class="class-title">4 Months, 40 Sessions</div>
 
@@ -88,7 +88,18 @@
                 <button id="trainer-booking">Book Now</button>
             </div>
 
-</div>
+        </div>
+
+        <div id="myPopup" class="popup">
+            <div class="popup-content">
+                <span class="popup-close">&times;</span>
+                <p id="popup-confirm"></p>
+                <button id="popup-confirm-button">Yes</button>
+                <button id="popup-cancel-button">Cancel</button>
+                <p id="popup-message"></p>
+
+            </div>
+        </div>
 
     </div>
 
@@ -96,6 +107,53 @@
 </body>
 <?php include("../partials/footer.php") ?>
 
-<script src="../public/js/personaltrainer.js"></script>
+
+<script>
+const bookBtns = document.querySelectorAll('#trainer-booking');
+
+const popup = document.getElementById("myPopup");
+const popupconfirm = document.getElementById("popup-confirm");
+const popupconfirmButton = document.getElementById("popup-confirm-button");
+const popupcancelButton = document.getElementById("popup-cancel-button");
+const popupclose = document.querySelector(".popup-close");
+const popupMessage = document.getElementById("popup-message");
+
+function showpopup(message) {
+    popupconfirm.textContent = message;
+    popup.style.display = "block";
+    popupconfirmButton.style.display = "block";
+    popupcancelButton.style.display = "block";
+    popupMessage.style.display="none";
+}
+
+function resetpopup() {
+    popup.style.display = "none";
+    popupconfirm.textContent = '';
+    popupconfirmButton.style.display = "none";
+    popupcancelButton.style.display = "none";
+}
+
+bookBtns.forEach((bookBtn) => {
+    bookBtn.addEventListener('click', () => {
+        showpopup("Are you sure you want to book this personal trainer package?");
+    });
+
+    popupclose.addEventListener('click', () => {
+        resetpopup();
+    });
+
+    popupconfirmButton.addEventListener('click', () => {
+        resetpopup();
+        popupMessage.style.display="block";
+        popupMessage.textContent = "Booking personal trainer package successful";
+        popup.style.display = "block";
+    });
+
+    popupcancelButton.addEventListener("click", () => {
+        resetpopup();
+    });
+});
+</script>
+
 
 </html>

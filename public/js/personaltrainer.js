@@ -55,7 +55,7 @@
 
             booktrainers.forEach((booktrainer) => {
                 booktrainer.addEventListener('click', () => {
-                    popupconfirm.textContent = `Are you sure you want to book one of your personal trainer sessions?`;
+                    popupconfirm.textContent = `Are you sure you want to book one of your free personal trainer sessions?`;
                     popup.style.display = "block";
 
 
