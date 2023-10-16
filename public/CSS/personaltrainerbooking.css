@@ -118,7 +118,7 @@
   color:white;
 }
 
-.modal {
+.modal, .popup {
   display: none; 
   position: fixed;
   z-index: 1;
@@ -130,7 +130,7 @@
   overflow: auto;
 }
 
-.modal-content {
+.modal-content,.popup-content {
   background-color: #f4f4f4;
   margin: 15% auto;
   padding: 20px;
@@ -139,7 +139,7 @@
   text-align: center;
 }
 
-.close-popup {
+.close-popup,.popup-close {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -147,11 +147,11 @@
   cursor: pointer;
 }
 
-.close:hover {
+.close-popup:hover,.popup-close:hover {
   color: black;
 }
 
-#confirm-free-button,#confirm-package-button {
+#confirm-free-button,#confirm-package-button,#popup-confirm-button,#popup-cancel-button {
   background-color: #000000;
   color: white;
   padding: 10px 20px;
@@ -160,9 +160,10 @@
   margin: 5px;
 }
 
-#confirm-free-button:hover,#confirm-package-button:hover {
+#confirm-free-button:hover,#confirm-package-button:hover,#popup-confirm-button:hover,#popup-cancel-button:hover {
   background-color: #424242;
 }
+
 
 #trainer-booking{
   background-color: transparent;

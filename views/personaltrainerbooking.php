@@ -111,6 +111,17 @@
                 </div>
             </div>
 
+            <div id="myPopup" class="popup">
+                <div class="popup-content">
+                    <span class="popup-close">&times;</span>
+                    <p id="popup-confirm"></p>
+                    <button id="popup-confirm-button">Yes</button>
+                    <button id="popup-cancel-button">Cancel</button>
+                    <p id="popup-message"></p>
+
+                </div>
+            </div>
+
 
         </div>
     </div>
