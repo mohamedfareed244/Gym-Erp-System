@@ -1,0 +1,30 @@
+.reminders{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    width:70%;
+}
+
+.reminder{
+margin-right:5%;
+}
+
+.greeting {
+    position: relative;
+    left: 12%;
+  }
+
+  #trainer-booking{
+    background-color: transparent;
+    padding: 8px;
+    border: 1px solid rgb(62, 62, 62);
+    cursor: pointer;
+    transition: 0.4s ease;
+    margin-top: 10px;
+  }
+  
+  #trainer-booking:hover {
+    background-color: rgb(62, 62, 62);
+    color: white;
+  }
