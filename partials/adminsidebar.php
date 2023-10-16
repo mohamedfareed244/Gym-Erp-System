@@ -25,7 +25,7 @@
                 <i class='bx bx-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link-name" href="#">Clients</a></li>
+                <li><a class="link-name" href="../views/clientdetails.php">Clients</a></li>
                 <li><a href="../views/addclient.php">Add</a></li>
                 <li><a href="../views/editclient.php">Edit</a></li>
                 <li><a href="../views/clientdetails.php">Details</a></li>
@@ -43,8 +43,8 @@
                 <i class='bx bx-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link-name" href="#">Coaches</a></li>
-                <li><a href="#">Classes</a></li>
+                <li><a class="link-name" href="../views/coachesadmin.php">Coaches</a></li>
+                <li><a href="../views/coachesadmin.php">Classes</a></li>
                 <li><a href="../views/ptsessions.php">Pt clients </a></li>
 
             </ul>

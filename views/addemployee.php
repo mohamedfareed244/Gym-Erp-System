@@ -44,13 +44,11 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <label for="jobs">Choose job title :</label>
-
                     <select name="jobs" id="jobs">
                         <option value="">Select job</option>
                         <option value="salesperson"> Sales Person</option>
                         <option value="fitnessmanager"> Fitness Manager </option>
                         <option value="hr">HR</option>
-
                     </select>
                 </div>
                 <div class="col-lg-4 col-sm-12">
