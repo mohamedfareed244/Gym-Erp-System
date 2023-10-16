@@ -146,7 +146,6 @@ bookBtns.forEach((bookBtn) => {
         resetpopup();
         popupMessage.style.display="block";
         popupMessage.textContent = "Booking personal trainer package successful";
-        popup.style.display = "block";
     });
 
     popupcancelButton.addEventListener("click", () => {

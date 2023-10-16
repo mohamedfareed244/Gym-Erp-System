@@ -151,6 +151,16 @@
   color: black;
 }
 
+#popup-confirm-button,#confirm-free-button{
+  position:relative;
+  left:42%;
+}
+
+#popup-cancel-button,#confirm-package-button{
+  position:relative;
+  left:40%;
+}
+
 #confirm-free-button,#confirm-package-button,#popup-confirm-button,#popup-cancel-button {
   background-color: #000000;
   color: white;
@@ -178,5 +188,7 @@
   background-color: rgb(62, 62, 62);
   color: white;
 }
+
+
 
 

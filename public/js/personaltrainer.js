@@ -22,6 +22,38 @@
 
 
 
+    function showpopup(message) {
+      popupconfirm.textContent = message;
+      popup.style.display = "block";
+      popupconfirmButton.style.display = "block";
+      popupcancelButton.style.display = "block";
+      popupMessage.style.display="none";
+  }
+  
+  function resetpopup() {
+      popup.style.display = "none";
+      popupconfirm.textContent = '';
+      popupconfirmButton.style.display = "none";
+      popupcancelButton.style.display = "none";
+      popupMessage.style.display="none";
+  }
+
+  function showmodal(message) {
+    confirmationText.textContent = message;
+    modal.style.display = "block";
+    confirmFreeButton.style.display = "block";
+    confirmPackageButton.style.display = "block";
+    modalMessage.style.display="none";
+}
+
+function resetmodal() {
+    modal.style.display = "none";
+    confirmationText.textContent = '';
+    confirmFreeButton.style.display = "none";
+    confirmPackageButton.style.display = "none";
+    modalMessage.style.display="none";
+}
+
     // Get reference to the details section
     const detailsSection = document.querySelector('#all-avail-times');
 
@@ -32,59 +64,43 @@
 
 
             detailsSection.style.display="block";
-            console.log("i am in");
-            confirmationText.textContent = "Do you want to book session from your free personal trainer sessions or book a whole package?";
-            modal.style.display = "block";
-            console.log("i am in");
-           
-        
+            showmodal("Do you want to book session from your free personal trainer sessions or book a whole package?");
 
         closeBtn.addEventListener('click', () => {
-            modal.style.display = "none";
+            resetmodal();
         });
 
         confirmFreeButton.addEventListener('click', () => {
         if (confirmationText.textContent) {
             
-            modal.style.display = "none";
-            modalMessage.textContent ="";
-            confirmationText.textContent='';
+            resetmodal();
 
             detailsSection.style.display = 'block';
 
 
             booktrainers.forEach((booktrainer) => {
                 booktrainer.addEventListener('click', () => {
-                    popupconfirm.textContent = `Are you sure you want to book one of your free personal trainer sessions?`;
-                    popup.style.display = "block";
+                    showpopup("Are you sure you want to book one of your free personal trainer sessions?");
 
 
                     popupclose.addEventListener('click', () => {
-                        popup.style.display = "none";
+                        resetpopup();
                     });
 
                     popupconfirmButton.addEventListener('click', () => {
                         if (popupconfirm.textContent) {
                             
-                            popup.style.display = "none";
-                            popupMessage.textContent= "Booking successful and details will also be sent by mail soon.";
-                            popup.style.display = "block";
-                            popupconfirm.textContent='';
-                            popupconfirmButton.style.display="none";
-                            popupcancelButton.style.display="none";
+                          resetpopup();
+                          popup.style.display="block";
+                          popupMessage.style.display="block";
+                          popupMessage.textContent = "Booking successful and details will also be sent by mail soon.";
                         }
                     });
 
                     popupcancelButton.addEventListener("click", () => {
                         if (popupconfirm.textContent) {
-                            popup.style.display = "none";
-                
-                            popupMessage.textContent = "no booking";
-                            popup.style.display = "block";
-                            popupconfirm.textContent='';
-                            popup.style.display = "block";
-                            popupconfirmButton.style.display="none";
-                            popupcancelButton.style.display="none";
+
+                          resetpopup();
                 
                         }
                     });
@@ -101,11 +117,7 @@
 
         confirmPackageButton.addEventListener('click', () => {
         if (confirmationText.textContent) {
-            
-            modal.style.display = "none";
-            confirmationText.textContent='';
-            confirmFreeButton.style.display="none";
-            confirmPackageButton.style.display="none";
+          resetpopup();
 
             window.location.href = "bookptpackage.php"; 
 
