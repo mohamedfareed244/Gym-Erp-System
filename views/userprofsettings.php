@@ -33,35 +33,49 @@
             <p class="hello-fz"><i class="fas fa-cog"></i> Profile Settings</p>
         </div>
 
+       
+
         <div class="reminders">
-        <div class="profile-settings">
+            <div class="profile-settings">
                 <h2>Edit Your Profile Settings</h2>
                 <form id="profile-settings-form">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="User's Username">
+                <div class="form-group">
+                        <label for="firstname">First Name:</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                        <span class="error" id="firstname-error"></span>
                     </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                        <span class="error" id="lastname-error"></span>
+                    </div>                   
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="user@gmail.com">
+                        <span class="error" id="email-error"></span>
                     </div>
-                    <div class="form-group">
+
+                     <div class="form-group">
                         <label for="phoneno">Phone Number:</label>
-                        <input type="text" id="phoneno" name="phoneno">
+                        <input type="text" id="phoneno" name="phoneno"  placeholder="">
+                        <span class="error" id="phoneno-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="password">New Password:</label>
                         <input type="password" id="password" name="password">
+                        <span class="error" id="password-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="confirm-password">Confirm New Password:</label>
                         <input type="password" id="confirm-password" name="confirm-password">
+                        <span class="error" id="confirm-password-error"></span>
                     </div>
                     <button id="update-profile-button" type="submit">Update Profile</button>
                 </form>
             </div>
-</div>
-</div>
+        </div>
+    </div>
+
 
 
 </body>
@@ -69,6 +83,9 @@
 
 
 <script src="../public/js/index.js"></script>
+<script src="../public/js/userprofsettings.js"></script>
+
+
 
 
 

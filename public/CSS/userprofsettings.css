@@ -48,8 +48,7 @@ button:hover {
     letter-spacing: 1px;
 }
 
-.error-message {
+.error {
     color: red;
-    display: none;
-    margin-top: 5px;
+    font-size: 14px;
 }
