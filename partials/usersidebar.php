@@ -71,13 +71,13 @@
             </li>
             <li>
                 <div class="icon-link">
-                <a href="#">
+                <a href="../views/userprofsettings.php">
                 <i class='bx bxs-cog'></i>
                 <span class="link-name">Account</span>
                 </a>
                 </div>
                 <ul class="sub-menu blank">
-                    <li><a  class="link-name" href="#">Account</a></li>
+                    <li><a  class="link-name" href="../views/userprofsettings.php">Account Settings</a></li>
                 </ul>
             </li>
             <li>
