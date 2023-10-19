@@ -20,38 +20,14 @@
 
 </head>
 
+
 <body>
     <!-- usersidebar start -->
     <?php include("../partials/usersidebar.php") ?>
 
 
     <div class="profile">
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 6</div>
-                <img src="../public/Images/free_weight.webp" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 6</div>
-                <img src="../public/Images/Gym-HD-Desktop.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 6</div>
-                <img src="../public/Images/infopic.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">4 / 6</div>
-                <img src="../public/Images/lockers.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">5 / 6</div>
-                <img src="../public/Images/Gym-Images.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">6 / 6</div>
-                <img src="../public/Images/cardio_area.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-        </div>
+
         <div class="gettinginshape">
             <p class="line1">GETTING</p>
             <p class="line2">IN</p>
@@ -118,6 +94,32 @@
                         <div class="dietplan-expirydate">25-11-2023</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 6</div>
+                <img src="../public/Images/free_weight.webp" class="imgslides" style="width:700px; height:450px;">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 6</div>
+                <img src="../public/Images/Gym-HD-Desktop.jpg" class="imgslides" style="width:700px; height:450px;">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 6</div>
+                <img src="../public/Images/infopic.jpg" class="imgslides" style="width:700px; height:450px;">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 6</div>
+                <img src="../public/Images/lockers.jpeg" class="imgslides" style="width:700px; height:450px;">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 6</div>
+                <img src="../public/Images/Gym-Images.jpg" class="imgslides" style="width:700px; height:450px;">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">6 / 6</div>
+                <img src="../public/Images/cardio_area.jpeg" class="imgslides" style="width:700px; height:450px;">
             </div>
         </div>
     </div>
