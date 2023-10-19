@@ -1,11 +1,17 @@
 .profile-settings {
     margin-top: 30px;
-    padding-left: 220px;
+    padding-left: 250px;
 }
+
+
+
+
 
 h2 {
     font-size: 20px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    color: rgb(145, 17, 17);
 }
 
 .form-group {
@@ -32,12 +38,14 @@ button {
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
+    transition: 0.8s ease;
 }
 
 button:hover {
     background-color: #555;
+    letter-spacing: 1px;
 }
 
 .error-message {

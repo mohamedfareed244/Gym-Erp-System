@@ -35,7 +35,7 @@
 
         <div class="reminders">
         <div class="profile-settings">
-                <h2>Edit Profile Settings</h2>
+                <h2>Edit Your Profile Settings</h2>
                 <form id="profile-settings-form">
                     <div class="form-group">
                         <label for="username">Username:</label>
@@ -46,11 +46,15 @@
                         <input type="email" id="email" name="email" placeholder="user@gmail.com">
                     </div>
                     <div class="form-group">
+                        <label for="phoneno">Phone Number:</label>
+                        <input type="text" id="phoneno" name="phoneno">
+                    </div>
+                    <div class="form-group">
                         <label for="password">New Password:</label>
                         <input type="password" id="password" name="password">
                     </div>
                     <div class="form-group">
-                        <label for="confirm-password">Confirm Password:</label>
+                        <label for="confirm-password">Confirm New Password:</label>
                         <input type="password" id="confirm-password" name="confirm-password">
                     </div>
                     <button id="update-profile-button" type="submit">Update Profile</button>
