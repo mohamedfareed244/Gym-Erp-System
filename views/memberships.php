@@ -89,7 +89,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>1 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>1 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 1,000</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 1,000</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
@@ -109,7 +109,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>2 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>2 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 2,500</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 2,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
@@ -129,7 +129,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>3 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>3 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 3,500</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 3,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
@@ -149,7 +149,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>5 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>5 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 5,500</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 5,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
@@ -169,7 +169,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>7 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>7 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 7,500</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 7,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
@@ -189,7 +189,7 @@
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>9 Inbody</h6>
                             <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>9 Private
                                 Training Session</h6>
-                            <h5 class="card-text" id="price">for L.E 9,000</h5>
+                            <!-- <h5 class="card-text" id="price">for L.E 9,000</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary">SUBSCRIBE NOW</button>
