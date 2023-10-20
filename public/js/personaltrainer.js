@@ -130,7 +130,45 @@ function resetmodal() {
 });
 
 
-        
+// Get references to the slider elements
+const slider = document.querySelector('.slider');
+const prevSlideBtn = document.querySelector('.prev-slide');
+const nextSlideBtn = document.querySelector('.next-slide');
+const availableTimes = document.querySelectorAll('.available-times');
+let currentSlide = 0;
+
+// Function to show the current slide
+function showSlide(slideIndex) {
+  // Hide all available times
+  availableTimes.forEach((time) => {
+    time.style.display = 'none';
+  });
+  // Show the selected slide
+  availableTimes[slideIndex].style.display = 'block';
+}
+
+// Show the initial slide
+showSlide(currentSlide);
+
+// Click event for the "Previous" button
+prevSlideBtn.addEventListener('click', () => {
+  currentSlide--;
+  if (currentSlide < 0) {
+    currentSlide = 0; // Prevent going to a negative slide index
+  }
+  showSlide(currentSlide);
+});
+
+// Click event for the "Next" button
+nextSlideBtn.addEventListener('click', () => {
+  currentSlide++;
+  if (currentSlide >= availableTimes.length) {
+    currentSlide = availableTimes.length - 1; // Prevent going beyond the last slide
+  }
+  showSlide(currentSlide);
+});
+
+     
 
 
 
