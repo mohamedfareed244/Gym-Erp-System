@@ -19,29 +19,32 @@
 </head>
 
 <body>
-    <?php require("../partials/adminsidebar.php")?>
+    <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body">
         <div class="container">
+        <section id="account-details">
+        <h3 class="acc-det" style="transform:translateY(-50px); transform: translateX(-30px);">Search for a Client: </h3>
+        </section>
             <form action="" class="row">
-                <div class="col-5">
-                    <label for="search">client id : </label>
+                <div id="search-client" class="col-5">
+                    <label for="search">Client ID: </label>
                     <input type="text" name="search">
 
 
                 </div>
-                <div class="col-5">
-                    <label for="search1">client phone : </label>
+                <div id="search-client" class="col-5">
+                    <label for="search1">Client's Phone: </label>
                     <input type="text" name="search1">
 
                 </div>
-                <div class="col-2">
+                <div id="search-client" class="col-2">
                     <input type="submit" value="Search" id="add-btn">
                 </div>
 
             </form>
             <br>
             <hr>
-            <h2>Memberships</h2>
+            <h2 class="table-title">Memberships:</h2>
             <div id="tablediv">
                 <table class="table overflow-auto mh-10">
                     <thead>
@@ -65,7 +68,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-info">freezed</td>
+                            <td class="bg-info">Freezed</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -77,7 +80,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -89,7 +92,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -101,7 +104,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -113,7 +116,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -125,7 +128,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-info">Freeze</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -137,7 +140,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -149,7 +152,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -161,7 +164,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-info">Freeze</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -173,7 +176,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -185,7 +188,7 @@
                             <td>02-09-2023</td>
                             <td>02-09-2023</td>
                             <td>30</td>
-                            <td class="bg-danger">expired</td>
+                            <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
                             <td><button>Freeze</button></td>
                             <td>Mohamed fareed</td>
@@ -198,38 +201,38 @@
 
       </div>
       <hr>
-      <h2>Classes </h2>
+      <h2 class="table-title">Classes: </h2>
       <div id="tablediv">
       <table class="table overflow-auto mh-10">
         <thead>
         <tr>
-      <th scope="col">class name</th>
+      <th scope="col">Class Name</th>
       <th scope="col"> Date </th>
-      <th scope="col">from</th>
-      <th scope="col">to </th>
+      <th scope="col">From</th>
+      <th scope="col">To </th>
       <th scope="col">Status </th>
-      <th scope="col">coach name  </th>
-      <th scope="col">fees </th>
-      <th scope="col">paid </th>
+      <th scope="col">Class Instructor </th>
+      <th scope="col">Fees </th>
+      <th scope="col">Paid </th>
     </tr>
         </thead>
         <tbody>
             <tr>
-            <td>yoga</td>
+            <td>Yoga</td>
             <td>09-09-2023</td>
             <td>9:00pm</td>
             <td>11:00pm</td>
-            <td class="bg-success text-white">attended</td>
+            <td class="bg-success text-white">Attended</td>
             <td>Mohamed fareed</td>
             <td>120</td>
-            <td class="bg-danger">not paid </td>
+            <td class="bg-danger">Not paid </td>
             </tr>
             
         </tbody>
 </table>
       </div>
       <hr>
-      <h2>Financials </h2>
+      <h2 class="table-title">Financials: </h2>
       <div id="tablediv">
         <table class="table">
         <thead>
@@ -245,7 +248,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>2 months </td>
+                <td>2 Months </td>
                 <td>09-09-2023</td>
                 <td>3000</td>
                 <td>2000</td>
