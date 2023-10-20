@@ -150,8 +150,19 @@ label[for="imgfile"]:hover {
 }
 
 
+
 #account-details{
   padding-left: 70px;
   padding-right: 70px;
   padding-bottom: 100px;
+}
+
+.bold-dets{
+font-weight: bold;
+color: rgb(97, 97, 97);
+}
+
+input[type="text"]{
+  color: rgb(90, 90, 90);
+
 }
