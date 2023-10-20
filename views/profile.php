@@ -14,32 +14,35 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
+ 
 <body>
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-1">
-                    <img src="../public/Images/bckgrnd.jpg" alt="" id="empimg">
+                    <img src="../public/Images/coach1.jpg" alt="" id="empimg">
                 </div>
-                <div class="col-5">
+                <div id="info-intro" class="col-5">
                     <h3>Mohamed Fareed</h3>
+                    <span class="bgrb">mohamed@gmail.com </span><span class="bgrb">- Administrator</span>
                     <br>
-                    <span class="text-info">Mohamed@gmail.com </span><span>- Administrator</span>
-                    <br>
-                    <br>
-                    <label for="photo">Change image </label>
+                    <span class="bgrb">Change Profile Image: </span>
+                    <label for="imgfile"> 
                     <input type="file" name="photo" id="imgfile">
+                    </label>
                 </div>
             </div>
 
         </div>
+
+        <section id="account-details">
+        <h3 class="acc-det">Account Details: </h3>
+
         <hr>
-        <h3>Account : </h3>
         <form action="" class="row">
             <div class="col-lg-2 ">
-                <span>username : </span>
+                <span class="bold-dets">Username: </span>
             </div>
             <div class="col-lg-10">
                 <input type="text" name="" id="" value="Mohamed Fareed" class="un">
@@ -48,27 +51,27 @@
             <br>
             <hr>
             <div class="col-lg-2 ">
-                <span>Password : </span>
+                <span class="bold-dets">Password: </span>
             </div>
             <div class="col-lg-10">
                 <input type="password" name="" id="" value="Mohamed Fareed" class="un">
-                <a href="">change ? </a>
+                <a href="" style="color:rgb(147, 26, 50)">Change Your Password </a>
             </div>
             <br>
             <br>
             <hr>
             <div class="col-lg-2 ">
-                <span>Email : </span>
+                <span class="bold-dets">Email: </span>
             </div>
             <div class="col-lg-10">
-                <input type="text" name="" id="" value="Mohamed@gmail.com" class="un">
+                <input type="text" name="" id="" value="mohamed@gmail.com" class="un">
 
             </div>
             <br>
             <br>
             <hr>
             <div class="col-lg-2 ">
-                <span>Job Title : </span>
+                <span class="bold-dets">Job Title: </span>
             </div>
             <div class="col-lg-10">
                 <input type="text" name="" id="" value="Administrator" class="un">
@@ -78,24 +81,27 @@
             <br>
             <hr>
             <div class="col-lg-2 ">
-                <span>Salary : </span>
+                <span class="bold-dets">Salary: </span>
             </div>
             <div class="col-lg-10">
-                <input type="text" name="" id="" value="3000" class="un">
+                <input type="text" name="" id="" value="EGP 3000" class="un">
 
             </div>
             <br>
             <br>
             <hr>
             <div class="col-lg-2 ">
-                <span>Attendance for current month : </span>
+                <span class="bold-dets">Current Month Attendance: </span>
             </div>
             <div class="col-lg-10">
                 <input type="text" name="" id="" value="10 Days" class="un">
 
             </div>
         </form>
+
+</section>
     </div>
+
 </body>
 
 </html>

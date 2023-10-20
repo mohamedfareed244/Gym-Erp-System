@@ -1,3 +1,19 @@
+<style>
+    ::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(224, 224, 224);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(31, 31, 31);
+}
+
+</style>
+
+
 <div class="sidebar close">
 
 
