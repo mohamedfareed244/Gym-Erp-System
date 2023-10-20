@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/facilities.php">
-                        Facilites
+                        Facilities
                     </a>
                 </li>
                 <li class="nav-item me-3 me-lg-0">
