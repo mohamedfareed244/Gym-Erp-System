@@ -24,9 +24,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <b>Edit client </b>
+                    <h4>Edit client </h4>
                 </div>
-                <br>
                 <hr>
                 <form action="" class="row">
                     <div class="col-5">

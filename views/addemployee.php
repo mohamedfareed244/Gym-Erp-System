@@ -17,54 +17,42 @@
 
 <body>
     <?php require("../partials/adminsidebar.php") ?>
-    <div id="add-body">
-        <h3>Add Employee </h3>
-        <br>
-        <hr>
-        <br>
+    <div id="add-body" class="addbody">
         <div class="container">
+        <div class="col-12">
+                    <h4>Add Employee </h4>
+                </div>
+                <hr>
             <div class="row">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Display Name : </label>
-                    <input type="text">
+                    <label for="name">Name: </label>
                 </div>
+                <input type="text">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Full Name : </label>
-                    <input type="text">
+                    <label for="name">Phone Number: </label>
                 </div>
+                <input type="text">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Phone : </label>
-                    <input type="text">
+                    <label for="name">Email: </label>
                 </div>
-                <br>
-                <br>
+                <input type="email">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Email : </label>
-                    <input type="text">
+                    <label for="jobs">Job Title :</label>
                 </div>
-                <div class="col-lg-4 col-sm-12">
-                    <label for="jobs">Choose job title :</label>
-                    <select name="jobs" id="jobs">
+                <select name="jobs" id="jobs">
                         <option value="">Select job</option>
                         <option value="salesperson"> Sales Person</option>
                         <option value="fitnessmanager"> Fitness Manager </option>
                         <option value="hr">HR</option>
                     </select>
-                </div>
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Salary : </label>
-                    <input type="text">
+                    <label for="name">Salary: </label>
                 </div>
-                <br>
-                <br>
+                <input type="number">
                 <div class="col-lg-12 col-sm-12">
-                    <label for="name">Address : </label>
-                    <input type="text" id="emp-addr">
+                    <label for="name">Address: </label>
                 </div>
-                <br>
-                <br>
-                <hr>
-                <br><br>
+                <textarea type="text" id="emp-addr"></textarea>
                 <div class="col-lg-4 col-sm-12">
                     <input type="submit" value="Add Employee" id="add-btn">
                 </div>

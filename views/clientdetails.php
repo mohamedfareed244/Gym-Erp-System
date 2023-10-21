@@ -29,7 +29,8 @@
     <div id="add-body" class="addbody">
         <div class="container" style="margin-left:-4%;">
         <section id="account-details">
-        <h3 class="acc-det"  style="margin-left:3%;">Search for Client: </h3>
+        <h3 class="col-12"  style="margin-left:3%;">Search for Client: </h3>
+        <hr>
         </section>
             <form action="" class="row">
                 <div id="search-client" class="col-5">

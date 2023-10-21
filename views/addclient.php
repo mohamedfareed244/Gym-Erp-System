@@ -22,9 +22,8 @@
         <div class="container">
             <div class="row">
             <div class="col-12">
-                    <b>Add client </b>
+                    <h4>Add client </h4>
                 </div>
-                <br>
                 <hr>
                 <form action="" class="row">
                     <div class="col-lg-4 col-md-12">
