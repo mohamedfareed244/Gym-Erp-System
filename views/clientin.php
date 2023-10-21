@@ -53,6 +53,33 @@
             </form>
             <br>
             <hr>
+            <div class="row">
+            <table class="table overflow-auto mh-10">
+                <thead>
+                <tr>
+                             <th scope="col">ID</th>
+                            <th scope="col">client Name</th>
+                            <th scope="col">package Name</th>
+                            <th scope="col">end date</th>
+                            <th scope="col">status</th>
+                            <th scope="col">visits</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                </thead>
+                <tbody>
+                <tr>
+                            <th scope="row">1</th>
+                            <td>Mohamed Fareed</td>
+                            <td>2 Months</td>
+                            <td>30-09-2023</td>
+                            <td class="bg-info">Freezed</td>
+                            <td><b>20</b> from <b>30</b></td>
+                            <td><button class="btn btn-success">check in </button></td>
+                        </tr>
+                </tbody>
+</table>
+            </div>
       
     </div>
 </div>
