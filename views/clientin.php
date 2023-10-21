@@ -20,7 +20,7 @@
     <div class="container">
     <div class="row" >
        <div class="col-3 divstat" style="height:40%;" >
-        <div class="row" style=" position:relative; bottom:40px;">
+        <div class="row" >
             <div class="col-3">
             <i class="fa fa-circle" style="color:green;margin-top:60px;"></i>
             </div>
@@ -54,7 +54,7 @@
                 </div>
 
             </form>
-<<<<<<< HEAD
+
             <br>
             <hr>
             <div class="row">
@@ -84,8 +84,8 @@
                 </tbody>
 </table>
             </div>
-=======
->>>>>>> f6ca7698bf05f85b5de3461f84c4470ee15126cb
+
+
       
     </div>
 </div>
