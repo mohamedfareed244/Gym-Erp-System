@@ -54,10 +54,9 @@
                 </div>
 
             </form>
-<<<<<<< HEAD
             <br>
             <hr>
-            <div class="row">
+            <div id="tablediv">
             <table class="table overflow-auto mh-10">
                 <thead>
                 <tr>
@@ -84,8 +83,6 @@
                 </tbody>
 </table>
             </div>
-=======
->>>>>>> f6ca7698bf05f85b5de3461f84c4470ee15126cb
       
     </div>
 </div>
