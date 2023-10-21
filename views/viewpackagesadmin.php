@@ -31,7 +31,7 @@
     font-weight: bolder;
     text-transform: uppercase;
     color: rgb(176, 37, 37);
-    letter-spacing: -1px;">Types:</h2>
+    letter-spacing: -1px;">Packages Available:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
@@ -50,7 +50,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 1,000</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 2,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 3,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 5,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 7,500</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                             <!-- <h5 class="card-text" id="price">for L.E 9,000</h5> -->
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary"> Edit</button>
                     </div>
                 </div>
             </div>

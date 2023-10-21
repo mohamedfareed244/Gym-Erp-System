@@ -20,26 +20,26 @@
 
 <body>
     <?php require("../partials/adminsidebar.php")?>
-    <div id="add-body">
+    <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <b>Edit client </b>
                 </div>
-
+                <br>
                 <hr>
                 <form action="" class="row">
                     <div class="col-5">
-                        <label for="search">client id : </label>
-                        <input type="text" name="search">
+                        <label for="search">Client's ID : </label>
 
 
                     </div>
+                    <input type="text" name="search">
                     <div class="col-5">
-                        <label for="search1">client phone : </label>
-                        <input type="text" name="search1">
+                        <label for="search1">Client's Phone Number : </label>
 
                     </div>
+                    <input type="text" name="search1">
                     <div class="col-1">
                         <input type="submit" value="Search" id="add-btn">
                     </div>
@@ -53,42 +53,36 @@
 
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Name : </label>
-                        <input type="text" name="name" id="name">
                     </div>
+                    <input type="text" name="name" id="name">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">phone : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="phone">Phone Number: </label>
                     </div>
+                    <input type="text" name="phone" id="phone">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">Email : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="email">Email : </label>
                     </div>
-                    <br>
-                    <br>
+                    <input type="email" name="email" id="email">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">National id : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="nationalid">National ID: </label>
                     </div>
+                    <input type="text" name="nationalid" id="nationalid">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">Age : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="age">Age : </label>
                     </div>
+                    <input type="number" name="age" id="age">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Weight : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="weight"> Weight : </label>
                     </div>
-                    <br>
-                    <br>
-
+                    <input type="number" name="weight" id="weight">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Height : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="height"> Height : </label>
                     </div>
+                    <input type="number" name="height" id="height">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Address : </label>
-                        <textarea name="name" id="" cols="80" rows="1"></textarea>
-
+                        <label for="address"> Address : </label>
                     </div>
+                    <textarea name="address" id="" cols="80" rows="1"></textarea>
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Edit" id="add-btn">
 

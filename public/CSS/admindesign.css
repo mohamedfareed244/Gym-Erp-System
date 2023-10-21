@@ -1,4 +1,4 @@
-.profile {
+.coaches-container {
     height: 100vh;
     position: relative;
     left: 290px;
@@ -6,23 +6,10 @@
     transition: all 0.5s ease;
 }
 
-.sidebar.close~.profile {
+.sidebar.close~.coaches-container {
     left: 150px;
     width: calc(100% - 150px);
 }
-
-.gymfooter {
-    position: relative;
-    left: 240px;
-    width: calc(100% - 240px);
-    transition: all 0.5s ease;
-}
-
-.sidebar.close~.gymfooter {
-    left: 70px;
-    width: calc(100% - 70px);
-}
-
 
 .circle.one {
     width: 130px;
@@ -42,13 +29,6 @@
     width: 100%;
     text-align: center;
     overflow: hidden;
-}
-
-/* Coaches editor page start */
-.coaches-container {
-    margin-left: 17%;
-    margin-right: 3%;
-
 }
 
 .coaches-table {

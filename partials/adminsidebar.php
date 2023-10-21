@@ -80,7 +80,6 @@
                 <li><a href="../views/addemployee.php">Add employee</a></li>
                 <li><a href="#">edit employee</a></li>
                 <li><a href="#">Attendance</a></li>
-                <li><a href="#">Sales target</a></li>
             </ul>
         </li>
         <li>
@@ -93,9 +92,9 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Admin </a></li>
-                <li><a href="#">Add Admin</a></li>
+                <li><a href="../views/addadmin.php">Add Admin</a></li>
                 <li><a href="#">Remove Admin</a></li>
-                <li><a href="#">Sales report</a></li>
+                <li><a href="#">Sales Report</a></li>
             </ul>
         </li>
         <li>
@@ -108,7 +107,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">packages</a></li>
-                <li><a href="#">View membership packages </a></li>
+                <li><a href="../views/viewmembershipsadmin.php">View membership packages </a></li>
                 <li><a href="#">Add membership packages </a></li>
                 <li><a href="#">Delete membership packages </a></li>
                 <li><a href="#">View pt packages </a></li>
