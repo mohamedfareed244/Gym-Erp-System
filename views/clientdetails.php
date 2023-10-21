@@ -20,7 +20,7 @@
 
 <body>
     <?php require("../partials/adminsidebar.php") ?>
-    <div id="add-body">
+    <div id="add-body" class="addbody">
         <div class="container">
         <section id="account-details">
         <h3 class="acc-det" style="transform:translateY(-50px); transform: translateX(-30px);">Search for a Client: </h3>
@@ -29,8 +29,6 @@
                 <div id="search-client" class="col-5">
                     <label for="search">Client ID: </label>
                     <input type="text" name="search">
-
-
                 </div>
                 <div id="search-client" class="col-5">
                     <label for="search1">Client's Phone: </label>

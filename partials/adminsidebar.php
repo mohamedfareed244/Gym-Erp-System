@@ -80,7 +80,6 @@
                 <li><a href="../views/addemployee.php">Add employee</a></li>
                 <li><a href="#">edit employee</a></li>
                 <li><a href="#">Attendance</a></li>
-                <li><a href="#">Sales target</a></li>
             </ul>
         </li>
         <li>
@@ -95,7 +94,6 @@
                 <li><a class="link-name" href="#">Admin </a></li>
                 <li><a href="../views/addadmin.php">Add Admin</a></li>
                 <li><a href="#">Remove Admin</a></li>
-                <li><a href="#">Sales report</a></li>
             </ul>
         </li>
         <li>

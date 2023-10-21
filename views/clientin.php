@@ -13,17 +13,18 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
 <?php require("../partials/adminsidebar.php") ?>
-<div id="add-body">
+<div id="add-body" class="addbody">
     <div class="container">
-    <div class="row">
-       <div class="col-3 divstat" >
-        <div class="row">
+    <div class="row" >
+       <div class="col-3 divstat" style="height:40%;" >
+        <div class="row" style=" position:relative; bottom:40px;">
             <div class="col-3">
             <i class="fa fa-circle" style="color:green;margin-top:60px;"></i>
             </div>
-            <div class="col-9"><h2 style="margin-top:50px;">130/200</h2>
+            <div class="col-9"><h2> 130/200</h2>
         <p><b>Estimated clients in the gym</b>  </p>
         </div>
         </div>
@@ -37,15 +38,17 @@
     <form action="" class="row">
                 <div  class="col-5">
                     <label for="search">Client ID: </label>
-                    <input type="text" name="search">
-
+                   
 
                 </div>
+                <input type="text" name="search">
+
                 <div  class="col-5">
                     <label for="search1">Client's Phone: </label>
-                    <input type="text" name="search1">
+                    
 
                 </div>
+                <input type="text" name="search1">
                 <div class="col-2">
                     <input type="submit" value="Search" id="add-btn">
                 </div>

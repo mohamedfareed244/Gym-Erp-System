@@ -23,8 +23,10 @@
     padding: 2px;
     text-align: center;
     margin-bottom:4%;
+    width:65%;
   }
-  .row{
+
+  .row,.row>*{
     display:block;
     width:65%;
   }
