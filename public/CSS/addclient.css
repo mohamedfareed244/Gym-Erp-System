@@ -195,3 +195,8 @@ input[type="text"]{
   padding-left: 40px;
   padding-bottom: 30px;
 }
+.divstat{
+  height: 150px;
+  background-color: #d3d6d7;
+  border-radius: 14px;
+}
