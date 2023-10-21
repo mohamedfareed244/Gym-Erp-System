@@ -94,6 +94,7 @@
                 <li><a class="link-name" href="#">Admin </a></li>
                 <li><a href="../views/addadmin.php">Add Admin</a></li>
                 <li><a href="#">Remove Admin</a></li>
+                <li><a href="#">Sales Report</a></li>
             </ul>
         </li>
         <li>
