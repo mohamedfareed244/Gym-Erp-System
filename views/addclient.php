@@ -21,6 +21,11 @@
     <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
+            <div class="col-12">
+                    <b>Add client </b>
+                </div>
+                <br>
+                <hr>
                 <form action="" class="row">
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Name : </label>

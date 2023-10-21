@@ -26,17 +26,17 @@
                 <div class="col-12">
                     <b>Edit client </b>
                 </div>
-
+                <br>
                 <hr>
                 <form action="" class="row">
                     <div class="col-5">
-                        <label for="search">client id : </label>
+                        <label for="search">Client's ID : </label>
 
 
                     </div>
                     <input type="text" name="search">
                     <div class="col-5">
-                        <label for="search1">client phone : </label>
+                        <label for="search1">Client's Phone Number : </label>
 
                     </div>
                     <input type="text" name="search1">
@@ -51,12 +51,12 @@
                 <hr>
                 <form action="" class="row">
 
-                <div class="col-lg-4 col-md-12">
+                    <div class="col-lg-4 col-md-12">
                         <label for="name">Name : </label>
                     </div>
                     <input type="text" name="name" id="name">
                     <div class="col-lg-4 col-md-12">
-                        <label for="phone">phone : </label>
+                        <label for="phone">Phone Number: </label>
                     </div>
                     <input type="text" name="phone" id="phone">
                     <div class="col-lg-4 col-md-12">
@@ -64,7 +64,7 @@
                     </div>
                     <input type="email" name="email" id="email">
                     <div class="col-lg-4 col-md-12">
-                        <label for="nationalid">National id : </label>
+                        <label for="nationalid">National ID: </label>
                     </div>
                     <input type="text" name="nationalid" id="nationalid">
                     <div class="col-lg-4 col-md-12">
