@@ -78,7 +78,7 @@
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
                 <li><a href="../views/employeesadmin.php">View Employees</a></li>
-                <li><a href="#">Attendance</a></li>
+                <li><a href="../views/attendance.php">Attendance</a></li>
             </ul>
         </li>
         <li>

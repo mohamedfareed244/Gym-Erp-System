@@ -8,7 +8,7 @@
     <title>Add Employee | Profit</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/addemployee.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -29,11 +29,11 @@
                 </div>
                 <input type="text">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Phone Number: </label>
+                    <label for="number">Phone Number: </label>
                 </div>
                 <input type="text">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="name">Email: </label>
+                    <label for="email">Email: </label>
                 </div>
                 <input type="email">
                 <div class="col-lg-4 col-sm-12">
