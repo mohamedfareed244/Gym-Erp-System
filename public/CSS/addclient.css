@@ -31,6 +31,11 @@
     width:65%;
   }
 
+  .coaches-main-content{
+    width:100%;
+}
+
+
 #info-intro {
   transform: translateY(30px);
 }

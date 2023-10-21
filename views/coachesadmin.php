@@ -22,7 +22,7 @@
 <body>
     <?php include("../partials/adminsidebar.php") ?>
     <div class="coaches-container">
-        <h1 class="coaches-title">Coaches</h1>
+        <h1 class="coaches-title">Coaches:</h1>
         <div class="coaches-main-content">
             <table class="coaches-table">
                 <thead>
@@ -78,7 +78,10 @@
                 </tbody>
             </table>
         </div>
-        <label class="coaches-title" id="add-coach-lbl">Add Coach:</label>
+        <br>
+        <br>
+        <h3 class="col-12" >Add Coach:</h3>
+        <hr>
         <div class="coaches row">
             <form action="" class="row">
                 <div class="col-lg-4 col-md-12">
