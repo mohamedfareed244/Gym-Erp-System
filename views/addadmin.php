@@ -29,7 +29,7 @@
                     <div class="col-lg-4 col-md-12">
                         <label for="phone">Phone Number : </label>
                     </div>
-                    <input type="number" name="phone" id="phone">
+                    <input type="text" name="phone" id="phone">
                     <div class="col-lg-4 col-md-12">
                         <label for="email">Email : </label>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="col-lg-4 col-md-12">
                         <label for="nationalid">National ID : </label>
                     </div>
-                    <input type="number" name="nationalid" id="nationalid">
+                    <input type="text" name="nationalid" id="nationalid">
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add admin" id="add-btn">
                     </div>

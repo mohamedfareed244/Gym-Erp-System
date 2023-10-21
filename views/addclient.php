@@ -18,48 +18,42 @@
 <body>
     <?php require("../partials/adminsidebar.php") ?>
 
-    <div id="add-body">
+    <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
                 <form action="" class="row">
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Name : </label>
-                        <input type="text" name="name" id="name">
                     </div>
+                    <input type="text" name="name" id="name">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">phone : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="phone">phone : </label>
                     </div>
+                    <input type="text" name="phone" id="phone">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">Email : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="email">Email : </label>
                     </div>
-                    <br>
-                    <br>
+                    <input type="email" name="email" id="email">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">National id : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="nationalid">National id : </label>
                     </div>
+                    <input type="text" name="nationalid" id="nationalid">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">Age : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="age">Age : </label>
                     </div>
+                    <input type="number" name="age" id="age">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Weight : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="weight"> Weight : </label>
                     </div>
-                    <br>
-                    <br>
-
+                    <input type="number" name="weight" id="weight">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Height : </label>
-                        <input type="text" name="name" id="name">
+                        <label for="height"> Height : </label>
                     </div>
+                    <input type="number" name="height" id="height">
                     <div class="col-lg-4 col-md-12">
-                        <label for="name"> Address : </label>
-                        <textarea name="name" id="" cols="80" rows="1"></textarea>
-
+                        <label for="address"> Address : </label>
                     </div>
+                    <textarea name="address" id="" cols="80" rows="1"></textarea>
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add client" id="add-btn">
 
