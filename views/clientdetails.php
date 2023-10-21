@@ -18,12 +18,18 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
+<style>
+    #account-details{
+         margin-bottom:10%;
+    }
+    </style>
+
 <body>
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container" style="margin-left:-4%;">
         <section id="account-details">
-        <h3 class="acc-det"  style="margin-left:-2%;">Search for a Client: </h3>
+        <h3 class="acc-det"  style="margin-left:3%;">Search for Client: </h3>
         </section>
             <form action="" class="row">
                 <div id="search-client" class="col-5">
