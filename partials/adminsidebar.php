@@ -77,8 +77,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
-                <li><a href="../views/addemployee.php">Add employee</a></li>
-                <li><a href="#">edit employee</a></li>
+                <li><a href="../views/employeesadmin.php">View Employees</a></li>
                 <li><a href="#">Attendance</a></li>
             </ul>
         </li>
@@ -107,13 +106,10 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">packages</a></li>
-                <li><a href="../views/viewmembershipsadmin.php">View membership packages </a></li>
-                <li><a href="#">Add membership packages </a></li>
-                <li><a href="#">Delete membership packages </a></li>
-                <li><a href="#">View pt packages </a></li>
-                <li><a href="#">Add pt packages </a></li>
-                <li><a href="#">Delete pt packages </a></li>
-
+                <li><a href="../views/viewpackagesadmin.php">View Packages </a></li>
+                <li><a href="../views/addPackageadmin.php">Add Package </a></li>
+                <li><a href="../views/viewptadmin.php">View Private Sessions </a></li>
+                <li><a href="../views/addptadmin.php">Add Private Sessions </a></li>
             </ul>
         </li>
 
