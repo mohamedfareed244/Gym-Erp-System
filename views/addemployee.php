@@ -19,10 +19,10 @@
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
-        <div class="col-12">
-                    <h4>Add Employee </h4>
-                </div>
-                <hr>
+            <div class="col-12">
+                <h4>Add Employee </h4>
+            </div>
+            <hr>
             <div class="row">
                 <div class="col-lg-4 col-sm-12">
                     <label for="name">Name: </label>
@@ -40,11 +40,11 @@
                     <label for="jobs">Job Title :</label>
                 </div>
                 <select name="jobs" id="jobs">
-                        <option value="">Select job</option>
-                        <option value="salesperson"> Sales Person</option>
-                        <option value="fitnessmanager"> Fitness Manager </option>
-                        <option value="hr">HR</option>
-                    </select>
+                    <option value="">Select job</option>
+                    <option value="salesperson"> Sales Person</option>
+                    <option value="fitnessmanager"> Fitness Manager </option>
+                    <option value="hr">HR</option>
+                </select>
                 <div class="col-lg-4 col-sm-12">
                     <label for="name">Salary: </label>
                 </div>
