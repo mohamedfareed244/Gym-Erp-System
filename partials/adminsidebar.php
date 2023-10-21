@@ -45,6 +45,7 @@
                 <li><a href="../views/addclient.php">Add</a></li>
                 <li><a href="../views/editclient.php">Edit</a></li>
                 <li><a href="../views/clientdetails.php">Details</a></li>
+                <li><a href="../views/clientin.php">Check in </a></li>
             </ul>
         </li>
 
@@ -92,7 +93,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Admin </a></li>
-                <li><a href="#">Add Admin</a></li>
+                <li><a href="../views/addadmin.php">Add Admin</a></li>
                 <li><a href="#">Remove Admin</a></li>
                 <li><a href="#">Sales report</a></li>
             </ul>
@@ -107,7 +108,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">packages</a></li>
-                <li><a href="#">View membership packages </a></li>
+                <li><a href="../views/viewmembershipsadmin.php">View membership packages </a></li>
                 <li><a href="#">Add membership packages </a></li>
                 <li><a href="#">Delete membership packages </a></li>
                 <li><a href="#">View pt packages </a></li>
