@@ -18,6 +18,39 @@
 <body>
     <?php require("../partials/adminsidebar.php") ?>
 
+    <div id="add-body" class="addbody">
+        <div class="container">
+            <div class="row">
+                <form action="" class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <label for="name">Name : </label>
+                    </div>
+                    <input type="text" name="name" id="name">
+                    <div class="col-lg-4 col-md-12">
+                        <label for="phone">Phone Number : </label>
+                    </div>
+                    <input type="number" name="phone" id="phone">
+                    <div class="col-lg-4 col-md-12">
+                        <label for="email">Email : </label>
+                    </div>
+                    <input type="email" name="email" id="email">
+                    <div class="col-lg-4 col-md-12">
+                        <label for="nationalid">National ID : </label>
+                    </div>
+                    <input type="number" name="nationalid" id="nationalid">
+                    <div class="col-lg-9 col-md-12">
+                        <input type="submit" value="Add admin" id="add-btn">
+                    </div>
+
+                </form>
+
+
+                <div class="col-12">
+                    <span>New Admin id : <b>12345</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
