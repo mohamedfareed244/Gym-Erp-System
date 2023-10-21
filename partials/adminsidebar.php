@@ -108,7 +108,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">packages</a></li>
-                <li><a href="#">View membership packages </a></li>
+                <li><a href="../views/viewmembershipsadmin.php">View membership packages </a></li>
                 <li><a href="#">Add membership packages </a></li>
                 <li><a href="#">Delete membership packages </a></li>
                 <li><a href="#">View pt packages </a></li>
