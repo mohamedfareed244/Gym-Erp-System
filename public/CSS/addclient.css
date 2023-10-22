@@ -31,7 +31,7 @@ input,textarea {
   width:70%;
 }
 
-.row>*,.row{
+.row,.row>*{
 width:70%;
 } 
 
@@ -57,6 +57,9 @@ width:70%;
   input {
     margin-bottom: 10px;
     width: 100%;
+  }
+  .row,.row>*{
+    width:100%;
   }
   #add-body {
     width: 85%;
