@@ -50,12 +50,13 @@
                 </div>
                 <input type="text" name="search1">
                 <div class="col-2">
+                    <br>
                     <input type="submit" value="Search" id="add-btn">
+                    <br>
                 </div>
 
             </form>
-            <br>
-            <hr>
+                        <hr>
             <div id="tablediv">
             <table class="table overflow-auto mh-10">
                 <thead>

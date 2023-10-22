@@ -20,6 +20,7 @@
     <div id="add-body" class="addbody">
         <div class="container">
             <h2>Private Training Sessions</h2>
+            <br>
             <div id="tablediv">
                 <table class="table overflow-auto mh-10">
                     <thead>

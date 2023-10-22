@@ -132,7 +132,7 @@
                 </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link-name" href="#">Logout</a></li>
+                <li><a class="link-name" href="../views/index.php">Logout</a></li>
             </ul>
         </li>
         <li>

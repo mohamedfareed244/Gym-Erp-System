@@ -27,7 +27,7 @@
 <body>
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
-        <div class="container" style="margin-left:-4%;">
+        <div class="container" style="margin-left:-2%;">
         <section id="account-details">
         <h3 id="speciall" class="col-12"  style="margin-left:3%;">Search for Client: </h3>
         <hr>
@@ -43,11 +43,11 @@
 
                 </div>
                 <div id="search-client" class="col-2">
+                    <br>
                     <input type="submit" value="Search" id="add-btn">
+                    <br>
                 </div>
-
             </form>
-            <br>
             <hr>
             <h2 class="table-title">Memberships:</h2>
             <div id="tablediv">

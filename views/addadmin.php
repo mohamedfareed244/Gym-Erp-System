@@ -43,6 +43,7 @@
                     </div>
                     <input type="text" name="nationalid" id="nationalid">
                     <div class="col-lg-9 col-md-12">
+                        <br>
                         <input type="submit" value="Add admin" id="add-btn">
                     </div>
 

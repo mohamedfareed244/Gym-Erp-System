@@ -59,6 +59,7 @@
                     </div>
                     <textarea name="address" id="" cols="80" rows="1"></textarea>
                     <div class="col-lg-9 col-md-12">
+                    <br>
                         <input type="submit" value="Add client" id="add-btn">
 
                     </div>

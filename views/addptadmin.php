@@ -20,7 +20,7 @@
     <div id="add-body" class="addbody">
         <div class="container">
             <h4>Add Private Training Session:</h2>
-                <br>
+                <hr>
                 <div class="pt row">
                     <form action="" class="pt row">
                         <div class="col-lg-4 col-md-12">
@@ -57,6 +57,7 @@
                         <br>
                         <br>
                         <div class="col-lg-9 col-md-12">
+                            <br>
                             <input type="submit" value="Add Pt Session" id="add-btn">
                         </div>
                         <br>

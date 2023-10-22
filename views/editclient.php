@@ -36,18 +36,17 @@
                     <input type="text" name="search">
                     <div class="col-5">
                         <label for="search1">Client's Phone Number : </label>
-
                     </div>
                     <input type="text" name="search1">
                     <div class="col-1">
+                        <br>
                         <input type="submit" value="Search" id="add-btn">
+                        <br>
+                        <hr>
                     </div>
 
 
                 </form>
-                <br>
-                <br>
-                <hr>
                 <form action="" class="row">
 
                     <div class="col-lg-4 col-md-12">
@@ -83,6 +82,7 @@
                     </div>
                     <textarea name="address" id="" cols="80" rows="1"></textarea>
                     <div class="col-lg-9 col-md-12">
+                        <br>
                         <input type="submit" value="Edit" id="add-btn">
 
                     </div>

@@ -25,15 +25,18 @@
     .container{
         text-align:left;
     }
+    #add-body{
+        height:90%;
+    }
     </style>
 </head>
 
 <body>
     <?php include("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
-        <div class="container" style="margin-left:-4%;">
+        <div class="container" >
         <section id="account-details">
-        <h3 class="col-12"  style="margin-left:3%;">Search for Admin: </h3>
+        <h3 id="speciall" class="col-12"  style="margin-left:3%;">Search for Admin: </h3>
         <hr>
         </section>
             <form action="" class="row">
