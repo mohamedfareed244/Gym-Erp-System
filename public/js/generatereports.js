@@ -14,7 +14,6 @@ function generateReport() {
         <p class="bold-title">Date Range:</p> <p> ${salesData.dateRange}</p>
         <p class="bold-title">Total Sales:</p> <p> EGP ${salesData.totalSales}</p>
         <p class="bold-title">Most Sold Memberships: </p> <p> ${salesData.mostSoldMemberships.join(", ")}</p>
-        <p class="bold-title">Most Sold Classes: </p> <p> ${salesData.mostSoldClasses.join(", ")}</p>
     `;
 
     reportContainer.innerHTML = reportContent;
