@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Karim Ayman</td>
+                            <td>Laila Nabil</td>
                             <td>011111111</td>
                             <td>example@gmail.com</td>
                             <td>HR</td>
@@ -48,7 +48,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Karim Ayman</td>
+                            <td>Laila Nabil</td>
                             <td>011111111</td>
                             <td>example@gmail.com</td>
                             <td>HR</td>
