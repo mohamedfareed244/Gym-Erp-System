@@ -20,7 +20,8 @@
     <div id="add-body" class="addbody">
         <div class="container">
         <section id="account-details">
-        <h3 class="acc-det">Search for Client: </h3>
+        <h3 id="speciall" class="col-12" >Search for Client: </h3>
+        <hr>
         </section>
             <form action="" class="row">
                 <div class="col-lg-4 col-md-12">
@@ -32,11 +33,11 @@
                 </div>
                 <input type="text" name="name" id="name">
                 <div class="col-2">
+                    <br>
                     <input type="submit" value="Search" id="add-btn">
                 </div>
 
             </form>
-            <br>
             <hr>
             <br>
             <h2>Private Training Sessions</h2>

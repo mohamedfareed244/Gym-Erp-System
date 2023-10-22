@@ -17,7 +17,7 @@
  
 <body>
     <?php require("../partials/adminsidebar.php") ?>
-    <div id="add-body">
+    <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-1">
@@ -97,7 +97,9 @@
                 <input type="text" name="" id="" value="10 Days" class="un">
 
             </div>
+</div>
         </form>
+</div>
 
 </section>
     </div>

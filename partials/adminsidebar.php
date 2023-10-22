@@ -77,9 +77,8 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
-                <li><a href="../views/addemployee.php">Add employee</a></li>
-                <li><a href="#">edit employee</a></li>
-                <li><a href="#">Attendance</a></li>
+                <li><a href="../views/employeesadmin.php">View Employees</a></li>
+                <li><a href="../views/attendance.php">Attendance</a></li>
             </ul>
         </li>
         <li>
@@ -93,7 +92,7 @@
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Admin </a></li>
                 <li><a href="../views/addadmin.php">Add Admin</a></li>
-                <li><a href="#">Remove Admin</a></li>
+                <li><a href="../views/removeadmin.php">Remove Admin</a></li>
                 <li><a href="#">Sales Report</a></li>
             </ul>
         </li>
@@ -107,13 +106,10 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">packages</a></li>
-                <li><a href="../views/viewmembershipsadmin.php">View membership packages </a></li>
-                <li><a href="#">Add membership packages </a></li>
-                <li><a href="#">Delete membership packages </a></li>
-                <li><a href="#">View pt packages </a></li>
-                <li><a href="#">Add pt packages </a></li>
-                <li><a href="#">Delete pt packages </a></li>
-
+                <li><a href="../views/viewpackagesadmin.php">View Packages </a></li>
+                <li><a href="../views/addPackageadmin.php">Add Package </a></li>
+                <li><a href="../views/viewptadmin.php">View Private Sessions </a></li>
+                <li><a href="../views/addptadmin.php">Add Private Sessions </a></li>
             </ul>
         </li>
 
@@ -136,7 +132,7 @@
                 </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link-name" href="#">Logout</a></li>
+                <li><a class="link-name" href="../views/index.php">Logout</a></li>
             </ul>
         </li>
         <li>

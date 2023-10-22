@@ -11,6 +11,7 @@
     width: calc(100% - 150px);
 }
 
+
 .circle.one {
     width: 130px;
     height: 130px;
@@ -214,4 +215,6 @@
     color: #ddd;
     transition: .3s ease-in-out;
 }
+
+
 /*  Coaches editor page end*/

@@ -22,9 +22,8 @@
         <div class="container">
             <div class="row">
             <div class="col-12">
-                    <b>Add client </b>
+                    <h4>Add client </h4>
                 </div>
-                <br>
                 <hr>
                 <form action="" class="row">
                     <div class="col-lg-4 col-md-12">
@@ -60,6 +59,7 @@
                     </div>
                     <textarea name="address" id="" cols="80" rows="1"></textarea>
                     <div class="col-lg-9 col-md-12">
+                    <br>
                         <input type="submit" value="Add client" id="add-btn">
 
                     </div>
