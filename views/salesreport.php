@@ -24,12 +24,18 @@
             padding: 10px;
             margin: 5px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
+            text-transform: uppercase;
+            background-color: transparent;
+            letter-spacing: 1px
+
+            
         }
 
         .date-label {
-            font-size: 16px;
+            font-size: 18px;
             margin: 5px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
     </style>
 </head>
