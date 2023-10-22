@@ -30,6 +30,7 @@
                         <th>Salary:</th>
                         <th>Address:</th>
                         <th>Job Title:</th>
+                        <th>Added By:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,7 @@
                         <td>50000</td>
                         <td>New Cairo City</td>
                         <td>HR</td>
+                        <td>Mohamed</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -54,6 +56,7 @@
                         <td>50000</td>
                         <td>New Cairo City</td>
                         <td>HR</td>
+                        <td>Mohamed</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -67,6 +70,7 @@
                         <td>50000</td>
                         <td>New Cairo City</td>
                         <td>HR</td>
+                        <td>Mohamed</td>
                         <td>
                             <button class="btn">Edit</button>
                             <button class="btn btn-delete">Delete</button>
@@ -110,14 +114,76 @@
                 <label for="name">Salary: </label>
             </div>
             <input type="number">
+            
             <div class="col-lg-12 col-sm-12">
                 <label for="name">Address: </label>
             </div>
             <textarea type="text" id="emp-addr"></textarea>
-            <div class="col-lg-4 col-sm-12">
+            
+            
+            <br>
+            <hr>
+            <h2>new employee authorities </h2>
+            <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">edit client</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault"> view client</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">client check in </label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">view employees </label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">employees attendance</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Add Admin</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">remove Admin</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">view sales report</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">view packages</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Add packages</label>
+  
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">view private sessions</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">reserve private sessions</label>
+</div>
+<br>
+<hr>
+<div class="col-lg-4 col-sm-12">
                 <input type="submit" value="Add Employee" id="add-btn">
             </div>
-
+            <br>
+            <br>
         </div>
 
 
