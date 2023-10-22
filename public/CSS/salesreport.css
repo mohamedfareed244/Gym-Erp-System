@@ -45,7 +45,7 @@
     letter-spacing: 1px;
 }
 
-/* salesreport.css */
+/* salesreport.js */
 
 .report-container {
     background-color: #f5f5f5;
@@ -61,6 +61,8 @@
 
 .report-container h2 {
     margin-top: 100px;
+    text-transform: uppercase;
+    border-bottom: 1px solid black;
     padding-bottom: 20px;
     font-size: 24px;
     color: #333;
@@ -68,6 +70,7 @@
 }
 
 .report-container p {
+    margin-top: 8px;
     font-size: 16px;
     color: #555;
     margin-bottom: 10px;
