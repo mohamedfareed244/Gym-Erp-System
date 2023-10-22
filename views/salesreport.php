@@ -47,11 +47,16 @@
         </div>
         <div class="center-button-container">
 
-        <button class="generate-report-button">Generate Report</button>
+        <button class="generate-report-button" onclick="generateReport()">Generate Report</button>
 
     </div>
     </div>
+    <div id="report-container" class="report-container"></div>
+
 
 </body>
+
+<script src="../public/js/generatereports.js"></script>
+
 
 </html>
