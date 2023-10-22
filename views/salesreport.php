@@ -22,9 +22,44 @@
         <div class="container">
             <div class="row">
             <div class="col-12">
-                    <h4>Add client </h4>
+                    <h4>Sales Report </h4>
                 </div>
                 <hr>
+                <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .date-container {
+            display: flex;
+        }
+
+        .date-input {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .date-label {
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="date-container">
+        <label class="date-label">From:</label>
+        <input type="date" class="date-input">
+    </div>
+
+    <div class="date-container">
+        <label class="date-label">To:</label>
+        <input type="date" class="date-input">
+    </div>
+</body>
+</html>
+
                 <form action="" class="row">
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Name : </label>

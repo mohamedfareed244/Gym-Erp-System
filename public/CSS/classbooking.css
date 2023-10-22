@@ -8,6 +8,7 @@
     width:calc(100% - 310px);
     transition: all 0.5s ease;
     margin-bottom:3%;
+    
 
 }
 
@@ -58,4 +59,6 @@
 
 .card{
     margin-right:5%;
+    padding-bottom: 200px;
+
 }
