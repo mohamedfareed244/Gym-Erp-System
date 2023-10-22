@@ -9,11 +9,11 @@ function generateReport() {
     const reportContainer = document.getElementById("report-container");
 
     const reportContent = `
-        <h2>Sales Report</h2>
-        <p>Date Range: ${salesData.dateRange}</p>
-        <p>Total Revenue: $${salesData.totalSales}</p>
-        <p>Most Sold Memberships: ${salesData.mostSoldMemberships.join(", ")}</p>
-        <p>Most Sold Classes: ${salesData.mostSoldClasses.join(", ")}</p>
+        <h2>Generated Report</h2>
+        <p class="bold-title">Date Range:</p> <p> ${salesData.dateRange}</p>
+        <p class="bold-title">Total Sales:</p> <p> EGP ${salesData.totalSales}</p>
+        <p class="bold-title">Most Sold Memberships: </p> <p> ${salesData.mostSoldMemberships.join(", ")}</p>
+        <p class="bold-title">Most Sold Classes: </p> <p> ${salesData.mostSoldClasses.join(", ")}</p>
     `;
 
     reportContainer.innerHTML = reportContent;
