@@ -78,3 +78,7 @@
 .bold-title{
     font-weight: bold;
 }
+
+#tablediv {
+    display: none; 
+}

@@ -7,6 +7,7 @@ const salesData = {
 
 function generateReport() {
     const reportContainer = document.getElementById("report-container");
+    const tableContainer = document.getElementById("tablediv");
 
     const reportContent = `
         <h2>Generated Report</h2>
@@ -17,4 +18,6 @@ function generateReport() {
     `;
 
     reportContainer.innerHTML = reportContent;
+    tableContainer.style.display = "block";
+
 }

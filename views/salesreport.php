@@ -52,7 +52,87 @@
     </div>
     </div>
     <div id="report-container" class="report-container"></div>
+    <h2 class="table-title">Memberships:</h2>
+            <div id="tablediv">
+                <table class="table overflow-auto mh-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">Package Name</th>
+                            <th scope="col">Start Date </th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Visits </th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Freezes </th>
+                            <th scope="col">Action </th>
+                            <th scope="col">Sales</th>
+                            <th scope="col">pt</th>
+                            <th scope="col">inbody</th>
 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">2 Months offer</th>
+                            <td>02-09-2023</td>
+                            <td>02-09-2023</td>
+                            <td>30</td>
+                            <td class="bg-info">Freezed</td>
+                            <td>2 Weeks</td>
+                            <td><button>Freeze</button></td>
+                            <td>Mohamed fareed</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6 Months offer</th>
+                            <td>02-09-2023</td>
+                            <td>02-09-2023</td>
+                            <td>30</td>
+                            <td class="bg-danger">Expired</td>
+                            <td>2 Weeks</td>
+                            <td><button>Freeze</button></td>
+                            <td>Mohamed fareed</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6 Months offer</th>
+                            <td>02-09-2023</td>
+                            <td>02-09-2023</td>
+                            <td>30</td>
+                            <td class="bg-danger">Expired</td>
+                            <td>2 Weeks</td>
+                            <td><button>Freeze</button></td>
+                            <td>Mohamed fareed</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6 Months offer</th>
+                            <td>02-09-2023</td>
+                            <td>02-09-2023</td>
+                            <td>30</td>
+                            <td class="bg-danger">Expired</td>
+                            <td>2 Weeks</td>
+                            <td><button>Freeze</button></td>
+                            <td>Mohamed fareed</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6 Months offer</th>
+                            <td>02-09-2023</td>
+                            <td>02-09-2023</td>
+                            <td>30</td>
+                            <td class="bg-danger">Expired</td>
+                            <td>2 Weeks</td>
+                            <td><button>Freeze</button></td>
+                            <td>Mohamed fareed</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+</div>
+</div>
 
 </body>
 
