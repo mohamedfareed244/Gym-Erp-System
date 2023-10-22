@@ -146,12 +146,23 @@ input[type="text"]{
   margin-right: -50px;
   margin-bottom: 0;
 }
-.table-title{
+.table-title,
+.container h4{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 27px;
   text-transform: uppercase;
   padding-top: 20px;
   color: rgb(36, 34, 34);
   padding-left: 40px;
+  padding-bottom: 30px;
+}
+
+#speciall{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  /* padding-left: 40px; */
   padding-bottom: 30px;
 }
