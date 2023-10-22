@@ -109,7 +109,7 @@
                 </div>
                 <input type="text" name="coach-address" id="coach-address">
                 <div class="col-lg-9 col-md-12">
-                    <input type="submit" value="Add Pt Session" id="add-btn">
+                    <input type="submit" value="Add coach" id="add-btn">
                 </div>
             </form>
 

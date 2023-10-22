@@ -61,9 +61,11 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="../views/coachesadmin.php">Coaches</a></li>
-                <li><a href="../views/coachesadmin.php">Classes</a></li>
-                <li><a href="../views/ptsessions.php">Pt clients </a></li>
-
+                <li><a href="../views/coachesadmin.php"> view coaches </a></li>
+                <li><a href="../views/ptsessions.php">view Pt clients </a></li>
+                <li><a href="#">My Pt clients </a></li>
+                <li><a href="#">View Classes</a></li>
+                <li><a href="#">My Classes</a></li>
             </ul>
         </li>
 
