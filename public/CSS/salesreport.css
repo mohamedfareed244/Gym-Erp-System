@@ -80,6 +80,6 @@
 }
 
 #tablediv {
-    /* display: none;  */
+    display: none; 
     padding-left: 100px;
 }
