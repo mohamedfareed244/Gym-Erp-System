@@ -31,13 +31,13 @@
                 </div>
 
    
-    <div class="date-container">
-        <label class="date-label">From:</label>
+    <div class="date-container-sales">
+        <label class="date-label-sales">From:</label>
         <input type="date" class="date-input">
     </div>
 
-    <div class="date-container">
-        <label class="date-label">To:</label>
+    <div class="date-container-sales">
+        <label class="date-label-sales">To:</label>
         <input type="date" class="date-input">
     </div>
 
