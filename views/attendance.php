@@ -24,7 +24,7 @@
 <body>
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
-        <div class="container" style="margin-left:-4%;">
+        <div class="container" style="margin-left:-4%; padding-left:50px" >
             <h2 class="table-title">Attendance:</h2>
             <div id="tablediv">
                 <table class="table overflow-auto mh-10">

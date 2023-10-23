@@ -13,16 +13,31 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
+<style>
+    .admin-classes-css{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  padding-left: 40px;
+  padding-bottom: 30px;
+    }
+
+
+
+</style>
 <body>
 <?php require("../partials/adminsidebar.php") ?>
 <div id="add-body">
     <table class="table">
         <thead>
             <tr>
-                <td class="col"> id </td>
-                <td class="col"> name </td>
-                <td class="col"> coach </td>
-                <td class="col"> coach phone</td>
+                <td class="col"> ID </td>
+                <td class="col"> Name </td>
+                <td class="col"> Coach </td>
+                <td class="col"> Coach's Phone Number</td>
                 <td>clients no </td>
                 <td>Days</td>
       <td>Action </td>
@@ -36,8 +51,8 @@
                 <td>mohamed</td>
                 <td>0123456789</td>
                 <td>10</td>
-                <td>saturday,sunday,monday</td>
-               <td><button id ="add-btn">view clients</button></td>
+                <td>Saturday, Sunday, Monday</td>
+               <td><button id ="add-btn">View Clients</button></td>
             </tr>
             <tr>
                 <td> 1
@@ -46,24 +61,24 @@
                 <td>Mohamed</td>
                 <td>0123456789</td>
                 <td>10</td>
-                <td>saturday,sunday,monday</td>
-                <td><button id ="add-btn">view clients</button></td>
+                <td>Saturday, Sunday, Monday</td>
+                <td><button id ="add-btn">View Clients</button></td>
             </tr>
         </tbody>
     </table>
     <br>
     <br>
     <hr>
-    <h2>create new class : </h2>
-    <label for="coaches"> select the coach : </label>
+    <h2 class="admin-classes-css">Create New Class : </h2>
+    <label for="coaches"> Select The Coach : </label>
     <select name="coaches" id="">
-        <option value="">select coach </option>
+        <option value="">Select Coach </option>
         <option value="">Mohamed </option>
         <option value="">Mostafa </option>
     </select>
     <br>
     <hr>
-    <h3>selected coach classes : </h3>
+    <h3 class="admin-classes-css">Selected Coach Classes : </h3>
     <table class="table">
         <thead>
             <tr>
@@ -83,7 +98,7 @@
         </tbody>
     </table>
     <br>
-    <h3>Class details : </h3>
+    <h3 class="admin-classes-css">Class Details : </h3>
     <div class="conatiner">
         <div class="row">
             <div class="col-4">
@@ -104,7 +119,7 @@
         <div class="col-m-8">
         <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">saturday</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -129,7 +144,7 @@
 
         </div>
         <div class="col-m-4">
-            <button id="add-btn">Add class </button>
+            <button id="add-btn">Add Class </button>
         </div>
        <br>
     </div>

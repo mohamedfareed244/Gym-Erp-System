@@ -15,6 +15,18 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
+<style>
+              .coaches-title{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  /* padding-left: 40px; */
+  padding-bottom: 30px;
+        }
+</style>
+
 <body>
     <?php require("../partials/adminsidebar.php") ?>
 
@@ -22,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4>Add Package: </h4>
+                    <h4 class="coaches-title">Add Package: </h4>
                 </div>
                 <hr>
                 <form action="" class="row">

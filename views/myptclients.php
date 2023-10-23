@@ -20,11 +20,11 @@
     <table class="table">
     <thead>
                         <tr>
-                          <th scope="col">client ID</th>
-                            <th scope="col">client Name</th>
-                            <th scope="col">client phone</th>
-                            <th scope="col">pt package name</th>
-                            <th scope="col">sessions</th>
+                          <th scope="col">Client ID</th>
+                            <th scope="col">Client Name</th>
+                            <th scope="col">Client Phone</th>
+                            <th scope="col">Pt Package Name</th>
+                            <th scope="col">Sessions</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>

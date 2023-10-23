@@ -17,6 +17,19 @@
     <!--css/icons/boostrap/jquery/fonts/images start-->
 
     <title>Admin Dashboard</title>
+
+    <Style>
+        .coaches-title{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  /* padding-left: 40px; */
+  padding-bottom: 30px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -80,7 +93,7 @@
         </div>
         <br>
         <br>
-        <h3 class="col-12" >Add Coach:</h3>
+        <h3 class="coaches-title col-12" >Add Coach:</h3>
         <hr>
         <div class="coaches row">
             <form action="" class="row">
@@ -101,11 +114,11 @@
                 </div>
                 <input type="text" name="coach-phone" id="coach-phone">
                 <div class="col-lg-4 col-md-12">
-                    <label for="coach-phone">title: </label>
+                    <label for="coach-phone">Title: </label>
                 </div>
                 <select name="" id="">
-                    <option value="">fitness manager</option>
-                    <option value="">coach</option>
+                    <option value="">Fitness Manager</option>
+                    <option value="">Coach</option>
                 </select>
                 <div class="col-lg-4 col-md-12">
                     <label for="coach-salary">Salary: </label>
@@ -116,7 +129,7 @@
                 </div>
                 <input type="text" name="coach-address" id="coach-address">
                 <div class="col-lg-9 col-md-12">
-                    <input type="submit" value="Add coach" id="add-btn" style="margin-top:30px; margin-bottom:20px">
+                    <input type="submit" value="Add Coach" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                 </div>
             </form>
 

@@ -22,15 +22,23 @@
 
 </head>
 
+<style>
+              .coaches-title{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  /* padding-left: 40px; */
+  padding-bottom: 30px;
+        }
+
+    </style>
 <body>
     <?php require("../partials/adminsidebar.php") ?>
 
-    <div class="container py-5">
-        <h2 style=" font-size: 22px;
-    font-weight: bolder;
-    text-transform: uppercase;
-    color: rgb(176, 37, 37);
-    letter-spacing: -1px;">Packages Available:</h2>
+    <div class="container py-5" style="padding-left:70px">
+        <h2 class="coaches-title">Packages Available:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 

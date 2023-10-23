@@ -16,6 +16,20 @@
     <title>Admin Dashboard</title>
 </head>
 
+<style>
+ .coaches-title{
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 27px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  color: rgb(36, 34, 34);
+  /* padding-left: 40px; */
+  padding-bottom: 30px;
+  }
+
+
+  </style>
+
 <body>
     <?php include("../partials/adminsidebar.php") ?>
     <div class="coaches-container">
@@ -85,7 +99,7 @@
 
 
         <div class="col-12">
-            <h4>Add Employee </h4>
+            <h4 class="coaches-title">Add Employee </h4>
         </div>
         <hr>
         <div class="row">
@@ -118,23 +132,23 @@
             <div class="col-lg-12 col-sm-12">
                 <label for="name">Address: </label>
             </div>
-            <textarea type="text" id="emp-addr"></textarea>
+            <textarea type="text" id="emp-addr" style="margin-bottom:20px"></textarea>
             
             
             <br>
             <hr>
-            <h2>New Employee's Authorities: </h2>
+            <h2 class="coaches-title">New Employee's Authorities: </h2>
             <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">edit client</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">Edit Client</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault"> view client</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault"> View Client</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -142,11 +156,11 @@
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">view employees </label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">View Employees </label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">employees attendance</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">Employees Attendance</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -154,15 +168,15 @@
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">remove Admin</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">Remove Admin</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">view sales report</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Report</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">view packages</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">View Packages</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -171,11 +185,11 @@
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">view private sessions</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">View Private Sessions</label>
 </div>
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">reserve private sessions</label>
+  <label class="form-check-label" for="flexSwitchCheckDefault">Reserve Private Sessions</label>
 </div>
 <br>
 <hr>

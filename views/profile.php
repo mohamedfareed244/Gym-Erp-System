@@ -23,8 +23,8 @@
                 <div class="col-lg-3 col-sm-1">
                     <img src="../public/Images/coach1.jpg" alt="" id="empimg">
                 </div>
-                <div id="info-intro" class="col-5">
-                    <h3>Mohamed Fareed</h3>
+                <div id="info-intro" class="col-5" >
+                    <h3 style="padding-left:50px">Mohamed Fareed</h3>
                     <span class="bgrb">mohamed@gmail.com </span><span class="bgrb">- Administrator</span>
                     <br>
                     <span class="bgrb">Change Profile Image: </span>
