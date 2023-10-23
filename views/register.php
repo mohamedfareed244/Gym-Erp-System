@@ -26,31 +26,144 @@
 
 </head>
 
+<?php
+
+
+include_once "../includes/dbh.inc.php";
+
+
+$fnameErr = $lnameErr = $ageErr = $genderErr = $emailErr = $passwordErr = ""; // Initialize error variables
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $isValid = true;
+    // Validate the "First Name" field
+    if (empty($_POST["fname"])) {
+        $fnameErr = "First Name is required";
+        $isValid = false;
+    }
+    else{
+        $fname=$_POST['fname'];
+        if(!preg_match("/^[a-zA-Z ]*$/",$fname)){
+            $fnameErr="Only alphabets and white space are allowed";
+            $isValid = false;
+        }
+    }
+
+
+// Validate the "Last Name" field
+    if (empty($_POST["lname"])) {
+        $lnameErr = "Last Name is required";
+        $isValid = false;
+    }
+
+    // Validate the "Age" field
+    if (empty($_POST["age"])) {
+        $ageErr = "Age is required";
+        $isValid = false;
+    } elseif (!filter_var($_POST["age"], FILTER_VALIDATE_INT, array("options" => array("min_range" => 16, "max_range" => 100)))) {
+        $ageErr = "Invalid age. Must be between 16 and 100.";
+        $isValid = false;
+    }
+
+    // Validate the "Gender" field
+    if (empty($_POST["gender"])) {
+        $genderErr = "Gender is required";
+        $isValid = false;
+    }
+
+    $email = htmlspecialchars($_POST["email"]);
+    // Validate the "Email" field
+    $checkEmailQuery = "SELECT * FROM client WHERE Email = '$email'";
+    $result = mysqli_query($conn, $checkEmailQuery);
+    
+    if (mysqli_num_rows($result) > 0) {
+        // Email already exists, display an error message
+        $emailErr = "This email is already registered.";
+        $isValid = false;
+    } else if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+        $isValid = false;
+    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format";
+        $isValid = false;
+    }
+
+ if (empty($_POST["password"])) {
+    $passwordErr = "Password is required";
+    $isValid = false;
+} elseif (strlen($_POST["password"]) < 6) {
+    $passwordErr = "Password must be at least 6 characters long";
+    $isValid = false;
+} 
+
+
+ // Check if there are no validation errors
+ if ($isValid) {
+
+    // Validation successful, save data to the database
+    $Fname = htmlspecialchars($_POST["fname"]);
+    $Lname = htmlspecialchars($_POST["lname"]);
+    $Age = htmlspecialchars($_POST["age"]);
+    $Gender = htmlspecialchars($_POST["gender"]);
+    $Email = htmlspecialchars($_POST["email"]);
+    $Password = htmlspecialchars($_POST["password"]);
+
+    if (!empty($_POST["weight"])) {
+        $Weight = htmlspecialchars($_POST["weight"]);
+    } else {
+        $Weight = '';  // Set to an empty string
+    }
+    
+    if (!empty($_POST["height"])) {
+        $Height = htmlspecialchars($_POST["height"]);
+    } else {
+        $Height = '';  // Set to an empty string
+    }
+
+     $sql = "insert into client(FirstName,LastName,Age,Gender,Weight,Height,Email,Password) 
+    values('$Fname','$Lname','$Age','$Gender','$Weight','$Height','$Email','$Password')";
+    
+    $result=mysqli_query($conn,$sql);
+
+    if ($result) {
+        // Data inserted successfully
+        header("Location:index.php");
+        exit();
+    }
+}
+ 
+
+}
+
+
+?>
+
 <body>
     <!-- include header -->
     <?php include("../partials/header.php") ?>
     <div class="signup-container">
         <div class="signup-form1">
-            <form action="post" autocomplete="off" id="signup-form">
+            <form method="post" autocomplete="off" id="signup-form">
                 <h3 class="signup-title">Create An Account</h3>
                 <div class="signup-input-container">
-                    <input type="text" name="fname" id="fname" class="signup-input"  />
+                    <input type="text" name="fname" id="fname" class="signup-input" />
                     <label class="signup-lbl" for="">First Name</label>
                     <span>First Name</span>
                 </div>
-                <span class="fname-error"></span>
+                <span id="fname-error"><?php echo $fnameErr; ?></span>
                 <div class="signup-input-container">
-                    <input type="text" name="lname" id="lname" class="signup-input"  />
+                    <input type="text" name="lname" id="lname" class="signup-input" />
                     <label class="signup-lbl" for="">Last Name</label>
                     <span>Last Name</span>
                 </div>
-                <span class="lname-error"></span>
+                <span id="lname-error"><?php echo $lnameErr; ?></span>
                 <div class="signup-input-container">
-                    <input type="number" name="age" id="age" class="signup-input"  min="16" max="100"  />
+                    <input type="number" name="age" id="age" class="signup-input" min="16" max="100" />
                     <label class="signup-lbl" for="">Age</label>
                     <span>Age</span>
                 </div>
-                <span class="age-error"></span>
+                <span id="age-error"></span>
                 <div class="signup-input-container">
                     <label class="signup-lbl" for="">Gender</label>
                     <input type="radio" id="male" name="gender" value="male">
@@ -59,9 +172,9 @@
                     <label for="female" class="gender-lbl">Female</label><br>
 
                 </div>
-                <span class="gender-error"></span>
+                <span id="gender-error"><?php echo $genderErr; ?></span>
                 <div class="signup-input-container">
-                    <input type="number" name="weight" id="weight" class="signup-input"  min="40" max="250" />
+                    <input type="number" name="weight" id="weight" class="signup-input" min="40" max="250" />
                     <label class="signup-lbl" for="">Weight</label>
                     <span>Weight</span>
                 </div>
@@ -71,17 +184,17 @@
                     <span>Height</span>
                 </div>
                 <div class="signup-input-container">
-                    <input type="email" name="email" id="email" class="signup-input"  />
+                    <input type="email" name="email" id="email" class="signup-input" />
                     <label class="signup-lbl" for="">Email</label>
                     <span>Email</span>
                 </div>
-                <span class="email-error"></span>
+                <span id="email-error"><?php echo $emailErr; ?></span>
                 <div class="signup-input-container">
                     <input type="password" name="password" id="password" class="signup-input" />
                     <label class="signup-lbl" for="">Password</label>
                     <span>Password</span>
                 </div>
-                <span class="password-error"></span>
+                <span id="password-error"><?php echo $passwordErr; ?></span>
                 <input type="submit" name="submit" value="Create Account" class="signup-btn" />
             </form>
         </div>
@@ -89,63 +202,11 @@
     </div>
 
 
-     <!-- Include necessary JavaScript/jQuery library -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-     <script>
-    $(document).ready(function () {
-        $("#signup-form").submit(function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Create a JavaScript object to store the form data
-            var formData = {
-                fname: $("#fname").val(),
-                lname: $("#lname").val(),
-                age: $("#age").val(),
-                gender: $("input[name='gender']:checked").val(),
-                email: $("#email").val(),
-                password: $("#password").val()
-            };
-
-            // Send an AJAX request to the server
-            $.ajax({
-                type: "POST",
-                url: "signup_validation.php", // Replace with the actual path to your PHP script
-                data: formData,
-                dataType: "json",
-                success: function (response) {
-                    if (response.success) {
-                        // Check if the form validation was successful
-                        if (response.insertion_success) {
-                            // Form validation and database insertion are successful
-                            // You can redirect to a success page or perform other actions
-                            window.location.href = "login.php"; // Replace with your success page URL
-                        } else {
-                            // Handle the case when database insertion fails
-                            alert("Database insertion failed. Please try again.");
-                        }
-                    } else {
-                        // Display form validation errors
-                        $(".fname-error").text(response.errors.fname);
-                        $(".lname-error").text(response.errors.lname);
-                        $(".age-error").text(response.errors.age);
-                        $(".gender-error").text(response.errors.gender);
-                        $(".email-error").text(response.errors.email);
-                        $(".password-error").text(response.errors.password);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Request Error:", status, error);
-                    console.log("XHR Object:", xhr);
-                    alert("An error occurred during the request. Please try again.");
-                }
-            });
-        });
-    });
-</script>
-
+    <script src="../public/js/signup_validation.js"></script>
 
     <!-- include footer -->
     <?php include("../partials/footer.php") ?>
+
 
 </body>
 

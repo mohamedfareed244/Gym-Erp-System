@@ -156,9 +156,7 @@ form {
     color: aqua;
 }
 
- .fname-error,.lname-error,.age-error,.gender-error,.email-error,.password-error{
-    position:relative;
-    right:30%;
+ #fname-error,#lname-error,#age-error,#gender-error,#email-error,#password-error{
     color:#b83f3f;
 }
 @media (max-width: 480px) {
