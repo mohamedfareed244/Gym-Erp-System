@@ -20,9 +20,28 @@
    <table class="table">
 <thead>
     <tr>
-        <td class="col"> </td>
+        <td class="col"> id </td>
+        <td class="col"> Title </td>
+        <td class="col"> From </td>
+        <td class="col"> To </td>
+        <td class="col"> Days </td>
+        <td class="col"> clients </td>
+        <td class="col"> Action </td>
     </tr>
 </thead>
+<tbody>
+    <td>1</td>
+    <td>yoga class</td>
+    <td>8:00 pm </td>
+    <td>
+        10:00 pm 
+    </td>
+    <td>saturday,Monday,Tuesday</td>
+    <td>20</td>
+    <td ><button id ="add-btn">
+View Clients
+    </button></td>
+</tbody>
    </table>
 
 </div>
