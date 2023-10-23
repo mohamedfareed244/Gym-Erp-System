@@ -50,9 +50,9 @@
                 </div>
                 <div class="signup-input-container">
                     <label class="signup-lbl" for="">Gender</label>
-                    <input type="radio" id="male" name="gender" value="male">
+                    <input type="radio" id="male" name="gender" value="male" class="radio-btn">
                     <label for="male" class="gender-lbl">Male</label>
-                    <input type="radio" id="female" name="gender" value="female">
+                    <input type="radio" id="female" name="gender" value="female" class="radio-btn">
                     <label for="female" class="gender-lbl">Female</label><br>
 
                 </div>

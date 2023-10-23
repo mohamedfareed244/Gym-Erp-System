@@ -150,12 +150,12 @@ form {
 }
 .gender-lbl{
     color: white;
-    padding: 4px;
+    padding: 6px;
 }
 .notreq{
     color: aqua;
 }
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .signup-container{
         width: 100%;
         padding-top: 30%;
@@ -180,5 +180,8 @@ form {
 
     .signup-btn {
         padding: 0.45rem 1.2rem;
+    }
+    .gender-lbl, .radio-btn{
+        margin-left: 10px;
     }
 }
