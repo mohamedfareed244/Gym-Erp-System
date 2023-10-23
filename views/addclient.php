@@ -43,11 +43,6 @@
                     <input type="text" name="age" id="age">
                     
                     <div class="col-lg-4 col-md-12">
-                        <label for="phone">Phone: </label>
-                    </div>
-                    <input type="text" name="phone" id="phone">
-                    
-                    <div class="col-lg-4 col-md-12">
                         <label for="gender">Gender: </label>
                     </div>
                     <input type="text" name="gender" id="gender">
@@ -94,7 +89,7 @@
         $height = (int) $_POST['height'];
         $email = $_POST['email'];
 
-        $sql = "INSERT INTO clients (FirstName, LastName, Age, Gender, Weight, Height, Email)
+        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email)
             VALUES ('$fname', '$lname', '$age', '$gender', $weight, $height, '$email')";
 
         if ($conn->query($sql) === true) {
