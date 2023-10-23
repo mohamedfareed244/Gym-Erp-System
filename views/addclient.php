@@ -63,7 +63,7 @@
                     <input type="email" name="email" id="email">
                     <br>
                     <div class="col-lg-9 col-md-12">
-                        <input type="submit" value="Add client" id="add-btn">
+                        <input type="submit" value="Add client" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
                 </form>
 
