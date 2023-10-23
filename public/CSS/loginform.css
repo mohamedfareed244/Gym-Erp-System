@@ -149,6 +149,10 @@ form {
     color: rgb(203, 203, 203);
 }
 
+#email-error,#password-error,#all-error{
+    color:#b83f3f;
+}
+
 @media (max-width: 480px) {
     .login-container{
         width: 100%;

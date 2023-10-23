@@ -101,6 +101,13 @@
                 </div>
                 <input type="text" name="coach-phone" id="coach-phone">
                 <div class="col-lg-4 col-md-12">
+                    <label for="coach-phone">title: </label>
+                </div>
+                <select name="" id="">
+                    <option value="">fitness manager</option>
+                    <option value="">coach</option>
+                </select>
+                <div class="col-lg-4 col-md-12">
                     <label for="coach-salary">Salary: </label>
                 </div>
                 <input type="number" name="coach-salary" id="coach-salary">
@@ -109,7 +116,7 @@
                 </div>
                 <input type="text" name="coach-address" id="coach-address">
                 <div class="col-lg-9 col-md-12">
-                    <input type="submit" value="Add Pt Session" id="add-btn">
+                    <input type="submit" value="Add coach" id="add-btn">
                 </div>
             </form>
 

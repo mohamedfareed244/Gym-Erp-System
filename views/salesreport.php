@@ -31,13 +31,13 @@
                 </div>
 
    
-    <div class="date-container">
-        <label class="date-label">From:</label>
+    <div class="date-container-sales">
+        <label class="date-label-sales">From:</label>
         <input type="date" class="date-input">
     </div>
 
-    <div class="date-container">
-        <label class="date-label">To:</label>
+    <div class="date-container-sales">
+        <label class="date-label-sales">To:</label>
         <input type="date" class="date-input">
     </div>
 
@@ -49,11 +49,60 @@
 
         <button class="generate-report-button" onclick="generateReport()">Generate Report</button>
 
+
+
+        
+
     </div>
     </div>
     <div id="report-container" class="report-container"></div>
 
+            <div id="tablediv">
+                <table class="table overflow-auto mh-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">Package ID</th>
+                            <th scope="col">Package Name </th>
+                            <th scope="col">Sales</th>
+                            <th scope="col">Visits </th>
 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>#1923P</td>
+                            <th scope="row">2 Months offer</th>
+                            <td>EGP 60000</td>
+                            <td>30</td>
+                          
+                        </tr>
+                        <tr>
+                        <td>#1923P</td>
+                            <th scope="row">2 Months offer</th>
+                            <td>EGP 60000</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                        <td>#1923P</td>
+                            <th scope="row">2 Months offer</th>
+                            <td>EGP 60000</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                        <td>#1923P</td>
+                            <th scope="row">2 Months offer</th>
+                            <td>EGP 60000</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                        <td>#1923P</td>
+                            <th scope="row">2 Months offer</th>
+                            <td>EGP 60000</td>
+                            <td>30</td>
+                        </tr>
+</table>
+<div>
 </body>
 
 <script src="../public/js/generatereports.js"></script>

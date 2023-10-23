@@ -6,7 +6,7 @@
     background-image: url("../Images/Capture.PNG");
     position: relative;
     width: 100%;
-    max-height: 100vh;
+    max-height: 150vh;
     padding: 10%;
     padding-top: 30%;
     padding-bottom: 25%;
@@ -155,7 +155,11 @@ form {
 .notreq{
     color: aqua;
 }
-@media (max-width: 600px) {
+
+ #fname-error,#lname-error,#age-error,#gender-error,#email-error,#password-error{
+    color:#b83f3f;
+}
+@media (max-width: 480px) {
     .signup-container{
         width: 100%;
         padding-top: 30%;
@@ -181,7 +185,8 @@ form {
     .signup-btn {
         padding: 0.45rem 1.2rem;
     }
-    .gender-lbl, .radio-btn{
-        margin-left: 10px;
+    .fname-error,.lname-error,.age-error,.gender-error,.email-error,.password-error{
+        position:relative;
+        right:20%;
     }
 }
