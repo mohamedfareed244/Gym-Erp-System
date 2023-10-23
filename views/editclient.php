@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4>Edit client </h4>
+                    <h4>Update Client's Information </h4>
                 </div>
                 <hr>
                 <form action="" class="row">
@@ -47,47 +47,91 @@
 
 
                 </form>
-                <form action="" class="row">
-
+                <form method="POST" >
                     <div class="col-lg-4 col-md-12">
-                        <label for="name">Name : </label>
+                        <label for="client_id">Client ID: </label>
                     </div>
-                    <input type="text" name="name" id="name">
+                    <input type="number" name="client_id" id="client_id">
+                    
                     <div class="col-lg-4 col-md-12">
-                        <label for="phone">Phone Number: </label>
+                        <label for="fname">First Name: </label>
+                    </div>
+                    <input type="text" name="fname" id="fname">
+                    
+                    <div class="col-lg-4 col-md-12">
+                        <label for="lname">Last Name: </label>
+                    </div>
+                    <input type="text" name="lname" id="lname">
+                    
+                    <div class="col-lg-4 col-md-12">
+                        <label for="age">Age: </label>
+                    </div>
+                    <input type="text" name="age" id="age">
+                    
+                    <div class="col-lg-4 col-md-12">
+                        <label for="phone">Phone: </label>
                     </div>
                     <input type="text" name="phone" id="phone">
+                    
                     <div class="col-lg-4 col-md-12">
-                        <label for="email">Email : </label>
+                        <label for="gender">Gender: </label>
                     </div>
-                    <input type="email" name="email" id="email">
+                    <input type="text" name="gender" id="gender">
+                    
                     <div class="col-lg-4 col-md-12">
-                        <label for="nationalid">National ID: </label>
-                    </div>
-                    <input type="text" name="nationalid" id="nationalid">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="age">Age : </label>
-                    </div>
-                    <input type="number" name="age" id="age">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="weight"> Weight : </label>
+                        <label for="weight">Weight: </label>
                     </div>
                     <input type="number" name="weight" id="weight">
+                    
                     <div class="col-lg-4 col-md-12">
-                        <label for="height"> Height : </label>
+                        <label for="height">Height: </label>
                     </div>
                     <input type="number" name="height" id="height">
+                    
                     <div class="col-lg-4 col-md-12">
-                        <label for="address"> Address : </label>
+                        <label for="email">Email: </label>
                     </div>
-                    <textarea name="address" id="" cols="80" rows="1"></textarea>
+                    <input type="email" name="email" id="email">
+                    <br>
                     <div class="col-lg-9 col-md-12">
-                        <br>
-                        <input type="submit" value="Edit" id="add-btn">
-
+                    <input type="submit" value="Edit" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
-
                 </form>
-</body>
+
+                <div class="col-12">
+                    <span>Updated Client ID : <b>12345</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    include_once "../includes/dbh.inc.php";
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $client_id = (int) $_POST['client_id'];
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $age = (int) $_POST['age'];
+        $gender = $_POST['gender'];
+        $weight = (float) $_POST['weight'];
+        $height = (int) $_POST['height'];
+        $email = $_POST['email'];
+
+        $sql = "UPDATE client
+                SET FirstName = '$fname', LastName = '$lname', Age = $age, Gender = '$gender', 
+                    Weight = $weight, Height = $height, Email = '$email' 
+                WHERE ClientID = $client_id";
+
+        if ($conn->query($sql) === true) {
+            echo "Client information updated successfully.";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+    }
+    ?>
+    </body>
 
 </html>
