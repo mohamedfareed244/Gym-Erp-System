@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="../public/CSS/register.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <!-- <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> -->
@@ -90,7 +90,7 @@
 
 
      <!-- Include necessary JavaScript/jQuery library -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <script>
     $(document).ready(function () {
         $("#signup-form").submit(function (event) {
@@ -118,7 +118,7 @@
                         if (response.insertion_success) {
                             // Form validation and database insertion are successful
                             // You can redirect to a success page or perform other actions
-                            window.location.href = "success.php"; // Replace with your success page URL
+                            window.location.href = "login.php"; // Replace with your success page URL
                         } else {
                             // Handle the case when database insertion fails
                             alert("Database insertion failed. Please try again.");

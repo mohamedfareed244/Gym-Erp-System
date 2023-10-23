@@ -31,7 +31,7 @@
     <?php include("../partials/header.php") ?>
     <div class="login-container">
         <div class="login-form1">
-            <form action="../views/index.php" autocomplete="off">
+            <form action="../views/login.php" autocomplete="off" method="post">
                 <h3 class="login-title">Log In</h3>
                 <div class="login-input-container">
                     <input type="email" name="email" class="login-input" required />
@@ -49,7 +49,6 @@
             </form>
         </div>
 
-    </div>
     </div>
 
     <!-- include footer -->
