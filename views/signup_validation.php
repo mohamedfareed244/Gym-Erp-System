@@ -74,6 +74,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "insert into client(FirstName,LastName,Age,Gender,Height,Email,Password) 
         values('$Fname','$Lname','$Age','$Gender','$Height','$Email','$Password')";
     }
+    else{
+        $sql = "insert into client(FirstName,LastName,Age,Gender,Height,Email,Password) 
+        values('$Fname','$Lname','$Age','$Gender','$Email','$Password')";
+
+    }
 
     if ($conn->query($sql) === TRUE) {
         // Data inserted successfully
