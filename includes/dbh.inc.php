@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "janahani";
 $password = "SecurePass123";
-$DB = "ProFit-gym";
+$DB = "Profit-gym";
 
 $conn = mysqli_connect($servername,$username,$password,$DB);
 
