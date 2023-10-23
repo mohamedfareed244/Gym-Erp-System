@@ -25,9 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate the "Age" field
     if (empty($_POST["age"])) {
         $ageErr = "Age is required";
-    } elseif (!filter_var($_POST["age"], FILTER_VALIDATE_INT, array("options" => array("min_range" => 16, "max_range" => 100)))) {
-        $ageErr = "Invalid age. Must be between 16 and 100.";
     }
+    // } elseif (!filter_var($_POST["age"], FILTER_VALIDATE_INT, array("options" => array("min_range" => 16, "max_range" => 100)))) {
+    //     $ageErr = "Invalid age. Must be between 16 and 100.";
+    // }
 
     // Validate the "Gender" field
     if (empty($_POST["gender"])) {
@@ -37,9 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate the "Email" field
     if (empty($_POST["email"])) {
         $emailErr = "Email is required";
-    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
     }
+    // } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+    //     $emailErr = "Invalid email format";
+    // }
 
     // Validate the "Password" field
     if (empty($_POST["password"])) {
@@ -79,8 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         values('$Fname','$Lname','$Age','$Gender','$Email','$Password')";
 
     }
+    $result=mysqli_query($conn,$sql);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($result) {
         // Data inserted successfully
         $insertion_success = true;
     } else {
@@ -88,8 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertion_success = false;
     }
 
-    // Close the database connection
-    $conn->close();
 } else {
     // Validation failed
     $insertion_success = false;
