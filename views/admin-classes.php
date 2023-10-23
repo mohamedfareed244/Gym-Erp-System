@@ -15,6 +15,83 @@
 </head>
 <body>
 <?php require("../partials/adminsidebar.php") ?>
+<div id="add-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <td class="col"> id </td>
+                <td class="col"> name </td>
+                <td class="col"> coach </td>
+                <td class="col"> coach phone</td>
+                <td>clients no </td>
+      <td>Action </td>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> 1</td>
+                <td>yoga class</td>
+                <td>mohamed</td>
+                <td>0123456789</td>
+                <td>10</td>
+               <td><button id ="add-btn">view clients</button></td>
+            </tr>
+            <tr>
+                <td> 1
+                </td>
+                <td>yoga class</td>
+                <td>Mohamed</td>
+                <td>0123456789</td>
+                <td>10</td>
+                <td><button id ="add-btn">view clients</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <hr>
+    <h2>create new class : </h2>
+    <label for="coaches"> select the coach : </label>
+    <select name="coaches" id="">
+        <option value="">select coach </option>
+        <option value="">Mohamed </option>
+        <option value="">Mostafa </option>
+    </select>
+    <br>
+    <hr>
+    <h3>selected coach classes : </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>title</td>
+                <td>From</td>
+                <td>To</td>
 
+            </tr>
+        </thead>
+        <tbody>
+            <td>1</td>
+            <td>yoga class</td>
+            <td>8:00 pm </td>
+            <td>9:30 pm</td>
+        </tbody>
+    </table>
+    <br>
+    <h3>Class details : </h3>
+    <div class="conatiner">
+        <div class="row">
+            <div class="col-4">
+                <label for="title">Title : </label>
+                <input type="text" name="title" id="">
+            </div>
+            <div class="col-4">
+                <label for="title">Title : </label>
+                <input type="text" name="title" id="">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

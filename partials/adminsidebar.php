@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
     ::-webkit-scrollbar {
   width: 10px;
 }
@@ -11,7 +11,7 @@
   background-color: rgb(31, 31, 31);
 }
 
-</style>
+</style> -->
 
 
 <div class="sidebar close">
@@ -64,7 +64,7 @@
                 <li><a href="../views/coachesadmin.php"> view coaches </a></li>
                 <li><a href="../views/ptsessions.php">view Pt clients </a></li>
                 <li><a href="../views/myptclients.php">My Pt clients </a></li>
-                <li><a href="#">View Classes</a></li>
+                <li><a href="../views/admin-classes.php">View Classes</a></li>
                 <li><a href="#">My Classes</a></li>
             </ul>
         </li>
