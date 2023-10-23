@@ -24,6 +24,7 @@
                 <td class="col"> coach </td>
                 <td class="col"> coach phone</td>
                 <td>clients no </td>
+                <td>Days</td>
       <td>Action </td>
                
             </tr>
@@ -35,6 +36,7 @@
                 <td>mohamed</td>
                 <td>0123456789</td>
                 <td>10</td>
+                <td>saturday,sunday,monday</td>
                <td><button id ="add-btn">view clients</button></td>
             </tr>
             <tr>
@@ -44,6 +46,7 @@
                 <td>Mohamed</td>
                 <td>0123456789</td>
                 <td>10</td>
+                <td>saturday,sunday,monday</td>
                 <td><button id ="add-btn">view clients</button></td>
             </tr>
         </tbody>
@@ -68,7 +71,7 @@
                 <td>title</td>
                 <td>From</td>
                 <td>To</td>
-
+<td>Days</td>
             </tr>
         </thead>
         <tbody>
@@ -76,6 +79,7 @@
             <td>yoga class</td>
             <td>8:00 pm </td>
             <td>9:30 pm</td>
+            <td>saturday,sunday,monday</td>
         </tbody>
     </table>
     <br>
@@ -96,7 +100,8 @@
             </div>
         </div>
         <br>
-        <div class="col-8">
+       
+        <div class="col-m-8">
         <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault">saturday</label>
@@ -121,10 +126,16 @@
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
 </div>
+
         </div>
+        <div class="col-m-4">
+            <button id="add-btn">Add class </button>
+        </div>
+       <br>
     </div>
-    <br>
-    <br>
+    
+  
 </div>
+
 </body>
 </html>
