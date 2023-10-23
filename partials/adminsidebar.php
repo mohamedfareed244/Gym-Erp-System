@@ -1,6 +1,6 @@
 <!-- <style>
     ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -95,7 +95,7 @@
                 <li><a class="link-name" href="#">Admin </a></li>
                 <li><a href="../views/addadmin.php">Add Admin</a></li>
                 <li><a href="../views/removeadmin.php">Remove Admin</a></li>
-                <li><a href="#">Sales Report</a></li>
+                <li><a href="../views/salesreport.php">Sales Report</a></li>
             </ul>
         </li>
         <li>
@@ -107,7 +107,7 @@
                 <i class='bx bx-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link-name" href="#">packages</a></li>
+                <li><a class="link-name" href="#">Packages</a></li>
                 <li><a href="../views/viewpackagesadmin.php">View Packages </a></li>
                 <li><a href="../views/addPackageadmin.php">Add Package </a></li>
                 <li><a href="../views/viewptadmin.php">View Private Sessions </a></li>

@@ -123,7 +123,7 @@
             
             <br>
             <hr>
-            <h2>new employee authorities </h2>
+            <h2>New Employee's Authorities: </h2>
             <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
