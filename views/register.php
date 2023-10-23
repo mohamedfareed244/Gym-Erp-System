@@ -196,6 +196,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <span id="password-error"><?php echo $passwordErr; ?></span>
                 <input type="submit" name="submit" value="Create Account" class="signup-btn" />
+                <p class="register-text">Already Have an Account? <a class="register-link"
+                        href="../views/login.php">Login Now</a></p>
             </form>
         </div>
 
