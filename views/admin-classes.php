@@ -87,11 +87,44 @@
                 <input type="text" name="title" id="">
             </div>
             <div class="col-4">
-                <label for="title">Title : </label>
+                <label for="title">From : </label>
+                <input type="text" name="title" id="">
+            </div>
+            <div class="col-4">
+                <label for="title">To : </label>
                 <input type="text" name="title" id="">
             </div>
         </div>
+        <br>
+        <div class="col-8">
+        <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">saturday</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
+</div>
+        </div>
     </div>
+    <br>
+    <br>
 </div>
 </body>
 </html>
