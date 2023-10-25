@@ -93,8 +93,8 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Admin </a></li>
-                <li><a href="../views/addadmin.php">Add Admin</a></li>
-                <li><a href="../views/removeadmin.php">Remove Admin</a></li>
+                <!-- <li><a href="../views/addadmin.php">Add Admin</a></li>
+                <li><a href="../views/removeadmin.php">Remove Admin</a></li> -->
                 <li><a href="../views/salesreport.php">Sales Report</a></li>
             </ul>
         </li>
