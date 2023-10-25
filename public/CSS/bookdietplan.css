@@ -42,10 +42,12 @@
     left:35%;
     bottom:46%;
     width:45%;
+    border:3px black;
 }
 
 #diet-details{
     display:none;
+
 }
 
 .dietplan-price{

@@ -309,6 +309,16 @@ img {
   color: black;
 }
 
+#confirm-button{
+  position:relative;
+  left:42%;
+}
+
+#cancel-button{
+  position:relative;
+  left:40%;
+}
+
 #confirm-button, #cancel-button {
   background-color: #000000;
   color: white;
@@ -346,3 +356,5 @@ img {
   display: none; 
   margin-top: 5px;
 }
+
+

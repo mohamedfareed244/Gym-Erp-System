@@ -159,11 +159,11 @@ updateButton.addEventListener("click", function() {
     confirmationText.style.display = "block";
     confirmationText.textContent = "Updated Successfully";
 
-    // Set a timer to hide the modal after 7 seconds (7000 milliseconds)
+    // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
     setTimeout(function() {
         modal.style.display = "none";
         confirmationText.style.display = "none";
-    }, 7000); // 7 seconds
+    }, 2000); // 2 seconds
 
 
 });

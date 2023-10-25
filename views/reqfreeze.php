@@ -96,51 +96,85 @@
     const errorMessage = document.getElementById("error-message");
     const modalMessage = document.getElementById("modal-message");
 
-    freezeButton.addEventListener("click", function () {
+    function showmodal(message) {
+        confirmationText.textContent = message;
+        modal.style.display = "block";
+        confirmButton.style.display = "block";
+        cancelButton.style.display = "block";
+        closeBtn.style.display = "block";
+        modalMessage.style.display = "none";
+    }
+
+    function resetmodal() {
+        modal.style.display = "none";
+        confirmationText.textContent = '';
+        confirmButton.style.display = "none";
+        cancelButton.style.display = "none";
+        closeBtn.style.display = "none";
+        modalMessage.style.display = "none";
+    }
+
+    let isFrozen = false; // Track if the freeze button is already pressed
+
+    freezeButton.addEventListener("click", function() {
         const freezeWeeks = freezeWeeksInput.value;
-        if (freezeWeeks !== '' && parseInt(freezeWeeks) >= 1 && parseInt(freezeWeeks) <= remainingFreezeAttempts) {
-            confirmationText.textContent = `Are you sure you want to freeze ${freezeWeeks} weeks?`;
-            errorMessage.style.display = "none";
-            modal.style.display = "block";
+        if (isFrozen) {
+            // Show modal message instead of the whole modal
+            showmodal("Your request is submitted, and you will receive a confirmation email.");
+            confirmButton.style.display = "none";
+        cancelButton.style.display = "none";
+        } else if (freezeWeeks !== '' && parseInt(freezeWeeks) >= 1 && parseInt(freezeWeeks) <=
+            remainingFreezeAttempts) {
+            showmodal(`Are you sure you want to freeze ${freezeWeeks} weeks?`);
+            isFrozen = true; // Set the freeze button state to pressed
         } else {
             errorMessage.style.display = "block";
             modal.style.display = "none";
         }
     });
 
-    closeBtn.addEventListener("click", function () {
-        modal.style.display = "none";
+
+    closeBtn.addEventListener("click", function() {
+        resetmodal();
     });
 
-    confirmButton.addEventListener("click", function () {
+    confirmButton.addEventListener("click", function() {
         if (confirmationText.textContent) {
-            modal.style.display = "none";
-            
+            resetmodal();
 
+            modal.style.display = "block";
+            modalMessage.style.display = "block";
             modalMessage.textContent = "Your request is submitted, and you will receive a confirmation email.";
-            modal.style.display = "block";
-            confirmationText.textContent='';
-            confirmButton.style.display="none";
-            cancelButton.style.display="none";
+
+            // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
+            setTimeout(function() {
+                modal.style.display = "none";
+                modalMessage.style.display = "none";
+            }, 2000); // 2 seconds
 
 
         }
 
     });
 
-    cancelButton.addEventListener("click", function () {
+    cancelButton.addEventListener("click", function() {
         if (confirmationText.textContent) {
-            modal.style.display = "none";
+            resetmodal();
 
-            modalMessage.textContent = "No request submitted.";
-            confirmationText.textContent='';
             modal.style.display = "block";
-            confirmButton.style.display="none";
-            cancelButton.style.display="none";
+            modalMessage.style.display = "block";
+            modalMessage.textContent = "No request submitted.";
+
+            // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
+            setTimeout(function() {
+                modal.style.display = "none";
+                modalMessage.style.display = "none";
+            }, 2000); // 2 seconds
+
 
         }
     });
-</script>
+    </script>
 
 
 
