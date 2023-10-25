@@ -64,7 +64,7 @@
                             <th scope="col">Package ID</th>
                             <th scope="col">Package Name </th>
                             <th scope="col">Sales</th>
-                            <th scope="col">Visits </th>
+                            <th scope="col">No .  </th>
 
                         </tr>
                     </thead>
