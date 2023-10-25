@@ -106,7 +106,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <img src="img/people.png">
+                                        <img src="../public/Images/coach1.png">
                                         <p>Laila Nabil</p>
                                     </td>
                                     <td>01-10-2023</td>
@@ -114,7 +114,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="img/people.png">
+                                        <img src="../public/Images/coach2.png">
                                         <p>Jana Hani</p>
                                     </td>
                                     <td>01-10-2023</td>
@@ -122,7 +122,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="img/people.png">
+                                        <img src="../public/Images/coach1.png">
                                         <p>Malak Helmy</p>
                                     </td>
                                     <td>01-10-2023</td>
@@ -130,7 +130,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="img/people.png">
+                                        <img src="../public/Images/coach2.png">
                                         <p>Fatimah </p>
                                     </td>
                                     <td>01-10-2023</td>
@@ -138,7 +138,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="img/people.png">
+                                        <img src="../public/Images/coach1.png">
                                         <p>Mohamed Fareed</p>
                                     </td>
                                     <td>01-10-2023</td>

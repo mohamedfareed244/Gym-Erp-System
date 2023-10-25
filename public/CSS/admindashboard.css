@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.addbody{
+    height:600px;
+}
+
 a {
     text-decoration: none;
 }
@@ -56,13 +60,13 @@ body {
 #content {
     position: relative;
     width: calc(100% - 280px);
-    left: 280px;
+    left: 160px;
     transition: .3s ease;
 }
 
-#sidebar.hide~#content {
-    width: calc(100% - 60px);
-    left: 60px;
+#sidebar.close~#content {
+    width: calc(100% - 80px);
+    left: 80px;
 }
 
 
@@ -73,7 +77,7 @@ body {
     padding: 36px 24px;
     font-family: var(--poppins);
     max-height: calc(100vh - 56px);
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 #content main .head-title {
