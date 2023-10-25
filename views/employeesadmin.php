@@ -128,7 +128,11 @@
                 <label for="name">Salary: </label>
             </div>
             <input type="number">
-            
+            <div class="col-lg-4 col-sm-12">
+                <label for="name">Image : </label>
+            </div>
+            <input type="file" name="photo" id="imgfile">
+           
             <div class="col-lg-12 col-sm-12">
                 <label for="name">Address: </label>
             </div>

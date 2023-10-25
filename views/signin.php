@@ -49,7 +49,7 @@ background:linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                   <a href="profile.php"><button class="btn btn-dark btn-lg btn-block" type="button">Login</button></a> 
                   </div>
 
                   <a class="small text-muted" href="#!">Forgot password?</a>
