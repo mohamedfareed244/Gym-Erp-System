@@ -121,7 +121,7 @@
         $sql = "UPDATE client
                 SET FirstName = '$fname', LastName = '$lname', Age = $age, Gender = '$gender', 
                     Weight = $weight, Height = $height, Email = '$email' 
-                WHERE ClientID = $client_id";
+                WHERE ID = $client_id";
 
         if ($conn->query($sql) === true) {
             echo "Client information updated successfully.";
