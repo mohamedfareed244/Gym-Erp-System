@@ -17,6 +17,23 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
+    <style>
+        @media (max-width: 1084px) {
+  .reminders {
+      flex-wrap: wrap;
+      
+      /* width:570px */
+  }
+  .membership-details{
+    width:300px;
+  }
+  .slideshow-container{
+    display: none;
+      }
+}
+
+        </style>
+
 
 </head>
 
