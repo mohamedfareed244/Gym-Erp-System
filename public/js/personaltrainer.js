@@ -4,7 +4,7 @@
 
     const booktrainers = document.querySelectorAll("#trainer-booking");
 
-    console.log("i am in");
+
 
     const modal = document.getElementById("myModal");
     const confirmationText = document.getElementById("confirmation-text");

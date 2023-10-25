@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 12:11 PM
+-- Generation Time: Oct 25, 2023 at 06:41 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -78,6 +78,14 @@ CREATE TABLE `client` (
   `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `client`
+--
+
+INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`) VALUES
+(11, 'jana', 'hani', 25, 'female', '80', '0', 'janahani.nbis@gmail.com', 'ghytujfred'),
+(12, 'rania', 'kamal', 47, 'female', '80', '180', 'raniakamal@gmail.com', '');
+
 -- --------------------------------------------------------
 
 --
@@ -90,7 +98,8 @@ CREATE TABLE `coach` (
   `Email` varchar(50) NOT NULL,
   `PhoneNumber` varchar(50) NOT NULL,
   `Salary` int(50) NOT NULL,
-  `Address` varchar(100) NOT NULL
+  `Address` varchar(100) NOT NULL,
+  `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -128,7 +137,8 @@ CREATE TABLE `employee` (
   `PhoneNumber` varchar(50) NOT NULL,
   `Salary` int(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
-  `JobTitle` varchar(50) NOT NULL
+  `JobTitle` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,7 +148,7 @@ CREATE TABLE `employee` (
 --
 
 CREATE TABLE `employee authorities` (
-  `ID` int(11) NOT NULL,
+  `EmployeeID` int(50) NOT NULL,
   `AuthorityID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -189,6 +199,7 @@ CREATE TABLE `private training membership` (
   `ClientID` int(50) NOT NULL,
   `CoachID` int(50) NOT NULL,
   `PrivateTrainingPackageID` int(50) NOT NULL,
+  `NumOfMonths` int(50) NOT NULL,
   `SessionsCount` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -290,8 +301,8 @@ ALTER TABLE `employee`
 -- Indexes for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `test` (`AuthorityID`);
+  ADD KEY `test` (`AuthorityID`),
+  ADD KEY `test25` (`EmployeeID`);
 
 --
 -- Indexes for table `membership`
@@ -363,7 +374,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -375,12 +386,6 @@ ALTER TABLE `coach`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `employee authorities`
---
-ALTER TABLE `employee authorities`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -422,7 +427,8 @@ ALTER TABLE `coach available slots`
 -- Constraints for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `test25` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `membership`

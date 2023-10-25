@@ -72,7 +72,7 @@ if ($isValid) {
         $_SESSION["Gender"] = $row["Gender"];
         $_SESSION["Email"] = $row["Email"];
         $_SESSION["Password"] = $row["Password"];
-        header("Location: index.php?login=success");
+        header("Location: userprofile.php");
     } else {
         // Check if the email is incorrect
         $mysql = "select * from client where Email = '$Email'";

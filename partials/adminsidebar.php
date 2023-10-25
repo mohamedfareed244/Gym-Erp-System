@@ -23,12 +23,12 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="#">
+            <a href="../views/admindashboard.php">
                 <i class='bx bxs-grid-alt'></i>
                 <span class="link-name">Dashboard</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link-name" href="#">Dashboard</a></li>
+                <li><a class="link-name" href="../views/admindashboard.php">Dashboard</a></li>
             </ul>
         </li>
         </li>
