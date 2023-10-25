@@ -38,7 +38,7 @@
         <div class="reminders">
             <div class="profile-settings">
                 <h2>Edit Your Profile Settings</h2>
-                <form id="profile-settings-form">
+                <form id="profile-settings-form" method="POST">
                 <div class="form-group">
                         <label for="firstname">First Name:</label>
                         <input type="text" id="firstname" name="firstname" placeholder="First Name">
@@ -82,6 +82,32 @@
 
 </body>
 <?php include("../partials/footer.php") ?>
+
+<?php
+session_start();
+
+include_once "../includes/dbh.inc.php";
+
+$firstname = $_POST["firstname"];
+$lastname = $_POST["lastname"];
+$email = $_POST["email"];
+$phoneno = $_POST["phoneno"];
+$password = $_POST["password"];
+
+$user_id = $_SESSION['user_id'];
+
+$sql = "UPDATE client SET FirstName='$firstname', LastName='$lastname', Email='$email', PhoneNo='$phoneno', Password='$password'
+        WHERE ID = $user_id";
+
+if ($conn->query($sql) === true) {
+    echo "User information updated successfully.";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
 
 
 <script src="../public/js/index.js"></script>
