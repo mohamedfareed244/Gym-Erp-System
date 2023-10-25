@@ -49,7 +49,7 @@
                     <input type="text" name="search1">
 
                 </div>
-                <div id="search-client" class="col-2">
+                <div id="search-client" class="col-2" style="margin-top:20px">
                     <input type="submit" value="Search" id="add-btn">
                 </div>
 
