@@ -107,6 +107,9 @@ img {
 
 }
 
+
+
+
 .line1 {
   font-size: 15vh;
   position: relative;
@@ -136,6 +139,7 @@ img {
 .reminders {
   display: flex;
 }
+
 
 .reminder+.reminder {
   margin-left: 20px;
