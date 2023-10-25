@@ -39,6 +39,22 @@ $password = $_POST["password"];
 
 $user_id = $_SESSION['ID'];
 
+if($password=="")
+{
+    $sql = "UPDATE client SET FirstName='$firstname', LastName='$lastname', Email='$email'
+    WHERE ID = $user_id";
+
+if ($conn->query($sql) === true) {
+$_SESSION["FName"] = $firstname;
+$_SESSION["LName"] = $lastname;
+$_SESSION["Email"] = $email;
+$_SESSION["Password"] = $password;
+} else {
+echo "Error: " . $sql . "<br>" . $conn->error;
+}
+}
+else{
+
 $sql = "UPDATE client SET FirstName='$firstname', LastName='$lastname', Email='$email', Password='$password'
         WHERE ID = $user_id";
 
@@ -52,6 +68,7 @@ if ($conn->query($sql) === true) {
 }
 
 $conn->close();
+}
 }
 ?>
 
@@ -142,8 +159,8 @@ updateButton.addEventListener("click", function() {
     confirmationText.style.display = "block";
     confirmationText.textContent = "Updated Successfully";
 
-        // Set a timer to hide the modal after 7 seconds (7000 milliseconds)
-        setTimeout(function() {
+    // Set a timer to hide the modal after 7 seconds (7000 milliseconds)
+    setTimeout(function() {
         modal.style.display = "none";
         confirmationText.style.display = "none";
     }, 7000); // 7 seconds
