@@ -19,7 +19,9 @@
 </head>
 
 <body>
-    <?php require("../partials/adminsidebar.php")?>
+    <?php require("../partials/adminsidebar.php"); 
+      include_once ("../includes/dbh.inc.php");
+      ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
@@ -27,17 +29,16 @@
                     <h4>Update Client's Information </h4>
                 </div>
                 <hr>
-                <form action="" class="row">
+                <form method="POST" class="row" action="editclient.php">
+                    <input type="hidden" name="type" value="form1">
                     <div class="col-5">
                         <label for="search">Client's ID : </label>
-
-
                     </div>
-                    <input type="text" name="search">
+                    <input type="text" name="search" required>
                     <div class="col-5">
                         <label for="search1">Client's Phone Number : </label>
                     </div>
-                    <input type="text" name="search1">
+                    <input type="text" name="search1" required>
                     <div class="col-1">
                         <br>
                         <input type="submit" value="Search" id="add-btn">
@@ -47,56 +48,81 @@
 
 
                 </form>
-                <form method="POST" >
-                    <div class="col-lg-4 col-md-12">
-                        <label for="client_id">Client ID: </label>
-                    </div>
-                    <input type="number" name="client_id" id="client_id">
+              <?php
+         
+              if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if($_POST['type']==='form1'){
+                    $id = (int)$_POST['search'];
+                    $sql="SELECT * FROM client WHERE ID = {$id}";
+                   
+                    $result=$conn->query($sql);
+                 
+                     if ($result->num_rows > 0) {
+                     
+                       while($row = $result->fetch_assoc()) {
                     
-                    <div class="col-lg-4 col-md-12">
-                        <label for="fname">First Name: </label>
-                    </div>
-                    <input type="text" name="fname" id="fname">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="lname">Last Name: </label>
-                    </div>
-                    <input type="text" name="lname" id="lname">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="age">Age: </label>
-                    </div>
-                    <input type="text" name="age" id="age">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="phone">Phone: </label>
-                    </div>
-                    <input type="text" name="phone" id="phone">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="gender">Gender: </label>
-                    </div>
-                    <input type="text" name="gender" id="gender">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="weight">Weight: </label>
-                    </div>
-                    <input type="number" name="weight" id="weight">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="height">Height: </label>
-                    </div>
-                    <input type="number" name="height" id="height">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="email">Email: </label>
-                    </div>
-                    <input type="email" name="email" id="email">
-                    <br>
-                    <div class="col-lg-9 col-md-12">
-                    <input type="submit" value="Edit" id="add-btn" style="margin-top:30px; margin-bottom:20px">
-                    </div>
-                </form>
+                        echo "<form method='POST' >
+                        <input type='hidden' name='type' value='form2'>
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='client_id'>Client ID: </label>
+                            </div>
+                            <input type='number' name='client_id' id='client_id' readonly value=".$row['ID'].">
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='fname'>First Name: </label>
+                            </div>
+                            <input type='text' name='fname' id='fname' value=".$row['FirstName'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='lname'>Last Name: </label>
+                            </div>
+                            <input type='text' name='lname' id='lname' value=".$row['LastName'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='age'>Age: </label>
+                            </div>
+                            <input type='text' name='age' id='age' value=".$row['Age'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='phone'>Phone: </label>
+                            </div>
+                            <input type='text' name='phone' id='phone' value='01210847059'>
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='gender'>Gender: </label>
+                            </div>
+                            <input type='text' name='gender' id='gender' value=".$row['Gender'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='weight'>Weight: </label>
+                            </div>
+                            <input type='number' name='weight' id='weight' value=".$row['Weight'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='height'>Height: </label>
+                            </div>
+                            <input type='number' name='height' id='height' value=".$row['Height'].">
+                            
+                            <div class='col-lg-4 col-md-12'>
+                                <label for='email'>Email: </label>
+                            </div>
+                            <input type='email' name='email' id='email' value=".$row['Email'].">
+                            <br>
+                            <div class='col-lg-9 col-md-12'>
+                            <input type='submit' value='Edit' id='add-btn' style='margin-top:30px; margin-bottom:20px'>
+                            </div>
+                        </form>";
+                       }
+
+
+                       
+                     } else {
+                       echo "0 results";
+                     }
+             $conn->close();
+                }
+              }
+              ?>  
+               
 
                 <div class="col-12">
                     <span>Updated Client ID : <b>12345</b></span>
@@ -106,10 +132,11 @@
     </div>
 
     <?php
-    include_once "../includes/dbh.inc.php";
-
+  
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $client_id = (int) $_POST['client_id'];
+    if ($_POST['type']==='form2'){
+ $client_id = (int) $_POST['client_id'];
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $age = (int) $_POST['age'];
@@ -121,15 +148,18 @@
         $sql = "UPDATE client
                 SET FirstName = '$fname', LastName = '$lname', Age = $age, Gender = '$gender', 
                     Weight = $weight, Height = $height, Email = '$email' 
-                WHERE ID = $client_id";
+                WHERE ID = $client_id ";
 
         if ($conn->query($sql) === true) {
+            echo "recieved";
             echo "Client information updated successfully.";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
         $conn->close();
+      }
+       
     }
     ?>
     </body>

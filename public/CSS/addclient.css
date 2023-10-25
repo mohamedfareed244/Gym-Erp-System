@@ -200,3 +200,6 @@ input[type="text"]{
   /* padding-left: 40px; */
   padding-bottom: 30px;
 }
+#edit-form{
+  display: none;
+}
