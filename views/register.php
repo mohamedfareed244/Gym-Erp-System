@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         // Data inserted successfully
-        header("Location:index.php");
+        header("Location:login.php");
         exit();
     }
 }
