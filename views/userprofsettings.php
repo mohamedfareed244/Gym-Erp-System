@@ -71,6 +71,8 @@
                         <span class="error" id="confirm-password-error"></span>
                     </div>
                     <button id="update-profile-button" type="submit">Update Profile</button>
+                    <button id="update-account-button">Delete Account</button>
+
                 </form>
             </div>
         </div>
