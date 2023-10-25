@@ -15,7 +15,8 @@
 
 </head>
 <body>
-<section class="vh-100" style="background-color: #4A4A9F;">
+<section class="vh-100 gradient-custom" style="background:#f093fb; background:-webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+background:linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10">
