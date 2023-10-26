@@ -139,7 +139,7 @@
         </li>
         <li>
             <div class="icon-link">
-                <a href="#">
+                <a href="../views/index.php">
                     <i class='bx bx-home'></i>
                     <span class="link-name">Return to Homepage</span>
                 </a>

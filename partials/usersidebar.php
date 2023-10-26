@@ -107,6 +107,17 @@
                     <li><a  class="link-name" href="../views/logout.php">Logout</a></li>
                 </ul>
             </li>
+            <li>
+            <div class="icon-link">
+                <a href="../views/index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link-name">Return to Homepage</span>
+                </a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link-name" href="../views/index.php">Return to Homepage</a></li>
+            </ul>
+        </li>
 
         </ul> 
         

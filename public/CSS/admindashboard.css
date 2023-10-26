@@ -57,16 +57,17 @@ body {
 
 
 /* CONTENT */
-#content {
+.content {
+    height: 250vh;
     position: relative;
-    width: calc(100% - 280px);
     left: 160px;
-    transition: .3s ease;
+    width: calc(100% - 160px);
+    transition: all 0.5s ease;
 }
 
-#sidebar.close~#content {
-    width: calc(100% - 80px);
-    left: 80px;
+#sidebar.close~.content {
+    left: 5px;
+    width: calc(100% - 5px);
 }
 
 
@@ -77,7 +78,6 @@ body {
     padding: 36px 24px;
     font-family: var(--poppins);
     max-height: calc(100vh - 56px);
-    overflow-y: hidden;
 }
 
 #content main .head-title {

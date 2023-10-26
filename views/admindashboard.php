@@ -20,7 +20,7 @@
 <body>
     <?php require("../partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
-        <div id="content">
+        <div id="content" class="content">
             <main>
                 <div class="head-title">
                     <div class="left">
