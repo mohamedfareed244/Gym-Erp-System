@@ -31,7 +31,8 @@
     <?php include("partials/header.php") ?>
     <div class="signup-container">
         <div class="signup-form1">
-            <form method="post" autocomplete="off" id="signup-form" action="../Controllers/RegisterController.php">
+            <form method="post" autocomplete="off" id="signup-form" action="../Controllers/ClientController.php">
+                <input type="hidden" name="action" value="register">
                 <h3 class="signup-title">Create An Account</h3>
                 <div class="signup-input-container">
                     <input type="text" name="fname" id="fname" class="signup-input" />

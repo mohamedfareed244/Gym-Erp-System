@@ -2,11 +2,13 @@
 
 include_once "../Models/ClientModel.php";
 
+
+class ClientController{
+
 function register(){
 
 $fnameErr = $lnameErr = $ageErr = $genderErr = $emailErr = $passwordErr = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isValid = true;
 
     if (empty($_POST["fname"])) {
@@ -111,5 +113,21 @@ if ($emailExists) {
     }
 }
 }
+
+$controller = new ClientController();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = isset($_POST["action"]) ? $_POST["action"] : "";
+
+    switch ($action) {
+        case "register":
+            $controller->register();
+            break;
+        default:
+            // Handle unknown action or display an error
+            break;
+    }
+}
+
 
 ?>
