@@ -19,30 +19,10 @@
     <?php require("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
-        <section id="account-details">
-        <h3 id="speciall" class="col-12" >Search for Client: </h3>
-        <hr>
-        </section>
-            <form action="" class="row">
-                <div class="col-lg-4 col-md-12">
-                    <label for="search">Client's ID: </label>
-                </div>
-                <input type="text" name="name" id="name">
-                <div class="col-lg-4 col-md-12">
-                    <label for="search1">Client's Phone Number: </label>
-                </div>
-                <input type="text" name="name" id="name">
-                <div class="col-2">
-                    <br>
-                    <input type="submit" value="Search" id="add-btn">
-                </div>
-
-            </form>
-            <hr>
-            <br>
             <h2>Private Training Sessions</h2>
+            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
             <div id="tablediv">
-                <table class="table overflow-auto mh-10">
+                <table class="view-table overflow-auto mh-10">
                     <thead>
                         <tr>
                             <th scope="col">Client ID</th>
@@ -53,6 +33,7 @@
                             <th scope="col">Time </th>
                             <th scope="col">Payment </th>
                             <th scope="col">Coach Name </th>
+                            <th scope="col">Action</th>
 
                         </tr>
                     </thead>
@@ -66,6 +47,10 @@
                             <td>3:00pm</td>
                             <td class="bg-info">Free</td>
                             <td>Mohamed fareed</td>
+                            <td>
+                                <button class="btn">Edit</button>
+                                <button class="btn btn-delete">Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">12345</th>
@@ -76,6 +61,10 @@
                             <td>3:00pm</td>
                             <td class="bg-danger">Paid</td>
                             <td>Ahmed Hassan</td>
+                            <td>
+                                <button class="btn">Edit</button>
+                                <button class="btn btn-delete">Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">12345</th>
@@ -86,6 +75,10 @@
                             <td>5:00pm</td>
                             <td class="bg-info">Free</td>
                             <td>Shorouk Ahmed</td>
+                            <td>
+                                <button class="btn">Edit</button>
+                                <button class="btn btn-delete">Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">12345</th>
@@ -96,6 +89,10 @@
                             <td>3:00pm</td>
                             <td class="bg-danger">Paid</td>
                             <td>Shorouk Ahmed</td>
+                            <td>
+                                <button class="btn">Edit</button>
+                                <button class="btn btn-delete">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -105,51 +102,41 @@
             <hr>
             <br>
 
-            <h4>Add Private Training Session:</h2>
+            <h4>Add Private Training Session:</h4>
             <br>
-                <div class="pt row">
-                    <form action="" class="pt row">
-                    <div class="col-lg-4 col-md-12">
-                            <label for="session-coach">Coach Name : </label>
-                        </div>
-                        <input type="text" name="session-coach" id="session-">
-                        <!-- <div class="col-lg-4 col-md-12">
-                            <label for="session-client"> Name: </label>
-                        </div>
-                        <input type="text" name="session-client" id="session-client">
-                        <div class="col-lg-4 col-md-12">
-                            <label for="session-phone"> Phone Number: </label>
-                        </div>
-                        <input type="text" name="session-phone" id="session-phone"> -->
-                        <div class="col-lg-4 col-md-12">
-                            <label for="session-date">Session Date: </label>
-                        </div>
-                        <input type="date" name="session-date" id="session-date">
-                        <div class="col-lg-4 col-md-12">
-                            <label for="session-duration">Duration: </label>
-                        </div>
-                        <input type="text" name="session-duration" id="session-duration">
-                        <div class="col-lg-4 col-md-12">
-                            <label for="session-time"> Time: </label>
-                        </div>
-                        <input type="time" name="session-time" id="session-time">
-                        <div class="col-lg-4 col-md-12">
-                            <label for="session-payment">Free/Paid:</label>
-                        </div>
-                        <select class="session-payment" name="session-payment">
-                                <option value="free">Free</option>
-                                <option value="paid">Paid</option>
-                            </select>
-                            <br>
-                            <br>
-                        <div class="col-lg-9 col-md-12">
-                            <input type="submit" value="Add Pt Session" id="add-btn" style="margin-top:30px; margin-bottom:20px">
-                        </div>
-                        <br>
-                        <br>
-                    </form>
-
+            <form action="" class="pt row">
+                <div class="col-lg-4 col-md-12">
+                    <label for="session-coach">Coach Name : </label>
                 </div>
+                <input type="text" name="session-coach" id="session-">
+                <div class="col-lg-4 col-md-12">
+                    <label for="session-date">Session Date: </label>
+                </div>
+                <input type="date" name="session-date" id="session-date">
+                <div class="col-lg-4 col-md-12">
+                    <label for="session-duration">Duration: </label>
+                </div>
+                <input type="text" name="session-duration" id="session-duration">
+                <div class="col-lg-4 col-md-12">
+                    <label for="session-time"> Time: </label>
+                </div>
+                <input type="time" name="session-time" id="session-time">
+                <div class="col-lg-4 col-md-12">
+                    <label for="session-payment">Free/Paid:</label>
+                </div>
+                <select class="session-payment" name="session-payment">
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select>
+                <br>
+                <br>
+                <div class="col-lg-9 col-md-12">
+                    <input type="submit" value="Add Pt Session" id="add-btn" style="margin-top:30px; margin-bottom:20px">
+                </div>
+                <br>
+                <br>
+            </form>
+
         </div>
     </div>
 </body>
