@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <!-- include header -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
     <div class="signup-container">
         <div class="signup-form1">
             <form method="post" autocomplete="off" id="signup-form">
@@ -207,7 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../public/js/signup_validation.js"></script>
 
     <!-- include footer -->
-    <?php include("../partials/footer.php") ?>
+    <?php include("partials/footer.php") ?>
 
 
 </body>

@@ -26,7 +26,7 @@
   padding-bottom: 30px;
         }
 </style>
-<?php require("../partials/adminsidebar.php") ?>
+<?php require("partials/adminsidebar.php") ?>
 <div id="add-body">
    <h2 class="coaches-title">My Classes : </h2>
    <table class="table">

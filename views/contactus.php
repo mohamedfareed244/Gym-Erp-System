@@ -23,7 +23,7 @@
 <body>
 
     <!-- include header -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
 
     <div class="contact-container">
         <img src="img/shape.png" class="square" alt="" />
@@ -102,7 +102,7 @@
     <script src="../public/js/contactus.js"></script>
 
     <!-- include footer -->
-    <?php include("../partials/footer.php") ?>
+    <?php include("partials/footer.php") ?>
 </body>
 
 </html>

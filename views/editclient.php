@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <?php require("../partials/adminsidebar.php"); 
+    <?php require("partials/adminsidebar.php"); 
       include_once ("../includes/dbh.inc.php");
       ?>
     <div id="add-body" class="addbody">

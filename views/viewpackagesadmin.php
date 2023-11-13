@@ -35,7 +35,7 @@
 
     </style>
 <body>
-    <?php require("../partials/adminsidebar.php") ?>
+    <?php require("partials/adminsidebar.php") ?>
 
     <div class="container py-5" style="padding-left:70px">
         <h2 class="coaches-title">Packages Available:</h2>

@@ -73,7 +73,7 @@ $conn->close();
 ?>
 
     <!-- usersidebar start -->
-    <?php include("../partials/usersidebar.php") ?>
+    <?php include("partials/usersidebar.php") ?>
 
     <div class="profile">
 
@@ -134,7 +134,7 @@ $conn->close();
 
 
 </body>
-<?php include("../partials/footer.php") ?>
+<?php include("partials/footer.php") ?>
 
 <script>
 const updateButton = document.getElementById("update-profile-button");

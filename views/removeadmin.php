@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    <?php include("../partials/adminsidebar.php") ?>
+    <?php include("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container" >
         <section id="account-details">

@@ -40,7 +40,7 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("../partials/usersidebar.php") ?>
+    <?php include("partials/usersidebar.php") ?>
 
 
     <div class="profile">
@@ -147,7 +147,7 @@
 
 
 </body>
-<?php include("../partials/footer.php") ?>
+<?php include("partials/footer.php") ?>
 
 
 <script src="../public/js/index.js"></script>

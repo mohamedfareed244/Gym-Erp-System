@@ -98,7 +98,7 @@ if ($isValid) {
 
 <body>
     <!-- include header -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
     <div class="login-container">
         <div class="login-form1">
             <form autocomplete="off" method="post" id="login-form">
@@ -127,7 +127,7 @@ if ($isValid) {
     <script src="../public/js/login_validation.js"></script>
 
     <!-- include footer -->
-    <?php include("../partials/footer.php") ?>
+    <?php include("partials/footer.php") ?>
 
 
 <script>

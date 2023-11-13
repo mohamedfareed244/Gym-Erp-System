@@ -32,7 +32,7 @@
 
 <body>
     <!-- navbar start -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
     <!-- header image -->
     <section id="welcome-image">
         <img src="../public/Images/yogaclass.jpg" alt="Home Image" class="main-img">

@@ -29,7 +29,7 @@
 
 </style>
 <body>
-<?php require("../partials/adminsidebar.php") ?>
+<?php require("partials/adminsidebar.php") ?>
 <div id="add-body">
     <table class="table">
         <thead>

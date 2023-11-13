@@ -31,7 +31,7 @@
   </style>
 
 <body>
-    <?php include("../partials/adminsidebar.php") ?>
+    <?php include("partials/adminsidebar.php") ?>
     <div class="coaches-container">
         <h1 class="coaches-title">Employees:</h1>
         <div class="coaches-main-content">

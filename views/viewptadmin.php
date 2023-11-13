@@ -29,7 +29,7 @@
     </style>
 
 <body>
-    <?php require("../partials/adminsidebar.php") ?>
+    <?php require("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <h2 class="coaches-title">Private Training Sessions</h2>

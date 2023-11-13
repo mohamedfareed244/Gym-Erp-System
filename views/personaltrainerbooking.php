@@ -22,7 +22,7 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("../partials/usersidebar.php") ?>
+    <?php include("partials/usersidebar.php") ?>
 
     <div class="container py-5">
         <h2 style=" font-size: 26px;
@@ -171,7 +171,7 @@
 
 
 </body>
-<?php include("../partials/footer.php") ?>
+<?php include("partials/footer.php") ?>
 
 <script src="../public/js/personaltrainer.js"></script>
 

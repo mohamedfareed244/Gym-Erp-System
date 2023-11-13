@@ -24,7 +24,7 @@
 
 <body>
     <!-- navbar start -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
     <!-- header image -->
     <section id="welcome-image">
         <img src="../public/Images/bckgrnd.png" alt="Home Image" class="main-img">
@@ -231,7 +231,7 @@
 
 
     <!-- include footer -->
-    <?php include('../partials/footer.php') ?>
+    <?php include('partials/footer.php') ?>
 
     <script src="../public/js/index.js"> </script>
 </body>

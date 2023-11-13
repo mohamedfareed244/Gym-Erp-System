@@ -22,7 +22,7 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("../partials/usersidebar.php") ?>
+    <?php include("partials/usersidebar.php") ?>
 
     <section class="dietplan-details" id="diet-details">
         <div class="dietplan-item">
@@ -172,7 +172,7 @@
 
 
 </body>
-<?php include("../partials/footer.php") ?>
+<?php include("partials/footer.php") ?>
 
 
 </html>

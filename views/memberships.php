@@ -26,7 +26,7 @@
 
 <body>
     <!-- include header -->
-    <?php include("../partials/header.php") ?>
+    <?php include("partials/header.php") ?>
     <!-- add image -->
     <section id="welcome-image">
         <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">
@@ -202,7 +202,7 @@
     </div>
 
     <!-- include footer -->
-    <?php include("../partials/footer.php") ?>
+    <?php include("partials/footer.php") ?>
 
     <!-- script for bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

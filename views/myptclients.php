@@ -14,7 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<?php require("../partials/adminsidebar.php") ?>  
+<?php require("partials/adminsidebar.php") ?>  
 <div id="add-body">
 <div id="tablediv">
     <table class="table">
