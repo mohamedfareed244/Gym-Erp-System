@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once "../includes/dbh.inc.php";
 
 class Client{
@@ -35,11 +37,31 @@ class Client{
 
     public function checkExistingEmail($email) {
         global $conn;
-        
+
         $Email = "SELECT * FROM client WHERE Email = '$email'";
         $result = mysqli_query($conn, $Email);
         return mysqli_num_rows($result) > 0;
     }
+
+    public function checkifClientExists($email,$password)
+    {
+        global $conn;
+
+        $mysql = "select * from client where Email = '$email' and Password = '$password'";
+        return mysqli_query($conn, $mysql);
+    }
+
+    public function checkifEmailExists($email)
+    {
+        global $conn;
+
+        $mysql = "select * from client where Email = '$email'";
+        return mysqli_query($conn, $mysql);
+
+    }
+
+
+
 }
 
 ?>

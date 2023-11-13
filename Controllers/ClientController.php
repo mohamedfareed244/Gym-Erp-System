@@ -2,6 +2,7 @@
 
 include_once "../Models/ClientModel.php";
 
+session_start();
 
 class ClientController{
 
@@ -112,6 +113,64 @@ if ($emailExists) {
         
     }
 }
+
+
+public function login()
+{
+    $emailErr = $passwordErr = $allErr= ""; // Initialize error variables
+
+    $client = new Client();
+    
+        $isValid = true;
+    
+         if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+            $isValid = false;
+        } 
+    
+     if (empty($_POST["password"])) {
+        $passwordErr = "Password is required";
+        $isValid = false;
+    } 
+    
+    
+    
+    
+    if ($isValid) {
+        // Validation successful, save data to the database
+        $Email = $_POST["email"];
+        $Password = $_POST["password"];
+    
+        $result=$client->checkifClientExists($Email,$Password);
+    
+    
+        if ($row = mysqli_fetch_array($result)) {
+            // Authentication successful
+            $_SESSION["ID"] = $row[0];
+            $_SESSION["FName"] = $row["FirstName"];
+            $_SESSION["LName"] = $row["LastName"];
+            $_SESSION["Age"] = $row["Age"];
+            $_SESSION["Gender"] = $row["Gender"];
+            $_SESSION["Email"] = $row["Email"];
+            $_SESSION["Password"] = $row["Password"];
+            header("Location: ../views/userprofile.php");
+        } else {
+            $result = $client->checkifEmailExists($Email);
+    
+            if ($row = mysqli_fetch_array($result)) {
+                // Password is incorrect
+                $passwordErr = "Incorrect password. Try Again.";
+            } else {
+                // Both email and password are incorrect
+                $allErr = "Wrong email and password. Try Again.";
+            }
+        }
+    }
+    
+     
+    
+
+}
 }
 
 $controller = new ClientController();
@@ -122,6 +181,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($action) {
         case "register":
             $controller->register();
+            break;
+        case "login":
+            $controller->login();
             break;
         default:
             // Handle unknown action or display an error
