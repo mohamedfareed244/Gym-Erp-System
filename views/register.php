@@ -25,7 +25,7 @@
 
 
 </head>
-
+<?php session_start() ?>
 <body>
     <!-- include header -->
     <?php include("partials/header.php") ?>
@@ -39,19 +39,19 @@
                     <label class="signup-lbl" for="">First Name</label>
                     <span>First Name</span>
                 </div>
-                <span id="fname-error"><?php echo isset($fnameErr) ? $fnameErr : ''; ?></span>
+                <span id="fname-error"><?php echo isset($_SESSION["fnameErr"]) ? $_SESSION["fnameErr"] : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="text" name="lname" id="lname" class="signup-input" />
                     <label class="signup-lbl" for="">Last Name</label>
                     <span>Last Name</span>
                 </div>
-                <span id="lname-error"><?php echo isset($lnameErr) ? $lnameErr : ''; ?></span>
+                <span id="lname-error"><?php echo isset($_SESSION["lnameErr"]) ? $_SESSION["lnameErr"] : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="number" name="age" id="age" class="signup-input" min="16" max="100" />
                     <label class="signup-lbl" for="">Age</label>
                     <span>Age</span>
                 </div>
-                <span id="age-error"></span>
+                <span id="age-error"><?php echo isset($_SESSION["ageErr"]) ? $_SESSION["ageErr"] : ''; ?></span>
                 <div class="signup-input-container">
                     <label class="signup-lbl" for="">Gender</label>
                     <input type="radio" id="male" name="gender" value="male" class="radio-btn">
@@ -60,7 +60,7 @@
                     <label for="female" class="gender-lbl">Female</label><br>
 
                 </div>
-                <span id="gender-error"><?php echo isset($genderErr) ? $genderErr : ''; ?></span>
+                <span id="gender-error"><?php echo isset($_SESSION["genderErr"]) ? $_SESSION["genderErr"] : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="number" name="weight" id="weight" class="signup-input" min="40" max="250" />
                     <label class="signup-lbl" for="">Weight</label>
@@ -76,17 +76,18 @@
                     <label class="signup-lbl" for="">Email</label>
                     <span>Email</span>
                 </div>
-                <span id="email-error"><?php echo isset($emailErr) ? $emailErr : ''; ?></span>
+                <span id="email-error"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="password" name="password" id="password" class="signup-input" />
                     <label class="signup-lbl" for="">Password</label>
                     <span>Password</span>
                 </div>
-                <span id="password-error"><?php echo isset($passwordErr) ? $passwordErr : ''; ?></span>
+                <span id="password-error"><?php echo isset( $_SESSION["passwordErr"]) ?  $_SESSION["passwordErr"] : ''; ?></span>
                 <input type="submit" name="submit" value="Create Account" class="signup-btn" />
                 <p class="register-text">Already Have an Account? <a class="register-link"
                         href="../views/login.php">Login Now</a></p>
             </form>
+            <?php session_destroy(); ?>
         </div>
 
     </div>

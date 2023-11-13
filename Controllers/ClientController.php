@@ -112,6 +112,16 @@ if ($emailExists) {
             }
         
     }
+
+            // If the login was unsuccessful, redirect back to the login page with error messages
+            $_SESSION["fnameErr"] = $fnameErr;
+            $_SESSION["lnameErr"] = $lnameErr;
+            $_SESSION["ageErr"] = $ageErr;
+            $_SESSION["genderErr"] = $genderErr;
+            $_SESSION["emailErr"] = $emailErr;
+            $_SESSION["passwordErr"] = $passwordErr;
+            header("Location: ../views/register.php");
+            exit(); 
 }
 
 
@@ -154,6 +164,7 @@ public function login()
             $_SESSION["Email"] = $row["Email"];
             $_SESSION["Password"] = $row["Password"];
             header("Location: ../views/userprofile.php");
+            exit();
         } else {
             $result = $client->checkifEmailExists($Email);
     
@@ -167,7 +178,12 @@ public function login()
         }
     }
     
-     
+        // If the login was unsuccessful, redirect back to the login page with error messages
+        $_SESSION["emailErr"] = $emailErr;
+        $_SESSION["passwordErr"] = $passwordErr;
+        $_SESSION["allErr"] = $allErr;
+        header("Location: ../views/login.php");
+        exit(); 
     
 
 }

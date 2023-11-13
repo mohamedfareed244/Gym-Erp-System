@@ -26,6 +26,7 @@
 
 </head>
 
+<?php session_start(); ?>
 <body>
     <!-- include header -->
     <?php include("partials/header.php") ?>
@@ -39,18 +40,19 @@
                     <label class="login-lbl" for="">Email</label>
                     <span>Email</span>
                 </div>
-                <span id="email-error"><?php echo isset($emailErr) ? $emailErr : ''; ?></span>
+                <span id="email-error"><?php echo isset( $_SESSION["emailErr"] ) ?  $_SESSION["emailErr"]  : ''; ?></span>
                 <div class="login-input-container">
                     <input type="password" name="password" id="password" class="login-input" required />
                     <label class="login-lbl" for="">Password</label>
                     <span>Password</span>
                 </div>
-                <span id="password-error"><?php echo isset($passwordErr) ? $passwordErr : ''; ?></span>
-                <span id="all-error"><?php echo isset($allErr) ? $allErr : ''; ?></span>
+                <span id="password-error"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?></span>
+                <span id="all-error"><?php echo isset($_SESSION["allErr"]) ? $_SESSION["allErr"] : ''; ?></span>
                 <input type="submit" value="Login" class="login-btn" />
                 <p class="register-text">Don't Have an Account? <a class="register-link"
                         href="../views/register.php">Register Now</a></p>
             </form>
+            <?php session_destroy(); ?>
         </div>
 
     </div>
