@@ -26,138 +26,25 @@
 
 </head>
 
-<?php
-
-
-include_once "../includes/dbh.inc.php";
-
-
-$fnameErr = $lnameErr = $ageErr = $genderErr = $emailErr = $passwordErr = ""; // Initialize error variables
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $isValid = true;
-    // Validate the "First Name" field
-    if (empty($_POST["fname"])) {
-        $fnameErr = "First Name is required";
-        $isValid = false;
-    }
-    else{
-        $fname=$_POST['fname'];
-        if(!preg_match("/^[a-zA-Z ]*$/",$fname)){
-            $fnameErr="Only alphabets and white space are allowed";
-            $isValid = false;
-        }
-    }
-
-
-// Validate the "Last Name" field
-    if (empty($_POST["lname"])) {
-        $lnameErr = "Last Name is required";
-        $isValid = false;
-    }
-
-    // Validate the "Age" field
-    if (empty($_POST["age"])) {
-        $ageErr = "Age is required";
-        $isValid = false;
-    } elseif (!filter_var($_POST["age"], FILTER_VALIDATE_INT, array("options" => array("min_range" => 16, "max_range" => 100)))) {
-        $ageErr = "Invalid age. Must be between 16 and 100.";
-        $isValid = false;
-    }
-
-    // Validate the "Gender" field
-    if (empty($_POST["gender"])) {
-        $genderErr = "Gender is required";
-        $isValid = false;
-    }
-
-    $email = htmlspecialchars($_POST["email"]);
-    // Validate the "Email" field
-    $checkEmailQuery = "SELECT * FROM client WHERE Email = '$email'";
-    $result = mysqli_query($conn, $checkEmailQuery);
-    
-    if (mysqli_num_rows($result) > 0) {
-        // Email already exists, display an error message
-        $emailErr = "This email is already registered.";
-        $isValid = false;
-    } else if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
-        $isValid = false;
-    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-        $isValid = false;
-    }
-
- if (empty($_POST["password"])) {
-    $passwordErr = "Password is required";
-    $isValid = false;
-} elseif (strlen($_POST["password"]) < 6) {
-    $passwordErr = "Password must be at least 6 characters long";
-    $isValid = false;
-} 
-
-
- // Check if there are no validation errors
- if ($isValid) {
-
-    // Validation successful, save data to the database
-    $Fname = htmlspecialchars($_POST["fname"]);
-    $Lname = htmlspecialchars($_POST["lname"]);
-    $Age = htmlspecialchars($_POST["age"]);
-    $Gender = htmlspecialchars($_POST["gender"]);
-    $Email = htmlspecialchars($_POST["email"]);
-    $Password = htmlspecialchars($_POST["password"]);
-
-    if (!empty($_POST["weight"])) {
-        $Weight = htmlspecialchars($_POST["weight"]);
-    } else {
-        $Weight = '';  // Set to an empty string
-    }
-    
-    if (!empty($_POST["height"])) {
-        $Height = htmlspecialchars($_POST["height"]);
-    } else {
-        $Height = '';  // Set to an empty string
-    }
-
-     $sql = "insert into client(FirstName,LastName,Age,Gender,Weight,Height,Email,Password) 
-    values('$Fname','$Lname','$Age','$Gender','$Weight','$Height','$Email','$Password')";
-    
-    $result=mysqli_query($conn,$sql);
-
-    if ($result) {
-        // Data inserted successfully
-        header("Location:login.php");
-        exit();
-    }
-}
- 
-
-}
-
-
-?>
-
 <body>
     <!-- include header -->
     <?php include("partials/header.php") ?>
     <div class="signup-container">
         <div class="signup-form1">
-            <form method="post" autocomplete="off" id="signup-form">
+            <form method="post" autocomplete="off" id="signup-form" action="../Controllers/RegisterController.php">
                 <h3 class="signup-title">Create An Account</h3>
                 <div class="signup-input-container">
                     <input type="text" name="fname" id="fname" class="signup-input" />
                     <label class="signup-lbl" for="">First Name</label>
                     <span>First Name</span>
                 </div>
-                <span id="fname-error"><?php echo $fnameErr; ?></span>
+                <span id="fname-error"><?php echo isset($fnameErr) ? $fnameErr : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="text" name="lname" id="lname" class="signup-input" />
                     <label class="signup-lbl" for="">Last Name</label>
                     <span>Last Name</span>
                 </div>
-                <span id="lname-error"><?php echo $lnameErr; ?></span>
+                <span id="lname-error"><?php echo isset($lnameErr) ? $lnameErr : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="number" name="age" id="age" class="signup-input" min="16" max="100" />
                     <label class="signup-lbl" for="">Age</label>
@@ -172,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="female" class="gender-lbl">Female</label><br>
 
                 </div>
-                <span id="gender-error"><?php echo $genderErr; ?></span>
+                <span id="gender-error"><?php echo isset($genderErr) ? $genderErr : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="number" name="weight" id="weight" class="signup-input" min="40" max="250" />
                     <label class="signup-lbl" for="">Weight</label>
@@ -188,13 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="signup-lbl" for="">Email</label>
                     <span>Email</span>
                 </div>
-                <span id="email-error"><?php echo $emailErr; ?></span>
+                <span id="email-error"><?php echo isset($emailErr) ? $emailErr : ''; ?></span>
                 <div class="signup-input-container">
                     <input type="password" name="password" id="password" class="signup-input" />
                     <label class="signup-lbl" for="">Password</label>
                     <span>Password</span>
                 </div>
-                <span id="password-error"><?php echo $passwordErr; ?></span>
+                <span id="password-error"><?php echo isset($passwordErr) ? $passwordErr : ''; ?></span>
                 <input type="submit" name="submit" value="Create Account" class="signup-btn" />
                 <p class="register-text">Already Have an Account? <a class="register-link"
                         href="../views/login.php">Login Now</a></p>
