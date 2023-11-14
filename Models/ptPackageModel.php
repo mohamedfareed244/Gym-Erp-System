@@ -42,34 +42,35 @@ class ptPackages
     public function addptPacks($ptPackage)
     {
         global $conn;
-
+    
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
         $Price = $ptPackage->Price;
-
-
+    
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price')";
-        return mysqli_query($conn, $sql);
+        return $conn->query($sql);
     }
+    
     public function updateptPacks($ptPackage)
     {
         global $conn;
-
+    
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
         $Price = $ptPackage->Price;
-
+    
         $ptpackid = $ptPackage->ID;
-
+    
         $sql = "UPDATE `private training package` 
                 SET Name='$Name', NumOfSessions='$NumOfSessions', MinPackageMonths='$MinPackageMonths', Price='$Price' 
                 WHERE ID = $ptpackid";
-
+    
         return $conn->query($sql);
     }
+    
 
     public function deleteptPacks($ptPackage)
     {
