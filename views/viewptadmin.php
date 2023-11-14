@@ -15,36 +15,24 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<style>
-              .coaches-title{
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 27px;
-  text-transform: uppercase;
-  padding-top: 20px;
-  color: rgb(36, 34, 34);
-  /* padding-left: 40px; */
-  padding-bottom: 30px;
-        }
-
-    </style>
-
 <body>
     <?php require("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <h2 class="coaches-title">Private Training Sessions</h2>
             <br>
+            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
             <div id="tablediv">
-                <table class="table overflow-auto mh-10">
+                <table id="ptSessions" class="view-table overflow-auto mh-10">
                     <thead>
                         <tr>
-                            <th scope="col">Coach Name </th>
+                            <th scope="col">Client Name </th>
                             <th scope="col">Session Date </th>
                             <th scope="col">Duration</th>
                             <th scope="col">Time </th>
                             <th scope="col">Payment </th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Coach Name</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,8 +43,9 @@
                             <td>3:00pm</td>
                             <td class="bg-info">Free</td>
                             <td>Mohamed fareed</td>
-                            <th><button class="btn btn-primary"> Edit</button></th>
-                            <th><button class="btn btn-primary"> Delete</button></th>
+                            <td><button class="btn"> Edit</button></th>
+                                <button class="btn btn-delete"> Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Ahmed Hassan</td>
@@ -65,8 +54,10 @@
                             <td>3:00pm</td>
                             <td class="bg-danger">Paid</td>
                             <td>Ahmed Hassan</td>
-                            <th><button class="btn btn-primary"> Edit</button></th>
-                            <th><button class="btn btn-primary"> Delete</button></th>
+
+                            <td><button class="btn"> Edit</button></th>
+                                <button class="btn btn-delete"> Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Shorouk Ahmed</td>
@@ -75,8 +66,10 @@
                             <td>5:00pm</td>
                             <td class="bg-info">Free</td>
                             <td>Shorouk Ahmed</td>
-                            <th><button class="btn btn-primary"> Edit</button></th>
-                            <th><button class="btn btn-primary"> Delete</button></th>
+
+                            <td><button class="btn"> Edit</button></th>
+                                <button class="btn btn-delete"> Delete</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Shorouk Ahmed</td>
@@ -85,8 +78,9 @@
                             <td>3:00pm</td>
                             <td class="bg-danger">Paid</td>
                             <td>Shorouk Ahmed</td>
-                            <th><button class="btn btn-primary"> Edit</button></th>
-                            <th><button class="btn btn-primary"> Delete</button></th>
+                            <td><button class="btn"> Edit</button></th>
+                                <button class="btn btn-delete"> Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,6 +88,27 @@
             <hr>
         </div>
     </div>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchBar");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("ptSessions");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
 </body>
 
 </html>

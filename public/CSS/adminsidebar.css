@@ -3,7 +3,9 @@
     padding:0;
     font-family:"Poppins",sans-serif;
 }
-
+body{
+    justify-content: space-between;
+}
 .sidebar
 {
     position:fixed;
