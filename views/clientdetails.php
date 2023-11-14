@@ -39,12 +39,12 @@
                             <th scope="col">End Date</th>
                             <th scope="col">Visits </th>
                             <th scope="col">Status </th>
-                            <th scope="col">Freezes </th>
-                            <th scope="col">Action </th>
+                            <th scope="col">Freeze Duration </th>
+                            <th scope="col">Freeze</th>
                             <th scope="col">Sales</th>
                             <th scope="col">pt</th>
                             <th scope="col">inbody</th>
-                            <th scope="col"> </th>
+                            <th scope="col">Actions </th>
 
                         </tr>
                     </thead>
@@ -57,12 +57,12 @@
                             <td>30</td>
                             <td class="bg-info">Freezed</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -74,12 +74,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -91,12 +91,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -108,12 +108,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -125,12 +125,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -143,12 +143,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -160,12 +160,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -177,12 +177,12 @@
                             <td>30</td>
                             <td class="bg-info">Freeze</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -195,12 +195,12 @@
                             <td>30</td>
                             <td class="bg-danger">Expired</td>
                             <td>2 Weeks</td>
-                            <td><button>Freeze</button></td>
+                            <td><button class="btn btn-freeze">Freeze</button></td>
                             <td>Mohamed fareed</td>
                             <td>2</td>
                             <td>1</td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -237,7 +237,7 @@
                             <td>120</td>
                             <td class="bg-danger">Not paid </td>
                             <td>
-                                <button class="btn">Edit</button>
+                            <button class="btn">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -273,7 +273,7 @@
                                 <td>01-10-2023</td>
                                 <td>Mohamed fareed </td>
                                 <td>
-                                    <button class="btn">Edit</button>
+                                <button class="btn">Edit</button>
                                     <button class="btn btn-delete">Delete</button>
                                 </td>
                             </tr>

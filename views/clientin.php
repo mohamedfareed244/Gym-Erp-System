@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,53 +16,33 @@
 </head>
 
 <body>
-<?php require("partials/adminsidebar.php") ?>
-<div id="add-body" class="addbody">
-    <div class="container">
-    <div class="row" >
-       <div class="col-3 divstat" style="height:40%;" >
-        <div class="row" >
-            <div class="col-3">
-            <i class="fa fa-circle" style="color:green;margin-top:60px;"></i>
+    <?php require("partials/adminsidebar.php") ?>
+    <div id="add-body" class="addbody">
+        <div class="container">
+            <div class="row">
+                <div class="col-3 divstat" style="height:40%;">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fa fa-circle" style="color:green;margin-top:60px;"></i>
+                        </div>
+                        <div class="col-9">
+                            <h2> 130/200</h2>
+                            <p><b>Estimated clients in the gym</b> </p>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="col-9"><h2> 130/200</h2>
-        <p><b>Estimated clients in the gym</b>  </p>
-        </div>
-        </div>
+            <br>
+            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for Clients..">
 
-
-       </div>
-        </div>
-        <br>
-        <br>
-
-    <form action="" class="row">
-                <div  class="col-5">
-                    <label for="search">Client ID: </label>
-                   
-
-                </div>
-                <input type="text" name="search">
-
-                <div  class="col-5">
-                    <label for="search1">Client's Phone: </label>
-                    
-
-                </div>
-                <input type="text" name="search1">
-                <div class="col-2">
-                    <br>
-                    <input type="submit" value="Search" id="add-btn">
-                    <br>
-                </div>
-
-            </form>
-                        <hr>
+            <hr>
             <div id="tablediv">
-            <table class="table overflow-auto mh-10">
-                <thead>
-                <tr>
-                             <th scope="col">ID</th>
+                <table id="clientsTable" class="view-table overflow-auto mh-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
                             <th scope="col">client Name</th>
                             <th scope="col">package Name</th>
                             <th scope="col">end date</th>
@@ -70,24 +51,44 @@
                             <th scope="col">Action</th>
 
                         </tr>
-                </thead>
-                <tbody>
-                <tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <th scope="row">1</th>
                             <td>Mohamed Fareed</td>
                             <td>2 Months</td>
                             <td>30-09-2023</td>
                             <td class="bg-info">Freezed</td>
                             <td><b>20</b> from <b>30</b></td>
-                            <td><button class="btn btn-success">check in </button></td>
+                            <td> <button class="btn btn-success">Check In</button>
+                            </td>
                         </tr>
-                </tbody>
-</table>
+                    </tbody>
+                </table>
             </div>
 
-
-      
+        </div>
     </div>
-</div>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchBar");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("clientsTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>
