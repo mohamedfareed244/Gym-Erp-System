@@ -36,7 +36,10 @@
                         <label for="lname">Last Name: </label>
                     </div>
                     <input type="text" name="lname" id="lname">
-                    
+                    <div class="col-lg-4 col-md-12">
+                        <label for="lname">Phone: </label>
+                    </div>
+                    <input type="text" name="phone" id="phone">
                     <div class="col-lg-4 col-md-12">
                         <label for="age">Age: </label>
                     </div>
@@ -78,16 +81,17 @@
 
    
     <?php
-    include_once "../includes/dbh.inc.php";
+    include_once "../Models/ClientModel.php";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $age = (int) $_POST['age'];
-        $gender = $_POST['gender'];
-        $weight = (float) $_POST['weight'];
-        $height = (int) $_POST['height'];
-        $email = $_POST['email'];
+        $newclient=new Client();
+        $newclient->Firstname = $_POST['fname'];
+        $newclient->Lastname = $_POST['lname'];
+        $newclient->Age = (int) $_POST['age'];
+        $newclient->Gender = $_POST['gender'];
+        $newclient->Weight = (float) $_POST['weight'];
+        $newclient->Height = (int) $_POST['height'];
+        $newclient->Email = $_POST['email'];
 
         $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email)
             VALUES ('$fname', '$lname', '$age', '$gender', $weight, $height, '$email')";
