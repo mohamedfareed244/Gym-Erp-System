@@ -121,6 +121,7 @@
             <h4 class="coaches-title">Add Employee </h4>
         </div>
         <hr>
+        <form action=""> 
         <div class="row">
             <div class="col-lg-4 col-sm-12">
                 <label for="name">Name: </label>
@@ -161,77 +162,24 @@
             <br>
             <hr>
             <h2 class="coaches-title">New Employee's Authorities: </h2>
-            <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Edit Client</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault"> View Client</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">client check in </label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Employees </label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Employees Attendance</label>
-</div>
-
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Report</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Packages</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Add packages</label>
-  
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Private Sessions</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">Reserve Private Sessions</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Coaches</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View classes</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Pt Clients</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Reports</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-  <label class="form-check-label" for="flexSwitchCheckDefault">View DashBoard</label>
-</div>
+            <?php 
+              include_once ("../Models/hrmodel.php");
+              $arr=getauth();
+              while($row = mysqli_fetch_assoc($arr)){
+            
+                echo " <div class='form-check form-switch'>
+                <input class='form-check-input' type='checkbox'  id='flexSwitchCheckDefault' value = '".$row['ID']."'>
+                <label class='form-check-label' for='flexSwitchCheckDefault'>".$row['FriendlyName']."</label>
+              </div> ";
+              }
+              ?>
+            
 <br>
 <hr>
 <div class="col-lg-4 col-sm-12">
                 <input type="submit" value="Add Employee" id="add-btn">
             </div>
+            </form>
             <br>
             <br>
         </div>
