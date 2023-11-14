@@ -2,7 +2,7 @@
 
 include_once "../Models/ClientModel.php";
 
-session_start();
+
 
 class ClientController{
 
@@ -187,6 +187,38 @@ public function login()
     
 
 }
+
+public function updateClientInfo()
+{
+    $firstname = $_POST["firstname"];
+    $lastname = $_POST["lastname"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $client = new Client();
+
+    $updatedClient=new Client();
+
+    $updatedClient->FirstName=$firstname;
+    $updatedClient->LastName=$lastname;
+    $updatedClient->Email=$email;
+    $updatedClient->Password=$password;
+
+    $result=$client->updateClient($updatedClient);
+
+    if($result)
+    {
+        $_SESSION["FName"] = $firstname;
+        $_SESSION["LName"] = $lastname;
+        $_SESSION["Email"] = $email;
+        $_SESSION["Password"] = $password;
+        header("Location: ../views/userprofsettings.php");
+        exit();
+    }
+    else{
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
 }
 
 $controller = new ClientController();
@@ -200,6 +232,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "login":
             $controller->login();
+            break;
+        case "update":
+            $controller->updateClientInfo();
             break;
         default:
             // Handle unknown action or display an error

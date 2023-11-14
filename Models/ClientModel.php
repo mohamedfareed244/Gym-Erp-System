@@ -60,6 +60,31 @@ class Client{
 
     }
 
+    public function updateClient($client)
+    {
+        global $conn;
+
+        $Fname=$client->FirstName;
+        $Lname=$client->LastName;
+        $Email=$client->Email;
+        $Password=$client->Password;
+
+        $user_id = $_SESSION['ID'];
+
+        if($Password=="")
+        {
+            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email'
+            WHERE ID = $user_id";
+        }
+        else{
+            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email', Password='$Password'
+            WHERE ID = $user_id";
+        }
+
+        return $conn->query($sql);
+
+    }
+
 
 
 }

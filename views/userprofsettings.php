@@ -24,52 +24,8 @@
 
 <body>
 
-    <?php
-
-
-include_once "../includes/dbh.inc.php";
-
+<?php
 session_start();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$firstname = $_POST["firstname"];
-$lastname = $_POST["lastname"];
-$email = $_POST["email"];
-$password = $_POST["password"];
-
-$user_id = $_SESSION['ID'];
-
-if($password=="")
-{
-    $sql = "UPDATE client SET FirstName='$firstname', LastName='$lastname', Email='$email'
-    WHERE ID = $user_id";
-
-if ($conn->query($sql) === true) {
-$_SESSION["FName"] = $firstname;
-$_SESSION["LName"] = $lastname;
-$_SESSION["Email"] = $email;
-$_SESSION["Password"] = $password;
-} else {
-echo "Error: " . $sql . "<br>" . $conn->error;
-}
-}
-else{
-
-$sql = "UPDATE client SET FirstName='$firstname', LastName='$lastname', Email='$email', Password='$password'
-        WHERE ID = $user_id";
-
-if ($conn->query($sql) === true) {
-    $_SESSION["FName"] = $firstname;
-    $_SESSION["LName"] = $lastname;
-    $_SESSION["Email"] = $email;
-    $_SESSION["Password"] = $password;
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
-}
-}
 ?>
 
     <!-- usersidebar start -->
@@ -86,23 +42,24 @@ $conn->close();
         <div class="reminders">
             <div class="profile-settings">
                 <h2>Edit Your Profile Settings</h2>
-                <form id="profile-settings-form" method="POST">
+                <form id="profile-settings-form" method="POST" action="../Controllers/ClientController.php">
+                <input type="hidden" name="action" value="update">
                     <div class="form-group">
                         <label for="firstname">First Name:</label>
                         <input type="text" id="firstname" name="firstname" placeholder="First Name"
-                            value="<?php echo $_SESSION['FName']; ?>">
+                            value="<?php echo isset( $_SESSION["FName"] ) ?  $_SESSION["FName"]  : ''; ?>">
                         <span class="error" id="firstname-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="lastname">Last Name:</label>
                         <input type="text" id="lastname" name="lastname" placeholder="Last Name"
-                            value="<?php echo $_SESSION['LName']; ?>">
+                            value="<?php echo isset( $_SESSION["LName"] ) ?  $_SESSION["LName"]  : ''; ?>">
                         <span class="error" id="lastname-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="user@gmail.com"
-                            value="<?php echo $_SESSION['Email']; ?>">
+                        value="<?php echo isset( $_SESSION["Email"] ) ?  $_SESSION["Email"]  : ''; ?>">
                         <span class="error" id="email-error"></span>
                     </div>
 
