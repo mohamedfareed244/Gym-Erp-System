@@ -1,8 +1,8 @@
 <?php
 
-session_start();
 
 include_once "../includes/dbh.inc.php";
+
 
 class Employee
 {
@@ -14,6 +14,34 @@ class Employee
     public $JobTitle;
     public $Address;
     public $PhoneNumber;
+
+    public static function getAllEmployees()
+    {
+        global $conn;
+
+        $sql = "SELECT * FROM employee";
+        $result = $conn->query($sql);
+
+        $employees = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $employee = new Employee();
+                $employee->ID = $row['ID'];
+                $employee->Name = $row['Name'];
+                $employee->Email = $row['Email'];
+                $employee->Password = $row['Password'];
+                $employee->Salary = $row['Salary'];
+                $employee->JobTitle = $row['JobTitle'];
+                $employee->Address = $row['Address'];
+                $employee->PhoneNumber = $row['PhoneNumber'];
+
+                $employees[] = $employee;
+            }
+        }
+
+        return $employees;
+    }
 
     public function addEmployee($employee)
     {
