@@ -75,6 +75,16 @@ class Client{
         }
 
     }
+
+    public function deleteClient()
+    {
+        global $conn;
+
+        $sql="DELETE from client where ID =" . $_SESSION['ID'];
+
+        return mysqli_query($conn,$sql);
+
+    }
     
 
 }

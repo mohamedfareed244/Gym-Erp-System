@@ -43,7 +43,7 @@ session_start();
             <div class="profile-settings">
                 <h2>Edit Your Profile Settings</h2>
                 <form id="profile-settings-form" method="POST" action="../Controllers/ClientController.php">
-                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="action" id="action" value="update">
                     <div class="form-group">
                         <label for="firstname">First Name:</label>
                         <input type="text" id="firstname" name="firstname" placeholder="First Name"
@@ -104,6 +104,18 @@ session_start();
 <?php include("partials/footer.php") ?>
 
 <script>
+
+const updateButton = document.getElementById("update-profile-button");
+const deleteButton = document.getElementById("delete-account-button");
+const actionInput = document.getElementById("action");
+
+updateButton.addEventListener("click", function (event) {
+    actionInput.value = "update";
+});
+
+deleteButton.addEventListener("click", function (event) {
+    actionInput.value = "delete";
+});
 // const updateButton = document.getElementById("update-profile-button");
 
 

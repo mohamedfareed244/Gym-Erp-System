@@ -2,7 +2,6 @@
 
 include_once "../Models/ClientModel.php";
 
-session_start();
 
 class ClientController{
 
@@ -200,9 +199,9 @@ public function updateClientInfo()
     $isValid = true;
     $fnameErr = $lnameErr = $emailErr = $allErr = "";
 
-    $firstname = $_POST["firstname"];
+   $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
-    $email = $_POST["email"];
+    $email = $_POST["email"]; 
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirm-password"];
 
@@ -273,6 +272,22 @@ public function updateClientInfo()
     exit();
 }
 
+
+public function deleteClient()
+{
+    
+   $client=new Client();
+
+   $result=$client->deleteClient();
+
+   
+   if($result){
+    session_destroy();
+    header("location:../views/index.php");
+   }
+
+}
+
 }
 
 $controller = new ClientController();
@@ -289,6 +304,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "update":
             $controller->updateClientInfo();
+            break;
+        case "delete":
+            $controller->deleteClient();
             break;
         default:
             // Handle unknown action or display an error
