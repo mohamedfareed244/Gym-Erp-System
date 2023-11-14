@@ -48,35 +48,45 @@ session_start();
                         <label for="firstname">First Name:</label>
                         <input type="text" id="firstname" name="firstname" placeholder="First Name"
                             value="<?php echo isset( $_SESSION["FName"] ) ?  $_SESSION["FName"]  : ''; ?>">
-                        <span class="error" id="firstname-error"></span>
                     </div>
+                    <span id="fname-error"><?php echo isset($_SESSION["fnameErr"]) ? $_SESSION["fnameErr"] : ''; ?></span>
                     <div class="form-group">
                         <label for="lastname">Last Name:</label>
                         <input type="text" id="lastname" name="lastname" placeholder="Last Name"
                             value="<?php echo isset( $_SESSION["LName"] ) ?  $_SESSION["LName"]  : ''; ?>">
-                        <span class="error" id="lastname-error"></span>
                     </div>
+                    <span id="lname-error"><?php echo isset($_SESSION["lnameErr"]) ? $_SESSION["lnameErr"] : ''; ?></span>
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="user@gmail.com"
                         value="<?php echo isset( $_SESSION["Email"] ) ?  $_SESSION["Email"]  : ''; ?>">
-                        <span class="error" id="email-error"></span>
                     </div>
-
+                    <span id="email-error"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?></span>
                     <div class="form-group">
                         <label for="password">New Password:</label>
                         <input type="password" id="password" name="password">
-                        <span class="error" id="password-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="confirm-password">Confirm New Password:</label>
                         <input type="password" id="confirm-password" name="confirm-password">
-                        <span class="error" id="confirm-password-error"></span>
                     </div>
+                    <span id="all-error"><?php echo isset($_SESSION["allErr"]) ? $_SESSION["allErr"] : ''; ?></span> 
+                    <span id="success"><?php echo isset($_SESSION["succ"]) ? $_SESSION["succ"] : ''; ?></span> 
+                    <div>
                     <button id="update-profile-button" id="update-button" type="submit">Update Profile</button>
                     <button id="delete-account-button">Delete Account</button>
+                    </div>
 
                 </form>
+                <?php
+                // Unset specific session variables for errors
+                unset($_SESSION["fnameErr"]);
+                unset($_SESSION["lnameErr"]);
+                unset($_SESSION["emailErr"]);
+                unset($_SESSION["allErr"]);
+                unset($_SESSION["succ"]);
+                ?>
+
             </div>
 
             <div id="myModal" class="modal">
@@ -94,36 +104,36 @@ session_start();
 <?php include("partials/footer.php") ?>
 
 <script>
-const updateButton = document.getElementById("update-profile-button");
+// const updateButton = document.getElementById("update-profile-button");
 
 
-const modal = document.getElementById("myModal");
-const confirmationText = document.getElementById("confirmation-text");
+// const modal = document.getElementById("myModal");
+// const confirmationText = document.getElementById("confirmation-text");
 
-function showpopup(message) {
-    confirmationText.textContent = message;
-    modal.style.display = "block";
-}
+// function showpopup(message) {
+//     confirmationText.textContent = message;
+//     modal.style.display = "block";
+// }
 
-function resetpopup() {
-    modal.style.display = "none";
-    confirmationText.textContent = '';
-}
+// function resetpopup() {
+//     modal.style.display = "none";
+//     confirmationText.textContent = '';
+// }
 
-updateButton.addEventListener("click", function() {
-    resetpopup();
-    modal.style.display = "block";
-    confirmationText.style.display = "block";
-    confirmationText.textContent = "Updated Successfully";
+// updateButton.addEventListener("click", function() {
+//     resetpopup();
+//     modal.style.display = "block";
+//     confirmationText.style.display = "block";
+//     confirmationText.textContent = "Updated Successfully";
 
-    // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
-    setTimeout(function() {
-        modal.style.display = "none";
-        confirmationText.style.display = "none";
-    }, 2000); // 2 seconds
+//     // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
+//     setTimeout(function() {
+//         modal.style.display = "none";
+//         confirmationText.style.display = "none";
+//     }, 2000); // 2 seconds
 
 
-});
+// });
 </script>
 
 

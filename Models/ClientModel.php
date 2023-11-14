@@ -43,49 +43,39 @@ class Client{
         return mysqli_num_rows($result) > 0;
     }
 
-    public function checkifClientExists($email,$password)
+    public function checkIfClientExists($email)
     {
         global $conn;
-
-        $mysql = "select * from client where Email = '$email' and Password = '$password'";
+        $mysql = "SELECT * FROM client WHERE Email = '$email'";
         return mysqli_query($conn, $mysql);
     }
 
-    public function checkifEmailExists($email)
-    {
-        global $conn;
-
-        $mysql = "select * from client where Email = '$email'";
-        return mysqli_query($conn, $mysql);
-
-    }
 
     public function updateClient($client)
     {
         global $conn;
-
-        $Fname=$client->FirstName;
-        $Lname=$client->LastName;
-        $Email=$client->Email;
-        $Password=$client->Password;
-
+    
+        $Fname = $client->FirstName;
+        $Lname = $client->LastName;
+        $Email = $client->Email;
+        $Password = $client->Password;
+    
         $user_id = $_SESSION['ID'];
-
-        if($Password=="")
-        {
+                // Check if a new password is provided
+        if (!empty($Password)) {
+            $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email', Password='$hashedPassword'
+                    WHERE ID = $user_id";
+                    return $conn->query($sql);
+        } else {
+            // Update with the new password
             $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email'
-            WHERE ID = $user_id";
+                    WHERE ID = $user_id";
+                    return $conn->query($sql);
         }
-        else{
-            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email', Password='$Password'
-            WHERE ID = $user_id";
-        }
-
-        return $conn->query($sql);
 
     }
-
-
+    
 
 }
 

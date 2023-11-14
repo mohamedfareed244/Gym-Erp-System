@@ -23,6 +23,12 @@ label {
     font-weight: bold;
 }
 
+
+#fname-error,#lname-error,#email-error,#all-error,#success{
+    color:#b83f3f;
+    font-size:18px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {

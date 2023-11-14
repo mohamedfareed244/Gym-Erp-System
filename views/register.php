@@ -87,7 +87,6 @@
                 <p class="register-text">Already Have an Account? <a class="register-link"
                         href="../views/login.php">Login Now</a></p>
             </form>
-            <?php session_destroy(); ?>
         </div>
 
     </div>
