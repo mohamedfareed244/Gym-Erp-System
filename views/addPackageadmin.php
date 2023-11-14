@@ -38,6 +38,10 @@
                 </div>
                 <hr>
                 <form action="" class="row">
+                <div class="col-lg-4 col-md-12">
+                        <label for="name">Package name : </label>
+                    </div>
+                    <input type="text" name="name" id="invi">
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Number of Months : </label>
                     </div>
