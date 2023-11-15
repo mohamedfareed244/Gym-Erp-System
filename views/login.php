@@ -52,6 +52,12 @@
                 <p class="register-text">Don't Have an Account? <a class="register-link"
                         href="../views/register.php">Register Now</a></p>
             </form>
+
+            <?php
+            unset($_SESSION["emailErr"]);
+            unset($_SESSION["passwordErr"]);
+            unset($_SESSION["allErr"]);
+            ?>
         </div>
 
     </div>
