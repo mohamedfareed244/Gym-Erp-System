@@ -46,14 +46,14 @@
 
                 </form>
               <?php
-         include_once ("../")
+         include_once ("../Controllers/ClientController.php");
               if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if($_POST['type']==='form1'){
 
                     $phone = $_POST['search1'];
-                   
-                    getclientbyphone
-                    $result=$conn->query($sql);
+                   $result=Client::getclientbyphone($phone);
+                    
+                 
                  
                      if ($result->num_rows > 0) {
                      
@@ -83,7 +83,7 @@
                             <div class='col-lg-4 col-md-12'>
                                 <label for='phone'>Phone: </label>
                             </div>
-                            <input type='text' name='phone' id='phone' value='01210847059'>
+                            <input type='text' name='phone' id='phone' value=".$row['Phone'].">
                             
                             <div class='col-lg-4 col-md-12'>
                                 <label for='gender'>Gender: </label>
@@ -114,9 +114,10 @@
 
                        
                      } else {
-                       echo "0 results";
+                        
+                       echo "<p style='color:red;'>Client Not Founded</p>";
                      }
-             $conn->close();
+             
                 }
               }
               ?>  
