@@ -20,7 +20,7 @@
 
 <body>
     <?php require("./partials/adminsidebar.php"); 
-      
+    include_once("../includes/dbh.inc.php");
       ?>
     <div id="add-body" class="addbody">
         <div class="container">
@@ -124,9 +124,7 @@
               ?>  
                
 
-                <div class="col-12">
-                    <span>Updated Client ID : <b>12345</b></span>
-                </div>
+            
             </div>
         </div>
     </div>
