@@ -43,10 +43,18 @@ class Client{
 return $result;
     }
 
-    public function checkExistingEmail($email) {
+    public static function checkExistingEmail($email) {
         global $conn;
 
         $Email = "SELECT * FROM client WHERE Email = '$email'";
+       
+        $result = mysqli_query($conn, $Email);
+        return mysqli_num_rows($result) > 0;
+    }
+    public static function checkExistingPhone($phone) {
+        global $conn;
+
+        $Email = "SELECT * FROM client WHERE Phone = '$phone'";
         $result = mysqli_query($conn, $Email);
         return mysqli_num_rows($result) > 0;
     }

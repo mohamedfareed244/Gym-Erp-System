@@ -83,21 +83,27 @@
          $newclient->Height = (int) $_POST['height'];
          $newclient->Email = $_POST['email'];
          $newclient->Phone=$_POST['phone'];
-       $result=Client::addClient($newclient);
+         if(Client::checkExistingEmail($newclient->Email)){
+            echo "<p style ='color:red;'>This Email already exist ! </p>";
+         }else if(Client::checkExistingPhone($newclient->Phone)){
+            echo "<p style ='color:red;'>This Phone already exist ! </p>";
+         }else{
+            $result=Client::addClient($newclient);
       
-       if($result){
-        
-         $r=Client::getid($newclient);
-         while($row = mysqli_fetch_assoc($r)) {
-            
-             echo " <div class='col-12'>
-             <span>New Client id : <b>".$row['ID']."</b></span>
-         </div>";
-           }
-       }else{
-         echo "<p style ='color:red;'>An Error Happened ! </p>";
-         
-       }
+            if($result){
+             
+              $r=Client::getid($newclient);
+              while($row = mysqli_fetch_assoc($r)) {
+                  echo " <div class='col-12'>
+                  <span>New Client id : <b>".$row['ID']."</b></span>
+              </div>";
+                }
+            }else{
+              echo "<p style ='color:red;'>An Error Happened ! </p>";
+              
+            }
+         }
+  
  
      }
      ?>
