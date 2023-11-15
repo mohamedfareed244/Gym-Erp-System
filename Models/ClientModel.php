@@ -14,10 +14,10 @@ class Client{
     public $Weight;
     public $Email;
     public $Password;
-    public $memberships;
+    public $Phone;
 
 
-    public function addClient($client)
+    public static function addClient($client)
     {
         global $conn;
 
@@ -29,16 +29,32 @@ class Client{
         $Weight=$client->Weight;
         $Email=$client->Email;
         $Password=$client->Password;
-
-        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password) 
-                VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password')";
+        $Phone=$client->Phone;
+        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
+                VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password','$Phone')";
+         
         return mysqli_query($conn, $sql);    
     }
+    public static function getid($client){
+        global $conn;
+        $sql ="SELECT ID FROM client WHERE Email='$client->Email'";
+        $result=mysqli_query($conn,$sql);
+       
+return $result;
+    }
 
-    public function checkExistingEmail($email) {
+    public static function checkExistingEmail($email) {
         global $conn;
 
         $Email = "SELECT * FROM client WHERE Email = '$email'";
+       
+        $result = mysqli_query($conn, $Email);
+        return mysqli_num_rows($result) > 0;
+    }
+    public static function checkExistingPhone($phone) {
+        global $conn;
+
+        $Email = "SELECT * FROM client WHERE Phone = '$phone'";
         $result = mysqli_query($conn, $Email);
         return mysqli_num_rows($result) > 0;
     }
@@ -49,7 +65,11 @@ class Client{
         $mysql = "SELECT * FROM client WHERE Email = '$email'";
         return mysqli_query($conn, $mysql);
     }
-
+public static function getclientbyphone($phone){
+    global $conn;
+        $mysql = "SELECT * FROM client WHERE Phone = '$phone'";
+        return mysqli_query($conn, $mysql);
+}
 
     public function updateClient($client)
     {

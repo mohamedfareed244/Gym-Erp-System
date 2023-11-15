@@ -42,7 +42,9 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="../views/clientdetails.php">Clients</a></li>
+
                 <li><a href="../views/addclient.php">Add</a></li>
+                <li><a href="../views/editclient.php">Edit</a></li>
                 <li><a href="../views/clientdetails.php">Details</a></li>
                 <li><a href="../views/clientin.php">Check in </a></li>
             </ul>
