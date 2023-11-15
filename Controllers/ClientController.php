@@ -7,7 +7,7 @@ class ClientController{
 
 function register(){
 
-$fnameErr = $lnameErr = $ageErr = $genderErr = $emailErr = $passwordErr = "";
+$fnameErr = $lnameErr = $ageErr = $genderErr = $phonenoErr = $emailErr = $passwordErr = "";
 
     $isValid = true;
 
@@ -52,6 +52,19 @@ $fnameErr = $lnameErr = $ageErr = $genderErr = $emailErr = $passwordErr = "";
         $isValid = false;
     }
 
+    if (empty($_POST["phone"])) {
+        $phonenoErr = "Phone Number is required";
+        $isValid = false;
+    } else {
+        // Regular expression for a valid 10-digit phone number
+        $phoneRegex = '/^0\d{10}$/';
+    
+        if (!preg_match($phoneRegex, $_POST["phone"])) {
+            $phonenoErr = "Invalid phone number format";
+            $isValid = false;
+        }
+    }
+
     if (empty($_POST["email"])) {
         $emailErr = "Email is required";
         $isValid = false;
@@ -74,6 +87,7 @@ $Fname = htmlspecialchars($_POST["fname"]);
 $Lname = htmlspecialchars($_POST["lname"]);
 $Age = htmlspecialchars($_POST["age"]);
 $Gender = htmlspecialchars($_POST["gender"]);
+$Phone = htmlspecialchars($_POST["phone"]);
 $Email = htmlspecialchars($_POST["email"]);
 $Password = htmlspecialchars($_POST["password"]);
 $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
@@ -105,6 +119,7 @@ if ($emailExists) {
             $newClient->LastName=$Lname;
             $newClient->Age=$Age;
             $newClient->Gender=$Gender;
+            $newClient->Phone=$Phone;
             $newClient->Height=$Height;
             $newClient->Weight=$Weight;
             $newClient->Email=$Email;
@@ -125,6 +140,7 @@ if ($emailExists) {
             $_SESSION["lnameErr"] = $lnameErr;
             $_SESSION["ageErr"] = $ageErr;
             $_SESSION["genderErr"] = $genderErr;
+            $_SESSION["phonenoErr"] = $phonenoErr;
             $_SESSION["emailErr"] = $emailErr;
             $_SESSION["passwordErr"] = $passwordErr;
             header("Location: ../views/register.php");

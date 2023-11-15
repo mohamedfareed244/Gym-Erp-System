@@ -156,7 +156,7 @@ form {
     color: aqua;
 }
 
- #fname-error,#lname-error,#age-error,#gender-error,#email-error,#password-error{
+ #fname-error,#lname-error,#age-error,#gender-error,#email-error,#password-error,#phoneno-error{
     color:#b83f3f;
 }
 @media (max-width: 480px) {

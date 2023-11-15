@@ -62,6 +62,12 @@
                 </div>
                 <span id="gender-error"><?php echo isset($_SESSION["genderErr"]) ? $_SESSION["genderErr"] : ''; ?></span>
                 <div class="signup-input-container">
+                    <input type="text" name="phone" id="phone" class="signup-input" />
+                    <label class="signup-lbl" for="">Phone Number</label>
+                    <span>Phone Number</span>
+                </div>
+                <span id="phoneno-error"><?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?></span>
+                <div class="signup-input-container">
                     <input type="number" name="weight" id="weight" class="signup-input" min="40" max="250" />
                     <label class="signup-lbl" for="">Weight</label>
                     <span>Weight</span>
@@ -87,6 +93,16 @@
                 <p class="register-text">Already Have an Account? <a class="register-link"
                         href="../views/login.php">Login Now</a></p>
             </form>
+            <?php
+// Unset all session error messages
+unset($_SESSION["fnameErr"]);
+unset($_SESSION["lnameErr"]);
+unset($_SESSION["ageErr"]);
+unset($_SESSION["genderErr"]);
+unset($_SESSION["phonenoErr"]);
+unset($_SESSION["emailErr"]);
+unset($_SESSION["passwordErr"]);
+?>
         </div>
 
     </div>

@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const lname = document.getElementById('lname');
         const age = document.getElementById('age');
         const gender = document.querySelector('input[name="gender"]:checked');
-        const weight = document.getElementById('weight');
-        const height = document.getElementById('height');
         const email = document.getElementById('email');
         const password = document.getElementById('password');
+        var phoneno = document.getElementById("phone");
+
 
         const fnameError = document.getElementById('fname-error');
         const lnameError = document.getElementById('lname-error');
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const genderError = document.getElementById('gender-error');
         const emailError = document.getElementById('email-error');
         const passwordError = document.getElementById('password-error');
+        var phonenoError = document.getElementById("phoneno-error");
 
         let isValid = true;
 
@@ -84,6 +85,17 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             passwordError.innerText = '';
         }
+
+                // Regular expression for a valid 10-digit phone number
+        var phoneRegex ='/^0\d{10}$/';
+
+        if (phoneno.value.trim() === '') {
+            phonenoError.innerText = 'Phone Number is required';
+            isValid = false;
+        } else if (!phoneRegex.test(phoneno.value)) {
+            phonenoError.innerText = 'Invalid phone number format';
+            isValid = false;
+        } 
 
         return isValid;
     }

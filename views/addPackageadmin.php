@@ -46,14 +46,14 @@
 .hidden {
     display: none;
 }
-span[id$="-error"] {
+span[id$="-error"],#success {
         color: red;
         font-size: 16px;
     }
 </style>
 
 <body>
-    
+<?php session_start(); ?>
     <script src="../public/js/addPackage.js"></script>
     <?php require("partials/adminsidebar.php") ?>
 
@@ -64,8 +64,13 @@ span[id$="-error"] {
                     <h4 class="coaches-title">Add Package: </h4>
                 </div>
                 <hr>
-                <form methos="post" class="row" action="../Controllers/PackageController" onsubmit="return validateForm()">
+                <form method="post" class="row" autocomplete="off" action="../Controllers/PackageController.php" onsubmit="return validateForm()">
                 <input type="hidden" name="action" value="addPackage">
+                <div class="col-lg-4 col-md-12">
+                        <label for="name">Number of Months : </label>
+                    </div>
+                    <input type="number" name="months" id="months">
+                    <span id="months-error"><?php echo isset($_SESSION["monthsErr"]) ? $_SESSION["monthsErr"] : ''; ?></span>
                     <div class="visits-container">
                         <div class="visits-title">Visits:</div>
                         <div class="radio-buttons">
@@ -77,49 +82,58 @@ span[id$="-error"] {
                                 onclick="hideLimitField()">
                             <label for="unlimited" id="unlimited">Unlimited</label>
                         </div>
-                        <span id="isLimited-error"></span>
+                        <span id="isLimited-error"><?php echo isset($_SESSION["visitsErr"]) ? $_SESSION["visitsErr"] : ''; ?></span>
 
                         <div id="limitField" class="hidden">
                             <label for="limitDays">Limit (Days):</label>
-                            <input type="text" id="limitDays" name="limitDays">
+                            <input type="number" id="limitDays" name="limitDays">
                         </div>
-                        <span id="limit-error"></span>
+                        <span id="limit-error"><?php echo isset($_SESSION["limitDaysErr"]) ? $_SESSION["limitDaysErr"] : ''; ?></span>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Freeze Limit (Days) : </label>
                     </div>
                     <input type="number" name="freezelimit" id="freezelimit">
-                    <span id="freezeLimit-error"></span>
-                    <div class="col-lg-4 col-md-12">
-                        <label for="name">Number of Months : </label>
-                    </div>
-                    <input type="text" name="months" id="months">
-                    <span id="months-error"></span>
+                    <span id="freezeLimit-error"><?php echo isset($_SESSION["freezeLimitErr"]) ? $_SESSION["freezeLimitErr"] : ''; ?></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="phone">Number of Invitations : </label>
                     </div>
-                    <input type="text" name="invitation" id="invitation">
-                    <span id="invitations-error"></span>
+                    <input type="number" name="invitation" id="invitation">
+                    <span id="invitations-error"><?php echo isset($_SESSION["invitationErr"]) ? $_SESSION["invitationErr"] : ''; ?></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="email">Number of Inbody : </label>
                     </div>
-                    <input type="text" name="inbody" id="inbody">
-                    <span id="inbody-error"></span>
+                    <input type="number" name="inbody" id="inbody">
+                    <span id="inbody-error"><?php echo isset($_SESSION["inbodyErr"]) ? $_SESSION["inbodyErr"] : ''; ?></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="nationalid">Number of PT sessions : </label>
                     </div>
-                    <input type="text" name="ptsession" id="ptsession">
-                    <span id="ptsession-error"></span>
+                    <input type="number" name="ptsession" id="ptsession">
+                    <span id="ptsession-error"><?php echo isset($_SESSION["ptSessionErr"]) ? $_SESSION["ptSessionErr"] : ''; ?></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="nationalid">Price : </label>
                     </div>
                     <input type="number" name="price" id="price">
-                    <span id="price-error"></span>
+                    <span id="price-error"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
+                    <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add Package" id="add-btn">
                     </div>
 
                 </form>
+                <?php
+                unset(
+    $_SESSION["visitsErr"],
+    $_SESSION["limitDaysErr"],
+    $_SESSION["freezeLimitErr"],
+    $_SESSION["monthsErr"],
+    $_SESSION["invitationErr"],
+    $_SESSION["inbodyErr"],
+    $_SESSION["ptSessionErr"],
+    $_SESSION["priceErr"],
+    $_SESSION["success"]
+);
+?>
             </div>
         </div>
     </div>

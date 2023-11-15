@@ -10,11 +10,11 @@ class Client{
     public $LastName;
     public $Age;
     public $Gender;
+    public $Phone;
     public $Height;
     public $Weight;
     public $Email;
     public $Password;
-    public $Phone;
 
 
     public static function addClient($client)
@@ -25,6 +25,7 @@ class Client{
         $Lname=$client->LastName;
         $Age=$client->Age;
         $Gender=$client->Gender;
+        $Phone=$client->Phone;
         $Height=$client->Height;
         $Weight=$client->Weight;
         $Email=$client->Email;
