@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 25, 2023 at 06:41 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost
+-- Generation Time: Nov 15, 2023 at 02:24 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,28 @@ CREATE TABLE `authority` (
   `ID` int(11) NOT NULL,
   `FriendlyName` varchar(50) NOT NULL,
   `LinkAddress` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `authority`
+--
+
+INSERT INTO `authority` (`ID`, `FriendlyName`, `LinkAddress`) VALUES
+(1, 'Dashboard', '../views/admindashboard.php'),
+(2, 'Add clients', '../views/addclient.php'),
+(3, 'edit clients', '../views/editclient.php'),
+(4, 'client details', '../views/clientdetails.php'),
+(5, 'client check-in', '../views/clientin.php'),
+(6, 'View Coaches', '../views/coachesadmin.php'),
+(7, 'View Pt Clients', '../views/ptsessions.php'),
+(8, 'View Classes', '../views/admin-classes.php'),
+(9, 'View Employees', '../views/employeesadmin.php'),
+(10, 'Attendance', '../views/attendance.php'),
+(11, 'Sales Report', '../views/salesreport.php'),
+(12, 'View Packages', '../views/viewpackagesadmin.php'),
+(13, 'Add Packages', '../views/addPackageadmin.php'),
+(14, 'View Private sessions', '../views/viewptadmin.php'),
+(15, 'Add Private sessions', '../views/addptadmin.php');
 
 -- --------------------------------------------------------
 
@@ -43,7 +64,7 @@ CREATE TABLE `available slots` (
   `ID` int(11) NOT NULL,
   `StartTime` time(6) NOT NULL,
   `EndTime` time(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -58,7 +79,7 @@ CREATE TABLE `class` (
   `StartTime` time(6) NOT NULL,
   `EndTime` time(6) NOT NULL,
   `Price` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -75,16 +96,19 @@ CREATE TABLE `client` (
   `Weight` decimal(50,0) NOT NULL,
   `Height` decimal(50,0) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Password` varchar(50) NOT NULL,
+  `Phone` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`) VALUES
-(11, 'jana', 'hani', 25, 'female', '80', '0', 'janahani.nbis@gmail.com', 'ghytujfred'),
-(12, 'rania', 'kamal', 47, 'female', '80', '180', 'raniakamal@gmail.com', '');
+INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
+(1, 'ayman', 'fareed', 20, 'male', 90, 185, 'mohamedfareed429@gmail.com', 'Mohamed', ''),
+(2, 'laila', 'ahmed', 20, 'female', 60, 168, 'laila@gmail.com', 'laila1234', ''),
+(3, 'salwa', 'osama', 20, 'female', 70, 160, 'salwa@gmail.com', 'salwa1234', ''),
+(24, 'mohamed ', 'fareed', 23, 'male', 90, 180, 'mohamedfareed443@gmail.com', '', '01210847059');
 
 -- --------------------------------------------------------
 
@@ -98,9 +122,8 @@ CREATE TABLE `coach` (
   `Email` varchar(50) NOT NULL,
   `PhoneNumber` varchar(50) NOT NULL,
   `Salary` int(50) NOT NULL,
-  `Address` varchar(100) NOT NULL,
-  `Password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Address` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,7 +134,7 @@ CREATE TABLE `coach` (
 CREATE TABLE `coach available days` (
   `CoachID` int(50) NOT NULL,
   `Days` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -122,7 +145,7 @@ CREATE TABLE `coach available days` (
 CREATE TABLE `coach available slots` (
   `CoachID` int(50) NOT NULL,
   `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -137,9 +160,8 @@ CREATE TABLE `employee` (
   `PhoneNumber` varchar(50) NOT NULL,
   `Salary` int(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
-  `JobTitle` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `JobTitle` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -148,9 +170,9 @@ CREATE TABLE `employee` (
 --
 
 CREATE TABLE `employee authorities` (
-  `EmployeeID` int(50) NOT NULL,
+  `ID` int(11) NOT NULL,
   `AuthorityID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -169,7 +191,7 @@ CREATE TABLE `membership` (
   `PrivatTrainingSessionsCount` int(50) NOT NULL,
   `FreezeCount` int(50) NOT NULL,
   `Freezed` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -187,7 +209,7 @@ CREATE TABLE `package` (
   `NumOfInbodySessions` int(50) NOT NULL,
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
   `Price` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -199,9 +221,8 @@ CREATE TABLE `private training membership` (
   `ClientID` int(50) NOT NULL,
   `CoachID` int(50) NOT NULL,
   `PrivateTrainingPackageID` int(50) NOT NULL,
-  `NumOfMonths` int(50) NOT NULL,
   `SessionsCount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -215,7 +236,7 @@ CREATE TABLE `private training package` (
   `NumOfSessions` int(50) NOT NULL,
   `MinPackageMonths` int(50) NOT NULL,
   `Price` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -228,7 +249,7 @@ CREATE TABLE `reserved class` (
   `CoachID` int(50) NOT NULL,
   `ClientID` int(50) NOT NULL,
   `Attended` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -242,7 +263,7 @@ CREATE TABLE `reserved private training free session` (
   `CoachID` int(50) NOT NULL,
   `Date` date NOT NULL,
   `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -302,7 +323,7 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `employee authorities`
   ADD KEY `test` (`AuthorityID`),
-  ADD KEY `test25` (`EmployeeID`);
+  ADD KEY `ID` (`ID`) USING BTREE;
 
 --
 -- Indexes for table `membership`
@@ -356,7 +377,7 @@ ALTER TABLE `reserved private training free session`
 -- AUTO_INCREMENT for table `authority`
 --
 ALTER TABLE `authority`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `available slots`
@@ -374,7 +395,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -427,8 +448,7 @@ ALTER TABLE `coach available slots`
 -- Constraints for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test25` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `membership`
