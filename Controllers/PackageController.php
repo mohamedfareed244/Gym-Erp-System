@@ -27,7 +27,7 @@ if (empty($_POST["freezelimit"])) {
 }
 
 if (empty($_POST["months"])) {
-    $monthsErr = "Number of Months is required";
+    $monthsErr = "Package Title is required";
     $isValid = false;
 }
 
@@ -66,7 +66,7 @@ if($isValid){
 
     $newpackage= new Package();
 
-    $newpackage->NumOfMonths=$months;
+    $newpackage->Title=$months;
     $newpackage->isVisitsLimited=$visits;
     if($visits=="limited"){
         $newpackage->VisitsLimit=$limitVisits;

@@ -7,7 +7,7 @@ include_once "../includes/dbh.inc.php";
 class Package{
  
     public $ID;
-    public $NumOfMonths;
+    public $Title;
     public $isVisitsLimited;
     public $VisitsLimit;
     public $FreezeLimit;
@@ -20,7 +20,7 @@ class Package{
     {
         global $conn;
 
-        $months=$package->NumOfMonths;
+        $title=$package->Title;
         $isLimited=$package->isVisitsLimited;
         $visitsLimit=$package->VisitsLimit;
         $freezeLimit=$package->FreezeLimit;
@@ -29,9 +29,9 @@ class Package{
         $pt=$package->NumOfPrivateTrainingSessions;
         $price=$package->Price;
 
-        $sql = "INSERT INTO package (NumofMonths, isVisitsLimited, VisitsLimit, FreezeLimit, NumOfInvitations, NumOfInbodySessions, NumOfPrivateTrainingSessions,
+        $sql = "INSERT INTO package (Title, isVisitsLimited, VisitsLimit, FreezeLimit, NumOfInvitations, NumOfInbodySessions, NumOfPrivateTrainingSessions,
          Price) 
-        VALUES ('$months', '$isLimited', '$visitsLimit', '$freezeLimit', '$invitations', '$inbody', '$pt', '$price')";
+        VALUES ('$title', '$isLimited', '$visitsLimit', '$freezeLimit', '$invitations', '$inbody', '$pt', '$price')";
  
         return mysqli_query($conn, $sql); 
     }

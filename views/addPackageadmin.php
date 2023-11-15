@@ -67,9 +67,9 @@ span[id$="-error"],#success {
                 <form method="post" class="row" autocomplete="off" action="../Controllers/PackageController.php" onsubmit="return validateForm()">
                 <input type="hidden" name="action" value="addPackage">
                 <div class="col-lg-4 col-md-12">
-                        <label for="name">Number of Months : </label>
+                        <label for="name">Title : </label>
                     </div>
-                    <input type="number" name="months" id="months">
+                    <input type="text" name="months" id="months">
                     <span id="months-error"><?php echo isset($_SESSION["monthsErr"]) ? $_SESSION["monthsErr"] : ''; ?></span>
                     <div class="visits-container">
                         <div class="visits-title">Visits:</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 08:24 PM
+-- Generation Time: Nov 15, 2023 at 09:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -105,7 +105,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
-(26, 'jana', 'hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866');
+(26, 'jana', 'hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866'),
+(28, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868');
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,7 @@ CREATE TABLE `membership` (
 
 CREATE TABLE `package` (
   `ID` int(11) NOT NULL,
-  `NumOfMonths` int(50) NOT NULL,
+  `Title` varchar(100) NOT NULL,
   `isVisitsLimited` varchar(20) NOT NULL,
   `VisitsLimit` int(50) NOT NULL,
   `FreezeLimit` int(50) NOT NULL,
@@ -212,9 +213,9 @@ CREATE TABLE `package` (
 -- Dumping data for table `package`
 --
 
-INSERT INTO `package` (`ID`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`) VALUES
-(3, 1, 'limited', 20, 10, 1, 1, 1, 600),
-(4, 2, 'unlimited', 0, 15, 2, 2, 2, 800);
+INSERT INTO `package` (`ID`, `Title`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`) VALUES
+(5, '1 Month', 'limited', 20, 10, 2, 1, 1, 500),
+(6, '2 Months + 1 Month free', 'unlimited', 0, 30, 3, 2, 2, 1000);
 
 -- --------------------------------------------------------
 
@@ -400,7 +401,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -418,7 +419,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `private training package`
@@ -490,4 +491,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

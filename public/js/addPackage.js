@@ -52,7 +52,7 @@ function validateForm() {
 
     if(months.value.trim() === "")
     {
-        monthsError.innerHTML="Number of Months is Required";
+        monthsError.innerHTML=" Package Title is Required";
         isValid=false;
     }
 
