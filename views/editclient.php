@@ -31,10 +31,7 @@
                 <hr>
                 <form method="POST" class="row" action="editclient.php">
                     <input type="hidden" name="type" value="form1">
-                    <div class="col-5">
-                        <label for="search">Client's ID : </label>
-                    </div>
-                    <input type="text" name="search" required>
+                    
                     <div class="col-5">
                         <label for="search1">Client's Phone Number : </label>
                     </div>
@@ -49,12 +46,13 @@
 
                 </form>
               <?php
-         
+         include_once ("../")
               if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if($_POST['type']==='form1'){
-                    $id = (int)$_POST['search'];
-                    $sql="SELECT * FROM client WHERE ID = {$id}";
+
+                    $phone = $_POST['search1'];
                    
+                    getclientbyphone
                     $result=$conn->query($sql);
                  
                      if ($result->num_rows > 0) {
