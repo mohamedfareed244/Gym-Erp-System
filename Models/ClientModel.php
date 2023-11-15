@@ -65,7 +65,11 @@ return $result;
         $mysql = "SELECT * FROM client WHERE Email = '$email'";
         return mysqli_query($conn, $mysql);
     }
-
+public static function getclientbyphone($phone){
+    global $conn;
+        $mysql = "SELECT * FROM client WHERE Phone = '$phone'";
+        return mysqli_query($conn, $mysql);
+}
 
     public function updateClient($client)
     {
