@@ -57,6 +57,12 @@ session_start();
                     </div>
                     <span id="lname-error"><?php echo isset($_SESSION["lnameErr"]) ? $_SESSION["lnameErr"] : ''; ?></span>
                     <div class="form-group">
+                        <label for="phoneno">Last Name:</label>
+                        <input type="text" id="phone" name="phone" placeholder="Phone Number"
+                            value="<?php echo isset( $_SESSION["Phone"] ) ?  $_SESSION["Phone"]  : ''; ?>">
+                    </div>
+                    <span id="phoneno-error"><?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?></span>
+                    <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="user@gmail.com"
                         value="<?php echo isset( $_SESSION["Email"] ) ?  $_SESSION["Email"]  : ''; ?>">
@@ -82,6 +88,7 @@ session_start();
                 // Unset specific session variables for errors
                 unset($_SESSION["fnameErr"]);
                 unset($_SESSION["lnameErr"]);
+                unset($_SESSION["phonenoErr"]);
                 unset($_SESSION["emailErr"]);
                 unset($_SESSION["allErr"]);
                 unset($_SESSION["succ"]);

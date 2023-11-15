@@ -184,6 +184,7 @@ public function login()
                 $_SESSION["ID"] = $row[0];
                 $_SESSION["FName"] = $row["FirstName"];
                 $_SESSION["LName"] = $row["LastName"];
+                $_SESSION["Phone"] = $row["Phone"];
                 $_SESSION["Age"] = $row["Age"];
                 $_SESSION["Gender"] = $row["Gender"];
                 $_SESSION["Email"] = $row["Email"];
@@ -213,11 +214,12 @@ public function login()
 public function updateClientInfo()
 {
     $isValid = true;
-    $fnameErr = $lnameErr = $emailErr = $allErr = "";
+    $fnameErr = $lnameErr = $emailErr = $allErr = $phonenoErr = "";
 
    $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"]; 
+    $phone = $_POST["phone"];
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirm-password"];
 
@@ -248,6 +250,19 @@ public function updateClientInfo()
         $isValid = false;
     }
 
+    if (empty($_POST["phone"])) {
+        $phonenoErr = "Phone Number is required";
+        $isValid = false;
+    } else {
+        // Regular expression for a valid 10-digit phone number
+        $phoneRegex = '/^0\d{10}$/';
+    
+        if (!preg_match($phoneRegex, $_POST["phone"])) {
+            $phonenoErr = "Invalid phone number format";
+            $isValid = false;
+        }
+    }
+
     // Validate password
     if (!empty($password) && empty($confirmPassword)) {
         $isValid = false;
@@ -264,6 +279,7 @@ public function updateClientInfo()
         $updatedClient = new Client();
         $updatedClient->FirstName = $firstname;
         $updatedClient->LastName = $lastname;
+        $updatedClient->Phone = $phone;
         $updatedClient->Email = $email;
         $updatedClient->Password = $password;
 
@@ -272,6 +288,7 @@ public function updateClientInfo()
         if ($result) {
             $_SESSION["FName"] = $firstname;
             $_SESSION["LName"] = $lastname;
+            $_SESSION["Phone"]=$phone;
             $_SESSION["Email"] = $email;
             header("Location: ../views/userprofsettings.php");
             $_SESSION["succ"] = "Updated Successfully";
@@ -282,6 +299,7 @@ public function updateClientInfo()
     // If there are validation errors or update fails, set session variables and redirect
     $_SESSION["fnameErr"] = $fnameErr;
     $_SESSION["lnameErr"] = $lnameErr;
+    $_SESSION["phonenoErr"] =$phonenoErr;
     $_SESSION["emailErr"] = $emailErr;
     $_SESSION["allErr"] = $allErr;
     header("Location: ../views/userprofsettings.php");

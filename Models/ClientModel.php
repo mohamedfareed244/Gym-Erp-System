@@ -78,6 +78,7 @@ public static function getclientbyphone($phone){
     
         $Fname = $client->FirstName;
         $Lname = $client->LastName;
+        $Phone= $client->Phone;
         $Email = $client->Email;
         $Password = $client->Password;
     
@@ -85,12 +86,12 @@ public static function getclientbyphone($phone){
                 // Check if a new password is provided
         if (!empty($Password)) {
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email', Password='$hashedPassword'
+            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone',Email='$Email', Password='$hashedPassword'
                     WHERE ID = $user_id";
                     return $conn->query($sql);
         } else {
             // Update with the new password
-            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Email='$Email'
+            $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone', Email='$Email'
                     WHERE ID = $user_id";
                     return $conn->query($sql);
         }

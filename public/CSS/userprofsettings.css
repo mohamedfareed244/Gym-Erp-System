@@ -24,9 +24,9 @@ label {
 }
 
 
-#fname-error,#lname-error,#email-error,#all-error,#success{
+#fname-error,#lname-error,#email-error,#all-error,#success,#phoneno-error{
     color:#b83f3f;
-    font-size:18px;
+    font-size:16px;
 }
 
 input[type="text"],
