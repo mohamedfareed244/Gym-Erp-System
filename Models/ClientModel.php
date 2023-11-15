@@ -17,7 +17,7 @@ class Client{
     public $Phone;
 
 
-    public function addClient($client)
+    public static function addClient($client)
     {
         global $conn;
 
@@ -29,16 +29,18 @@ class Client{
         $Weight=$client->Weight;
         $Email=$client->Email;
         $Password=$client->Password;
-
-        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password) 
-                VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password')";
+        $Phone=$client->Phone;
+        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
+                VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password','$Phone')";
+         
         return mysqli_query($conn, $sql);    
     }
-    public function getid($client){
+    public static function getid($client){
         global $conn;
         $sql ="SELECT ID FROM client WHERE Email='$client->Email'";
         $result=mysqli_query($conn,$sql);
-
+       
+return $result;
     }
 
     public function checkExistingEmail($email) {

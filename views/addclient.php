@@ -25,7 +25,7 @@
                     <h4>Add client</h4>
                 </div>
                 <hr>
-                <form method="POST" >
+                <form method="POST" action="./addclient.php">
                 <!-- action="addclientbackend.php" -->
                     <div class="col-lg-4 col-md-12">
                         <label for="fname">First Name: </label>
@@ -68,43 +68,49 @@
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add client" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
+                     
+    <?php
+     
+     include_once "../Models/ClientModel.php";
+     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+              
+         $newclient=new Client();
+         $newclient->FirstName = $_POST['fname'];
+         $newclient->LastName = $_POST['lname'];
+         $newclient->Age = (int) $_POST['age'];
+         $newclient->Gender = $_POST['gender'];
+         $newclient->Weight = (float) $_POST['weight'];
+         $newclient->Height = (int) $_POST['height'];
+         $newclient->Email = $_POST['email'];
+         $newclient->Phone=$_POST['phone'];
+       $result=Client::addClient($newclient);
+      
+       if($result){
+        
+         $r=Client::getid($newclient);
+         while($row = mysqli_fetch_assoc($r)) {
+            
+             echo " <div class='col-12'>
+             <span>New Client id : <b>".$row['ID']."</b></span>
+         </div>";
+           }
+       }else{
+         echo "<p style ='color:red;'>An Error Happened ! </p>";
+         
+       }
+ 
+     }
+     ?>
                 </form>
 
 
 
-                <div class="col-12">
-                    <span>New Client id : <b>12345</b></span>
-                </div>
+               
             </div>
         </div>
     </div>
 
-   
-    <?php
-    include_once "../Models/ClientModel.php";
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $newclient=new Client();
-        $newclient->Firstname = $_POST['fname'];
-        $newclient->Lastname = $_POST['lname'];
-        $newclient->Age = (int) $_POST['age'];
-        $newclient->Gender = $_POST['gender'];
-        $newclient->Weight = (float) $_POST['weight'];
-        $newclient->Height = (int) $_POST['height'];
-        $newclient->Email = $_POST['email'];
-
-        $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email)
-            VALUES ('$fname', '$lname', '$age', '$gender', $weight, $height, '$email')";
-
-        if ($conn->query($sql) === true) {
-            echo "Client added successfully.";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        $conn->close();
-    }
-    ?>
+  
 
 
 </body>
