@@ -46,9 +46,15 @@
 .hidden {
     display: none;
 }
+span[id$="-error"] {
+        color: red;
+        font-size: 16px;
+    }
 </style>
 
 <body>
+    
+    <script src="../public/js/addPackage.js"></script>
     <?php require("partials/adminsidebar.php") ?>
 
     <div id="add-body" class="addbody">
@@ -58,7 +64,8 @@
                     <h4 class="coaches-title">Add Package: </h4>
                 </div>
                 <hr>
-                <form action="" class="row">
+                <form methos="post" class="row" action="../Controllers/PackageController" onsubmit="return validateForm()">
+                <input type="hidden" name="action" value="addPackage">
                     <div class="visits-container">
                         <div class="visits-title">Visits:</div>
                         <div class="radio-buttons">
@@ -70,28 +77,44 @@
                                 onclick="hideLimitField()">
                             <label for="unlimited" id="unlimited">Unlimited</label>
                         </div>
+                        <span id="isLimited-error"></span>
 
                         <div id="limitField" class="hidden">
-                            <label for="limitDays">Limit in days:</label>
+                            <label for="limitDays">Limit (Days):</label>
                             <input type="text" id="limitDays" name="limitDays">
                         </div>
+                        <span id="limit-error"></span>
                     </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label for="name">Freeze Limit (Days) : </label>
+                    </div>
+                    <input type="number" name="freezelimit" id="freezelimit">
+                    <span id="freezeLimit-error"></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="name">Number of Months : </label>
                     </div>
-                    <input type="text" name="invi" id="invi">
+                    <input type="text" name="months" id="months">
+                    <span id="months-error"></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="phone">Number of Invitations : </label>
                     </div>
-                    <input type="text" name="inbod" id="inbod">
+                    <input type="text" name="invitation" id="invitation">
+                    <span id="invitations-error"></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="email">Number of Inbody : </label>
                     </div>
-                    <input type="email" name="ptsess" id="ptsess">
+                    <input type="text" name="inbody" id="inbody">
+                    <span id="inbody-error"></span>
                     <div class="col-lg-4 col-md-12">
                         <label for="nationalid">Number of PT sessions : </label>
                     </div>
-                    <input type="text" name="addpbtn" id="addpbtn">
+                    <input type="text" name="ptsession" id="ptsession">
+                    <span id="ptsession-error"></span>
+                    <div class="col-lg-4 col-md-12">
+                        <label for="nationalid">Price : </label>
+                    </div>
+                    <input type="number" name="price" id="price">
+                    <span id="price-error"></span>
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add Package" id="add-btn">
                     </div>
@@ -100,19 +123,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-    function showLimitField() {
-        var limitField = document.getElementById("limitField");
-        limitField.style.display = "block";
-
-    }
-
-    function hideLimitField() {
-        var limitField = document.getElementById("limitField");
-        limitField.style.display = "none";
-    }
-    </script>
 
 </body>
 
