@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 06:49 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost
+-- Generation Time: Nov 16, 2023 at 09:17 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,7 +78,8 @@ CREATE TABLE `class` (
   `Date` date NOT NULL,
   `StartTime` time(6) NOT NULL,
   `EndTime` time(6) NOT NULL,
-  `Price` int(50) NOT NULL
+  `Price` int(50) NOT NULL,
+  `Coach` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -230,7 +231,8 @@ INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsL
 (8, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800),
 (9, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100),
 (10, '4 Months + 2 Months Free', 6, 'unlimited', 0, 50, 6, 5, 5, 2500),
-(11, '6 Months + 3 Months Free', 9, 'unlimited', 0, 80, 7, 6, 6, 3400);
+(11, '6 Months + 3 Months Free', 9, 'unlimited', 0, 80, 7, 6, 6, 3400),
+(12, 'mohamed', 3, 'unlimited', 0, 30, 3, 4, 4, 400);
 
 -- --------------------------------------------------------
 
@@ -434,7 +436,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `private training package`
