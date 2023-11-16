@@ -43,7 +43,7 @@ class Employee
         return $employees;
     }
 
-    public function addEmployee($employee)
+    public static function addEmployee($employee)
     {
         global $conn;
 
@@ -59,6 +59,7 @@ class Employee
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password')";
         return mysqli_query($conn, $sql);
     }
+
     public function updateEmployee($employee)
     {
         global $conn;

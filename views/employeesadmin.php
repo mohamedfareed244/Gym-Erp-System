@@ -98,15 +98,15 @@
             <label for="name">Salary: </label>
           </div>
           <input type="number" name="salary" min="1000">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Image : </label>
-          </div>
-          <input type="file" name="photo" id="imgfile">
-
+         
           <div class="col-lg-12 col-sm-12">
             <label for="name">Address: </label>
           </div>
-          <input type="text" id="emp-addr" name="address" style="margin-bottom:20px">
+          <input type="text" id="emp-addr" name="address" >
+          <div class="col-lg-4 col-sm-12">
+            <label for="name">Password: </label>
+          </div>
+          <input type="text" name="password" style="margin-bottom:20px">
           <br>
           <!-- <hr>
           <h2 class="coaches-title">New Employee's Authorities: </h2>
@@ -213,9 +213,7 @@
           } else {
             echo "<p>All fields are required!</p>";
           }
-        } else {
-          echo "<p>Invalid request method</p>";
-        }
+        } 
         ?>
         </form>
         
