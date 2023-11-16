@@ -14,6 +14,7 @@ function validateForm() {
     var isLimitedError = document.getElementById("isLimited-error");
     var limitError = document.getElementById("limit-error");
     var freezeLimitError = document.getElementById("freezeLimit-error");
+    var titleError = document.getElementById("title-error");
     var monthsError = document.getElementById("months-error");
     var invitationsError = document.getElementById("invitations-error");
     var inbodyError = document.getElementById("inbody-error");
@@ -28,6 +29,7 @@ function validateForm() {
     var limitDays=document.getElementById("limitDays");
     var freezeLimit = document.getElementById("freezelimit");
     var months = document.getElementById("months");
+    var title = document.getElementById("title");
     var invitation = document.getElementById("invitation");
     var inbody= document.getElementById("inbody");
     var ptSession = document.getElementById("ptsession");
@@ -50,9 +52,15 @@ function validateForm() {
         isValid=false;
     }
 
+    if(title.value.trim() === "")
+    {
+        titleError.innerHTML=" Package Title is Required";
+        isValid=false;
+    }
+
     if(months.value.trim() === "")
     {
-        monthsError.innerHTML=" Package Title is Required";
+        monthsError.innerHTML=" Number of Months is Required";
         isValid=false;
     }
 

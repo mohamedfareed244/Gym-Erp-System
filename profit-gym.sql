@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 09:00 PM
+-- Generation Time: Nov 16, 2023 at 06:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -200,6 +200,7 @@ CREATE TABLE `membership` (
 CREATE TABLE `package` (
   `ID` int(11) NOT NULL,
   `Title` varchar(100) NOT NULL,
+  `NumOfMonths` int(11) NOT NULL,
   `isVisitsLimited` varchar(20) NOT NULL,
   `VisitsLimit` int(50) NOT NULL,
   `FreezeLimit` int(50) NOT NULL,
@@ -213,9 +214,12 @@ CREATE TABLE `package` (
 -- Dumping data for table `package`
 --
 
-INSERT INTO `package` (`ID`, `Title`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`) VALUES
-(5, '1 Month', 'limited', 20, 10, 2, 1, 1, 500),
-(6, '2 Months + 1 Month free', 'unlimited', 0, 30, 3, 2, 2, 1000);
+INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`) VALUES
+(7, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600),
+(8, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800),
+(9, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100),
+(10, '4 Months + 2 Months Free', 6, 'unlimited', 0, 50, 6, 5, 5, 2500),
+(11, '6 Months + 3 Months Free', 9, 'unlimited', 0, 80, 7, 6, 6, 3400);
 
 -- --------------------------------------------------------
 
@@ -419,7 +423,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `private training package`

@@ -7,7 +7,7 @@ class PackageController{
 
     function addPackage()
     {
-        $visitsErr = $limitDaysErr = $freezeLimitErr = $monthsErr = $invitationErr = $inbodyErr = $ptSessionErr = $priceErr = $success ="";
+        $visitsErr = $limitDaysErr = $freezeLimitErr = $monthsErr = $titleErr = $invitationErr = $inbodyErr = $ptSessionErr = $priceErr = $success ="";
 
 $isValid = true;
 
@@ -27,7 +27,11 @@ if (empty($_POST["freezelimit"])) {
 }
 
 if (empty($_POST["months"])) {
-    $monthsErr = "Package Title is required";
+    $monthsErr = "Number of Months is required";
+    $isValid = false;
+}
+if (empty($_POST["title"])) {
+    $titleErr = "Package Title is required";
     $isValid = false;
 }
 
@@ -55,6 +59,7 @@ $visits = htmlspecialchars($_POST["visits"]);
 $limitVisits = htmlspecialchars($_POST["limitDays"]);
 $freezeLimit = htmlspecialchars($_POST["freezelimit"]);
 $months = htmlspecialchars($_POST["months"]);
+$title = htmlspecialchars($_POST["title"]);
 $invitation = htmlspecialchars($_POST["invitation"]);
 $inbody = htmlspecialchars($_POST["inbody"]);
 $ptsession = htmlspecialchars($_POST["ptsession"]);
@@ -66,7 +71,8 @@ if($isValid){
 
     $newpackage= new Package();
 
-    $newpackage->Title=$months;
+    $newpackage->Title=$title;
+    $newpackage->NumOfMonths=$months;
     $newpackage->isVisitsLimited=$visits;
     if($visits=="limited"){
         $newpackage->VisitsLimit=$limitVisits;
@@ -91,6 +97,7 @@ if($isValid){
         $_SESSION["limitDaysErr"] = $limitDaysErr;
         $_SESSION["freezeLimitErr"] = $freezeLimitErr;
         $_SESSION["monthsErr"] = $monthsErr;
+        $_SESSION["titleErr"] = $titleErr;
         $_SESSION["invitationErr"] = $invitationErr;
         $_SESSION["inbodyErr"] = $inbodyErr;
         $_SESSION["ptSessionErr"] = $ptSessionErr;

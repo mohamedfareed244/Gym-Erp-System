@@ -69,7 +69,12 @@ span[id$="-error"],#success {
                 <div class="col-lg-4 col-md-12">
                         <label for="name">Title : </label>
                     </div>
-                    <input type="text" name="months" id="months">
+                    <input type="text" name="title" id="title">
+                    <span id="title-error"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ''; ?></span>
+                    <div class="col-lg-4 col-md-12">
+                        <label for="name">Number Of Months : </label>
+                    </div>
+                    <input type="Number" name="months" id="months">
                     <span id="months-error"><?php echo isset($_SESSION["monthsErr"]) ? $_SESSION["monthsErr"] : ''; ?></span>
                     <div class="visits-container">
                         <div class="visits-title">Visits:</div>
@@ -126,6 +131,7 @@ span[id$="-error"],#success {
     $_SESSION["visitsErr"],
     $_SESSION["limitDaysErr"],
     $_SESSION["freezeLimitErr"],
+    $_SESSION["titleErr"],
     $_SESSION["monthsErr"],
     $_SESSION["invitationErr"],
     $_SESSION["inbodyErr"],
