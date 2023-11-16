@@ -32,13 +32,22 @@
   /* padding-left: 40px; */
   padding-bottom: 30px;
         }
+        #succes,#fail{
+            font-size:16px;
+            color:red;
+        }
 
     </style>
 <body>
+    
+<?php
+session_start();
+?>
     <?php require("partials/adminsidebar.php") ?>
-    <?php include_once "../Models/PackageModel.php";
+    <?php
+    include_once "../Models/PackageModel.php";
     $package = new Package();
-    $packages = $package->getAllPackages();?>
+    $packages = $package->getAllPackagesforEmployee();?>
     <div class="container py-5" style="padding-left:70px">
         <h2 class="coaches-title">Packages Available:</h2>
 
@@ -63,8 +72,16 @@
                             <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
+                        <form method="post"  autocomplete="off" action="../Controllers/PackageController.php">
+                            <input type="hidden" name="package_id" value="<?php echo $package['ID']; ?>">
+                            <?php if ($package['isActivated'] == "Activated") { ?>
+                                <button type="submit" id="deactivate-button" class="btn btn-danger" name="action" value="deactivatePackage"> Deactivate</button>
+                            <?php } else { ?>
+                                <button type="submit" id="activate-button" class="btn btn-success" name="action" value="activatePackage"> Activate</button>
+                            <?php } ?>
+                            <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span> 
+                            <span id="fail"><?php echo isset($_SESSION["fail"]) ? $_SESSION["fail"] : ''; ?></span>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -74,6 +91,23 @@
         </div>
 
     </div>
+
+    <script>
+
+const activateButton = document.getElementById("activate-button");
+const deactivateButton = document.getElementById("deactivate-button");
+const actionInput = document.getElementById("action");
+
+activateButton.addEventListener("click", function (event) {
+    actionInput.value = "activatePackage";
+    activateButton.innerHTML= "Deactivate";
+});
+
+deactivateButton.addEventListener("click", function (event) {
+    actionInput.value = "deactivatePackage";
+    deactivateButton.innerHTML= "Activate";
+});
+</script>
 
 
 </body>

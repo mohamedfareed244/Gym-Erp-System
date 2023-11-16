@@ -29,7 +29,7 @@
     <?php include("partials/header.php") ?>
     <?php include_once "../Models/PackageModel.php";
     $package = new Package();
-    $packages = $package->getAllPackages();?>
+    $packages = $package->getAllPackagesforClient();?>
     <!-- add image -->
     <section id="welcome-image">
         <img src="../public/Images/bckgrnd2.jpg" alt="Home Image" class="main-img">

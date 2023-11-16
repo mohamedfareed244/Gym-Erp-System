@@ -108,7 +108,54 @@ if($isValid){
 
 }
 
+public function activatePackage()
+{
+    if (isset($_POST["package_id"])) {
+        $packageId = $_POST["package_id"];
 
+        $package = new Package();
+
+        $result=$package->activatePackage($packageId);
+
+        if($result)
+        {
+            $success = "Package activated successfully";
+            $_SESSION["success"] = $success;
+            header("Location: ../views/viewpackagesadmin.php");
+            exit();
+        }
+
+        $fail = "Package failed to activate";
+        $_SESSION["fail"] = $fail;
+        header("Location: ../views/viewpackagesadmin.php");
+        exit();
+    }
+}
+
+public function deactivatePackage()
+{
+    if (isset($_POST["package_id"])) {
+        $packageId = $_POST["package_id"];
+
+        $package = new Package();
+
+        $result=$package->deactivatePackage($packageId);
+
+        if($result)
+        {
+            $success = "Package deactivated successfully";
+            $_SESSION["success"] = $success;
+            header("Location: ../views/viewpackagesadmin.php");
+            exit();
+        }
+
+        $fail = "Package failed to deactivate";
+        $_SESSION["fail"] = $fail;
+        header("Location: ../views/viewpackagesadmin.php");
+        exit();
+}
+
+}
 
 
 }
@@ -121,6 +168,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($action) {
         case "addPackage":
             $controller->addPackage();
+            break;
+        case "activatePackage":
+            $controller->activatePackage();
+            break;
+        case "deactivatePackage":
+            $controller->deactivatePackage();
             break;
         default:
             // Handle unknown action or display an error

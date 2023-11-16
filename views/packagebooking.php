@@ -26,7 +26,7 @@
     <?php include("partials/usersidebar.php") ?>
     <?php include_once "../Models/PackageModel.php";
     $package = new Package();
-    $packages = $package->getAllPackages();?>
+    $packages = $package->getAllPackagesforClient();?>
     <div class="container py-5">
         <h2 style=" font-size: 26px;
     font-weight: bolder;
@@ -56,7 +56,7 @@
                             <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">SUBSCRIBE NOW</button>
+                        <button class="btn btn-primary">REQUEST SUBSCRIPTION</button>
                     </div>
                 </div>
             </div>
