@@ -39,6 +39,27 @@ class Package{
 
     }
 
+    public function getAllPackages()
+    {
+        global $conn;
+
+        $sql="SELECT * FROM package";
+            // Perform the query
+    $result = $conn->query($sql);
+
+    // Check if the query was successful
+    if ($result) {
+        $packages = $result->fetch_all(MYSQLI_ASSOC);
+
+        $result->free_result();
+
+        // Return the packages
+        return $packages;
+    } else {
+        return [];
+    }
+    }
+
 
 
 }
