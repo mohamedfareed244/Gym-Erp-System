@@ -23,18 +23,19 @@ class Package{
         $title=$package->Title;
         $months=$package->NumOfMonths;
         $isLimited=$package->isVisitsLimited;
-        $visitsLimit=$package->VisitsLimit;
+        $visitsLimit=isset($package->VisitsLimit)?$package->VisitsLimit:0;
         $freezeLimit=$package->FreezeLimit;
         $invitations=$package->NumOfInvitations;
         $inbody=$package->NumOfInbodySessions;
         $pt=$package->NumOfPrivateTrainingSessions;
         $price=$package->Price;
-
         $sql = "INSERT INTO package (Title, NumOfMonths, isVisitsLimited, VisitsLimit, FreezeLimit, NumOfInvitations, NumOfInbodySessions, NumOfPrivateTrainingSessions,
          Price) 
         VALUES ('$title', '$months','$isLimited', '$visitsLimit', '$freezeLimit', '$invitations', '$inbody', '$pt', '$price')";
- 
-        return mysqli_query($conn, $sql); 
+  
+
+        return  mysqli_query($conn, $sql); 
+
     }
 
     public function getAllPackages()
