@@ -82,5 +82,47 @@ class ptPackages
     
         return $conn->query($sql);
     }
+
+    public function getUserPackageDetails($packageId)
+    {
+        global $conn;
+
+         if (!isset($_SESSION['clientID'])) {
+            return null;
+        }
+
+        $clientId = $_SESSION['clientID'];
+
+        $sql = "SELECT c.*, ptm.SessionsCount, ppd.*
+                FROM client c
+                INNER JOIN pt_membership ptm ON c.ID = ptm.ClientID
+                INNER JOIN pt_package_details ppd ON ptm.PrivateTrainingPackageID = ppd.ID
+                WHERE c.ID = $clientId AND ptm.PrivateTrainingPackageID = $packageId";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            $userPackageDetails = new ptPackages();
+            $userPackageDetails->ClientID = $row['ID'];
+            $userPackageDetails->FirstName = $row['FirstName'];
+            $userPackageDetails->LastName = $row['LastName'];
+            $userPackageDetails->SessionsCount = $row['SessionsCount'];
+            $userPackageDetails->PackageID = $row['ID'];
+            $userPackageDetails->PackageName = $row['Name'];
+            $userPackageDetails->NumOfSessions = $row['NumOfSessions'];
+            $userPackageDetails->MinPackageMonths = $row['MinPackageMonths'];
+            $userPackageDetails->Price = $row['Price'];
+
+            return $userPackageDetails;
+        } else {
+            return null; 
+        }
+    }
+
     
 }
+
+
+?>
