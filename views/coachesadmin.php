@@ -88,7 +88,7 @@
             <h3 class="coaches-title col-12">Add Coach:</h3>
             <hr>
             <div class="coaches row">
-                <form action="" class="row">
+                <form action=""  method ="POST" class="row">
                     <div class="col-lg-4 col-md-12">
                         <label for="coach-name"> Name: </label>
                     </div>
@@ -97,10 +97,7 @@
                         <label for="coach-email"> Email: </label>
                     </div>
                     <input type="email" name="coach-email" id="coach-email">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-class">Class: </label>
-                    </div>
-                    <input type="text" name="coach-class" id="coach-class">
+                    
                     <div class="col-lg-4 col-md-12">
                         <label for="coach-phone">Phone Number: </label>
                     </div>
@@ -109,8 +106,8 @@
                         <label for="coach-phone">Title: </label>
                     </div>
                     <select name="" id="">
-                        <option value="">Fitness Manager</option>
-                        <option value="">Coach</option>
+                        <option value="1">Fitness Manager</option>
+                        <option value="0">Coach</option>
                     </select>
                     <div class="col-lg-4 col-md-12">
                         <label for="coach-salary">Salary: </label>
@@ -123,6 +120,11 @@
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add Coach" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
+                    <?php
+                    if($_SERVER["REQUEST_METHOD"]=="POST"){
+                        
+                    }
+                    ?>
                 </form>
 
             </div>
