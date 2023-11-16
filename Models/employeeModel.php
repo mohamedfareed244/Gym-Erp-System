@@ -57,6 +57,7 @@ class Employee
 
         $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password) 
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password')";
+                echo $sql;
         return mysqli_query($conn, $sql);
     }
 
