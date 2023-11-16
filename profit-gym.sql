@@ -78,8 +78,9 @@ CREATE TABLE `class` (
   `Date` date NOT NULL,
   `StartTime` time(6) NOT NULL,
   `EndTime` time(6) NOT NULL,
-  `Price` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Price` int(50) NOT NULL,
+  `Coach` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
