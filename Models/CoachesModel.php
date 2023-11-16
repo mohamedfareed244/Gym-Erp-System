@@ -76,7 +76,7 @@ class Coach extends Employee
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $ptSessionDetails = new Coach(); // Create an instance to store PT session details
+                $ptSessionDetails = new Coach(); 
                 $ptSessionDetails->ClientID = $row['ClientID'];
                 $ptSessionDetails->CoachID = $row['CoachID'];
                 $ptSessionDetails->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
@@ -90,6 +90,47 @@ class Coach extends Employee
     }
 
 
-}
 
+
+    public function getRegisteredPTClients($employee, $client)
+    {
+        global $conn;
+
+        if (empty($this->ID)) {
+            return [];
+        }
+
+        $employee_id = $_SESSION['ID'];
+
+        $sql = "SELECT pts.ClientID, e.Name AS ClientName, e.Email AS ClientEmail, c.FirstName, c.LastName, c.Age, c.Gender, c.Weight, c.Height, c.Phone
+            FROM pt_sessions pts
+            INNER JOIN employee e ON pts.CoachID = e.ID
+            INNER JOIN client c ON pts.ClientID = c.ID
+            WHERE e.ID = $employee_id AND (e.JobTitle = 'Coach' OR e.JobTitle = 'Fitness Manager')";
+
+        $result = $conn->query($sql);
+
+        $RegisteredPTClients = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $clientptDetails = new Coach(); 
+                $clientptDetails->ClientID = $row['ClientID'];
+                $clientptDetails->ClientName = $row['ClientName'];
+                $clientptDetails->ClientEmail = $row['ClientEmail'];
+                $clientptDetails->FirstName = $row['FirstName'];
+                $clientptDetails->LastName = $row['LastName'];
+                $clientptDetails->Age = $row['Age'];
+                $clientptDetails->Gender = $row['Gender'];
+                $clientptDetails->Weight = $row['Weight'];
+                $clientptDetails->Height = $row['Height'];
+                $clientptDetails->Phone = $row['Phone'];
+
+                $RegisteredPTClients[] = $clientptDetails;
+            }
+        }
+
+        return $RegisteredPTClients;
+    }
+}
 ?>
