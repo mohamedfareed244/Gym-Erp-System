@@ -44,6 +44,10 @@
                         <h4 class="card-title"><?php echo $package['Title']; ?></h5>
                             <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i><?php echo $package['isVisitsLimited']. " Visits"; ?>
                             </h6>
+                            <?php if ($package['isVisitsLimited'] == 'limited') { ?>
+                            <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i><?php echo $package['VisitsLimit']. " Visits"; ?>
+                            </h6>
+                            <?php } ?>
                             <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInvitations']." Invitations" ?>
                                 </h6>
                             <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInbodySessions']. " Inbody Sessions" ?></h6>

@@ -36,25 +36,31 @@
     </style>
 <body>
     <?php require("partials/adminsidebar.php") ?>
-
+    <?php include_once "../Models/PackageModel.php";
+    $package = new Package();
+    $packages = $package->getAllPackages();?>
     <div class="container py-5" style="padding-left:70px">
         <h2 class="coaches-title">Packages Available:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
-            <!-- first membership -->
+        <?php foreach ($packages as $package): ?>
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">1 MONTH</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Limited Visits
+                    <h4 class="card-title"><?php echo $package['Title']; ?></h5>
+                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i><?php echo $package['isVisitsLimited']. " Visits"; ?>
                             </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>2
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>1 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>1 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 1,000</h5> -->
+                            <?php if ($package['isVisitsLimited'] == 'limited') { ?>
+                            <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i><?php echo $package['VisitsLimit']. " Visits"; ?>
+                            </h6>
+                            <?php } ?>
+                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInvitations']." Invitations" ?>
+                                </h6>
+                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInbodySessions']. " Inbody Sessions" ?></h6>
+                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfPrivateTrainingSessions'] . " Private
+                                Training Sessions"?></h6>
+                            <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
                     </div>
                     <div class="d-flex justify-content-around mb-5">
                         <button class="btn btn-primary"> Edit</button>
@@ -62,111 +68,8 @@
                     </div>
                 </div>
             </div>
+            <?php endforeach; ?>
 
-            <!-- second membership -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">2 MONTHS</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Limited Visits
-                            </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>4
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>2 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>2 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 2,500</h5> -->
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- third membership -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">3 MONTHS</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits
-                            </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>5
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>3 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>3 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 3,500</h5> -->
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- fourth membership -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">4 MONTHS + 2 MONTHS FREE</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits
-                            </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>6
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>5 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>5 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 5,500</h5> -->
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- fifth membership -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">6 MONTHS + 3 MONTHS</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits
-                            </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>8
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>7 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>7 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 7,500</h5> -->
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- sixth membership -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">8 MONTHS + 4 MONTHS FREE</h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>Unlimited Visits
-                            </h6>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>10
-                                Invitations</h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>9 Inbody</h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>9 Private
-                                Training Session</h6>
-                            <!-- <h5 class="card-text" id="price">for L.E 9,000</h5> -->
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary"> Edit</button>
-                        <button class="btn btn-primary"> Delete</button>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
