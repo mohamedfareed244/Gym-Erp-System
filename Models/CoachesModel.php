@@ -36,16 +36,16 @@ class Coach extends Employee
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $class = new stdClass(); // to store class details
-            $class->ID = $row['ID'];
-            $class->Name = $row['Name'];
-            $class->Date = $row['Date'];
-            $class->StartTime = $row['StartTime'];
-            $class->EndTime = $row['EndTime'];
-            $class->Price = $row['Price'];
-            $class->Coach = $row['Coach'];
+            $coachclassdetails = new Coach(); // to store class details
+            $coachclassdetails->ID = $row['ID'];
+            $coachclassdetails->Name = $row['Name'];
+            $coachclassdetails->Date = $row['Date'];
+            $coachclassdetails->StartTime = $row['StartTime'];
+            $coachclassdetails->EndTime = $row['EndTime'];
+            $coachclassdetails->Price = $row['Price'];
+            $coachclassdetails->Coach = $row['Coach'];
 
-            $assignedClasses[] = $class;
+            $assignedClasses[] = $coachclassdetails;
         }
     }
 
