@@ -29,10 +29,29 @@
                 </div>
 
                 <ul class="box-info">
+                    <?php
+                    include_once "../Models/PackageModel.php";
+                    include_once "../Models/ClientModel.php";
+                    include_once "../Models/employeeModel.php";
+                    $packageModel = new Package();
+
+                    $packages = $packageModel->getAllPackagesforEmployee();
+                    $numberOfPackages = count($packages);
+
+                    
+                    $clientModel = new Client();
+
+                    $clients = $clientModel->getAllClients();
+                    $numberOfClients = count($clients);
+
+                    $allEmployees = Employee::getAllEmployees();
+                    $numberOfEmployees = count($allEmployees);
+                    ?>
+
                     <li>
                         <i class='bx bxs-calendar-check'></i>
                         <span class="text">
-                            <h3>10</h3>
+                            <h3><?php echo $numberOfPackages; ?></h3>
                             <p>Packages</p>
                         </span>
                     </li>
@@ -46,14 +65,14 @@
                     <li>
                         <i class='bx bxs-group'></i>
                         <span class="text">
-                            <h3>280</h3>
+                            <h3><?php echo $numberOfClients; ?></h3>
                             <p>Clients</p>
                         </span>
                     </li>
                     <li>
                         <i class='bx bxs-group'></i>
                         <span class="text">
-                            <h3>60</h3>
+                            <h3><?php echo $numberOfEmployees ?></h3>
                             <p>Employees</p>
                         </span>
                     </li>
