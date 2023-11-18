@@ -243,9 +243,9 @@ CREATE TABLE `package` (
   `NumOfInvitations` int(50) NOT NULL,
   `NumOfInbodySessions` int(50) NOT NULL,
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
-  `Price` int(50) NOT NULL
+  `Price` int(50) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 
