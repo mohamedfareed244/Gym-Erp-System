@@ -81,6 +81,55 @@ class ptPackController
                 header("Location: ../views/addPTpackage.php");
                 exit();
     }
+
+    public function activatePtPackage()
+{
+    if (isset($_POST["package_id"])) {
+        $ptpackageId = $_POST["package_id"];
+
+        $ptpackage = new Package();
+
+        $result=$ptpackage->activatePtPackage($ptpackageId);
+
+        if($result)
+        {
+            $success = "PT Package activated successfully";
+            $_SESSION["success"] = $success;
+            header("Location: ../views/viewPTpackage.php");
+            exit();
+        }
+
+        $fail = "PT Package failed to activate";
+        $_SESSION["fail"] = $fail;
+        header("Location: ../views/viewPTpackage.php");
+        exit();
+    }
+}
+
+public function deactivatePtPackage()
+{
+    if (isset($_POST["package_id"])) {
+        $ptpackageId = $_POST["package_id"];
+
+        $ptpackage = new Package();
+
+        $result=$ptpackage->deactivatePtPackage($ptpackageId);
+
+        if($result)
+        {
+            $success = "PT Package deactivated successfully";
+            $_SESSION["success"] = $success;
+            header("Location: ../views/viewPTpackage.php");
+            exit();
+        }
+
+        $fail = "PT Package failed to deactivate";
+        $_SESSION["fail"] = $fail;
+        header("Location: ../views/viewPTpackage.php");
+        exit();
+}
+
+}
 }
        
     
@@ -94,6 +143,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($action) {
         case "addPtPackage":
             $controller->AddptPackages();
+            break;
+         case "activatePtPackage":
+            $controller->activatePtPackage();
+            break;
+        case "deactivatePtPackage":
+            $controller->deactivatePtPackage();
             break;
         default:
             // Handle unknown action or display an error

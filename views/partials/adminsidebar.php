@@ -114,6 +114,7 @@
                 <li><a href="../views/viewptadmin.php">View Private Sessions </a></li>
                 <li><a href="../views/addptadmin.php">Add Private Sessions </a></li>
                 <li><a href="../views/addPTpackage.php">Add PT Package </a></li>
+                <li><a href="../views/viewPTpackage.php">View PT Package </a></li>
 
             </ul>
         </li>
