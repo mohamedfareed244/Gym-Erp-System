@@ -24,7 +24,7 @@
 
 <body>
 <?php session_start(); ?>
-<script src="../public/js/addPtPackage.js"></script>
+<!-- <script src="../public/js/addPtPackage.js"></script> -->
     <?php require("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
@@ -59,6 +59,7 @@
 
                         <input type="number" name="session-price" id="package-price">
                         <span id="package-price-error"><?php echo isset($_SESSION["packagePriceErr"]) ? $_SESSION["packagePriceErr"] : ''; ?></span>
+                        <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
 
                         <div class="col-lg-9 col-md-12">
                             <br>
@@ -67,16 +68,17 @@
                         <br>
                         <br>
                     </form>
-                    <?php
-                    unset($_SESSION["packageNameErr"]);
-                    unset($_SESSION["minMonthsErr"]);
-                    unset($_SESSION["sessionsErr"]);
-                    unset($_SESSION["packagePriceErr"]);
-                    ?>
 
                 </div>
         </div>
     </div>
+    <?php
+                    unset($_SESSION["packageNameErr"]);
+                    unset($_SESSION["minMonthsErr"]);
+                    unset($_SESSION["sessionsErr"]);
+                    unset($_SESSION["packagePriceErr"]);
+                    unset($_SESSION["success"]);
+                    ?>
 </body>
 
 </html>

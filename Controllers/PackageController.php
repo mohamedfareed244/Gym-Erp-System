@@ -2,6 +2,7 @@
 
 include_once "../Models/PackageModel.php";
 
+session_start();
 
 class PackageController{
 

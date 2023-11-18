@@ -3,7 +3,7 @@
 
 include_once "../Models/ptPackageModel.php";
 
-// session_start();
+session_start();
 
 
 class ptPackController
@@ -20,28 +20,28 @@ class ptPackController
         $isValid = false;
         }
 
-       if (!is_numeric($_POST["package-min-months"]) || $_POST["package-min-months"] <= 0) {
+        if (empty($_POST["package-min-months"])) {
+        $minMonthsErr = "Minimum Membership Months is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["package-min-months"]) || $_POST["package-min-months"] <= 0) {
         $minMonthsErr = "Minimum Membership Months must be a positive number";
         $isValid = false;
-        } else if (empty($_POST["package-min-months"])) {
-            $minMonthsErr = "Minimum Membership Months is required";
-            $isValid = false;
         }
 
-        if (!is_numeric($_POST["package-sessions"]) || $_POST["package-sessions"] <= 0) {
+        if (empty($_POST["package-sessions"])) {
+        $sessionsErr = "Number of Sessions is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["package-sessions"]) || $_POST["package-sessions"] <= 0) {
          $sessionsErr = "Number of Sessions must be a positive number";
          $isValid = false;
-        } else if (empty($_POST["package-sessions"])) {
-            $sessionsErr = "Number of Sessions is required";
-            $isValid = false;
-        } 
+        }
 
-        if (!is_numeric($_POST["session-price"]) || $_POST["session-price"] <= 0) {
+        if (empty($_POST["session-price"])) {
+        $packagePriceErr = "PT Package Price is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["session-price"]) || $_POST["session-price"] <= 0) {
         $packagePriceErr = "PT Package Price must be a positive number";
         $isValid = false;
-        }else if (empty($_POST["session-price"])) {
-            $packagePriceErr = "PT Package Price is required";
-            $isValid = false;
         }
 
         $name = htmlspecialchars($_POST["package-name"]);
@@ -80,11 +80,12 @@ class ptPackController
                 $_SESSION["packagePriceErr"] = $packagePriceErr;
                 header("Location: ../views/addPTpackage.php");
                 exit();
-
+    }
+}
        
     
-}
-}
+
+
 $controller = new ptPackController();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
