@@ -24,12 +24,19 @@ if ($_POST["visits"] === "limited" && empty($_POST["limitDays"])) {
 if (empty($_POST["freezelimit"])) {
     $freezeLimitErr = "Freeze Limit is required";
     $isValid = false;
-}
+}elseif (!is_numeric($_POST["freezelimit"]) || $_POST["freezelimit"] <= 0) {
+    $freezeLimitErr = "Freeze Limit must be a positive number";
+    $isValid = false;
+ }
 
 if (empty($_POST["months"])) {
     $monthsErr = "Number of Months is required";
     $isValid = false;
-}
+}elseif (!is_numeric($_POST["months"]) || $_POST["months"] <= 0) {
+    $monthsErr = "Number of Months must be a positive number";
+    $isValid = false;
+ }
+
 if (empty($_POST["title"])) {
     $titleErr = "Package Title is required";
     $isValid = false;
@@ -39,9 +46,17 @@ if (empty($_POST["invitation"])) {
     $invitationErr = "Number of Invitations is required";
     $isValid = false;
 }
+elseif (!is_numeric($_POST["invitation"]) || $_POST["invitation"] < 0) {
+    $invitationErr = "Number of Invitations must be a positive number";
+    $isValid = false;
+}
 
 if (empty($_POST["inbody"])) {
     $inbodyErr = "Number of Inbody Sessions is required";
+    $isValid = false;
+}
+elseif (!is_numeric($_POST["inbody"]) || $_POST["inbody"] < 0) {
+    $inbodyErr = "Number of Inbody Sessions must be a positive number";
     $isValid = false;
 }
 
@@ -49,9 +64,17 @@ if (empty($_POST["ptsession"])) {
     $ptSessionErr = "Number of PT sessions is required";
     $isValid = false;
 }
+elseif (!is_numeric($_POST["ptsession"]) || $_POST["ptsession"] < 0) {
+    $ptSessionErr = "Number of  PT sessions must be a positive number";
+    $isValid = false;
+}
 
 if (empty($_POST["price"])) {
     $priceErr = "Price is required";
+    $isValid = false;
+}
+elseif (!is_numeric($_POST["price"]) || $_POST["price"] <= 0) {
+    $priceErr = "Price must be a positive number";
     $isValid = false;
 }
 
