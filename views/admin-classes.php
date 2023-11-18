@@ -76,14 +76,19 @@
         <option value="">Select Coach </option>
         
         <?php
-        echo "in";
-         include_once "../Models/CoachesModel.php";
-         echo "in";
-         $result=Coach::Get_All();
-        foreach ($result as $coach){
-            echo "<option value='".$coach["ID"]."'>".$coach["Name"]."</option>";
-        }
-        ?>
+include_once "../Models/EmployeeModel.php";
+
+$employee = new Employee();
+$employeesData = $employee->GetAllCoaches();
+
+foreach ($employeesData['Coaches'] as $coach) {
+    echo "<option value='" . $coach["ID"] . "'>" . $coach["Name"] . " (Coach)</option>";
+}
+
+foreach ($employeesData['FitnessManagers'] as $fitnessManager) {
+    echo "<option value='" . $fitnessManager["ID"] . "'>" . $fitnessManager["Name"] . " (Fitness Manager)</option>";
+}
+?>
         
     </select>
     <br>

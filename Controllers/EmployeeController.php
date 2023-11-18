@@ -4,7 +4,7 @@ include_once "../Models/employeeModel.php";
 
 session_start();
 
-class EmployeeController{
+class EmployeeController {
 
    public function addEmployee(){
     $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = "";
