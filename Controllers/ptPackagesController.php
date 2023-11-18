@@ -3,7 +3,7 @@
 
 include_once "../Models/ptPackageModel.php";
 
-// session_start();
+session_start();
 
 
 class ptPackController
@@ -11,71 +11,93 @@ class ptPackController
 
     function AddptPackages()
     {
+        $packageNameErr = $minMonthsErr = $sessionsErr = $packagePriceErr = $success = "";
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $isValid = true;
-            $nameErr = $monthsErr = $invitationsErr = $inbodyErr = $ptSessionsErr = "";
+        $isValid = true;
 
-            $name = $_POST["name"];
-            $months = $_POST["months"];
-            $invitations = $_POST["invitations"];
-            $inbody = $_POST["inbody"];
-            $ptSessions = $_POST["ptsess"];
+        if (empty($_POST["package-name"])) {
+        $packageNameErr = "PT Package Name is required";
+        $isValid = false;
+        }
 
-            if (empty($name)) {
-                $nameErr = "Package Name is required";
-                $isValid = false;
-            }
+        if (empty($_POST["package-min-months"])) {
+        $minMonthsErr = "Minimum Membership Months is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["package-min-months"]) || $_POST["package-min-months"] <= 0) {
+        $minMonthsErr = "Minimum Membership Months must be a positive number";
+        $isValid = false;
+        }
 
-            if (empty($months)) {
-                $monthsErr = "Number of Months is required";
-                $isValid = false;
-            } elseif (!is_numeric($months) || $months <= 0) {
-                $monthsErr = "Invalid number of months";
-                $isValid = false;
-            }
+        if (empty($_POST["package-sessions"])) {
+        $sessionsErr = "Number of Sessions is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["package-sessions"]) || $_POST["package-sessions"] <= 0) {
+         $sessionsErr = "Number of Sessions must be a positive number";
+         $isValid = false;
+        }
 
-            if (empty($invitations)) {
-                $invitationsErr = "Number of Invitations is required";
-                $isValid = false;
-            } elseif (!is_numeric($invitations) || $invitations < 0) {
-                $invitationsErr = "Invalid number of invitations";
-                $isValid = false;
-            }
+        if (empty($_POST["session-price"])) {
+        $packagePriceErr = "PT Package Price is required";
+        $isValid = false;
+        } elseif (!is_numeric($_POST["session-price"]) || $_POST["session-price"] <= 0) {
+        $packagePriceErr = "PT Package Price must be a positive number";
+        $isValid = false;
+        }
 
-            if (empty($inbody)) {
-                $inbodyErr = "Number of Inbody is required";
-                $isValid = false;
-            } elseif (!is_numeric($inbody) || $inbody < 0) {
-                $inbodyErr = "Invalid number of inbody";
-                $isValid = false;
-            }
+        $name = htmlspecialchars($_POST["package-name"]);
+        $months = htmlspecialchars($_POST["package-min-months"]);
+        $sessions = htmlspecialchars($_POST["package-sessions"]);
+        $price = htmlspecialchars($_POST["session-price"]);
 
-            if (empty($ptSessions)) {
-                $ptSessionsErr = "Number of PT Sessions is required";
-                $isValid = false;
-            } elseif (!is_numeric($ptSessions) || $ptSessions < 0) {
-                $ptSessionsErr = "Invalid number of PT sessions";
-                $isValid = false;
-            }
+        if($isValid)
+        {
+            $ptpackage = new ptPackages();
 
-            if ($isValid) {
-                $ptPackages = new ptPackages();
+            $newptpackage = new  ptPackages();
 
-                $updatedptpack = new ptPackages();
-           //incomplete
+            $newptpackage->Name=$name;
+            $newptpackage->NumOfSessions=$sessions;
+            $newptpackage->MinPackageMonths=$months;
+            $newptpackage->Price=$price;
 
-            } else {
-                $_SESSION["nameErr"] = $nameErr;
-                $_SESSION["monthsErr"] = $monthsErr;
-                $_SESSION["invitationsErr"] = $invitationsErr;
-                $_SESSION["inbodyErr"] = $inbodyErr;
-                $_SESSION["ptSessionsErr"] = $ptSessionsErr;
+            $result=$ptpackage->addptPacks($newptpackage);
 
-                header("Location: ../views/addPackageadmin.php");
+            if($result)
+            {
+                $success = "PT Package added successfully";
+                $_SESSION["success"] = $success;
+                header("Location: ../views/addPTpackage.php");
                 exit();
             }
+
+
         }
+
+                // If the pt package addition was unsuccessful, redirect back to the form with error messages
+                $_SESSION["packageNameErr"] = $packageNameErr;
+                $_SESSION["minMonthsErr"] = $minMonthsErr;
+                $_SESSION["sessionsErr"] = $sessionsErr;
+                $_SESSION["packagePriceErr"] = $packagePriceErr;
+                header("Location: ../views/addPTpackage.php");
+                exit();
+    }
+}
+       
+    
+
+
+$controller = new ptPackController();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = isset($_POST["action"]) ? $_POST["action"] : "";
+
+    switch ($action) {
+        case "addPtPackage":
+            $controller->AddptPackages();
+            break;
+        default:
+            // Handle unknown action or display an error
+            break;
     }
 }
 ?>
