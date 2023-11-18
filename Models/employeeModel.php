@@ -121,4 +121,14 @@ class Employee
 
         return mysqli_query($conn, $sql);
     }
+
+    public static function checkExistingEmail($email)
+    {
+        global $conn;
+
+        $Email = "SELECT * FROM employee WHERE Email = '$email'";
+
+        $result = mysqli_query($conn, $Email);
+        return mysqli_num_rows($result) > 0;
+    }
 }

@@ -19,8 +19,15 @@
 
   <title>Admin Dashboard</title>
 </head>
-
+<style>
+span[id$="-error"],#success {
+        color: red;
+        font-size: 16px;
+    }
+</style>
 <body>
+  <?php session_start(); ?>
+<script src="../public/js/addEmployee.js"></script>
   <?php include("partials/adminsidebar.php") ?>
   <div id="add-body" class="addbody">
     <div class="container">
@@ -76,19 +83,23 @@
       <h4 class="coaches-title">Add Employee </h4>
       <hr>
       <div class="row">
-        <form class="row" method="post">
+        <form class="row" method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php">
+        <input type="hidden" name="action" value="addEmployee">
           <div class="col-lg-4 col-sm-12">
             <label for="name">Name: </label>
           </div>
           <input type="text" name="name">
+          <span id="name-error"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Phone Number: </label>
           </div>
           <input type="text" name="phoneNumber">
+          <span id="phoneno-error"><?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?></span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Email: </label>
           </div>
           <input type="email" name="email">
+          <span id="email-error"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?></span>
           <div class="col-lg-4 col-sm-12">
             <label for="jobs">Job Title :</label>
           </div>
@@ -101,22 +112,24 @@
             }
 
             ?>
-
-
           </select>
+          <span id="jobTitle-error"><?php echo isset($_SESSION["jobTitleErr"]) ? $_SESSION["jobTitleErr"] : ''; ?></span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Salary: </label>
           </div>
           <input type="number" name="salary" min="1000">
-
+          <span id="salary-error"><?php echo isset($_SESSION["salaryErr"]) ? $_SESSION["salaryErr"] : ''; ?></span>
           <div class="col-lg-12 col-sm-12">
             <label for="name">Address: </label>
           </div>
           <input type="text" name="address">
+          <span id="address-error"><?php echo isset($_SESSION["addressErr"]) ? $_SESSION["addressErr"] : ''; ?></span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Password: </label>
           </div>
           <input type="password" name="password" style="margin-bottom:20px">
+          <span id="password-error"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?></span>
+          <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
           <br>
           <!-- <hr>
           <h2 class="coaches-title">New Employee's Authorities: </h2>
@@ -181,65 +194,24 @@
           </div>
           <br>
           <br>
-          <?php
 
-          if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Check if all required fields are set
-            if (
-              isset($_POST['name']) &&
-              isset($_POST['phoneNumber']) &&
-              isset($_POST['email']) &&
-              isset($_POST['jobTitle']) &&
-              isset($_POST['salary']) &&
-              isset($_POST['address']) &&
-              isset($_POST['password'])
-            ) {
-              $name = htmlspecialchars($_POST['name']);
-              $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
-              $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-              $jobTitle = htmlspecialchars($_POST['jobTitle']);
-              $salary = floatval($_POST['salary']);
-              $address = htmlspecialchars($_POST['address']);
-              if (isset($_POST['password']) && !empty($_POST['password'])) {
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-              } else {
-                $password = null;
-              }
-
-              if (!$email) {
-                echo "<p>Invalid email address</p>";
-                exit();
-              }
-
-              $newEmployee = new Employee();
-              $newEmployee->Name = $name;
-              $newEmployee->PhoneNumber = $phoneNumber;
-              $newEmployee->Email = $email;
-              $newEmployee->JobTitle = $jobTitle;
-              $newEmployee->Salary = $salary;
-              $newEmployee->Address = $address;
-              $newEmployee->Password = $password;
-
-              $result = $newEmployee->addEmployee($newEmployee);
-
-              if ($result) {
-                echo "<p>Employee added successfully!</p>";
-              } else {
-                echo "<p>Error adding employee</p>";
-              }
-            } else {
-              echo "<p>All fields are required!</p>";
-            }
-          } else {
-            echo "<p>Invalid request method</p>";
-          }
-          ?>
         </form>
 
 
       </div>
     </div>
   </div>
+  <?php
+// Unset all error session variables
+unset($_SESSION["nameErr"]);
+unset($_SESSION["phonenoErr"]);
+unset($_SESSION["emailErr"]);
+unset($_SESSION["jobTitleErr"]);
+unset($_SESSION["salaryErr"]);
+unset($_SESSION["addressErr"]);
+unset($_SESSION["passwordErr"]);
+unset($_SESSION["success"]);
+?>
   <script>
     function myFunction() {
       var input, filter, table, tr, td, i, txtValue;
