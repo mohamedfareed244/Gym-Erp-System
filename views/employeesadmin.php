@@ -68,7 +68,6 @@
               echo "<td>" . $employee->Email . "</td>";
               echo "<td>" . $employee->Salary . "</td>";
               echo "<td>" . $employee->Address . "</td>";
-
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
               echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";

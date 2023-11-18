@@ -22,7 +22,10 @@
 </style>
 
 <body>
-    <?php require("partials/adminsidebar.php") ?>
+    <?php require("partials/adminsidebar.php");
+    include_once "../Models/ClientModel.php";
+    $clients = Client::getAllClients();
+    ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <h2 class="table-title">Memberships:</h2>
@@ -33,177 +36,44 @@
                     <hr>
                     <thead>
                         <tr>
-                            <th scope="col">Package</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Client Name</th>
+                            <th scope="col">Package</th>
                             <th scope="col">Start Date </th>
                             <th scope="col">End Date</th>
                             <th scope="col">Visits </th>
                             <th scope="col">Status </th>
-                            <th scope="col">Freeze Duration </th>
                             <th scope="col">Freeze</th>
                             <th scope="col">Sales</th>
                             <th scope="col">pt</th>
                             <th scope="col">inbody</th>
+                            <th scope="col">Phone</th>
                             <th scope="col">Actions </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">2 Months offer</th>
-                            <td>Mohamed fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-info">Freezed</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Mohamed Ahmed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Salwa fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td> fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Mohamed fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Wael Khalid</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Mohamed fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Mohamed fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-info">Freeze</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">6 Months offer</th>
-                            <td>Mohamed fareed</td>
-                            <td>02-09-2023</td>
-                            <td>02-09-2023</td>
-                            <td>30</td>
-                            <td class="bg-danger">Expired</td>
-                            <td>2 Weeks</td>
-                            <td><button class="btn btn-freeze">Freeze</button></td>
-                            <td>Mohamed fareed</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
-                            <button class="btn" onclick="window.location.href='/ProFit-Gym/views/editclient.php'">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
+                        <?php
+                        foreach ($clients as $client) {
+                            echo "<tr id='row-" . $client->ID . "'>";
+                            echo '<td> '. $client->ID.' </td>';
+                            echo '<td> '. $client->FirstName.' '.$client->LastName.' </td>';
+                            echo '<td> </td>';
+                            echo '<td>02-09-2023</td>';
+                            echo '<td>02-09-2023</td>';
+                            echo '<td>30</td>';
+                            echo '<td class="bg-info">Freezed</td>';
+                            echo '<td><button class="btn btn-freeze">Freeze</button></td>';
+                            echo '<td>Mohamed fareed</td>';
+                            echo '<td>2</td>';
+                            echo '<td>1</td>';
+                            echo '<td>'.$client->Phone.'</td>';
+                            echo "<td><a a href='editclient.php?ID=" . $client->ID . "' class=\"btn\">Edit</a>       ";
+                            echo '<button class="btn btn-delete">Delete</button>';
+                            echo '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
 
                     </tbody>
                 </table>
@@ -237,7 +107,7 @@
                             <td>120</td>
                             <td class="bg-danger">Not paid </td>
                             <td>
-                            <button class="btn">Edit</button>
+                                <button class="btn">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
@@ -273,7 +143,7 @@
                                 <td>01-10-2023</td>
                                 <td>Mohamed fareed </td>
                                 <td>
-                                <button class="btn">Edit</button>
+                                    <button class="btn">Edit</button>
                                     <button class="btn btn-delete">Delete</button>
                                 </td>
                             </tr>
@@ -291,7 +161,7 @@
         table = document.getElementById("membershipsTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

@@ -13,7 +13,27 @@ class Classes{
     public $Price;
     public $Coach;
    
+    public static function getAllClasses(){
+        global $conn;
+         $sql = "SELECT * FROM `class`";
+         $result = $conn->query($sql);
+         if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $class = new Classes();
+                $class->ID = $row['ID'];
+                $class->Name = $row['Name'];
+                $class->Date = $row['Date'];
+                $class->StartTime = $row['StartTime'];
+                $class->EndTime = $row['EndTime'];
+                $class->Price = $row['Price'];
+                $class->Coach = $row['Coach'];
+             
 
+                $classes[] = $class;
+            }
+        }
+        return $classes;
+    }
 
     public static function addClass($class)
     {
@@ -70,9 +90,6 @@ class Classes{
         return mysqli_query($conn,$sql);
 
     }
-
-
-    
 
 }
 
