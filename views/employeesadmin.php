@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--css/icons/boostrap/jquery/fonts/images start-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
   <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
@@ -15,19 +17,20 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
 
   <title>Admin Dashboard</title>
 </head>
 <style>
-span[id$="-error"],#success {
-        color: red;
-        font-size: 16px;
-    }
+  span[id$="-error"],
+  #success {
+    color: red;
+    font-size: 16px;
+  }
 </style>
+
 <body>
   <?php session_start(); ?>
-<script src="../public/js/addEmployee.js"></script>
+  <script src="../public/js/addEmployee.js"></script>
   <?php include("partials/adminsidebar.php") ?>
   <div id="add-body" class="addbody">
     <div class="container">
@@ -58,7 +61,7 @@ span[id$="-error"],#success {
             $allEmployees = Employee::getAllEmployees();
 
             foreach ($allEmployees as $employee) {
-              echo "<tr>";
+              echo "<tr id='row-" . $employee->ID . "'>";
               echo "<td>" . $employee->ID . "</td>";
               echo "<td>" . $employee->Name . "</td>";
               echo "<td>" . $employee->PhoneNumber . "</td>";
@@ -69,7 +72,7 @@ span[id$="-error"],#success {
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
               echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
-              echo "<button class=\"btn btn-delete\" data-employee-id=\"" . $employee->ID . "\">Delete</button></td>";
+              echo "<button class=\"btn btn-delete\" onclick='deleteEmployee(" . $employee->ID . ")'>Delete</button></td>";
               echo "</tr>";
             }
             ?>
@@ -83,7 +86,7 @@ span[id$="-error"],#success {
       <hr>
       <div class="row">
         <form class="row" method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php">
-        <input type="hidden" name="action" value="addEmployee">
+          <input type="hidden" name="action" value="addEmployee">
           <div class="col-lg-4 col-sm-12">
             <label for="name">Name: </label>
           </div>
@@ -201,16 +204,16 @@ span[id$="-error"],#success {
     </div>
   </div>
   <?php
-// Unset all error session variables
-unset($_SESSION["nameErr"]);
-unset($_SESSION["phonenoErr"]);
-unset($_SESSION["emailErr"]);
-unset($_SESSION["jobTitleErr"]);
-unset($_SESSION["salaryErr"]);
-unset($_SESSION["addressErr"]);
-unset($_SESSION["passwordErr"]);
-unset($_SESSION["success"]);
-?>
+  // Unset all error session variables
+  unset($_SESSION["nameErr"]);
+  unset($_SESSION["phonenoErr"]);
+  unset($_SESSION["emailErr"]);
+  unset($_SESSION["jobTitleErr"]);
+  unset($_SESSION["salaryErr"]);
+  unset($_SESSION["addressErr"]);
+  unset($_SESSION["passwordErr"]);
+  unset($_SESSION["success"]);
+  ?>
   <script>
     function myFunction() {
       var input, filter, table, tr, td, i, txtValue;
@@ -229,6 +232,32 @@ unset($_SESSION["success"]);
           }
         }
       }
+    }
+
+    function deleteEmployee(employeeId) {
+      $.ajax({
+        type: "POST",
+        url: "../Controllers/EmployeeController.php",
+        data: {
+          action: "deleteEmployee",
+          employeeId: employeeId,
+        },
+        success: function(response) {
+          if (response === "success") {
+            var tableRow = document.getElementById('row-' + employeeId);
+            if (tableRow) {
+              tableRow.parentNode.removeChild(tableRow);
+            } else {
+              console.log("Error: Row not found in the DOM.");
+            }
+          } else {
+            console.log("Error deleting employee.");
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error("AJAX error: " + status + " - " + error);
+        },
+      });
     }
   </script>
 

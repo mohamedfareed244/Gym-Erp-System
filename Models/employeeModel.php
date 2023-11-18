@@ -191,13 +191,18 @@ class Employee
     }
     
     
-    public static function deleteEmployeeAdmin($employee)
+    public static function deleteEmployeeById($employeeID)
     {
         global $conn;
 
-        $sql = "DELETE from employee where ID =" . $employee->ID;
+        $sql = "DELETE from employee where ID =" . $employeeID;
 
-        return mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            return true;  
+        } else {
+            return false;
+        }
     }
     
     
