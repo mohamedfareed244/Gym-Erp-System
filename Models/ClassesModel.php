@@ -10,6 +10,7 @@ class Classes{
     public $Date;
     public $StartTime;
     public $EndTime;
+    public $isFree;
     public $Price;
     public $Coach;
    
@@ -38,19 +39,33 @@ class Classes{
     public static function addClass($class)
     {
         global $conn;
-
-        $Name=$class->Name;
-        $Date=$class->Date;
-        $StartTime=$class->StartTime;
-        $EndTime=$class->EndTime;
-        $Price=$class->Price;
-        $Coach=$class->Coach;
-       
-        $sql = "INSERT INTO class (Name, Date, StartTime, EndTime, Price, Coach) 
-                VALUES ('$Name', '$Date', '$StartTime', '$EndTime', '$Price', '$Coach')";
-         
-        return mysqli_query($conn, $sql);    
+    
+        $Name = $class->Name;
+        $Dates = $class->Date;
+        $StartTime = $class->StartTime;
+        $EndTime = $class->EndTime;
+        $isFree =$class->isFree;
+        $Price = $class->Price;
+        $Coach = $class->Coach;
+    
+        $finalresult = true; // Initialize result
+    
+        foreach ($Dates as $Date) {
+            $sql = "INSERT INTO class (Name, Date, StartTime, EndTime, isFree, Price, Coach) 
+                    VALUES ('$Name', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$Coach')";
+    
+            $result = mysqli_query($conn, $sql);
+    
+            if (!$result) {
+                $finalresult = false; // If any query fails, set result to false
+            }
+        }
+    
+        return $finalresult;
     }
+    
+
+
     public static function getid($class){
         global $conn;
         $sql ="SELECT ID FROM class WHERE ID='$class->ID'";
@@ -91,6 +106,9 @@ class Classes{
 
     }
 
-}
+    }
+    
+
+
 
 ?>
