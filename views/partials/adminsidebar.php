@@ -16,7 +16,6 @@
 
 <div class="sidebar close">
 
-
     <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name" style="font-weight:300">Admin</span>

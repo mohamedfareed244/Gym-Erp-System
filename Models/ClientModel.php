@@ -45,6 +45,17 @@ class Client
             return null;
         }
     }
+    public static function deleteClientByID($clientID){
+        global $conn;
+        $sql = "DELETE from client where ID =" . $clientID;
+
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public static function getAllClients()
     {

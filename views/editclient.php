@@ -94,8 +94,6 @@
                     </div>
                 </form>";
                 <?php
-
-
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($_POST['type'] === 'form2') {
                         $client_id = (int) $_POST['client_id'];

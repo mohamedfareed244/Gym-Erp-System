@@ -30,7 +30,7 @@ class ClientController
             $lnameErr = "Last Name is required";
             $isValid = false;
         } else {
-            $fname = $_POST['lname'];
+            $lname = $_POST['lname'];
             if (!preg_match("/^[a-zA-Z ]*$/", $lname)) {
                 $lnameErr = "Only alphabets and white space are allowed";
                 $isValid = false;
@@ -336,6 +336,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "delete":
             $controller->deleteClient();
+            break;
+        case "deleteClient":
+            if (isset($_POST["clientId"])) {
+                $clientId = $_POST["clientId"];
+
+                $result = Client::deleteClientByID($clientId);
+
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
+                }
+            }
             break;
         default:
             // Handle unknown action or display an error
