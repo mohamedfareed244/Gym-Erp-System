@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <!--css/icons/boostrap/jquery/fonts/images start-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
 
   <title>Admin Dashboard</title>
 </head>
@@ -69,14 +69,13 @@ span[id$="-error"],#success {
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
               echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
-              echo "<button class=\"btn btn-delete\">Delete</button></td>";
+              echo "<button class=\"btn btn-delete\" data-employee-id=\"" . $employee->ID . "\">Delete</button></td>";
               echo "</tr>";
             }
             ?>
           </tbody>
         </table>
       </div>
-
       <br>
       <br>
 
@@ -232,6 +231,7 @@ unset($_SESSION["success"]);
       }
     }
   </script>
+
 </body>
 
 </html>
