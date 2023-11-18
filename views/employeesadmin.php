@@ -43,6 +43,8 @@
           </thead>
           <tbody>
             <?php
+            include_once "../Models/hrmodel.php";
+            $result = getjobtitles();
 
             include_once "../Models/employeeModel.php";
 
@@ -56,9 +58,11 @@
               echo "<td>" . $employee->Email . "</td>";
               echo "<td>" . $employee->Salary . "</td>";
               echo "<td>" . $employee->Address . "</td>";
+
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
-              echo "<td><button class=\"btn\">Edit</button><button class=\"btn btn-delete\">Delete</button></td>";
+              echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
+              echo "<button class=\"btn btn-delete\">Delete</button></td>";
               echo "</tr>";
             }
             ?>
@@ -90,30 +94,29 @@
           </div>
           <select name="jobTitle" id="jobs">
             <option value="">Select job</option>
-            <?php include_once "../Models/hrmodel.php";  
-            $result =getjobtitles();
-            foreach ($result as $title){
-              
-              echo "<option value='".$title["Id"]."'> ".$title["Name"]."</option>";
+            <?php
+            foreach ($result as $title) {
+
+              echo "<option value='" . $title["Id"] . "'> " . $title["Name"] . "</option>";
             }
-            
+
             ?>
-            
-            
+
+
           </select>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Salary: </label>
           </div>
           <input type="number" name="salary" min="1000">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Image : </label>
-          </div>
-          <input type="file" name="photo" id="imgfile">
 
           <div class="col-lg-12 col-sm-12">
             <label for="name">Address: </label>
           </div>
-          <input type="text" id="emp-addr" name="address" style="margin-bottom:20px">
+          <input type="text" name="address">
+          <div class="col-lg-4 col-sm-12">
+            <label for="name">Password: </label>
+          </div>
+          <input type="password" name="password" style="margin-bottom:20px">
           <br>
           <!-- <hr>
           <h2 class="coaches-title">New Employee's Authorities: </h2>
@@ -188,7 +191,8 @@
               isset($_POST['email']) &&
               isset($_POST['jobTitle']) &&
               isset($_POST['salary']) &&
-              isset($_POST['address'])
+              isset($_POST['address']) &&
+              isset($_POST['password'])
             ) {
               $name = htmlspecialchars($_POST['name']);
               $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
@@ -196,6 +200,11 @@
               $jobTitle = htmlspecialchars($_POST['jobTitle']);
               $salary = floatval($_POST['salary']);
               $address = htmlspecialchars($_POST['address']);
+              if (isset($_POST['password']) && !empty($_POST['password'])) {
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+              } else {
+                $password = null;
+              }
 
               if (!$email) {
                 echo "<p>Invalid email address</p>";
@@ -209,6 +218,7 @@
               $newEmployee->JobTitle = $jobTitle;
               $newEmployee->Salary = $salary;
               $newEmployee->Address = $address;
+              $newEmployee->Password = $password;
 
               $result = $newEmployee->addEmployee($newEmployee);
 

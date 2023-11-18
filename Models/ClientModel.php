@@ -135,4 +135,8 @@ class Client
 
         return mysqli_query($conn, $sql);
     }
+
+    public function freezeMembership(){}
+    
+    public function unfreezeMembership(){}
 }

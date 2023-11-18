@@ -57,7 +57,34 @@ class Employee
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password')";
         return mysqli_query($conn, $sql);
     }
-    public function updateEmployee($employee)
+    public static function getEmployeeByID($employeeID)
+    {
+        global $conn;
+
+        $employeeID = mysqli_real_escape_string($conn, $employeeID);
+
+        $sql = "SELECT * FROM employee WHERE ID = '$employeeID'";
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $employeeData = $result->fetch_assoc();
+
+            $employee = new Employee();
+            $employee->ID = $employeeData['ID'];
+            $employee->Name = $employeeData['Name'];
+            $employee->Email = $employeeData['Email'];
+            $employee->Password = $employeeData['Password'];
+            $employee->Salary = $employeeData['Salary'];
+            $employee->JobTitle = $employeeData['JobTitle'];
+            $employee->Address = $employeeData['Address'];
+            $employee->PhoneNumber = $employeeData['PhoneNumber'];
+
+            return $employee;
+        } else {
+            return null;
+        }
+    }
+    public static function updateEmployee($employee)
     {
         global $conn;
 
@@ -69,7 +96,7 @@ class Employee
         $Email = $employee->Email;
         $Password = $employee->Password;
 
-        $employee_id = $_SESSION['ID'];
+        $employee_id = $employee->ID;
 
         if (!empty($Password)) {
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
