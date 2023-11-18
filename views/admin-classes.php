@@ -38,7 +38,7 @@
                 <td class="col"> Name </td>
                 <td class="col"> Coach </td>
                 <td class="col"> Coach's Phone Number</td>
-                <td>clients no </td>
+                
                 <td>Days</td>
       <td>Action </td>
                
@@ -50,9 +50,9 @@
                 <td>yoga class</td>
                 <td>mohamed</td>
                 <td>0123456789</td>
-                <td>10</td>
+                
                 <td>Saturday, Sunday, Monday</td>
-               <td><button id ="add-btn">View Clients</button></td>
+               <td><button id ="add-btn">View Clients</button> <button id ="add-btn" style="background-color:red; color:white;">Delete</button></td>
             </tr>
             <tr>
                 <td> 1
@@ -60,9 +60,9 @@
                 <td>yoga class</td>
                 <td>Mohamed</td>
                 <td>0123456789</td>
-                <td>10</td>
+            
                 <td>Saturday, Sunday, Monday</td>
-                <td><button id ="add-btn">View Clients</button></td>
+                <td><button id ="add-btn">View Clients</button> <button id ="add-btn" style="background-color:red; color:white;">Delete</button></td>
             </tr>
         </tbody>
     </table>
@@ -73,8 +73,18 @@
     <label for="coaches"> Select The Coach : </label>
     <select name="coaches" id="">
         <option value="">Select Coach </option>
-        <option value="">Mohamed </option>
-        <option value="">Mostafa </option>
+        
+        <?php
+        echo "in";
+         include_once "../Models/CoachesModel.php";
+         echo "in";
+         $result=Coach::Get_All();
+        foreach ($result as $coach){
+          
+            echo "<option value='".$coach["ID"]."'>".$coach["Name"]."</option>";
+        }
+        ?>
+        
     </select>
     <br>
     <hr>
