@@ -42,35 +42,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                 <?php
-               
-                 include_once "../Models/CoachesModel.php";
-                 $result=Coach::Get_All();
-                 foreach($result as $coach ){
-                    echo " <tr>
-                    <td>".$coach["Name"]."</td>
-                    <td>".$coach["Email"]."</td>
-                    
-                    <td>".$coach["PhoneNumber"]."</td>
-                    <td>".$coach["Salary"]."</td>
-                    <td>".$coach["Address"]."</td>
-                    <td>".$coach["JobTitle"]."</td>
+                        <?php
+
+                        include_once "../Models/CoachesModel.php";
+                        $result = Coach::Get_All();
+                        foreach ($result as $coach) {
+                            echo " <tr>
+                    <td>" . $coach["Name"] . "</td>
+                    <td>" . $coach["Email"] . "</td>
+                    <td>" . $coach["PhoneNumber"] . "</td>
+                    <td>" . $coach["Salary"] . "</td>
+                    <td>" . $coach["Address"] . "</td>
+                    <td>" . $coach["JobTitle"] . "</td>
                     <td>
                         <button class='btn'>Edit</button>
                         <button class='btn btn-delete'>Delete</button>
                     </td>
                 </tr>";
-                 }
-                       
-                 
-                 ?>
+                        }
+
+
+                        ?>
                     </tbody>
                 </table>
             </div>
             <br>
             <br>
-            
-      
+
+
 
         </div>
     </div>
