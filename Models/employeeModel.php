@@ -1,8 +1,6 @@
 <?php
 
-
 include_once "../includes/dbh.inc.php";
-
 
 class Employee
 {
@@ -43,7 +41,7 @@ class Employee
         return $employees;
     }
 
-    public static function addEmployee($employee)
+    public function addEmployee($employee)
     {
         global $conn;
 
@@ -57,10 +55,8 @@ class Employee
 
         $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password) 
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password')";
-                echo $sql;
         return mysqli_query($conn, $sql);
     }
-
     public function updateEmployee($employee)
     {
         global $conn;
