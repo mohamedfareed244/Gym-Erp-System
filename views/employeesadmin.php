@@ -72,7 +72,7 @@
       <h4 class="coaches-title">Add Employee </h4>
       <hr>
       <div class="row">
-        <form class="row" method="POST">
+        <form class="row" method="post">
           <div class="col-lg-4 col-sm-12">
             <label for="name">Name: </label>
           </div>
@@ -105,72 +105,127 @@
             <label for="name">Salary: </label>
           </div>
           <input type="number" name="salary" min="1000">
-         
+          <div class="col-lg-4 col-sm-12">
+            <label for="name">Image : </label>
+          </div>
+          <input type="file" name="photo" id="imgfile">
+
           <div class="col-lg-12 col-sm-12">
             <label for="name">Address: </label>
           </div>
-          <input type="text" id="emp-addr" name="address" >
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Password: </label>
-          </div>
-          <input type="text" name="password" style="margin-bottom:20px">
+          <input type="text" id="emp-addr" name="address" style="margin-bottom:20px">
           <br>
-         
+          <!-- <hr>
+          <h2 class="coaches-title">New Employee's Authorities: </h2>
+          <hr>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Edit Client</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"> View Client</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">client check in </label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">View Employees </label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Employees Attendance</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Add Admin</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Remove Admin</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Report</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">View Packages</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Add packages</label>
+
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">View Private Sessions</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Reserve Private Sessions</label>
+          </div>
+          <br>
+          <hr> -->
           <div class="col-lg-4 col-sm-12">
             <input type="submit" value="Add Employee" id="add-btn">
           </div>
-          </form>
           <br>
           <br>
           <?php
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          // Check if all required fields are set
-       
-          if (
-            isset($_POST['name']) &&
-            isset($_POST['phoneNumber']) &&
-            isset($_POST['email']) &&
-            isset($_POST['jobTitle']) &&
-            isset($_POST['salary']) &&
-            isset($_POST['address'])
-          ) {
-          
-            $name = htmlspecialchars($_POST['name']);
-            $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
-            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-            $jobTitle = htmlspecialchars($_POST['jobTitle']);
-            $salary = floatval($_POST['salary']);
-            $address = htmlspecialchars($_POST['address']);
-            $password=$_POST['password'];
-            if (!$email) {
-              echo "<p>Invalid email address</p>";
-              exit();
-            }
+          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Check if all required fields are set
+            if (
+              isset($_POST['name']) &&
+              isset($_POST['phoneNumber']) &&
+              isset($_POST['email']) &&
+              isset($_POST['jobTitle']) &&
+              isset($_POST['salary']) &&
+              isset($_POST['address'])
+            ) {
+              $name = htmlspecialchars($_POST['name']);
+              $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+              $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+              $jobTitle = htmlspecialchars($_POST['jobTitle']);
+              $salary = floatval($_POST['salary']);
+              $address = htmlspecialchars($_POST['address']);
 
-            $newEmployee = new Employee();
-            $newEmployee->Name = $name;
-            $newEmployee->PhoneNumber = $phoneNumber;
-            $newEmployee->Email = $email;
-            $newEmployee->JobTitle = $jobTitle;
-            $newEmployee->Salary = $salary;
-            $newEmployee->Address = $address;
-            $newEmployee->Password = $password;
-          
-            $result = $newEmployee->addEmployee($newEmployee);
-           
-            if ($result) {
-              echo "<p>Employee added successfully!</p>";
+              if (!$email) {
+                echo "<p>Invalid email address</p>";
+                exit();
+              }
+
+              $newEmployee = new Employee();
+              $newEmployee->Name = $name;
+              $newEmployee->PhoneNumber = $phoneNumber;
+              $newEmployee->Email = $email;
+              $newEmployee->JobTitle = $jobTitle;
+              $newEmployee->Salary = $salary;
+              $newEmployee->Address = $address;
+
+              $result = $newEmployee->addEmployee($newEmployee);
+
+              if ($result) {
+                echo "<p>Employee added successfully!</p>";
+              } else {
+                echo "<p>Error adding employee</p>";
+              }
             } else {
-              echo "<p>Error adding employee</p>";
+              echo "<p>All fields are required!</p>";
             }
           } else {
-            echo "<p>All fields are required!</p>";
+            echo "<p>Invalid request method</p>";
           }
-        } 
-        ?>
+          ?>
         </form>
-        
+
 
       </div>
     </div>
