@@ -85,49 +85,8 @@
             </div>
             <br>
             <br>
-            <h3 class="coaches-title col-12">Add Coach:</h3>
-            <hr>
-            <div class="coaches row">
-                <form action=""  method ="POST" class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-name"> Name: </label>
-                    </div>
-                    <input type="text" name="coach-name" id="coach-name">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-email"> Email: </label>
-                    </div>
-                    <input type="email" name="coach-email" id="coach-email">
-                    
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-phone">Phone Number: </label>
-                    </div>
-                    <input type="text" name="coach-phone" id="coach-phone">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-phone">Title: </label>
-                    </div>
-                    <select name="" id="">
-                        <option value="1">Fitness Manager</option>
-                        <option value="0">Coach</option>
-                    </select>
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-salary">Salary: </label>
-                    </div>
-                    <input type="number" name="coach-salary" id="coach-salary">
-                    <div class="col-lg-4 col-md-12">
-                        <label for="coach-address">Address: </label>
-                    </div>
-                    <input type="text" name="coach-address" id="coach-address">
-                    <div class="col-lg-9 col-md-12">
-                        <input type="submit" value="Add Coach" id="add-btn" style="margin-top:30px; margin-bottom:20px">
-                    </div>
-                    <?php
-                    if($_SERVER["REQUEST_METHOD"]=="POST"){
-                        
-                    }
-                    ?>
-                </form>
-
-            </div>
+            
+      
 
         </div>
     </div>
