@@ -83,54 +83,51 @@ class ptPackController
     }
 
     public function activatePtPackage()
-{
-    if (isset($_POST["package_id"])) {
-        $ptpackageId = $_POST["package_id"];
-
-        $ptpackage = new Package();
-
-        $result=$ptpackage->activatePtPackage($ptpackageId);
-
-        if($result)
-        {
-            $success = "PT Package activated successfully";
-            $_SESSION["success"] = $success;
-            header("Location: ../views/viewPTpackage.php");
-            exit();
+    {
+        if (isset($_POST["package_id"])) {
+            $ptpackageId = $_POST["package_id"];
+    
+            $ptpackage = new ptPackages();
+    
+            $result = $ptpackage->activatePtPackage($ptpackageId);
+    
+            if ($result) {
+                $success = "PT Package activated successfully";
+                $_SESSION["success"] = $success;
+            } else {
+                $fail = "PT Package failed to activate";
+                $_SESSION["fail"] = $fail;
+            }
         }
-
-        $fail = "PT Package failed to activate";
-        $_SESSION["fail"] = $fail;
+    
         header("Location: ../views/viewPTpackage.php");
         exit();
     }
-}
-
-public function deactivatePtPackage()
-{
-    if (isset($_POST["package_id"])) {
-        $ptpackageId = $_POST["package_id"];
-
-        $ptpackage = new Package();
-
-        $result=$ptpackage->deactivatePtPackage($ptpackageId);
-
-        if($result)
-        {
-            $success = "PT Package deactivated successfully";
-            $_SESSION["success"] = $success;
-            header("Location: ../views/viewPTpackage.php");
-            exit();
+    
+    public function deactivatePtPackage()
+    {
+        if (isset($_POST["package_id"])) {
+            $ptpackageId = $_POST["package_id"];
+    
+            $ptpackage = new ptPackages();
+    
+            $result = $ptpackage->deactivatePtPackage($ptpackageId);
+    
+            if ($result) {
+                $success = "PT Package deactivated successfully";
+                $_SESSION["success"] = $success;
+            } else {
+                $fail = "PT Package failed to deactivate";
+                $_SESSION["fail"] = $fail;
+            }
         }
-
-        $fail = "PT Package failed to deactivate";
-        $_SESSION["fail"] = $fail;
+    
         header("Location: ../views/viewPTpackage.php");
         exit();
-}
+    }
 
 }
-}
+
        
     
 

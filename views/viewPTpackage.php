@@ -71,13 +71,13 @@ session_start();
                             <?php } else { ?>
                                 <button type="submit" id="activate-button" class="btn btn-success" name="action" value="activatePtPackage"> Activate</button>
                             <?php } ?>
-                            <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span> 
-                            <span id="fail"><?php echo isset($_SESSION["fail"]) ? $_SESSION["fail"] : ''; ?></span>
                         </form>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
+            <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span> 
+            <span id="fail"><?php echo isset($_SESSION["fail"]) ? $_SESSION["fail"] : ''; ?></span>
 
 
         </div>
