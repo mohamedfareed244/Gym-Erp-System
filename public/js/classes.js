@@ -1,6 +1,6 @@
 function getclasses(){
 let option=document.getElementById("select-coaches").value;
-let postData={'key':'value'};
+let postData={'id':option};
 fetch('../Controllers/coachapi.php', {
     method: 'POST',
     headers: {
@@ -9,7 +9,7 @@ fetch('../Controllers/coachapi.php', {
     body: JSON.stringify(postData),
 }) .then(response => response.json())
 .then(data => {
-    console.log('POST Response:', data);
+    console.log('POST Response: ', data);
 })
 .catch(error => console.error('Error:', error));
 
