@@ -26,7 +26,6 @@
                 </div>
                 <hr>
                 <form method="POST" action="./addclient.php">
-                    <!-- action="addclientbackend.php" -->
                     <div class="col-lg-4 col-md-12">
                         <label for="fname">First Name: </label>
                     </div>

@@ -15,13 +15,14 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <!--css/icons/boostrap/jquery/fonts/images start-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
 
   <title>Admin Dashboard</title>
 </head>
 
 <body>
-  <?php include("partials/adminsidebar.php") ?>
+  <?php header('Content-Type: text/html; charset=utf-8');
+  include("partials/adminsidebar.php") ?>
   <div id="add-body" class="addbody">
     <div class="container">
       <h1 class="table-title">Employees:</h1>
@@ -62,184 +63,19 @@
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
               echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
-              echo "<button class=\"btn btn-delete\">Delete</button></td>";
+              echo "<button class=\"btn btn-delete\" data-employee-id=\"" . $employee->ID . "\">Delete</button></td>";
               echo "</tr>";
             }
             ?>
           </tbody>
         </table>
       </div>
-
       <br>
       <br>
 
-      <h4 class="coaches-title">Add Employee </h4>
-      <hr>
-      <div class="row">
-        <form class="row" method="post">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Name: </label>
-          </div>
-          <input type="text" name="name">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Phone Number: </label>
-          </div>
-          <input type="text" name="phoneNumber">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Email: </label>
-          </div>
-          <input type="email" name="email">
-          <div class="col-lg-4 col-sm-12">
-            <label for="jobs">Job Title :</label>
-          </div>
-          <select name="jobTitle" id="jobs">
-            <option value="">Select job</option>
-            <?php
-            foreach ($result as $title) {
-
-              echo "<option value='" . $title["Id"] . "'> " . $title["Name"] . "</option>";
-            }
-
-            ?>
-
-
-          </select>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Salary: </label>
-          </div>
-          <input type="number" name="salary" min="1000">
-
-          <div class="col-lg-12 col-sm-12">
-            <label for="name">Address: </label>
-          </div>
-          <input type="text" name="address">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Password: </label>
-          </div>
-          <input type="password" name="password" style="margin-bottom:20px">
-          <br>
-          <!-- <hr>
-          <h2 class="coaches-title">New Employee's Authorities: </h2>
-          <hr>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Edit Client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault"> View Client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">client check in </label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Employees </label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Employees Attendance</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add Admin</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Remove Admin</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Report</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Packages</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add packages</label>
-
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Private Sessions</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Reserve Private Sessions</label>
-          </div>
-          <br>
-          <hr> -->
-          <div class="col-lg-4 col-sm-12">
-            <input type="submit" value="Add Employee" id="add-btn">
-          </div>
-          <br>
-          <br>
-          <?php
-
-          if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Check if all required fields are set
-            if (
-              isset($_POST['name']) &&
-              isset($_POST['phoneNumber']) &&
-              isset($_POST['email']) &&
-              isset($_POST['jobTitle']) &&
-              isset($_POST['salary']) &&
-              isset($_POST['address']) &&
-              isset($_POST['password'])
-            ) {
-              $name = htmlspecialchars($_POST['name']);
-              $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
-              $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-              $jobTitle = htmlspecialchars($_POST['jobTitle']);
-              $salary = floatval($_POST['salary']);
-              $address = htmlspecialchars($_POST['address']);
-              if (isset($_POST['password']) && !empty($_POST['password'])) {
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-              } else {
-                $password = null;
-              }
-
-              if (!$email) {
-                echo "<p>Invalid email address</p>";
-                exit();
-              }
-
-              $newEmployee = new Employee();
-              $newEmployee->Name = $name;
-              $newEmployee->PhoneNumber = $phoneNumber;
-              $newEmployee->Email = $email;
-              $newEmployee->JobTitle = $jobTitle;
-              $newEmployee->Salary = $salary;
-              $newEmployee->Address = $address;
-              $newEmployee->Password = $password;
-
-              $result = $newEmployee->addEmployee($newEmployee);
-
-              if ($result) {
-                echo "<p>Employee added successfully!</p>";
-              } else {
-                echo "<p>Error adding employee</p>";
-              }
-            } else {
-              echo "<p>All fields are required!</p>";
-            }
-          } else {
-            echo "<p>Invalid request method</p>";
-          }
-          ?>
-        </form>
-
-
-      </div>
     </div>
   </div>
+
   <script>
     function myFunction() {
       var input, filter, table, tr, td, i, txtValue;
@@ -260,6 +96,7 @@
       }
     }
   </script>
+
 </body>
 
 </html>

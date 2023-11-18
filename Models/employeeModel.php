@@ -121,4 +121,13 @@ class Employee
 
         return mysqli_query($conn, $sql);
     }
+    public static function deleteEmployeeAdmin($employee)
+    {
+        global $conn;
+
+        $sql = "DELETE from employee where ID =" . $employee->ID;
+
+        return mysqli_query($conn, $sql);
+    }
+    
 }
