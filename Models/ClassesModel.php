@@ -4,6 +4,7 @@
 include_once "../includes/dbh.inc.php";
 
 class Classes{
+    
     public $ID;
     public $Name;
     public $Date;

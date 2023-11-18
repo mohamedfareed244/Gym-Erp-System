@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 03:58 PM
+-- Generation Time: Nov 18, 2023 at 05:14 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -165,7 +165,7 @@ CREATE TABLE `employee` (
   `Salary` int(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
   `JobTitle` varchar(50) NOT NULL,
-  `Password` varchar(11) NOT NULL
+  `Password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -282,21 +282,22 @@ CREATE TABLE `private training package` (
   `Name` varchar(50) NOT NULL,
   `NumOfSessions` int(50) NOT NULL,
   `MinPackageMonths` int(50) NOT NULL,
-  `Price` int(50) NOT NULL
+  `Price` int(50) NOT NULL,
+  `isActivated` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `private training package`
 --
 
-INSERT INTO `private training package` (`ID`, `Name`, `NumOfSessions`, `MinPackageMonths`, `Price`) VALUES
-(1, 'Beginners', 10, 1, 600),
-(2, 'Intermediate', 20, 3, 1600),
-(3, 'Advanced', 40, 6, 4000),
-(4, 'For 1 Month', 15, 1, 1000),
-(5, 'For 2 Months', 25, 2, 2400),
-(6, 'For 3 Months', 35, 3, 3600),
-(7, 'For 4 Months', 55, 4, 4900);
+INSERT INTO `private training package` (`ID`, `Name`, `NumOfSessions`, `MinPackageMonths`, `Price`, `isActivated`) VALUES
+(9, 'Beginners', 10, 1, 1000, 'Activated'),
+(10, 'Intermediate', 30, 3, 2800, 'Activated'),
+(11, 'Advanced', 50, 6, 4300, 'Activated'),
+(12, 'For 1 Month', 15, 1, 1500, 'Activated'),
+(13, 'For 2 Months', 25, 2, 2400, 'Activated'),
+(14, 'For 3 Months', 35, 3, 3300, 'Activated'),
+(15, 'For 4 Months', 45, 4, 4200, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -473,7 +474,7 @@ ALTER TABLE `coach`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `job_titles`
@@ -491,7 +492,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `private training package`
 --
 ALTER TABLE `private training package`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `reserved private training free session`
