@@ -11,32 +11,27 @@ class ptPackages
     public $NumOfSessions;
     public $MinPackageMonths;
     public $Price;
+    public $isActivated;
 
-
-    public static function getAllptPacks()
+    public function getAllPtPackagesforEmployee()
     {
         global $conn;
 
-        $sql = "SELECT * FROM `private training package` ";
+        $sql = "SELECT * FROM `private training package`";
+        // Perform the query
         $result = $conn->query($sql);
 
-        $ptpackagesarray = array();
+        // Check if the query was successful
+        if ($result) {
+            $ptpackages = $result->fetch_all(MYSQLI_ASSOC);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $ptPackage = new ptPackages();
-                $ptPackage->ID = $row['ID'];
-                $ptPackage->Name = $row['Name'];
-                $ptPackage->NumOfSessions = $row['NumOfSessions'];
-                $ptPackage->MinPackageMonths = $row['MinPackageMonths'];
-                $ptPackage->Price = $row['Price'];
+            $result->free_result();
 
-
-                $ptpackagesarray[] = $ptPackage;
-            }
+            // Return the packages
+            return $ptpackages;
+        } else {
+            return [];
         }
-
-        return $ptpackagesarray;
     }
 
     public function addptPacks($ptPackage)
@@ -47,39 +42,30 @@ class ptPackages
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
         $Price = $ptPackage->Price;
+        $isActivated = "Activated";
     
-        $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price) 
-                VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price')";
+        $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
+                VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
         return $conn->query($sql);
     }
-    
-    public function updateptPacks($ptPackage)
-    {
-        global $conn;
-    
-        $Name = $ptPackage->Name;
-        $NumOfSessions = $ptPackage->NumOfSessions;
-        $MinPackageMonths = $ptPackage->MinPackageMonths;
-        $Price = $ptPackage->Price;
-    
-        $ptpackid = $ptPackage->ID;
-    
-        $sql = "UPDATE `private training package` 
-                SET Name='$Name', NumOfSessions='$NumOfSessions', MinPackageMonths='$MinPackageMonths', Price='$Price' 
-                WHERE ID = $ptpackid";
-    
-        return $conn->query($sql);
-    }
-    
 
-    public function deleteptPacks($ptPackage)
+    
+    public function activatePtPackage($ptpackageID)
     {
         global $conn;
-    
-        $ptpackid = $ptPackage->ID;
-    
-        $sql = "DELETE FROM `private training package` WHERE ID = $ptpackid";
-    
+
+        $sql = "UPDATE `private training package` SET isActivated='Activated' WHERE ID='$ptpackageID'";
+
+        return $conn->query($sql);
+    }
+
+
+    public function deactivatePtPackage($ptpackageID)
+    {
+        global $conn;
+
+        $sql = "UPDATE `private training package` SET isActivated='Deactivated' WHERE ID='$ptpackageID'";
+
         return $conn->query($sql);
     }
 
