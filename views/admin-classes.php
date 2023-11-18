@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="../public/js/classes.js"></script>
 </head>
 
 <style>
@@ -71,7 +72,7 @@
     <hr>
     <h2 class="admin-classes-css">Create New Class : </h2>
     <label for="coaches"> Select The Coach : </label>
-    <select name="coaches" id="">
+    <select name="coaches" id="select-coaches" onchange="getclasses()">
         <option value="">Select Coach </option>
         
         <?php
@@ -80,7 +81,6 @@
          echo "in";
          $result=Coach::Get_All();
         foreach ($result as $coach){
-          
             echo "<option value='".$coach["ID"]."'>".$coach["Name"]."</option>";
         }
         ?>
