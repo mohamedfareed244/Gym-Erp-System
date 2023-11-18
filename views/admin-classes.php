@@ -43,6 +43,7 @@ span[id$="-err"],#success {
     session_start();
     require("partials/adminsidebar.php");
      ?>
+         <script src="../public/js/addClass.js"></script>
     <div id="add-body">
         <table class="table">
             <thead>
@@ -85,7 +86,7 @@ span[id$="-err"],#success {
         <br>
         <hr>
         <h2 class="admin-classes-css">Create New Class : </h2>
-        <form method="post" autocomplete="off" action="../Controllers/ClassController.php">
+        <form method="post" autocomplete="off" action="../Controllers/ClassController.php"  onsubmit="return validateForm()">
         <input type="hidden" name="action" value="addClass">
         <label for="coaches"> Select The Coach : </label>
         <select name="coaches" id="select-coaches" onchange="getclasses()">
@@ -108,7 +109,7 @@ span[id$="-err"],#success {
 
         </select>
 
-        
+
         <span id="coach-err"><?php echo isset($_SESSION["coachErr"]) ? $_SESSION["coachErr"] : ''; ?></span>
         <br>
         <hr>
