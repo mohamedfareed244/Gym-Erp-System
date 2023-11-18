@@ -22,7 +22,7 @@
             <h4>Add Private Training Session:</h2>
                 <hr>
                 <div class="pt row">
-                    <form action="" class="pt row">
+                    <form  method="post" action="../Models/ptPackageModel.php" class="pt row">
                         <div class="col-lg-4 col-md-12">
                             <label for="package-name">Package Name : </label>
                         </div>

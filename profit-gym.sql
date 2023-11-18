@@ -243,20 +243,22 @@ CREATE TABLE `package` (
   `NumOfInvitations` int(50) NOT NULL,
   `NumOfInbodySessions` int(50) NOT NULL,
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
-  `Price` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Price` int(50) NOT NULL,
+  `isActivated` varchar(20) NOT NULL
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 --
 -- Dumping data for table `package`
 --
 
-INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`) VALUES
-(7, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600),
-(8, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800),
-(9, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100),
-(10, '4 Months + 2 Months Free', 6, 'unlimited', 0, 50, 6, 5, 5, 2500),
-(11, '6 Months + 3 Months Free', 9, 'unlimited', 0, 80, 7, 6, 6, 3400),
-(12, 'mohamed', 3, 'unlimited', 0, 30, 3, 4, 4, 400);
+INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`, `isActivated`) VALUES
+(12, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600, 'Deactivated'),
+(13, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800, 'Activated'),
+(14, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100, 'Activated'),
+(15, '4 Months + 2 Months Free', 6, 'unlimited', 0, 30, 5, 3, 3, 2500, 'Activated'),
+(16, '6 Months + 3 Months Free', 9, 'unlimited', 0, 70, 7, 6, 6, 3400, 'Activated');
 
 -- --------------------------------------------------------
 
