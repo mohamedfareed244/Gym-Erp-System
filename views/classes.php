@@ -76,50 +76,80 @@
 
                 <div class="card">
                     <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <h3>Yoga Class</h3>
+                    <p>Yoga classes focus on improving flexibility, strength, and mental well-being 
+                        through a combination of physical postures, breath control, and meditation.</p>
                 </div>
 
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../public/Images/zumba2.jpg">
+                    <h3>Zumba Class</h3>
+                    <p>Zumba is a dance-based fitness class 
+                        that incorporates Latin and international music. 
+                        It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.</p>
                 </div>
 
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../public/Images/pilates.jpg">
+                    <h3>Pilates Class</h3>
+                    <p>Pilates focuses on core strength, flexibility, and overall body awareness. 
+                        It involves precise movements and controlled breathing to improve posture and build long, lean muscles.</p>
                 </div>
 
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../public/Images/aerobics1.jpg">
+                    <h3>Aqua Aerobics Class</h3>
+                    <p>Aqua aerobics takes traditional aerobic exercises into the pool. The water 
+                        provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.</p>
                 </div>
 
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../public/Images/mind.jpg">
+                    <h3>Mind-Body Fusion Class</h3>
+                    <p>Classes like Barre combine elements of ballet, Pilates, and yoga.
+                         They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.</p>
                 </div>
 
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../public/Images/cycling.jpg">
+                    <h3>Indoor Cycling Class</h3>
+                    <p>In these high-energy classes, participants pedal stationary bikes to the beat of music. 
+                        It's an effective cardiovascular workout that also strengthens the legs and core.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/kettlebell.jpg">
+                    <h3>Kettlebell Training Class</h3>
+                    <p>In these high-energy classes, participants pedal stationary bikes to the beat of music. 
+                        It's an effective cardiovascular workout that also strengthens the legs and coreKettlebell classes use kettlebells, 
+                        which are weighted balls with handles, for dynamic strength training. They engage multiple muscle groups, improve coordination, and enhance power.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/circuit.jpg">
+                    <h3>Circuit Training Class</h3>
+                    <p>Circuit training involves moving through a series of different exercises at stations with minimal rest. 
+                        It combines strength and cardiovascular training for an efficient and effective workout.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/parkour.jpg">
+                    <h3>Parkour Class</h3>
+                    <p> Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/aerial.jpg">
+                    <h3>Aerial Yoga Class</h3>
+                    <p> Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. 
+                        It adds an element of suspension and flexibility, enhancing strength and balance.</p>
+                </div>
+
+                <div class="card">
+                    <img src="../public/Images/strength1.jpg">
+                    <h3>Strength and Conditioning Class</h3>
+                    <p> Strength and conditioning classes focus on improving overall athletic performance. 
+                        They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.</p>
                 </div>
 
             </div>
