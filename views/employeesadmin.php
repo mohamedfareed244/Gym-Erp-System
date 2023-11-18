@@ -90,9 +90,16 @@
           </div>
           <select name="jobTitle" id="jobs">
             <option value="">Select job</option>
-            <option value="Sales Person"> Sales Person</option>
-            <option value="Fitness Manager"> Fitness Manager </option>
-            <option value="hr">HR</option>
+            <?php include_once "../Models/hrmodel.php";  
+            $result =getjobtitles();
+            foreach ($result as $title){
+              
+              echo "<option value='".$title["Id"]."'> ".$title["Name"]."</option>";
+            }
+            
+            ?>
+            
+            
           </select>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Salary: </label>
