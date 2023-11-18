@@ -58,7 +58,8 @@
               echo "<td>" . $employee->Address . "</td>";
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
-              echo "<td><button class=\"btn\">Edit</button><button class=\"btn btn-delete\">Delete</button></td>";
+              echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
+              echo "<button class=\"btn btn-delete\">Delete</button></td>";
               echo "</tr>";
             }
             ?>
