@@ -2,21 +2,11 @@
 
 
 include_once "../includes/dbh.inc.php";
-
+include_once "employeeModel.php";
 
 class Coach extends Employee
 {
-    public $ID;
-    public $Name;
-    public $Email;
-    public $Password;
-    public $Salary;
-    public $JobTitle;
-    public $Address;
-    public $PhoneNumber;
-
-
-
+  
     public function getAssignedClasses($employee)
     {
         global $conn;
@@ -131,6 +121,14 @@ class Coach extends Employee
         }
 
         return $RegisteredPTClients;
+    }
+
+    public static function Get_All(){
+        global $conn;
+    $sql="SELECT * FROM employee where JobTitle = 'Coach' OR JobTitle='Fitness-manager'";
+    $result=mysqli_query($conn,$sql);
+ 
+    return $result;
     }
 }
 ?>

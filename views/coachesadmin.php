@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <?php include("partials/adminsidebar.php") ?>
+    <?php include("./partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
 
         <div class="container">
@@ -34,52 +34,36 @@
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Class</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Salary</th>
                             <th scope="col">Address</th>
+                            <th scope="col">JobTitle</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Karim Ayman</td>
-                            <td>example@gmail.com</td>
-                            <td>Body Attack</td>
-                            <td>011111111</td>
-                            <td>50000</td>
-                            <td>New Cairo City</td>
-                            <td>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>Mervat Mohammed</td>
-                            <td>example@gmail.com</td>
-                            <td>Yoga</td>
-                            <td>011111111</td>
-                            <td>50000</td>
-                            <td>New Cairo City</td>
-                            <td>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>Hannah Ahmed</td>
-                            <td>example@gmail.com</td>
-                            <td>Pilates</td>
-                            <td>011111111</td>
-                            <td>50000</td>
-                            <td>New Cairo City</td>
-                            <td>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
+                 <?php
+               
+                 include_once "../Models/CoachesModel.php";
+                 $result=Coach::Get_All();
+                 foreach($result as $coach ){
+                    echo " <tr>
+                    <td>".$coach["Name"]."</td>
+                    <td>".$coach["Email"]."</td>
+                    
+                    <td>".$coach["PhoneNumber"]."</td>
+                    <td>".$coach["Salary"]."</td>
+                    <td>".$coach["Address"]."</td>
+                    <td>".$coach["JobTitle"]."</td>
+                    <td>
+                        <button class='btn'>Edit</button>
+                        <button class='btn btn-delete'>Delete</button>
+                    </td>
+                </tr>";
+                 }
+                       
+                 
+                 ?>
                     </tbody>
                 </table>
             </div>
