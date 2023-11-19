@@ -16,24 +16,22 @@ class Classes{
    
     public static function getAllClasses(){
         global $conn;
-         $sql = "SELECT * FROM `class`";
-         $result = $conn->query($sql);
-         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $class = new Classes();
-                $class->ID = $row['ID'];
-                $class->ClassID = $row['ClassID'];
-                $class->Date = $row['Date'];
-                $class->StartTime = $row['StartTime'];
-                $class->EndTime = $row['EndTime'];
-                $class->Price = $row['Price'];
-                $class->Coach = $row['Coach'];
-             
 
-                $classes[] = $class;
-            }
+        $sql = "SELECT * FROM class";
+        // Perform the query
+        $result = $conn->query($sql);
+
+        // Check if the query was successful
+        if ($result) {
+            $classes = $result->fetch_all(MYSQLI_ASSOC);
+
+            $result->free_result();
+
+            // Return the packages
+            return $classes;
+        } else {
+            return [];
         }
-        return $classes;
     }
 
     public static function assignClass($class)
