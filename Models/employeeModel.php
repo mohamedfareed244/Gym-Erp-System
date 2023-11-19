@@ -205,4 +205,22 @@ class Employee
         ];
     }
 
+public static function GetAllClasses()
+{
+    global $conn;
+
+    $sql = "SELECT ID, Name FROM class";
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $classes = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free_result();
+        $conn->close();
+        return $classes;
+    } else {
+        $conn->close();
+        return [];
+    }
+}
+
 }

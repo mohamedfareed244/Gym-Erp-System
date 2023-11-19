@@ -6,7 +6,7 @@ include_once "../includes/dbh.inc.php";
 class Classes{
     
     public $ID;
-    public $Name;
+    public $ClassID;
     public $Date;
     public $StartTime;
     public $EndTime;
@@ -22,7 +22,7 @@ class Classes{
             while ($row = $result->fetch_assoc()) {
                 $class = new Classes();
                 $class->ID = $row['ID'];
-                $class->Name = $row['Name'];
+                $class->ClassID = $row['ClassID'];
                 $class->Date = $row['Date'];
                 $class->StartTime = $row['StartTime'];
                 $class->EndTime = $row['EndTime'];
@@ -36,11 +36,11 @@ class Classes{
         return $classes;
     }
 
-    public static function addClass($class)
+    public static function assignClass($class)
     {
         global $conn;
     
-        $Name = $class->Name;
+        $ClassID = $class->ClassID;
         $Dates = $class->Date;
         $StartTime = $class->StartTime;
         $EndTime = $class->EndTime;
@@ -51,8 +51,8 @@ class Classes{
         $finalresult = true; // Initialize result
     
         foreach ($Dates as $Date) {
-            $sql = "INSERT INTO class (Name, Date, StartTime, EndTime, isFree, Price, Coach) 
-                    VALUES ('$Name', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$Coach')";
+            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, Coach) 
+                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$Coach')";
     
             $result = mysqli_query($conn, $sql);
     
@@ -63,12 +63,20 @@ class Classes{
     
         return $finalresult;
     }
-    
+
+    public static function addClassImage($name,$descr, $imagePath)
+{
+    global $conn; // Assuming you have a global database connection variable named $conn
+
+    $sql = "INSERT INTO class (Name, Description,imgPath) VALUES ('$name', '$descr', '$imagePath')";
+
+    return mysqli_query($conn, $sql);
+}
 
 
     public static function getid($class){
         global $conn;
-        $sql ="SELECT ID FROM class WHERE ID='$class->ID'";
+        $sql ="SELECT ID FROM assignedclass WHERE ID='$class->ID'";
         $result=mysqli_query($conn,$sql);
        
     return $result;
@@ -78,7 +86,7 @@ class Classes{
     {
         global $conn;
     
-        $Name = $class->Name;
+        $ClassID = $class->ClassID;
         $Date = $class->Date;
         $StartTime= $class->StartTime;
         $EndTime = $class->EndTime;
@@ -89,7 +97,7 @@ class Classes{
         $class_id = $_SESSION['ID'];
 
             // Update with the new password
-            $sql = "UPDATE class SET Name='$Name', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', Coach='$Coach'
+            $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', Coach='$Coach'
                     WHERE ID = $class_id";
                     return $conn->query($sql);
         

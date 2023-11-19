@@ -29,13 +29,16 @@
     padding-left: 40px;
     padding-bottom: 30px;
 }
+
 .hidden {
     display: none;
 }
-span[id$="-err"],#success {
-        color: red;
-        font-size: 16px;
-    }
+
+span[id$="-err"],
+#success {
+    color: red;
+    font-size: 16px;
+}
 </style>
 
 <body>
@@ -43,7 +46,7 @@ span[id$="-err"],#success {
     session_start();
     require("partials/adminsidebar.php");
      ?>
-         <script src="../public/js/addClass.js"></script>
+    <script src="../public/js/addClass.js"></script>
     <div id="add-body">
         <table class="table">
             <thead>
@@ -83,16 +86,63 @@ span[id$="-err"],#success {
             </tbody>
         </table>
         <br>
+
+        <h2 class="admin-classes-css">Add New Class: </h2>
+        <form method="post" autocomplete="off" action="../Controllers/ClassController.php" onsubmit="return validateAddForm()"
+            enctype="multipart/form-data">
+            <input type="hidden" name="action" value="addClass">
+            <div class="conatiner">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="name">Name : </label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <br>
+                    <br>
+                    <span id="name-err"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
+                    <div class="col-4">
+                        <label for="descr">Description : </label>
+                        <input type="text" name="descr" id="descr">
+                    </div>
+                    <br>
+                    <br>
+                    <span id="descr-err"><?php echo isset($_SESSION["descrErr"]) ? $_SESSION["descrErr"] : ''; ?></span>
+                    <div class="col-4">
+                        <label for="image">Image : </label>
+                        <input type="file" name="image" id="image">
+                    </div>
+                    <br>
+                    <br>
+                    <span id="img-err"><?php echo isset($_SESSION["imageErr"]) ? $_SESSION["imageErr"] : ''; ?></span>
+                    <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
+                </div>
+                <div class="col-m-4">
+                    <button id="add-btn">Add Class </button>
+                </div>
+                <br>
+            </div>
+        </form>
+        <?php
+        // Unset specific error messages
+unset(
+    $_SESSION["nameErr"],
+    $_SESSION["descrErr"],
+    $_SESSION["imageErr"],
+    $_SESSION["success"]
+);
+?>
+
         <br>
         <hr>
-        <h2 class="admin-classes-css">Create New Class : </h2>
-        <form method="post" autocomplete="off" action="../Controllers/ClassController.php"  onsubmit="return validateForm()">
-        <input type="hidden" name="action" value="addClass">
-        <label for="coaches"> Select The Coach : </label>
-        <select name="coaches" id="select-coaches" onchange="getclasses()">
-            <option value="">Select Coach </option>
+        <h2 class="admin-classes-css">Assign Class to Coach: </h2>
+        <form method="post" autocomplete="off" action="../Controllers/ClassController.php"
+            onsubmit="return validateAssignForm()">
+            <input type="hidden" name="action" value="assignCoachtoClass">
+            <label for="coaches"> Select The Coach : </label>
+            <select name="coaches" id="select-coaches">
+                <option value="">Select Coach </option>
 
-        <?php
+                <?php
         include_once "../Models/EmployeeModel.php";
  
         $employee = new Employee();
@@ -107,42 +157,57 @@ span[id$="-err"],#success {
         }
         ?>
 
-        </select>
+            </select>
 
 
-        <span id="coach-err"><?php echo isset($_SESSION["coachErr"]) ? $_SESSION["coachErr"] : ''; ?></span>
-        <br>
-        <hr>
-        <h3 class="admin-classes-css">Selected Coach Classes : </h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>id</td>
-                    <td>title</td>
-                    <td>From</td>
-                    <td>To</td>
-                    <td>Days</td>
-                </tr>
-            </thead>
-            <tbody>
-                <td>1</td>
-                <td>yoga class</td>
-                <td>8:00 pm </td>
-                <td>9:30 pm</td>
-                <td>saturday,sunday,monday</td>
-            </tbody>
-        </table>
-        <br>
-        <h3 class="admin-classes-css">Class Details : </h3>
+            <span id="coach-err"><?php echo isset($_SESSION["coachErr"]) ? $_SESSION["coachErr"] : ''; ?></span>
+            <br>
+            <hr>
+            <h3 class="admin-classes-css">Selected Coach Classes : </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>title</td>
+                        <td>From</td>
+                        <td>To</td>
+                        <td>Days</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td>1</td>
+                    <td>yoga class</td>
+                    <td>8:00 pm </td>
+                    <td>9:30 pm</td>
+                    <td>saturday,sunday,monday</td>
+                </tbody>
+            </table>
+            <br>
+            <h3 class="admin-classes-css">Class Details : </h3>
             <div class="conatiner">
                 <div class="row">
                     <div class="col-4">
-                        <label for="title">Title : </label>
-                        <input type="text" name="title" id="title">
+                    <label for="classes"> Select The Class : </label>
+                        <?php
+                           include_once "../Models/EmployeeModel.php";
+
+                            $employee = new Employee();
+                            $classes = $employee->GetAllClasses();
+
+                            echo "<select name='classes' id='select-classes'>";
+                            echo "<option value=''>Select Class:</option>";
+
+                            foreach ($classes as $class) {
+                                echo "<option value='" . $class["ID"] . "'>" . $class["Name"] . "</option>";
+                            }
+
+                            echo "</select>";
+                        ?>
                     </div>
+
                     <br>
-                    <span id="title-err"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ''; ?></span>
                     <br>
+                    <span id="class-err"><?php echo isset($_SESSION["classErr"]) ? $_SESSION["classErr"] : ''; ?></span>
                     <div class="col-4">
                         <label for="from">From : </label>
                         <input type="time" name="from" id="from">
@@ -157,63 +222,71 @@ span[id$="-err"],#success {
                     <br>
                     <span id="to-err"><?php echo isset($_SESSION["toErr"]) ? $_SESSION["toErr"] : ''; ?></span>
                     <br>
+                    <br>
                 </div>
-                <br>
                 <div class="price-container">
-                        <div class="free-title">Free:</div>
-                        <div class="radio-buttons">
-                            <input type="radio" id="free" name="price" value="Free" class="radio-btn"
-                                onclick="hidePriceField()">
-                            <label for="limited" id="">Yes</label>
+                    <div class="free-title">Free:</div>
+                    <div class="radio-buttons">
+                        <input type="radio" id="free" name="price" value="Free" class="radio-btn"
+                            onclick="hidePriceField()">
+                        <label for="limited" id="">Yes</label>
 
-                            <input type="radio" id="" name="price" value="NotFree" class="radio-btn"
-                                onclick="showPriceField()">
-                            <label for="unlimited" id="unlimited">No</label>
-                        </div>
-                        <span id="isFree-err"><?php echo isset($_SESSION["isFreeErr"]) ? $_SESSION["isFreeErr"] : ''; ?></span>
-                        <br>
-                        <div id="priceField" class="hidden">
-                            <label for="class-price">Price:</label>
-                            <input type="number" id="classPrice" name="class-price">
-                        </div>
-                        <span id="price-err"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
+                        <input type="radio" id="" name="price" value="NotFree" class="radio-btn"
+                            onclick="showPriceField()">
+                        <label for="unlimited" id="unlimited">No</label>
+                    </div>
+                    <span
+                        id="isFree-err"><?php echo isset($_SESSION["isFreeErr"]) ? $_SESSION["isFreeErr"] : ''; ?></span>
+                    <br>
+                    <div id="priceField" class="hidden">
+                        <label for="class-price">Price:</label>
+                        <input type="number" id="classPrice" name="class-price">
+                    </div>
+                    <span id="price-err"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
                 </div>
                 <br>
                 <h5>Choose Day/s:</h5>
                 <div class="col-m-8">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Saturday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Saturday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Sunday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Sunday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Monday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Monday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Tuesday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Tuesday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Wednesday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Wednesday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Thursday">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Thursday">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
                     </div>
                     <br>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]" value="Friday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Friday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
                     </div>
                     <br>
 
@@ -222,14 +295,14 @@ span[id$="-err"],#success {
                 <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
                 <br>
                 <div class="col-m-4">
-                    <button id="add-btn">Add Class </button>
+                    <button id="add-btn">Submit </button>
                 </div>
                 <br>
             </div>
         </form>
 
     </div>
-<?php
+    <?php
 // Unset specific error messages
 unset(
     $_SESSION["titleErr"],
@@ -243,16 +316,16 @@ unset(
 );
 ?>
     <script>
-        function showPriceField() {
-    var priceField = document.getElementById("priceField");
-    priceField.style.display = "block";
+    function showPriceField() {
+        var priceField = document.getElementById("priceField");
+        priceField.style.display = "block";
 
-}
+    }
 
-function hidePriceField() {
-    var limitField = document.getElementById("priceField");
-    priceField.style.display = "none";
-}
+    function hidePriceField() {
+        var limitField = document.getElementById("priceField");
+        priceField.style.display = "none";
+    }
     </script>
 
 </body>

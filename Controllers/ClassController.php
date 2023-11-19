@@ -6,15 +6,15 @@ session_start();
 
 class ClassController{
 
-    public function addClass()
+    public function assignCoachtoClass()
     {
-        $titleErr = $fromErr = $toErr = $daysErr = $coachErr = $success = $isFreeErr = $priceErr = "";
+        $classErr = $fromErr = $toErr = $daysErr = $coachErr = $success = $isFreeErr = $priceErr ="";
 
         $isValid = true;
         
         // Validate the "Title" field
-        if (empty($_POST["title"])) {
-            $titleErr = "Title is required";
+        if (empty($_POST["classes"])) {
+            $classErr = "Class is required";
             $isValid = false;
         } 
         
@@ -45,22 +45,23 @@ class ClassController{
             $isValid = false;
         }
         
-        if ($_POST["price"] === "NotFree" && empty($_POST["class-price"])) {
+        if ($_POST["price"] == "NotFree" && empty($_POST["class-price"])) {
             $priceErr = "Class Price is required";
             $isValid = false;
         }
 
 
-        if ($_POST["price"] === "NotFree"){
+        if ($_POST["price"] == "NotFree"){
         if (!is_numeric($_POST["class-price"]) || $_POST["class-price"] <= 0) {
             $priceErr = "Price must be a positive number";
             $isValid = false;
         }
         }
+
+
     
         if($isValid){
-
-        $title = htmlspecialchars($_POST["title"]);
+        $classID = isset($_POST['classes']) ? htmlspecialchars($_POST['classes']) : '';
         $from = htmlspecialchars($_POST["from"]);
         $to = htmlspecialchars($_POST["to"]);
         $days = $_POST["days"];
@@ -72,7 +73,7 @@ class ClassController{
 
         $newclass = new Classes();
 
-        $newclass->Name=$title;
+        $newclass->ClassID=$classID;
         $newclass->Date=$days;
         $newclass->StartTime=$from;
         $newclass->EndTime=$to;
@@ -84,18 +85,18 @@ class ClassController{
 
         $newclass->Coach=$coachID;
 
-        $result=$class->addClass($newclass);
+        $result=$class->assignClass($newclass);
 
-        if($result)
+        if($result && $result1)
         {
-            $success = "Class added successfully";
+            $success = "Class assigned to coach successfully";
             $_SESSION["success"] = $success;
             header("Location: ../views/admin-classes.php");
             exit();
         }
 
         }
-        $_SESSION["titleErr"] = $titleErr;
+        $_SESSION["classErr"] = $classErr;
         $_SESSION["fromErr"] = $fromErr;
         $_SESSION["toErr"] = $toErr;
         $_SESSION["daysErr"] = $daysErr;
@@ -107,9 +108,118 @@ class ClassController{
         exit();
 
 
+
     }
 
+    public function addClass()
+{
+    $nameErr = $descrErr = $imgErr = "";
+    $isValid = true; // Initialize $isValid
+
+    // Validate the "Name" field
+    if (empty($_POST["name"])) {
+        $nameErr = "Name is required";
+        $isValid = false;
+    }
+
+    // Validate the "Description" field
+    if (empty($_POST["descr"])) {
+        $descrErr = "Description is required";
+        $isValid = false;
+    }
+
+    // Validate the "Image" field
+    if (empty($_FILES["image"]["name"])) {
+        $imgErr = "Image is required";
+        $isValid = false;
+    }
+
+    if ($isValid) {
+        $name = htmlspecialchars($_POST["name"]);
+        $descr = htmlspecialchars($_POST["descr"]);
+
+        // Call the function to handle image upload and insertion into the database
+        $result = $this->handleImageUpload($name, $descr);
+
+        if ($result) {
+            // Image uploaded and inserted successfully
+            $_SESSION["success"] = "Class added successfully";
+            header("Location: ../views/admin-classes.php");
+            exit();
+        } else {
+            // Handle the case where image upload or insertion fails
+            $_SESSION["imgErr"] = "Failed to upload image or insert into the database";
+            header("Location: ../views/admin-classes.php");
+            exit();
+        }
+    } else {
+        // Validation failed, redirect back to the form with error messages
+        $_SESSION["nameErr"] = $nameErr;
+        $_SESSION["descrErr"] = $descrErr;
+        $_SESSION["imgErr"] = $imgErr;
+        header("Location: ../views/admin-classes.php");
+        exit();
+    }
 }
+        
+public function handleImageUpload($name, $descr)
+{
+    global $conn;
+
+    $imgErr = "";
+    $isValid = true;
+
+    $uploadDir = "../public/Images/"; // Set your desired upload directory
+    $uploadFile = $uploadDir . basename($_FILES["image"]["name"]);
+    $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+
+    // Check if the file is an image
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check !== false) {
+        // Check if the file already exists
+        if (file_exists($uploadFile)) {
+            $imgErr = "File already exists.";
+            $isValid = false;
+        } else {
+            // Check if the file type is allowed (you can customize this list)
+            if ($imageFileType == "jpg" || $imageFileType == "jpeg" || $imageFileType == "png" || $imageFileType == "gif") {
+                // Move the uploaded file to the desired directory
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFile)) {
+                    // File uploaded successfully
+                    // Insert the image information into the database
+                    $imagePath = "public/Images/" . basename($_FILES["image"]["name"]);
+                    $result = Classes::addClassImage($name, $descr, $imagePath);
+
+                    if ($result) {
+                        return true;
+                    } else {
+                        // Delete the uploaded file if insertion into the database fails
+                        unlink($uploadFile);
+                        return false;
+                    }
+                } else {
+                    $imgErr = "Failed to upload image.";
+                    $isValid = false;
+                }
+            } else {
+                $imgErr = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+                $isValid = false;
+            }
+        }
+    } else {
+        $imgErr = "File is not an image.";
+        $isValid = false;
+    }
+
+    // Set the error message and return false if any validation fails
+    $_SESSION["imgErr"] = $imgErr;
+    return false;
+}
+}
+
+    
+
+
 
 
 $controller = new ClassController();
@@ -120,6 +230,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($action) {
         case "addClass":
             $controller->addClass();
+            break;
+         case "assignCoachtoClass":
+            $controller->assignCoachtoClass();
             break;
         default:
             // Handle unknown action or display an error

@@ -1,4 +1,4 @@
-function validateForm() {
+function validateAssignForm() {
     const title = document.getElementById('title');
     const from = document.getElementById('from');
     const to = document.getElementById('to');
@@ -61,6 +61,44 @@ function validateForm() {
         isValid = false;
     } else {
         daysError.innerText = '';
+    }
+
+    return isValid;
+}
+
+function validateAddForm() {
+    const name = document.getElementById('name');
+    const descr = document.getElementById('descr');
+    const image = document.getElementById('image');
+
+    const nameError = document.getElementById('name-err');
+    const descrError = document.getElementById('descr-err');
+    const imageError = document.getElementById('img-err');
+
+    let isValid = true;
+
+    // Name validation
+    if (name.value.trim() === '') {
+        nameError.innerText = 'Name is required';
+        isValid = false;
+    } else {
+        nameError.innerText = '';
+    }
+
+    // Description validation
+    if (descr.value.trim() === '') {
+        descrError.innerText = 'Description is required';
+        isValid = false;
+    } else {
+        descrError.innerText = '';
+    }
+
+    // Image validation
+    if (image.value.trim() === '') {
+        imageError.innerText = 'Image is required';
+        isValid = false;
+    } else {
+        imageError.innerText = '';
     }
 
     return isValid;
