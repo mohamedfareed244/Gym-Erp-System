@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 10:01 PM
+-- Generation Time: Nov 19, 2023 at 11:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `profit-gym`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignedclass`
+--
+
+CREATE TABLE `assignedclass` (
+  `ID` int(11) NOT NULL,
+  `ClassID` int(11) NOT NULL,
+  `Date` varchar(30) NOT NULL,
+  `StartTime` time(6) NOT NULL,
+  `EndTime` time(6) NOT NULL,
+  `isFree` varchar(20) NOT NULL,
+  `Price` int(50) NOT NULL,
+  `Coach` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assignedclass`
+--
+
+INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `Coach`) VALUES
+(1, 3, 'Sunday', '12:00:00.000000', '13:30:00.000000', 'NotFree', 300, 4),
+(2, 3, 'Wednesday', '12:00:00.000000', '13:30:00.000000', 'NotFree', 300, 4),
+(3, 2, 'Tuesday', '18:00:00.000000', '19:30:00.000000', 'Free', 0, 3),
+(4, 2, 'Thursday', '18:00:00.000000', '19:30:00.000000', 'Free', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -76,23 +103,25 @@ CREATE TABLE `available slots` (
 
 CREATE TABLE `class` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(50) NOT NULL,
-  `Date` varchar(30) NOT NULL,
-  `StartTime` time(6) NOT NULL,
-  `EndTime` time(6) NOT NULL,
-  `isFree` varchar(20) NOT NULL,
-  `Price` int(50) NOT NULL,
-  `Coach` int(10) NOT NULL
+  `Name` varchar(30) NOT NULL,
+  `Description` varchar(500) NOT NULL,
+  `imgPath` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `class`
 --
 
-INSERT INTO `class` (`ID`, `Name`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `Coach`) VALUES
-(8, 'Zumba', 'Saturday', '17:00:00.000000', '18:30:00.000000', 'NotFree', 200, 3),
-(9, 'Zumba', 'Monday', '17:00:00.000000', '18:30:00.000000', 'NotFree', 200, 3),
-(10, 'Zumba', 'Wednesday', '17:00:00.000000', '18:30:00.000000', 'NotFree', 200, 3);
+INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
+(1, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
+(2, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being                          through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
+(3, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness.                          It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
+(4, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
+(5, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
+(6, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
+(7, 'Parkour ', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
+(8, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
+(9, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
 
 -- --------------------------------------------------------
 
@@ -354,6 +383,12 @@ CREATE TABLE `reserved private training free session` (
 --
 
 --
+-- Indexes for table `assignedclass`
+--
+ALTER TABLE `assignedclass`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `authority`
 --
 ALTER TABLE `authority`
@@ -470,6 +505,12 @@ ALTER TABLE `reserved private training free session`
 --
 
 --
+-- AUTO_INCREMENT for table `assignedclass`
+--
+ALTER TABLE `assignedclass`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
 -- AUTO_INCREMENT for table `authority`
 --
 ALTER TABLE `authority`
@@ -485,7 +526,7 @@ ALTER TABLE `available slots`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -572,7 +613,7 @@ ALTER TABLE `private training membership`
 --
 ALTER TABLE `reserved class`
   ADD CONSTRAINT `test10` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test8` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `test8` FOREIGN KEY (`ClassID`) REFERENCES `assignedclass` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test9` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -587,4 +628,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
