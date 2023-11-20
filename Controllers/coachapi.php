@@ -7,14 +7,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($data as $key => $value) {
        $id=$value;
     }
+    $daysarr=array();
     $result=Coach::getClassesForCoach($id);
+   foreach ($result as $row){
+    $result1=Coach::getclassdays($row['ID']);
+    $daysarr[$row['ID']]=array();
+    foreach ($result1 as $row1){
+$
+    }
+   }
 $arr=[];
-
 $arr['key']='hello';
-// foreach($result as $row){
-//     $arr[]='key'=>'hello';
-  
-// }
+$arr['key1']='hello';
+$arr['key2']='hello';
+
     if ($data !== null) {
         $response = ['message' => 'This is a POST request.', 'data' => $arr];
         echo json_encode($response);
