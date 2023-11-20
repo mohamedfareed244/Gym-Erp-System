@@ -7,15 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--css/icons/boostrap/jquery/fonts/images start-->
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script> <!--css/icons/boostrap/jquery/fonts/images start-->
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
   <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!--css/icons/boostrap/jquery/fonts/images end-->
 
   <title>Admin Dashboard</title>
 </head>
@@ -89,17 +95,23 @@
             <label for="name">Name: </label>
           </div>
           <input type="text" name="name">
-          <span id="name-error"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
+          <span id="name-error">
+            <?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?>
+          </span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Phone Number: </label>
           </div>
           <input type="text" name="phoneNumber">
-          <span id="phoneno-error"><?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?></span>
+          <span id="phoneno-error">
+            <?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?>
+          </span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Email: </label>
           </div>
           <input type="email" name="email">
-          <span id="email-error"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?></span>
+          <span id="email-error">
+            <?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?>
+          </span>
           <div class="col-lg-4 col-sm-12">
             <label for="jobs">Job Title :</label>
           </div>
@@ -113,23 +125,33 @@
 
             ?>
           </select>
-          <span id="jobTitle-error"><?php echo isset($_SESSION["jobTitleErr"]) ? $_SESSION["jobTitleErr"] : ''; ?></span>
+          <span id="jobTitle-error">
+            <?php echo isset($_SESSION["jobTitleErr"]) ? $_SESSION["jobTitleErr"] : ''; ?>
+          </span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Salary: </label>
           </div>
           <input type="number" name="salary" min="1000">
-          <span id="salary-error"><?php echo isset($_SESSION["salaryErr"]) ? $_SESSION["salaryErr"] : ''; ?></span>
+          <span id="salary-error">
+            <?php echo isset($_SESSION["salaryErr"]) ? $_SESSION["salaryErr"] : ''; ?>
+          </span>
           <div class="col-lg-12 col-sm-12">
             <label for="name">Address: </label>
           </div>
           <input type="text" name="address">
-          <span id="address-error"><?php echo isset($_SESSION["addressErr"]) ? $_SESSION["addressErr"] : ''; ?></span>
+          <span id="address-error">
+            <?php echo isset($_SESSION["addressErr"]) ? $_SESSION["addressErr"] : ''; ?>
+          </span>
           <div class="col-lg-4 col-sm-12">
             <label for="name">Password: </label>
           </div>
           <input type="password" name="password" style="margin-bottom:20px">
-          <span id="password-error"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?></span>
-          <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
+          <span id="password-error">
+            <?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?>
+          </span>
+          <span id="success">
+            <?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?>
+          </span>
           <br>
           <!-- <hr>
           <h2 class="coaches-title">New Employee's Authorities: </h2>
@@ -240,7 +262,7 @@
           action: "deleteEmployee",
           employeeId: employeeId,
         },
-        success: function(response) {
+        success: function (response) {
           if (response === "success") {
             var tableRow = document.getElementById('row-' + employeeId);
             if (tableRow) {
@@ -252,7 +274,7 @@
             console.log("Error deleting employee.");
           }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.error("AJAX error: " + status + " - " + error);
         },
       });

@@ -85,7 +85,7 @@
 
             </div>
             <hr>
-            <h2 class="table-title">Classes: </h2>
+            <!-- <h2 class="table-title">Classes: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <thead>
@@ -154,7 +154,7 @@
                             </tr>
                         </tbody>
                     </table>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
