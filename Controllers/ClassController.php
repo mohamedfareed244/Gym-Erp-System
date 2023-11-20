@@ -8,7 +8,7 @@ class ClassController{
 
     public function assignCoachtoClass()
     {
-        $classErr = $fromErr = $toErr = $daysErr = $coachErr = $success = $isFreeErr = $priceErr ="";
+        $classErr = $fromErr = $toErr = $daysErr = $coachErr = $success = $isFreeErr = $priceErr = $attendantsErr = "";
 
         $isValid = true;
         
@@ -58,6 +58,11 @@ class ClassController{
         }
         }
 
+        if (!is_numeric($_POST["attendants"]) || $_POST["attendants"] <= 0) {
+            $daysErr = "Attendants must be positive number";
+            $isValid = false;
+        } 
+
 
     
         if($isValid){
@@ -68,6 +73,8 @@ class ClassController{
         $coachID = isset($_POST['coaches']) ? htmlspecialchars($_POST['coaches']) : '';
         $isFree=htmlspecialchars($_POST["price"]);
         $price = htmlspecialchars($_POST["class-price"]);
+        $attendants=htmlspecialchars($_POST["attendants"]);
+
 
         $class = new Classes();
 
@@ -83,7 +90,8 @@ class ClassController{
         $newclass->Price=$price;
         }
 
-        $newclass->Coach=$coachID;
+        $newclass->CoachID=$coachID;
+        $newclass->NumOfAttendants=$attendants;
 
         $result=$class->assignClass($newclass);
 
@@ -103,6 +111,7 @@ class ClassController{
         $_SESSION["coachErr"] = $coachErr;
         $_SESSION["isFreeErr"]=$isFreeErr;
         $_SESSION["priceErr"]=$priceErr;
+        $_SEESION["attendantsErr"]=$attendantsErr;
         $_SESSION["success"] = $success;
         header("Location: ../views/admin-classes.php");
         exit();
@@ -113,7 +122,7 @@ class ClassController{
 
     public function addClass()
 {
-    $nameErr = $descrErr = $imgErr = "";
+    $nameErr = $descrErr = $imgErr = $daysErr = "";
     $isValid = true; // Initialize $isValid
 
     // Validate the "Name" field
@@ -134,12 +143,19 @@ class ClassController{
         $isValid = false;
     }
 
+    // Validate the "Days" field
+    if (empty($_POST["days"]) || count($_POST["days"]) === 0) {
+        $daysErr = "At least one day must be selected";
+         $isValid = false;
+    } 
+
     if ($isValid) {
         $name = htmlspecialchars($_POST["name"]);
         $descr = htmlspecialchars($_POST["descr"]);
+        $days = $_POST["days"];
 
         // Call the function to handle image upload and insertion into the database
-        $result = $this->handleImageUpload($name, $descr);
+        $result = $this->handleImageUpload($name, $descr,$days);
 
         if ($result) {
             // Image uploaded and inserted successfully
@@ -157,12 +173,13 @@ class ClassController{
         $_SESSION["nameErr"] = $nameErr;
         $_SESSION["descrErr"] = $descrErr;
         $_SESSION["imgErr"] = $imgErr;
+        $_SESSION["daysErr"] =$daysErr;
         header("Location: ../views/admin-classes.php");
         exit();
     }
 }
         
-public function handleImageUpload($name, $descr)
+public function handleImageUpload($name, $descr,$days)
 {
     global $conn;
 
@@ -188,7 +205,7 @@ public function handleImageUpload($name, $descr)
                     // File uploaded successfully
                     // Insert the image information into the database
                     $imagePath = "public/Images/" . basename($_FILES["image"]["name"]);
-                    $result = Classes::addClassImage($name, $descr, $imagePath);
+                    $result = Classes::addClass($name, $descr, $imagePath,$days);
 
                     if ($result) {
                         return true;

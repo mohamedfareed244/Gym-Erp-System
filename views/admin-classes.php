@@ -17,6 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="../public/js/classes.js?v=<?php echo time();?>"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <style>
@@ -46,7 +48,12 @@ span[id$="-err"],
     session_start();
     require("partials/adminsidebar.php");
      ?>
+
     <script src="../public/js/addClass.js"></script>
+    <?php include_once "../Models/ClassesModel.php";
+    $class = new Classes();
+    $results=$class->getallCoachesandClasses();
+    ?>
     <div id="add-body">
         <table class="table">
             <thead>
@@ -62,27 +69,18 @@ span[id$="-err"],
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($results as $result):?>
                 <tr>
-                    <td> 1</td>
-                    <td>yoga class</td>
-                    <td>mohamed</td>
-                    <td>0123456789</td>
+                    <td> <?php echo $result['ClassID'] ?> </td>
+                    <td> <?php echo $result['ClassName'] ?> </td>
+                    <td> <?php echo $result['CoachName'] ?></td>
+                    <td> <?php echo $result['PhoneNumber'] ?> </td>
+                    <td> <?php echo $result['Date'] ?> </td>
 
-                    <td>Saturday, Sunday, Monday</td>
                     <td><button id="add-btn">View Clients</button> <button id="add-btn"
                             style="background-color:red; color:white;">Delete</button></td>
                 </tr>
-                <tr>
-                    <td> 1
-                    </td>
-                    <td>yoga class</td>
-                    <td>Mohamed</td>
-                    <td>0123456789</td>
-
-                    <td>Saturday, Sunday, Monday</td>
-                    <td><button id="add-btn">View Clients</button> <button id="add-btn"
-                            style="background-color:red; color:white;">Delete</button></td>
-                </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <br>
@@ -95,25 +93,80 @@ span[id$="-err"],
                 <div class="row">
                     <div class="col-4">
                         <label for="name">Name : </label>
+                        <br>
                         <input type="text" name="name" id="name">
                     </div>
                     <br>
                     <br>
                     <span id="name-err"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
+                    <br>
                     <div class="col-4">
                         <label for="descr">Description : </label>
+                        <br>
                         <input type="text" name="descr" id="descr">
                     </div>
                     <br>
                     <br>
                     <span id="descr-err"><?php echo isset($_SESSION["descrErr"]) ? $_SESSION["descrErr"] : ''; ?></span>
+                    <br>
                     <div class="col-4">
                         <label for="image">Image : </label>
+                        <br>
                         <input type="file" name="image" id="image">
                     </div>
                     <br>
                     <br>
                     <span id="img-err"><?php echo isset($_SESSION["imageErr"]) ? $_SESSION["imageErr"] : ''; ?></span>
+                    <br>
+                    <label for ="days">Select Day/s:</label>
+                <div class="col-m-8">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Saturday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Sunday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Monday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Tuesday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Wednesday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Thursday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
+                            value="Friday">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
+                    </div>
+                    <br>
+
+                </div>
+                <br>
+                <br>
+                    <span id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
                     <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
                 </div>
                 <div class="col-m-4">
@@ -164,30 +217,15 @@ unset(
             <br>
             <hr>
             <h3 class="admin-classes-css">Selected Coach Classes : </h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>id</td>
-                        <td>title</td>
-                        <td>From</td>
-                        <td>To</td>
-                        <td>Days</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>1</td>
-                    <td>yoga class</td>
-                    <td>8:00 pm </td>
-                    <td>9:30 pm</td>
-                    <td>saturday,sunday,monday</td>
-                </tbody>
-            </table>
+            <div id="selectedCoachClasses">
+            </div>
             <br>
             <h3 class="admin-classes-css">Class Details : </h3>
             <div class="conatiner">
                 <div class="row">
                     <div class="col-4">
                     <label for="classes"> Select The Class : </label>
+                    <br>
                         <?php
                            include_once "../Models/EmployeeModel.php";
 
@@ -202,14 +240,18 @@ unset(
                             }
 
                             echo "</select>";
+
+                            
                         ?>
                     </div>
 
                     <br>
                     <br>
                     <span id="class-err"><?php echo isset($_SESSION["classErr"]) ? $_SESSION["classErr"] : ''; ?></span>
+                    <br>
                     <div class="col-4">
                         <label for="from">From : </label>
+                        <br>
                         <input type="time" name="from" id="from">
                     </div>
                     <br>
@@ -217,6 +259,7 @@ unset(
                     <br>
                     <div class="col-4">
                         <label for="to">To : </label>
+                        <br>
                         <input type="time" name="to" id="to">
                     </div>
                     <br>
@@ -240,60 +283,26 @@ unset(
                     <br>
                     <div id="priceField" class="hidden">
                         <label for="class-price">Price:</label>
+                        <br>
                         <input type="number" id="classPrice" name="class-price">
                     </div>
                     <span id="price-err"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
+                    <br>
+                    <div class="col-4">
+                        <label for="attendants">Number of Attendants: </label>
+                        <br>
+                        <input type="number" name="attendants" id="attendants">
+                    </div>
+                    <br>
+                    <span id="attendants-err"><?php echo isset($_SESSION["attendantsErr"]) ? $_SESSION["attendantsErr"] : ''; ?></span>
                 </div>
                 <br>
-                <h5>Choose Day/s:</h5>
-                <div class="col-m-8">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Saturday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Sunday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Monday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Tuesday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Wednesday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Thursday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Friday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
-                    </div>
-                    <br>
-
-                </div>
                 <span id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
                 <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
-                <br>
+                <div id="days-container">
+
+
+                </div>
                 <div class="col-m-4">
                     <button id="add-btn">Submit </button>
                 </div>
@@ -326,6 +335,60 @@ unset(
         var limitField = document.getElementById("priceField");
         priceField.style.display = "none";
     }
+
+
+
+    $(document).ready(function() {
+    // Attach change event to the select element
+    $('#select-classes').change(function() {
+        // Get the selected class ID
+        var classId = $(this).val();
+
+        // Check if a class is selected
+        if (classId !== '') {
+            // Use AJAX to fetch days for the selected class
+            $.ajax({
+                url: 'getClassDays.php', // Update the path to your PHP script
+                type: 'POST',
+                data: { classId: classId },
+                success: function(response) {
+                    // Update the days-container with the fetched days
+                    $('#days-container').html(response);
+                }
+            });
+        } else {
+            // If no class is selected, clear the days-container
+            $('#days-container').html('');
+        }
+    });
+});
+
+
+$(document).ready(function() {
+    // Attach change event to the select element
+    $('#select-coaches').change(function() {
+        // Get the selected class ID
+        var coachId = $(this).val();
+
+        // Check if a class is selected
+        if (coachId !== '') {
+            // Use AJAX to fetch days for the selected class
+            $.ajax({
+                url: 'getSelectedCoachClasses.php', // Update the path to your PHP script
+                type: 'POST',
+                data: {coachId: coachId },
+                success: function(response) {
+                    // Update the days-container with the fetched days
+                    $('#selectedCoachClasses').html(response);
+                }
+            });
+        } else {
+            // If no class is selected, clear the days-container
+            $('#selectedCoachClasses').html('');
+        }
+    });
+});
+
     </script>
 
 </body>

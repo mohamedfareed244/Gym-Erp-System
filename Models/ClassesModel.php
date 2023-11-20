@@ -12,7 +12,8 @@ class Classes{
     public $EndTime;
     public $isFree;
     public $Price;
-    public $Coach;
+    public $CoachID;
+    public $NumOfAttendants;
    
     public static function getAllClasses(){
         global $conn;
@@ -44,13 +45,14 @@ class Classes{
         $EndTime = $class->EndTime;
         $isFree =$class->isFree;
         $Price = $class->Price;
-        $Coach = $class->Coach;
+        $CoachID = $class->CoachID;
+        $NumOfAttendants=$class->NumOfAttendants;
     
         $finalresult = true; // Initialize result
     
         foreach ($Dates as $Date) {
-            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, Coach) 
-                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$Coach')";
+            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, CoachID,NumOfAttendants) 
+                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$CoachID','$NumOfAttendants')";
     
             $result = mysqli_query($conn, $sql);
     
@@ -62,14 +64,34 @@ class Classes{
         return $finalresult;
     }
 
-    public static function addClassImage($name,$descr, $imagePath)
-{
-    global $conn; // Assuming you have a global database connection variable named $conn
-
-    $sql = "INSERT INTO class (Name, Description,imgPath) VALUES ('$name', '$descr', '$imagePath')";
-
-    return mysqli_query($conn, $sql);
-}
+    public static function addClass($name, $descr, $imagePath, $days)
+    {
+        global $conn; // Assuming you have a global database connection variable named $conn
+    
+        $sql = "INSERT INTO class (Name, Description, imgPath) VALUES ('$name', '$descr', '$imagePath')";
+    
+        // Execute the first query to insert the class
+        $result1 = mysqli_query($conn, $sql);
+    
+        // Check if the first query was successful
+        if ($result1) {
+            $classId = mysqli_insert_id($conn);
+    
+            // Loop through the days and execute the second query for each day
+            foreach ($days as $day) {
+                $mysql = "INSERT INTO class_days (ClassID, Day) VALUES ('$classId', '$day')";
+                $result2 = mysqli_query($conn, $mysql);
+                
+                // Check if the second query failed
+                if (!$result2) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     public static function getid($class){
@@ -78,6 +100,25 @@ class Classes{
         $result=mysqli_query($conn,$sql);
        
     return $result;
+    }
+
+    public static function getClassDaysById($classId)
+    {
+        global $conn; // Assuming you have a global database connection variable named $conn
+    
+        $sql = "SELECT Day FROM class_days WHERE ClassID = '$classId'";
+    
+        $result = mysqli_query($conn, $sql);
+    
+        $days = array();
+    
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $days[] = $row['Day'];
+            }
+        }
+    
+        return $days;
     }
 
     public function updateClass($class)
@@ -89,13 +130,15 @@ class Classes{
         $StartTime= $class->StartTime;
         $EndTime = $class->EndTime;
         $Price = $class->Price;        
-        $Coach = $class->Coach;
+        $CoachID = $class->CoachID;
+        $NumOfAttendants=$class->NumOfAttendants;
 
     
         $class_id = $_SESSION['ID'];
 
             // Update with the new password
-            $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', Coach='$Coach'
+            $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', CoachID='$CoachID' ,
+            NumOfAttendants='$NumOfAttendants'
                     WHERE ID = $class_id";
                     return $conn->query($sql);
         
@@ -112,7 +155,70 @@ class Classes{
 
     }
 
+
+    public function getSelectedCoachClasses($coachID)
+    {
+        global $conn;
+
+        $results = array();
+
+        $sql = "SELECT assignedclass.CoachID,assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, class.Name
+        FROM assignedclass
+        INNER JOIN class ON class.ID = assignedclass.ClassID 
+        WHERE assignedclass.CoachID = '$coachID'";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+               $results[] = array(
+                'CoachID'=>$row['CoachID'],
+            'Date' => $row['Date'],
+            'StartTime' => $row['StartTime'],
+            'EndTime' => $row['EndTime'],
+            'ClassName' => $row['Name'],
+        );
+        }
+        }
+
+        return $results;
+
     }
+    
+    public function getallCoachesandClasses()
+    {
+        global $conn;
+    
+        $results = array();
+    
+        $sql = "SELECT assignedclass.ClassID, assignedclass.Date, class.Name AS ClassName, 
+                employee.Name AS CoachName, employee.PhoneNumber
+                FROM assignedclass
+                INNER JOIN class ON assignedclass.ClassID = class.ID 
+                INNER JOIN employee ON assignedclass.CoachID = employee.ID";
+    
+        $result = mysqli_query($conn, $sql);
+    
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ClassID' => $row['ClassID'],
+                    'Date' => $row['Date'],
+                    'ClassName' => $row['ClassName'],
+                    'CoachName' => $row['CoachName'],
+                    'PhoneNumber' => $row['PhoneNumber'],
+                );
+            }
+        }
+    
+        return $results;
+    }
+    
+    }
+
+
+
+    
     
 
 
