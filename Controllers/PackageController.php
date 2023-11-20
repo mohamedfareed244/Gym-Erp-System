@@ -193,8 +193,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->deactivatePackage();
             break;
         case "activateMembership":
-            if (isset($_POST["clientId"]) && isset($_POST["packageId"])) {
-                $clientId = $_POST["clientId"];
+            if (isset($_POST["membershipclientId"]) && isset($_POST["packageId"])) {
+                $clientId = $_POST["membershipclientId"];
                 $packageId = $_POST["packageId"];
 
                 $result = Memberships::createMembership($clientId, $packageId);
