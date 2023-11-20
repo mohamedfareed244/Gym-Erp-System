@@ -56,7 +56,7 @@ class Memberships
             $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
             $freezed = 0;
             $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed)
-                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '$Package->VisitsLimit', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed')";
+                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed')";
             return mysqli_query($conn, $sql);
         }
         return false;
