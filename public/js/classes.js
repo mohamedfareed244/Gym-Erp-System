@@ -9,7 +9,8 @@ fetch('../Controllers/coachapi.php', {
     body: JSON.stringify(postData),
 }) .then(response => response.json())
 .then(data => {
-    console.log('POST Response: ', data);
+    let val=data['data'];
+    console.log('POST Response: ', val['key']);
 })
 .catch(error => console.error('Error:', error));
 

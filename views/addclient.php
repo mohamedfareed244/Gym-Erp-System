@@ -16,7 +16,9 @@
 </head>
 
 <body>
-    <?php require("partials/adminsidebar.php") ?>
+    <?php require("partials/adminsidebar.php");
+   
+    ?>
 
     <div id="add-body" class="addbody">
         <div class="container">
@@ -72,7 +74,7 @@
 
                     include_once "../Models/ClientModel.php";
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+                      
                         $newclient = new Client();
                         $newclient->FirstName = $_POST['fname'];
                         $newclient->LastName = $_POST['lname'];
@@ -82,13 +84,15 @@
                         $newclient->Height = (int) $_POST['height'];
                         $newclient->Email = $_POST['email'];
                         $newclient->Phone = $_POST['phone'];
+                    
                         if (Client::checkExistingEmail($newclient->Email)) {
                             echo "<p style ='color:red;'>This Email already exist ! </p>";
                         } else if (Client::checkExistingPhone($newclient->Phone)) {
                             echo "<p style ='color:red;'>This Phone already exist ! </p>";
                         } else {
+                           
                             $result = Client::addClient($newclient);
-
+                        
                             if ($result) {
 
                                 $r = Client::getid($newclient);

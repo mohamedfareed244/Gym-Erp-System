@@ -162,6 +162,13 @@ return $result;
 
         // return $assignedClasses;
     }
+    public static function getclassdays($id){
+        global $conn;
+        $sql = "SELECT * FROM class_days WHERE Class = $id " ;
+        $result = $conn->query($sql);
+        return $result;
+    }
 
+    
 }
 ?>
