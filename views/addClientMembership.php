@@ -115,7 +115,7 @@
                 url: "../Controllers/PackageController.php",
                 data: {
                     action: "activateMembership",
-                    clientId: clientId,
+                    membershipclientId: clientId,
                     packageId: packageId
                 },
                 success: function (response) {
