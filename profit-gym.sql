@@ -294,7 +294,7 @@ CREATE TABLE `membership` (
   `VisitsCount` int(50) NOT NULL,
   `InvitationsCount` int(50) NOT NULL,
   `InbodyCount` int(50) NOT NULL,
-  `PrivatTrainingSessionsCount` int(50) NOT NULL,
+  `PrivateTrainingSessionsCount` int(50) NOT NULL,
   `FreezeCount` int(50) NOT NULL,
   `Freezed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
