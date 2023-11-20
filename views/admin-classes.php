@@ -70,15 +70,18 @@ span[id$="-err"],
             </thead>
             <tbody>
             <?php foreach($results as $result):?>
-                <tr>
+                <tr id="row_<?php echo $result['ClassID']; ?>">
                     <td> <?php echo $result['ClassID'] ?> </td>
                     <td> <?php echo $result['ClassName'] ?> </td>
                     <td> <?php echo $result['CoachName'] ?></td>
                     <td> <?php echo $result['PhoneNumber'] ?> </td>
                     <td> <?php echo $result['Date'] ?> </td>
 
-                    <td><button id="add-btn">View Clients</button> <button id="add-btn"
-                            style="background-color:red; color:white;">Delete</button></td>
+                    <td><button id="add-btn" action="viewClients" >View Clients</button> 
+                    <button id="add-btn" style="background-color:red; color:white;" data-classid="<?php echo $result['ClassID']; ?>"
+                        data-coachid="<?php echo $result['CoachID']; ?>"
+                        data-date="<?php echo $result['Date']; ?>"
+                        onclick='deleteClass(this)'>Delete</button>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -389,6 +392,40 @@ $(document).ready(function() {
     });
 });
 
+
+function deleteClass(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var classID = button.getAttribute('data-classid');
+        var coachID = button.getAttribute('data-coachid');
+        var date = button.getAttribute('data-date');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + classID;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/ClassController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'deleteClass',
+                classID: classID,
+                coachID: coachID,
+                date: date
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
     </script>
 
 </body>

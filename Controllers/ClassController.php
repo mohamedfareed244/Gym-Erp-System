@@ -251,6 +251,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          case "assignCoachtoClass":
             $controller->assignCoachtoClass();
             break;
+        case "deleteClass":
+            $classID = $_POST['classID'];
+            $coachID = $_POST['coachID'];
+            $date = $_POST['date'];
+
+            $class=new Classes();
+            $result=$class->deleteClass($classID,$coachID,$date);
+            
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+
         default:
             // Handle unknown action or display an error
             break;

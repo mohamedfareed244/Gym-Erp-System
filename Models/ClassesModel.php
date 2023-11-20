@@ -145,11 +145,11 @@ class Classes{
 
     }
 
-    public function deleteClass()
+    public function deleteClass($classID,$coachID,$date)
     {
         global $conn;
 
-        $sql="DELETE from class where ID =" . $_SESSION['ID'];
+        $sql="DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";
 
         return mysqli_query($conn,$sql);
 
@@ -184,14 +184,14 @@ class Classes{
         return $results;
 
     }
-    
+
     public function getallCoachesandClasses()
     {
         global $conn;
     
         $results = array();
     
-        $sql = "SELECT assignedclass.ClassID, assignedclass.Date, class.Name AS ClassName, 
+        $sql = "SELECT assignedclass.ClassID, assignedclass.Date, class.Name AS ClassName, assignedclass.CoachID,
                 employee.Name AS CoachName, employee.PhoneNumber
                 FROM assignedclass
                 INNER JOIN class ON assignedclass.ClassID = class.ID 
@@ -204,6 +204,7 @@ class Classes{
                 $results[] = array(
                     'ClassID' => $row['ClassID'],
                     'Date' => $row['Date'],
+                    'CoachID' => $row['CoachID'],
                     'ClassName' => $row['ClassName'],
                     'CoachName' => $row['CoachName'],
                     'PhoneNumber' => $row['PhoneNumber'],
