@@ -148,62 +148,35 @@ class Employee
 
     public static function GetAllCoaches()
     {
-        global $conn;
+    global $conn;
 
-        // Query to get the IDs of the job titles 'Coach' and 'Fitness-manager'
-        $sql = "SELECT ID, Name FROM job_titles WHERE Name='Coach' OR Name='Fitness-manager'";
-        $result = mysqli_query($conn, $sql);
+    $results = array(); // Initialize the array
 
-        if (!$result) {
-            return [];
-        }
+    $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName
+            FROM employee  
+            INNER JOIN job_titles 
+            ON (job_titles.Name = 'Coach' OR job_titles.Name = 'Fitness-manager') 
+            AND employee.JobTitle = job_titles.Id";
 
-        $coaches = [];
-        $fitnessManagers = [];
+    $result = mysqli_query($conn, $sql);
 
-        // Iterate through the job titles and get employees for each
+    if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $jobId = $row['ID'];
-
-            // Query to get employees with a specific jobTitle
-            $employeeSql = "SELECT ID, Name FROM employee WHERE jobTitle = ?";
-            $stmt = mysqli_prepare($conn, $employeeSql);
-
-            if ($stmt) {
-                // Bind the parameters
-                mysqli_stmt_bind_param($stmt, "i", $jobId);
-
-                // Execute the query
-                mysqli_stmt_execute($stmt);
-
-                // Bind the result variables
-                mysqli_stmt_bind_result($stmt, $id, $name);
-
-                // Fetch the results into an array
-                while (mysqli_stmt_fetch($stmt)) {
-                    $employee = [
-                        'ID' => $id,
-                        'Name' => $name,
-                        // add other columns as needed
-                    ];
-
-                    // Separate employees into coaches and fitness managers
-                    if ($row['Name'] === 'Coach') {
-                        $coaches[] = $employee;
-                    } elseif ($row['Name'] === 'Fitness-manager') {
-                        $fitnessManagers[] = $employee;
-                    }
-                }
-
-                mysqli_stmt_close($stmt);
-            }
+            $results[] = array(
+                'CoachID' => $row['ID'],
+                'Name' => $row['Name'],
+                'Email' => $row['Email'],
+                'PhoneNumber' => $row['PhoneNumber'],
+                'Salary' => $row['Salary'],
+                'Address' => $row['Address'],
+                'JobTitleName' => $row['JobTitleName']
+            );
         }
-
-        return [
-            'Coaches' => $coaches,
-            'FitnessManagers' => $fitnessManagers,
-        ];
     }
+
+    return $results;
+    }
+
 
 public static function GetAllClasses()
 {

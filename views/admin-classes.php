@@ -199,17 +199,13 @@ unset(
                 <option value="">Select Coach </option>
 
                 <?php
-        include_once "../Models/EmployeeModel.php";
+        include_once "../Models/employeeModel.php";
  
         $employee = new Employee();
         $employeesData = $employee->GetAllCoaches();
 
-        foreach ($employeesData['Coaches'] as $coach) {
-        echo "<option value='" . $coach["ID"] . "'>" . $coach["Name"] . " </option>";
-        }
-
-        foreach ($employeesData['FitnessManagers'] as $fitnessManager) {
-        echo "<option value='" . $fitnessManager["ID"] . "'>" . $fitnessManager["Name"] . " </option>";
+        foreach ($employeesData as $coach) {
+        echo "<option value='" . $coach["CoachID"] . "'>" . $coach["Name"] . " </option>";
         }
         ?>
 
