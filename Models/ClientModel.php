@@ -3,6 +3,7 @@
 
 include_once "../includes/dbh.inc.php";
 include_once "../views/send_pw_email.php";
+//to display error on mac it won't affect the code or make errors . 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 class Client
