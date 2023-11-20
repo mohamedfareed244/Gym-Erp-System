@@ -21,12 +21,20 @@ if (isset($_POST['coachId'])) {
     $response .= "</thead>";
     $response .= "<tbody>";
 
+
     foreach ($results as $result) {
+        $startTime = new DateTime($result['StartTime']);
+        $endTime = new DateTime($result['EndTime']);
+        
+        // Format the DateTime object as "H:i" (24-hour format)
+        $startformattedDate = $startTime->format("H:i");
+        $endformattedDate = $endTime->format("H:i");
+
         $response .= "<tr>";
         $response .= "<td>" . $result['CoachID'] . "</td>";
         $response .= "<td>" .  $result['ClassName'] . "</td>";
-        $response .= "<td>" . $result['StartTime'] . "</td>";
-        $response .= "<td>" . $result['EndTime'] . "</td>";
+        $response .= "<td>" . $startformattedDate . "</td>";
+        $response .= "<td>" . $endformattedDate . "</td>";
         $response .= "<td>" . $result['Date'] . "</td>";
         $response .= "</tr>";
     }
