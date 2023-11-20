@@ -45,11 +45,7 @@
 
     <div class="profile">
 
-        <div class="gettinginshape">
-            <p class="line1">GETTING</p>
-            <p class="line2">IN</p>
-            <p class="line3">SHAPE</p>
-        </div>
+      
         <div class="greeting">
             <p class="hello">Hello Jana! </p>
         </div>
