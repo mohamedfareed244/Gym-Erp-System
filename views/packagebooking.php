@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/memberships.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/packagebooking.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/userprofile.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
@@ -56,11 +57,17 @@
                             <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
                     </div>
                     <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary">REQUEST SUBSCRIPTION</button>
+                        <button class="btn btn-primary" onclick="viewModal()">REQUEST SUBSCRIPTION</button>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
+
+            <div id="myModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <p id="confirmation-text">Request made. Please Visit Gym For Payment.</p>
+                </div>
+            </div>
             
 
         </div>
@@ -71,6 +78,21 @@
 
 <script src="../public/js/slider.js"></script>
 
+<script>
+    function viewModal()
+    {
+        const modal = document.getElementById("myModal");
+        modal.style.display="block";
+
+        // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
+        setTimeout(function() {
+                modal.style.display = "none";
+                modalMessage.style.display = "none";
+            }, 2000); // 2 seconds
+    }
+
+
+</script>
 
 </body>
 <?php include("partials/footer.php") ?>

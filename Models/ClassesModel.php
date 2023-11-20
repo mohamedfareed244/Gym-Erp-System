@@ -215,6 +215,38 @@ class Classes{
     
         return $results;
     }
+
+
+    public function getClassDetails()
+    {
+        global $conn;
+
+        $sql ="SELECT class.imgPath, class.Name , assignedclass.Date ,assignedclass.StartTime , assignedclass.EndTime, 
+        assignedclass.NumOfAttendants , assignedclass.Price
+        FROM class
+        INNER JOIN assignedclass
+        ON class.ID = assignedclass.ClassID";
+
+        $result = mysqli_query($conn, $sql);
+    
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'imgPath' => $row['imgPath'],
+                    'Name' => $row['Name'],
+                    'Date' => $row['Date'],
+                    'StartTime' => $row['StartTime'],
+                    'EndTime' => $row['EndTime'],
+                    'NumOfAttendants' => $row['NumOfAttendants'],
+                    'Price' => $row['Price']
+                );
+            }
+        }
+    
+        return $results;
+
+
+    }
     
     }
 

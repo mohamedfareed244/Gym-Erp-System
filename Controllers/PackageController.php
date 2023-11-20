@@ -1,6 +1,7 @@
 <?php
 
 include_once "../Models/PackageModel.php";
+include_once "../Models/membershipsModel.php";
 
 session_start();
 
@@ -172,7 +173,7 @@ class PackageController
             exit();
         }
     }
-    
+
 }
 
 $controller = new PackageController();
@@ -190,6 +191,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "deactivatePackage":
             $controller->deactivatePackage();
             break;
+        case "activateMembership":
+            if (isset($_POST["clientId"]) && isset($_POST["packageId"])) {
+                $clientId = $_POST["clientId"];
+                $packageId = $_POST["packageId"];
+
+                $result = Memberships::createMembership($clientId, $packageId);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
+                }
+            }
         default:
             // Handle unknown action or display an error
             break;
