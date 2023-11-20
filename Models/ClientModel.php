@@ -2,7 +2,7 @@
 
 
 include_once "../includes/dbh.inc.php";
-include_once "./send_pw_email.php";
+include_once "../views/send_pw_email.php";
 class Client
 {
     public $ID;
