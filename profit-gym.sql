@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 11:54 PM
+-- Generation Time: Nov 20, 2023 at 02:02 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -35,18 +35,18 @@ CREATE TABLE `assignedclass` (
   `EndTime` time(6) NOT NULL,
   `isFree` varchar(20) NOT NULL,
   `Price` int(50) NOT NULL,
-  `Coach` int(10) NOT NULL
+  `CoachID` int(10) NOT NULL,
+  `NumOfAttendants` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assignedclass`
 --
 
-INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `Coach`) VALUES
-(1, 3, 'Sunday', '12:00:00.000000', '13:30:00.000000', 'NotFree', 300, 4),
-(2, 3, 'Wednesday', '12:00:00.000000', '13:30:00.000000', 'NotFree', 300, 4),
-(3, 2, 'Tuesday', '18:00:00.000000', '19:30:00.000000', 'Free', 0, 3),
-(4, 2, 'Thursday', '18:00:00.000000', '19:30:00.000000', 'Free', 0, 3);
+INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`) VALUES
+(1, 2, 'Sunday', '19:30:00.000000', '20:45:00.000000', 'Free', 0, 3, 15),
+(2, 4, 'Wednesday', '16:30:00.000000', '17:45:00.000000', 'NotFree', 200, 4, 10),
+(4, 7, 'Sunday', '18:45:00.000000', '20:00:00.000000', 'NotFree', 200, 4, 10);
 
 -- --------------------------------------------------------
 
@@ -114,12 +114,12 @@ CREATE TABLE `class` (
 
 INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
 (1, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
-(2, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being                          through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
-(3, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness.                          It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
+(2, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
+(3, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness. It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
 (4, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
 (5, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
 (6, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
-(7, 'Parkour ', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
+(7, 'Parkour', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
 (8, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
 (9, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
 
@@ -130,9 +130,29 @@ INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
 --
 
 CREATE TABLE `class_days` (
-  `Class` int(11) NOT NULL,
+  `ClassID` int(11) NOT NULL,
   `Day` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `class_days`
+--
+
+INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
+(1, 'Saturday'),
+(1, 'Tuesday'),
+(2, 'Sunday'),
+(2, 'Wednesday'),
+(3, 'Friday'),
+(3, 'Tuesday'),
+(4, 'Saturday'),
+(4, 'Wednesday'),
+(5, 'Monday'),
+(5, 'Tuesday'),
+(6, 'Tuesday'),
+(7, 'Sunday'),
+(8, 'Thursday'),
+(9, 'Sunday');
 
 -- --------------------------------------------------------
 
@@ -410,7 +430,7 @@ ALTER TABLE `class`
 -- Indexes for table `class_days`
 --
 ALTER TABLE `class_days`
-  ADD PRIMARY KEY (`Class`,`Day`);
+  ADD PRIMARY KEY (`ClassID`,`Day`);
 
 --
 -- Indexes for table `client`
@@ -508,7 +528,7 @@ ALTER TABLE `reserved private training free session`
 -- AUTO_INCREMENT for table `assignedclass`
 --
 ALTER TABLE `assignedclass`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `authority`
@@ -575,6 +595,12 @@ ALTER TABLE `reserved private training free session`
 --
 
 --
+-- Constraints for table `class_days`
+--
+ALTER TABLE `class_days`
+  ADD CONSTRAINT `test20` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ID`);
+
+--
 -- Constraints for table `coach available days`
 --
 ALTER TABLE `coach available days`
@@ -613,7 +639,7 @@ ALTER TABLE `private training membership`
 --
 ALTER TABLE `reserved class`
   ADD CONSTRAINT `test10` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test8` FOREIGN KEY (`ClassID`) REFERENCES `assignedclass` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `test8` FOREIGN KEY (`ClassID`) REFERENCES `assignedclass` (`ID`),
   ADD CONSTRAINT `test9` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
