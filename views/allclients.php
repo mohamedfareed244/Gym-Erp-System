@@ -34,7 +34,7 @@
     ?>
     <div id="add-body" class="addbody">
         <div class="container">
-            <h2 class="table-title">Memberships:</h2>
+            <h2 class="table-title">Clients:</h2>
             <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
 
             <div id="tablediv">
@@ -44,18 +44,14 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Client Name</th>
-                            <th scope="col">Package</th>
-                            <th scope="col">Start Date </th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Visits </th>
-                            <th scope="col">Status </th>
-                            <th scope="col">Freeze</th>
-                            <th scope="col">Sales</th>
-                            <th scope="col">pt</th>
-                            <th scope="col">inbody</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Weight </th>
+                            <th scope="col">Height </th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Actions </th>
-
+                            <th scope="col">PT Package</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,16 +60,13 @@
                             echo "<tr id='row-" . $client->ID . "'>";
                             echo '<td> '. $client->ID.' </td>';
                             echo '<td> '. $client->FirstName.' '.$client->LastName.' </td>';
-                            echo '<td> </td>';
-                            echo '<td>02-09-2023</td>';
-                            echo '<td>02-09-2023</td>';
-                            echo '<td>30</td>';
-                            echo '<td class="bg-info">Freezed</td>';
-                            echo '<td><button class="btn btn-freeze">Freeze</button></td>';
-                            echo '<td>Mohamed fareed</td>';
-                            echo '<td>2</td>';
-                            echo '<td>1</td>';
-                            echo '<td>'.$client->Phone.'</td>';
+                            echo '<td> '.$client->Email.'</td>';
+                            echo '<td> '.$client->Age.'</td>';
+                            echo '<td> '.$client->Gender.'</td>';
+                            echo '<td> '.$client->Weight.'</td>';
+                            echo '<td> '.$client->Height.'</td>';
+                            echo '<td> '.$client->Phone.'</td>';
+                            echo '<td><button class="btn btn-freeze">Add</button></td>';
                             echo "<td><a a href='editclient.php?ID=" . $client->ID . "' class=\"btn\">Edit</a>       ";
                             echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->ID . ")'>Delete</button></td>";
                             echo '</tr>';
@@ -85,76 +78,7 @@
 
             </div>
             <hr>
-            <h2 class="table-title">Classes: </h2>
-            <div id="tablediv">
-                <table class="view-table overflow-auto mh-10">
-                    <thead>
-                        <tr>
-                            <th scope="col">Class Name</th>
-                            <th scope="col"> Date </th>
-                            <th scope="col">From</th>
-                            <th scope="col">To </th>
-                            <th scope="col">Status </th>
-                            <th scope="col">Class Instructor </th>
-                            <th scope="col">Fees </th>
-                            <th scope="col">Paid </th>
-                            <th scope="col">Actions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Yoga</td>
-                            <td>09-09-2023</td>
-                            <td>9:00pm</td>
-                            <td>11:00pm</td>
-                            <td class="bg-success text-white">Attended</td>
-                            <td>Mohamed fareed</td>
-                            <td>120</td>
-                            <td class="bg-danger">Not paid </td>
-                            <td>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
 
-                    </tbody>
-                </table>
-            </div>
-            <hr>
-            <h2 class="table-title">Financials: </h2>
-            <div id="tablediv">
-                <table class="view-table overflow-auto mh-10">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Package Name </th>
-                                <th scope="col"> Date </th>
-                                <th scope="col">Amount </th>
-                                <th scope="col">Paid </th>
-                                <th scope="col">Remain </th>
-                                <th scope="col">Due </th>
-                                <th scope="col">Sales </th>
-                                <th scope="col">Actions </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2 Months </td>
-                                <td>09-09-2023</td>
-                                <td>3000</td>
-                                <td>2000</td>
-                                <td>1000</td>
-                                <td>01-10-2023</td>
-                                <td>Mohamed fareed </td>
-                                <td>
-                                    <button class="btn">Edit</button>
-                                    <button class="btn btn-delete">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </div>
         </div>
     </div>
 </body>
@@ -166,7 +90,7 @@
         table = document.getElementById("membershipsTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
+            td = tr[i].getElementsByTagName("td")[7];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

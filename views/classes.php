@@ -65,7 +65,9 @@
         </div>
     </div>
 
-
+    <?php include_once "../Models/ClassesModel.php";
+    $class = new Classes();
+    $classes = $class->getAllClasses();?>
     <div class="container py-5">
         <h2 style=" font-size: 22px;
     font-weight: bolder;
@@ -73,54 +75,13 @@
     color: rgb(176, 37, 37);
     letter-spacing: -1px;">Types:</h1>
             <div class="card-container">
-
+            <?php foreach ($classes as $class): ?>
                 <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
+                    <img src="../<?php echo $class['imgPath'];?>">
+                    <h3><?php echo $class['Name'];?></h3>
+                    <p><?php echo $class['Description'];?></p>
                 </div>
-
-                <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
-                </div>
-
-                <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
-                </div>
-
-                <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
-                </div>
-
-                <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
-                </div>
-
-                <div class="card">
-                    <img src="../public/Images/yoga.jpg">
-                    <h3>Power Yoga Class</h3>
-                    <p>Each class starts with a flowing series to warm up the spine and heat up the body, followed by a
-                        series of held postures to build strength, stability, and stamina. Class ends with gentle
-                        stretches to improve flexibility.</p>
-                </div>
+                <?php endforeach; ?>
 
             </div>
     </div>

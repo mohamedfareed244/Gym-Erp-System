@@ -16,6 +16,47 @@ class Client
     public $Email;
     public $Password;
 
+    public static function getClientByID($clientID)
+    {
+        global $conn;
+
+        $clientID = mysqli_real_escape_string($conn, $clientID);
+
+        $sql = "SELECT * FROM client WHERE ID = '$clientID'";
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $clientData = $result->fetch_assoc();
+
+            $client = new Client();
+            $client->ID = $clientData['ID'];
+            $client->FirstName = $clientData['FirstName'];
+            $client->LastName = $clientData['LastName'];
+            $client->Email = $clientData['Email'];
+            $client->Password = $clientData['Password'];
+            $client->Phone = $clientData['Phone'];
+            $client->Age = $clientData['Age'];
+            $client->Gender = $clientData['Gender'];
+            $client->Height = $clientData['Height'];
+            $client->Weight = $clientData['Weight'];
+
+            return $client;
+        } else {
+            return null;
+        }
+    }
+    public static function deleteClientByID($clientID){
+        global $conn;
+        $sql = "DELETE from client where ID =" . $clientID;
+
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function getAllClients()
     {
         global $conn;
@@ -31,6 +72,7 @@ class Client
                 $client->LastName = $row['LastName'];
                 $client->Email = $row['Email'];
                 $client->Password = $row['Password'];
+                $client->Phone = $row['Phone'];
                 $client->Age = $row['Age'];
                 $client->Gender = $row['Gender'];
                 $client->Height = $row['Height'];
@@ -136,7 +178,11 @@ class Client
         return mysqli_query($conn, $sql);
     }
 
-    public function freezeMembership(){}
-    
-    public function unfreezeMembership(){}
+    public function freezeMembership()
+    {
+    }
+
+    public function unfreezeMembership()
+    {
+    }
 }

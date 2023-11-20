@@ -121,4 +121,106 @@ class Employee
 
         return mysqli_query($conn, $sql);
     }
+    
+    public static function deleteEmployeeById($employeeID)
+    {
+        global $conn;
+
+        $sql = "DELETE from employee where ID =" . $employeeID;
+
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function checkExistingEmail($email)
+    {
+        global $conn;
+
+        $Email = "SELECT * FROM employee WHERE Email = '$email'";
+
+        $result = mysqli_query($conn, $Email);
+        return mysqli_num_rows($result) > 0;
+    }
+
+    public static function GetAllCoaches()
+    {
+        global $conn;
+
+        // Query to get the IDs of the job titles 'Coach' and 'Fitness-manager'
+        $sql = "SELECT ID, Name FROM job_titles WHERE Name='Coach' OR Name='Fitness-manager'";
+        $result = mysqli_query($conn, $sql);
+
+        if (!$result) {
+            return [];
+        }
+
+        $coaches = [];
+        $fitnessManagers = [];
+
+        // Iterate through the job titles and get employees for each
+        while ($row = mysqli_fetch_assoc($result)) {
+            $jobId = $row['ID'];
+
+            // Query to get employees with a specific jobTitle
+            $employeeSql = "SELECT ID, Name FROM employee WHERE jobTitle = ?";
+            $stmt = mysqli_prepare($conn, $employeeSql);
+
+            if ($stmt) {
+                // Bind the parameters
+                mysqli_stmt_bind_param($stmt, "i", $jobId);
+
+                // Execute the query
+                mysqli_stmt_execute($stmt);
+
+                // Bind the result variables
+                mysqli_stmt_bind_result($stmt, $id, $name);
+
+                // Fetch the results into an array
+                while (mysqli_stmt_fetch($stmt)) {
+                    $employee = [
+                        'ID' => $id,
+                        'Name' => $name,
+                        // add other columns as needed
+                    ];
+
+                    // Separate employees into coaches and fitness managers
+                    if ($row['Name'] === 'Coach') {
+                        $coaches[] = $employee;
+                    } elseif ($row['Name'] === 'Fitness-manager') {
+                        $fitnessManagers[] = $employee;
+                    }
+                }
+
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        return [
+            'Coaches' => $coaches,
+            'FitnessManagers' => $fitnessManagers,
+        ];
+    }
+
+public static function GetAllClasses()
+{
+    global $conn;
+
+    $sql = "SELECT ID, Name FROM class";
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $classes = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free_result();
+        $conn->close();
+        return $classes;
+    } else {
+        $conn->close();
+        return [];
+    }
+}
+
 }

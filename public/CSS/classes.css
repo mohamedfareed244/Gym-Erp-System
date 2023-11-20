@@ -53,7 +53,7 @@
 
 .container .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-template-columns: repeat(3, minmax(270px, 1fr));
     gap: 15px;
 }
 
@@ -122,6 +122,9 @@
 @media (max-width:768px) {
     .container {
         padding: 20px;
+    }
+    .container .card-container {
+        grid-template-columns: repeat(1, minmax(270px, 1fr)); /* Display one card in a row on smaller screens */
     }
 }
 
