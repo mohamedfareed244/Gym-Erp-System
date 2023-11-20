@@ -2,7 +2,8 @@
 
 include_once "../Models/PackageModel.php";
 include_once "../Models/membershipsModel.php";
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 class PackageController
