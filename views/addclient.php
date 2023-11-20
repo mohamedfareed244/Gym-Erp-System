@@ -26,12 +26,11 @@
                 </div>
                 <hr>
                 <form method="POST" action="./addclient.php">
-                <!-- action="addclientbackend.php" -->
                     <div class="col-lg-4 col-md-12">
                         <label for="fname">First Name: </label>
                     </div>
                     <input type="text" name="fname" id="fname">
-                    
+
                     <div class="col-lg-4 col-md-12">
                         <label for="lname">Last Name: </label>
                     </div>
@@ -44,22 +43,22 @@
                         <label for="age">Age: </label>
                     </div>
                     <input type="text" name="age" id="age">
-                    
+
                     <div class="col-lg-4 col-md-12">
                         <label for="gender">Gender: </label>
                     </div>
                     <input type="text" name="gender" id="gender">
-                    
+
                     <div class="col-lg-4 col-md-12">
                         <label for="weight">Weight: </label>
                     </div>
                     <input type="number" name="weight" id="weight">
-                    
+
                     <div class="col-lg-4 col-md-12">
                         <label for="height">Height: </label>
                     </div>
                     <input type="number" name="height" id="height">
-                    
+
                     <div class="col-lg-4 col-md-12">
                         <label for="email">Email: </label>
                     </div>
@@ -68,55 +67,49 @@
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add client" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
-                     
-    <?php
-     
-     include_once "../Models/ClientModel.php";
-     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-              
-         $newclient=new Client();
-         $newclient->FirstName = $_POST['fname'];
-         $newclient->LastName = $_POST['lname'];
-         $newclient->Age = (int) $_POST['age'];
-         $newclient->Gender = $_POST['gender'];
-         $newclient->Weight = (float) $_POST['weight'];
-         $newclient->Height = (int) $_POST['height'];
-         $newclient->Email = $_POST['email'];
-         $newclient->Phone=$_POST['phone'];
-         if(Client::checkExistingEmail($newclient->Email)){
-            echo "<p style ='color:red;'>This Email already exist ! </p>";
-         }else if(Client::checkExistingPhone($newclient->Phone)){
-            echo "<p style ='color:red;'>This Phone already exist ! </p>";
-         }else{
-            $result=Client::addClient($newclient);
-      
-            if($result){
-             
-              $r=Client::getid($newclient);
-              while($row = mysqli_fetch_assoc($r)) {
-                  echo " <div class='col-12'>
-                  <span>New Client id : <b>".$row['ID']."</b></span>
+
+                    <?php
+
+                    include_once "../Models/ClientModel.php";
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                        $newclient = new Client();
+                        $newclient->FirstName = $_POST['fname'];
+                        $newclient->LastName = $_POST['lname'];
+                        $newclient->Age = (int) $_POST['age'];
+                        $newclient->Gender = $_POST['gender'];
+                        $newclient->Weight = (float) $_POST['weight'];
+                        $newclient->Height = (int) $_POST['height'];
+                        $newclient->Email = $_POST['email'];
+                        $newclient->Phone = $_POST['phone'];
+                        if (Client::checkExistingEmail($newclient->Email)) {
+                            echo "<p style ='color:red;'>This Email already exist ! </p>";
+                        } else if (Client::checkExistingPhone($newclient->Phone)) {
+                            echo "<p style ='color:red;'>This Phone already exist ! </p>";
+                        } else {
+                            $result = Client::addClient($newclient);
+
+                            if ($result) {
+
+                                $r = Client::getid($newclient);
+                                while ($row = mysqli_fetch_assoc($r)) {
+                                    echo " <div class='col-12'>
+                  <span>New Client id : <b>" . $row['ID'] . "</b></span>
               </div>";
-                }
-            }else{
-              echo "<p style ='color:red;'>An Error Happened ! </p>";
-              
-            }
-         }
-  
- 
-     }
-     ?>
+                                }
+                            } else {
+                                echo "<p style ='color:red;'>An Error Happened ! </p>";
+                            }
+                        }
+                    }
+                    ?>
                 </form>
 
-
-
-               
             </div>
         </div>
     </div>
 
-  
+
 
 
 </body>

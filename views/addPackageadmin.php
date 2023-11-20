@@ -126,7 +126,10 @@ span[id$="-error"],#success {
                     </div>
 
                 </form>
-                <?php
+            </div>
+        </div>
+    </div>
+    <?php
                 unset(
     $_SESSION["visitsErr"],
     $_SESSION["limitDaysErr"],
@@ -140,9 +143,6 @@ span[id$="-error"],#success {
     $_SESSION["success"]
 );
 ?>
-            </div>
-        </div>
-    </div>
 
 </body>
 

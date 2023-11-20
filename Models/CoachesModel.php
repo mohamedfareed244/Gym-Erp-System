@@ -132,40 +132,41 @@ class Coach extends Employee
     }
 
 
-    public function getClassesForCoach()
+    public  static function getClassesForCoach( $coachID)
     {
         global $conn;
 
-        if (empty($this->ID)) {
-            return [];
-        }
+    
 
-        $coachID = $this->ID;
-
-        $sql = "SELECT * FROM class
-                WHERE Coach = $coachID 
-                AND (Coach IN (SELECT ID FROM employee WHERE JobTitle = 'Coach' OR JobTitle = 'Fitness Manager'))";
+        $sql = "SELECT * FROM class WHERE Coach = $coachID " ;
+               
 
         $result = $conn->query($sql);
+return $result;
+        // $assignedClasses = array();
 
-        $assignedClasses = array();
+        // if ($result->num_rows > 0) {
+        //     while ($row = $result->fetch_assoc()) {
+        //         $class = new Classes();
+        //         $class->ID = $row['ID'];
+        //         $class->Name = $row['Name'];
+        //         $class->Date = $row['Date'];
+        //         $class->StartTime = $row['StartTime'];
+        //         $class->EndTime = $row['EndTime'];
+        //         $class->Price = $row['Price'];
+        //         $class->Coach = $row['Coach'];
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $class = new Classes();
-                $class->ID = $row['ID'];
-                $class->Name = $row['Name'];
-                $class->Date = $row['Date'];
-                $class->StartTime = $row['StartTime'];
-                $class->EndTime = $row['EndTime'];
-                $class->Price = $row['Price'];
-                $class->Coach = $row['Coach'];
+        //         $assignedClasses[] = $class;
+        //     }
+        // }
 
-                $assignedClasses[] = $class;
-            }
-        }
-
-        return $assignedClasses;
+        // return $assignedClasses;
+    }
+    public static function getclassdays($id){
+        global $conn;
+        $sql = "SELECT * FROM class_days WHERE Class = $id " ;
+        $result = $conn->query($sql);
+        return $result;
     }
 
     

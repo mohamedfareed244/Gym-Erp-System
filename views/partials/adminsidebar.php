@@ -16,7 +16,6 @@
 
 <div class="sidebar close">
 
-
     <div class="logo-details">
         <i class='bx bx-user-circle'></i>
         <span class="logo-name" style="font-weight:300">Admin</span>
@@ -44,8 +43,9 @@
                 <li><a class="link-name" href="../views/clientdetails.php">Clients</a></li>
 
                 <li><a href="../views/addclient.php">Add</a></li>
-                <li><a href="../views/editclient.php">Edit</a></li>
-                <li><a href="../views/clientdetails.php">Details</a></li>
+                <!-- <li><a href="../views/editclient.php">Edit</a></li> -->
+                <li><a href="../views/allclients.php">Details</a></li>
+                <li><a href="../views/clientdetails.php">Memberships</a></li>
                 <li><a href="../views/clientin.php">Check in </a></li>
             </ul>
         </li>
@@ -81,6 +81,7 @@
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">HR </a></li>
                 <li><a href="../views/employeesadmin.php">View Employees</a></li>
+                <!-- <li><a href="../views/addemployees.php">Add Employees</a></li> -->
                 <li><a href="../views/attendance.php">Attendance</a></li>
             </ul>
         </li>
@@ -109,11 +110,10 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="#">Packages</a></li>
-                <li><a href="../views/viewpackagesadmin.php">View Packages </a></li>
                 <li><a href="../views/addPackageadmin.php">Add Package </a></li>
-                <li><a href="../views/viewptadmin.php">View Private Sessions </a></li>
-                <li><a href="../views/addptadmin.php">Add Private Sessions </a></li>
+                <li><a href="../views/viewpackagesadmin.php">View Packages </a></li>
                 <li><a href="../views/addPTpackage.php">Add PT Package </a></li>
+                <li><a href="../views/viewPTpackage.php">View PT Packages </a></li>
 
             </ul>
         </li>

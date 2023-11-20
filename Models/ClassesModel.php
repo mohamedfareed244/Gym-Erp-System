@@ -4,35 +4,77 @@
 include_once "../includes/dbh.inc.php";
 
 class Classes{
+    
     public $ID;
-    public $Name;
+    public $ClassID;
     public $Date;
     public $StartTime;
     public $EndTime;
+    public $isFree;
     public $Price;
     public $Coach;
    
+    public static function getAllClasses(){
+        global $conn;
 
+        $sql = "SELECT * FROM class";
+        // Perform the query
+        $result = $conn->query($sql);
 
-    public static function addClass($class)
+        // Check if the query was successful
+        if ($result) {
+            $classes = $result->fetch_all(MYSQLI_ASSOC);
+
+            $result->free_result();
+
+            // Return the packages
+            return $classes;
+        } else {
+            return [];
+        }
+    }
+
+    public static function assignClass($class)
     {
         global $conn;
-
-        $Name=$class->Name;
-        $Date=$class->Date;
-        $StartTime=$class->StartTime;
-        $EndTime=$class->EndTime;
-        $Price=$class->Price;
-        $Coach=$class->Coach;
-       
-        $sql = "INSERT INTO class (Name, Date, StartTime, EndTime, Price, Coach) 
-                VALUES ('$Name', '$Date', '$StartTime', '$EndTime', '$Price', '$Coach')";
-         
-        return mysqli_query($conn, $sql);    
+    
+        $ClassID = $class->ClassID;
+        $Dates = $class->Date;
+        $StartTime = $class->StartTime;
+        $EndTime = $class->EndTime;
+        $isFree =$class->isFree;
+        $Price = $class->Price;
+        $Coach = $class->Coach;
+    
+        $finalresult = true; // Initialize result
+    
+        foreach ($Dates as $Date) {
+            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, Coach) 
+                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$Coach')";
+    
+            $result = mysqli_query($conn, $sql);
+    
+            if (!$result) {
+                $finalresult = false; // If any query fails, set result to false
+            }
+        }
+    
+        return $finalresult;
     }
+
+    public static function addClassImage($name,$descr, $imagePath)
+{
+    global $conn; // Assuming you have a global database connection variable named $conn
+
+    $sql = "INSERT INTO class (Name, Description,imgPath) VALUES ('$name', '$descr', '$imagePath')";
+
+    return mysqli_query($conn, $sql);
+}
+
+
     public static function getid($class){
         global $conn;
-        $sql ="SELECT ID FROM class WHERE ID='$class->ID'";
+        $sql ="SELECT ID FROM assignedclass WHERE ID='$class->ID'";
         $result=mysqli_query($conn,$sql);
        
     return $result;
@@ -42,7 +84,7 @@ class Classes{
     {
         global $conn;
     
-        $Name = $class->Name;
+        $ClassID = $class->ClassID;
         $Date = $class->Date;
         $StartTime= $class->StartTime;
         $EndTime = $class->EndTime;
@@ -53,7 +95,7 @@ class Classes{
         $class_id = $_SESSION['ID'];
 
             // Update with the new password
-            $sql = "UPDATE class SET Name='$Name', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', Coach='$Coach'
+            $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', Coach='$Coach'
                     WHERE ID = $class_id";
                     return $conn->query($sql);
         
@@ -70,9 +112,9 @@ class Classes{
 
     }
 
-
+    }
     
 
-}
+
 
 ?>
