@@ -92,7 +92,7 @@
                         <?php
             unset(
     $_SESSION["alreadyExists"][$classDetail['assignedclassID']],
-    $_SESSION["fail"][$classDetail['assignedclassID']],
+    $_SESSION["failToReserve"][$classDetail['assignedclassID']],
     $_SESSION["successFree"][$classDetail['assignedclassID']],
     $_SESSION["successPrice"][$classDetail['assignedclassID']]
 );

@@ -246,7 +246,7 @@ public function reserveClass()
 
         $result = $class->addReservedClass($CoachID, $AssignedClassID, $ClientID);
 
-        if ($result['successFree']) {
+        if ($result['inserted']) {
             $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
             header("Location: ../views/classbooking.php");
             exit();
@@ -256,9 +256,11 @@ public function reserveClass()
             header("Location: ../views/classbooking.php");
             exit();
         }
+        else{
         $_SESSION["failToReserve"][$AssignedClassID] = "Class reservation failed.";
         header("Location: ../views/classbooking.php");
         exit();
+        }
     } else {
         $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
         $_SESSION["successPrice"][$AssignedClassID] = "Request made. Please Visit Gym For Payment as places are limited.";
