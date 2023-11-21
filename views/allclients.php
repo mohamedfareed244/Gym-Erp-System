@@ -78,7 +78,7 @@
                 foreach ($memberships as $membership) {
                   if ($membership->clientId == $client->ID) {
                     echo '<td><button class="btn" disabled>Add</button></td>';
-                    echo '<td><button class="btn btn-freeze">Add</button></td>';
+                    echo '<td><a href="addCLientPtPackage.php?ID='.$client->ID.'" class="btn btn-freeze">Add</a></td>';
                     $found = true;
                     break;
                   }

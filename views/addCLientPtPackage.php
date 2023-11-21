@@ -28,12 +28,12 @@
     session_start();
     require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
-    include_once "../Models/PackageModel.php";
-    $package = new Package();
-    $packages = $package->getAllPackagesforEmployee();
+    include_once "../Models/ptPackageModel.php";
+    $package = new ptPackages();
+    $packages = $package->getAllPtPackagesforEmployee();
     ?>
     <div class="container py-5" style="padding-left:70px">
-        <h2 class="coaches-title">Choose a Package for
+        <h2 class="coaches-title">Choose a Private Training Package for
             <?php
 
             if (isset($_GET['ID'])) {
@@ -61,26 +61,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <?php echo $package['Title']; ?>
+                                    <?php echo $package['Name']; ?>
                                     </h5>
                                     <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['isVisitsLimited'] . " Visits"; ?>
+                                        <?php echo $package['NumOfSessions'] . " Sessions"; ?>
                                     </h6>
-                                    <?php if ($package['isVisitsLimited'] == 'limited') { ?>
-                                        <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i>
-                                            <?php echo $package['VisitsLimit'] . " Visits"; ?>
-                                        </h6>
-                                    <?php } ?>
+                                    
                                     <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfInvitations'] . " Invitations" ?>
+                                        <?php echo $package['MinPackageMonths'] . " Months" ?>
                                     </h6>
-                                    <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfInbodySessions'] . " Inbody Sessions" ?>
-                                    </h6>
-                                    <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfPrivateTrainingSessions'] . " Private
-                                Training Sessions" ?>
-                                    </h6>
+                                    
                                     <h5 class="card-text" id="price">
                                         <?php echo "for L.E " . $package['Price'] ?>
                                     </h5>
@@ -88,8 +78,8 @@
                             <?php
                             echo '<div class="d-flex justify-content-around mb-5">
                                 <button id="btn-" class="btn btn-success"
-                                    onclick="activateMembership(' . $package['ID'] . ' , ' . $clientID . ' )">
-                                    Activate Membership</button>'
+                                    onclick="addPtPackage(' . $package['ID'] . ' , ' . $clientID . ' )">
+                                    Add Package</button>'
                                 ?>
                         </div>
                     </div>
@@ -100,14 +90,14 @@
 
     </div>
     <script>
-        function activateMembership(packageId, clientId) {
+        function addPtPackage(packageId, clientId) {
             $.ajax({
                 type: "POST",
-                url: "../Controllers/PackageController.php",
+                url: "../Controllers/ptPackagesController.php",
                 data: {
-                    action: "activateMembership",
+                    action: "addPtPackage",
                     membershipclientId: clientId,
-                    packageId: packageId
+                    ptPackageId: packageId
                 },
                 success: function (response) {
                     console.log(response);

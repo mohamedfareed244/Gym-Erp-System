@@ -61,4 +61,21 @@ class Memberships
         }
         return false;
     }
+
+    public static function hasActiveMembership($clientId)
+    {
+        global $conn;
+
+        $currentDate = date("Y-m-d");
+
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate'";
+        $result = $conn->query($sql);
+        $found = false;
+        if ($result && $result->num_rows > 0) {
+            $found = true;
+            return $found;
+        } else {
+            return $found;
+        }
+    }
 }
