@@ -13,17 +13,22 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.come/a076d05399.js"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-
+<style>
+    #successFree,#successPrice,#fail,#alreadyExists {
+        color: red;
+        font-size: 16px;
+    }
+</style>
 
 </head>
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php session_start();
+    include("partials/usersidebar.php") ?>
 
     <div class="container py-5">
         <h2 style=" font-size: 26px;
@@ -38,9 +43,14 @@
             $classDetails = $class->getClassDetails();?>
        
             <?php foreach($classDetails as $classDetail): ?>
+            <form method="post"  autocomplete="off" id="reserveForm" action="../Controllers/ClassController.php">
+            <input type="hidden" name="action" value="reserveClass">
+            <input type="text" name="coachid" value="<?php echo $classDetail['CoachID']?>"  style="display:none;">
+            <input type="text" name="assignedclassid" value="<?php echo $classDetail['assignedclassID']?>"  style="display:none;">
             <div class="card">
             <img src="../<?php echo $classDetail['imgPath']; ?>" style="width:310px; height:240px;">
                 <h3><?php echo $classDetail['Name'] ?></h3>
+                <p class="coachname"><strong>Coach Name:</strong> <?php echo $classDetail['employeeName']?></p>
                 <section class="class-details">
                     <div class="class-item">
                         <div class="class-info">
@@ -52,7 +62,7 @@
                             $startformattedDate = $startTime->format("H:i");
                             $endformattedDate = $endTime->format("H:i");
 
-                            echo $startformattedDate . " - " .  $endformattedDate?></p>
+                            echo $startformattedDate . " - " .  $endformattedDate?></p> 
                             <p class="class-date"><strong>Date:</strong> <?php echo $classDetail['Date'] ?></p>
                             <p class="class-participants"><strong>Limit of Participants:</strong> <?php echo $classDetail['NumOfAttendants']?></p>
                             <p class="class-price"><strong>Price :</strong> <?php 
@@ -67,24 +77,61 @@
                                     <span id="availability-count">10</span> Places Left
                                 </p>
                             </div> -->
-
-                            <button class="reserve-class">Reserve Now</button>
+                            <input type=text  name="price" value= "<?php echo $classDetail['Price']?>" id="price" style="display:none;">
+                            <span id="successFree"><?php echo isset($_SESSION["successFree"][$classDetail['assignedclassID']]) ? $_SESSION["successFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="successPrice"><?php echo isset($_SESSION["successPrice"][$classDetail['assignedclassID']]) ? $_SESSION["successPrice"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="fail"><?php echo isset($_SESSION["failToReserve"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserve"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="alreadyExists"><?php echo isset($_SESSION["alreadyExists"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExists"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <input type="submit" value="Reserve Class" id="add-btn" class="reserve-class" >
 
                         </div>
                     </div>
                 </section>
             </div>
-            <?php endforeach; ?>
+                        </form>
+                        <?php
+            unset(
+    $_SESSION["alreadyExists"][$classDetail['assignedclassID']],
+    $_SESSION["fail"][$classDetail['assignedclassID']],
+    $_SESSION["successFree"][$classDetail['assignedclassID']],
+    $_SESSION["successPrice"][$classDetail['assignedclassID']]
+);
+?>
+            <?php endforeach;?>
 
         </div>
 
     </div>
 </body>
 
-<script src="../public/js/slider.js"></script>
+
+<!-- <script>
+function submitForm() {
+    const form = document.getElementById('reserveForm');
+    const formData = new FormData(form);
+
+    fetch('../Controllers/ClassController.php', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+
+        // Change the URL without reloading the page
+        history.pushState({}, '', 'classbooking?reserveClass');
+    })
+    .catch(error => {
+        // Handle errors if any
+        console.error('Error:', error);
+    });
+}
+
+</script> -->
 
 
-</body>
 <?php include("partials/footer.php") ?>
 
 

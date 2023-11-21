@@ -232,6 +232,41 @@ public function handleImageUpload($name, $descr,$days)
     $_SESSION["imgErr"] = $imgErr;
     return false;
 }
+
+public function reserveClass()
+{
+    $price = floatval(htmlspecialchars($_POST["price"]));
+
+    if ($price == "0") {
+        $CoachID = htmlspecialchars($_POST["coachid"]);
+        $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
+        $ClientID = $_SESSION["ID"];
+
+        $class = new Classes();
+
+        $result = $class->addReservedClass($CoachID, $AssignedClassID, $ClientID);
+
+        if ($result['successFree']) {
+            $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
+            header("Location: ../views/classbooking.php");
+            exit();
+        }
+        else if($result['alreadyExists']){
+            $_SESSION["alreadyExists"][$AssignedClassID] = "You already booked this class.";
+            header("Location: ../views/classbooking.php");
+            exit();
+        }
+        $_SESSION["failToReserve"][$AssignedClassID] = "Class reservation failed.";
+        header("Location: ../views/classbooking.php");
+        exit();
+    } else {
+        $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
+        $_SESSION["successPrice"][$AssignedClassID] = "Request made. Please Visit Gym For Payment as places are limited.";
+        header("Location: ../views/classbooking.php");
+        exit();
+    }
+}
+
 }
 
     
@@ -251,6 +286,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          case "assignCoachtoClass":
             $controller->assignCoachtoClass();
             break;
+        case "reserveClass":
+            $controller->reserveClass();
+            break;
         case "deleteClass":
             $classID = $_POST['classID'];
             $coachID = $_POST['coachID'];
@@ -264,9 +302,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "failure";
             }
-
+            break;
         default:
-            // Handle unknown action or display an error
             break;
     }
 }

@@ -78,7 +78,8 @@ span[id$="-err"],
                     <td> <?php echo $result['Date'] ?> </td>
 
                     <td><button id="add-btn" action="viewClients" >View Clients</button> 
-                    <button id="add-btn" style="background-color:red; color:white;" data-classid="<?php echo $result['ClassID']; ?>"
+                    <button id="add-btn" style="background-color:red; color:white;" 
+                        data-classid="<?php echo $result['ClassID']; ?>"
                         data-coachid="<?php echo $result['CoachID']; ?>"
                         data-date="<?php echo $result['Date']; ?>"
                         onclick='deleteClass(this)'>Delete</button>

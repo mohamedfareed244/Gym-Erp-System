@@ -220,11 +220,11 @@ class Classes{
     {
         global $conn;
 
-        $sql ="SELECT class.imgPath, class.Name , assignedclass.Date ,assignedclass.StartTime , assignedclass.EndTime, 
-        assignedclass.NumOfAttendants , assignedclass.Price
+        $sql ="SELECT class.imgPath, class.Name AS className , assignedclass.CoachID AS CoachID, assignedclass.Date ,assignedclass.StartTime , assignedclass.EndTime, 
+        assignedclass.NumOfAttendants , assignedclass.Price, assignedclass.ID AS assignedclassID, employee.Name AS employeeName 
         FROM class
-        INNER JOIN assignedclass
-        ON class.ID = assignedclass.ClassID";
+        INNER JOIN assignedclass ON class.ID = assignedclass.ClassID
+        INNER JOIN employee ON employee.ID = assignedclass.CoachID";
 
         $result = mysqli_query($conn, $sql);
     
@@ -232,12 +232,16 @@ class Classes{
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
                     'imgPath' => $row['imgPath'],
-                    'Name' => $row['Name'],
+                    'Name' => $row['className'],
+                    'CoachID' => $row['CoachID'],
                     'Date' => $row['Date'],
                     'StartTime' => $row['StartTime'],
                     'EndTime' => $row['EndTime'],
                     'NumOfAttendants' => $row['NumOfAttendants'],
-                    'Price' => $row['Price']
+                    'Price' => $row['Price'],
+                    'assignedclassID' => $row['assignedclassID'],
+                    'employeeName' => $row['employeeName']
+
                 );
             }
         }
@@ -246,8 +250,29 @@ class Classes{
 
 
     }
+
+    public function addReservedClass($CoachID, $AssignedClassID, $ClientID)
+    {
+        global $conn;
     
+        $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
+        $checkResult = mysqli_query($conn, $checkSql);
+    
+        $alreadyExists = mysqli_num_rows($checkResult) > 0;
+    
+        if (!$alreadyExists) {
+            $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID) VALUES ('$AssignedClassID','$CoachID','$ClientID')";
+            $insertResult = mysqli_query($conn, $sql);
+    
+            return array('inserted' => $insertResult, 'alreadyExists' => false);
+        } else {
+            return array('inserted' => false, 'alreadyExists' => true);
+        }
     }
+
+    }
+    
+    
 
 
 
