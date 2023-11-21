@@ -17,7 +17,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
-    #successFree,#successPrice,#fail,#alreadyExists {
+    #successFree,#successNotFree,#failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree {
         color: red;
         font-size: 16px;
     }
@@ -78,11 +78,13 @@
                                 </p>
                             </div> -->
                             <input type=text  name="price" value= "<?php echo $classDetail['Price']?>" id="price" style="display:none;">
-                            <span id="successFree"><?php echo isset($_SESSION["successFree"][$classDetail['assignedclassID']]) ? $_SESSION["successFree"][$classDetail['assignedclassID']] : ''; ?></span>
-                            <span id="successPrice"><?php echo isset($_SESSION["successPrice"][$classDetail['assignedclassID']]) ? $_SESSION["successPrice"][$classDetail['assignedclassID']] : ''; ?></span>
-                            <span id="fail"><?php echo isset($_SESSION["failToReserve"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserve"][$classDetail['assignedclassID']] : ''; ?></span>
-                            <span id="alreadyExists"><?php echo isset($_SESSION["alreadyExists"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExists"][$classDetail['assignedclassID']] : ''; ?></span>
                             <input type="submit" value="Reserve Class" id="add-btn" class="reserve-class" >
+                            <span id="successFree"><?php echo isset($_SESSION["successFree"][$classDetail['assignedclassID']]) ? $_SESSION["successFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="failFree"><?php echo isset($_SESSION["failToReserveFree"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserveFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="alreadyExistsFree"><?php echo isset($_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="successNotFree"><?php echo isset($_SESSION["successNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["successNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="failFree"><?php echo isset($_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="alreadyExistsNotFree"><?php echo isset($_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
 
                         </div>
                     </div>
@@ -91,10 +93,13 @@
                         </form>
                         <?php
             unset(
-    $_SESSION["alreadyExists"][$classDetail['assignedclassID']],
-    $_SESSION["failToReserve"][$classDetail['assignedclassID']],
+    $_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']],
+    $_SESSION["failToReserveFree"][$classDetail['assignedclassID']],
     $_SESSION["successFree"][$classDetail['assignedclassID']],
-    $_SESSION["successPrice"][$classDetail['assignedclassID']]
+    $_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']],
+    $_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']],
+    $_SESSION["successNotFree"][$classDetail['assignedclassID']]
+
 );
 ?>
             <?php endforeach;?>

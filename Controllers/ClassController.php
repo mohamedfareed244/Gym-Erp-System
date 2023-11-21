@@ -236,15 +236,14 @@ public function handleImageUpload($name, $descr,$days)
 public function reserveClass()
 {
     $price = floatval(htmlspecialchars($_POST["price"]));
+    $CoachID = htmlspecialchars($_POST["coachid"]);
+    $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
+    $ClientID = $_SESSION["ID"];
 
     if ($price == "0") {
-        $CoachID = htmlspecialchars($_POST["coachid"]);
-        $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
-        $ClientID = $_SESSION["ID"];
-
         $class = new Classes();
 
-        $result = $class->addReservedClass($CoachID, $AssignedClassID, $ClientID);
+        $result = $class->ReservationFreeClass($CoachID, $AssignedClassID, $ClientID);
 
         if ($result['inserted']) {
             $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
@@ -252,20 +251,34 @@ public function reserveClass()
             exit();
         }
         else if($result['alreadyExists']){
-            $_SESSION["alreadyExists"][$AssignedClassID] = "You already booked this class.";
+            $_SESSION["alreadyExistsFree"][$AssignedClassID] = "You already booked this class.";
             header("Location: ../views/classbooking.php");
             exit();
         }
         else{
-        $_SESSION["failToReserve"][$AssignedClassID] = "Class reservation failed.";
+        $_SESSION["failToReserveFree"][$AssignedClassID] = "Class reservation failed.";
         header("Location: ../views/classbooking.php");
         exit();
         }
     } else {
-        $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
-        $_SESSION["successPrice"][$AssignedClassID] = "Request made. Please Visit Gym For Payment as places are limited.";
+        $class = new Classes();
+
+        $result = $class->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
+        if ($result['inserted']) {
+            $_SESSION["successNotFree"][$AssignedClassID] = "Request made. Please Visit Gym For Payment as places are limited.";
+            header("Location: ../views/classbooking.php");
+            exit();
+        }
+        else if($result['alreadyExists']){
+            $_SESSION["alreadyExistsNotFree"][$AssignedClassID] = "You already booked this class.";
+            header("Location: ../views/classbooking.php");
+            exit();
+        }
+        else{
+        $_SESSION["failToReserveNotFree"][$AssignedClassID] = "Class reservation failed.";
         header("Location: ../views/classbooking.php");
         exit();
+        }
     }
 }
 

@@ -252,9 +252,10 @@ class Classes{
 
     }
 
-    public function addReservedClass($CoachID, $AssignedClassID, $ClientID)
+    public function ReservationFreeClass($CoachID, $AssignedClassID, $ClientID)
     {
         global $conn;
+        $isActivated="Activated";
     
         $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
         $checkResult = mysqli_query($conn, $checkSql);
@@ -262,7 +263,27 @@ class Classes{
         $alreadyExists = mysqli_num_rows($checkResult) > 0;
     
         if (!$alreadyExists) {
-            $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID) VALUES ('$AssignedClassID','$CoachID','$ClientID')";
+            $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
+            $insertResult = mysqli_query($conn, $sql);
+    
+            return array('inserted' => $insertResult, 'alreadyExists' => false);
+        } else {
+            return array('inserted' => false, 'alreadyExists' => true);
+        }
+    }
+
+    public function ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID)
+    {
+        global $conn;
+        $isActivated="Not Activated";
+    
+        $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
+        $checkResult = mysqli_query($conn, $checkSql);
+    
+        $alreadyExists = mysqli_num_rows($checkResult) > 0;
+    
+        if (!$alreadyExists) {
+            $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
             $insertResult = mysqli_query($conn, $sql);
     
             return array('inserted' => $insertResult, 'alreadyExists' => false);
