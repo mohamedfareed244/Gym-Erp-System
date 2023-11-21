@@ -2,7 +2,10 @@
 
 
 include_once "../includes/dbh.inc.php";
-include_once "./send_pw_email.php";
+include_once "../views/send_pw_email.php";
+//to display error on mac it won't affect the code or make errors . 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 class Client
 {
     public $ID;
@@ -16,6 +19,21 @@ class Client
     public $Email;
     public $Password;
 
+    public static function checkClient($clientID)
+    {
+        global $conn;
+        $clientID = mysqli_real_escape_string($conn, $clientID);
+
+        $sql = "SELECT * FROM client WHERE ID = '$clientID'";
+        $result = $conn->query($sql);
+        $found = false;
+        if ($result && $result->num_rows > 0) {
+            $found = true;
+            return $found;
+        } else {
+            return $found;
+        }
+    }
     public static function getClientByID($clientID)
     {
         global $conn;
@@ -45,7 +63,8 @@ class Client
             return null;
         }
     }
-    public static function deleteClientByID($clientID){
+    public static function deleteClientByID($clientID)
+    {
         global $conn;
         $sql = "DELETE from client where ID =" . $clientID;
 
@@ -88,28 +107,28 @@ class Client
     public static function addClient($client)
     {
         global $conn;
-   try{
-    $Fname = $client->FirstName;
-    $Lname = $client->LastName;
-    $Age = $client->Age;
-    $Gender = $client->Gender;
-    $Phone = $client->Phone;
-    $Height = $client->Height;
-    $Weight = $client->Weight;
-    $Email = $client->Email;
-    $Password =ConfirmationMailer::generateRandomPassword();
-    $Phone = $client->Phone;
-    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        try {
+            $Fname = $client->FirstName;
+            $Lname = $client->LastName;
+            $Age = $client->Age;
+            $Gender = $client->Gender;
+            $Phone = $client->Phone;
+            $Height = $client->Height;
+            $Weight = $client->Weight;
+            $Email = $client->Email;
+            $Password = ConfirmationMailer::generateRandomPassword();
+            $Phone = $client->Phone;
+            $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
+            $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
             VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$hashedPassword','$Phone')";
- ConfirmationMailer::sendConfirmationEmail($Email,$Password);
+            ConfirmationMailer::sendConfirmationEmail($Email, $Password);
 
-    return mysqli_query($conn, $sql);
- }catch(Exception $e){
-    echo $e;
-}
-       
+            return mysqli_query($conn, $sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
+
     }
     public static function getid($client)
     {
@@ -185,6 +204,11 @@ class Client
         return mysqli_query($conn, $sql);
     }
 
+    public function activateMembership()
+    {
+        global $conn;
+
+    }
     public function freezeMembership()
     {
     }

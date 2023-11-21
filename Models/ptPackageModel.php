@@ -3,6 +3,8 @@
 
 include_once "../includes/dbh.inc.php";
 
+include_once "ClientModel.php";
+include_once "membershipsModel.php";
 
 class ptPackages
 {
@@ -37,19 +39,19 @@ class ptPackages
     public function addptPacks($ptPackage)
     {
         global $conn;
-    
+
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
         $Price = $ptPackage->Price;
         $isActivated = "Activated";
-    
+
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
         return $conn->query($sql);
     }
 
-    
+
     public function activatePtPackage($ptpackageID)
     {
         global $conn;
@@ -74,7 +76,7 @@ class ptPackages
         global $conn;
 
         if (!isset($_SESSION['clientID'])) {
-            return null; 
+            return null;
         }
 
         $clientId = $_SESSION['clientID'];
@@ -108,10 +110,38 @@ class ptPackages
 
             return $userPackageDetails;
         } else {
-            return null; 
+            return null;
         }
     }
-    
+    public static function checkPtPackage($ptPackageID)
+    {
+        global $conn;
+        $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
+        $result = $conn->query($sql);
+        $found = false;
+        if ($result && $result->num_rows > 0) {
+            $found = true;
+            return $found;
+        } else {
+            return $found;
+        }
+    }
+    public static function addPackageForClient($clientID, $ptPackageID)
+    {
+        global $conn;
+        $findClient = Client::checkClient($clientID);
+        if ($findClient) {
+            $checkMembership = Memberships::hasActiveMembership($clientID);
+            if ($checkMembership) {
+                $findPtPackage = ptPackages::checkPtPackage($ptPackageID);
+                if ($findPtPackage) {
+                    
+                }
+            }
+
+        }
+    }
+
 }
 
 

@@ -38,7 +38,7 @@ class Package
         VALUES ('$title', '$months','$isLimited', '$visitsLimit', '$freezeLimit', '$invitations', '$inbody', '$pt', '$price','$isActivated')";
 
 
-        return  mysqli_query($conn, $sql);
+        return mysqli_query($conn, $sql);
     }
 
     public function getAllPackagesforEmployee()
@@ -101,5 +101,43 @@ class Package
         $sql = "UPDATE package SET isActivated='Deactivated' WHERE ID='$packageID'";
 
         return $conn->query($sql);
+    }
+
+    public static function getPackage($packageID)
+    {
+        global $conn;
+        $sql = "SELECT * FROM package WHERE ID='$packageID'";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $packageData = $result->fetch_assoc();
+            $package = new Package();
+            $package->ID = $packageData['ID'];  
+            $package->NumOfMonths = $packageData['NumOfMonths'];
+            $package->isVisitsLimited = $packageData['isVisitsLimited'];
+            $package->FreezeLimit = $packageData['FreezeLimit'];
+            $package->NumOfInvitations = $packageData['NumOfInvitations'];
+            $package->NumOfInbodySessions = $packageData['NumOfInbodySessions'];
+            $package->NumOfPrivateTrainingSessions = $packageData['NumOfPrivateTrainingSessions'];
+            $package->Price = $packageData['Price'];
+            $package->isActivated = $packageData['isActivated'];
+
+            return $package;
+        }
+        else{
+            return null;
+        }
+    }
+    public static function checkPackage($packageID)
+    {
+        global $conn;
+        $sql = "SELECT * FROM package WHERE ID='$packageID'";
+        $result = $conn->query($sql);
+        $found = false;
+        if ($result && $result->num_rows > 0) {
+            $found = true;
+            return $found;
+        } else {
+            return $found;
+        }
     }
 }

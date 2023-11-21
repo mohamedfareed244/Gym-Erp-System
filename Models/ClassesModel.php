@@ -2,7 +2,8 @@
 
 
 include_once "../includes/dbh.inc.php";
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 class Classes{
     
     public $ID;
@@ -156,7 +157,7 @@ class Classes{
     }
 
 
-    public function getSelectedCoachClasses($coachID)
+    public static function getSelectedCoachClasses($coachID)
     {
         global $conn;
 

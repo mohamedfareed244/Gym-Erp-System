@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 02:02 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Nov 20, 2023 at 08:28 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `assignedclass` (
   `Price` int(50) NOT NULL,
   `CoachID` int(10) NOT NULL,
   `NumOfAttendants` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `assignedclass`
@@ -58,7 +58,7 @@ CREATE TABLE `authority` (
   `ID` int(11) NOT NULL,
   `FriendlyName` varchar(50) NOT NULL,
   `LinkAddress` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `authority`
@@ -93,7 +93,7 @@ CREATE TABLE `available slots` (
   `ID` int(11) NOT NULL,
   `StartTime` time(6) NOT NULL,
   `EndTime` time(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE `class` (
   `Name` varchar(30) NOT NULL,
   `Description` varchar(500) NOT NULL,
   `imgPath` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `class`
@@ -132,7 +132,7 @@ INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
 CREATE TABLE `class_days` (
   `ClassID` int(11) NOT NULL,
   `Day` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `class_days`
@@ -171,16 +171,16 @@ CREATE TABLE `client` (
   `Email` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `Phone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
-(26, 'jana', 'hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866'),
-(28, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868'),
-(29, 'mo', 'dd', 90, 'mal', '90', '90', 'm@gm.com', '', 'ddd');
+(26, 'jana', 'hani', 20, 'female', 65, 165, 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866'),
+(28, 'rania', 'kamal', 40, 'female', 0, 0, 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868'),
+(29, 'mo', 'dd', 90, 'mal', 90, 90, 'm@gm.com', '', 'ddd');
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,7 @@ CREATE TABLE `coach` (
   `Address` varchar(100) NOT NULL,
   `Ismanager` int(1) NOT NULL,
   `Password` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE `coach` (
 CREATE TABLE `coach available days` (
   `CoachID` int(50) NOT NULL,
   `Days` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -219,7 +219,7 @@ CREATE TABLE `coach available days` (
 CREATE TABLE `coach available slots` (
   `CoachID` int(50) NOT NULL,
   `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -236,7 +236,7 @@ CREATE TABLE `employee` (
   `Address` varchar(100) NOT NULL,
   `JobTitle` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee`
@@ -256,7 +256,7 @@ INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address
 CREATE TABLE `employee authorities` (
   `ID` int(11) NOT NULL,
   `AuthorityID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -267,7 +267,7 @@ CREATE TABLE `employee authorities` (
 CREATE TABLE `job_titles` (
   `Id` int(11) NOT NULL,
   `Name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `job_titles`
@@ -294,10 +294,19 @@ CREATE TABLE `membership` (
   `VisitsCount` int(50) NOT NULL,
   `InvitationsCount` int(50) NOT NULL,
   `InbodyCount` int(50) NOT NULL,
-  `PrivatTrainingSessionsCount` int(50) NOT NULL,
+  `PrivateTrainingSessionsCount` int(50) NOT NULL,
   `FreezeCount` int(50) NOT NULL,
   `Freezed` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `membership`
+--
+
+INSERT INTO `membership` (`ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`) VALUES
+(28, 15, '2023-11-20', '2024-05-20', 0, 5, 3, 3, 30, 0),
+(26, 15, '2023-11-20', '2024-05-20', 0, 5, 3, 3, 30, 0),
+(29, 13, '2023-11-20', '2024-01-20', 0, 4, 2, 2, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -317,14 +326,14 @@ CREATE TABLE `package` (
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `package`
 --
 
 INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`, `isActivated`) VALUES
-(12, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600, 'Deactivated'),
+(12, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600, 'Activated'),
 (13, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800, 'Activated'),
 (14, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100, 'Activated'),
 (15, '4 Months + 2 Months Free', 6, 'unlimited', 0, 30, 5, 3, 3, 2500, 'Activated'),
@@ -341,7 +350,7 @@ CREATE TABLE `private training membership` (
   `CoachID` int(50) NOT NULL,
   `PrivateTrainingPackageID` int(50) NOT NULL,
   `SessionsCount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -356,7 +365,7 @@ CREATE TABLE `private training package` (
   `MinPackageMonths` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `private training package`
@@ -382,7 +391,7 @@ CREATE TABLE `reserved class` (
   `CoachID` int(50) NOT NULL,
   `ClientID` int(50) NOT NULL,
   `Attended` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -396,7 +405,7 @@ CREATE TABLE `reserved private training free session` (
   `CoachID` int(50) NOT NULL,
   `Date` date NOT NULL,
   `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
