@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 11:49 PM
+-- Generation Time: Nov 22, 2023 at 01:23 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -287,6 +287,7 @@ INSERT INTO `job_titles` (`Id`, `Name`) VALUES
 --
 
 CREATE TABLE `membership` (
+  `ID` int(11) NOT NULL,
   `ClientID` int(50) NOT NULL,
   `PackageID` int(50) NOT NULL,
   `StartDate` date NOT NULL,
@@ -296,17 +297,16 @@ CREATE TABLE `membership` (
   `InbodyCount` int(50) NOT NULL,
   `PrivateTrainingSessionsCount` int(50) NOT NULL,
   `FreezeCount` int(50) NOT NULL,
-  `Freezed` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Freezed` tinyint(1) NOT NULL,
+  `isActivated` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `membership`
 --
 
-INSERT INTO `membership` (`ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`) VALUES
-(28, 15, '2023-11-20', '2024-05-20', 0, 5, 3, 3, 30, 0),
-(26, 15, '2023-11-20', '2024-05-20', 0, 5, 3, 3, 30, 0),
-(29, 13, '2023-11-20', '2024-01-20', 0, 4, 2, 2, 20, 0);
+INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
+(4, 28, 13, '2023-11-22', '2024-01-22', 0, 4, 2, 2, 20, 0, 'Not Activated');
 
 -- --------------------------------------------------------
 
@@ -499,6 +499,7 @@ ALTER TABLE `job_titles`
 -- Indexes for table `membership`
 --
 ALTER TABLE `membership`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `test1` (`ClientID`),
   ADD KEY `test2` (`PackageID`);
 
@@ -593,6 +594,12 @@ ALTER TABLE `job_titles`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `membership`
+--
+ALTER TABLE `membership`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
@@ -646,37 +653,15 @@ ALTER TABLE `employee authorities`
   ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `membership`
---
-ALTER TABLE `membership`
-  ADD CONSTRAINT `test1` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test2` FOREIGN KEY (`PackageID`) REFERENCES `package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `private training membership`
 --
 ALTER TABLE `private training membership`
   ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reserved class`
---
-ALTER TABLE `reserved class`
-  ADD CONSTRAINT `test10` FOREIGN KEY (`CoachID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test8` FOREIGN KEY (`AssignedClassID`) REFERENCES `assignedclass` (`ID`),
-  ADD CONSTRAINT `test9` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reserved private training free session`
---
-ALTER TABLE `reserved private training free session`
-  ADD CONSTRAINT `test11` FOREIGN KEY (`SlotID`) REFERENCES `available slots` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test6` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test7` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
