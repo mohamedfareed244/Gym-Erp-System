@@ -18,13 +18,33 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+    <style>
+    #success,
+    #fail,
+    #alreadyExists1,
+    #alreadyExists2 {
+        color: red;
+        font-size: 16px;
+    }
 
+    .row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(270px, 1fr));
+    }
+
+    .col {
+        width: 70%;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+    </style>
 
 </head>
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php session_start();
+    include("partials/usersidebar.php");?>
     <?php include_once "../Models/PackageModel.php";
     $package = new Package();
     $packages = $package->getAllPackagesforClient();?>
@@ -37,38 +57,64 @@
     margin-bottom:3%;">Types:</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
- 
-        <?php foreach ($packages as $package): ?>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $package['Title']; ?></h5>
-                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i><?php echo $package['isVisitsLimited']. " Visits"; ?>
-                            </h6>
-                            <?php if ($package['isVisitsLimited'] == 'limited') { ?>
-                            <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i><?php echo $package['VisitsLimit']. " Visits"; ?>
-                            </h6>
-                            <?php } ?>
-                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInvitations']." Invitations" ?>
+
+            <?php foreach ($packages as $package): ?>
+            <form method="post" autocomplete="off" id="addMembershipForm"
+                action="../Controllers/MembershipsController.php">
+                <input type="hidden" name="action" value="addMembership">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $package['Title']; ?></h5>
+                                <input type="text" value="<?php echo $package['ID'];?>" name="PackageID"
+                                    style="display:none;">
+                                <h6 class="card-text" id="visits"><i
+                                        class="fa-regular fa-circle-check"></i><?php echo $package['isVisitsLimited']. " Visits"; ?>
                                 </h6>
-                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInbodySessions']. " Inbody Sessions" ?></h6>
-                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfPrivateTrainingSessions'] . " Private
+                                <?php if ($package['isVisitsLimited'] == 'limited') { ?>
+                                <h6 class="card-text" id="visitsnum"><i
+                                        class="fa-regular fa-circle-check"></i><?php echo $package['VisitsLimit']. " Visits"; ?>
+                                </h6>
+                                <?php } ?>
+                                <h6 class="card-text" id="invitations"><i
+                                        class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInvitations']." Invitations" ?>
+                                </h6>
+                                <h6 class="card-text" id="inbody"><i
+                                        class="fa-regular fa-circle-check"></i><?php echo $package['NumOfInbodySessions']. " Inbody Sessions" ?>
+                                </h6>
+                                <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i><?php echo $package['NumOfPrivateTrainingSessions'] . " Private
                                 Training Sessions"?></h6>
-                            <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
-                    </div>
-                    <div class="d-flex justify-content-around mb-5">
-                        <button class="btn btn-primary" onclick="viewModal()">REQUEST SUBSCRIPTION</button>
+                                <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
+                        </div>
+                        <div class="d-flex justify-content-around mb-5">
+                            <button class="btn btn-primary">Request</button>
+                            <span id="success">
+                                <?php echo isset($_SESSION["membershipsuccess"][$package['ID']]) ? $_SESSION["membershipsuccess"][$package['ID']] : ''; ?>
+                            </span>
+                            <span id="alreadyExists1">
+                                <?php echo isset($_SESSION["alreadyThisMembershipExists"][$package['ID']]) ? $_SESSION["alreadyThisMembershipExists"][$package['ID']] : ''; ?>
+                            </span>
+                            <span id="alreadyExists2">
+                                <?php echo isset($_SESSION["alreadyAnotherMembershipExists"][$package['ID']]) ? $_SESSION["alreadyAnotherMembershipExists"][$package['ID']] : ''; ?>
+                            </span>
+                            <span id="fail">
+                                <?php echo isset($_SESSION["fail"][$package['ID']]) ? $_SESSION["fail"][$package['ID']] : ''; ?>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+            <?php
+            unset(
+    $_SESSION["alreadyThisMembershipExists"][$package['ID']],
+    $_SESSION["alreadyAnotherMembershipExists"][$package['ID']],
+    $_SESSION["fail"][$package['ID']],
+    $_SESSION["membershipsuccess"][$package['ID']],
+);
+?>
             <?php endforeach; ?>
 
-            <div id="myModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <p id="confirmation-text">Request made. Please Visit Gym For Payment.</p>
-                </div>
-            </div>
-            
+
 
         </div>
 
@@ -76,23 +122,7 @@
 
 </body>
 
-<script src="../public/js/slider.js"></script>
 
-<script>
-    function viewModal()
-    {
-        const modal = document.getElementById("myModal");
-        modal.style.display="block";
-
-        // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
-        setTimeout(function() {
-                modal.style.display = "none";
-                modalMessage.style.display = "none";
-            }, 2000); // 2 seconds
-    }
-
-
-</script>
 
 </body>
 <?php include("partials/footer.php") ?>

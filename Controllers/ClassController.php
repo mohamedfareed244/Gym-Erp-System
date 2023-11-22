@@ -265,7 +265,7 @@ public function reserveClass()
 
         $result = $class->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
         if ($result['inserted']) {
-            $_SESSION["successNotFree"][$AssignedClassID] = "Request made. Please Visit Gym For Payment as places are limited.";
+            $_SESSION["successNotFree"][$AssignedClassID] = "Class Request made. Please Visit Gym For Payment as places are limited.";
             header("Location: ../views/classbooking.php");
             exit();
         }

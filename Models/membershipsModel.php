@@ -48,6 +48,7 @@ class Memberships
     public static function createMembership($clientId, $packageId)
     {
         global $conn;
+        $isActivated="Activated";
         $findClient = Client::checkClient($clientId);
         $findPackage = Package::checkPackage($packageId);
         if ($findClient && $findPackage) {
@@ -55,12 +56,51 @@ class Memberships
             $startDate = date("Y-m-d");
             $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
             $freezed = 0;
-            $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed)
-                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed')";
+            $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
+                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed','$isActivated')";
             return mysqli_query($conn, $sql);
         }
         return false;
     }
+
+
+    public static function addMembershipUserSide($clientId, $packageId)
+    {
+        global $conn;
+        $isActivated="Not Activated";
+        $findClient = Client::checkClient($clientId);
+        $findPackage = Package::checkPackage($packageId);
+        if ($findClient && $findPackage) {
+            $Package = Package::getPackage($packageId);
+
+            $check1Sql = "SELECT * FROM `membership` WHERE ClientID = '$clientId' AND PackageID ='$packageId'";
+            $check1Result = mysqli_query($conn, $check1Sql);
+            $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
+            
+            $check2Sql = "SELECT * FROM `membership` WHERE ClientID = '$clientId'";
+            $check2Result = mysqli_query($conn, $check2Sql);
+            $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
+
+            if($alreadyThisMembershipExists)
+            {
+                return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false);
+            }
+            else if( $alreadyAnotherMembershipExists){
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
+            }
+
+           else{
+            $startDate = date("Y-m-d");
+            $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
+            $freezed = 0;
+            $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
+                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed' , '$isActivated')";
+            $insertResult = mysqli_query($conn, $sql);
+            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult );
+           }
+        }
+    }
+
 
     public static function hasActiveMembership($clientId)
     {
