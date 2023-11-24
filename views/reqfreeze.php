@@ -23,7 +23,9 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php session_start();
+    
+    include("partials/usersidebar.php") ?>
 
 
     <div class="profile">
@@ -34,28 +36,37 @@
 
         <div class="reminders">
             <div class="reminder">
+            <?php include_once "../Models/membershipsModel.php";
+            include_once "../Models/PackageModel.php";
+
+            $membership = new Memberships();
+            $package = new Package();
+            $clientId = $_SESSION["ID"];
+
+            $membershipdetails = $membership->getMembership($clientId);
+            ?>
                 <p class="class">Package:</p>
                 <div class="class-title">2 Months</div>
 
                 <div class="dates">
                     <div class="date">
                         <p>Start Date:</p>
-                        <div class="start-date">21-06-2023</div>
+                        <div class="start-date"><?php echo $membershipdetails->startDate; ?></div>
                     </div>
                     <div class="date">
                         <p>End Date:</p>
-                        <div class="end-date">21-08-2023</div>
+                        <div class="end-date"><?php echo $membershipdetails->endDate; ?></div>
                     </div>
                 </div>
 
                 <div class="rem-info">
                     <p>Remaining Freeze Attempts:</p>
-                    <p class="actual-rem" id="actual-rem"></p>
+                    <p class="actual-rem" id="actual-rem"><?php echo $membershipdetails->freezeCount; ?> Weeks Out of <?php echo $package->FreezeLimit - $membershipdetails->freezeCount; ?> Left</p>
                 </div>
 
                 <div class="freeze-request">
                     <p class="rem-info">Weeks to be Frozen:</p>
-                    <input type="number" id="freeze-weeks" min="1" max="5" placeholder="Weeks">
+                    <input type="number" id="freeze-weeks" min="1" max="<?php echo $membershipdetails->remainingFreezeAttempts; ?>" placeholder="Weeks">
                     <button id="freeze-button">Submit Request</button>
                     <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
 
