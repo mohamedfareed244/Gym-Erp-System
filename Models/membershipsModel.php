@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include_once "../includes/dbh.inc.php";
 include_once "ClientModel.php";
@@ -118,5 +119,42 @@ class Memberships
         } else {
             return $found;
         }
+    }
+
+    public static function getClientMembershipInfo()
+    {
+    global $conn;
+
+    $isActivated = "Activated";
+
+    $sql = "SELECT package.NumOfMonths, package.NumOfInvitations, package.NumOfInbodySessions, package.NumOfPrivateTrainingSessions,
+            package.FreezeLimit, package.Price , membership.StartDate, membership.EndDate, membership.InvitationsCount, membership.InbodyCount,
+            membership.PrivateTrainingSessionsCount, membership.FreezeCount
+            FROM package 
+            INNER JOIN membership ON package.ID = membership.PackageID 
+            WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'] ;
+
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+       $results[] = array(
+        'NumOfMonths'=>$row['NumOfMonths'],
+        'NumOfInvitations' => $row['NumOfInvitations'],
+        'Price' => $row['Price'],
+        'NumOfInbodySessions' => $row['NumOfInbodySessions'],
+        'NumOfPrivateTrainingSessions' => $row['NumOfPrivateTrainingSessions'],
+        'FreezeLimit' => $row['FreezeLimit'],
+        'StartDate'=>$row['StartDate'],
+        'EndDate' => $row['EndDate'],
+        'InvitationsCount' => $row['InvitationsCount'],
+        'InbodyCount' => $row['InbodyCount'],
+        'PrivateTrainingSessionsCount' => $row['PrivateTrainingSessionsCount'],
+        'FreezeCount' => $row['FreezeCount']
+        );
+    }
+    }
+
+    return $results;
     }
 }
