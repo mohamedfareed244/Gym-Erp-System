@@ -2,6 +2,8 @@
 
 include_once "../Models/ClientModel.php";
 
+session_start();
+
 
 class ClientController
 {
@@ -180,7 +182,7 @@ class ClientController
                 $storedHashedPassword = $row["Password"];
                 if (password_verify($Password, $storedHashedPassword)) {
                     // Authentication successful
-                    $_SESSION["ID"] = $row[0];
+                    $_SESSION["ID"] = $row["ID"];
                     $_SESSION["FName"] = $row["FirstName"];
                     $_SESSION["LName"] = $row["LastName"];
                     $_SESSION["Phone"] = $row["Phone"];

@@ -16,6 +16,7 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+    <script src="../public/js/reqfreeze.js"></script>
 
 
 </head>
@@ -49,14 +50,14 @@
 
                 <div class="rem-info">
                     <p>Remaining Freeze Attempts:</p>
-                    <p class="actual-rem">5 Weeks Out of 5 Left</p>
+                    <p class="actual-rem" id="actual-rem"></p>
                 </div>
 
                 <div class="freeze-request">
                     <p class="rem-info">Weeks to be Frozen:</p>
                     <input type="number" id="freeze-weeks" min="1" max="5" placeholder="Weeks">
                     <button id="freeze-button">Submit Request</button>
-                    <p id="error-message" class="error-message">Please enter a number between 1 and 5.</p>
+                    <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
 
                 </div>
             </div>
@@ -83,97 +84,15 @@
 
 
     <script src="../public/js/slider.js"></script>
+    <script src="../public/js/reqfreeze.js"></script>
+
     <script>
-    const freezeButton = document.getElementById("freeze-button");
-    const freezeWeeksInput = document.getElementById("freeze-weeks");
-    const remainingFreezeAttempts = 5; // To be fetched from the database later on
+                document.getElementById("freeze-button").addEventListener("click", function() {
+            const freezeWeeks = document.getElementById("freeze-weeks").value;
 
-    const modal = document.getElementById("myModal");
-    const confirmationText = document.getElementById("confirmation-text");
-    const confirmButton = document.getElementById("confirm-button");
-    const cancelButton = document.getElementById("cancel-button");
-    const closeBtn = document.querySelector(".close-popup");
-    const errorMessage = document.getElementById("error-message");
-    const modalMessage = document.getElementById("modal-message");
+            sendFreezeRequest(freezeWeeks);
+        });
 
-    function showmodal(message) {
-        confirmationText.textContent = message;
-        modal.style.display = "block";
-        confirmButton.style.display = "block";
-        cancelButton.style.display = "block";
-        closeBtn.style.display = "block";
-        modalMessage.style.display = "none";
-    }
-
-    function resetmodal() {
-        modal.style.display = "none";
-        confirmationText.textContent = '';
-        confirmButton.style.display = "none";
-        cancelButton.style.display = "none";
-        closeBtn.style.display = "none";
-        modalMessage.style.display = "none";
-    }
-
-    let isFrozen = false; // Track if the freeze button is already pressed
-
-    freezeButton.addEventListener("click", function() {
-        const freezeWeeks = freezeWeeksInput.value;
-        if (isFrozen) {
-            // Show modal message instead of the whole modal
-            showmodal("Your request is submitted, and you will receive a confirmation email.");
-            confirmButton.style.display = "none";
-        cancelButton.style.display = "none";
-        } else if (freezeWeeks !== '' && parseInt(freezeWeeks) >= 1 && parseInt(freezeWeeks) <=
-            remainingFreezeAttempts) {
-            showmodal(`Are you sure you want to freeze ${freezeWeeks} weeks?`);
-            isFrozen = true; // Set the freeze button state to pressed
-        } else {
-            errorMessage.style.display = "block";
-            modal.style.display = "none";
-        }
-    });
-
-
-    closeBtn.addEventListener("click", function() {
-        resetmodal();
-    });
-
-    confirmButton.addEventListener("click", function() {
-        if (confirmationText.textContent) {
-            resetmodal();
-
-            modal.style.display = "block";
-            modalMessage.style.display = "block";
-            modalMessage.textContent = "Your request is submitted, and you will receive a confirmation email.";
-
-            // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
-            setTimeout(function() {
-                modal.style.display = "none";
-                modalMessage.style.display = "none";
-            }, 2000); // 2 seconds
-
-
-        }
-
-    });
-
-    cancelButton.addEventListener("click", function() {
-        if (confirmationText.textContent) {
-            resetmodal();
-
-            modal.style.display = "block";
-            modalMessage.style.display = "block";
-            modalMessage.textContent = "No request submitted.";
-
-            // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
-            setTimeout(function() {
-                modal.style.display = "none";
-                modalMessage.style.display = "none";
-            }, 2000); // 2 seconds
-
-
-        }
-    });
     </script>
 
 

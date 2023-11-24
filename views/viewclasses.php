@@ -22,111 +22,60 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php
 
+    session_start();
+
+    include_once "../Models/ClassesModel.php";
+    
+    $classes = Classes::getClientClassInfo();
+    
+    include("partials/usersidebar.php");?>
 
     <div class="profile">
 
         <div class="greeting">
             <p class="hello-classes"><i class="fas fa-calendar"></i> Your Upcoming Classes</p>
         </div>
-
+        <?php foreach ($classes as $class): ?>
         <div class="reminders">
             <div class="reminder">
                 <p class="class">Class:</p>
-                <div class="class-title">YOGA</div>
+                <div class="class-title"><?php echo $class['className']; ?></div>
                 <div class="dates">
-                    <div class="date">
-                        <p>Date:</p>
-                        <div class="class-date">21-10-2023</div>
-                    </div>
                     <div class="time">
                         <p>Time:</p>
-                        <div class="class-time">4:30 - 6:00 p.m</div>
+                        <div class="class-time">
+                            <?php
+                            $startTime = new DateTime($class['StartTime']);
+                            $endTime = new DateTime($class['EndTime']);
+                            
+                            // Format the DateTime object as "H:i" (24-hour format)
+                            $startformattedDate = $startTime->format("H:i");
+                            $endformattedDate = $endTime->format("H:i");
+
+                            echo $startformattedDate . " - " . $endformattedDate . " p.m"; ?></div>
                     </div>
 
                     <div class="day">
                         <p>Day:</p>
-                        <div class="class-day">Sunday</div>
+                        <div class="class-day"><?php echo $class['Date'] ?></div>
                     </div>
                 </div>
 
                 <div class="rem-info">
-                    <p>Level:</p>
-                    <p class="actual-rem"> Moderate</p>
 
-                    <p>Instructor:</p>
-                    <p class="actual-rem"> Sara Maged</p>
+                    <p>Coach:</p>
+                    <p class="actual-rem"> <?php echo $class['employeeName']; ?></p>
 
                     <p>Class Fees:</p>
-                    <p class="actual-rem"> 200 L.E.</p>
-                </div>
-            </div>
-
-
-            <div class="reminder">
-                <p class="class">Class:</p>
-                <div class="class-title">BODY-ATTACK</div>
-                <div class="dates">
-                    <div class="date">
-                        <p>Date:</p>
-                        <div class="class-date"> 28-10-2023</div>
-                    </div>
-                    <div class="time">
-                        <p>Time:</p>
-                        <div class="class-time">6:30 - 8:00 p.m</div>
-                    </div>
-
-                    <div class="day">
-                        <p>Day:</p>
-                        <div class="class-day">Monday</div>
-                    </div>
-                </div>
-
-                <div class="rem-info">
-                    <p>Level:</p>
-                    <p class="actual-rem"> Hard</p>
-
-                    <p>Instructor:</p>
-                    <p class="actual-rem"> Kareem Ahmed</p>
-
-                    <p>Class Fees:</p>
-                    <p class="actual-rem"> 200 L.E.</p>
-                </div>
-            </div>
-
-            <div class="reminder">
-                <p class="class">Class:</p>
-                <div class="class-title">AEROBICS</div>
-                <div class="dates">
-                    <div class="date">
-                        <p>Date:</p>
-                        <div class="class-date">31-10-2023</div>
-                    </div>
-                    <div class="time">
-                        <p>Time:</p>
-                        <div class="class-time">5:30 - 7:00 p.m</div>
-                    </div>
-
-                    <div class="day">
-                        <p>Day:</p>
-                        <div class="class-day">Tuesday</div>
-                    </div>
-                </div>
-
-                <div class="rem-info">
-                    <p>Level:</p>
-                    <p class="actual-rem"> Easy</p>
-
-                    <p>Instructor:</p>
-                    <p class="actual-rem"> Anna Hall</p>
-
-                    <p>Class Fees:</p>
-                    <p class="actual-rem"> 0 L.E.</p>
+                    <p class="actual-rem"> <?php echo $class['Price'] . " L.E "; ?></p>
                 </div>
             </div>
         </div>
+        <?php endforeach ?>
     </div>
+
 
 
 

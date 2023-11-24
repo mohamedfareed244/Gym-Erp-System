@@ -34,52 +34,72 @@
 
         </style>
 
-
 </head>
 
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php 
+    session_start();
+   
+    include_once "../Models/membershipsModel.php";
+    include_once "../Models/ClassesModel.php";
+    
+    $memberships = Memberships::getClientMembershipInfo();
+    $classes = Classes::getClientClassInfo();
+
+    include("partials/usersidebar.php") ?>
 
 
     <div class="profile">
-
-      
         <div class="greeting">
-            <p class="hello">Hello Jana! </p>
+            <p class="hello">Hello <?php echo $_SESSION["FName"]; ?>! </p>
         </div>
+        <?php foreach ($memberships as $membership): ?>
         <div class="membership-details">
             <p class="currpackage">Current Package:</p>
-            <div class="membership-title">2 MONTHS</div>
+            <div class="membership-title"><?php echo $membership['Title']; ?></div>
             <div class="dates">
                 <div class="date">
                     <p>Start Date:</p>
-                    <div class="start-date">21-06-2023</div>
+                    <div class="start-date"><?php echo $membership['StartDate']; ?></div>
                 </div>
                 <div class="date">
                     <p>End Date:</p>
-                    <div class="end-date">21-08-2023</div>
+                    <div class="end-date"><?php echo $membership['EndDate']; ?></div>
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
         <h2 class="reminder-title"><i class='bx bxs-bell-ring'></i>REMINDER:</h2>
         <div class="reminders">
+        <?php foreach ($classes as $class): ?>
             <div class="reminder">
                 <p class="class">Class:</p>
-                <div class="class-title">YOGA</div>
+                <div class="class-title"><?php echo $class['className']; ?></div>
                 <div class="dates">
                     <div class="date">
                         <p>Date:</p>
-                        <div class="class-date">21-10-2023</div>
+                        <div class="class-date"><?php echo $class['Date'] ?></div>
                     </div>
                     <div class="time">
                         <p>Time:</p>
-                        <div class="class-time">4:30 - 6:00 p.m</div>
+                        <div class="class-time"> 
+                            <?php
+                            $startTime = new DateTime($class['StartTime']);
+                            $endTime = new DateTime($class['EndTime']);
+                            
+                            // Format the DateTime object as "H:i" (24-hour format)
+                            $startformattedDate = $startTime->format("H:i");
+                            $endformattedDate = $endTime->format("H:i");
+
+                            echo $startformattedDate . " - " . $endformattedDate . " p.m"; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="reminder">
+            <?php endforeach; ?>
+            <!-- <div class="reminder">
                 <p class="ptsession">Private training session:</p>
                 <p class="ptsession-coach">Coach:</p>
                 <div class="ptsession-coachname">Sara Khaled</div>
@@ -93,47 +113,7 @@
                         <div class="ptsession-time">1:30-3:00 p.m</div>
                     </div>
                 </div>
-            </div>
-            <div class="reminder">
-                <p class="dietplan">Diet Plan:</p>
-                <div class="dietplan-name">Intermittent Fasting</div>
-                <div class="dates">
-                    <div class="date">
-                        <p>Duration:</p>
-                        <div class="dietplan-duration">1 Month</div>
-                    </div>
-                    <div class="time">
-                        <p>Expiry Date:</p>
-                        <div class="dietplan-expirydate">25-11-2023</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 6</div>
-                <img src="../public/Images/free_weight.webp" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 6</div>
-                <img src="../public/Images/Gym-HD-Desktop.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 6</div>
-                <img src="../public/Images/infopic.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">4 / 6</div>
-                <img src="../public/Images/lockers.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">5 / 6</div>
-                <img src="../public/Images/Gym-Images.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">6 / 6</div>
-                <img src="../public/Images/cardio_area.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
+            </div> -->
         </div>
     </div>
 
