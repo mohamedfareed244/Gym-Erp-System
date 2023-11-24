@@ -17,6 +17,7 @@ class Memberships
     public $privateTrainingSessionsCount;
     public $freezeCount;
     public $freezed;
+    public $isActivated;
 
     public static function getAllMemberships()
     {
