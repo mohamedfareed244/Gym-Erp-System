@@ -22,7 +22,8 @@ class MembershipsController
         } else {
             $_SESSION['fail'][$ClientID] = "Membership reservation failed.";
         }
-
+        
+        var_dump($_SESSION);
         header("Location: ../views/packagebooking.php");
         exit();
     }
