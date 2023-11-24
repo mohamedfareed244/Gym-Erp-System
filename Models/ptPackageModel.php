@@ -175,6 +175,20 @@ class ptPackages
         }
         return null;
     }
+
+    public static function ExistingPtMembership($clientID)
+    {
+        global $conn;
+        $findClient = Client::checkClient($clientID);
+        if ($findClient) {
+            $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static function addPackageForClient($clientID, $ptPackageID, $coachID)
     {
         global $conn;

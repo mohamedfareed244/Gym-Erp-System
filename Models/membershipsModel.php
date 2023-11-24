@@ -30,6 +30,7 @@ class Memberships
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $membership = new Memberships();
+                $membership->ID = $row['ID'];
                 $membership->clientId = $row['ClientID'];
                 $membership->packageId = $row['PackageID'];
                 $membership->startDate = $row['StartDate'];
