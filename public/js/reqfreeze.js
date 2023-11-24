@@ -86,18 +86,16 @@ cancelButton.addEventListener("click", function() {
         modalMessage.style.display = "block";
         modalMessage.textContent = "No request submitted.";
 
-        // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
         setTimeout(function() {
             modal.style.display = "none";
             modalMessage.style.display = "none";
-        }, 2000); // 2 seconds
+        }, 2000);
     }
 });
 
-// Function to send freeze request
 function sendFreezeRequest(freezeWeeks) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "freeze_membership.php", true);
+    xhr.open("POST", "reqfreeze.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -108,16 +106,17 @@ function sendFreezeRequest(freezeWeeks) {
     xhr.send("action=freezeMembership&freezeWeeks=" + freezeWeeks);
 }
 
-// Function to fetch freeze info from the server
-function fetchFreezeInfo() {
-    fetch("fetch_freeze_info.php")
+// Fetch initial freeze info when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+    fetchRemainingFreezeAttempts(); 
+});
+
+function fetchRemainingFreezeAttempts() {
+    fetch("reqfreeze.php") 
         .then(response => response.json())
         .then(data => {
-            // Update the remaining freeze attempts
             remainingFreezeAttempts = data.remainingFreezeAttempts;
+            document.getElementById("actual-rem").textContent = `${remainingFreezeAttempts} Weeks Out of ${remainingFreezeAttempts} Left`;
         })
         .catch(error => console.error("Error fetching freeze info:", error));
 }
-
-// Fetch initial freeze info when the page loads
-document.addEventListener("DOMContentLoaded", fetchFreezeInfo);
