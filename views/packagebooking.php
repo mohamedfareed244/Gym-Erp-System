@@ -43,7 +43,8 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php session_start();
+    <?php 
+    session_start();
     include("partials/usersidebar.php");?>
     <?php include_once "../Models/PackageModel.php";
     $package = new Package();
@@ -87,26 +88,28 @@
                                 <h5 class="card-text" id="price"><?php echo "for L.E " . $package['Price'] ?></h5>
                         </div>
                         <div class="d-flex justify-content-around mb-5">
-            <input type="submit" value="Request" id="add-btn" class="btn btn-primary">
-            <span id="success">
-                <?php echo isset($_SESSION["membershipsuccess"][$package['ID']]) ? $_SESSION["membershipsuccess"][$package['ID']] : ''; ?>
-            </span>
-            <span id="alreadyExists1">
-                <?php echo isset($_SESSION["alreadyThisMembershipExists"][$package['ID']]) ? $_SESSION["alreadyThisMembershipExists"][$package['ID']] : ''; ?>
-            </span>
-            <span id="alreadyExists2">
-                <?php echo isset($_SESSION["alreadyAnotherMembershipExists"][$package['ID']]) ? $_SESSION["alreadyAnotherMembershipExists"][$package['ID']] : ''; ?>
-            </span>
-            <span id="fail">
-                <?php echo isset($_SESSION["fail"][$package['ID']]) ? $_SESSION["fail"][$package['ID']] : ''; ?>
-            </span>
-        </div>
+                            <input type="submit" value="Request" id="add-btn" class="btn btn-primary">
+                            <div style ="padding:10px;">
+                                <span id="success">
+                                    <?php echo isset($_SESSION["membershipsuccess"][$package['ID']]) ? $_SESSION["membershipsuccess"][$package['ID']] : ''; ?>
+                                </span>
+                                <span id="alreadyExists1">
+                                    <?php echo isset($_SESSION["alreadyThisMembershipExists"][$package['ID']]) ? $_SESSION["alreadyThisMembershipExists"][$package['ID']] : ''; ?>
+                                </span>
+                                <span id="alreadyExists2">
+                                    <?php echo isset($_SESSION["alreadyAnotherMembershipExists"][$package['ID']]) ? $_SESSION["alreadyAnotherMembershipExists"][$package['ID']] : ''; ?>
+                                </span>
+                                <span id="fail">
+                                    <?php echo isset($_SESSION["fail"][$package['ID']]) ? $_SESSION["fail"][$package['ID']] : ''; ?>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
             <?php endforeach; ?>
 
-<?php
+            <?php
 // Clear session variables after displaying messages for all packages
 unset($_SESSION["membershipsuccess"], $_SESSION["alreadyThisMembershipExists"], $_SESSION["alreadyAnotherMembershipExists"], $_SESSION["fail"]);
 ?>
