@@ -49,7 +49,8 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Client Name</th>
+                            <th scope="col">Client Name</th>                            
+                            <th scope="col">Phone</th>
                             <th scope="col">Package</th>
                             <th scope="col">Start Date </th>
                             <th scope="col">End Date</th>
@@ -57,9 +58,8 @@
                             <th scope="col">Invitations </th>
                             <th scope="col">Status </th>
                             <th scope="col">Freeze</th>
-                            <th scope="col">Private Training Sessions</th>
+                            <th scope="col">PT Sessions</th>
                             <th scope="col">inbody</th>
-                            <th scope="col">Phone</th>
                             <th scope="col">Actions </th>
 
                         </tr>
@@ -68,29 +68,27 @@
                         <?php
                         foreach ($memberships as $membership) {
                             echo "<tr id='row-" . $membership->ID . "'>";
-                            echo "<td>". $membership->ID . "</td>";
-                            foreach ($clients as $client) {
-                                if ($client->ID == $membership->clientId) {
-                                    echo '<td> ' . $client->FirstName . ' ' . $client->LastName . ' </td>';
-                                    break;
-                                }
+                            echo "<td>" . $membership->ID . "</td>";
+                            $client = Client::getClientByID($membership->clientId);
+                            echo '<td> ' . $client->FirstName . ' ' . $client->LastName . ' </td>';
+                            echo '<td> ' . $client->Phone . ' </td>';
+                            echo '<td>' . $membership->packageId . '</td>';
+                            echo '<td>' . $membership->startDate . '</td>';
+                            echo '<td>' . $membership->endDate . '</td>';
+                            echo '<td>' . $membership->visitsCount . '</td>';
+                            echo '<td>' . $membership->invitationsCount . '</td>';
+                            if ($membership->freezed == 0) {
+                                echo '<td class="bg">Active</td>';
+                                echo '<td><button class="btn btn-freeze" onclick="freezeMembership">Freeze</button></td>';
+                            } else {
+                                echo '<td class="bg">Freezed</td>';
+                                echo '<td><button class="btn btn-freeze" disabled>Freeze</button></td>';
+
                             }
-                            foreach ($packages as $package) {
-                                if ($package->ID == $membership->packageId) {
-                                    echo '<td>'.$package->Name.' </td>';
-                                }
-                            }
-                            echo '<td>02-09-2023</td>';
-                            echo '<td>02-09-2023</td>';
-                            echo '<td>30</td>';
-                            echo '<td class="bg-info">Freezed</td>';
-                            echo '<td><button class="btn btn-freeze">Freeze</button></td>';
-                            echo '<td>Mohamed fareed</td>';
-                            echo '<td>2</td>';
-                            echo '<td>1</td>';
-                            echo '<td>' . $client->Phone . '</td>';
-                            echo "<td><a a href='editclient.php?ID=" . $client->ID . "' class=\"btn\">Edit</a>       ";
-                            echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->ID . ")'>Delete</button></td>";
+                            echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
+                            echo '<td>' . $membership->inbodyCount . '</td>';
+                            echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
+                            echo "<button class=\"btn btn-delete\" onclick='deleteMembership(" . $membership->ID . ")'>Delete</button></td>";
                             echo '</tr>';
                         }
                         ?>
