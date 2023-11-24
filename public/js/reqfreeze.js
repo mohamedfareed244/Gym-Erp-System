@@ -108,4 +108,18 @@ xhr.onreadystatechange = function() {
 xhr.send("action=freezeMembership&freezeWeeks=" + freezeWeeks);
 });
 
+function fetchFreezeInfo() {
+
+    fetch("fetch_freeze_info.php")
+        .then(response => response.json())
+        .then(data => {
+            // Update the remaining freeze attempts
+            remainingFreezeAttempts = data.remainingFreezeAttempts;
+        })
+        .catch(error => console.error("Error fetching freeze info:", error));
+}
+
+fetchFreezeInfo();
+
+
 }
