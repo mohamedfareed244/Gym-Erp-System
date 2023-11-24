@@ -34,6 +34,23 @@ class MembershipsController
             exit();
         }
     }
+
+    public function freezeMembership()
+    {
+        $clientId = $_SESSION["ID"];
+        $freezeWeeks = $_POST["freezeWeeks"];
+
+        $result = Memberships::freezeMembership($clientId, $freezeWeeks);
+
+        if ($result['success']) {
+            $_SESSION['freezeSuccess'][$clientId] = "Membership frozen successfully.";
+        } else {
+            $_SESSION['freezeFail'][$clientId] = "Failed to freeze membership.";
+        }
+
+        header("Location: ../views/reqfreeze.php"); // Redirect to the client's page
+        exit();
+    }
 }
 
 $controller = new MembershipsController();
@@ -49,6 +66,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Handle unknown action or display an error
             break;
     }
+    switch ($action) {
+        case "freezeMembership":
+            $controller->freezeMembership();
+            break;
+            default:
+            break;
+    }
 }
+
+
+
+
+
 
 ?>
