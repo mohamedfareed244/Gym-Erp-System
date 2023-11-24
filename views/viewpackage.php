@@ -23,6 +23,8 @@
 <body>
     <!-- usersidebar start -->
     <?php
+
+    session_start();
    
    include_once "../Models/membershipsModel.php";
    

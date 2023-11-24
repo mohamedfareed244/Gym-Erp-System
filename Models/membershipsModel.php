@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once "../includes/dbh.inc.php";
 include_once "ClientModel.php";
@@ -179,4 +178,5 @@ class Memberships
 
     return $results;
     }
+
 }
