@@ -11,45 +11,36 @@ class MembershipsController
         $PackageID = $_POST["PackageID"];
         $ClientID = $_SESSION["ID"];
 
-        $result=Memberships::addMembershipUserSide($ClientID, $PackageID);
+        $result = Memberships::addMembershipUserSide($ClientID, $PackageID);
 
-        if ($result['alreadyThisMembershipExists']){
-            $_SESSION['alreadyThisMembershipExists'][$ClientID]="You already subscribed to this package.";
-            header("Location: ../views/packagebooking.php");
-            exit();
+        if ($result['alreadyThisMembershipExists']) {
+            $_SESSION['alreadyThisMembershipExists'][$ClientID] = "You already subscribed to this package.";
+        } else if ($result['alreadyAnotherMembershipExists']) {
+            $_SESSION['alreadyAnotherMembershipExists'][$ClientID] = "You are already subscribed to another package.";
+        } else if ($result['success']) {
+            $_SESSION['membershipsuccess'][$ClientID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
+        } else {
+            $_SESSION['fail'][$ClientID] = "Membership reservation failed.";
         }
-        else if ($result['alreadyAnotherMembershipExists']){
-            $_SESSION['alreadyAnotherMembershipExists'][$ClientID]="You are already subscribed to another package.";
-            header("Location: ../views/packagebooking.php");
-            exit();
-        }
-        else if($result['success']){
-            $_SESSION['membershipsuccess'][$ClientID]="Membership Request added. Please Visit Gym For Payment to activate your account.";
-            header("Location: ../views/packagebooking.php");
-            exit();
-        }
-        else{
-            $_SESSION['fail'][$ClientID]="Membership reservation failed.";
-            header("Location: ../views/packagebooking.php");
-            exit();
-        }
-        var_dump($_SESSION);
+
+        header("Location: ../views/packagebooking.php");
+        exit();
     }
 
     public function freezeMembership()
     {
-        $clientId = $_SESSION["ID"];
+        $ClientID = $_SESSION["ID"];
         $freezeWeeks = $_POST["freezeWeeks"];
 
-        $result = Memberships::freezeMembership($clientId, $freezeWeeks);
+        $result = Memberships::freezeMembership($ClientID, $freezeWeeks);
 
         if ($result['success']) {
-            $_SESSION['freezeSuccess'][$clientId] = "Membership frozen successfully.";
+            $_SESSION['freezeSuccess'][$ClientID] = "Membership frozen successfully.";
         } else {
-            $_SESSION['freezeFail'][$clientId] = "Failed to freeze membership.";
+            $_SESSION['freezeFail'][$ClientID] = "Failed to freeze membership.";
         }
 
-        header("Location: ../views/reqfreeze.php"); // Redirect to the client's page
+        header("Location: ../views/reqfreeze.php"); 
         exit();
     }
 }
@@ -63,22 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "addMembership":
             $controller->addMembership();
             break;
-        default:
-            // Handle unknown action or display an error
-            break;
-    }
-    switch ($action) {
         case "freezeMembership":
             $controller->freezeMembership();
             break;
-            default:
+        default:
             break;
     }
 }
-
-
-
-
-
-
 ?>
