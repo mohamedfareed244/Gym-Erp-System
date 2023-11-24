@@ -3,6 +3,7 @@
 
 include_once "../includes/dbh.inc.php";
 
+include_once "employeeModel.php";
 include_once "ClientModel.php";
 include_once "membershipsModel.php";
 
@@ -20,10 +21,8 @@ class ptPackages
         global $conn;
 
         $sql = "SELECT * FROM `private training package`";
-        // Perform the query
         $result = $conn->query($sql);
 
-        // Check if the query was successful
         if ($result) {
             $ptpackages = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -34,6 +33,37 @@ class ptPackages
         } else {
             return [];
         }
+    }
+
+    public static function getActivePtPackagesForClient($clientID)
+    {
+        global $conn;
+
+        $currentDate = date("Y-m-d");
+        $clientMembership = Memberships::hasActiveMembership($clientID);
+        if ($clientMembership) {
+
+            $sql = "SELECT * FROM `private training package` WHERE `isActivated` = 'Activated'";
+
+            $result = $conn->query($sql);
+            if ($result) {
+                $membership = Memberships::getMembership($clientID);
+                $packages = array();
+                while ($row = $result->fetch_assoc()) {
+                    if (strtotime($membership->endDate) >= strtotime($currentDate . " + " . $row['MinPackageMonths'] . " months")) {
+                        $package = new ptPackages();
+                        $package->ID = $row["ID"];
+                        $package->Name = $row["Name"];
+                        $package->MinPackageMonths = $row["MinPackageMonths"];
+                        $package->NumOfSessions = $row["NumOfSessions"];
+                        $package->Price = $row["Price"];
+                        $packages[] = $package;
+                    }
+                }
+                return $packages;
+            }
+        }
+        return null;
     }
 
     public function addptPacks($ptPackage)
@@ -126,23 +156,58 @@ class ptPackages
             return $found;
         }
     }
-    public static function addPackageForClient($clientID, $ptPackageID)
+    public static function getPtPackage($ptPackageID)
+    {
+        global $conn;
+        $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
+        $result = $conn->query($sql);
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $ptPackage = new PtPackages();
+            $ptPackage->ID = $row["ID"];
+            $ptPackage->Name = $row["Name"];
+            $ptPackage->NumOfSessions = $row["NumOfSessions"];
+            $ptPackage->MinPackageMonths = $row["MinPackageMonths"];
+            $ptPackage->Price = $row["Price"];
+            $ptPackage->isActivated = $row["isActivated"];
+
+            return $ptPackage;
+        }
+        return null;
+    }
+    public static function addPackageForClient($clientID, $ptPackageID, $coachID)
     {
         global $conn;
         $findClient = Client::checkClient($clientID);
         if ($findClient) {
             $checkMembership = Memberships::hasActiveMembership($clientID);
             if ($checkMembership) {
-                $findPtPackage = ptPackages::checkPtPackage($ptPackageID);
-                if ($findPtPackage) {
-                    
+                $coach = Employee::getEmployeeByID($coachID);
+                if ($coach != null) {
+                    $ptPackage = ptPackages::getPtPackage($ptPackageID);
+                    if ($ptPackage != null) {
+                        $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount)
+                        VALUES ('$clientID', '$coachID','$ptPackage->ID', '$ptPackage->NumOfSessions')";
+                        return mysqli_query($conn, $sql);
+                    }
                 }
             }
 
         }
+        return false;
     }
 
 }
 
+class clientPtPackage
+{
+    public $ClientID;
+    public $CoachID;
+
+    public $PrivateTrainingPackageID;
+
+    public $SessionsCount;
+
+}
 
 ?>
