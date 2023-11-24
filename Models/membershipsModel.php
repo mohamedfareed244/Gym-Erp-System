@@ -148,7 +148,7 @@ class Memberships
 
     $isActivated = "Activated";
 
-    $sql = "SELECT package.NumOfMonths, package.NumOfInvitations, package.NumOfInbodySessions, package.NumOfPrivateTrainingSessions,
+    $sql = "SELECT package.Title, package.NumOfInvitations, package.NumOfInbodySessions, package.NumOfPrivateTrainingSessions,
             package.FreezeLimit, package.Price , membership.StartDate, membership.EndDate, membership.InvitationsCount, membership.InbodyCount,
             membership.PrivateTrainingSessionsCount, membership.FreezeCount
             FROM package 
@@ -160,7 +160,7 @@ class Memberships
     if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
        $results[] = array(
-        'NumOfMonths'=>$row['NumOfMonths'],
+        'Title'=>$row['Title'],
         'NumOfInvitations' => $row['NumOfInvitations'],
         'Price' => $row['Price'],
         'NumOfInbodySessions' => $row['NumOfInbodySessions'],

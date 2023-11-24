@@ -43,7 +43,7 @@
         </div>
         <div class="membership-details">
             <p class="currpackage">Current Package</p>
-                <div class="membership-title"><?php echo $membership['NumOfMonths'] . " Months"; ?></div>
+                <div class="membership-title"><?php echo $membership['Title']; ?></div>
             <div class="dates">
                 <div class="date">
                     <p>Start Date:</p>
