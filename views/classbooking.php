@@ -17,7 +17,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
-    #successFree,#successNotFree,#failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree {
+    #failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree {
         color: red;
         font-size: 16px;
     }
@@ -30,7 +30,7 @@
     <?php session_start();
     include("partials/usersidebar.php") ?>
 
-    <div class="container py-5">
+    <div class="container py-5" style="padding-bottom:300px;">
         <h2 style=" font-size: 26px;
     font-weight: bolder;
     text-transform: uppercase;
