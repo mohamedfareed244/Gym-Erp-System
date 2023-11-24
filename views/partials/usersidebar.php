@@ -60,7 +60,7 @@
                     <li><a href="../views/viewpt.php">Personal Training</a></li>
                 </ul>
             </li>
-            <li>
+            <!-- <li>
                 <div class="icon-link">
                 <a href="#">
                 <i class='bx bxs-leaf'></i>
@@ -73,7 +73,7 @@
                     <li><a href="../views/viewdietplan.php">View</a></li>
                     <li><a href="../views/bookdietplan.php">Book</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li>
                 <div class="icon-link">
                 <a href="../views/reqfreeze.php">

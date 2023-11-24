@@ -33,6 +33,7 @@ class MembershipsController
             header("Location: ../views/packagebooking.php");
             exit();
         }
+        var_dump($_SESSION);
     }
 
     public function freezeMembership()
