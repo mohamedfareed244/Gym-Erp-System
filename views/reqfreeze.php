@@ -23,7 +23,9 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php session_start();
+    
+    include("partials/usersidebar.php") ?>
 
 
     <div class="profile">
@@ -34,6 +36,12 @@
 
         <div class="reminders">
             <div class="reminder">
+            <?php include_once "../Models/membershipsModel.php";
+            $membership = new Memberships();
+            $clientId = $_SESSION["ID"];
+
+            $membershipdetails = $membership->getMembership($clientId);
+            ?>
                 <p class="class">Package:</p>
                 <div class="class-title">2 Months</div>
 
