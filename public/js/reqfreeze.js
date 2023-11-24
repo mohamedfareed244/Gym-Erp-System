@@ -57,7 +57,7 @@ confirmButton.addEventListener("click", function() {
 
         // sends a request to the server to handle the freeze
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "freeze_membership.php", true);
+        xhr.open("POST", "reqfreeze.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
