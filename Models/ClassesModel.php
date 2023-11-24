@@ -4,6 +4,7 @@
 include_once "../includes/dbh.inc.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
 class Classes{
     
     public $ID;
@@ -291,6 +292,40 @@ class Classes{
             return array('inserted' => false, 'alreadyExists' => true);
         }
     }
+
+    public static function getClientClassInfo()
+    {
+        global $conn;
+
+        $isActivated = "Activated";
+
+        $sql="SELECT class.Name AS className, assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, 
+        employee.Name AS employeeName, assignedclass.Price ,  `reserved class`.ClientID
+        FROM class
+        INNER JOIN assignedclass ON class.ID = assignedclass.ClassID
+        INNER JOIN employee ON employee.ID = assignedclass.CoachID
+        INNER JOIN `reserved class` ON `reserved class`.AssignedClassID = assignedclass.ID
+        WHERE  `reserved class`.isActivated ='$isActivated' AND `reserved class`.ClientID = " . $_SESSION['ID'];
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'className'=>$row['className'],
+                    'Date' => $row['Date'],
+                    'StartTime' => $row['StartTime'],
+                    'EndTime' => $row['EndTime'],
+                    'employeeName' => $row['employeeName'],
+                    'Price' => $row['Price'],
+                    'ClientID'=>$row['ClientID'],
+                );
+            }
+        }
+
+        return $results;
+    }
+
 
     }
     
