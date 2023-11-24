@@ -140,4 +140,20 @@ class Package
             return $found;
         }
     }
+
+    
+public static function getPackageFreezeLimit($PackageID)
+{
+    global $conn;
+    $sql = "SELECT `FreezeLimit` FROM `package` WHERE `ID`='$PackageID'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['FreezeLimit'];
+    } else {
+        return 0; 
+    }
+}
+
 }
