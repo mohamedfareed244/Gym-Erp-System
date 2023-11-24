@@ -16,6 +16,7 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+    <script src="../public/js/reqfreeze.js"></script>
 
 
 </head>
@@ -49,14 +50,14 @@
 
                 <div class="rem-info">
                     <p>Remaining Freeze Attempts:</p>
-                    <p class="actual-rem">5 Weeks Out of 5 Left</p>
+                    <p class="actual-rem" id="actual-rem"></p>
                 </div>
 
                 <div class="freeze-request">
                     <p class="rem-info">Weeks to be Frozen:</p>
                     <input type="number" id="freeze-weeks" min="1" max="5" placeholder="Weeks">
                     <button id="freeze-button">Submit Request</button>
-                    <p id="error-message" class="error-message">Please enter a number between 1 and 5.</p>
+                    <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
 
                 </div>
             </div>
@@ -86,6 +87,12 @@
     <script src="../public/js/reqfreeze.js"></script>
 
     <script>
+                document.getElementById("freeze-button").addEventListener("click", function() {
+            const freezeWeeks = document.getElementById("freeze-weeks").value;
+
+            sendFreezeRequest(freezeWeeks);
+        });
+
     </script>
 
 

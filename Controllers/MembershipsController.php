@@ -29,15 +29,24 @@ class MembershipsController
         $ClientID = $_SESSION["ID"];
         $freezeWeeks = $_POST["freezeWeeks"];
 
-        $result = Memberships::freezeMembership($ClientID, $freezeWeeks);
+        // Fetch initial freeze info to check remaining freeze attempts
+        $initialFreezeInfo = Memberships::getPackageFreezeLimit($_SESSION['PackageID']);
+        $remainingFreezeAttempts = $initialFreezeInfo - $_SESSION['FreezeCount'];
 
-        if ($result['success']) {
-            $_SESSION['freezeSuccess'][$ClientID] = "Membership frozen successfully.";
+        if ($freezeWeeks >= 1 && $freezeWeeks <= $remainingFreezeAttempts) {
+            // Update freeze count on the server
+            $result = Memberships::freezeMembership($ClientID, $freezeWeeks);
+
+            if ($result['success']) {
+                $_SESSION['freezeSuccess'][$ClientID] = "Membership frozen successfully.";
+            } else {
+                $_SESSION['freezeFail'][$ClientID] = "Failed to freeze membership.";
+            }
         } else {
-            $_SESSION['freezeFail'][$ClientID] = "Failed to freeze membership.";
+            $_SESSION['freezeFail'][$ClientID] = "Invalid freeze request.";
         }
 
-        header("Location: ../views/reqfreeze.php"); 
+        header("Location: ../views/reqfreeze.php");
         exit();
     }
 }
