@@ -148,9 +148,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "addPtPackageForClient":
             if (isset($_POST["membershipclientId"]) && isset($_POST["ptPackageId"])) {
                 $clientId = $_POST["membershipclientId"];
-                $ptPackageId = $_POST["packageId"];
+                $ptPackageId = $_POST["ptPackageId"];
+                $coachID = $_POST["coachID"];
 
-                $result = ptPackages::addPackageForClient($clientId, $ptPackageId);
+                $result = ptPackages::addPackageForClient($clientId, $ptPackageId, $coachID);
                 if ($result) {
                     echo "success";
                 } else {

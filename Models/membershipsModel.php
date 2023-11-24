@@ -7,6 +7,7 @@ include_once "PackageModel.php";
 
 class Memberships
 {
+    public $ID;
     public $clientId;
     public $packageId;
     public $startDate;
@@ -17,6 +18,7 @@ class Memberships
     public $privateTrainingSessionsCount;
     public $freezeCount;
     public $freezed;
+    public $isActivated;
 
     public static function getAllMemberships()
     {
@@ -48,7 +50,7 @@ class Memberships
     public static function createMembership($clientId, $packageId)
     {
         global $conn;
-        $isActivated="Activated";
+        $isActivated = "Activated";
         $findClient = Client::checkClient($clientId);
         $findPackage = Package::checkPackage($packageId);
         if ($findClient && $findPackage) {
@@ -67,7 +69,7 @@ class Memberships
     public static function addMembershipUserSide($clientId, $packageId)
     {
         global $conn;
-        $isActivated="Not Activated";
+        $isActivated = "Not Activated";
         $findClient = Client::checkClient($clientId);
         $findPackage = Package::checkPackage($packageId);
         if ($findClient && $findPackage) {
@@ -76,28 +78,24 @@ class Memberships
             $check1Sql = "SELECT * FROM `membership` WHERE ClientID = '$clientId' AND PackageID ='$packageId'";
             $check1Result = mysqli_query($conn, $check1Sql);
             $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
-            
+
             $check2Sql = "SELECT * FROM `membership` WHERE ClientID = '$clientId'";
             $check2Result = mysqli_query($conn, $check2Sql);
             $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
 
-            if($alreadyThisMembershipExists)
-            {
+            if ($alreadyThisMembershipExists) {
                 return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false);
-            }
-            else if( $alreadyAnotherMembershipExists){
+            } else if ($alreadyAnotherMembershipExists) {
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
-            }
-
-           else{
-            $startDate = date("Y-m-d");
-            $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
-            $freezed = 0;
-            $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
+            } else {
+                $startDate = date("Y-m-d");
+                $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
+                $freezed = 0;
+                $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
                                   VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed' , '$isActivated')";
-            $insertResult = mysqli_query($conn, $sql);
-            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult );
-           }
+                $insertResult = mysqli_query($conn, $sql);
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
+            }
         }
     }
 
@@ -108,14 +106,39 @@ class Memberships
 
         $currentDate = date("Y-m-d");
 
-        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate'";
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate`";
         $result = $conn->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
             $found = true;
             return $found;
-        } else {
-            return $found;
         }
+        return $found;
+    }
+    public static function getMembership($clientId)
+    {
+        global $conn;
+
+        $currentDate = date("Y-m-d");
+
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate` AND `Freezed` = 0";
+        $result = $conn->query($sql);
+        if ($result) {
+            $membershipData = $result->fetch_assoc();
+            $membership = new Memberships();
+            $membership->ID = $membershipData["ID"];
+            $membership->clientId = $membershipData["ClientID"];
+            $membership->packageId = $membershipData["PackageID"];
+            $membership->startDate = $membershipData["StartDate"];
+            $membership->endDate = $membershipData["EndDate"];
+            $membership->visitsCount = $membershipData["VisitsCount"];
+            $membership->inbodyCount = $membershipData["InvitationsCount"];
+            $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
+            $membership->freezeCount = $membershipData["FreezeCount"];
+            $membership->freezed = $membershipData["Freezed"];
+
+            return $membership;
+        }
+        return null;
     }
 }
