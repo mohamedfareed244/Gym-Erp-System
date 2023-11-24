@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 01:23 AM
+-- Generation Time: Nov 24, 2023 at 09:28 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -306,7 +306,8 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
-(4, 28, 13, '2023-11-22', '2024-01-22', 0, 4, 2, 2, 20, 0, 'Not Activated');
+(7, 26, 16, '2023-11-24', '2024-08-24', 0, 7, 6, 6, 70, 0, 'Not Activated'),
+(8, 28, 14, '2023-11-24', '2024-02-24', 0, 5, 3, 3, 30, 0, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -597,7 +598,7 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `package`

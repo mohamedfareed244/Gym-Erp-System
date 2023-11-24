@@ -30,7 +30,13 @@
 <body>
     <?php require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
+    include_once "../Models/membershipsModel.php";
+    include_once "../Models/PackageModel.php";
+
     $clients = Client::getAllClients();
+    $memberships = Memberships::getAllMemberships();
+    $packages = new Package();
+    $packages = $packages->getAllPackagesforEmployee();
     ?>
     <div id="add-body" class="addbody">
         <div class="container">
@@ -48,10 +54,10 @@
                             <th scope="col">Start Date </th>
                             <th scope="col">End Date</th>
                             <th scope="col">Visits </th>
+                            <th scope="col">Invitations </th>
                             <th scope="col">Status </th>
                             <th scope="col">Freeze</th>
-                            <th scope="col">Sales</th>
-                            <th scope="col">pt</th>
+                            <th scope="col">Private Training Sessions</th>
                             <th scope="col">inbody</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Actions </th>
@@ -60,11 +66,20 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($clients as $client) {
-                            echo "<tr id='row-" . $client->ID . "'>";
-                            echo '<td> '. $client->ID.' </td>';
-                            echo '<td> '. $client->FirstName.' '.$client->LastName.' </td>';
-                            echo '<td> </td>';
+                        foreach ($memberships as $membership) {
+                            echo "<tr id='row-" . $membership->ID . "'>";
+                            echo "<td>". $membership->ID . "</td>";
+                            foreach ($clients as $client) {
+                                if ($client->ID == $membership->clientId) {
+                                    echo '<td> ' . $client->FirstName . ' ' . $client->LastName . ' </td>';
+                                    break;
+                                }
+                            }
+                            foreach ($packages as $package) {
+                                if ($package->ID == $membership->packageId) {
+                                    echo '<td>'.$package->Name.' </td>';
+                                }
+                            }
                             echo '<td>02-09-2023</td>';
                             echo '<td>02-09-2023</td>';
                             echo '<td>30</td>';
@@ -73,7 +88,7 @@
                             echo '<td>Mohamed fareed</td>';
                             echo '<td>2</td>';
                             echo '<td>1</td>';
-                            echo '<td>'.$client->Phone.'</td>';
+                            echo '<td>' . $client->Phone . '</td>';
                             echo "<td><a a href='editclient.php?ID=" . $client->ID . "' class=\"btn\">Edit</a>       ";
                             echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->ID . ")'>Delete</button></td>";
                             echo '</tr>';
