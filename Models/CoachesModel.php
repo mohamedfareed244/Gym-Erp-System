@@ -3,10 +3,12 @@
 
 include_once "../includes/dbh.inc.php";
 include_once "employeeModel.php";
+include_once "ClassesModel.php";
+include_once "ptPackageModel.php";
 
 class Coach extends Employee
 {
-  
+
     public function getAssignedClasses($employee)
     {
         global $conn;
@@ -28,14 +30,14 @@ class Coach extends Employee
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $coachclassdetails = new Coach(); // to store class details
+                $coachclassdetails = new Classes(); // to store class details
                 $coachclassdetails->ID = $row['ID'];
-                $coachclassdetails->Name = $row['Name'];
+                // $coachclassdetails->Name = $row['Name'];
                 $coachclassdetails->Date = $row['Date'];
                 $coachclassdetails->StartTime = $row['StartTime'];
                 $coachclassdetails->EndTime = $row['EndTime'];
                 $coachclassdetails->Price = $row['Price'];
-                $coachclassdetails->Coach = $row['Coach'];
+                $coachclassdetails->CoachID = $row['Coach'];
 
                 $assignedClasses[] = $coachclassdetails;
             }
@@ -56,7 +58,7 @@ class Coach extends Employee
         $employee_id = $_SESSION['ID'];
 
 
-        $sql = "SELECT pts.* FROM pt_sessions pts
+        $sql = "SELECT pts.* FROM 'private training membership'
             INNER JOIN employee e ON pts.CoachID = e.ID
             WHERE e.ID = $employee_id AND (e.JobTitle = 'Coach' OR e.JobTitle = 'Fitness Manager')";
 
@@ -66,7 +68,7 @@ class Coach extends Employee
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $ptSessionDetails = new Coach(); 
+                $ptSessionDetails = new clientPtPackage();
                 $ptSessionDetails->ClientID = $row['ClientID'];
                 $ptSessionDetails->CoachID = $row['CoachID'];
                 $ptSessionDetails->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
@@ -93,7 +95,7 @@ class Coach extends Employee
         $employee_id = $_SESSION['ID'];
 
         $sql = "SELECT pts.ClientID, e.Name AS ClientName, e.Email AS ClientEmail, c.FirstName, c.LastName, c.Age, c.Gender, c.Weight, c.Height, c.Phone
-            FROM pt_sessions pts
+            FROM 'private training membership'
             INNER JOIN employee e ON pts.CoachID = e.ID
             INNER JOIN client c ON pts.ClientID = c.ID
             WHERE e.ID = $employee_id AND (e.JobTitle = 'Coach' OR e.JobTitle = 'Fitness Manager')";
@@ -104,12 +106,11 @@ class Coach extends Employee
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $clientptDetails = new Coach(); 
-                $clientptDetails->ClientID = $row['ClientID'];
-                $clientptDetails->ClientName = $row['ClientName'];
-                $clientptDetails->ClientEmail = $row['ClientEmail'];
+                $clientptDetails = new Client();
+                $clientptDetails->ID = $row['ClientID'];
                 $clientptDetails->FirstName = $row['FirstName'];
                 $clientptDetails->LastName = $row['LastName'];
+                $clientptDetails->Email = $row['Email'];
                 $clientptDetails->Age = $row['Age'];
                 $clientptDetails->Gender = $row['Gender'];
                 $clientptDetails->Weight = $row['Weight'];
@@ -123,26 +124,24 @@ class Coach extends Employee
         return $RegisteredPTClients;
     }
 
-    public static function Get_All(){
+    public static function getCoaches()
+    {
         global $conn;
-    $sql="SELECT * FROM employee where JobTitle = 'Coach' OR JobTitle='Fitness-manager'";
-    $result=mysqli_query($conn,$sql);
- 
-    return $result;
+        $sql = "SELECT * FROM employee where JobTitle = 'Coach' OR JobTitle='Fitness-manager'";
+        $result = mysqli_query($conn, $sql);
+
+        return $result;
     }
 
 
-    public  static function getClassesForCoach( $coachID)
+    public static function getClassesForCoach($coachID)
     {
         global $conn;
 
-    
-
-        $sql = "SELECT * FROM class WHERE Coach = $coachID " ;
-               
+        $sql = "SELECT * FROM class WHERE Coach = $coachID ";
 
         $result = $conn->query($sql);
-return $result;
+        return $result;
         // $assignedClasses = array();
 
         // if ($result->num_rows > 0) {
@@ -162,13 +161,14 @@ return $result;
 
         // return $assignedClasses;
     }
-    public static function getclassdays($id){
+    public static function getclassdays($id)
+    {
         global $conn;
-        $sql = "SELECT * FROM class_days WHERE Class = $id " ;
+        $sql = "SELECT * FROM class_days WHERE Class = $id ";
         $result = $conn->query($sql);
         return $result;
     }
 
-    
+
 }
 ?>

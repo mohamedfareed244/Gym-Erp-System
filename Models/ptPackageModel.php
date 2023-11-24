@@ -144,5 +144,14 @@ class ptPackages
 
 }
 
+class clientPtPackage{
+    public $ClientID;
+    public $CoachID;
+
+    public $PrivateTrainingPackageID;
+
+    public $SessionsCount;
+
+}
 
 ?>

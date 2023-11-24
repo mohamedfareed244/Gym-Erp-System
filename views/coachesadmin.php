@@ -46,24 +46,23 @@
                     </thead>
                     <tbody>
                         <?php
-                       include_once "../Models/employeeModel.php";
+                        include_once "../Models/employeeModel.php";
 
-                       $employeesData = Employee::GetAllCoaches();
-                       
-                       foreach ($employeesData as $coach) {
-                           echo "<tr>
+                        $employeesData = Employee::GetAllCoaches();
+
+                        foreach ($employeesData as $coach) {
+                            echo "<tr>
                                <td>" . $coach["Name"] . "</td>
                                <td>" . $coach["Email"] . "</td>
                                <td>" . $coach["PhoneNumber"] . "</td>
                                <td>" . $coach["Salary"] . "</td>
                                <td>" . $coach["Address"] . "</td>
                                <td>" . $coach["JobTitleName"] . "</td>
-                               <td>
-                                   <button class='btn'>Edit</button>
-                                   <button class='btn btn-delete'>Delete</button>
+                               <td><a a href='editemployee.php?ID=" . $coach["CoachID"] . "' class=\"btn\">Edit</a>        
+                               <button class=\"btn btn-delete\" onclick='deleteEmployee(" . $coach["CoachID"] . ")'>Delete</button></td>
                                </td>
                            </tr>";
-                       }
+                        }
 
                         ?>
                     </tbody>
@@ -96,7 +95,33 @@
             }
         }
     }
-    </script>
+    function deleteEmployee(employeeId) {
+      $.ajax({
+        type: "POST",
+        url: "../Controllers/EmployeeController.php",
+        data: {
+          action: "deleteEmployee",
+          employeeId: employeeId,
+        },
+        success: function (response) {
+          if (response === "success") {
+            var tableRow = document.getElementById('row-' + employeeId);
+            if (tableRow) {
+              tableRow.parentNode.removeChild(tableRow);
+            } else {
+              console.log("Error: Row not found in the DOM.");
+            }
+          } else {
+            console.log("Error deleting employee.");
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("AJAX error: " + status + " - " + error);
+        },
+      });
+    }
+  </script>
+
 </body>
 
 </html>
