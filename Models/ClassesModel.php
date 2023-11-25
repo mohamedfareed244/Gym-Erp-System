@@ -320,10 +320,10 @@ class Classes{
                     'Price' => $row['Price'],
                     'ClientID'=>$row['ClientID'],
                 );
+                return $results;
             }
         }
 
-        return $results;
     }
 
 

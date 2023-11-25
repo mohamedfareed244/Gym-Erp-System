@@ -34,8 +34,9 @@
    
    include("partials/usersidebar.php");
    ?>
-
-<?php foreach ($memberships as $membership): ?>
+   <?php
+ if (is_array($memberships) && !empty($memberships)) {
+ foreach ($memberships as $membership): ?>
     <div class="profile">
         
         <div class="greeting">
@@ -76,6 +77,12 @@
 
     </div>
     <?php endforeach; ?>
+    <?php } else{ ?>
+        <div class="no-package" style="height:1000px; margin-left:200px;">
+            <p class="nopackage" style="font-size:24px;">You aren't subscribed to any package still.</p>
+        </div>
+    <?php } ?>
+
 
 </body>
 <?php include("partials/footer.php") ?>

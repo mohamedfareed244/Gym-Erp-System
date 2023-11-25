@@ -48,14 +48,18 @@
     $memberships = Memberships::getClientMembershipInfo();
     $classes = Classes::getClientClassInfo();
 
-    include("partials/usersidebar.php") ?>
+    include("partials/usersidebar.php"); ?>
 
 
     <div class="profile">
         <div class="greeting">
             <p class="hello">Hello <?php echo $_SESSION["FName"]; ?>! </p>
         </div>
-        <?php foreach ($memberships as $membership): ?>
+        <?php
+         // Check if $memberships is an array before using foreach
+        if (is_array($memberships) && !empty($memberships)) {
+        foreach ($memberships as $membership):
+            ?>
         <div class="membership-details">
             <p class="currpackage">Current Package:</p>
             <div class="membership-title"><?php echo $membership['Title']; ?></div>
@@ -71,9 +75,13 @@
             </div>
         </div>
         <?php endforeach; ?>
-        <h2 class="reminder-title"><i class='bx bxs-bell-ring'></i>REMINDER:</h2>
-        <div class="reminders">
-        <?php foreach ($classes as $class): ?>
+        <?php } ?>
+        <?php
+         // Check if $memberships is an array before using foreach
+        if (is_array($classes) && !empty($classes)) { ?>
+            <h2 class="reminder-title"><i class='bx bxs-bell-ring'></i>REMINDER:</h2>
+            <div class="reminders">
+            <?php foreach ($classes as $class): ?>
             <div class="reminder">
                 <p class="class">Class:</p>
                 <div class="class-title"><?php echo $class['className']; ?></div>
@@ -99,6 +107,7 @@
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php } ?>
             <!-- <div class="reminder">
                 <p class="ptsession">Private training session:</p>
                 <p class="ptsession-coach">Coach:</p>

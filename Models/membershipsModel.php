@@ -212,10 +212,10 @@ class Memberships
                     'PrivateTrainingSessionsCount' => $row['PrivateTrainingSessionsCount'],
                     'FreezeCount' => $row['FreezeCount']
                 );
+                return $results;
             }
         }
 
-        return $results;
     }
 
     public static function freezeMembership($membershipId, $selectedDate)
