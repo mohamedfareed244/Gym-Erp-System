@@ -343,3 +343,27 @@ input[type="text"] {
 .pt {
   margin-left: 10px;
 }
+
+/* Freeze Membership Modal Start */
+#datePickerModal {
+  display: none;
+  position: absolute;
+}
+
+.modal-content {
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff; 
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* Freeze Membership Modal End */

@@ -6,23 +6,23 @@ include_once "../Models/membershipsModel.php";
 class MembershipsController
 {
     public function addMembership()
-{
-    $PackageID = $_POST["PackageID"];
-    $result = Memberships::addMembershipUserSide($PackageID);
+    {
+        $PackageID = $_POST["PackageID"];
+        $result = Memberships::addMembershipUserSide($PackageID);
 
-    if ($result['alreadyThisMembershipExists']) {
-        $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
-    } else if ($result['alreadyAnotherMembershipExists']) {
-        $_SESSION['alreadyAnotherMembershipExists'][$PackageID] = "You are already subscribed to another package.";
-    } else if ($result['success']) {
-        $_SESSION['membershipsuccess'][$PackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
-    } else {
-        $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
+        if ($result['alreadyThisMembershipExists']) {
+            $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
+        } else if ($result['alreadyAnotherMembershipExists']) {
+            $_SESSION['alreadyAnotherMembershipExists'][$PackageID] = "You are already subscribed to another package.";
+        } else if ($result['success']) {
+            $_SESSION['membershipsuccess'][$PackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
+        } else {
+            $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
+        }
+
+        header("Location: ../views/packagebooking.php");
+        exit();
     }
-
-    header("Location: ../views/packagebooking.php");
-    exit();
-}
 
     public function freezeMembership()
     {
@@ -30,7 +30,7 @@ class MembershipsController
         $freezeWeeks = $_POST["freezeWeeks"];
 
         // Fetch initial freeze info to check remaining freeze attempts
-        $initialFreezeInfo = Memberships::getPackageFreezeLimit($_SESSION['PackageID']);
+        $initialFreezeInfo = Package::getPackageFreezeLimit($_SESSION['PackageID']);
         $remainingFreezeAttempts = $initialFreezeInfo - $_SESSION['FreezeCount'];
 
         if ($freezeWeeks >= 1 && $freezeWeeks <= $remainingFreezeAttempts) {
@@ -63,6 +63,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "freezeMembership":
             $controller->freezeMembership();
             break;
+        case "freezeClientMembership":
+            if (isset($_POST["membershipID"]) && isset($_POST["selectedDate"])) {
+
+                $membershipID = $_POST["membershipID"];
+                $selectedDate = $_POST["selectedDate"];
+                $result = Memberships::freezeMembership($membershipID, $selectedDate);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
+                }
+            }
+            break;
+
         default:
             break;
     }

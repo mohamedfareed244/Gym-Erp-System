@@ -204,6 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "failure";
                 }
             }
+            break;
         default:
             // Handle unknown action or display an error
             break;
