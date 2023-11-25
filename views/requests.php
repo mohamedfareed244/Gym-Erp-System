@@ -113,6 +113,7 @@
                             <td>
                                 <button class="btn"
                                     data-reservedclassid="<?php echo $classRequest['reservedClassID']; ?>"
+                                    data-assignedclassid="<?php echo $classRequest['assignedClassID']; ?>"
                                     onclick='acceptClass(this)'>Accept
                                 </button>
                             </td>
@@ -160,6 +161,7 @@
     function acceptClass(button) {
         // Extract ClassID, CoachID, and Date from the data attributes
         var reservedClassID = button.getAttribute('data-reservedClassid');
+        var assignedClassID = button.getAttribute('data-assignedClassid');
 
         // Use JavaScript to remove the corresponding row
         var rowId = 'row_' + reservedClassID;
@@ -174,7 +176,8 @@
             type: 'POST',
             data: {
                 action: 'acceptClass',
-                reservedClassID : reservedClassID 
+                reservedClassID : reservedClassID,
+                assignedClassID : assignedClassID
             },
             success: function(response) {
                 // Handle the response from the controller if needed

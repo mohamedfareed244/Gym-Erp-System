@@ -320,9 +320,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "acceptClass":
             $reservedClassID = $_POST['reservedClassID'];
+            $assignedClassID = $_POST['assignedClassID'];
     
             $class=new Classes();
-            $result=$class->acceptClass($reservedClassID);
+            $result=$class->acceptClass($reservedClassID,$assignedClassID);
                 
             if ($result) {
                 echo "success";
