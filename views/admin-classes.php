@@ -124,47 +124,26 @@ span[id$="-err"],
                     <br>
                     <label for ="days">Select Day/s:</label>
                 <div class="col-m-8">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Saturday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Sunday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Monday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Tuesday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Wednesday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Thursday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="days[]"
-                            value="Friday">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
-                    </div>
+                <?php
+                // Get tomorrow's date
+                    $tomorrow = date('Y-m-d', strtotime('+1 day'));
+
+                    // Loop through the next 7 days
+                    for ($i = 0; $i < 7; $i++) {
+                    // Generate the date for each day
+                    $date = date('Y-m-d', strtotime("+$i day", strtotime($tomorrow)));
+
+                    // Get the day name
+                    $dayName = date('l', strtotime($date));
+
+                    // Display the day name and date
+                    echo '<div class="form-check form-switch">';
+                    echo '<input class="form-check-input" type="checkbox" id="flexSwitchCheck' . $i . '" name="days[]" value="' . $date . '">';
+                    echo '<label class="form-check-label" for="flexSwitchCheck' . $i . '">' . $dayName . ', ' . $date . '</label>';
+                    echo '</div>';
+                    echo '<br>';
+                }
+                ?>
                     <br>
 
                 </div>
