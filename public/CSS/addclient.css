@@ -347,7 +347,6 @@ input[type="text"] {
 /* Freeze Membership Modal Start */
 #datePickerModal {
   display: none;
-  position: absolute;
 }
 
 .modal-content {
@@ -357,10 +356,9 @@ input[type="text"] {
   background-color: #fff; 
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
 }
 
-.close {
+.close-btn {
   position: absolute;
   right: 10px;
   font-size: 20px;

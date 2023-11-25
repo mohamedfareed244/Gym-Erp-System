@@ -87,7 +87,7 @@
                                 <div class="modal" id="datePickerModal">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <span class="close" onclick="hideDatePickerModal()">&times;</span>
+                                            <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
                                             <div>
                                                 <label for="datepicker">Choose a Date:</label>
                                                 <input type="date" id="datepicker"
