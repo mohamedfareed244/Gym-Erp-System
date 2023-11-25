@@ -90,7 +90,7 @@
                         <div class="d-flex justify-content-around mb-5">
                             <input type="submit" value="Request" id="add-btn" class="btn btn-primary">
                             <div style ="padding:10px;">
-                                <span id="success">
+                                <span id="success" style="color: green;">
                                     <?php echo isset($_SESSION["membershipsuccess"][$package['ID']]) ? $_SESSION["membershipsuccess"][$package['ID']] : ''; ?>
                                 </span>
                                 <span id="alreadyExists1">
