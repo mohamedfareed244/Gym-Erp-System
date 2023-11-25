@@ -100,7 +100,7 @@
         <li>
             <div class="icon-link">
                 <a href="#">
-                    <i class='fas fa-cog'></i>
+                    <i class='bx bx-dumbbell' style="font-size:24px;" ></i>
                     <span class="link-name">Packages</span>
                 </a>
                 <i class='bx bx-chevron-down arrow'></i>
@@ -112,6 +112,18 @@
                 <li><a href="../views/addPTpackage.php">Add PT Package </a></li>
                 <li><a href="../views/viewPTpackage.php">View PT Packages </a></li>
 
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="../views/requests.php">
+                    <i class='bx bx-info-circle' style="font-size:24px;" ></i>
+                    <span class="link-name">Requests</span>
+                </a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link-name" href="../views/requests.php">Requests</a></li>
             </ul>
         </li>
 
