@@ -76,7 +76,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
             break;
-
+        case "acceptMembership":
+            $membershipID = $_POST['membershipID'];
+    
+            $membership=new Memberships();
+            $result=$membership->acceptMembership($membershipID);
+                
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+            break;
         default:
             break;
     }

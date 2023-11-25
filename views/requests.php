@@ -16,6 +16,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -30,7 +31,7 @@
 
     <div id="add-body" class="addbody">
         <div class="container">
-        <h2 class="table-title">Membership Requests: </h2>
+            <h2 class="table-title">Membership Requests: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <thead>
@@ -48,7 +49,8 @@
                     <tbody>
                         <?php if (is_array($membershipRequests) && !empty($membershipRequests)) {
                             foreach ($membershipRequests as $membershipRequest): ?>
-                        <tr>
+
+                        <tr id="row_<?php echo $membershipRequest['membershipID']; ?>">
                             <td><?php echo $membershipRequest['ID'] ?></td>
                             <td><?php echo $membershipRequest['FirstName'] ?></td>
                             <td><?php echo $membershipRequest['Title'] ?></td>
@@ -57,8 +59,10 @@
                             <td><?php echo $membershipRequest['EndDate'] ?></td>
                             <td><?php echo $membershipRequest['Price'] ?></td>
                             <td>
-                                <button class="btn">Accept</button>
-                                <button class="btn btn-delete">Decline</button>
+                                <button class="btn"
+                                    data-membershipid="<?php echo $membershipRequest['membershipID']; ?>"
+                                    onclick='acceptMembership(this)'>Accept
+                                </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -86,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php if (is_array($classRequests) && !empty($classRequests)) {
+                        <?php if (is_array($classRequests) && !empty($classRequests)) {
                             foreach ($classRequests as $classRequest): ?>
                         <tr>
                             <td><?php echo $classRequest['ID']?></td>
@@ -107,7 +111,6 @@
                             <td><?php echo $classRequest['Price']?></td>
                             <td>
                                 <button class="btn">Accept</button>
-                                <button class="btn btn-delete">Decline</button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -118,3 +121,38 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function acceptMembership(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var membershipID = button.getAttribute('data-membershipid');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + membershipID ;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/MembershipsController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'acceptMembership',
+                membershipID : membershipID
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>
