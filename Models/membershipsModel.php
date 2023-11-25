@@ -212,10 +212,10 @@ class Memberships
                     'PrivateTrainingSessionsCount' => $row['PrivateTrainingSessionsCount'],
                     'FreezeCount' => $row['FreezeCount']
                 );
+                return $results;
             }
         }
 
-        return $results;
     }
 
     public static function freezeMembership($membershipId, $selectedDate)
@@ -319,4 +319,50 @@ class Memberships
             return false;
         }
     }
+    public static function getMembershipRequests()
+    {
+        global $conn;
+
+        $isActivated="Not Activated";
+
+        $sql="SELECT client.ID,client.FirstName,package.Title,package.NumOfMonths,membership.StartDate,membership.EndDate,package.Price,membership.ID AS membershipID
+        FROM membership
+        INNER JOIN client ON client.ID = membership.ClientID
+        INNER JOIN package ON package.ID = membership.PackageID
+        WHERE membership.isActivated = '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID' => $row['ID'],
+                    'FirstName' => $row['FirstName'],
+                    'Title' => $row['Title'],
+                    'NumOfMonths' => $row['NumOfMonths'],
+                    'StartDate' => $row['StartDate'],
+                    'EndDate' => $row['EndDate'],
+                    'Price' => $row['Price'],
+                    'membershipID' => $row['membershipID']
+                );
+                return $results;
+            }
+        }
+    }
+
+    public function acceptMembership($membershipID)
+    {
+        global $conn;
+
+        $isActivated = "Activated";
+
+        $sql="UPDATE membership 
+        SET isActivated='$isActivated' 
+        WHERE ID = $membershipID";
+
+        return $conn->query($sql);
+    }
+
+
+
 }

@@ -16,6 +16,7 @@ class Classes{
     public $Price;
     public $CoachID;
     public $NumOfAttendants;
+    public $AvailablePlaces;
    
     public static function getAllClasses(){
         global $conn;
@@ -49,12 +50,14 @@ class Classes{
         $Price = $class->Price;
         $CoachID = $class->CoachID;
         $NumOfAttendants=$class->NumOfAttendants;
+        $AvailablePlaces=$class->NumOfAttendants;
+
     
         $finalresult = true; // Initialize result
     
         foreach ($Dates as $Date) {
-            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, CoachID,NumOfAttendants) 
-                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$CoachID','$NumOfAttendants')";
+            $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, CoachID,NumOfAttendants,AvailablePlaces) 
+                    VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$CoachID','$NumOfAttendants','$AvailablePlaces')";
     
             $result = mysqli_query($conn, $sql);
     
@@ -320,22 +323,67 @@ class Classes{
                     'Price' => $row['Price'],
                     'ClientID'=>$row['ClientID'],
                 );
+                return $results;
             }
         }
 
-        return $results;
     }
 
+    public static function getClassRequests()
+    {
+        global $conn;
 
+        $isActivated='Not Activated';
+
+        $sql="SELECT client.ID,client.FirstName AS clientName,class.Name AS className, assignedclass.Date, assignedclass.StartTime,
+        assignedclass.EndTime, employee.Name AS employeeName, assignedclass.Price , `reserved class`.ID AS reservedClassID , assignedclass.ID AS assignedClassID
+        FROM `reserved class`
+        INNER JOIN client ON client.ID = `reserved class`.ClientID
+        INNER JOIN assignedclass ON assignedclass.ID = `reserved class`.AssignedClassID
+        INNER JOIN employee ON employee.ID = `reserved class`.CoachID
+        INNER JOIN class ON class.ID = assignedclass.ClassID
+        WHERE `reserved class`.isActivated = '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID'=>$row['ID'],
+                    'clientName' => $row['clientName'],
+                    'className' => $row['className'],
+                    'Date' => $row['Date'],
+                    'StartTime' => $row['StartTime'],
+                    'EndTime' => $row['EndTime'],
+                    'employeeName'=>$row['employeeName'],
+                    'Price'=>$row['Price'],
+                    'reservedClassID' => $row['reservedClassID'],
+                    'assignedClassID' => $row['assignedClassID']
+                );
+                return $results;
+            }
+        }
     }
-    
-    
 
+    public function acceptClass($reservedClassID,$assignedClassID)
+    {
+        global $conn;
 
+        $isActivated= 'Activated';
 
-    
-    
+        $sql="UPDATE `reserved class`
+        SET isActivated='$isActivated'
+        WHERE ID = $reservedClassID";
 
+        if($conn->query($sql)){
 
+        $sql1="UPDATE assignedclass
+        SET AvailablePlaces= AvailablePlaces - 1
+        WHERE assignedclass.ID = '$assignedClassID'";
 
+        return $conn->query($sql1);
+        }
+    }
+
+}
 ?>

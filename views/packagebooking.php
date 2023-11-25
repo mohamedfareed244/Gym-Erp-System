@@ -25,6 +25,7 @@
     #alreadyExists2 {
         color: red;
         font-size: 16px;
+        margin-left:30px;
     }
 
     .row {

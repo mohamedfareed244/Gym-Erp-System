@@ -30,7 +30,6 @@
                 <li><a class="link-name" href="../views/admindashboard.php">Dashboard</a></li>
             </ul>
         </li>
-        </li>
         <li>
             <div class="icon-link">
                 <a href="#">
@@ -41,7 +40,6 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link-name" href="../views/clientdetails.php">Clients</a></li>
-
                 <li><a href="../views/addclient.php">Add</a></li>
                 <!-- <li><a href="../views/editclient.php">Edit</a></li> -->
                 <li><a href="../views/allclients.php">Details</a></li>
@@ -50,7 +48,6 @@
             </ul>
         </li>
 
-        </li>
 
         <li>
             <div class="icon-link">
@@ -103,7 +100,7 @@
         <li>
             <div class="icon-link">
                 <a href="#">
-                    <i class='fas fa-cog'></i>
+                    <i class='bx bx-dumbbell' style="font-size:24px;" ></i>
                     <span class="link-name">Packages</span>
                 </a>
                 <i class='bx bx-chevron-down arrow'></i>
@@ -115,6 +112,18 @@
                 <li><a href="../views/addPTpackage.php">Add PT Package </a></li>
                 <li><a href="../views/viewPTpackage.php">View PT Packages </a></li>
 
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="../views/requests.php">
+                    <i class='bx bx-info-circle' style="font-size:24px;" ></i>
+                    <span class="link-name">Requests</span>
+                </a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link-name" href="../views/requests.php">Requests</a></li>
             </ul>
         </li>
 
@@ -165,21 +174,21 @@
 
 
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e) => {
-            let arrowParent = e.target.parentElement.parentElement;
-            arrowParent.classList.toggle("showMenu");
+let arrow = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement;
+        arrowParent.classList.toggle("showMenu");
 
-            console.log(arrowParent);
+        console.log(arrowParent);
 
-        });
-    }
-
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
     });
+}
+
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".bx-menu");
+console.log(sidebarBtn);
+sidebarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+});
 </script>

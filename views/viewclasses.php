@@ -32,6 +32,7 @@
     
     include("partials/usersidebar.php");?>
 
+    <?php if (is_array($classes) && !empty($classes)) { ?>
     <div class="profile">
 
         <div class="greeting">
@@ -74,6 +75,12 @@
             </div>
         </div>
         <?php endforeach ?>
+        <?php } else{ ?>
+            <div class="no-class" style="height:1000px; margin-left:200px;">
+            <p class="noclass" style="font-size:24px;">You haven't reserved any classes yet.</p>
+        </div>
+        <?php } ?>
+
     </div>
 
 
