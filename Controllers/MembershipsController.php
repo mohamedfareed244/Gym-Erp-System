@@ -88,6 +88,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "failure";
             }
             break;
+        case "unfreezeClientMembership":
+            if (isset($_POST["membershipID"])) {
+
+                $membershipID = $_POST["membershipID"];
+                $result = Memberships::unFreezeMembership($membershipID);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
+                }
+            }
+            break;
+
         default:
             break;
     }

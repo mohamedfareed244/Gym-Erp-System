@@ -162,25 +162,23 @@ class Memberships
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
-                'ID' => $row["ID"],
-                'clientId' => $row["ClientID"],
-                'packageId' => $row["PackageID"],
-                'startDate' => $row["StartDate"],
-                'endDate' => $row["EndDate"],
-                'visitsCount' => $row["VisitsCount"],
-                'inbodyCount' => $row["InvitationsCount"],
-                'privateTrainingSessionsCount' => $row["PrivateTrainingSessionsCount"],
-                'freezeCount' => $row["FreezeCount"],
-                'freezed' => $row["Freezed"],
-                'freezeLimit'=> $row["FreezeLimit"],
-                'Title'=> $row["Title"]
-            );
+                    'ID' => $row["ID"],
+                    'clientId' => $row["ClientID"],
+                    'packageId' => $row["PackageID"],
+                    'startDate' => $row["StartDate"],
+                    'endDate' => $row["EndDate"],
+                    'visitsCount' => $row["VisitsCount"],
+                    'inbodyCount' => $row["InvitationsCount"],
+                    'privateTrainingSessionsCount' => $row["PrivateTrainingSessionsCount"],
+                    'freezeCount' => $row["FreezeCount"],
+                    'freezed' => $row["Freezed"],
+                    'freezeLimit' => $row["FreezeLimit"],
+                    'Title' => $row["Title"]
+                );
+            }
         }
-    
 
         return $results;
-    }
-
     }
 
 
@@ -229,21 +227,29 @@ class Memberships
         $membership = Memberships::getMembershipByID($membershipId);
 
         if ($membership) {
-            $startDateTime = new DateTime(); 
+            $freezeEndDate = date("Y-m-d", strtotime($selectedDate));
+            echo "Selected Date: ", $selectedDate, " Converted Freeze End Date: ", $freezeEndDate;
+            $startDateTime = new DateTime();
             $endDateTime = new DateTime($selectedDate);
 
             $interval = $startDateTime->diff($endDateTime);
-            $months = $interval->m;
+            $days = $interval->days;
 
-            $newEndDate = date("Y-m-d", strtotime($membership->endDate . " + " . $months . " months"));
+            $newEndDate = date("Y-m-d", strtotime($membership->endDate . " + " . $days . " days"));
 
             echo "New End Date: " . $newEndDate; // Debug statement
 
-            $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$membership->freezeCount-1' WHERE ID='$membershipId'";
-
+            $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$membership->freezeCount'-1 WHERE ID='$membershipId'";
             $result = mysqli_query($conn, $sql);
 
-            if ($result) {
+            $freezeStartDate = date("Y-m-d");
+
+            $sql2 = "INSERT INTO `scheduled_unfreeze` (membershipId, freezeEndDate, freezeStartDate, freezeCount) VALUES 
+            ('$membership->ID','$freezeEndDate', '$freezeStartDate', '$membership->freezeCount'-1)";
+
+            $result2 = mysqli_query($conn, $sql2);
+
+            if ($result && $result2) {
                 echo "Update successful!";
             } else {
                 echo "Error updating record: " . mysqli_error($conn);
@@ -255,6 +261,67 @@ class Memberships
         }
     }
 
+    public static function getScheduledUnFreeze($membershipId)
+    {
+        global $conn;
+        $sql = "SELECT * FROM `scheduled_unfreeze` WHERE membershipId = '$membershipId'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
+
+    public static function unFreezeMembership($membershipId)
+    {
+        global $conn;
+        $membership = Memberships::getMembershipByID($membershipId);
+        
+        $scheduledUnFreeze = Memberships::getScheduledUnFreeze($membershipId);
+        echo 'Scheduled Freeze End Date: ' . $scheduledUnFreeze['freezeEndDate'];
+
+        if ($membership && $scheduledUnFreeze) {
+            $currDate = new DateTime();
+            $freezeStartDate = new DateTime($scheduledUnFreeze['freezeStartDate']);
+            $freezeEndDate = new DateTime($scheduledUnFreeze['freezeEndDate']);
+            echo $freezeStartDate->format('Y-m-d'), "    END FREEZE ", $freezeEndDate->format('Y-m-d');
+
+            if ($currDate < $freezeEndDate) {
+                $Package = Package::getPackage($membership->packageId);
+                $interval = $currDate->diff($freezeStartDate);
+                $days = $interval->days;
+
+                // Calculate new end date by adding months and days
+                $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$Package->NumOfMonths months +$days days"));
+                $currentDate = date("Y-m-d");
+                echo 'NEW DATE', $newEndDate, " Current ", $currentDate, "  Days ", $days, '    ', $Package->NumOfMonths;
+                $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
+                $result = mysqli_query($conn, $sql);
+
+                $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
+                $result2 = mysqli_query($conn, $sql2);
+
+                if ($result && $result2) {
+                    echo "Update successful!";
+                } else {
+                    echo "Error updating record: " . mysqli_error($conn);
+                }
+            } else if ($currDate >= $freezeEndDate) {
+                $sql = "UPDATE `membership` SET Freezed = 0 WHERE ID='$membershipId'";
+                $result = mysqli_query($conn, $sql);
+                $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
+                $result2 = mysqli_query($conn, $sql2);
+                if ($result && $result2) {
+                    echo "Update successful!";
+                } else {
+                    echo "Error updating record: " . mysqli_error($conn);
+                }
+
+            }
+            return $result;
+
+        } else {
+            return false;
+        }
+    }
     public static function getMembershipRequests()
     {
         global $conn;

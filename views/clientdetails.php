@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Details | Profit</title>
+    <title>Client Memberships</title>
 
     <!--css/icons/boostrap/jquery/fonts/images start-->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
@@ -24,7 +24,6 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
 
 </head>
-
 
 <body>
     <?php require("partials/adminsidebar.php");
@@ -90,19 +89,16 @@
                                             <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
                                             <div>
                                                 <label for="datepicker">Choose a Date:</label>
-                                                <input type="date" id="datepicker"
-                                                    min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
-                                                    max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                                            </div>
-                                            <button class="btn btn-primary"
-                                                onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
-                                        </div>
+                                         <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
+                                        max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
                                     </div>
+                                    <button class="btn btn-primary" onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
                                 </div>
-                                <?php
+                            </div>
+                            <?php
                             } else {
                                 echo '<td class="status-' . $membership->ID . ' bg">Freezed</td>';
-                                echo '<td><button class="btn btn-freeze" disabled>Freeze</button></td>';
+                                echo '<td><button id="unfreezeBtn-' . $membership->ID . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->ID . ')">Unfreeze</button></td>';
 
                             }
                             echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
@@ -188,101 +184,125 @@
             </div> -->
         </div>
     </div>
-</body>
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("searchBar");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("membershipsTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+    </body>
+
+    <script>
+        
+function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchBar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("membershipsTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
             }
         }
     }
-    function freezeMembership(membershipID) {
-        var selectedDate = $('#datepicker').val();
+}
+function freezeMembership(membershipID) {
+    var selectedDate = $('#datepicker').val();
+    console.log(selectedDate);
 
-        console.log('Selected Date:', selectedDate);
+    console.log('Selected Date:', selectedDate);
 
-        $.ajax({
-            type: "POST",
-            url: "../Controllers/MembershipsController.php",
-            data: {
-                action: "freezeClientMembership",
-                membershipID: membershipID,
-                selectedDate: selectedDate,
-            },
-            success: function (response) {
-                // Handle success
-                console.log(response);
-                var newEndDate = response.newEndDate;
-                $('#endDate-' + membershipID).text(newEndDate);
+    $.ajax({
+        type: "POST",
+        url: "../Controllers/MembershipsController.php",
+        data: {
+            action: "freezeClientMembership",
+            membershipID: membershipID,
+            selectedDate: selectedDate,
+        },
+        success: function (response) {
+            console.log(response);
+            var newEndDate = response.newEndDate;
+            $('#endDate-' + membershipID).text(newEndDate);
 
-                // Update status to "Freezed"
-                $('.status-' + membershipID).text('Freezed');
+            $('.status-' + membershipID).text('Freezed');
 
-                // Disable the freeze button
-                $('#freezeBtn-' + membershipID).prop('disabled', true);
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX error: " + status + " - " + error);
-            },
-        });
+            var unfreezeButton = '<button id="unfreezeBtn-' +membershipID+'" class="btn btn-unfreeze" onclick="unfreezeMembership(' + membershipID + ')">Unfreeze</button>';
+             $('#freezeBtn-' + membershipID).replaceWith(unfreezeButton);            
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error: " + status + " - " + error);
+        },
+    });
 
-        hideDatePickerModal();
-    }
+    hideDatePickerModal();
+}
+function unfreezeMembership(membershipID) {
+    console.log(membershipID);
+    $.ajax({
+        type: "POST",
+        url: "../Controllers/MembershipsController.php",
+        data: {
+            action: "unfreezeClientMembership",
+            membershipID: membershipID,
+        },
+        success: function (response) {
+            console.log(response);
 
-    function showDatePickerModal() {
-        $('#datePickerModal').fadeIn();
+            $('.status-' + membershipID).text('Active');
 
-    }
+            var freezeButton = '<button id="freezeBtn-' + membershipID + '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button>';
+            $('#unfreezeBtn-' + membershipID).replaceWith(freezeButton);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error: " + status + " - " + error);
+        },
+    });
+}
 
-    function hideDatePickerModal() {
-        $('#datePickerModal').fadeOut();
-    }
+function showDatePickerModal() {
+    $('#datePickerModal').fadeIn();
 
-    function submitFreeze() {
-        var selectedDate = $('#datepicker').val();
+}
 
-        console.log('Selected Date:', selectedDate);
+function hideDatePickerModal() {
+    $('#datePickerModal').fadeOut();
+}
 
-        hideDatePickerModal();
-    }
+function submitFreeze() {
+    var selectedDate = $('#datepicker').val();
 
-    function deleteMembership(membershipID) {
-        $.ajax({
-            type: "POST",
-            url: "../Controllers/MembershipsController.php",
-            data: {
-                action: "deleteMembership",
-                membershipID: membershipID,
-            },
-            success: function (response) {
-                if (response === "success") {
-                    var tableRow = document.getElementById('row-' + clientId);
-                    if (tableRow) {
-                        tableRow.parentNode.removeChild(tableRow);
-                    } else {
-                        console.log("Error.");
-                    }
+    console.log('Selected Date:', selectedDate);
+
+    hideDatePickerModal();
+}
+
+function deleteMembership(membershipID) {
+    $.ajax({
+        type: "POST",
+        url: "../Controllers/MembershipsController.php",
+        data: {
+            action: "deleteMembership",
+            membershipID: membershipID,
+        },
+        success: function (response) {
+            if (response === "success") {
+                var tableRow = document.getElementById('row-' + clientId);
+                if (tableRow) {
+                    tableRow.parentNode.removeChild(tableRow);
                 } else {
-                    console.log("Error deleting client.");
+                    console.log("Error.");
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX error: " + status + " - " + error);
-            },
-        });
-    }
-</script>
+            } else {
+                console.log("Error deleting client.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error: " + status + " - " + error);
+        },
+    });
+}
+    </script>
+
 
 </html>
