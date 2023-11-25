@@ -318,6 +318,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "failure";
             }
             break;
+        case "acceptClass":
+            $reservedClassID = $_POST['reservedClassID'];
+    
+            $class=new Classes();
+            $result=$class->acceptClass($reservedClassID);
+                
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+            break;
         default:
             break;
     }

@@ -92,7 +92,8 @@
                     <tbody>
                         <?php if (is_array($classRequests) && !empty($classRequests)) {
                             foreach ($classRequests as $classRequest): ?>
-                        <tr>
+
+                        <tr id="row_<?php echo $classRequest['reservedClassID']; ?>">
                             <td><?php echo $classRequest['ID']?></td>
                             <td><?php echo $classRequest['clientName']?></td>
                             <td><?php echo $classRequest['className']?></td>
@@ -110,7 +111,10 @@
                             <td><?php echo $classRequest['employeeName']?></td>
                             <td><?php echo $classRequest['Price']?></td>
                             <td>
-                                <button class="btn">Accept</button>
+                                <button class="btn"
+                                    data-reservedclassid="<?php echo $classRequest['reservedClassID']; ?>"
+                                    onclick='acceptClass(this)'>Accept
+                                </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -141,6 +145,36 @@
             data: {
                 action: 'acceptMembership',
                 membershipID : membershipID
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
+
+    function acceptClass(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var reservedClassID = button.getAttribute('data-reservedClassid');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + reservedClassID;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/ClassController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'acceptClass',
+                reservedClassID : reservedClassID 
             },
             success: function(response) {
                 // Handle the response from the controller if needed

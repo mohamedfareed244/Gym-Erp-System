@@ -353,11 +353,25 @@ class Classes{
                     'StartTime' => $row['StartTime'],
                     'EndTime' => $row['EndTime'],
                     'employeeName'=>$row['employeeName'],
-                    'Price'=>$row['Price']
+                    'Price'=>$row['Price'],
+                    'reservedClassID' => $row['reservedClassID']
                 );
                 return $results;
             }
         }
+    }
+
+    public function acceptClass($reservedClassID)
+    {
+        global $conn;
+
+        $isActivated= 'Activated';
+
+        $sql="UPDATE `reserved class`
+        SET isActivated='$isActivated'
+        WHERE ID = $reservedClassID";
+
+        return $conn->query($sql);
     }
 
 }
