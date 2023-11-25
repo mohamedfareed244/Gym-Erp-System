@@ -250,5 +250,36 @@ class Memberships
         }
     }
 
+    public static function getMembershipRequests()
+    {
+        global $conn;
+
+        $isActivated="Not Activated";
+
+        $sql="SELECT client.ID,client.FirstName,package.Title,package.NumOfMonths,membership.StartDate,membership.EndDate,package.Price
+        FROM membership
+        INNER JOIN client ON client.ID = membership.ClientID
+        INNER JOIN package ON package.ID = membership.PackageID
+        WHERE membership.isActivated = '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID' => $row['ID'],
+                    'FirstName' => $row['FirstName'],
+                    'Title' => $row['Title'],
+                    'NumOfMonths' => $row['NumOfMonths'],
+                    'StartDate' => $row['StartDate'],
+                    'EndDate' => $row['EndDate'],
+                    'Price' => $row['Price'],
+                );
+                return $results;
+            }
+        }
+    }
+
+
 
 }

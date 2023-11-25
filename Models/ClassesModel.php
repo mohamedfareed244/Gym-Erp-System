@@ -326,16 +326,39 @@ class Classes{
 
     }
 
+    public static function getClassRequests()
+    {
+        global $conn;
 
+        $isActivated='Not Activated';
+
+        $sql="SELECT client.ID,client.FirstName AS clientName,class.Name AS className, assignedclass.Date, assignedclass.StartTime,
+        assignedclass.EndTime, employee.Name AS employeeName, assignedclass.Price , `reserved class`.ID AS reservedClassID
+        FROM `reserved class`
+        INNER JOIN client ON client.ID = `reserved class`.ClientID
+        INNER JOIN assignedclass ON assignedclass.ID = `reserved class`.AssignedClassID
+        INNER JOIN employee ON employee.ID = `reserved class`.CoachID
+        INNER JOIN class ON class.ID = assignedclass.ClassID
+        WHERE `reserved class`.isActivated = '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID'=>$row['ID'],
+                    'clientName' => $row['clientName'],
+                    'className' => $row['className'],
+                    'Date' => $row['Date'],
+                    'StartTime' => $row['StartTime'],
+                    'EndTime' => $row['EndTime'],
+                    'employeeName'=>$row['employeeName'],
+                    'Price'=>$row['Price']
+                );
+                return $results;
+            }
+        }
     }
-    
-    
 
-
-
-    
-    
-
-
-
+}
 ?>

@@ -20,8 +20,14 @@
 
 <body>
     <?php require("partials/adminsidebar.php");
-   
+    
+    include_once "../Models/ClassesModel.php";
+    include_once "../Models/membershipsModel.php";
+
+    $classRequests=Classes::getClassRequests();
+    $membershipRequests=Memberships::getMembershipRequests();
     ?>
+
     <div id="add-body" class="addbody">
         <div class="container">
         <h2 class="table-title">Membership Requests: </h2>
@@ -40,19 +46,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if (is_array($membershipRequests) && !empty($membershipRequests)) {
+                            foreach ($membershipRequests as $membershipRequest): ?>
                         <tr>
-                            <td> 5 </td>
-                            <td>Sara Ahmed</td>
-                            <td>2 Months</td>
-                            <td>2</td>
-                            <td>2023-11-25</td>
-                            <td>2024-01-25</td>
-                            <td>900</td>
+                            <td><?php echo $membershipRequest['ID'] ?></td>
+                            <td><?php echo $membershipRequest['FirstName'] ?></td>
+                            <td><?php echo $membershipRequest['Title'] ?></td>
+                            <td><?php echo $membershipRequest['NumOfMonths'] ?></td>
+                            <td><?php echo $membershipRequest['StartDate'] ?></td>
+                            <td><?php echo $membershipRequest['EndDate'] ?></td>
+                            <td><?php echo $membershipRequest['Price'] ?></td>
                             <td>
                                 <button class="btn">Accept</button>
                                 <button class="btn btn-delete">Decline</button>
                             </td>
                         </tr>
+                        <?php endforeach; ?>
+                        <?php } ?>
 
                     </tbody>
                 </table>
@@ -76,20 +86,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if (is_array($classRequests) && !empty($classRequests)) {
+                            foreach ($classRequests as $classRequest): ?>
                         <tr>
-                            <td> 5 </td>
-                            <td>Sara Ahmed</td>
-                            <td>Yoga</td>
-                            <td>Sunday</td>
-                            <td>9:00pm</td>
-                            <td>11:00pm</td>
-                            <td>Mohamed fareed</td>
-                            <td>120</td>
+                            <td><?php echo $classRequest['ID']?></td>
+                            <td><?php echo $classRequest['clientName']?></td>
+                            <td><?php echo $classRequest['className']?></td>
+                            <td><?php echo $classRequest['Date']?></td>
+                            <?php
+                            $startTime = new DateTime($classRequest['StartTime']);
+                            $endTime = new DateTime($classRequest['EndTime']);
+                            
+                            // Format the DateTime object as "H:i" (24-hour format)
+                            $startformattedDate = $startTime->format("H:i");
+                            $endformattedDate = $endTime->format("H:i");
+                            ?>
+                            <td><?php echo $startformattedDate?></td>
+                            <td><?php echo $endformattedDate?></td>
+                            <td><?php echo $classRequest['employeeName']?></td>
+                            <td><?php echo $classRequest['Price']?></td>
                             <td>
                                 <button class="btn">Accept</button>
                                 <button class="btn btn-delete">Decline</button>
                             </td>
                         </tr>
+                        <?php endforeach; ?>
+                        <?php } ?>
 
                     </tbody>
                 </table>
