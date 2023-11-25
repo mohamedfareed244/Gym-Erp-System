@@ -278,22 +278,34 @@ input[type="text"] {
   color: white;
   background-color: #00A8E8;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .btn-delete {
   padding: 10px;
   border: 0;
   color: white;
-  width: 70px;
+  width: 80px;
   background-color: #00d93a;
 }
 
 .btn-freeze {
+  text-align: center;
   background-color: rgb(140, 17, 132);
+}
+.btn-unfreeze {
+  padding: 2px;
+  height: 40px;
+  text-align: left;
+  background-color: palevioletred;
 }
 
 .btn-freeze:hover {
   background-color: rgb(201, 130, 196);
+  color: white;
+}
+.btn-unfreeze:hover {
+  background-color: rgb(218, 141, 166);
   color: white;
 }
 
@@ -337,6 +349,11 @@ input[type="text"] {
     font-size: 13px;
     margin-bottom: 2px;
   }
+  .btn-unfreeze {
+    width: 60px;
+    font-size: 13px;
+    height: 30px;
+  }
 }
 
 /* view table */
@@ -347,6 +364,7 @@ input[type="text"] {
 /* Freeze Membership Modal Start */
 #datePickerModal {
   display: none;
+  position: absolute;
 }
 
 .modal-content {
