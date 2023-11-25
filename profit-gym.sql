@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 09:28 PM
+-- Generation Time: Nov 25, 2023 at 10:53 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -31,23 +31,24 @@ CREATE TABLE `assignedclass` (
   `ID` int(11) NOT NULL,
   `ClassID` int(11) NOT NULL,
   `Date` varchar(30) NOT NULL,
-  `StartTime` time(6) NOT NULL,
-  `EndTime` time(6) NOT NULL,
+  `StartTime` time NOT NULL,
+  `EndTime` time NOT NULL,
   `isFree` varchar(20) NOT NULL,
   `Price` int(50) NOT NULL,
   `CoachID` int(10) NOT NULL,
-  `NumOfAttendants` int(11) NOT NULL
+  `NumOfAttendants` int(11) NOT NULL,
+  `AvailablePlaces` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assignedclass`
 --
 
-INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`) VALUES
-(2, 4, 'Wednesday', '16:30:00.000000', '17:45:00.000000', 'NotFree', 200, 4, 10),
-(4, 7, 'Sunday', '18:45:00.000000', '20:00:00.000000', 'NotFree', 200, 4, 10),
-(6, 2, 'Wednesday', '18:30:00.000000', '20:00:00.000000', 'NotFree', 150, 3, 20),
-(7, 8, 'Thursday', '20:30:00.000000', '22:00:00.000000', 'Free', 0, 3, 20);
+INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
+(1, 1, '2023-11-26', '18:30:00', '20:00:00', 'Free', 0, 3, 20, 19),
+(2, 4, '2023-11-27', '14:00:00', '15:15:00', 'NotFree', 150, 4, 10, -1),
+(3, 3, '2023-11-30', '19:30:00', '21:00:00', 'NotFree', 250, 3, 20, 18),
+(4, 8, '2023-11-28', '20:30:00', '22:00:00', 'Free', 0, 4, 20, 20);
 
 -- --------------------------------------------------------
 
@@ -140,20 +141,20 @@ CREATE TABLE `class_days` (
 --
 
 INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
-(1, 'Saturday'),
-(1, 'Tuesday'),
-(2, 'Sunday'),
-(2, 'Wednesday'),
-(3, 'Friday'),
-(3, 'Tuesday'),
-(4, 'Saturday'),
-(4, 'Wednesday'),
-(5, 'Monday'),
-(5, 'Tuesday'),
-(6, 'Tuesday'),
-(7, 'Sunday'),
-(8, 'Thursday'),
-(9, 'Sunday');
+(1, '2023-11-26'),
+(1, '2023-11-29'),
+(2, '2023-11-28'),
+(2, '2023-12-01'),
+(3, '2023-11-30'),
+(4, '2023-11-26'),
+(4, '2023-11-27'),
+(5, '2023-11-29'),
+(6, '2023-11-27'),
+(6, '2023-12-02'),
+(7, '2023-11-26'),
+(8, '2023-11-28'),
+(9, '2023-11-30'),
+(9, '2023-12-02');
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,8 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
 (26, 'jana', 'hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866'),
-(28, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868');
+(28, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868'),
+(37, 'laila', 'nabil', 20, 'female', '0', '0', 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378');
 
 -- --------------------------------------------------------
 
@@ -306,8 +308,8 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
-(7, 26, 16, '2023-11-24', '2024-08-24', 0, 7, 6, 6, 70, 0, 'Not Activated'),
-(8, 28, 14, '2023-11-24', '2024-02-24', 0, 5, 3, 3, 30, 0, 'Activated');
+(8, 28, 14, '2023-11-24', '2024-02-24', 0, 5, 3, 3, 30, 0, 'Activated'),
+(9, 26, 13, '2023-11-25', '2024-01-25', 0, 4, 2, 2, 20, 0, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -401,8 +403,9 @@ CREATE TABLE `reserved class` (
 --
 
 INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
-(10, 6, 3, 28, '', 'Not Activated'),
-(11, 7, 3, 28, '', 'Activated');
+(3, 3, 3, 28, '', 'Activated'),
+(4, 3, 3, 26, '', 'Activated'),
+(9, 1, 3, 26, '', 'Activated');
 
 -- --------------------------------------------------------
 
@@ -550,7 +553,7 @@ ALTER TABLE `reserved private training free session`
 -- AUTO_INCREMENT for table `assignedclass`
 --
 ALTER TABLE `assignedclass`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `authority`
@@ -574,7 +577,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -598,7 +601,7 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `package`
@@ -616,7 +619,7 @@ ALTER TABLE `private training package`
 -- AUTO_INCREMENT for table `reserved class`
 --
 ALTER TABLE `reserved class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `reserved private training free session`
@@ -627,12 +630,6 @@ ALTER TABLE `reserved private training free session`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `class_days`
---
-ALTER TABLE `class_days`
-  ADD CONSTRAINT `test20` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ID`);
 
 --
 -- Constraints for table `coach available days`
