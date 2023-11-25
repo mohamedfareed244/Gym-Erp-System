@@ -18,6 +18,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+<style>
+#myButton:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+</style>
 
 <body>
     <?php require("partials/adminsidebar.php");
@@ -111,11 +117,18 @@
                             <td><?php echo $classRequest['employeeName']?></td>
                             <td><?php echo $classRequest['Price']?></td>
                             <td>
+                            <?php if($classRequest['AvailablePlaces'] != 0) { ?>
                                 <button class="btn"
                                     data-reservedclassid="<?php echo $classRequest['reservedClassID']; ?>"
                                     data-assignedclassid="<?php echo $classRequest['assignedClassID']; ?>"
                                     onclick='acceptClass(this)'>Accept
                                 </button>
+                                <?php } else {?>
+                                    <button class="btn"
+                                    data-reservedclassid="<?php echo $classRequest['reservedClassID']; ?>"
+                                    onclick='declineClass(this)'>Decline
+                                </button>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -158,6 +171,7 @@
         });
     }
 
+
     function acceptClass(button) {
         // Extract ClassID, CoachID, and Date from the data attributes
         var reservedClassID = button.getAttribute('data-reservedClassid');
@@ -189,6 +203,37 @@
             }
         });
     }
+ 
+    function declineClass(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var reservedClassID = button.getAttribute('data-reservedClassid');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + reservedClassID;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/ClassController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'declineClass',
+                reservedClassID : reservedClassID
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
+
     </script>
 </body>
 

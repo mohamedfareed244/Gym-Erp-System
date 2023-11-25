@@ -157,6 +157,8 @@ class Memberships
 
         $result = $conn->query($sql);
 
+        $results = array();
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -174,9 +176,10 @@ class Memberships
                 'Title'=> $row["Title"]
             );
         }
-    }
+    
 
         return $results;
+    }
 
     }
 
@@ -196,6 +199,8 @@ class Memberships
 
         $result = mysqli_query($conn, $sql);
 
+        $results = array();
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -212,8 +217,8 @@ class Memberships
                     'PrivateTrainingSessionsCount' => $row['PrivateTrainingSessionsCount'],
                     'FreezeCount' => $row['FreezeCount']
                 );
-                return $results;
             }
+            return $results;
         }
 
     }
@@ -264,6 +269,8 @@ class Memberships
 
         $result = mysqli_query($conn, $sql);
 
+        $results = array();
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -276,8 +283,8 @@ class Memberships
                     'Price' => $row['Price'],
                     'membershipID' => $row['membershipID']
                 );
-                return $results;
             }
+            return $results;
         }
     }
 

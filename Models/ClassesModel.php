@@ -215,9 +215,9 @@ class Classes{
                     'PhoneNumber' => $row['PhoneNumber'],
                 );
             }
+            return $results;
         }
     
-        return $results;
     }
 
 
@@ -226,12 +226,14 @@ class Classes{
         global $conn;
 
         $sql ="SELECT class.imgPath, class.Name AS className , assignedclass.CoachID AS CoachID, assignedclass.Date ,assignedclass.StartTime , assignedclass.EndTime, 
-        assignedclass.NumOfAttendants , assignedclass.Price, assignedclass.ID AS assignedclassID, employee.Name AS employeeName 
+        assignedclass.NumOfAttendants , assignedclass.Price, assignedclass.ID AS assignedclassID, employee.Name AS employeeName ,assignedclass.AvailablePlaces
         FROM class
         INNER JOIN assignedclass ON class.ID = assignedclass.ClassID
         INNER JOIN employee ON employee.ID = assignedclass.CoachID";
 
         $result = mysqli_query($conn, $sql);
+
+        $results = array();
     
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -245,13 +247,13 @@ class Classes{
                     'NumOfAttendants' => $row['NumOfAttendants'],
                     'Price' => $row['Price'],
                     'assignedclassID' => $row['assignedclassID'],
-                    'employeeName' => $row['employeeName']
-
+                    'employeeName' => $row['employeeName'],
+                    'AvailablePlaces' => $row['AvailablePlaces']
                 );
             }
+            return $results;
         }
     
-        return $results;
 
 
     }
@@ -268,9 +270,18 @@ class Classes{
     
         if (!$alreadyExists) {
             $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
-            $insertResult = mysqli_query($conn, $sql);
+
+            $result = mysqli_query($conn, $sql);
+            
+            if($result) {
+            $sql1="UPDATE assignedclass
+            SET AvailablePlaces= AvailablePlaces - 1
+            WHERE assignedclass.ID = '$AssignedClassID'";
+
+            $insertResult = mysqli_query($conn, $sql1);
     
             return array('inserted' => $insertResult, 'alreadyExists' => false);
+            }
         } else {
             return array('inserted' => false, 'alreadyExists' => true);
         }
@@ -312,6 +323,8 @@ class Classes{
 
         $result = mysqli_query($conn, $sql);
 
+        $results = array();
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -323,8 +336,8 @@ class Classes{
                     'Price' => $row['Price'],
                     'ClientID'=>$row['ClientID'],
                 );
-                return $results;
             }
+            return $results;
         }
 
     }
@@ -336,7 +349,8 @@ class Classes{
         $isActivated='Not Activated';
 
         $sql="SELECT client.ID,client.FirstName AS clientName,class.Name AS className, assignedclass.Date, assignedclass.StartTime,
-        assignedclass.EndTime, employee.Name AS employeeName, assignedclass.Price , `reserved class`.ID AS reservedClassID , assignedclass.ID AS assignedClassID
+        assignedclass.EndTime, employee.Name AS employeeName, assignedclass.Price , `reserved class`.ID AS reservedClassID , assignedclass.ID AS assignedClassID,
+         assignedclass.AvailablePlaces
         FROM `reserved class`
         INNER JOIN client ON client.ID = `reserved class`.ClientID
         INNER JOIN assignedclass ON assignedclass.ID = `reserved class`.AssignedClassID
@@ -345,6 +359,8 @@ class Classes{
         WHERE `reserved class`.isActivated = '$isActivated'";
 
         $result = mysqli_query($conn, $sql);
+
+        $results = array();
 
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -358,11 +374,12 @@ class Classes{
                     'employeeName'=>$row['employeeName'],
                     'Price'=>$row['Price'],
                     'reservedClassID' => $row['reservedClassID'],
-                    'assignedClassID' => $row['assignedClassID']
+                    'assignedClassID' => $row['assignedClassID'],
+                    'AvailablePlaces' => $row['AvailablePlaces']
                 );
-                return $results;
             }
         }
+        return $results;
     }
 
     public function acceptClass($reservedClassID,$assignedClassID)
@@ -383,6 +400,18 @@ class Classes{
 
         return $conn->query($sql1);
         }
+    }
+
+    public function declineClass($reservedClassID)
+    {
+        global $conn;
+
+        $sql="DELETE 
+        FROM `reserved class`
+        WHERE ID = $reservedClassID";
+
+        return $conn->query($sql);
+
     }
 
 }

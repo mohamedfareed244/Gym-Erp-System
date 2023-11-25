@@ -331,6 +331,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "failure";
             }
             break;
+        case "declineClass":
+            $reservedClassID = $_POST['reservedClassID'];
+        
+            $class=new Classes();
+            $result=$class->declineClass($reservedClassID);
+                    
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+            break;
         default:
             break;
     }

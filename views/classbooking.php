@@ -42,7 +42,20 @@
             $class = new Classes();
             $classDetails = $class->getClassDetails();?>
        
-            <?php foreach($classDetails as $classDetail): ?>
+            <?php foreach($classDetails as $classDetail): 
+            if($classDetail['AvailablePlaces'] != "0") { 
+
+            $startTime = new DateTime($classDetail['StartTime']);
+            $endTime = new DateTime($classDetail['EndTime']);
+                            
+            // Format the DateTime object as "H:i" (24-hour format)
+            $startformattedDate = $startTime->format("H:i");
+            $endformattedDate = $endTime->format("H:i");
+                
+            $currentDateTime = strtotime(date("Y-m-d H:i")); // Current date and time
+
+            $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $startformattedDate); // Class start date and time
+            if ($currentDateTime <= $classStartDateTime) { ?>
             <form method="post"  autocomplete="off" id="reserveForm" action="../Controllers/ClassController.php">
             <input type="hidden" name="action" value="reserveClass">
             <input type="text" name="coachid" value="<?php echo $classDetail['CoachID']?>"  style="display:none;">
@@ -55,14 +68,7 @@
                     <div class="class-item">
                         <div class="class-info">
                             <p class="class-time"><strong>Time:</strong> <?php 
-                            $startTime = new DateTime($classDetail['StartTime']);
-                            $endTime = new DateTime($classDetail['EndTime']);
-                            
-                            // Format the DateTime object as "H:i" (24-hour format)
-                            $startformattedDate = $startTime->format("H:i");
-                            $endformattedDate = $endTime->format("H:i");
-
-                            echo $startformattedDate . " - " .  $endformattedDate?></p> 
+                            echo $startformattedDate . " - " .  $endformattedDate ?></p> 
                             <p class="class-date"><strong>Date:</strong> <?php echo $classDetail['Date'] ?></p>
                             <p class="class-participants"><strong>Limit of Participants:</strong> <?php echo $classDetail['NumOfAttendants']?></p>
                             <p class="class-price"><strong>Price :</strong> <?php 
@@ -102,6 +108,8 @@
 
 );
 ?>
+            <?php } ?>
+            <?php } ?>
             <?php endforeach;?>
 
         </div>
