@@ -94,6 +94,36 @@ class ptMemberships{
     
         return $coachNames;
     }
+
+    public static function getClientPtMembershipInfo()
+    {
+        global $conn;
+
+        $isActivated = "Activated";
+
+        $sql = "SELECT package.Name, package.NumOfSessions, package.MinPackageMonths, package.Price
+            FROM `private training package` 
+            INNER JOIN `private training membership` ON package.ID = membership.PrivateTrainingPackageID 
+            WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'];
+
+        $result = mysqli_query($conn, $sql);
+
+        $results = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'Name' => $row['Name'],
+                    'NumOfSessions' => $row['NumOfSessions'],
+                    'MinPackageMonths' => $row['MinPackageMonths'],
+                    'Price' => $row['Price']
+                );
+            }
+            return $results;
+        }
+    }
+
+
 }
 
 ?>
