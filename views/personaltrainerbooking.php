@@ -36,10 +36,10 @@
     $ptMembershipsInstance = new ptMemberships();
     $packages = $ptpackage->getAllPtPackagesforClient();
 
-
-    // echo $coachName . '<br>';
+     
+        // echo $coachName . '<br>';
+       
     
-
 
     ?>
 
@@ -56,26 +56,17 @@
 
       
         <?php foreach ($coaches as $coachID => $coachName): ?>
-        <div class="card">
-            <img src="../public/Images/coach3.jpg" class="imgslides">
-            <?php
-            if (isset($coachName['Name'])) {
-                echo '<h3>' . $coachName['Name'] . '</h3>';
-                $selectedCoachId = ;
-        
-                $selectedCoachName = ''; // Initialize the variable to store the selected coach's name
-        
-                foreach ($coaches as $coachID => $coach) {
-                    if ($coachID == $selectedCoachId) {
-                        $selectedCoachName = $coach['Name'];
-                        break; // Stop the loop once the selected coach is found
-                    }
-                }
-            } else {
-                echo '<h3>Coach Name Not Available</h3>';
-            }
-            ?>
-        </div>
+    <div class="card">
+        <img src="../public/Images/coach3.jpg" class="imgslides">
+        <?php
+        if (isset($coachName['Name'])) {
+            echo '<h3>' . $coachName['Name'] . '</h3>';
+            
+        } else {
+            echo '<h3>Coach Name Not Available</h3>';
+        }
+        ?>
+    </div>
 <?php endforeach; ?>
 
 
