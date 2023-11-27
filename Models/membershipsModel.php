@@ -172,35 +172,29 @@ class Memberships
 
         $currentDate = date("Y-m-d");
 
-        $sql = " SELECT membership.*, package.FreezeLimit, package.Title 
-        FROM membership 
-        INNER JOIN package ON package.ID = membership.PackageID
-        WHERE membership.ClientID = '$clientId' AND '$currentDate' BETWEEN membership.StartDate AND membership.EndDate AND membership.Freezed = 0";
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId'";
 
         $result = $conn->query($sql);
 
-        $results = array();
-
         if ($result) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $results[] = array(
-                    'ID' => $row["ID"],
-                    'clientId' => $row["ClientID"],
-                    'packageId' => $row["PackageID"],
-                    'startDate' => $row["StartDate"],
-                    'endDate' => $row["EndDate"],
-                    'visitsCount' => $row["VisitsCount"],
-                    'inbodyCount' => $row["InvitationsCount"],
-                    'privateTrainingSessionsCount' => $row["PrivateTrainingSessionsCount"],
-                    'freezeCount' => $row["FreezeCount"],
-                    'freezed' => $row["Freezed"],
-                    'freezeLimit' => $row["FreezeLimit"],
-                    'Title' => $row["Title"]
-                );
-            }
+            $membershipData = $result->fetch_assoc();
+            
+            $membership = new Memberships();
+            $membership->ID = $membershipData["ID"];
+            $membership->clientId = $membershipData["ClientID"];
+            $membership->packageId = $membershipData["PackageID"];
+            $membership->startDate = $membershipData["StartDate"];
+            $membership->endDate = $membershipData["EndDate"];
+            $membership->visitsCount = $membershipData["VisitsCount"];
+            $membership->inbodyCount = $membershipData["InvitationsCount"];
+            $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
+            $membership->freezeCount = $membershipData["FreezeCount"];
+            $membership->freezed = $membershipData["Freezed"];
+
+            return $membership;
         }
 
-        return $results;
+        return false;
     }
 
 

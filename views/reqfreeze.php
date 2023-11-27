@@ -6,138 +6,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--css/icons/boostrap/jquery/fonts/images start-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" type="text/css" href="../public/CSS/footer.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/usersidebar.css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/userprofile.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.come/a076d05399.js"></script>
-    <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <script src="../public/js/reqfreeze.js"></script>
-
-
+    <!--css/icons/boostrap/jquery/fonts/images end-->
 </head>
 
 <body>
     <!-- usersidebar start -->
     <?php session_start();
-
     include("partials/usersidebar.php") ?>
 
-
     <div class="profile">
-
         <div class="greeting">
-            <p class="hello-fz"><i class="fas fa-lock"></i> Request to Freeze</p>
+            <p class="hello-fz"><i class="fas fa-lock"></i>Freeze Membership</p>
         </div>
 
         <div class="reminders">
             <div class="reminder">
-                <?php include_once "../Models/membershipsModel.php";
+                <?php
+                include_once "../Models/membershipsModel.php";
                 include_once "../Models/ClientModel.php";
-                include_once "../Models/PackageModel.php";
                 include_once "../Models/PackageModel.php";
 
                 $memberships = new Memberships();
                 $clientId = $_SESSION["ID"];
-
                 $membershipdetails = $memberships->getMembership($clientId);
+                $pck = new Package();
+                $package = $pck->getPackage($membershipdetails->packageId);
                 ?>
+                <script>
+                    var currentDate = new Date();
+                    var maxDate = new Date(currentDate);
+                    maxDate.setMonth(currentDate.getMonth() + 3);
+                </script>
+                <p class="membership class">Package:</p>
+                <div class="class-title"><?php echo $package->getTitle(); ?></div>
 
-            <script>
-            var currentDate = new Date();
-            var maxDate = new Date(currentDate);
-            maxDate.setMonth(currentDate.getMonth() + 3);
-          </script>
-                <?php foreach ($membershipdetails as $membership): ?>
-                    <p class="class">Package:</p>
-                    <div class="class-title"><?php echo $membership['Title']; ?></div>
-
-                    <div class="dates">
-                        <div class="date">
-                            <p>Start Date:</p>
-                            <div class="start-date"><?php echo $membership['startDate']; ?></div>
-                        </div>
-                        <div class="date">
-                            <p>End Date:</p>
-                            <div class="end-date"><?php echo $membership['endDate']; ?></div>
-                        </div>
+                <div class="membership dates">
+                    <div class="date">
+                        <p>Start Date:</p>
+                        <div class="start-date"><?php echo $membershipdetails->startDate; ?></div>
                     </div>
-
-                    <div class="rem-info">
-                        <p>Remaining Freeze Attempts:</p>
-                        <p class="actual-rem" id="actual-rem">
-                        <?php echo $membership['freezeCount'] - $membership['remainingFreezeAttempts'] . " Days Out of " . $membership['freezeLimit']; ?> Left
-                        </p>
+                    <div class="date">
+                        <p>End Date:</p>
+                        <div class="end-date"><?php echo $membershipdetails->endDate; ?></div>
                     </div>
-
-                    <div class="freeze-request">
-                        <p class="rem-info">Weeks to be Frozen:</p>
-                        <input type="number" id="freeze-weeks" min="1"                       
-                      max="<?php echo $membership['freezeCount']->$remainingFreezeAttempts; ?>" placeholder="Weeks">
-                       <?php echo '<td><button id="freezeBtn-' . $membership['ID'] . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>               
-                    '; ?>
-
-                            <div class="modal" id="datePickerModal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
-                                                <div>
-                                                    <label for="datepicker">Choose a Date:</label>
-                                             <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
-                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                                        </div>
-
-                        <button id="freeze-button" onclick="freezeMembership(<?php echo $membership['ID'] ?>)">Submit Request</button>
-                        <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
-
-                    </div>
-                <?php endforeach ?> 
-            </div>
-
-
-
-
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close-popup">&times;</span>
-                    <p id="confirmation-text"></p>
-                    <button id="confirm-button">Yes</button>
-                    <button id="cancel-button">Cancel</button>
-                    <p id="modal-message"></p>
-
                 </div>
+
+                <div class="rem-info">
+                    <p>Remaining Freeze Attempts:</p>
+                    <p class="actual-rem" id="actual-rem">
+                        <?php echo $membershipdetails->freezeCount . " Days left from " . $package->getFreezeLimit(); ?>
+                    </p>
+                </div>
+                <div class="membershipStatus">
+                <p>Membership Status:</p>
+                <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
+                    </div>
+                <?php if ($membershipdetails->freezed == 1) { ?>
+                        <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->ID; ?>)'>Unfreeze</button>
+                <?php } else { ?>
+    
+                            <div class="datePicking">
+                            <label for="datepicker">Choose a Date:</label>
+                                <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                            </div>
+                            <button id="freeze-button" onclick='showModal()'>Freeze</button> 
+                            <div class="modal" id="freezeModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <span class="close-btn" onclick="hideModal()">&times;</span>
+                                        <div>
+                                        <label id="modal-label" >Are you sure you want to freeze your membership?</label>
+                                        </div>
+                                        <button  id="confirm-button"
+                                            onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
+                                    </div>
+                                </div>
+                            </div>                   
+                <?php } ?>
+
             </div>
 
-
+            
         </div>
     </div>
 
-
-
-
-    <script src="../public/js/slider.js"></script>
-    <script src="../public/js/reqfreeze.js"></script>
-
     <script>
-    document.getElementById("freeze-button").addEventListener("click", function() {
-        const freezeWeeks = document.getElementById("freeze-weeks").value;
+        
+var freezebtn = document.getElementById("freeze-button");
+var datePicker = document.getElementById("datepicker");
 
-        sendFreezeRequest(freezeWeeks);
-    });
+function showModal() {
+  var selectedDate = document.getElementById("datepicker").value;
+  var modalLabel = document.getElementById("modal-label");
+
+  if (selectedDate) {
+    modalLabel.textContent =
+      "Are you sure you want to freeze your membership to " +
+      selectedDate +
+      "?";
+
+  } else {
+    return;
+  }
+  $("#freezeModal").fadeIn();
+
+}
+function hideModal()
+{
+    $("#freezeModal").fadeOut();
+
+}
+function freezeMembership(membershipID) {
+  var selectedDate = $("#datepicker").val();
+  console.log(selectedDate);
+
+  console.log("Selected Date:", selectedDate);
+
+  $.ajax({
+    type: "POST",
+    url: "../Controllers/MembershipsController.php",
+    data: {
+      action: "freezeClientMembership",
+      membershipID: membershipID,
+      selectedDate: selectedDate,
+    },
+    success: function (response) {
+      console.log(response);
+      var unfreezeButton =
+        '<button id="unfreeze-button" onclick="unfreezeMembership(' +
+        membershipID +
+        ')">Unfreeze</button>';
+      $("#freeze-button").replaceWith(unfreezeButton);
+    },
+    error: function (xhr, status, error) {
+      console.error("AJAX error: " + status + " - " + error);
+    },
+  });
+
+  hideModal();
+}
+
+function unfreezeMembership(membershipID) {
+  console.log(membershipID);
+  $.ajax({
+    type: "POST",
+    url: "../Controllers/MembershipsController.php",
+    data: {
+      action: "unfreezeClientMembership",
+      membershipID: membershipID,
+    },
+    success: function (response) {
+      console.log(response);
+
+      $(".status").text("Active");
+
+      var freezeButton =
+        '<button id="freeze-button" class="" onclick="showModal()">Freeze</button>';
+      $("#unfreeze-button").replaceWith(freezeButton);
+    },
+    error: function (xhr, status, error) {
+      console.error("AJAX error: " + status + " - " + error);
+    },
+  });
+}
+
     </script>
 
+    <script src="../public/js/slider.js"></script>
 
-
+    <?php include("partials/footer.php") ?>
 </body>
-<?php include("partials/footer.php") ?>
-
-
-<script src="../public/js/index.js"></script>
-
-
 
 </html>
