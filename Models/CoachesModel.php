@@ -148,7 +148,7 @@ class Coach extends Employee
     public static function getclassnum($id)
     {
         global $conn;
-        $sql = "SELECT COUNT(AssignedClassId) as num from reserved_class where AssignedClassId=$id";
+        $sql = "SELECT COUNT(AssignedClassId) as num from `reserved class` where AssignedClassId=$id";
         $result = $conn->query($sql);
         return $result;
     }

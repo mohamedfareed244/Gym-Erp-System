@@ -72,3 +72,23 @@
   #emp-addr{
  width: 60%;
   }
+  #viewclients{
+    position: absolute;
+  left: 200px;
+  right: 200px;
+  top: 100px;
+  bottom: 100px;
+height: 70vh;
+background-color: rgb(255, 255, 255);
+display: none;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  @media only screen and (max-width: 600px) {
+    #viewclients{
+      left: 90px;
+      right: 30px;
+      top: 50px;
+      bottom: 50px;
+    height: 70vh;
+    }
+  }
