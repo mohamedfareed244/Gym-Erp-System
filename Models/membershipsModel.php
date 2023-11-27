@@ -392,5 +392,30 @@ class Memberships
         return $conn->query($sql);
     }
 
+    public function calculateRemainingFreezeAttempts($userInput)
+    {
+        
+        if ($this->freezeCount > 0) {
+            $remainingFreezeAttempts = max(0, $this->freezeCount - $userInput);
+            $this->freezeCount = $remainingFreezeAttempts;
+
+            return $remainingFreezeAttempts;
+        } else {
+            return 0;
+        }
+    }
+
+    private function updateFreezeCountInDatabase($newFreezeCount)
+    {
+        global $conn;
+        $sql = "UPDATE memberships SET freezeCount = $newFreezeCount WHERE ID = $this->ID";
+        $result = mysqli_query($conn, $sql);
+        
+        if (!$result) {
+            die("Error updating freezeCount: " . mysqli_error($conn));
+        }
+        
+    }
+
 
 }

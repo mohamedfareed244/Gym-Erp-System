@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2023 at 04:22 PM
+-- Generation Time: Nov 27, 2023 at 08:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -385,6 +385,31 @@ INSERT INTO `private training package` (`ID`, `Name`, `NumOfSessions`, `MinPacka
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reserved class`
+--
+
+CREATE TABLE `reserved class` (
+  `ID` int(11) NOT NULL,
+  `AssignedClassID` int(50) NOT NULL,
+  `CoachID` int(50) NOT NULL,
+  `ClientID` int(50) NOT NULL,
+  `Attended` varchar(20) NOT NULL,
+  `isActivated` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reserved class`
+--
+
+INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
+(20, 5, 3, 45, '', 'Activated'),
+(21, 7, 3, 46, '', 'Activated'),
+(22, 8, 3, 46, '', 'Activated'),
+(23, 7, 3, 44, '', 'Activated');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reserved private training free session`
 --
 
@@ -395,31 +420,6 @@ CREATE TABLE `reserved private training free session` (
   `Date` date NOT NULL,
   `SlotID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reserved_class`
---
-
-CREATE TABLE `reserved_class` (
-  `ID` int(11) NOT NULL,
-  `AssignedClassID` int(50) NOT NULL,
-  `CoachID` int(50) NOT NULL,
-  `ClientID` int(50) NOT NULL,
-  `Attended` varchar(20) NOT NULL,
-  `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reserved_class`
---
-
-INSERT INTO `reserved_class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
-(20, 5, 3, 45, '', 'Activated'),
-(21, 7, 3, 46, '', 'Activated'),
-(22, 8, 3, 46, '', 'Activated'),
-(23, 7, 3, 44, '', 'Activated');
 
 --
 -- Indexes for dumped tables
@@ -528,6 +528,15 @@ ALTER TABLE `private training package`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `reserved class`
+--
+ALTER TABLE `reserved class`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `test8` (`AssignedClassID`),
+  ADD KEY `test9` (`ClientID`),
+  ADD KEY `test10` (`CoachID`);
+
+--
 -- Indexes for table `reserved private training free session`
 --
 ALTER TABLE `reserved private training free session`
@@ -535,15 +544,6 @@ ALTER TABLE `reserved private training free session`
   ADD KEY `test6` (`ClientID`),
   ADD KEY `test7` (`CoachID`),
   ADD KEY `test11` (`SlotID`);
-
---
--- Indexes for table `reserved_class`
---
-ALTER TABLE `reserved_class`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `test8` (`AssignedClassID`),
-  ADD KEY `test9` (`ClientID`),
-  ADD KEY `test10` (`CoachID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -616,16 +616,16 @@ ALTER TABLE `private training package`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `reserved class`
+--
+ALTER TABLE `reserved class`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT for table `reserved private training free session`
 --
 ALTER TABLE `reserved private training free session`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `reserved_class`
---
-ALTER TABLE `reserved_class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

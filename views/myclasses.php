@@ -12,8 +12,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body id ="body">
 
 <style>
      .coaches-title{
@@ -26,6 +27,28 @@
   padding-bottom: 30px;
         }
 </style>
+<div id="viewclients">
+<i class="fa fa-close"  style="font-size:30px" id="close"></i>
+<table class="table">
+<thead>
+    <tr>
+
+        <td class="col"> CLient Id  </td>
+        <td class="col"> CLient Name</td>
+        <td class="col"> CLient Phone </td>
+        <td class="col"> Attend</td>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+    <td class="col"> 2</td>
+    <td class="col"> Mohamed Fareed </td>
+    <td class="col"> 01210847059 </td>
+    <td class="col"> <input type="checkbox" name="" id=""> </td>
+    </tr>
+</tbody>
+</table>
+</div>
 <?php require("partials/adminsidebar.php") ?>
 <div id="add-body">
    <h2 class="coaches-title"> My Classes : </h2>
@@ -33,7 +56,7 @@
     <!-- Assume that the coach id =4 till the sessions work  -->
     <?php
     include_once "../Models/CoachesModel.php";
- $result=Coach::getClassesForCoach(9);
+ $result=Coach::getClassesForCoach(4);
  if(mysqli_num_rows($result)<=0){
     echo "<h2> There Are no Available Classes </h2>";
     exit();
@@ -72,25 +95,26 @@ echo "<tr><td>".$res["ID"]."</td>
 <td>".date('l', $timestamp)."</td>
 <td>".$res["Date"]."</td>
 <td>".$num."</td>
-<td ><button id ='add-btn'>
+<td ><button id ='add-btn' onclick ='show()'>
 View Clients
 </button></td> </tr>";
 }
     ?>
-    <!-- <td>1</td>
-    <td>yoga class</td>
-    <td>8:00 pm </td>
-    <td>
-        10:00 pm 
-    </td>
-    <td>Saturday, Monday, Tuesday</td>
-    <td>20</td>
-    <td ><button id ="add-btn">
-View Clients
-    </button></td> -->
+  
 </tbody>
    </table>
 
 </div>
 </body>
+<script language='javascript'>
+    function show(event){
+        document.getElementById("viewclients").style.display="block";
+
+    }
+    document.getElementById("close").addEventListener('click',function(){
+        document.getElementById("viewclients").style.display="none";
+    });
+  
+
+</script>
 </html>

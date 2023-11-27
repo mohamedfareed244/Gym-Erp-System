@@ -20,9 +20,20 @@
 
 </head>
 
-<body>
+<body> 
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php
+    session_start();
+    include("partials/usersidebar.php") ?>
+    <?php include_once "../Models/ptMembershipsModel.php";
+    include_once "../Models/ptPackageModel.php";
+
+    $ptpackage = new ptPackages();
+    $ptmemberships = new ptMemberships();
+
+    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
+
+
 
     <div class="container py-5">
         <h2 style=" font-size: 26px;
@@ -33,21 +44,14 @@
     margin-bottom:3%;">Coaches:</h2>
         <div class="card-container">
 
+        <?php foreach ($ptmemberships as $ptmembership): ?>
+
             <div class="card">
                 <img src="../public/Images/coach3.jpg" class="imgslides">
-                <h3>Lama Ahmed</h3>
+                <h3><?php echo $ptmembership->getCoachNames()?></h3>
             </div>
 
-            <div class="card">
-                <img src="../public/Images/coach1.jpg" class="imgslides">
-                <h3>Ahmed Mohamed</h3>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/coach2.jpg" class="imgslides">
-                <h3>Yasser Sayed</h3>
-            </div>
-
+           
         </div>
 
         <div class="all-avail-times" id="all-avail-times">

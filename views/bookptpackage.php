@@ -22,7 +22,20 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php
+    session_start();
+     include("partials/usersidebar.php") ?>
+         <?php include_once "../Models/ptMembershipsModel.php";
+    include_once "../Models/ptPackageModel.php";
+
+    $ptpackage = new ptPackages();
+    $ptmemberships = new ptMemberships();
+
+    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
+
+?>
+
+
     <div class="profile">
 
         <div class="greeting">
