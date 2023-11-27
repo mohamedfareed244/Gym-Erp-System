@@ -29,7 +29,7 @@
     include_once "../Models/ptPackageModel.php";
 
     $ptpackage = new ptPackages();
-    $ptmemberships = new ptMemberships();
+    $ptmembership = new ptMemberships();
 
     $packages = $ptpackage->getAllPtPackagesforClient(); ?>
 
@@ -44,14 +44,22 @@
     margin-bottom:3%;">Coaches:</h2>
         <div class="card-container">
 
-        <?php foreach ($ptmemberships as $ptmembership): ?>
-
+        <?php foreach ($packages as $package) ?>
             <div class="card">
                 <img src="../public/Images/coach3.jpg" class="imgslides">
-                <h3><?php echo $ptmembership->getCoachNames()?></h3>
+                <h3>Lama Ahmed</h3>
             </div>
 
-           
+            <div class="card">
+                <img src="../public/Images/coach1.jpg" class="imgslides">
+                <h3>Ahmed Mohamed</h3>
+            </div>
+
+            <div class="card">
+                <img src="../public/Images/coach2.jpg" class="imgslides">
+                <h3>Yasser Sayed</h3>
+            </div>
+
         </div>
 
         <div class="all-avail-times" id="all-avail-times">
@@ -73,7 +81,6 @@
                             <p>To:</p>
                             <div class="end-date">11:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                     <div class="dates">
                         <div class="date">
@@ -84,7 +91,6 @@
                             <p>To:</p>
                             <div class="end-date">3:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                     <div class="dates">
                         <div class="date">
@@ -95,7 +101,6 @@
                             <p>To:</p>
                             <div class="end-date">7:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                 </div>
                 <div class="available-times">
@@ -109,7 +114,6 @@
                             <p>To:</p>
                             <div class="end-date">11:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                     <div class="dates">
                         <div class="date">
@@ -120,7 +124,6 @@
                             <p>To:</p>
                             <div class="end-date">3:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                     <div class="dates">
                         <div class="date">
@@ -131,7 +134,6 @@
                             <p>To:</p>
                             <div class="end-date">7:00 p.m</div>
                         </div>
-                        <button id="trainer-booking">Book Now</button>
                     </div>
                 </div>
             </div>
@@ -146,8 +148,8 @@
             <div class="modal-content">
                 <span class="close-popup">&times;</span>
                 <p id="confirmation-text"></p>
-                <button id="confirm-free-button">Free</button>
-                <button id="confirm-package-button">Package</button>
+                <button id="confirm-package-button">View Packages</button>
+                <button id="confirm-free-button">Cancel</button>
                 <p id="modal-message"></p>
 
             </div>

@@ -30,15 +30,7 @@
     include_once "../Models/ptMembershipsModel.php";
     ?>
 
-    <div class="profile">
-        <div class="greeting">
-            <p class="hello-pt"><i class="fas fa-user"></i> Your Personal Trainer</p>
-        </div>
-
-        <div class="reminders">
-            <div class="reminder">
-
-                <?php
+<?php
                 $ptMemberships = ptMemberships::getClientPtMembershipInfo();
                 $ptPackages = new ptPackages();
                 // $clientID = $_SESSION["clientID"];
@@ -48,6 +40,14 @@
                         $ptPackageID = $membership['PrivateTrainingPackageID'];
                         $ptPackageDetails = $ptPackages->getUserPackageDetails($ptPackageID);
                         ?>
+    <div class="profile">
+        <div class="greeting">
+            <p class="hello-pt"><i class="fas fa-user"></i> Your Personal Trainer</p>
+        </div>
+
+        <div class="reminders">
+            <div class="reminder">
+
 
                                 <p class='class'>Personal Trainer:</p>
                                 <div class='class-title'><?php echo $ptPackageDetails->CoachName; ?></div>
@@ -73,7 +73,7 @@
                 } else {
                     ?>
                         <div class="no-package" style="height:1000px; margin-left:200px;">
-                            <p class="nopackage" style="font-size:24px;">No PT Packages found.</p>
+                            <p class="nopackage" style="font-size:24px;">No PT packages found.</p>
                         </div>
                     <?php
                 }
