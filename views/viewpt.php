@@ -28,12 +28,8 @@
     include_once "../Models/ptPackageModel.php";
     include_once "../Models/ptPMembershipsModel.php";
 
-    
-    $ptMemberships = ptMemberships::getAllPtMemberships();
-    $ptPackages = new ptPackages();
-    $clientID = $_SESSION["clientID"];
-    ?>
 
+    ?>
 
     <div class="profile">
 
@@ -41,34 +37,56 @@
             <p class="hello-pt"><i class="fas fa-user"></i> Your Personal Trainer</p>
         </div>
 
+        
         <div class="reminders">
             <div class="reminder">
-                <p class="class">Personal Trainer:</p>
-                <div class="class-title">Sara Maged</div>
-
-                <p class="class">PT Package:</p>
-                <div class="class-title">2 Months, 30 Sessions</div>
 
 
-                <div class="rem-info">
-                    <p>Remaining Sessions:</p>
-                    <p class="actual-rem"> 17 Sessions of 30</p>
+            <?php
+            $ptMemberships = ptMemberships::getAllPtMemberships();
+            $ptPackages = new ptPackages();
+            $clientID = $_SESSION["clientID"];
 
-                    <p>Working Days:</p>
-                    <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
+            $currentPtMembership = null;
 
-                    <p>Working Hours:</p>
-                    <p class="actual-rem"> 10 AM - 5 PM</p>
+            foreach ($ptMemberships as $ptMembership) {
+                if ($ptMembership->ClientID == $clientID) {
+                    $currentPtMembership = $ptMembership;
+                    break;
+                }
+            }
 
-                    <p>PT Fees:</p>
-                    <p class="actual-rem"> 1500 L.E.</p>
-                </div>
-            </div>
+            if (!empty($currentPtMembership)) {
+                $ptPackageID = $currentPtMembership->PrivateTrainingPackageID;
+                $ptPackageDetails = $ptPackages->getUserPackageDetails($ptPackageID);
 
+                echo "<p class='class'>Personal Trainer:</p>";
+                echo "<div class='class-title'>" . $ptPackageDetails->CoachName . "</div>";
 
+                echo "<p class='class'>PT Package:</p>";
+                echo "<div class='class-title'>" . $ptPackageDetails->MinPackageMonths . " Months, " . $ptPackageDetails->NumOfSessions . " Sessions</div>";
 
+                echo "<div class='rem-info'>";
+                echo "<p>Remaining Sessions:</p>";
+                echo "<p class='actual-rem'>" . $ptPackageDetails->SessionsCount . " Sessions of " . $ptPackageDetails->NumOfSessions . "</p>";
+
+                echo "<p>PT Fees:</p>";
+                echo "<p class='actual-rem'>" . $ptPackageDetails->Price . "</p>";
+                echo "</div>";
+            }
+            else {
+            echo "No PT membership found for the current client.";
+        }
+            ?>
+
+            <p>Working Days:</p>
+            <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
+
+            <p>Working Hours:</p>
+            <p class="actual-rem"> 10 AM - 5 PM</p>
         </div>
     </div>
+    
 
 
 
