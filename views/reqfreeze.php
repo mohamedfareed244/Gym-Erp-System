@@ -68,13 +68,26 @@
 
                 <div class="freeze-request">
                     <p class="rem-info">Weeks to be Frozen:</p>
-                    <input type="number" id="freeze-weeks" min="1"
-                        max="<?php echo $membershipdetails->remainingFreezeAttempts; ?>" placeholder="Weeks">
-                    <button id="freeze-button">Submit Request</button>
+                    <input type="number" id="freeze-weeks" min="1"                       
+                  max="<?php echo $membershipdetails->$remainingFreezeAttempts; ?>" placeholder="Weeks">
+                   <?php echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>               
+                    '; ?>
+
+                        <div class="modal" id="datePickerModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
+                                            <div>
+                                                <label for="datepicker">Choose a Date:</label>
+                                         <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
+                                        max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                                    </div>
+                                    
+                    <button id="freeze-button" onclick="freezeMembership(<?php echo $membership->ID ?>)">Submit Request</button>
                     <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
 
                 </div>
-                <?php endforeach ?>
+                <?php endforeach ?> 
             </div>
 
 
