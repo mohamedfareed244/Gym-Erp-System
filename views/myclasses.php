@@ -28,9 +28,17 @@
 </style>
 <?php require("partials/adminsidebar.php") ?>
 <div id="add-body">
-   <h2 class="coaches-title">My Classes : </h2>
+   <h2 class="coaches-title"> My Classes : </h2>
    <table class="table">
     <!-- Assume that the coach id =4 till the sessions work  -->
+    <?php
+    include_once "../Models/CoachesModel.php";
+ $result=Coach::getClassesForCoach(9);
+ if(mysqli_num_rows($result)<=0){
+    echo "<h2> There Are no Available Classes </h2>";
+    exit();
+ }
+    ?>
 <thead>
     <tr>
         <td class="col"> ID </td>
@@ -38,17 +46,15 @@
         <td class="col"> From </td>
         <td class="col"> To </td>
         <td class="col"> Day </td>
-        <td class="col">Date</td>
+        <td class="col"> Date </td>
         <td class="col"> Clients </td>
         <td class="col"> Action </td>
     </tr>
 </thead>
 <tbody>
     <?php 
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-    include_once "../Models/CoachesModel.php";
-   $result=Coach::getClassesForCoach(3);
+    
+   
 
 foreach($result as $res){
     $timestamp = strtotime($res["Date"]);
