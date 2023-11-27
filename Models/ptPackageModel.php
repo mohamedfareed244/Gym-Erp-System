@@ -113,8 +113,8 @@ class ptPackages
 
         $sql = "SELECT c.*, ptm.SessionsCount, ppd.*, e.Name AS CoachName
                 FROM client c
-                INNER JOIN pt_membership ptm ON c.ID = ptm.ClientID
-                INNER JOIN pt_package_details ppd ON ptm.PrivateTrainingPackageID = ppd.ID
+                INNER JOIN `private training membership` ptm ON c.ID = ptm.ClientID
+                INNER JOIN `private training package` ppd ON ptm.PrivateTrainingPackageID = ppd.ID
                 INNER JOIN employee e ON ptm.CoachID = e.ID
                 WHERE c.ID = $clientId AND ptm.PrivateTrainingPackageID = $packageId";
 

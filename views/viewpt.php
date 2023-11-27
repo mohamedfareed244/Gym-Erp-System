@@ -22,7 +22,17 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    <?php session_start();
+    include("partials/usersidebar.php");
+    include_once "../Models/membershipsModel.php";
+    include_once "../Models/ptPackageModel.php";
+    include_once "../Models/ptPMembershipsModel.php";
+
+    
+    $ptMemberships = ptMemberships::getAllPtMemberships();
+    $ptPackages = new ptPackages();
+    $clientID = $_SESSION["clientID"];
+    ?>
 
 
     <div class="profile">
