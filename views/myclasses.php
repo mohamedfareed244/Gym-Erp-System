@@ -39,7 +39,7 @@
         <td class="col"> Attend</td>
     </tr>
 </thead>
-<tbody>
+<tbody id="clienttable">
     <tr>
     <td class="col"> 2</td>
     <td class="col"> Mohamed Fareed </td>
@@ -56,7 +56,7 @@
     <!-- Assume that the coach id =4 till the sessions work  -->
     <?php
     include_once "../Models/CoachesModel.php";
- $result=Coach::getClassesForCoach(4);
+ $result=Coach::getClassesForCoach(3);
  if(mysqli_num_rows($result)<=0){
     echo "<h2> There Are no Available Classes </h2>";
     exit();
@@ -95,7 +95,7 @@ echo "<tr><td>".$res["ID"]."</td>
 <td>".date('l', $timestamp)."</td>
 <td>".$res["Date"]."</td>
 <td>".$num."</td>
-<td ><button id ='add-btn' onclick ='show()'>
+<td ><button id ='add-btn' onclick ='show(".$res["ID"].")'>
 View Clients
 </button></td> </tr>";
 }
@@ -107,8 +107,28 @@ View Clients
 </div>
 </body>
 <script language='javascript'>
-    function show(event){
+    function show(x){
+        fetch(`../Models/ClassesModel.php?x=${x}`)
+        .then(response => {
+            // Check if the response status is OK (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the response as text
+            return response.text();
+        })
+        .then(htmlContent => {
+         
+
+            // Update your view with the received HTML content
+            document.getElementById("clienttable").innerHTML = htmlContent;
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
         document.getElementById("viewclients").style.display="block";
+    
 
     }
     document.getElementById("close").addEventListener('click',function(){
