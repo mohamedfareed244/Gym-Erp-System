@@ -41,10 +41,10 @@
                 include_once "../Models/PackageModel.php";
                 include_once "../Models/PackageModel.php";
 
-                $membership = new Memberships();
+                $memberships = new Memberships();
                 $clientId = $_SESSION["ID"];
 
-                $membershipdetails = $membership->getMembership($clientId);
+                $membershipdetails = $memberships->getMembership($clientId);
                 ?>
 
             <script>
@@ -70,7 +70,7 @@
                     <div class="rem-info">
                         <p>Remaining Freeze Attempts:</p>
                         <p class="actual-rem" id="actual-rem">
-                            <?php echo $membership['freezeCount'] . " Days Out of " . $membership['freezeLimit']; ?> Left
+                        <?php echo $membership['freezeCount'] - $membership['remainingFreezeAttempts'] . " Days Out of " . $membership['freezeLimit']; ?> Left
                         </p>
                     </div>
 
@@ -78,7 +78,7 @@
                         <p class="rem-info">Weeks to be Frozen:</p>
                         <input type="number" id="freeze-weeks" min="1"                       
                       max="<?php echo $membership['freezeCount']->$remainingFreezeAttempts; ?>" placeholder="Weeks">
-                       <?php echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>               
+                       <?php echo '<td><button id="freezeBtn-' . $membership['ID'] . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>               
                     '; ?>
 
                             <div class="modal" id="datePickerModal">
@@ -91,7 +91,7 @@
                                             max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
                                         </div>
 
-                        <button id="freeze-button" onclick="freezeMembership(<?php echo $membership->ID ?>)">Submit Request</button>
+                        <button id="freeze-button" onclick="freezeMembership(<?php echo $membership['ID'] ?>)">Submit Request</button>
                         <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
 
                     </div>
