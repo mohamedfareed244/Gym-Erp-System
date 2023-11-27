@@ -1,7 +1,7 @@
 <?php
 require_once("Model.php");
 
-class Package
+class Package extends Model
 {
 
     private $ID;
@@ -165,14 +165,14 @@ class Package
     public function activatePackage($packageID)
     {
         $sql = "UPDATE package SET isActivated='Activated' WHERE ID='$packageID'";
-        return $this->db->query($sql);;
+        return $this->db->query($sql);
     }
 
 
     public function deactivatePackage($packageID)
     {
         $sql = "UPDATE package SET isActivated='Deactivated' WHERE ID='$packageID'";
-        return $this->db->query($sql);;
+        return $this->db->query($sql);
     }
 
     public function getPackage($packageID)

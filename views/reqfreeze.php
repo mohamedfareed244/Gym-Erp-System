@@ -40,7 +40,6 @@
             include_once "../Models/PackageModel.php";
 
             $membership = new Memberships();
-            $package = new Package();
             $clientId = $_SESSION["ID"];
 
             $membershipdetails = $membership->getMembership($clientId);

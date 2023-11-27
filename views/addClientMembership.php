@@ -39,8 +39,9 @@
             if (isset($_GET['ID'])) {
                 $clientID = $_GET['ID'];
 
-                $Client = Client::getClientByID($clientID);
-                echo '' . $Client->FirstName . ' ' . $Client->LastName . '';
+                $client = new Client();
+                $Client = $client->getClientByID($clientID);
+                echo '' . $Client->getFirstName() . ' ' . $Client->getLastName() . '';
 
                 if (!$Client) {
                     echo "Client not found";
