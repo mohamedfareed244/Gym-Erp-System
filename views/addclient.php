@@ -15,8 +15,17 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
+<style>
+    #emailExists,#error,#success{
+        color:red;
+        font-size:16px;
+    }
+</style>
+
 <body>
-    <?php require("partials/adminsidebar.php");
+    <?php 
+    session_start();
+    require("partials/adminsidebar.php");
    
     ?>
 
@@ -27,7 +36,8 @@
                     <h4>Add client</h4>
                 </div>
                 <hr>
-                <form method="POST" action="./addclient.php">
+                <form method="POST" action="../Controllers/ClientController.php">
+                    <input type="hidden" name="action" value="addClient">
                     <div class="col-lg-4 col-md-12">
                         <label for="fname">First Name: </label>
                     </div>
@@ -69,45 +79,14 @@
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add client" id="add-btn" style="margin-top:30px; margin-bottom:20px">
                     </div>
+                    <span id="emailExists"><?php echo isset ($_SESSION["EmailExist"]) ? ($_SESSION["EmailExist"]) : ''; ?></span>
+                    <span id="success"><?php echo isset ($_SESSION["AddedSuccess"]) ? ($_SESSION["AddedSuccess"]) : ''; ?></span>
+                    <span id="error"><?php echo isset ($_SESSION["Error"]) ? ($_SESSION["Error"]) : ''; ?></span>
 
-                    <?php
-
-                    include_once "../Models/ClientModel.php";
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                      
-                        $newclient = new Client();
-                        $newclient->FirstName = $_POST['fname'];
-                        $newclient->LastName = $_POST['lname'];
-                        $newclient->Age = (int) $_POST['age'];
-                        $newclient->Gender = $_POST['gender'];
-                        $newclient->Weight = (float) $_POST['weight'];
-                        $newclient->Height = (int) $_POST['height'];
-                        $newclient->Email = $_POST['email'];
-                        $newclient->Phone = $_POST['phone'];
-                    
-                        if (Client::checkExistingEmail($newclient->Email)) {
-                            echo "<p style ='color:red;'>This Email already exist ! </p>";
-                        } else if (Client::checkExistingPhone($newclient->Phone)) {
-                            echo "<p style ='color:red;'>This Phone already exist ! </p>";
-                        } else {
-                           
-                            $result = Client::addClient($newclient);
-                        
-                            if ($result) {
-
-                                $r = Client::getid($newclient);
-                                while ($row = mysqli_fetch_assoc($r)) {
-                                    echo " <div class='col-12'>
-                  <span>New Client id : <b>" . $row['ID'] . "</b></span>
-              </div>";
-                                }
-                            } else {
-                                echo "<p style ='color:red;'>An Error Happened ! </p>";
-                            }
-                        }
-                    }
-                    ?>
                 </form>
+                <?php unset($_SESSION["AddedSuccess"]); ?>
+                <?php unset($_SESSION["EmailExist"]); ?>
+                <?php unset($_SESSION["Error"]); ?>
 
             </div>
         </div>

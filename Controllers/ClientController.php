@@ -1,11 +1,9 @@
 <?php
 
-include_once "../Models/ClientModel.php";
+require_once("Controller.php");
+require_once("../Models/ClientModel.php");
 
-session_start();
-
-
-class ClientController
+class ClientController extends Controller
 {
 
     function register()
@@ -117,17 +115,17 @@ class ClientController
 
 
             $newClient = new Client();
-            $newClient->FirstName = $Fname;
-            $newClient->LastName = $Lname;
-            $newClient->Age = $Age;
-            $newClient->Gender = $Gender;
-            $newClient->Phone = $Phone;
-            $newClient->Height = $Height;
-            $newClient->Weight = $Weight;
-            $newClient->Email = $Email;
-            $newClient->Password = $hashedPassword;
+            $newClient->setFirstName($Fname);
+            $newClient->setLastName($Lname);
+            $newClient->setAge($Age);
+            $newClient->setGender($Gender);
+            $newClient->setPhone($Phone);
+            $newClient->setHeight($Height);
+            $newClient->setWeight($Weight);
+            $newClient->setEmail($Email);
+            $newClient->setPassword($hashedPassword);
 
-            $result = $client->addClient($newClient);
+            $result = $client->addClientUserSide($newClient);
 
             if ($result) {
                 // Data inserted successfully
@@ -146,6 +144,45 @@ class ClientController
         $_SESSION["passwordErr"] = $passwordErr;
         header("Location: ../views/register.php");
         exit();
+    }
+
+
+    public function addClient()
+    {
+        $newClient = new Client();
+        $newClient->setFirstName($_POST['fname']);
+        $newClient->setLastName($_POST['lname']);
+        $newClient->setAge((int) $_POST['age']);
+        $newClient->setGender($_POST['gender']);
+        $newClient->setWeight((float) $_POST['weight']);
+        $newClient->setHeight((int) $_POST['height']);
+        $newClient->setEmail($_POST['email']);
+        $newClient->setPhone($_POST['phone']);
+
+        $client = new Client();
+    
+        if ($client->checkExistingEmail($newClient->getEmail())) {
+            $_SESSION['EmailExist'] = "This Email already exist";
+            header("Location: ../views/addclient.php");
+            exit();
+        } else {
+           
+            $result = $client->addClient($newClient);
+        
+            if ($result) {
+
+                $r = $client->getClientid($newClient);
+                if ($row = mysqli_fetch_assoc($r)) {
+                   $_SESSION['AddedSuccess'] = "Account added sucessfully" ;
+                    header("Location: ../views/addclient.php");
+                    exit();
+                }
+            } else {
+                $_SESSION['Error'] = "An Error happened";
+                header("Location: ../views/addclient.php");
+                exit();
+            }
+        }
     }
 
 
@@ -276,11 +313,11 @@ class ClientController
             $client = new Client();
 
             $updatedClient = new Client();
-            $updatedClient->FirstName = $firstname;
-            $updatedClient->LastName = $lastname;
-            $updatedClient->Phone = $phone;
-            $updatedClient->Email = $email;
-            $updatedClient->Password = $password;
+            $updatedClient->setFirstName($firstname);
+            $updatedClient->setLastName($lastname);
+            $updatedClient->setPhone($phone);
+            $updatedClient->setEmail($email);
+            $updatedClient->setPassword($password);
 
             $result = $client->updateClient($updatedClient);
 
@@ -321,7 +358,8 @@ class ClientController
     }
 }
 
-$controller = new ClientController();
+$model = new Client();
+$controller = new ClientController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
@@ -343,7 +381,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["clientId"])) {
                 $clientId = $_POST["clientId"];
 
-                $result = Client::deleteClientByID($clientId);
+                $client = new Client();
+                $result = $client->deleteClientByID($clientId);
 
                 if ($result) {
                     echo "success";
@@ -351,6 +390,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "failure";
                 }
             }
+            break;
+        case "addClient":
+            $controller->addClient();
             break;
         default:
             // Handle unknown action or display an error

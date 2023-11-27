@@ -1,31 +1,107 @@
 <?php
 
+require_once("Model.php");
 
-include_once "../includes/dbh.inc.php";
+// include_once "../includes/dbh.inc.php";
 include_once "../views/send_pw_email.php";
 //to display error on mac it won't affect the code or make errors . 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-class Client
+
+
+class Client extends Model
 {
-    public $ID;
-    public $FirstName;
-    public $LastName;
-    public $Age;
-    public $Gender;
-    public $Phone;
-    public $Height;
-    public $Weight;
-    public $Email;
-    public $Password;
+    private $ID;
+    private $FirstName;
+    private $LastName;
+    private $Age;
+    private $Gender;
+    private $Phone;
+    private $Height;
+    private $Weight;
+    private $Email;
+    private $Password;
 
-    public static function checkClient($clientID)
+    function __construct() {
+        $this->db = $this->connect();
+    }
+
+    public function getID() {
+        return $this->ID;
+    }
+
+    public function setFirstName($FirstName) {
+        $this->FirstName = $FirstName;
+    }
+
+    public function getFirstName() {
+        return $this->FirstName;
+    }
+
+    public function setLastName($LastName) {
+        $this->LastName = $LastName;
+    }
+
+    public function getLastName() {
+        return $this->LastName;
+    }
+
+    public function setAge($Age) {
+        $this->Age = $Age;
+    }
+
+    public function getAge() {
+        return $this->Age;
+    }
+
+    public function setGender($Gender) {
+        $this->Gender = $Gender;
+    }
+
+    public function getGender() {
+        return $this->Gender;
+    }
+
+    public function setPhone($Phone) {
+        $this->Phone = $Phone;
+    }
+
+    public function getPhone() {
+        return $this->Phone;
+    }
+
+    public function setHeight($Height) {
+        $this->Height = $Height;
+    }
+
+    public function getHeight() {
+        return $this->Height;
+    }
+
+    public function setWeight($Weight) {
+        $this->Weight = $Weight;
+    }
+
+    public function getWeight() {
+        return $this->Weight;
+    }
+
+    public function setEmail($Email) {
+        $this->Email = $Email;
+    }
+
+    public function getEmail() {
+        return $this->Email;
+    }
+
+    public function setPassword($Password) {
+        $this->Password = $Password;
+    }
+
+    public function checkClient($clientID)
     {
-        global $conn;
-        $clientID = mysqli_real_escape_string($conn, $clientID);
-
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
             $found = true;
@@ -34,14 +110,11 @@ class Client
             return $found;
         }
     }
-    public static function getClientByID($clientID)
+    
+    public function getClientByID($clientID)
     {
-        global $conn;
-
-        $clientID = mysqli_real_escape_string($conn, $clientID);
-
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             $clientData = $result->fetch_assoc();
@@ -63,12 +136,13 @@ class Client
             return null;
         }
     }
-    public static function deleteClientByID($clientID)
+    
+
+    public function deleteClientByID($clientID)
     {
-        global $conn;
         $sql = "DELETE from client where ID =" . $clientID;
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
         if ($result) {
             return true;
         } else {
@@ -76,11 +150,10 @@ class Client
         }
     }
 
-    public static function getAllClients()
+    public function getAllClients()
     {
-        global $conn;
         $sql = "SELECT * FROM `client`";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $clients = array();
 
         if ($result->num_rows > 0) {
@@ -104,9 +177,8 @@ class Client
         return $clients;
     }
 
-    public static function addClient($client)
+    public function addClient($client)
     {
-        global $conn;
         try {
             $Fname = $client->FirstName;
             $Lname = $client->LastName;
@@ -124,56 +196,71 @@ class Client
             VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$hashedPassword','$Phone')";
             ConfirmationMailer::sendConfirmationEmail($Email, $Password);
 
-            return mysqli_query($conn, $sql);
+            return $this->db->query($sql);
         } catch (Exception $e) {
             echo $e;
         }
 
     }
-    public static function getid($client)
+
+    public function addClientUserSide($client)
     {
-        global $conn;
+        try {
+            $Fname = $client->FirstName;
+            $Lname = $client->LastName;
+            $Age = $client->Age;
+            $Gender = $client->Gender;
+            $Phone = $client->Phone;
+            $Height = $client->Height;
+            $Weight = $client->Weight;
+            $Email = $client->Email;
+            $Password = $client->Password;
+            $Phone = $client->Phone;
+
+            $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
+            VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password','$Phone')";
+
+            return $this->db->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
+
+    }
+
+    public function getClientid($client)
+    {
         $sql = "SELECT ID FROM client WHERE Email='$client->Email'";
-        $result = mysqli_query($conn, $sql);
-
-        return $result;
+        return $this->db->query($sql);
     }
 
-    public static function checkExistingEmail($email)
+    public function checkExistingEmail($email)
     {
-        global $conn;
-
-        $Email = "SELECT * FROM client WHERE Email = '$email'";
-
-        $result = mysqli_query($conn, $Email);
-        return mysqli_num_rows($result) > 0;
+        $sql = "SELECT * FROM client WHERE Email = '$email'";
+        $result = $this->db->query($sql);
+		return $result->num_rows > 0;
     }
-    public static function checkExistingPhone($phone)
-    {
-        global $conn;
 
-        $Email = "SELECT * FROM client WHERE Phone = '$phone'";
-        $result = mysqli_query($conn, $Email);
-        return mysqli_num_rows($result) > 0;
+    public function checkExistingPhone($phone)
+    {
+
+        $sql = "SELECT * FROM client WHERE Phone = '$phone'";
+        $result = $this->db->query($sql);
+		return $result->num_rows > 0;
     }
 
     public function checkIfClientExists($email)
     {
-        global $conn;
-        $mysql = "SELECT * FROM client WHERE Email = '$email'";
-        return mysqli_query($conn, $mysql);
+        $sql = "SELECT * FROM client WHERE Email = '$email'";
+        return $this->db->query($sql);
     }
-    public static function getclientbyphone($phone)
+    public function getclientbyphone($phone)
     {
-        global $conn;
-        $mysql = "SELECT * FROM client WHERE Phone = '$phone'";
-        return mysqli_query($conn, $mysql);
+        $sql = "SELECT * FROM client WHERE Phone = '$phone'";
+        return $this->db->query($sql);
     }
 
     public function updateClient($client)
     {
-        global $conn;
-
         $Fname = $client->FirstName;
         $Lname = $client->LastName;
         $Phone = $client->Phone;
@@ -186,34 +273,18 @@ class Client
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
             $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone',Email='$Email', Password='$hashedPassword'
                     WHERE ID = $user_id";
-            return $conn->query($sql);
+            return $this->db->query($sql);
         } else {
             // Update with the new password
             $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone', Email='$Email'
                     WHERE ID = $user_id";
-            return $conn->query($sql);
+            return $this->db->query($sql);
         }
     }
 
     public function deleteClient()
     {
-        global $conn;
-
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
-
-        return mysqli_query($conn, $sql);
-    }
-
-    public function activateMembership()
-    {
-        global $conn;
-
-    }
-    public function freezeMembership()
-    {
-    }
-
-    public function unfreezeMembership()
-    {
+        return $this->db->query($sql);
     }
 }
