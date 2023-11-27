@@ -36,7 +36,7 @@
   include_once "../Models/ClientModel.php";
   include_once "../Models/membershipsModel.php";
   $Client = new Client;
-  $clients = $Client -> getAllClients();
+  $clients = $Client->getAllClients();
   $memberships = memberships::getAllMemberships();
   ?>
   <div id="add-body" class="addbody">
@@ -79,7 +79,7 @@
                 foreach ($memberships as $membership) {
                   if ($membership->clientId == $client->getID()) {
                     echo '<td><button class="btn" disabled>Add</button></td>';
-                    echo '<td><a href="addCLientPtPackage.php?ID='.$client->getID().'" class="btn btn-freeze">Add</a></td>';
+                    echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
                     $found = true;
                     break;
                   }
@@ -87,14 +87,27 @@
               }
 
               if (!$found) {
-                echo '<td><a href="addclientmembership.php?ID='.$client->getID().'" class="btn">Add</a></td>';
+                echo '<td><a href="addclientmembership.php?ID=' . $client->getID() . '" class="btn">Add</a></td>';
                 echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
 
               }
 
               echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";
-              echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->getID() . ")'>Delete</button></td>";
-              echo '</tr>';
+              echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>"; ?>
+                <div class="modal" id="deleteModal">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                      <div>
+                                      <label >Are you sure you want to delete this client?</label>
+                                      </div>
+                                      <button class="btn btn-delete"
+                                          onclick='deleteClient(<?php echo $client->getID() ?>)' style="background-color:red">Delete</button>
+                                  </div>
+                              </div>
+                          </div>
+                <?php
+                echo '</tr>';
             }
             ?>
 
@@ -103,11 +116,20 @@
 
       </div>
       <hr>
-
     </div>
   </div>
+  
 </body>
 <script>
+  
+  function showDeleteModal() {
+        $('#deleteModal').fadeIn();
+
+    }
+
+    function hideDeleteModal() {
+        $('#deleteModal').fadeOut();
+    }
   function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchBar");
@@ -152,6 +174,7 @@
         console.error("AJAX error: " + status + " - " + error);
       },
     });
+    hideDeleteModal();
   }
 </script>
 

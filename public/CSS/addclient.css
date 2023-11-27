@@ -293,6 +293,7 @@ input[type="text"] {
   text-align: center;
   background-color: rgb(140, 17, 132);
 }
+
 .btn-unfreeze {
   padding: 2px;
   height: 40px;
@@ -304,6 +305,7 @@ input[type="text"] {
   background-color: rgb(201, 130, 196);
   color: white;
 }
+
 .btn-unfreeze:hover {
   background-color: rgb(218, 141, 166);
   color: white;
@@ -349,6 +351,7 @@ input[type="text"] {
     font-size: 13px;
     margin-bottom: 2px;
   }
+
   .btn-unfreeze {
     width: 60px;
     font-size: 13px;
@@ -362,24 +365,26 @@ input[type="text"] {
 }
 
 /* Freeze Membership Modal Start */
-#datePickerModal {
+.modal {
   display: none;
-  position: absolute;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+
 }
 
 .modal-content {
-  width: 300px;
+  background-color: #fefefe;
   padding: 20px;
-  text-align: center;
-  background-color: #fff; 
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px; 
 }
 
 .close-btn {
-  position: absolute;
-  right: 10px;
   font-size: 20px;
   cursor: pointer;
 }
+
 /* Freeze Membership Modal End */

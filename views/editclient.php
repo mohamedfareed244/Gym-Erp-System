@@ -31,8 +31,8 @@
 
                 if (isset($_GET['ID'])) {
                     $clientID = $_GET['ID'];
-
-                    $Client = Client::getClientByID($clientID);
+                    $client = new CLient();
+                    $Client = $client->getClientByID($clientID);
 
                     if (!$Client) {
                         echo "Client not found";
@@ -48,46 +48,46 @@
                     <div class='col-lg-4 col-md-12'>
                         <label for='client_id'>Client ID: </label>
                     </div>
-                    <input type='number' name='client_id' id='client_id' value="<?php echo $Client->ID; ?>">
+                    <input type='number' name='client_id' id='client_id' value="<?php echo $Client->getID(); ?>">
                     <div class='col-lg-4 col-md-12'>
                         <label for='fname'>First Name: </label>
                     </div>
-                    <input type='text' name='fname' id='fname' value="<?php echo $Client->FirstName; ?>">
+                    <input type='text' name='fname' id='fname' value="<?php echo $Client->getFirstName(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='lname'>Last Name: </label>
                     </div>
-                    <input type='text' name='lname' id='lname' value="<?php echo $Client->LastName; ?>">
+                    <input type='text' name='lname' id='lname' value="<?php echo $Client->getLastName(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='age'>Age: </label>
                     </div>
-                    <input type='text' name='age' id='age' value="<?php echo $Client->Age; ?>">
+                    <input type='text' name='age' id='age' value="<?php echo $Client->getAge(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='phone'>Phone: </label>
                     </div>
-                    <input type='text' name='phone' id='phone' value="<?php echo $Client->Phone; ?>">
+                    <input type='text' name='phone' id='phone' value="<?php echo $Client->getPhone(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='gender'>Gender: </label>
                     </div>
-                    <input type='text' name='gender' id='gender' value="<?php echo $Client->Gender; ?>">
+                    <input type='text' name='gender' id='gender' value="<?php echo $Client->getGender(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='weight'>Weight: </label>
                     </div>
-                    <input type='number' name='weight' id='weight' value="<?php echo $Client->Weight; ?>">
+                    <input type='number' name='weight' id='weight' value="<?php echo $Client->getWeight(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='height'>Height: </label>
                     </div>
-                    <input type='number' name='height' id='height' value="<?php echo $Client->Height; ?>">
+                    <input type='number' name='height' id='height' value="<?php echo $Client->getHeight(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='email'>Email: </label>
                     </div>
-                    <input type='email' name='email' id='email' value="<?php echo $Client->Email; ?>">
+                    <input type='email' name='email' id='email' value="<?php echo $Client->getEmail(); ?>">
                     <br>
                     <div class='col-lg-9 col-md-12'>
                         <input type='submit' value='Edit' id='add-btn' style='margin-top:30px; margin-bottom:20px'>

@@ -32,19 +32,17 @@
     include_once "../Models/PackageModel.php";
 
     $Client = new Client();
-    $clients = $Client->getAllClients();
     $memberships = Memberships::getAllMemberships();
     ?>
     <script>
-        var currentDate = new Date();
-        var maxDate = new Date(currentDate);
-        maxDate.setMonth(currentDate.getMonth() + 3);
+    var currentDate = new Date();
+    var maxDate = new Date(currentDate);
+    maxDate.setMonth(currentDate.getMonth() + 3);
     </script>
     <div id="add-body" class="addbody">
         <div class="container">
             <h2 class="table-title">Memberships:</h2>
             <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
-
             <div id="tablediv">
                 <table id="membershipsTable" class="view-table overflow-auto mh-10">
                     <hr>
@@ -68,10 +66,12 @@
                     </thead>
                     <tbody>
                         <?php
+                        if(count($memberships) > 0) {
                         foreach ($memberships as $membership) {
+                            $client = $Client->getClientByID($membership->clientId);
+                            if($client) {
                             echo "<tr id='row-" . $membership->ID . "'>";
                             echo "<td>" . $membership->ID . "</td>";
-                            $client = $Client->getClientByID($membership->clientId);
                             echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
                             echo '<td> ' . $client->getPhone() . ' </td>';
                             echo '<td>' . $membership->packageId . '</td>';
@@ -80,24 +80,27 @@
                             echo '<td>' . $membership->visitsCount . '</td>';
                             echo '<td>' . $membership->invitationsCount . '</td>';
                             if ($membership->freezed == 0) {
-                                $Package=new Package();
+                                $Package = new Package();
                                 $package = $Package->getPackage($membership->packageId);
                                 echo '<td class="status-' . $membership->ID . ' bg">Active</td>';
                                 echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
                                 '; ?>
-                                <div class="modal" id="datePickerModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
-                                            <div>
-                                                <label for="datepicker">Choose a Date:</label>
-                                         <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
-                                        max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                        <div class="modal" id="datePickerModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
+                                    <div>
+                                        <label for="datepicker">Choose a Date:</label>
+                                        <input type="date" id="datepicker"
+                                            min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
+                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
                                     </div>
-                                    <button class="btn btn-primary" onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
+                                    <button class="btn btn-primary"
+                                        onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
                                 </div>
                             </div>
-                            <?php
+                        </div>
+                        <?php
                             } else {
                                 echo '<td class="status-' . $membership->ID . ' bg">Freezed</td>';
                                 echo '<td><button id="unfreezeBtn-' . $membership->ID . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->ID . ')">Unfreeze</button></td>';
@@ -106,8 +109,23 @@
                             echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
                             echo '<td>' . $membership->inbodyCount . '</td>';
                             echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
-                            echo "<button class=\"btn btn-delete\" onclick='deleteMembership(" . $membership->ID . ")'>Delete</button></td>";
-                            echo '</tr>';
+                            echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
+                        <div class="modal" id="deleteModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                    <div>
+                                    <label >Are you sure you want to cancel this membership?</label>
+                                    </div>
+                                    <button class="btn btn-delete"
+                                        onclick='deleteMembership(<?php echo $membership->ID ?>)' style="background-color:red">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <?php echo '</tr>';
+                        }}}
+                        else 
+                        {
                         }
                         ?>
                     </tbody>
@@ -186,125 +204,136 @@
             </div> -->
         </div>
     </div>
-    </body>
 
     <script>
-        
-function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("searchBar");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("membershipsTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchBar");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("membershipsTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
         }
     }
-}
-function freezeMembership(membershipID) {
-    var selectedDate = $('#datepicker').val();
-    console.log(selectedDate);
 
-    console.log('Selected Date:', selectedDate);
+    function freezeMembership(membershipID) {
+        var selectedDate = $('#datepicker').val();
+        console.log(selectedDate);
 
-    $.ajax({
-        type: "POST",
-        url: "../Controllers/MembershipsController.php",
-        data: {
-            action: "freezeClientMembership",
-            membershipID: membershipID,
-            selectedDate: selectedDate,
-        },
-        success: function (response) {
-            console.log(response);
-            var newEndDate = response.newEndDate;
-            $('#endDate-' + membershipID).text(newEndDate);
+        console.log('Selected Date:', selectedDate);
 
-            $('.status-' + membershipID).text('Freezed');
+        $.ajax({
+            type: "POST",
+            url: "../Controllers/MembershipsController.php",
+            data: {
+                action: "freezeClientMembership",
+                membershipID: membershipID,
+                selectedDate: selectedDate,
+            },
+            success: function(response) {
+                console.log(response);
+                var newEndDate = response.newEndDate;
+                $('#endDate-' + membershipID).text(newEndDate);
 
-            var unfreezeButton = '<button id="unfreezeBtn-' +membershipID+'" class="btn btn-unfreeze" onclick="unfreezeMembership(' + membershipID + ')">Unfreeze</button>';
-             $('#freezeBtn-' + membershipID).replaceWith(unfreezeButton);            
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX error: " + status + " - " + error);
-        },
-    });
+                $('.status-' + membershipID).text('Freezed');
 
-    hideDatePickerModal();
-}
-function unfreezeMembership(membershipID) {
-    console.log(membershipID);
-    $.ajax({
-        type: "POST",
-        url: "../Controllers/MembershipsController.php",
-        data: {
-            action: "unfreezeClientMembership",
-            membershipID: membershipID,
-        },
-        success: function (response) {
-            console.log(response);
+                var unfreezeButton = '<button id="unfreezeBtn-' + membershipID +
+                    '" class="btn btn-unfreeze" onclick="unfreezeMembership(' + membershipID +
+                    ')">Unfreeze</button>';
+                $('#freezeBtn-' + membershipID).replaceWith(unfreezeButton);
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error: " + status + " - " + error);
+            },
+        });
 
-            $('.status-' + membershipID).text('Active');
+        hideDatePickerModal();
+    }
 
-            var freezeButton = '<button id="freezeBtn-' + membershipID + '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button>';
-            $('#unfreezeBtn-' + membershipID).replaceWith(freezeButton);
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX error: " + status + " - " + error);
-        },
-    });
-}
+    function unfreezeMembership(membershipID) {
+        console.log(membershipID);
+        $.ajax({
+            type: "POST",
+            url: "../Controllers/MembershipsController.php",
+            data: {
+                action: "unfreezeClientMembership",
+                membershipID: membershipID,
+            },
+            success: function(response) {
+                console.log(response);
 
-function showDatePickerModal() {
-    $('#datePickerModal').fadeIn();
+                $('.status-' + membershipID).text('Active');
 
-}
+                var freezeButton = '<button id="freezeBtn-' + membershipID +
+                    '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button>';
+                $('#unfreezeBtn-' + membershipID).replaceWith(freezeButton);
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error: " + status + " - " + error);
+            },
+        });
+    }
 
-function hideDatePickerModal() {
-    $('#datePickerModal').fadeOut();
-}
+    function showDatePickerModal() {
+        $('#datePickerModal').fadeIn();
 
-function submitFreeze() {
-    var selectedDate = $('#datepicker').val();
+    }
+    function showDeleteModal() {
+        $('#deleteModal').fadeIn();
 
-    console.log('Selected Date:', selectedDate);
+    }
 
-    hideDatePickerModal();
-}
+    function hideDatePickerModal() {
+        $('#datePickerModal').fadeOut();
+    }
+    function hideDeleteModal() {
+        $('#deleteModal').fadeOut();
+    }
 
-function deleteMembership(membershipID) {
-    $.ajax({
-        type: "POST",
-        url: "../Controllers/MembershipsController.php",
-        data: {
-            action: "deleteMembership",
-            membershipID: membershipID,
-        },
-        success: function (response) {
-            if (response === "success") {
-                var tableRow = document.getElementById('row-' + clientId);
-                if (tableRow) {
-                    tableRow.parentNode.removeChild(tableRow);
+    function submitFreeze() {
+        var selectedDate = $('#datepicker').val();
+
+        console.log('Selected Date:', selectedDate);
+
+        hideDatePickerModal();
+    }
+
+    function deleteMembership(membershipID) {
+        $.ajax({
+            type: "POST",
+            url: "../Controllers/MembershipsController.php",
+            data: {
+                action: "deleteMembership",
+                membershipID: membershipID,
+            },
+            success: function(response) {
+                if (response === "success") {
+                    var tableRow = document.getElementById('row-' + membershipID);
+                    if (tableRow) {
+                        tableRow.parentNode.removeChild(tableRow);
+                    } else {
+                        console.log("Error.");
+                    }
                 } else {
-                    console.log("Error.");
+                    console.log("Error deleting client.");
                 }
-            } else {
-                console.log("Error deleting client.");
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX error: " + status + " - " + error);
-        },
-    });
-}
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error: " + status + " - " + error);
+            },
+        });
+        showDeleteModal();
+    }
     </script>
-
+</body>
 
 </html>

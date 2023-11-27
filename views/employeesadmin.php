@@ -75,8 +75,22 @@
               echo "<td>" . $employee->Address . "</td>";
               echo "<td>" . $employee->JobTitle . "</td>";
               echo "<td>" . $employee->Name . "</td>";
-              echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>";
-              echo "<button class=\"btn btn-delete\" onclick='deleteEmployee(" . $employee->ID . ")'>Delete</button></td>";
+              echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>         ";
+              echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";
+              ?>
+              <div class="modal" id="deleteModal">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                      <div>
+                                      <label >Are you sure you want to delete this employee?</label>
+                                      </div>
+                                      <button class="btn btn-delete"
+                                          onclick='deleteEmployee(<?php echo $employee->ID ?>)' style="background-color:red">Delete</button>
+                                  </div>
+                              </div>
+                </div>
+              <?php
               echo "</tr>";
             }
             ?>
@@ -224,6 +238,7 @@
     </div>
   </div>
   <?php
+  
   // Unset all error session variables
   unset($_SESSION["nameErr"]);
   unset($_SESSION["phonenoErr"]);
@@ -235,6 +250,15 @@
   unset($_SESSION["success"]);
   ?>
   <script>
+    
+    function showDeleteModal() {
+        $('#deleteModal').fadeIn();
+
+    }
+
+    function hideDeleteModal() {
+        $('#deleteModal').fadeOut();
+    }
     function myFunction() {
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("searchBar");
@@ -278,6 +302,7 @@
           console.error("AJAX error: " + status + " - " + error);
         },
       });
+      hideDeleteModal();
     }
   </script>
 

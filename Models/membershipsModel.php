@@ -48,6 +48,14 @@ class Memberships
         return $memberships;
     }
 
+    public static function deleteMembership($membershipID)
+    {
+        global $conn;
+        $sql = "DELETE from membership where ID =" . $membershipID;
+        $result = $conn->query($sql);
+        return $result;
+
+    }
     public static function createMembership($clientId, $packageId)
     {
         global $conn;
@@ -116,7 +124,6 @@ class Memberships
             }
         }
     }
-
 
     public static function hasActiveMembership($clientId)
     {
