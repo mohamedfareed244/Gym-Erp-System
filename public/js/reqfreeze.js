@@ -108,11 +108,11 @@ function sendFreezeRequest(freezeWeeks) {
 
 // Fetch initial freeze info when the page loads
 document.addEventListener("DOMContentLoaded", function () {
-    fetchRemainingFreezeAttempts(); 
+    fetchRemainingFreezeAttempts();
 });
 
 function fetchRemainingFreezeAttempts() {
-    fetch("reqfreeze.php") 
+    fetch("reqfreeze.php")
         .then(response => response.json())
         .then(data => {
             remainingFreezeAttempts = data.remainingFreezeAttempts;

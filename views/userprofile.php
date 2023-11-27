@@ -13,8 +13,8 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.come/a076d05399.js"></script>
-    <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--css/icons/boostrap/jquery/fonts/images end-->
 
 
     <style>
