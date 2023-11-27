@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 27, 2023 at 08:06 PM
+-- Host: 127.0.0.1
+-- Generation Time: Nov 27, 2023 at 10:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -421,6 +421,19 @@ CREATE TABLE `reserved private training free session` (
   `SlotID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scheduled_unfreeze`
+--
+
+CREATE TABLE `scheduled_unfreeze` (
+  `membership_id` int(11) NOT NULL,
+  `freezeEndDate` date NOT NULL,
+  `freezeStartDate` date NOT NULL,
+  `freezeCount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -546,6 +559,12 @@ ALTER TABLE `reserved private training free session`
   ADD KEY `test11` (`SlotID`);
 
 --
+-- Indexes for table `scheduled_unfreeze`
+--
+ALTER TABLE `scheduled_unfreeze`
+  ADD KEY `fk_membership` (`membership_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -657,6 +676,12 @@ ALTER TABLE `private training membership`
   ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `scheduled_unfreeze`
+--
+ALTER TABLE `scheduled_unfreeze`
+  ADD CONSTRAINT `fk_membership` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -108,8 +108,8 @@
                             }
                             echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
                             echo '<td>' . $membership->inbodyCount . '</td>';
-                            echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
-                            echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
+                            // echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
+                            echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
                         <div class="modal" id="deleteModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -287,13 +287,13 @@
         $('#datePickerModal').fadeIn();
 
     }
+    function hideDatePickerModal() {
+        $('#datePickerModal').fadeOut();
+    }
+    
     function showDeleteModal() {
         $('#deleteModal').fadeIn();
 
-    }
-
-    function hideDatePickerModal() {
-        $('#datePickerModal').fadeOut();
     }
     function hideDeleteModal() {
         $('#deleteModal').fadeOut();
