@@ -30,19 +30,48 @@
 <div id="add-body">
    <h2 class="coaches-title">My Classes : </h2>
    <table class="table">
+    <!-- Assume that the coach id =4 till the sessions work  -->
 <thead>
     <tr>
         <td class="col"> ID </td>
         <td class="col"> Title </td>
         <td class="col"> From </td>
         <td class="col"> To </td>
-        <td class="col"> Days </td>
+        <td class="col"> Day </td>
+        <td class="col">Date</td>
         <td class="col"> Clients </td>
         <td class="col"> Action </td>
     </tr>
 </thead>
 <tbody>
-    <td>1</td>
+    <?php 
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    include_once "../Models/CoachesModel.php";
+   $result=Coach::getClassesForCoach(3);
+
+foreach($result as $res){
+    $timestamp = strtotime($res["Date"]);
+    $a=Coach::getclassnum($res["ID"]);
+    $num;
+    foreach($a as $b){
+        $num=$b["num"];
+    }
+echo "<tr><td>".$res["ID"]."</td>
+<td>".$res["Name"]."</td>
+<td>".$res["StartTime"]." </td>
+<td>
+    ".$res["EndTime"]."
+</td>
+<td>".date('l', $timestamp)."</td>
+<td>".$res["Date"]."</td>
+<td>".$num."</td>
+<td ><button id ='add-btn'>
+View Clients
+</button></td> </tr>";
+}
+    ?>
+    <!-- <td>1</td>
     <td>yoga class</td>
     <td>8:00 pm </td>
     <td>
@@ -52,7 +81,7 @@
     <td>20</td>
     <td ><button id ="add-btn">
 View Clients
-    </button></td>
+    </button></td> -->
 </tbody>
    </table>
 
