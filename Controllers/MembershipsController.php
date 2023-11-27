@@ -30,7 +30,8 @@ class MembershipsController
         $freezeWeeks = $_POST["freezeWeeks"];
 
         // Fetch initial freeze info to check remaining freeze attempts
-        $initialFreezeInfo = Package::getPackageFreezeLimit($_SESSION['PackageID']);
+        $pck = new Package();
+        $initialFreezeInfo = $pck->getPackageFreezeLimit($_SESSION['PackageID']);
         $remainingFreezeAttempts = $initialFreezeInfo - $_SESSION['FreezeCount'];
 
         if ($freezeWeeks >= 1 && $freezeWeeks <= $remainingFreezeAttempts) {
