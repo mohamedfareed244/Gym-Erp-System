@@ -1,27 +1,115 @@
 <?php
-
-
-include_once "../includes/dbh.inc.php";
+require_once("Model.php");
 
 class Package
 {
 
-    public $ID;
-    public $Title;
-    public $NumOfMonths;
-    public $isVisitsLimited;
-    public $VisitsLimit;
-    public $FreezeLimit;
-    public $NumOfInvitations;
-    public $NumOfInbodySessions;
-    public $NumOfPrivateTrainingSessions;
-    public $Price;
-    public $isActivated;
+    private $ID;
+    private $Title;
+    private $NumOfMonths;
+    private $isVisitsLimited;
+    private $VisitsLimit;
+    private $FreezeLimit;
+    private $NumOfInvitations;
+    private $NumOfInbodySessions;
+    private $NumOfPrivateTrainingSessions;
+    private $Price;
+    private $isActivated;
+
+    function __construct() {
+        $this->db = $this->connect();
+    }
+
+    
+    public function setID($ID) {
+        $this->ID = $ID;
+    }
+
+    public function getID() {
+        return $this->ID;
+    }
+    public function setTitle($Title) {
+        $this->Title = $Title;
+    }
+
+    public function getTitle() {
+        return $this->Title;
+    }
+
+    public function setNumOfMonths($NumOfMonths) {
+        $this->NumOfMonths = $NumOfMonths;
+    }
+
+    public function getNumOfMonths() {
+        return $this->NumOfMonths;
+    }
+
+    public function setIsVisitsLimited($isVisitsLimited) {
+            $this->isVisitsLimited = $isVisitsLimited;
+        }
+    
+    public function getIsVisitsLimited() {
+            return $this->isVisitsLimited;
+        }
+
+    public function setVisitsLimit($VisitsLimit) {
+            $this->VisitsLimit = $VisitsLimit;
+        }
+
+    public function getVisitsLimit() {
+            return $this->VisitsLimit;
+        }
+
+    public function setFreezeLimit($FreezeLimit) {
+            $this->FreezeLimit = $FreezeLimit;
+        }
+
+    public function getFreezeLimit() {
+            return $this->FreezeLimit;
+        }
+
+    public function setNumOfInvitations($NumOfInvitations) {
+            $this->NumOfInvitations = $NumOfInvitations;
+        }
+  
+    public function getNumOfInvitations() {
+            return $this->NumOfInvitations;
+        }
+  
+    public function setNumOfInbodySessions($NumOfInbodySessions) {
+            $this->NumOfInbodySessions = $NumOfInbodySessions;
+        }
+
+    public function getNumOfInbodySessions() {
+            return $this->NumOfInbodySessions;
+        }
+
+    public function setNumOfPrivateTrainingSessions($NumOfPrivateTrainingSessions) {
+            $this->NumOfPrivateTrainingSessions = $NumOfPrivateTrainingSessions;
+        }
+
+    public function getNumOfPrivateTrainingSessions() {
+            return $this->NumOfPrivateTrainingSessions;
+        }
+
+    public function setPrice($Price) {
+            $this->Price = $Price;
+        }
+
+    public function getPrice() {
+            return $this->Price;
+        }
+
+    public function setIsActivated($isActivated) {
+        $this->isActivated = $isActivated;
+    }
+
+    public function getIsActivated() {
+        return $this->isActivated;
+    }
 
     public function addPackage($package)
     {
-        global $conn;
-
         $title = $package->Title;
         $months = $package->NumOfMonths;
         $isLimited = $package->isVisitsLimited;
@@ -38,24 +126,19 @@ class Package
         VALUES ('$title', '$months','$isLimited', '$visitsLimit', '$freezeLimit', '$invitations', '$inbody', '$pt', '$price','$isActivated')";
 
 
-        return mysqli_query($conn, $sql);
+        return $this->db->query($sql);
     }
 
     public function getAllPackagesforEmployee()
     {
-        global $conn;
-
         $sql = "SELECT * FROM package";
-        // Perform the query
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
-        // Check if the query was successful
         if ($result) {
             $packages = $result->fetch_all(MYSQLI_ASSOC);
 
             $result->free_result();
 
-            // Return the packages
             return $packages;
         } else {
             return [];
@@ -65,19 +148,14 @@ class Package
 
     public function getAllPackagesforClient()
     {
-        global $conn;
-
         $sql = "SELECT * FROM package WHERE isActivated='Activated'";
-        // Perform the query
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);;
 
-        // Check if the query was successful
         if ($result) {
             $packages = $result->fetch_all(MYSQLI_ASSOC);
 
             $result->free_result();
 
-            // Return the packages
             return $packages;
         } else {
             return [];
@@ -86,28 +164,21 @@ class Package
 
     public function activatePackage($packageID)
     {
-        global $conn;
-
         $sql = "UPDATE package SET isActivated='Activated' WHERE ID='$packageID'";
-
-        return $conn->query($sql);
+        return $this->db->query($sql);;
     }
 
 
     public function deactivatePackage($packageID)
     {
-        global $conn;
-
         $sql = "UPDATE package SET isActivated='Deactivated' WHERE ID='$packageID'";
-
-        return $conn->query($sql);
+        return $this->db->query($sql);;
     }
 
-    public static function getPackage($packageID)
+    public function getPackage($packageID)
     {
-        global $conn;
         $sql = "SELECT * FROM package WHERE ID='$packageID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         if ($result && $result->num_rows > 0) {
             $packageData = $result->fetch_assoc();
             $package = new Package();
@@ -127,11 +198,10 @@ class Package
             return null;
         }
     }
-    public static function checkPackage($packageID)
+    public function checkPackage($packageID)
     {
-        global $conn;
         $sql = "SELECT * FROM package WHERE ID='$packageID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
             $found = true;
@@ -142,11 +212,10 @@ class Package
     }
 
     
-public static function getPackageFreezeLimit($PackageID)
+public function getPackageFreezeLimit($PackageID)
 {
-    global $conn;
     $sql = "SELECT `FreezeLimit` FROM `package` WHERE `ID`='$PackageID'";
-    $result = $conn->query($sql);
+    $result = $this->db->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();

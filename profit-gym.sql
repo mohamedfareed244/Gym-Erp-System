@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 10:53 PM
+-- Generation Time: Nov 27, 2023 at 01:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -45,10 +45,10 @@ CREATE TABLE `assignedclass` (
 --
 
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
-(1, 1, '2023-11-26', '18:30:00', '20:00:00', 'Free', 0, 3, 20, 19),
-(2, 4, '2023-11-27', '14:00:00', '15:15:00', 'NotFree', 150, 4, 10, -1),
-(3, 3, '2023-11-30', '19:30:00', '21:00:00', 'NotFree', 250, 3, 20, 18),
-(4, 8, '2023-11-28', '20:30:00', '22:00:00', 'Free', 0, 4, 20, 20);
+(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 18),
+(6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 15),
+(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9),
+(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
 
 -- --------------------------------------------------------
 
@@ -115,15 +115,15 @@ CREATE TABLE `class` (
 --
 
 INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
-(1, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
-(2, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
-(3, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness. It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
-(4, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
-(5, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
-(6, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
-(7, 'Parkour', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
-(8, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
-(9, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
+(12, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
+(13, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
+(14, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness. It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
+(15, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
+(16, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
+(17, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
+(18, 'Parkour', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
+(19, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
+(20, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
 
 -- --------------------------------------------------------
 
@@ -141,20 +141,18 @@ CREATE TABLE `class_days` (
 --
 
 INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
-(1, '2023-11-26'),
-(1, '2023-11-29'),
-(2, '2023-11-28'),
-(2, '2023-12-01'),
-(3, '2023-11-30'),
-(4, '2023-11-26'),
-(4, '2023-11-27'),
-(5, '2023-11-29'),
-(6, '2023-11-27'),
-(6, '2023-12-02'),
-(7, '2023-11-26'),
-(8, '2023-11-28'),
-(9, '2023-11-30'),
-(9, '2023-12-02');
+(12, 'Friday'),
+(12, 'Tuesday'),
+(13, 'Sunday'),
+(13, 'Wednesday'),
+(14, 'Monday'),
+(15, 'Saturday'),
+(15, 'Thursday'),
+(16, 'Sunday'),
+(17, 'Wednesday'),
+(18, 'Monday'),
+(19, 'Saturday'),
+(20, 'Saturday');
 
 -- --------------------------------------------------------
 
@@ -180,9 +178,10 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
-(26, 'jana', 'hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$ng6oDea6CzWkFawUDBJ9vOxMBQr.GaoQ1gps6cu7eQkPLplDvCzNK', '01091119866'),
-(28, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$YMVK11OFNpBH3/RJJPNmOuO3qhpIj.s2adzWuEJrvy9ZwGo1zJYri', '01091119868'),
-(37, 'laila', 'nabil', 20, 'female', '0', '0', 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378');
+(37, 'laila', 'nabil', 20, 'female', '0', '0', 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378'),
+(44, 'omar', 'omran', 25, 'male', '0', '0', 'omaromran@gmail.com', '$2y$10$FtrUm7owwXQpOH9CvunRge/eacZZR.S2QN2ZmI4zCFkeIrOHKv6ee', '01023876543'),
+(45, 'jana', 'omran', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$aVoXddxNbjd09/egCDebtOK2xmrK/YFxL23xA41vgh7WrjrYHGut2', '01091119866'),
+(46, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$b2WpY5G/aA5pMDt5.D9ji.HcYd20c0yP05qKKFiAy6Oag1M3CLY0C', '01091119866');
 
 -- --------------------------------------------------------
 
@@ -398,15 +397,6 @@ CREATE TABLE `reserved class` (
   `isActivated` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `reserved class`
---
-
-INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
-(3, 3, 3, 28, '', 'Activated'),
-(4, 3, 3, 26, '', 'Activated'),
-(9, 1, 3, 26, '', 'Activated');
-
 -- --------------------------------------------------------
 
 --
@@ -553,7 +543,7 @@ ALTER TABLE `reserved private training free session`
 -- AUTO_INCREMENT for table `assignedclass`
 --
 ALTER TABLE `assignedclass`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `authority`
@@ -571,13 +561,13 @@ ALTER TABLE `available slots`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -619,7 +609,7 @@ ALTER TABLE `private training package`
 -- AUTO_INCREMENT for table `reserved class`
 --
 ALTER TABLE `reserved class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `reserved private training free session`
@@ -662,4 +652,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

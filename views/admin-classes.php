@@ -138,8 +138,8 @@ span[id$="-err"],
 
                     // Display the day name and date
                     echo '<div class="form-check form-switch">';
-                    echo '<input class="form-check-input" type="checkbox" id="flexSwitchCheck' . $i . '" name="days[]" value="' . $date . '">';
-                    echo '<label class="form-check-label" for="flexSwitchCheck' . $i . '">' . $dayName . ', ' . $date . '</label>';
+                    echo '<input class="form-check-input" type="checkbox" id="flexSwitchCheck' . $i . '" name="days[]" value="' . $dayName . '">';
+                    echo '<label class="form-check-label" for="flexSwitchCheck' . $i . '">' . $dayName . '</label>';
                     echo '</div>';
                     echo '<br>';
                 }

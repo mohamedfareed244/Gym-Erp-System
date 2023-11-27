@@ -1,7 +1,9 @@
 <?php
 
-include_once "../Models/PackageModel.php";
+require_once("Controller.php");
+require_once("../Models/PackageModel.php");
 include_once "../Models/membershipsModel.php";
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
@@ -94,17 +96,17 @@ class PackageController
 
             $newpackage = new Package();
 
-            $newpackage->Title = $title;
-            $newpackage->NumOfMonths = $months;
-            $newpackage->isVisitsLimited = $visits;
+            $newpackage->setTitle($title);
+            $newpackage->setNumOfMonths($months);
+            $newpackage->setisVisitsLimited($visits);
             if ($visits == "limited") {
-                $newpackage->VisitsLimit = $limitVisits;
+                $newpackage->setVisitsLimit($limitVisits);
             }
-            $newpackage->FreezeLimit = $freezeLimit;
-            $newpackage->NumOfInvitations = $invitation;
-            $newpackage->NumOfInbodySessions = $inbody;
-            $newpackage->NumOfPrivateTrainingSessions = $ptsession;
-            $newpackage->Price = $price;
+            $newpackage->setFreezeLimit($freezeLimit);
+            $newpackage->setNumOfInvitations($invitation);
+            $newpackage->setNumOfInbodySessions($inbody);
+            $newpackage->setNumOfPrivateTrainingSessions($ptsession);
+            $newpackage->setPrice($price);
 
             $result = $package->addPackage($newpackage);
 
@@ -177,7 +179,8 @@ class PackageController
 
 }
 
-$controller = new PackageController();
+$model = new Package();
+$controller = new PackageController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
