@@ -115,10 +115,10 @@ class Client extends Model
     {
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
         $result = $this->db->query($sql);
-
-        if ($result) {
+    
+        if ($result && $result->num_rows > 0) {
             $clientData = $result->fetch_assoc();
-
+    
             $client = new Client();
             $client->ID = $clientData['ID'];
             $client->FirstName = $clientData['FirstName'];
@@ -130,7 +130,7 @@ class Client extends Model
             $client->Gender = $clientData['Gender'];
             $client->Height = $clientData['Height'];
             $client->Weight = $clientData['Weight'];
-
+    
             return $client;
         } else {
             return null;

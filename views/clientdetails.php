@@ -80,7 +80,8 @@
                             echo '<td>' . $membership->visitsCount . '</td>';
                             echo '<td>' . $membership->invitationsCount . '</td>';
                             if ($membership->freezed == 0) {
-                                $package = Package::getPackage($membership->packageId);
+                                $Package=new Package();
+                                $package = $Package->getPackage($membership->packageId);
                                 echo '<td class="status-' . $membership->ID . ' bg">Active</td>';
                                 echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
                                 '; ?>

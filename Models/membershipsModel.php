@@ -52,15 +52,17 @@ class Memberships
     {
         global $conn;
         $isActivated = "Activated";
-        $findClient = Client::checkClient($clientId);
-        $findPackage = Package::checkPackage($packageId);
+        $client=new Client();
+        $package = new Package();
+        $findClient = $client->checkClient($clientId);
+        $findPackage = $package->checkPackage($packageId);
         if ($findClient && $findPackage) {
-            $Package = Package::getPackage($packageId);
+            $Package = $package->getPackage($packageId);
             $startDate = date("Y-m-d");
-            $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
+            $endDate = date("Y-m-d", strtotime("+$Package->getNumOfMonths() months"));
             $freezed = 0;
             $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
-                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions','$Package->FreezeLimit', '$freezed','$isActivated')";
+                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->getNumOfInvitations()', '$Package->getNumOfInbodySessions()', '$Package->getNumOfPrivateTrainingSessions()','$Package->getFreezeLimit()', '$getfreezed()','$getisActivated()')";
             return mysqli_query($conn, $sql);
         }
         return false;
@@ -367,7 +369,6 @@ class Memberships
 
         return $conn->query($sql);
     }
-
 
 
 }

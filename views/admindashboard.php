@@ -17,9 +17,9 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
-<body>
-    <?php require("partials/adminsidebar.php") ?>
-    <div id="add-body" class="addbody">
+<body>   
+    <?php require("partials/adminsidebar.php"); ?>
+    <div id="add-body" class="addbody" style="background-color:white; height:100%; margin-top:-70px;">
         <div id="content" class="content">
             <main>
                 <div class="head-title">
@@ -33,19 +33,32 @@
                     include_once "../Models/PackageModel.php";
                     include_once "../Models/ClientModel.php";
                     include_once "../Models/employeeModel.php";
+                    include_once "../Models/ClassesModel.php";
+                    include_once "../Models/membershipsModel.php";
+
+                    $allMemberships = Memberships::getAllMemberships();
+                    $numberOfMemberships = count($allMemberships);
+
+                    $clientModel = new Client();
+                    $clients = $clientModel -> getAllClients();
+
                     $packageModel = new Package();
 
                     $packages = $packageModel->getAllPackagesforEmployee();
                     $numberOfPackages = count($packages);
-
                     
-                    $clientModel = new Client();
 
                     $clients = $clientModel->getAllClients();
                     $numberOfClients = count($clients);
 
                     $allEmployees = Employee::getAllEmployees();
                     $numberOfEmployees = count($allEmployees);
+
+                    $allCoaches = Employee::GetAllCoaches();
+                    $numberOfCoaches = count($allCoaches);
+
+                    $allClasses = Classes::getAllClasses();
+                    $numberOfClasses = count($allClasses);
                     ?>
 
                     <li>
@@ -58,7 +71,7 @@
                     <li>
                         <i class='bx bxs-calendar-check'></i>
                         <span class="text">
-                            <h3>20</h3>
+                            <h3><?php echo $numberOfClasses; ?></h3>
                             <p>Classes</p>
                         </span>
                     </li>
@@ -79,29 +92,15 @@
                     <li>
                         <i class='bx bxs-group'></i>
                         <span class="text">
-                            <h3>70</h3>
+                            <h3><?php echo $numberOfCoaches ?></h3>
                             <p>Coaches</p>
                         </span>
                     </li>
                     <li>
-                        <i class='bx bxs-dollar-circle'></i>
+                        <i class='bx bxs-group'></i>
                         <span class="text">
-                            <h3>$2543</h3>
-                            <p>Revenue</p>
-                        </span>
-                    </li>
-                    <li>
-                        <i class='bx bxs-dollar-circle'></i>
-                        <span class="text">
-                            <h3>$25400</h3>
-                            <p>Total Costs</p>
-                        </span>
-                    </li>
-                    <li>
-                        <i class='bx bxs-dollar-circle'></i>
-                        <span class="text">
-                            <h3>88%</h3>
-                            <p>Work Load</p>
+                            <h3><?php echo $numberOfMemberships ?></h3>
+                            <p>Memberships</p>
                         </span>
                     </li>
                 </ul>
@@ -110,90 +109,36 @@
                 <div class="table-data">
                     <div class="order">
                         <div class="head">
-                            <h3>Recent Requests</h3>
-                            <i class='bx bx-search'></i>
-                            <i class='bx bx-filter'></i>
+                            <h3>Recent Clients</h3>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>User</th>
-                                    <th>Date Order</th>
-                                    <th>Status</th>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email Address</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>PhoneNumber</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php foreach ($clients as $client): ?>
                                 <tr>
                                     <td>
-                                        <img src="../public/Images/coach1.png">
-                                        <p>Laila Nabil</p>
+                                        <p><?php echo $client->getID()?></p>
                                     </td>
-                                    <td>01-10-2023</td>
-                                    <td><span class="status completed">Completed</span></td>
+                                    <td><?php echo $client->getFirstName()?></td>
+                                    <td><?php echo $client->getLastName()?></td>
+                                    <td><?php echo $client->getEmail()?></td>
+                                    <td><?php echo $client->getAge()?></td>
+                                    <td><?php echo $client->getGender()?></td>
+                                    <td><?php echo $client->getPhone()?></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <img src="../public/Images/coach2.png">
-                                        <p>Jana Hani</p>
-                                    </td>
-                                    <td>01-10-2023</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="../public/Images/coach1.png">
-                                        <p>Malak Helmy</p>
-                                    </td>
-                                    <td>01-10-2023</td>
-                                    <td><span class="status process">Process</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="../public/Images/coach2.png">
-                                        <p>Fatimah </p>
-                                    </td>
-                                    <td>01-10-2023</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="../public/Images/coach1.png">
-                                        <p>Mohamed Fareed</p>
-                                    </td>
-                                    <td>01-10-2023</td>
-                                    <td><span class="status completed">Completed</span></td>
-                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="todo">
-                        <div class="head">
-                            <h3>Todos</h3>
-                            <i class='bx bx-plus'></i>
-                            <i class='bx bx-filter'></i>
-                        </div>
-                        <ul class="todo-list">
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </main>
