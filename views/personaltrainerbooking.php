@@ -148,8 +148,8 @@
             <div class="modal-content">
                 <span class="close-popup">&times;</span>
                 <p id="confirmation-text"></p>
-                <button id="confirm-free-button">Free</button>
-                <button id="confirm-package-button">Package</button>
+                <button id="confirm-package-button">View Packages</button>
+                <button id="confirm-free-button">Cancel</button>
                 <p id="modal-message"></p>
 
             </div>
