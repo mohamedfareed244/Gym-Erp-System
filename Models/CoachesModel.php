@@ -1,5 +1,6 @@
 <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 include_once "../includes/dbh.inc.php";
 include_once "employeeModel.php";
@@ -138,33 +139,16 @@ class Coach extends Employee
     {
         global $conn;
 
-        $sql = "SELECT * FROM class WHERE Coach = $coachID ";
+        $sql = "SELECT c.Name,ac.StartTime,ac.EndTime,ac.Date,ac.CoachID,ac.ID from assignedclass ac join class c on ac.ClassID=c.ID  where ac.CoachID=$coachID";
 
         $result = $conn->query($sql);
         return $result;
-        // $assignedClasses = array();
-
-        // if ($result->num_rows > 0) {
-        //     while ($row = $result->fetch_assoc()) {
-        //         $class = new Classes();
-        //         $class->ID = $row['ID'];
-        //         $class->Name = $row['Name'];
-        //         $class->Date = $row['Date'];
-        //         $class->StartTime = $row['StartTime'];
-        //         $class->EndTime = $row['EndTime'];
-        //         $class->Price = $row['Price'];
-        //         $class->Coach = $row['Coach'];
-
-        //         $assignedClasses[] = $class;
-        //     }
-        // }
-
-        // return $assignedClasses;
+       
     }
-    public static function getclassdays($id)
+    public static function getclassnum($id)
     {
         global $conn;
-        $sql = "SELECT * FROM class_days WHERE Class = $id ";
+        $sql = "SELECT COUNT(AssignedClassId) as num from reserved_class where AssignedClassId=$id";
         $result = $conn->query($sql);
         return $result;
     }
