@@ -31,9 +31,10 @@
     $ptpackage = new ptPackages();
     $ptmemberships = new ptMemberships();
 
-    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
+    $packages = $ptpackage->getAllPtPackagesforClient(); 
+    
+    ?>
 
-?>
 
 
     <div class="profile">

@@ -27,11 +27,21 @@
     include("partials/usersidebar.php") ?>
     <?php include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
+    include_once "../Models/employeeModel.php";
+
 
     $ptpackage = new ptPackages();
-    $ptmembership = new ptMemberships();
+    $ptmemberships = ptMemberships::getAllPtMemberships();
+    $coaches = Employee::getAllCoaches(); // Move this line here
+    $ptMembershipsInstance = new ptMemberships();
+    $packages = $ptpackage->getAllPtPackagesforClient();
 
-    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
+     
+        // echo $coachName . '<br>';
+       
+    
+
+    ?>
 
 
 
@@ -44,21 +54,23 @@
     margin-bottom:3%;">Coaches:</h2>
         <div class="card-container">
 
-        <?php foreach ($packages as $package) ?>
-            <div class="card">
-                <img src="../public/Images/coach3.jpg" class="imgslides">
-                <h3>Lama Ahmed</h3>
-            </div>
+      
+        <?php foreach ($coaches as $coachID => $coachName): ?>
+    <div class="card">
+        <img src="../public/Images/coach3.jpg" class="imgslides">
+        <?php
+        if (isset($coachName['Name'])) {
+            echo '<h3>' . $coachName['Name'] . '</h3>';
+        } else {
+            echo '<h3>Coach Name Not Available</h3>';
+        }
+        ?>
+    </div>
+<?php endforeach; ?>
 
-            <div class="card">
-                <img src="../public/Images/coach1.jpg" class="imgslides">
-                <h3>Ahmed Mohamed</h3>
-            </div>
 
-            <div class="card">
-                <img src="../public/Images/coach2.jpg" class="imgslides">
-                <h3>Yasser Sayed</h3>
-            </div>
+
+
 
         </div>
 

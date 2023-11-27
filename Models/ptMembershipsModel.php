@@ -3,6 +3,8 @@ include_once "../includes/dbh.inc.php";
 include_once "ptPackageModel.php";
 include_once "ClientModel.php";
 include_once "CoachesModel.php";
+include_once "employeeModel.php";
+
 
 
 
@@ -122,7 +124,56 @@ class ptMemberships{
             return $results;
         }
     }
+
+    public static function getPtMembershipByPackageID($packageID) {
+        global $conn;
+
+        $sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            $ptMembership = new ptMemberships();
+            $ptMembership->ID = $row['ID'];
+            $ptMembership->clientId = $row['ClientID'];
+            $ptMembership->coachid = $row['CoachID'];
+            $ptMembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
+            $ptMembership->SessionsCount = $row['SessionsCount'];
+            $ptMembership->isActivated = $row['isActivated'];
+
+            return $ptMembership;
+        }
+    }
     
+    public static function getCoachNamesForPackage($packageID) {
+        global $conn;
+
+        $coaches = Employee::GetAllCoaches();
+
+        $coachNames = array();
+
+        $sql = "SELECT CoachID FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
+        $result = $conn->query($sql);
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $coachID = $row['CoachID'];
+
+                $coach = array_filter($coaches, function ($c) use ($coachID) {
+                    return $c['CoachID'] == $coachID;
+                });
+
+                if (!empty($coach)) {
+                    $coach = reset($coach);
+                    $coachNames[$coachID] = $coach['Name'];
+                }
+            }
+        }
+
+        return $coachNames;
+    }
+
 
 
 }
