@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("Controller.php");
 require_once("../Models/ClientModel.php");
 

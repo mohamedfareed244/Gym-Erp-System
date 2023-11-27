@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 01:21 PM
+-- Generation Time: Nov 27, 2023 at 01:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -45,10 +45,10 @@ CREATE TABLE `assignedclass` (
 --
 
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
-(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 18),
+(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 17),
 (6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 15),
-(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9),
-(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
+(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 7),
+(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8);
 
 -- --------------------------------------------------------
 
@@ -397,6 +397,16 @@ CREATE TABLE `reserved class` (
   `isActivated` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `reserved class`
+--
+
+INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
+(20, 5, 3, 45, '', 'Activated'),
+(21, 7, 3, 46, '', 'Activated'),
+(22, 8, 3, 46, '', 'Activated'),
+(23, 7, 3, 44, '', 'Activated');
+
 -- --------------------------------------------------------
 
 --
@@ -609,7 +619,7 @@ ALTER TABLE `private training package`
 -- AUTO_INCREMENT for table `reserved class`
 --
 ALTER TABLE `reserved class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `reserved private training free session`
@@ -652,3 +662,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
