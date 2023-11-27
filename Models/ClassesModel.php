@@ -4,7 +4,36 @@
 include_once "../includes/dbh.inc.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+if($_SERVER["REQUEST_METHOD"]==='GET'&&isset($_GET["x"])){
+    global $conn;
+   
+    $num=$_GET["x"];
+  
+$sql ="SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
 
+$result=$conn->query($sql);
+ $word='';
+if(mysqli_num_rows($result)<=0){
+    echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
+}else{
+    foreach ($result as $res){
+        $word.="<tr><td>";
+        $word.=$res["ID"];
+       $word .="</td>";
+        $word.="<td class='col'>";
+       $word .=$res["Name"];
+        $word.="</td>";
+       $word.=" <td class='col'>";
+       $word .=$res["Phone"];
+        $word.="</td>";
+   
+        $word.="<td class='col'> <input type='checkbox' name='' id=''> </td>
+        </tr>";
+    }
+    echo $word;
+}
+exit();
+}
 class Classes{
     
     public $ID;
@@ -413,6 +442,7 @@ class Classes{
         return $conn->query($sql);
 
     }
+  
 
 }
 ?>

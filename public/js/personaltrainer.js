@@ -64,7 +64,7 @@ function resetmodal() {
 
 
             detailsSection.style.display="block";
-            showmodal("Do you want to book session from your free personal trainer sessions or book a whole package?");
+            showmodal("View Private Training packages for this coach ?");
 
         closeBtn.addEventListener('click', () => {
             resetmodal();
