@@ -98,18 +98,18 @@ class ptMemberships{
     public static function getClientPtMembershipInfo()
     {
         global $conn;
-
+    
         $isActivated = "Activated";
-
-        $sql = "SELECT package.Name, package.NumOfSessions, package.MinPackageMonths, package.Price
-            FROM `private training package` 
-            INNER JOIN `private training membership` ON package.ID = membership.PrivateTrainingPackageID 
-            WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'];
-
+    
+        $sql = "SELECT `private training package`.Name, `private training package`.NumOfSessions, `private training package`.MinPackageMonths, `private training package`.Price
+                FROM `private training package`
+                INNER JOIN `private training membership` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
+                WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = " . $_SESSION['ID'];
+    
         $result = mysqli_query($conn, $sql);
-
+    
         $results = array();
-
+    
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -122,6 +122,7 @@ class ptMemberships{
             return $results;
         }
     }
+    
 
 
 }
