@@ -26,7 +26,7 @@
     include("partials/usersidebar.php");
     include_once "../Models/membershipsModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/ptPMembershipsModel.php";
+    include_once "../Models/ptMembershipsModel.php";
 
 
     ?>
@@ -74,8 +74,10 @@
                 echo "<p class='actual-rem'>" . $ptPackageDetails->Price . "</p>";
                 echo "</div>";
             }
+
             else {
             echo "No PT membership found for the current client.";
+
         }
             ?>
 
@@ -85,6 +87,7 @@
             <p>Working Hours:</p>
             <p class="actual-rem"> 10 AM - 5 PM</p>
         </div>
+    </div>
     </div>
     
 
