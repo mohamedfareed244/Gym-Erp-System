@@ -88,7 +88,7 @@
                                       <button class="btn btn-delete"
                                           onclick='deleteEmployee(<?php echo $employee->ID ?>)' style="background-color:red">Delete</button>
                                   </div>
-                              </div>
+                            </div>
                 </div>
               <?php
               echo "</tr>";
@@ -255,7 +255,6 @@
         $('#deleteModal').fadeIn();
 
     }
-
     function hideDeleteModal() {
         $('#deleteModal').fadeOut();
     }
