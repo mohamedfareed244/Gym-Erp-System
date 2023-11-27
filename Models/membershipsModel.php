@@ -52,17 +52,23 @@ class Memberships
     {
         global $conn;
         $isActivated = "Activated";
-        $client=new Client();
+        $client = new Client();
         $package = new Package();
         $findClient = $client->checkClient($clientId);
         $findPackage = $package->checkPackage($packageId);
         if ($findClient && $findPackage) {
             $Package = $package->getPackage($packageId);
             $startDate = date("Y-m-d");
-            $endDate = date("Y-m-d", strtotime("+$Package->getNumOfMonths() months"));
+            $endDate = date("Y-m-d", strtotime("+" . $Package->getNumOfMonths() . "months"));
             $freezed = 0;
+            $numOfInv = $Package->getNumOfInvitations();
+            $numOfInb = $Package->getNumOfInbodySessions();
+            $privTrain = $Package->getNumOfPrivateTrainingSessions();
+            $freezeCount = $Package->getFreezeLimit();
+            $freezed = 0;
+            $isActivated = 'Activated';
             $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
-                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$Package->getNumOfInvitations()', '$Package->getNumOfInbodySessions()', '$Package->getNumOfPrivateTrainingSessions()','$Package->getFreezeLimit()', '$getfreezed()','$getisActivated()')";
+                                  VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$numOfInv', '$numOfInb', '$privTrain','$freezeCount', '$freezed','$isActivated')";
             return mysqli_query($conn, $sql);
         }
         return false;
@@ -72,12 +78,14 @@ class Memberships
     public static function addMembershipUserSide($packageId)
     {
         global $conn;
+        $pck = new Package();
+        $client = new Client();
         $isActivated = "Not Activated";
-        $findClient = Client::checkClient($_SESSION['ID']); // Use $_SESSION['ID'] directly
-        $findPackage = Package::checkPackage($packageId);
+        $findClient = $client->checkClient($_SESSION['ID']); // Use $_SESSION['ID'] directly
+        $findPackage = $pck->checkPackage($packageId);
 
         if ($findClient && $findPackage) {
-            $Package = Package::getPackage($packageId);
+            $Package = $pck->getPackage($packageId);
 
             $check1Sql = "SELECT * FROM `membership` WHERE PackageID ='$packageId' AND ClientID = " . $_SESSION['ID'];
             $check1Result = mysqli_query($conn, $check1Sql);
@@ -92,11 +100,16 @@ class Memberships
             } else if ($alreadyAnotherMembershipExists) {
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
             } else {
+                $numOfmonths = $Package->getNumOfMonths();
                 $startDate = date("Y-m-d");
-                $endDate = date("Y-m-d", strtotime("+$Package->NumOfMonths months"));
+                $endDate = date("Y-m-d", strtotime("+$numOfmonths months"));
+                $numOfInv = $Package->getNumOfInvitations();
+                $numOfInb = $Package->getNumOfInbodySessions();
+                $privTrain = $Package->getNumOfPrivateTrainingSessions();
+                $freezeCount = $Package->getFreezeLimit();
                 $freezed = 0;
                 $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
-                    VALUES ('" . $_SESSION['ID'] . "', '$packageId', '$startDate', '$endDate', '0', '$Package->NumOfInvitations', '$Package->NumOfInbodySessions', '$Package->NumOfPrivateTrainingSessions', '$Package->FreezeLimit', '$freezed' , '$isActivated')";
+                    VALUES ('" . $_SESSION['ID'] . "', '$packageId', '$startDate', '$endDate', '0', '$numOfInv', '$numOfInb', '$privTrain', '$freezeCount', '$freezed' , '$isActivated')";
                 $insertResult = mysqli_query($conn, $sql);
 
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
@@ -276,7 +289,7 @@ class Memberships
     {
         global $conn;
         $membership = Memberships::getMembershipByID($membershipId);
-        
+
         $scheduledUnFreeze = Memberships::getScheduledUnFreeze($membershipId);
         echo 'Scheduled Freeze End Date: ' . $scheduledUnFreeze['freezeEndDate'];
 
@@ -287,14 +300,16 @@ class Memberships
             echo $freezeStartDate->format('Y-m-d'), "    END FREEZE ", $freezeEndDate->format('Y-m-d');
 
             if ($currDate < $freezeEndDate) {
-                $Package = Package::getPackage($membership->packageId);
+                $package = new Package();
+                $Package = $package->getPackage($membership->packageId);
                 $interval = $currDate->diff($freezeStartDate);
                 $days = $interval->days;
 
                 // Calculate new end date by adding months and days
-                $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$Package->NumOfMonths months +$days days"));
+                $numOfMonths = $Package->getNumOfMonths();
+                $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$numOfMonths months +$days days"));
                 $currentDate = date("Y-m-d");
-                echo 'NEW DATE', $newEndDate, " Current ", $currentDate, "  Days ", $days, '    ', $Package->NumOfMonths;
+                echo 'NEW DATE', $newEndDate, " Current ", $currentDate, "  Days ", $days, '    ', $numOfMonths;
                 $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
                 $result = mysqli_query($conn, $sql);
 
@@ -328,9 +343,9 @@ class Memberships
     {
         global $conn;
 
-        $isActivated="Not Activated";
+        $isActivated = "Not Activated";
 
-        $sql="SELECT client.ID,client.FirstName,package.Title,package.NumOfMonths,membership.StartDate,membership.EndDate,package.Price,membership.ID AS membershipID
+        $sql = "SELECT client.ID,client.FirstName,package.Title,package.NumOfMonths,membership.StartDate,membership.EndDate,package.Price,membership.ID AS membershipID
         FROM membership
         INNER JOIN client ON client.ID = membership.ClientID
         INNER JOIN package ON package.ID = membership.PackageID
@@ -363,11 +378,36 @@ class Memberships
 
         $isActivated = "Activated";
 
-        $sql="UPDATE membership 
+        $sql = "UPDATE membership 
         SET isActivated='$isActivated' 
         WHERE ID = $membershipID";
 
         return $conn->query($sql);
+    }
+
+    public function calculateRemainingFreezeAttempts($userInput)
+    {
+        
+        if ($this->freezeCount > 0) {
+            $remainingFreezeAttempts = max(0, $this->freezeCount - $userInput);
+            $this->freezeCount = $remainingFreezeAttempts;
+
+            return $remainingFreezeAttempts;
+        } else {
+            return 0;
+        }
+    }
+
+    private function updateFreezeCountInDatabase($newFreezeCount)
+    {
+        global $conn;
+        $sql = "UPDATE memberships SET freezeCount = $newFreezeCount WHERE ID = $this->ID";
+        $result = mysqli_query($conn, $sql);
+        
+        if (!$result) {
+            die("Error updating freezeCount: " . mysqli_error($conn));
+        }
+        
     }
 
 

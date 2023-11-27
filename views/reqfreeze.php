@@ -24,7 +24,7 @@
 <body>
     <!-- usersidebar start -->
     <?php session_start();
-    
+
     include("partials/usersidebar.php") ?>
 
 
@@ -37,44 +37,65 @@
         <div class="reminders">
             <div class="reminder">
                 <?php include_once "../Models/membershipsModel.php";
-            include_once "../Models/PackageModel.php";
+                include_once "../Models/ClientModel.php";
+                include_once "../Models/PackageModel.php";
+                include_once "../Models/PackageModel.php";
 
-            $membership = new Memberships();
-            $clientId = $_SESSION["ID"];
+                $memberships = new Memberships();
+                $clientId = $_SESSION["ID"];
 
-            $membershipdetails = $membership->getMembership($clientId);
-            ?>
+                $membershipdetails = $memberships->getMembership($clientId);
+                ?>
+
+            <script>
+            var currentDate = new Date();
+            var maxDate = new Date(currentDate);
+            maxDate.setMonth(currentDate.getMonth() + 3);
+          </script>
                 <?php foreach ($membershipdetails as $membership): ?>
-                <p class="class">Package:</p>
-                <div class="class-title"><?php echo $membership['Title']; ?></div>
+                    <p class="class">Package:</p>
+                    <div class="class-title"><?php echo $membership['Title']; ?></div>
 
-                <div class="dates">
-                    <div class="date">
-                        <p>Start Date:</p>
-                        <div class="start-date"><?php echo $membership['startDate']; ?></div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>Start Date:</p>
+                            <div class="start-date"><?php echo $membership['startDate']; ?></div>
+                        </div>
+                        <div class="date">
+                            <p>End Date:</p>
+                            <div class="end-date"><?php echo $membership['endDate']; ?></div>
+                        </div>
                     </div>
-                    <div class="date">
-                        <p>End Date:</p>
-                        <div class="end-date"><?php echo $membership['endDate']; ?></div>
+
+                    <div class="rem-info">
+                        <p>Remaining Freeze Attempts:</p>
+                        <p class="actual-rem" id="actual-rem">
+                        <?php echo $membership['freezeCount'] - $membership['remainingFreezeAttempts'] . " Days Out of " . $membership['freezeLimit']; ?> Left
+                        </p>
                     </div>
-                </div>
 
-                <div class="rem-info">
-                    <p>Remaining Freeze Attempts:</p>
-                    <p class="actual-rem" id="actual-rem">
-                        <?php echo $membership['freezeCount']  ." Days Out of " . $membership['freezeLimit'] ; ?> Left
-                    </p>
-                </div>
+                    <div class="freeze-request">
+                        <p class="rem-info">Weeks to be Frozen:</p>
+                        <input type="number" id="freeze-weeks" min="1"                       
+                      max="<?php echo $membership['freezeCount']->$remainingFreezeAttempts; ?>" placeholder="Weeks">
+                       <?php echo '<td><button id="freezeBtn-' . $membership['ID'] . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>               
+                    '; ?>
 
-                <div class="freeze-request">
-                    <p class="rem-info">Weeks to be Frozen:</p>
-                    <input type="number" id="freeze-weeks" min="1"
-                        max="<?php echo $membershipdetails->remainingFreezeAttempts; ?>" placeholder="Weeks">
-                    <button id="freeze-button">Submit Request</button>
-                    <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
+                            <div class="modal" id="datePickerModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
+                                                <div>
+                                                    <label for="datepicker">Choose a Date:</label>
+                                             <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
+                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                                        </div>
 
-                </div>
-                <?php endforeach ?>
+                        <button id="freeze-button" onclick="freezeMembership(<?php echo $membership['ID'] ?>)">Submit Request</button>
+                        <p id="error-message" class="error-message">Please enter the number of weeks to be frozen.</p>
+
+                    </div>
+                <?php endforeach ?> 
             </div>
 
 
