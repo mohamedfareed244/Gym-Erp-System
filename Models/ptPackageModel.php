@@ -213,8 +213,9 @@ class ptPackages
 
     public function getAllPtPackagesforClient()
     {
+        global $conn;
         $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";
-        $result = $this->db->query($sql);;
+        $result = $conn->query($sql);
 
         if ($result) {
             $packages = $result->fetch_all(MYSQLI_ASSOC);
