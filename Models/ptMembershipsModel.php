@@ -77,25 +77,6 @@ class ptMemberships{
         // return false;
     }
 
-    function getCoachNames($ptMemberships, $coaches) {
-        $coachNames = array();
-    
-        foreach ($ptMemberships as $ptMembership) {
-            $clientId = $ptMembership['ClientID'];
-            $coachId = $ptMembership['CoachID'];
-    
-            $coach = array_filter($coaches, function ($c) use ($coachId) {
-                return $c['ID'] == $coachId;
-            });
-    
-            if (!empty($coach)) {
-                $coach = reset($coach);
-                $coachNames[$clientId] = $coach['Name'];
-            }
-        }
-    
-        return $coachNames;
-    }
 
     public static function getClientPtMembershipInfo()
     {
