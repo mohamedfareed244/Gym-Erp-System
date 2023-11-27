@@ -35,7 +35,8 @@
   <?php require("partials/adminsidebar.php");
   include_once "../Models/ClientModel.php";
   include_once "../Models/membershipsModel.php";
-  $clients = Client::getAllClients();
+  $Client = new Client;
+  $clients = $Client -> getAllClients();
   $memberships = memberships::getAllMemberships();
   ?>
   <div id="add-body" class="addbody">
@@ -64,21 +65,21 @@
           <tbody>
             <?php
             foreach ($clients as $client) {
-              echo "<tr id='row-" . $client->ID . "'>";
-              echo '<td> ' . $client->ID . ' </td>';
-              echo '<td> ' . $client->FirstName . ' ' . $client->LastName . ' </td>';
-              echo '<td> ' . $client->Email . '</td>';
-              echo '<td> ' . $client->Age . '</td>';
-              echo '<td> ' . $client->Gender . '</td>';
-              echo '<td> ' . $client->Weight . '</td>';
-              echo '<td> ' . $client->Height . '</td>';
-              echo '<td> ' . $client->Phone . '</td>';
+              echo "<tr id='row-" . $client->getID() . "'>";
+              echo '<td> ' . $client->getID() . ' </td>';
+              echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
+              echo '<td> ' . $client->getEmail() . '</td>';
+              echo '<td> ' . $client->getAge() . '</td>';
+              echo '<td> ' . $client->getGender() . '</td>';
+              echo '<td> ' . $client->getWeight() . '</td>';
+              echo '<td> ' . $client->getHeight() . '</td>';
+              echo '<td> ' . $client->getPhone() . '</td>';
               $found = false;
               if ($memberships) {
                 foreach ($memberships as $membership) {
-                  if ($membership->clientId == $client->ID) {
+                  if ($membership->clientId == $client->getID()) {
                     echo '<td><button class="btn" disabled>Add</button></td>';
-                    echo '<td><a href="addCLientPtPackage.php?ID='.$client->ID.'" class="btn btn-freeze">Add</a></td>';
+                    echo '<td><a href="addCLientPtPackage.php?ID='.$client->getID().'" class="btn btn-freeze">Add</a></td>';
                     $found = true;
                     break;
                   }
@@ -86,13 +87,13 @@
               }
 
               if (!$found) {
-                echo '<td><a href="addclientmembership.php?ID='.$client->ID.'" class="btn">Add</a></td>';
+                echo '<td><a href="addclientmembership.php?ID='.$client->getID().'" class="btn">Add</a></td>';
                 echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
 
               }
 
-              echo "<td><a href='editclient.php?ID=" . $client->ID . "' class=\"btn\">Edit</a>       ";
-              echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->ID . ")'>Delete</button></td>";
+              echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";
+              echo "<button class=\"btn btn-delete\" onclick='deleteClient(" . $client->getID() . ")'>Delete</button></td>";
               echo '</tr>';
             }
             ?>

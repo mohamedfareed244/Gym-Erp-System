@@ -31,7 +31,8 @@
     include_once "../Models/membershipsModel.php";
     include_once "../Models/PackageModel.php";
 
-    $clients = Client::getAllClients();
+    $Client = new Client();
+    $clients = $Client->getAllClients();
     $memberships = Memberships::getAllMemberships();
     ?>
     <script>
@@ -70,9 +71,9 @@
                         foreach ($memberships as $membership) {
                             echo "<tr id='row-" . $membership->ID . "'>";
                             echo "<td>" . $membership->ID . "</td>";
-                            $client = Client::getClientByID($membership->clientId);
-                            echo '<td> ' . $client->FirstName . ' ' . $client->LastName . ' </td>';
-                            echo '<td> ' . $client->Phone . ' </td>';
+                            $client = $Client->getClientByID($membership->clientId);
+                            echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
+                            echo '<td> ' . $client->getPhone() . ' </td>';
                             echo '<td>' . $membership->packageId . '</td>';
                             echo '<td>' . $membership->startDate . '</td>';
                             echo '<td class="endDate-' . $membership->ID . '">' . $membership->endDate . '</td>';
