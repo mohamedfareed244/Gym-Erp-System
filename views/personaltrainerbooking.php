@@ -18,14 +18,9 @@
 
 
     <style>
-        .card {
-    position: relative;
-    text-align: center; /* Center align the text within the card */
-}
 
 #confirm-package-button {
-    position: absolute;
-    bottom: 10px; /* Adjust the distance from the bottom as needed */
+    transform: translateX(-85px);
 }
         </style>
 </head>
@@ -65,8 +60,8 @@
                         <h3>Coach Name Not Available</h3>
                     <?php endif; ?>
 
-                    <form method="post" action="">
-                        <input type="hidden" name="selectedTrainerID" value="<?php echo $coachID; ?>">
+                    <form method="post" action="bookptpack.php?coachID=<?php echo $coachID; ?>">
+                        <!-- <input type="hidden" name="selectedTrainerID" value="<?php echo $coachID; ?>"> -->
                         <button type="submit" id="confirm-package-button">Request</button>
                     </form>
 

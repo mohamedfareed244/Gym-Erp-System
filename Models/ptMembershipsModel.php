@@ -60,22 +60,50 @@ class ptMemberships{
         return $conn->query($sql);
     }
 
-    public static function createPtMembership($clientId, $ptpackageID)
+   
+    public static function addPtMembershipUserSide($ptPackageID)
     {
         global $conn;
-        $isActivated = "Activated";
-        $client=new Client();
-        $package = new ptPackages();
-        $findClient = $client->checkClient($clientId);
-        $findPackage = $package->checkPtPackage($ptpackageID);
-        // if ($findClient && $findPackage) {
-        //     $Package = $package->getPtPackage($ptpackageID);
-        //     $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
-        //     -- VALUES ('$clientId', '$','$getisActivated()')";
-        //     return mysqli_query($conn, $sql);
-        // }
-        // return false;
+        $pck = new ptPackages();
+        $client = new Client();
+        $isActivated = "Not Activated";
+        $findClient = $client->checkClient($_SESSION['ID']); // Use $_SESSION['ID'] directly
+        $findPackage = $pck->checkPtPackage($ptPackageID);
+    
+        if ($findClient && $findPackage) {
+            $Package = $pck->getPtPackage($ptPackageID);
+    
+            $check1Sql = "SELECT * FROM `private training membership` WHERE PackageID ='$ptPackageID' AND ClientID = " . $_SESSION['ID'];
+            $check1Result = mysqli_query($conn, $check1Sql);
+            $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
+    
+            $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = " . $_SESSION['ID'];
+            $check2Result = mysqli_query($conn, $check2Sql);
+            $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
+    
+            if ($alreadyThisMembershipExists) {
+                return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false);
+            } elseif ($alreadyAnotherMembershipExists) {
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
+            } else {
+                $ClientID = $_SESSION['ID'];
+                $CoachID = $Package->CoachID; 
+                $PrivateTrainingPackageID = $Package->getPrivateTrainingPackageID(); // Use the correct method to get the property value
+                $SessionsCount = $Package->SessionsCount;
+                $isActivated = $Package->isActivated;
+    
+                $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
+                        VALUES ('$ClientID', '$CoachID', '$PrivateTrainingPackageID', '$SessionsCount', '$isActivated')";
+                $insertResult = mysqli_query($conn, $sql);
+    
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
+            }
+        } else {
+            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => 'Client or package not found');
+        }
     }
+    
+
 
 
     public static function getClientPtMembershipInfo()

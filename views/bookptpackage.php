@@ -42,34 +42,55 @@
         echo "Error: Coach ID not specified.";
         exit();
     }
-    ?>
 
+    $selectedCoachName = $coaches[$selectedTrainerID]['Name'];
     ?>
 
     <div class="profile">
 
-        <!-- <div class="greeting">
+         <div class="greeting">
             <p class="class">Personal Trainer:</p>
-            <div class="class-title">Sara Maged</div>
-        </div> -->
+            <div class="class-title"><?php echo $selectedCoachName; ?></p></div>
+        </div> 
 
         <div class="reminders">
     <?php foreach ($ptpacks as $ptpackage): ?>
-                <div class="reminder">
-                    <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
+                    <div class="reminder">
+                        <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
 
-                    <div class="rem-info">
-                        <p>Number Of Sessions:</p>
-                        <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
+                        <div class="rem-info">
+                            <p>Number Of Sessions:</p>
+                            <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
 
-                        <p>PT Fees:</p>
-                        <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
+                            <p>PT Fees:</p>
+                            <p class="actual-rem"><?php echo "For L.E " . $ptpackage['Price'] ?></p>
+                        </div>
+                        <div class="d-flex justify-content-around mb-5">
+                                <input type="submit" value="Request" id="trainer-booking" class="btn btn-primary">
+                                <div style ="padding:10px;">
+                                    <span id="success" style="color: green;">
+                                        <?php echo isset($_SESSION["membershipsuccess"][$ptpackage['ID']]) ? $_SESSION["membershipsuccess"][$ptpackage['ID']] : ''; ?>
+                                    </span>
+                                    <span id="alreadyExists1">
+                                        <?php echo isset($_SESSION["alreadyThisMembershipExists"][$ptpackage['ID']]) ? $_SESSION["alreadyThisMembershipExists"][$ptpackage['ID']] : ''; ?>
+                                    </span>
+                                    <span id="alreadyExists2">
+                                        <?php echo isset($_SESSION["alreadyAnotherMembershipExists"][$ptpackage['ID']]) ? $_SESSION["alreadyAnotherMembershipExists"][$ptpackage['ID']] : ''; ?>
+                                    </span>
+                                    <span id="fail">
+                                        <?php echo isset($_SESSION["fail"][$ptpackage['ID']]) ? $_SESSION["fail"][$ptpackage['ID']] : ''; ?>
+                                    </span>
+                                </div>
+                            </div>
+                        <!-- <button id="trainer-booking">Request</button> -->
                     </div>
-
-                    <button id="trainer-booking">Request</button>
-                </div>
-                <br>
+                    <br>
     <?php endforeach; ?>
+    <?php
+    // Clear session variables after displaying messages for all packages
+    unset($_SESSION["membershipsuccess"], $_SESSION["alreadyThisMembershipExists"], $_SESSION["alreadyAnotherMembershipExists"], $_SESSION["fail"]);
+    ?>
+
 </div>
 
             </div>

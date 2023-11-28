@@ -2,6 +2,8 @@
 
 
 include_once "../Models/ptPackageModel.php";
+include_once "../Models/ptMembershipsModel.php";
+
 
 session_start();
 
@@ -124,6 +126,25 @@ class ptPackController
         exit();
     }
 
+    public function addPtMembership()
+    {
+        $PackageID = $_POST["PackageID"];
+        $result = ptMemberships::createPtMembership($clientId, $PackageID);
+
+        if ($result['alreadyThisMembershipExists']) {
+            $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
+        } else if ($result['alreadyAnotherMembershipExists']) {
+            $_SESSION['alreadyAnotherMembershipExists'][$PackageID] = "You are already subscribed to another package.";
+        } else if ($result['success']) {
+            $_SESSION['membershipsuccess'][$PackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
+        } else {
+            $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
+        }
+
+        header("Location: ../views/packagebooking.php");
+        exit();
+    }
+
 }
 
 
@@ -158,6 +179,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "failure";
                 }
             }
+            case "addPtMembership":
+                $controller->addPtMembership();
+                break;
         default:
             // Handle unknown action or display an error
             break;
