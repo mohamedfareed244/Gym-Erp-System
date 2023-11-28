@@ -136,7 +136,7 @@
             <?php endforeach; ?>
             <?php } ?>
             <!-- <div class="reminder">
-                <p class="ptsession">Private training session:</p>
+                <p class="ptsession">Private training package:</p>
                 <p class="ptsession-coach">Coach:</p>
                 <div class="ptsession-coachname">Sara Khaled</div>
                 <div class="dates">
