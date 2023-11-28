@@ -43,86 +43,89 @@
     <?php session_start();
     include("partials/usersidebar.php") ?>
 
-    <div class="profile">
+<div class="profile">
         <div class="greeting">
             <p class="hello-fz"><i class="fas fa-lock"></i>Freeze Membership</p>
         </div>
 
         <div class="reminders">
-            <div class="reminder">
-                <?php
-                include_once "../Models/membershipsModel.php";
-                include_once "../Models/ClientModel.php";
-                include_once "../Models/PackageModel.php";
+            <?php
+            include_once "../Models/membershipsModel.php";
+            include_once "../Models/ClientModel.php";
+            include_once "../Models/PackageModel.php";
 
-                $memberships = new Memberships();
-                $membership = Memberships::getClientMembershipInfo();
+            $memberships = new Memberships();
+            $membership = Memberships::getClientMembershipInfo();
+            $clientId = $_SESSION["ID"];
 
-                $clientId = $_SESSION["ID"];
-                $membershipdetails = $memberships->getMembership($clientId);
-                $pck = new Package();
-                $package = $pck->getPackage($membershipdetails->packageId);
-                ?>
-                <script>
-                    var currentDate = new Date();
-                    var maxDate = new Date(currentDate);
-                    maxDate.setMonth(currentDate.getMonth() + 3);
-                </script>
-                <p class="membership class">Package:</p>
-                <div class="class-title"><?php echo $package->getTitle(); ?></div>
+            if (!empty($membership)) :
+                foreach ($membership as $membershipp) :
+                    $membershipdetails = $memberships->getMembership($clientId);
+                    $pck = new Package();
+                    $package = $pck->getPackage($membershipdetails->packageId);
+                    ?>
+                    <script>
+                        var currentDate = new Date();
+                        var maxDate = new Date(currentDate);
+                        maxDate.setMonth(currentDate.getMonth() + 3);
+                    </script>
+                    <div class="reminder">
+                        <p class="membership class">Package:</p>
+                        <div class="class-title"><?php echo $package->getTitle(); ?></div>
 
-                <div class="membership dates">
-                    <div class="date">
-                        <p>Start Date:</p>
-                        <div class="start-date"><?php echo $membershipdetails->startDate; ?></div>
-                    </div>
-                    <div class="date">
-                        <p>End Date:</p>
-                        <div class="end-date"><?php echo $membershipdetails->endDate; ?></div>
-                    </div>
-                </div>
+                        <div class="membership dates">
+                            <div class="date">
+                                <p>Start Date:</p>
+                                <div class="start-date"><?php echo $membershipdetails->startDate; ?></div>
+                            </div>
+                            <div class="date">
+                                <p>End Date:</p>
+                                <div class="end-date"><?php echo $membershipdetails->endDate; ?></div>
+                            </div>
+                        </div>
 
-                <div class="rem-info">
-                    <p>Remaining Freeze Attempts:</p>
-                    <p class="actual-rem" id="actual-rem">
-                        <?php echo $membershipdetails->freezeCount . " Days left from " . $package->getFreezeLimit(); ?>
-                    </p>
-                </div>
-                <div class="rem-info">
-                <p>Membership Freeze Status:</p>
-                <p class="actual-rem" id="freeze-stat"><?php echo ($membershipdetails->freezed == 0) ? 'Not Freezed' : 'Freezed'; ?></p>
-                    </div>
+                        <div class="rem-info">
+                            <p>Remaining Freeze Attempts:</p>
+                            <p class="actual-rem" id="actual-rem">
+                                <?php echo $membershipdetails->freezeCount . " Days left from " . $package->getFreezeLimit(); ?>
+                            </p>
+                        </div>
+                        <div class="rem-info">
+                            <p>Membership Freeze Status:</p>
+                            <p class="actual-rem" id="freeze-stat"><?php echo ($membershipdetails->freezed == 0) ? 'Not Freezed' : 'Freezed'; ?></p>
+                        </div>
 
-                    <div class="rem-info">
-                <p>Membership Status:</p>
-                <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
-                    </div>
-                <?php if ($membershipdetails->freezed == 1) { ?>
+                        <div class="rem-info">
+                            <p>Membership Status:</p>
+                            <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
+                        </div>
+                        <?php if ($membershipdetails->freezed == 1) { ?>
                             <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->ID; ?>)'>Unfreeze</button>
-                <?php } else { ?>
-    
-                                <div class="datePicking">
+                        <?php } else { ?>
+                            <div class="datePicking">
                                 <label for="datepicker">Choose a Date:</label>
-                                    <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                                </div>
-                                <button id="freeze-button" onclick='showModal()'>Freeze</button> 
-                                <div class="modal" id="freezeModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <span class="close-btn" onclick="hideModal()">&times;</span>
-                                            <div>
-                                            <label id="modal-label" >Are you sure you want to freeze your membership?</label>
-                                            </div>
-                                            <button  id="confirm-button"
-                                                onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
+                                <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                            </div>
+                            <button id="freeze-button" onclick='showModal()'>Freeze</button>
+                            <div class="modal" id="freezeModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <span class="close-btn" onclick="hideModal()">&times;</span>
+                                        <div>
+                                            <label id="modal-label">Are you sure you want to freeze your membership?</label>
                                         </div>
+                                        <button id="confirm-button" onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
                                     </div>
-                                </div>                   
-                <?php } ?>
-
-            </div>
-
-            
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <div class="no-package" style="height:1000px; margin-left:200px;">
+                    <p class="nopackage" style="font-size:24px;">You aren't subscribed to any package still.</p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
