@@ -262,6 +262,7 @@ img {
 }
 
 #freeze-button,
+#unfreeze-button,
 #freeze-weeks {
   background-color: transparent;
   padding: 8px;
@@ -270,7 +271,8 @@ img {
   transition: 0.4s ease;
 }
 
-#freeze-button:hover {
+#freeze-button:hover, 
+#unfreeze-button:hover {
   background-color: rgb(51, 51, 51);
   color: white;
 }

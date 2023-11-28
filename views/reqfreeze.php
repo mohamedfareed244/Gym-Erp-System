@@ -19,6 +19,22 @@
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+
+    <style>
+      
+#unfreeze-button{
+  background-color: transparent;
+  padding: 8px;
+  border: 1px solid rgb(51, 51, 51);
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+#unfreeze-button:hover {
+  background-color: rgb(51, 51, 51);
+  color: white;
+}
+      </style>
     <!--css/icons/boostrap/jquery/fonts/images end-->
 </head>
 
@@ -70,36 +86,36 @@
                         <?php echo $membershipdetails->freezeCount . " Days left from " . $package->getFreezeLimit(); ?>
                     </p>
                 </div>
-                <div class="membershipStatus">
+                <div class="rem-info">
                 <p>Membership Freeze Status:</p>
                 <p class="actual-rem"><?php echo ($membershipdetails->freezed == 0) ? 'Active' : 'Freezed'; ?></p>
                     </div>
 
-                    <div class="membershipStatus">
+                    <div class="rem-info">
                 <p>Membership Status:</p>
                 <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
                     </div>
                 <?php if ($membershipdetails->freezed == 1) { ?>
-                        <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->ID; ?>)'>Unfreeze</button>
+                            <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->ID; ?>)'>Unfreeze</button>
                 <?php } else { ?>
     
-                            <div class="datePicking">
-                            <label for="datepicker">Choose a Date:</label>
-                                <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                            </div>
-                            <button id="freeze-button" onclick='showModal()'>Freeze</button> 
-                            <div class="modal" id="freezeModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <span class="close-btn" onclick="hideModal()">&times;</span>
-                                        <div>
-                                        <label id="modal-label" >Are you sure you want to freeze your membership?</label>
-                                        </div>
-                                        <button  id="confirm-button"
-                                            onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
-                                    </div>
+                                <div class="datePicking">
+                                <label for="datepicker">Choose a Date:</label>
+                                    <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
                                 </div>
-                            </div>                   
+                                <button id="freeze-button" onclick='showModal()'>Freeze</button> 
+                                <div class="modal" id="freezeModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <span class="close-btn" onclick="hideModal()">&times;</span>
+                                            <div>
+                                            <label id="modal-label" >Are you sure you want to freeze your membership?</label>
+                                            </div>
+                                            <button  id="confirm-button"
+                                                onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
+                                        </div>
+                                    </div>
+                                </div>                   
                 <?php } ?>
 
             </div>
@@ -187,6 +203,7 @@ function unfreezeMembership(membershipID) {
     },
   });
 }
+
 
     </script>
 
