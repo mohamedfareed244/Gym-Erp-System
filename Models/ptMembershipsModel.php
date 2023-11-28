@@ -73,7 +73,7 @@ class ptMemberships{
         if ($findClient && $findPackage) {
             $Package = $pck->getPtPackage($ptPackageID);
     
-            $check1Sql = "SELECT * FROM `private training membership` WHERE PackageID ='$ptPackageID' AND ClientID = " . $_SESSION['ID'];
+            $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$ptPackageID' AND ClientID = " . $_SESSION['ID'];
             $check1Result = mysqli_query($conn, $check1Sql);
             $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
     
@@ -87,8 +87,8 @@ class ptMemberships{
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
             } else {
                 $ClientID = $_SESSION['ID'];
-                $CoachID = $Package->CoachID; 
-                $PrivateTrainingPackageID = $Package->getPrivateTrainingPackageID(); // Use the correct method to get the property value
+            $CoachID = $Package->CoachID;
+                $PrivateTrainingPackageID = $Package->PrivateTrainingPackageID;
                 $SessionsCount = $Package->SessionsCount;
                 $isActivated = $Package->isActivated;
     
@@ -99,6 +99,7 @@ class ptMemberships{
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
             }
         } else {
+            // Handle the case where either client or package is not found
             return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => 'Client or package not found');
         }
     }

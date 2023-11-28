@@ -30,9 +30,12 @@
     
     include_once "../Models/ClassesModel.php";
     include_once "../Models/membershipsModel.php";
+    include_once "../Models/ptMembershipsModel.php";
+
 
     $classRequests=Classes::getClassRequests();
     $membershipRequests=Memberships::getMembershipRequests();
+    $ptmembershipsRequests = ptMemberships::getPtMembershipRequests();
     ?>
 
     <div id="add-body" class="addbody">
@@ -129,6 +132,48 @@
                                     onclick='declineClass(this)'>Decline
                                 </button>
                                 <?php } ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+            <h2 class="table-title">Membership Requests: </h2>
+            <div id="tablediv">
+                <table class="view-table overflow-auto mh-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">Client ID</th>
+                            <th scope="col">Client Name</th>
+                            <th scope="col">Package Title</th>
+                            <th scope="col">Months</th>
+                            <th scope="col">StartDate</th>
+                            <th scope="col">EndDate</th>
+                            <th scope="col">Price </th>
+                            <th scope="col">Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (is_array($membershipRequests) && !empty($membershipRequests)) {
+                            foreach ($membershipRequests as $membershipRequest): ?>
+
+                        <tr id="row_<?php echo $membershipRequest['membershipID']; ?>">
+                            <td><?php echo $membershipRequest['ID'] ?></td>
+                            <td><?php echo $membershipRequest['FirstName'] ?></td>
+                            <td><?php echo $membershipRequest['Title'] ?></td>
+                            <td><?php echo $membershipRequest['NumOfMonths'] ?></td>
+                            <td><?php echo $membershipRequest['StartDate'] ?></td>
+                            <td><?php echo $membershipRequest['EndDate'] ?></td>
+                            <td><?php echo $membershipRequest['Price'] ?></td>
+                            <td>
+                                <button class="btn"
+                                    data-membershipid="<?php echo $membershipRequest['membershipID']; ?>"
+                                    onclick='acceptMembership(this)'>Accept
+                                </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
