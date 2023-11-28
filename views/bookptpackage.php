@@ -58,7 +58,7 @@
                     <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
                 </div>
 
-                <button id="trainer-booking">Book Now</button>
+                <button id="trainer-booking">Request</button>
             </div>
             <br>
     <?php endforeach; ?>

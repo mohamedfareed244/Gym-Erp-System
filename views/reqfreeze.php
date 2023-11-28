@@ -221,7 +221,6 @@ function unfreezeMembership(membershipID) {
 
 
 
-
     </script>
 
     <script src="../public/js/slider.js"></script>

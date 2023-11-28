@@ -156,6 +156,54 @@ class ptMemberships{
     }
 
 
+    public static function getPtMembershipRequests()
+    {
+        global $conn;
+
+        $isActivated = "Not Activated";
+
+        $sql = "SELECT client.ID,client.FirstName,`private training package`.Name,`private training package`.NumOfSessions,`private training membership`.MinPackageMonths,`private training package`.Price,`private training membership`.SessionsCount,`private training membership`.isActivated,`private training membership`.PrivateTrainingPackageID AS membershipID
+        FROM `private training membership`
+        INNER JOIN client ON client.ID = `private training membership`.ClientID
+        INNER JOIN `private training package` ON package.ID = `private training membership`.PrivateTrainingPackageID
+        WHERE `private training membership`.isActivated = '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        $results = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'CliendID' => $row['CliendID'],
+                    'CoachID' => $row['CoachID'],
+                    'PrivateTrainingPackageID' => $row['PrivateTrainingPackageID'],
+                    'SessionsCount' => $row['SessionsCount'],
+                    'isActivated' => $row['isActivated'],
+                    'Name' => $row['Name'],
+                    'NumOfSessions' => $row['NumOfSessions'],
+                    'MinPackageMonths' => $row['MinPackageMonths'],
+                    'Price' => $row['Price'],
+                    'FirstName' => $row['FirstName'],
+
+                );
+            }
+            return $results;
+        }
+    }
+
+    public function acceptPtMembership($PrivateTrainingPackageID)
+    {
+        global $conn;
+
+        $isActivated = "Activated";
+
+        $sql = "UPDATE `private training membership` 
+        SET isActivated='$isActivated' 
+        WHERE ID = $PrivateTrainingPackageID";
+
+        return $conn->query($sql);
+    }
 
 }
 
