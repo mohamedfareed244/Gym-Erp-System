@@ -209,12 +209,17 @@ function unfreezeMembership(membershipID) {
       var freezeButton =
         '<button id="freeze-button" class="" onclick="showModal()">Freeze</button>';
       $("#unfreeze-button").replaceWith(freezeButton);
+      $("#freeze-stat").text("Not Freezed");
+
+      
     },
     error: function (xhr, status, error) {
       console.error("AJAX error: " + status + " - " + error);
     },
   });
 }
+
+
 
 
     </script>

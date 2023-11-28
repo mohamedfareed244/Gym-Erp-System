@@ -50,6 +50,22 @@ class MembershipsController
         header("Location: ../views/reqfreeze.php");
         exit();
     }
+    public function unfreezeClientMembership()
+    {
+        $ClientID = $_SESSION["ID"];
+
+        $result = Memberships::unfreezeMembership($ClientID);
+
+        if ($result) {
+            $_SESSION['unfreezeSuccess'][$ClientID] = "Membership unfrozen successfully.";
+        } else {
+            $_SESSION['unfreezeFail'][$ClientID] = "Failed to unfreeze membership.";
+        }
+
+        header("Location: ../views/reqfreeze.php");
+        exit();
+    }
+
 }
 
 $controller = new MembershipsController();
@@ -62,8 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->addMembership();
             break;
         case "deleteMembership":
-            if (isset($_POST["membershipID"]))
-            {
+            if (isset($_POST["membershipID"])) {
                 $membershipID = $_POST["membershipID"];
                 $result = Memberships::deleteMembership($membershipID);
                 if ($result) {
@@ -76,6 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "freezeMembership":
             $controller->freezeMembership();
             break;
+            case "unfreezeClientMembership":
+                $controller->unfreezeClientMembership();
+                break;
         case "freezeClientMembership":
             if (isset($_POST["membershipID"]) && isset($_POST["selectedDate"])) {
 
