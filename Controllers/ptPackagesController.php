@@ -129,7 +129,7 @@ class ptPackController
     public function addPtMembership()
     {
         $PackageID = $_POST["PackageID"];
-        $result = ptMemberships::createPtMembership($clientId, $PackageID);
+        $result = ptMemberships::addPtMembershipUserSide($ClientID, $PackageID);
 
         if ($result['alreadyThisMembershipExists']) {
             $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
@@ -141,7 +141,7 @@ class ptPackController
             $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
         }
 
-        header("Location: ../views/packagebooking.php");
+        header("Location: ../views/bookptpackage.php");
         exit();
     }
 
