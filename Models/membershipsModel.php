@@ -178,18 +178,24 @@ class Memberships
 
         if ($result) {
             $membershipData = $result->fetch_assoc();
+
+            if ($membershipData) {
+                $membership = new Memberships();
+                $membership->ID = $membershipData["ID"];
+                $membership->clientId = $membershipData["ClientID"];
+                $membership->packageId = $membershipData["PackageID"];
+                $membership->startDate = $membershipData["StartDate"];
+                $membership->endDate = $membershipData["EndDate"];
+                $membership->visitsCount = $membershipData["VisitsCount"];
+                $membership->inbodyCount = $membershipData["InvitationsCount"];
+                $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
+                $membership->freezeCount = $membershipData["FreezeCount"];
+                $membership->freezed = $membershipData["Freezed"];
+                $membership->isActivated = $membershipData["isActivated"];
+            } else {
+                $membership = null;
+            }
             
-            $membership = new Memberships();
-            $membership->ID = $membershipData["ID"];
-            $membership->clientId = $membershipData["ClientID"];
-            $membership->packageId = $membershipData["PackageID"];
-            $membership->startDate = $membershipData["StartDate"];
-            $membership->endDate = $membershipData["EndDate"];
-            $membership->visitsCount = $membershipData["VisitsCount"];
-            $membership->inbodyCount = $membershipData["InvitationsCount"];
-            $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
-            $membership->freezeCount = $membershipData["FreezeCount"];
-            $membership->freezed = $membershipData["Freezed"];
 
             return $membership;
         }
@@ -388,16 +394,16 @@ class Memberships
 
     public function calculateRemainingFreezeAttempts($userInput)
     {
-        
-        if ($this->freezeCount > 0) {
+        if ($this->freezeCount !== null && $this->freezeCount > 0) {
             $remainingFreezeAttempts = max(0, $this->freezeCount - $userInput);
             $this->freezeCount = $remainingFreezeAttempts;
-
+    
             return $remainingFreezeAttempts;
         } else {
             return 0;
         }
     }
+    
 
     private function updateFreezeCountInDatabase($newFreezeCount)
     {
