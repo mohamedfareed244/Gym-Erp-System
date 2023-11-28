@@ -40,10 +40,10 @@
 
     <div class="profile">
 
-        <div class="greeting">
+        <!-- <div class="greeting">
             <p class="class">Personal Trainer:</p>
             <div class="class-title">Sara Maged</div>
-        </div>
+        </div> -->
 
         <div class="reminders">
     <?php foreach ($ptpacks as $ptpackage): ?>
@@ -51,11 +51,8 @@
                 <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
 
                 <div class="rem-info">
-                    <p>Working Days:</p>
-                    <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
-
-                    <p>Working Hours:</p>
-                    <p class="actual-rem"> 10 AM - 5 PM</p>
+                    <p>Number Of Sessions:</p>
+                    <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
 
                     <p>PT Fees:</p>
                     <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
