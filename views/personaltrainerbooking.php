@@ -17,77 +17,64 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
+    <style>
+        .card {
+    position: relative;
+    text-align: center; /* Center align the text within the card */
+}
 
+#confirm-package-button {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+}
+        </style>
 </head>
 
-<body> 
+<body>
     <!-- usersidebar start -->
     <?php
     session_start();
-    include("partials/usersidebar.php") ?>
-    <?php include_once "../Models/ptMembershipsModel.php";
+    include("partials/usersidebar.php");
+    ?>
+    <?php
+    include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
     include_once "../Models/employeeModel.php";
 
-
     $ptpackage = new ptPackages();
     $ptmemberships = ptMemberships::getAllPtMemberships();
-    $coaches = Employee::getAllCoaches(); // Move this line here
+    $coaches = Employee::getAllCoaches(); 
     $ptMembershipsInstance = new ptMemberships();
     $packages = $ptpackage->getAllPtPackagesforClient();
-
-     
-        // echo $coachName . '<br>';
-       
-    
-
     ?>
 
-
-
     <div class="container py-5">
-        <h2 style=" font-size: 26px;
+        <h2 style="font-size: 26px;
     font-weight: bolder;
     text-transform: uppercase;
     color: rgb(176, 37, 37);
     letter-spacing: -1px;
     margin-bottom:3%;">Coaches:</h2>
         <div class="card-container">
+            <?php foreach ($coaches as $coachID => $coachName): ?>
+                <div class="card">
+                    <img src="../public/Images/coach3.jpg" class="imgslides">
+                    <?php if (isset($coachName['Name'])): ?>
+                        <h3><?php echo $coachName['Name']; ?></h3>
+                    <?php else: ?>
+                        <h3>Coach Name Not Available</h3>
+                    <?php endif; ?>
 
-      
-        <?php foreach ($coaches as $coachID => $coachName): ?>
-    <div class="card">
-        <!-- <img src="../public/Images/coach3.jpg" class="imgslides"> -->
-        <?php
-        if (isset($coachName['Name'])) {
-            echo '<h3>' . $coachName['Name'] . '</h3>';
-            
-        } else {
-            echo '<h3>Coach Name Not Available</h3>';
-        }
-        ?>
-    </div>
-<?php endforeach; ?>
+                    <form method="post" action="">
+                        <input type="hidden" name="selectedTrainerID" value="<?php echo $coachID; ?>">
+                        <button type="submit" id="confirm-package-button">Request</button>
+                    </form>
 
-
-
-
-
+                </div>
+            <?php endforeach; ?>
         </div>
 
-        
-
-
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close-popup">&times;</span>
-                <p id="confirmation-text"></p>
-                <button id="confirm-package-button">View Packages</button>
-                <button id="confirm-free-button">Cancel</button>
-                <p id="modal-message"></p>
-
-            </div>
-        </div>
+        <p id="modal-message"></p>
 
         <div id="myPopup" class="popup">
             <div class="popup-content">
@@ -96,23 +83,19 @@
                 <button id="popup-confirm-button">Yes</button>
                 <button id="popup-cancel-button">Cancel</button>
                 <p id="popup-message"></p>
-
             </div>
         </div>
-
-
-    </div>
     </div>
 
-
-
-
-
-
-
+    <?php include("partials/footer.php") ?>
+    <script src="../public/js/personaltrainer.js"></script>
+    <script>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedTrainerID'])) {
+        echo 'window.location.href = "bookptpackage.php?coachID=' . $_POST['selectedTrainerID'] . '";';
+    }
+    ?>
+</script>
 </body>
-<?php include("partials/footer.php") ?>
-
-<script src="../public/js/personaltrainer.js"></script>
 
 </html>

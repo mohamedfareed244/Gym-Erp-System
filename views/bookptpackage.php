@@ -36,6 +36,14 @@
     $ptMembershipsInstance = new ptMemberships();
 
 
+    if (isset($_GET['coachID'])) {
+        $selectedTrainerID = $_GET['coachID'];
+    } else {
+        echo "Error: Coach ID not specified.";
+        exit();
+    }
+    ?>
+
     ?>
 
     <div class="profile">
@@ -47,20 +55,20 @@
 
         <div class="reminders">
     <?php foreach ($ptpacks as $ptpackage): ?>
-            <div class="reminder">
-                <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
+                <div class="reminder">
+                    <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
 
-                <div class="rem-info">
-                    <p>Number Of Sessions:</p>
-                    <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
+                    <div class="rem-info">
+                        <p>Number Of Sessions:</p>
+                        <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
 
-                    <p>PT Fees:</p>
-                    <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
+                        <p>PT Fees:</p>
+                        <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
+                    </div>
+
+                    <button id="trainer-booking">Request</button>
                 </div>
-
-                <button id="trainer-booking">Request</button>
-            </div>
-            <br>
+                <br>
     <?php endforeach; ?>
 </div>
 
