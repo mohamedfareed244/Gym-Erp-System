@@ -190,6 +190,8 @@ class Memberships
             $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
             $membership->freezeCount = $membershipData["FreezeCount"];
             $membership->freezed = $membershipData["Freezed"];
+            $membership->isActivated = $membershipData["isActivated"];
+
 
             return $membership;
         }

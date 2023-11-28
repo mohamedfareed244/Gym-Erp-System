@@ -71,6 +71,11 @@
                     </p>
                 </div>
                 <div class="membershipStatus">
+                <p>Membership Freeze Status:</p>
+                <p class="actual-rem"><?php echo ($membershipdetails->freezed == 0) ? 'Active' : 'Freezed'; ?></p>
+                    </div>
+
+                    <div class="membershipStatus">
                 <p>Membership Status:</p>
                 <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
                     </div>
