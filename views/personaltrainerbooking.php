@@ -75,7 +75,82 @@
 
         </div>
 
-        
+        <div class="all-avail-times" id="all-avail-times">
+            <h2 class="avail-times" style=" font-size: 26px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgb(176, 37, 37);
+    letter-spacing: -1px;
+    margin-bottom:3%;">Available Times:</h2>
+            <div class="slider">
+                <div class="available-times">
+                <div class="day" style="height:10%;">Wednesday, 25th of October 2023</div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">9:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">11:00 p.m</div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">1:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">3:00 p.m</div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">5:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">7:00 p.m</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="available-times">
+                <div class="day" style="height:10%;">Sunday, 29th of October 2023</div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">9:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">11:00 p.m</div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">1:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">3:00 p.m</div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="date">
+                            <p>From:</p>
+                            <div class="time">5:30 p.m</div>
+                        </div>
+                        <div class="date">
+                            <p>To:</p>
+                            <div class="end-date">7:00 p.m</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div id="myModal" class="modal">

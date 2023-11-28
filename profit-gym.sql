@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 08:49 PM
+-- Generation Time: Nov 28, 2023 at 09:50 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -46,7 +46,7 @@ CREATE TABLE `assignedclass` (
 
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
 (5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 19),
-(6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 15),
+(6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 14),
 (7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8),
 (8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
 
@@ -271,6 +271,13 @@ CREATE TABLE `membership` (
   `isActivated` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `membership`
+--
+
+INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
+(10, 45, 13, '2023-11-28', '2024-01-28', 0, 4, 2, 2, 20, 0, 'Activated');
+
 -- --------------------------------------------------------
 
 --
@@ -366,7 +373,22 @@ INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `A
 (20, 5, 3, 45, '', 'Activated'),
 (21, 7, 3, 46, '', 'Activated'),
 (22, 8, 3, 46, '', 'Activated'),
-(23, 7, 3, 44, '', 'Activated');
+(23, 7, 3, 44, '', 'Activated'),
+(24, 6, 4, 45, '', 'Activated');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scheduled_unfreeze`
+--
+
+CREATE TABLE `scheduled_unfreeze` (
+  `ID` int(11) NOT NULL,
+  `membership_id` int(11) NOT NULL,
+  `freezeEndDate` date NOT NULL,
+  `freezeStartDate` date NOT NULL,
+  `freezeCount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -465,6 +487,12 @@ ALTER TABLE `reserved class`
   ADD KEY `test10` (`CoachID`);
 
 --
+-- Indexes for table `scheduled_unfreeze`
+--
+ALTER TABLE `scheduled_unfreeze`
+  ADD KEY `fk-membership` (`membership_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -514,7 +542,7 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `package`
@@ -532,7 +560,7 @@ ALTER TABLE `private training package`
 -- AUTO_INCREMENT for table `reserved class`
 --
 ALTER TABLE `reserved class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -551,6 +579,12 @@ ALTER TABLE `private training membership`
   ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `scheduled_unfreeze`
+--
+ALTER TABLE `scheduled_unfreeze`
+  ADD CONSTRAINT `fk-membership` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
