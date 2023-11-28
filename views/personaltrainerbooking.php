@@ -17,143 +17,64 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
+    <style>
+        .card {
+    position: relative;
+    text-align: center; /* Center align the text within the card */
+}
 
+#confirm-package-button {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+}
+        </style>
 </head>
 
-<body> 
+<body>
     <!-- usersidebar start -->
     <?php
     session_start();
-    include("partials/usersidebar.php") ?>
-    <?php include_once "../Models/ptMembershipsModel.php";
+    include("partials/usersidebar.php");
+    ?>
+    <?php
+    include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
+    include_once "../Models/employeeModel.php";
 
     $ptpackage = new ptPackages();
-    $ptmembership = new ptMemberships();
-
-    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
-
-
+    $ptmemberships = ptMemberships::getAllPtMemberships();
+    $coaches = Employee::getAllCoaches(); 
+    $ptMembershipsInstance = new ptMemberships();
+    $packages = $ptpackage->getAllPtPackagesforClient();
+    ?>
 
     <div class="container py-5">
-        <h2 style=" font-size: 26px;
+        <h2 style="font-size: 26px;
     font-weight: bolder;
     text-transform: uppercase;
     color: rgb(176, 37, 37);
     letter-spacing: -1px;
     margin-bottom:3%;">Coaches:</h2>
         <div class="card-container">
+            <?php foreach ($coaches as $coachID => $coachName): ?>
+                <div class="card">
+                    <img src="../public/Images/coach3.jpg" class="imgslides">
+                    <?php if (isset($coachName['Name'])): ?>
+                        <h3><?php echo $coachName['Name']; ?></h3>
+                    <?php else: ?>
+                        <h3>Coach Name Not Available</h3>
+                    <?php endif; ?>
 
-        <?php foreach ($packages as $package) ?>
-            <div class="card">
-                <img src="../public/Images/coach3.jpg" class="imgslides">
-                <h3>Lama Ahmed</h3>
-            </div>
+                    <form method="post" action="">
+                        <input type="hidden" name="selectedTrainerID" value="<?php echo $coachID; ?>">
+                        <button type="submit" id="confirm-package-button">Request</button>
+                    </form>
 
-            <div class="card">
-                <img src="../public/Images/coach1.jpg" class="imgslides">
-                <h3>Ahmed Mohamed</h3>
-            </div>
-
-            <div class="card">
-                <img src="../public/Images/coach2.jpg" class="imgslides">
-                <h3>Yasser Sayed</h3>
-            </div>
-
-        </div>
-
-        <div class="all-avail-times" id="all-avail-times">
-            <h2 class="avail-times" style=" font-size: 26px;
-    font-weight: bolder;
-    text-transform: uppercase;
-    color: rgb(176, 37, 37);
-    letter-spacing: -1px;
-    margin-bottom:3%;">Available Times:</h2>
-            <div class="slider">
-                <div class="available-times">
-                <div class="day" style="height:10%;">Wednesday, 25th of October 2023</div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">9:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">11:00 p.m</div>
-                        </div>
-                    </div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">1:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">3:00 p.m</div>
-                        </div>
-                    </div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">5:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">7:00 p.m</div>
-                        </div>
-                    </div>
                 </div>
-                <div class="available-times">
-                <div class="day" style="height:10%;">Sunday, 29th of October 2023</div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">9:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">11:00 p.m</div>
-                        </div>
-                    </div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">1:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">3:00 p.m</div>
-                        </div>
-                    </div>
-                    <div class="dates">
-                        <div class="date">
-                            <p>From:</p>
-                            <div class="time">5:30 p.m</div>
-                        </div>
-                        <div class="date">
-                            <p>To:</p>
-                            <div class="end-date">7:00 p.m</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-controls">
-        <button class="prev-slide">&#8249;</button>
-        <button class="next-slide">&#8250;</button>
-    </div>
+            <?php endforeach; ?>
         </div>
 
-
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close-popup">&times;</span>
-                <p id="confirmation-text"></p>
-                <button id="confirm-package-button">View Packages</button>
-                <button id="confirm-free-button">Cancel</button>
-                <p id="modal-message"></p>
-
-            </div>
-        </div>
+        <p id="modal-message"></p>
 
         <div id="myPopup" class="popup">
             <div class="popup-content">
@@ -162,23 +83,19 @@
                 <button id="popup-confirm-button">Yes</button>
                 <button id="popup-cancel-button">Cancel</button>
                 <p id="popup-message"></p>
-
             </div>
         </div>
-
-
-    </div>
     </div>
 
-
-
-
-
-
-
+    <?php include("partials/footer.php") ?>
+    <script src="../public/js/personaltrainer.js"></script>
+    <script>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedTrainerID'])) {
+        echo 'window.location.href = "bookptpackage.php?coachID=' . $_POST['selectedTrainerID'] . '";';
+    }
+    ?>
+</script>
 </body>
-<?php include("partials/footer.php") ?>
-
-<script src="../public/js/personaltrainer.js"></script>
 
 </html>

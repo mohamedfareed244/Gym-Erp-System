@@ -24,82 +24,56 @@
     <!-- usersidebar start -->
     <?php
     session_start();
-     include("partials/usersidebar.php") ?>
-         <?php include_once "../Models/ptMembershipsModel.php";
+    include("partials/usersidebar.php");
+    include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
+    include_once "../Models/employeeModel.php";
 
-    $ptpackage = new ptPackages();
-    $ptmemberships = new ptMemberships();
 
-    $packages = $ptpackage->getAllPtPackagesforClient(); ?>
+    $ptpackages = new ptPackages();
+    $ptpacks = $ptpackages->getAllPtPackagesforClient();
+    $coaches = Employee::getAllCoaches();
+    $ptMembershipsInstance = new ptMemberships();
 
-?>
 
+    if (isset($_GET['coachID'])) {
+        $selectedTrainerID = $_GET['coachID'];
+    } else {
+        echo "Error: Coach ID not specified.";
+        exit();
+    }
+    ?>
+
+    ?>
 
     <div class="profile">
 
-        <div class="greeting">
+        <!-- <div class="greeting">
             <p class="class">Personal Trainer:</p>
             <div class="class-title">Sara Maged</div>
-        </div>
+        </div> -->
 
         <div class="reminders">
-            <div class="reminder">
-                <div class="class-title">1 Months, 15 Sessions</div>
+    <?php foreach ($ptpacks as $ptpackage): ?>
+                <div class="reminder">
+                    <div class="class-title"><?php echo $ptpackage['Name']; ?></div>
 
+                    <div class="rem-info">
+                        <p>Number Of Sessions:</p>
+                        <p class="actual-rem"><?php echo $ptpackage['NumOfSessions']; ?></p>
 
-                <div class="rem-info">
-                    <p>Working Days:</p>
-                    <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
+                        <p>PT Fees:</p>
+                        <p class="actual-rem"><?php echo "for L.E " . $ptpackage['Price'] ?></p>
+                    </div>
 
-                    <p>Working Hours:</p>
-                    <p class="actual-rem"> 10 AM - 5 PM</p>
-
-                    <p>PT Fees:</p>
-                    <p class="actual-rem"> 1500 L.E.</p>
+                    <button id="trainer-booking">Request</button>
                 </div>
-                <button id="trainer-booking">Book Now</button>
+                <br>
+    <?php endforeach; ?>
+</div>
+
             </div>
 
-
-
-            <div class="reminder">
-                <div class="class-title">2 Months, 30 Sessions</div>
-
-
-                <div class="rem-info">
-                    <p>Working Days:</p>
-                    <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
-
-                    <p>Working Hours:</p>
-                    <p class="actual-rem"> 10 AM - 5 PM</p>
-
-                    <p>PT Fees:</p>
-                    <p class="actual-rem"> 3500 L.E.</p>
-                </div>
-                <button id="trainer-booking">Book Now</button>
-            </div>
-
-
-
-
-
-            <div class="reminder">
-                <div class="class-title">4 Months, 40 Sessions</div>
-
-
-                <div class="rem-info">
-                    <p>Working Days:</p>
-                    <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
-
-                    <p>Working Hours:</p>
-                    <p class="actual-rem"> 10 AM - 5 PM</p>
-
-                    <p>PT Fees:</p>
-                    <p class="actual-rem"> 4500 L.E.</p>
-                </div>
-                <button id="trainer-booking">Book Now</button>
-            </div>
 
         </div>
 
@@ -113,6 +87,8 @@
 
             </div>
         </div>
+
+    </div>
 
     </div>
 

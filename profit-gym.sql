@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 10:14 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 28, 2023 at 08:49 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,17 +38,17 @@ CREATE TABLE `assignedclass` (
   `CoachID` int(10) NOT NULL,
   `NumOfAttendants` int(11) NOT NULL,
   `AvailablePlaces` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assignedclass`
 --
 
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
-(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 17),
+(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 19),
 (6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 15),
-(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 7),
-(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8);
+(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8),
+(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `authority` (
   `ID` int(11) NOT NULL,
   `FriendlyName` varchar(50) NOT NULL,
   `LinkAddress` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `authority`
@@ -88,18 +88,6 @@ INSERT INTO `authority` (`ID`, `FriendlyName`, `LinkAddress`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `available slots`
---
-
-CREATE TABLE `available slots` (
-  `ID` int(11) NOT NULL,
-  `StartTime` time(6) NOT NULL,
-  `EndTime` time(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `class`
 --
 
@@ -108,7 +96,7 @@ CREATE TABLE `class` (
   `Name` varchar(30) NOT NULL,
   `Description` varchar(500) NOT NULL,
   `imgPath` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `class`
@@ -134,7 +122,7 @@ INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
 CREATE TABLE `class_days` (
   `ClassID` int(11) NOT NULL,
   `Day` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `class_days`
@@ -152,7 +140,9 @@ INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
 (17, 'Wednesday'),
 (18, 'Monday'),
 (19, 'Saturday'),
-(20, 'Saturday');
+(20, 'Saturday'),
+(21, 'Saturday'),
+(21, 'Sunday');
 
 -- --------------------------------------------------------
 
@@ -171,17 +161,17 @@ CREATE TABLE `client` (
   `Email` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `Phone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
-(37, 'laila', 'nabil', 20, 'female', 0, 0, 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378'),
-(44, 'omar', 'omran', 25, 'male', 0, 0, 'omaromran@gmail.com', '$2y$10$FtrUm7owwXQpOH9CvunRge/eacZZR.S2QN2ZmI4zCFkeIrOHKv6ee', '01023876543'),
-(45, 'jana', 'omran', 20, 'female', 0, 0, 'janahani.nbis@gmail.com', '$2y$10$aVoXddxNbjd09/egCDebtOK2xmrK/YFxL23xA41vgh7WrjrYHGut2', '01091119866'),
-(46, 'rania', 'kamal', 40, 'female', 0, 0, 'raniakamal@gmail.com', '$2y$10$b2WpY5G/aA5pMDt5.D9ji.HcYd20c0yP05qKKFiAy6Oag1M3CLY0C', '01091119866');
+(37, 'laila', 'nabil', 20, 'female', '0', '0', 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378'),
+(44, 'omar', 'omran', 25, 'male', '0', '0', 'omaromran@gmail.com', '$2y$10$FtrUm7owwXQpOH9CvunRge/eacZZR.S2QN2ZmI4zCFkeIrOHKv6ee', '01023876543'),
+(45, 'jana', 'omran', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$aVoXddxNbjd09/egCDebtOK2xmrK/YFxL23xA41vgh7WrjrYHGut2', '01091119866'),
+(46, 'rania', 'kamal', 40, 'female', '0', '0', 'raniakamal@gmail.com', '$2y$10$b2WpY5G/aA5pMDt5.D9ji.HcYd20c0yP05qKKFiAy6Oag1M3CLY0C', '01091119866');
 
 -- --------------------------------------------------------
 
@@ -198,29 +188,7 @@ CREATE TABLE `coach` (
   `Address` varchar(100) NOT NULL,
   `Ismanager` int(1) NOT NULL,
   `Password` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `coach available days`
---
-
-CREATE TABLE `coach available days` (
-  `CoachID` int(50) NOT NULL,
-  `Days` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `coach available slots`
---
-
-CREATE TABLE `coach available slots` (
-  `CoachID` int(50) NOT NULL,
-  `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -236,17 +204,18 @@ CREATE TABLE `employee` (
   `Salary` int(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
   `JobTitle` varchar(50) NOT NULL,
-  `Password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Password` varchar(255) NOT NULL,
+  `Img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`) VALUES
-(1, 'mohamed', 'mohamedfareed429@gmail.com', 'mohamedfareed429@gmail.com', 1900, 'egypt', 'Sales Person', 'Mohamed'),
-(3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K'),
-(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q');
+INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`, `Img`) VALUES
+(1, 'mohamed', 'mohamedfareed429@gmail.com', 'mohamedfareed429@gmail.com', 1900, 'egypt', 'Sales Person', 'Mohamed', 'public/Images/user.jpeg'),
+(3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K', 'public/Images/user.jpeg'),
+(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q', 'public/Images/user.jpeg');
 
 -- --------------------------------------------------------
 
@@ -257,7 +226,7 @@ INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address
 CREATE TABLE `employee authorities` (
   `ID` int(11) NOT NULL,
   `AuthorityID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -268,7 +237,7 @@ CREATE TABLE `employee authorities` (
 CREATE TABLE `job_titles` (
   `Id` int(11) NOT NULL,
   `Name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `job_titles`
@@ -300,15 +269,7 @@ CREATE TABLE `membership` (
   `FreezeCount` int(50) NOT NULL,
   `Freezed` tinyint(1) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `membership`
---
-
-INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
-(8, 28, 14, '2023-11-24', '2024-02-24', 0, 5, 3, 3, 30, 0, 'Activated'),
-(9, 26, 13, '2023-11-25', '2024-01-25', 0, 4, 2, 2, 20, 0, 'Activated');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -328,7 +289,7 @@ CREATE TABLE `package` (
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `package`
@@ -352,7 +313,7 @@ CREATE TABLE `private training membership` (
   `CoachID` int(50) NOT NULL,
   `PrivateTrainingPackageID` int(50) NOT NULL,
   `SessionsCount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -367,7 +328,7 @@ CREATE TABLE `private training package` (
   `MinPackageMonths` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `private training package`
@@ -395,7 +356,7 @@ CREATE TABLE `reserved class` (
   `ClientID` int(50) NOT NULL,
   `Attended` varchar(20) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reserved class`
@@ -406,33 +367,6 @@ INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `A
 (21, 7, 3, 46, '', 'Activated'),
 (22, 8, 3, 46, '', 'Activated'),
 (23, 7, 3, 44, '', 'Activated');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reserved private training free session`
---
-
-CREATE TABLE `reserved private training free session` (
-  `ID` int(11) NOT NULL,
-  `ClientID` int(50) NOT NULL,
-  `CoachID` int(50) NOT NULL,
-  `Date` date NOT NULL,
-  `SlotID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `scheduled_unfreeze`
---
-
-CREATE TABLE `scheduled_unfreeze` (
-  `membership_id` int(11) NOT NULL,
-  `freezeEndDate` date NOT NULL,
-  `freezeStartDate` date NOT NULL,
-  `freezeCount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -448,12 +382,6 @@ ALTER TABLE `assignedclass`
 -- Indexes for table `authority`
 --
 ALTER TABLE `authority`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `available slots`
---
-ALTER TABLE `available slots`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -479,19 +407,6 @@ ALTER TABLE `client`
 --
 ALTER TABLE `coach`
   ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `coach available days`
---
-ALTER TABLE `coach available days`
-  ADD KEY `test12` (`CoachID`);
-
---
--- Indexes for table `coach available slots`
---
-ALTER TABLE `coach available slots`
-  ADD KEY `test13` (`CoachID`),
-  ADD KEY `test14` (`SlotID`);
 
 --
 -- Indexes for table `employee`
@@ -550,21 +465,6 @@ ALTER TABLE `reserved class`
   ADD KEY `test10` (`CoachID`);
 
 --
--- Indexes for table `reserved private training free session`
---
-ALTER TABLE `reserved private training free session`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `test6` (`ClientID`),
-  ADD KEY `test7` (`CoachID`),
-  ADD KEY `test11` (`SlotID`);
-
---
--- Indexes for table `scheduled_unfreeze`
---
-ALTER TABLE `scheduled_unfreeze`
-  ADD KEY `fk_membership` (`membership_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -581,16 +481,10 @@ ALTER TABLE `authority`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `available slots`
---
-ALTER TABLE `available slots`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -641,27 +535,8 @@ ALTER TABLE `reserved class`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `reserved private training free session`
---
-ALTER TABLE `reserved private training free session`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `coach available days`
---
-ALTER TABLE `coach available days`
-  ADD CONSTRAINT `test12` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `coach available slots`
---
-ALTER TABLE `coach available slots`
-  ADD CONSTRAINT `test13` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test14` FOREIGN KEY (`SlotID`) REFERENCES `available slots` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employee authorities`
@@ -676,12 +551,6 @@ ALTER TABLE `private training membership`
   ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `scheduled_unfreeze`
---
-ALTER TABLE `scheduled_unfreeze`
-  ADD CONSTRAINT `fk_membership` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
