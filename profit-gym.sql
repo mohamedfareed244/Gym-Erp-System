@@ -254,7 +254,7 @@ INSERT INTO `job_titles` (`Id`, `Name`) VALUES
 
 --
 -- Table structure for table `membership`
---
+---
 
 CREATE TABLE `membership` (
   `ID` int(11) NOT NULL,
