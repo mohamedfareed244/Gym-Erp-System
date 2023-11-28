@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 10:14 PM
+-- Host: localhost
+-- Generation Time: Nov 28, 2023 at 05:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -152,7 +152,9 @@ INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
 (17, 'Wednesday'),
 (18, 'Monday'),
 (19, 'Saturday'),
-(20, 'Saturday');
+(20, 'Saturday'),
+(21, 'Saturday'),
+(21, 'Sunday');
 
 -- --------------------------------------------------------
 
@@ -236,17 +238,18 @@ CREATE TABLE `employee` (
   `Salary` int(50) NOT NULL,
   `Address` varchar(100) NOT NULL,
   `JobTitle` varchar(50) NOT NULL,
-  `Password` varchar(255) NOT NULL
+  `Password` varchar(255) NOT NULL,
+  `Img` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`) VALUES
-(1, 'mohamed', 'mohamedfareed429@gmail.com', 'mohamedfareed429@gmail.com', 1900, 'egypt', 'Sales Person', 'Mohamed'),
-(3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K'),
-(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q');
+INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`, `Img`) VALUES
+(1, 'mohamed', 'mohamedfareed429@gmail.com', 'mohamedfareed429@gmail.com', 1900, 'egypt', 'Sales Person', 'Mohamed', 'public/Images/user.jpeg'),
+(3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K', 'public/Images/user.jpeg'),
+(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q', 'public/Images/user.jpeg');
 
 -- --------------------------------------------------------
 
@@ -421,19 +424,6 @@ CREATE TABLE `reserved private training free session` (
   `SlotID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `scheduled_unfreeze`
---
-
-CREATE TABLE `scheduled_unfreeze` (
-  `membership_id` int(11) NOT NULL,
-  `freezeEndDate` date NOT NULL,
-  `freezeStartDate` date NOT NULL,
-  `freezeCount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -559,12 +549,6 @@ ALTER TABLE `reserved private training free session`
   ADD KEY `test11` (`SlotID`);
 
 --
--- Indexes for table `scheduled_unfreeze`
---
-ALTER TABLE `scheduled_unfreeze`
-  ADD KEY `fk_membership` (`membership_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -590,7 +574,7 @@ ALTER TABLE `available slots`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -676,12 +660,6 @@ ALTER TABLE `private training membership`
   ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `scheduled_unfreeze`
---
-ALTER TABLE `scheduled_unfreeze`
-  ADD CONSTRAINT `fk_membership` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
