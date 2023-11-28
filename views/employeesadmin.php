@@ -103,7 +103,7 @@
       <h4 class="coaches-title">Add Employee </h4>
       <hr>
       <div class="row">
-        <form class="row" method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php">
+        <form class="row" method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php" enctype="multipart/form-data">
           <input type="hidden" name="action" value="addEmployee">
           <div class="col-lg-4 col-sm-12">
             <label for="name">Name: </label>
@@ -127,13 +127,19 @@
             <?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?>
           </span>
           <div class="col-lg-4 col-sm-12">
+            <label for="name">Image: </label>
+          </div>
+          <input type="file" name="image">
+          <span id="email-error">
+            <?php echo isset($_SESSION["imgerror"]) ? $_SESSION["imgerror"] : ''; ?>
+          </span>
+          <div class="col-lg-4 col-sm-12">
             <label for="jobs">Job Title :</label>
           </div>
           <select name="jobTitle" id="jobs">
             <option value="">Select job</option>
             <?php
             foreach ($result as $title) {
-
               echo "<option value='" . $title["Id"] . "'> " . $title["Name"] . "</option>";
             }
 
@@ -167,64 +173,7 @@
             <?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?>
           </span>
           <br>
-          <!-- <hr>
-          <h2 class="coaches-title">New Employee's Authorities: </h2>
-          <hr>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Edit Client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault"> View Client</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">client check in </label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Employees </label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Employees Attendance</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add Admin</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Remove Admin</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Sales Report</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Packages</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Add packages</label>
-
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">View Private Sessions</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Reserve Private Sessions</label>
-          </div>
-          <br>
-          <hr> -->
+          
           <div class="col-lg-4 col-sm-12">
             <input type="submit" value="Add Employee" id="add-btn">
           </div>

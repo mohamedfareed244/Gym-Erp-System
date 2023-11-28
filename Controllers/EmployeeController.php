@@ -1,7 +1,8 @@
 <?php
 
 include_once "../Models/employeeModel.php";
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 class EmployeeController
@@ -9,7 +10,7 @@ class EmployeeController
 
     public function addEmployee()
     {
-        $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = "";
+        $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = $imgerror= "";
         $isValid = true;
 
         if (empty($_POST["name"])) {
@@ -66,6 +67,10 @@ class EmployeeController
             $passwordErr = "Password must be at least 6 characters long";
             $isValid = false;
         }
+        if(!isset($_FILES["image"])){
+            $imgerror="you have to choose image file ";
+            $isValid = false;
+        }
 
         // Check if email already exists in the database
         $employee = new Employee();
@@ -84,7 +89,17 @@ class EmployeeController
         $Salary = htmlspecialchars($_POST["salary"]);
         $Address = htmlspecialchars($_POST["address"]);
         $Password = htmlspecialchars($_POST["password"]);
+        if ($isValid){
+        $uploadedFile = $_FILES["image"];
+$tempFilePath = $uploadedFile["tmp_name"];
+$fileExtension = pathinfo($uploadedFile["name"], PATHINFO_EXTENSION);
+$destination = "../public/Images/" .$PhoneNumber.".".$fileExtension;
 
+if (!move_uploaded_file($tempFilePath, $destination)) {
+    $imgerror=$destination;
+    $isValid=false;
+} 
+        }
         // Hash the password
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
@@ -98,12 +113,14 @@ class EmployeeController
             $newEmployee->Salary = $Salary;
             $newEmployee->Address = $Address;
             $newEmployee->Password = $hashedPassword;
+            $newEmployee->Img=$destination;
 
             $result = $newEmployee->addEmployee($newEmployee);
 
             if ($result) {
                 $success = "Employee addded successfully";
                 $_SESSION["success"] = $success;
+                unset($_SESSION["imgerror"]);
                 // Data inserted successfully
                 header("Location: ../views/employeesadmin.php");
                 exit();
@@ -111,6 +128,7 @@ class EmployeeController
         }
         // Set session variables with error messages
         $_SESSION["nameErr"] = $nameErr;
+        $_SESSION["imgerror"] = $imgerror;
         $_SESSION["phonenoErr"] = $phonenoErr;
         $_SESSION["jobTitleErr"] = $jobTitleErr;
         $_SESSION["salaryErr"] = $salaryErr;
