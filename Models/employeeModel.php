@@ -12,7 +12,7 @@ class Employee
     public $JobTitle;
     public $Address;
     public $PhoneNumber;
-
+public $Img;
     public static function getAllEmployees()
     {
         global $conn;
@@ -52,9 +52,9 @@ class Employee
         $jobTitle = $employee->JobTitle;
         $Email = $employee->Email;
         $Password = $employee->Password;
-
-        $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password) 
-                VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password')";
+$Img=$employee->Img;
+        $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password,Img) 
+                VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password','$Img')";
         return mysqli_query($conn, $sql);
     }
     public static function getEmployeeByID($employeeID)
