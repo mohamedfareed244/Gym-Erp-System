@@ -427,7 +427,8 @@ class Memberships
         FROM membership
         INNER JOIN client ON client.ID = membership.ClientID
         INNER JOIN PACKAGE ON package.ID = membership.PackageID
-        where membership.isActivated= '$isActivated' AND membership.EndDate > CURDATE() AND package.VisitsLimit != membership.VisitsCount";
+        where membership.isActivated= '$isActivated' AND membership.EndDate > CURDATE() 
+        AND (package.VisitsLimit = 0 OR (package.VisitsLimit > 0 AND package.VisitsLimit > membership.VisitsCount))";
 
         $result = mysqli_query($conn, $sql);
 

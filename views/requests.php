@@ -142,7 +142,7 @@
             </div>
             <br>
             <br>
-            <h2 class="table-title">Membership Requests: </h2>
+            <!-- <h2 class="table-title">Membership Requests: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <thead>
@@ -181,7 +181,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
     </div>
 
