@@ -16,7 +16,7 @@
 </head>
 
 <style>
-#emailExists,#error,#success{
+#emailExists,#success{
     color:red;
     font-size:16px;
 }
@@ -120,12 +120,18 @@
                     </div>
                     <span id="emailExists"><?php echo isset ($_SESSION["EmailExist"]) ? ($_SESSION["EmailExist"]) : ''; ?></span>
                     <span id="success"><?php echo isset ($_SESSION["AddedSuccess"]) ? ($_SESSION["AddedSuccess"]) : ''; ?></span>
-                    <span id="error"><?php echo isset ($_SESSION["Error"]) ? ($_SESSION["Error"]) : ''; ?></span>
 
                 </form>
-                <?php unset($_SESSION["AddedSuccess"]); ?>
-                <?php unset($_SESSION["EmailExist"]); ?>
-                <?php unset($_SESSION["Error"]); ?>
+                <?php 
+                unset($_SESSION["AddedSuccess"]); 
+                unset($_SESSION["EmailExist"]);
+                unset($_SESSION["fnameErr"]);
+                unset($_SESSION["lnameErr"]);
+                unset($_SESSION["ageErr"]);
+                unset($_SESSION["genderErr"]);
+                unset($_SESSION["phonenoErr"]);
+                unset($_SESSION["emailErr"]); 
+                ?>
 
             </div>
         </div>

@@ -151,6 +151,82 @@ class ClientController extends Controller
 
     public function addClient()
     {
+        $fnameErr = $lnameErr = $ageErr = $genderErr = $phonenoErr = $emailErr = "";
+
+        $isValid = true;
+
+        if (empty($_POST["fname"])) {
+            $fnameErr = "First Name is required";
+            $isValid = false;
+        } else {
+            $fname = $_POST['fname'];
+            if (!preg_match("/^[a-zA-Z ]*$/", $fname)) {
+                $fnameErr = "Only alphabets and white space are allowed";
+                $isValid = false;
+            }
+        }
+
+
+        // Validate the "Last Name" field
+        if (empty($_POST["lname"])) {
+            $lnameErr = "Last Name is required";
+            $isValid = false;
+        } else {
+            $lname = $_POST['lname'];
+            if (!preg_match("/^[a-zA-Z ]*$/", $lname)) {
+                $lnameErr = "Only alphabets and white space are allowed";
+                $isValid = false;
+            }
+        }
+
+        // Validate the "Age" field
+        if (empty($_POST["age"])) {
+            $ageErr = "Age is required";
+            $isValid = false;
+        } elseif (!filter_var($_POST["age"], FILTER_VALIDATE_INT, array("options" => array("min_range" => 16, "max_range" => 100)))) {
+            $ageErr = "Invalid age. Must be between 16 and 100.";
+            $isValid = false;
+        }
+
+        // Validate the "Gender" field
+        if (empty($_POST["gender"])) {
+            $genderErr = "Gender is required";
+            $isValid = false;
+        }
+
+        if (empty($_POST["phone"])) {
+            $phonenoErr = "Phone Number is required";
+            $isValid = false;
+        } else {
+            // Regular expression for a valid 10-digit phone number
+            $phoneRegex = '/^0\d{10}$/';
+
+            if (!preg_match($phoneRegex, $_POST["phone"])) {
+                $phonenoErr = "Invalid phone number format";
+                $isValid = false;
+            }
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+            $isValid = false;
+        } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+            $isValid = false;
+        }
+
+        if (!empty($_POST["weight"])) {
+            $Weight = htmlspecialchars($_POST["weight"]);
+        } else {
+            $Weight = '';  // Set to an empty string
+        }
+
+        if (!empty($_POST["height"])) {
+            $Height = htmlspecialchars($_POST["height"]);
+        } else {
+            $Height = '';  // Set to an empty string
+        }
+
         $newClient = new Client();
         $newClient->setFirstName($_POST['fname']);
         $newClient->setLastName($_POST['lname']);
@@ -162,29 +238,33 @@ class ClientController extends Controller
         $newClient->setPhone($_POST['phone']);
 
         $client = new Client();
-    
-        if ($client->checkExistingEmail($newClient->getEmail())) {
-            $_SESSION['EmailExist'] = "This Email already exist";
-            header("Location: ../views/addclient.php");
-            exit();
-        } else {
+
+        $emailExists = $client->checkExistingEmail($newClient->getEmail());
+        if ($emailExists) {
+            $emailErr = "This email is already registered.";
+            $isValid = false;
+        }
+
+        if($isValid){
            
             $result = $client->addClient($newClient);
         
             if ($result) {
-
-                $r = $client->getClientid($newClient);
-                if ($row = mysqli_fetch_assoc($r)) {
-                   $_SESSION['AddedSuccess'] = "Account added sucessfully" ;
-                    header("Location: ../views/addclient.php");
-                    exit();
-                }
-            } else {
-                $_SESSION['Error'] = "An Error happened";
+                $_SESSION['AddedSuccess'] = "Account added sucessfully" ;
                 header("Location: ../views/addclient.php");
                 exit();
+                }
             }
-        }
+        
+
+        $_SESSION["fnameErr"] = $fnameErr;
+        $_SESSION["lnameErr"] = $lnameErr;
+        $_SESSION["ageErr"] = $ageErr;
+        $_SESSION["genderErr"] = $genderErr;
+        $_SESSION["phonenoErr"] = $phonenoErr;
+        $_SESSION["emailErr"] = $emailErr;
+        header("Location: ../views/addclient.php");
+        exit();
     }
 
 
