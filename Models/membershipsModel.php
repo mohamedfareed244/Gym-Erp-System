@@ -427,7 +427,7 @@ class Memberships
         FROM membership
         INNER JOIN client ON client.ID = membership.ClientID
         INNER JOIN PACKAGE ON package.ID = membership.PackageID
-        where membership.isActivated= '$isActivated'";
+        where membership.isActivated= '$isActivated' AND membership.EndDate > CURDATE() AND package.VisitsLimit != membership.VisitsCount";
 
         $result = mysqli_query($conn, $sql);
 
@@ -448,6 +448,17 @@ class Memberships
             }
             return $results;
         }
+    }
+
+    public static function checkinClient($clientID)
+    {
+        global $conn;
+
+        $sql="UPDATE membership 
+        SET VisitsCount = VisitsCount + 1
+        WHERE ClientID = $clientID";
+
+        return mysqli_query($conn, $sql);
     }
 
 

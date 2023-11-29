@@ -41,15 +41,11 @@
 
                     $clientModel = new Client();
                     $clients = $clientModel -> getAllClients();
+                    $numberOfClients = count($clients);
 
                     $packageModel = new Package();
-
                     $packages = $packageModel->getAllPackagesforEmployee();
                     $numberOfPackages = count($packages);
-                    
-
-                    $clients = $clientModel->getAllClients();
-                    $numberOfClients = count($clients);
 
                     $allEmployees = Employee::getAllEmployees();
                     $numberOfEmployees = count($allEmployees);

@@ -66,6 +66,7 @@ class MembershipsController
         exit();
     }
 
+
 }
 
 $controller = new MembershipsController();
@@ -130,9 +131,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 }
                 break;
-
-        default:
-            break;
+            case "checkinClient":
+                if (isset($_POST["clientID"])) {
+                    $clientID = $_POST["clientID"];
+                    $result = Memberships::checkinClient($clientID);
+                    if ($result) {
+                        echo "success";
+                    } else {
+                        echo "failure";
+                    }
+                }
+                break;
+            default:
+                 break;
     }
 }
 ?>

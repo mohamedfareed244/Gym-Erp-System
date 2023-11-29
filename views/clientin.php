@@ -13,13 +13,27 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+<style>
+ #disableBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</style>
+
 
 <body>
     <?php require("partials/adminsidebar.php");
     include_once "../Models/membershipsModel.php";
+    include_once "../Models/ClientModel.php";
     $memberships = new Memberships();
-    $membership=$memberships->getClientAndMembership(); ?>
+    $membership=$memberships->getClientAndMembership(); 
+
+    $clientModel = new Client();
+    $clients = $clientModel -> getAllClients();
+    $numberOfClients = count($clients); ?>
 
     <div id="add-body" class="addbody">
         <div class="container">
@@ -30,7 +44,7 @@
                             <i class="fa fa-circle" style="color:green;margin-top:60px;"></i>
                         </div>
                         <div class="col-9">
-                            <h2> 130/200</h2>
+                            <h2> <?php echo $numberOfClients; ?></h2>
                             <p><b>Estimated clients in the gym</b> </p>
                         </div>
                     </div>
@@ -47,18 +61,18 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">client Name</th>
-                            <th scope="col">package Name</th>
-                            <th scope="col">end date</th>
-                            <th scope="col">status</th>
-                            <th scope="col">visits</th>
+                            <th scope="col">Client Name</th>
+                            <th scope="col">Package Name</th>
+                            <th scope="col">End date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Visits</th>
                             <th scope="col">Action</th>
 
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach($membership as $membership) : ?>
-                        <tr>
+                        <tr id="row_<?php echo $membership['ID'] ?>">
                             <th scope="row"><?php echo $membership['ID'] ?></th>
                             <td><?php echo $membership['FirstName'] . " " . $membership['LastName']; ?></td>
                             <td><?php echo $membership['Title']; ?></td>
@@ -69,7 +83,15 @@
                             <td class="bg-info">Freezed</td>
                             <?php } ?>
                             <td><b><?php echo $membership['VisitsCount'] ?></b> from <b><?php echo $membership['VisitsLimit'] ?></b></td>
-                            <td> <button class="btn btn-success">Check In</button>
+                            <td>
+                            <?php if($membership['Freezed'] == '0'){ ?>
+                                <button class="btn btn-success"
+                                data-clientid="<?php echo $membership['ID']; ?>"
+                                onclick='Checkin(this)'>Check In
+                                </button>
+                            <?php } else { ?>
+                                <button id="disableBtn" class="btn btn-success">Check In</button>
+                            <?php } ?>
                             </td>
                         </tr>
                         <?php endforeach ?>
@@ -98,6 +120,31 @@
                 }
             }
         }
+
+        function Checkin(button) {
+        var clientID = button.getAttribute('data-clientid');
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + clientID;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        $.ajax({
+            url: '../Controllers/MembershipsController.php',
+            type: 'POST',
+            data: {
+                action: 'checkinClient',
+                clientID : clientID
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
     </script>
 </body>
 
