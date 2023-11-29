@@ -41,8 +41,8 @@
   ?>
   <div id="add-body" class="addbody">
     <div class="container">
-      <h2 class="table-title">Clients:</h2>
-      <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
+      <h2 class="table-title">All Clients:</h2>
+      <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names.." style="width:100%;">
 
       <div id="tablediv">
         <table id="membershipsTable" class="view-table overflow-auto mh-10">
