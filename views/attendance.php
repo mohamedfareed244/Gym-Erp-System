@@ -22,10 +22,11 @@
 </style>
 
 <body>
-    <?php require("partials/adminsidebar.php") ?>
+    <?php require("./partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container" style="margin-left:-4%; padding-left:50px" >
-            <h2 class="table-title">Attendance:</h2>
+            <h2 class="table-title">Attendance :  <?php $date = new DateTime("now", new DateTimeZone('Africa/Cairo'));
+echo $date->format('Y-m-d'); ?> </h2>
             <div id="tablediv">
                 <table class="table overflow-auto mh-10">
                     <thead>
@@ -38,6 +39,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                      
+                        include_once "../Models/employeeModel.php";
+                       
+                        
+                        $result=Employee::getattendance($date->format('Y-m-d'));
+                        foreach($result as $emp){
+                            echo "<tr>
+                            <td>".$emp["Name"]."</td>
+                            <td>".$emp["PhoneNumber"]."</td>
+                            <td>".$emp["Email"]."</td>
+                            <td>".$emp["JobTitle"]."</td>
+                            <td><input type='checkbox'  id='att' name='".$emp["PhoneNumber"]."' ".(!$emp['Status'] ? 'checked' : '').">
+                                <label for='att'></label><br>
+                            </td>
+                        </tr>";
+                    
+                        }
+                        ?>
                         <tr>
                             <td>Laila Nabil</td>
                             <td>011111111</td>
@@ -140,9 +160,14 @@
 
                     </tbody>
                 </table>
+              
             </div>
         </div>
+        <div >
+                    <button id="savebtn">Save</button>
+                </div>
     </div>
+  
 </body>
 
 </html>

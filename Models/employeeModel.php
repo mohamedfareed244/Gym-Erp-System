@@ -1,7 +1,8 @@
 <?php
 
 include_once "../includes/dbh.inc.php";
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 class Employee
 {
     public $ID;
@@ -40,7 +41,28 @@ public $Img;
 
         return $employees;
     }
+public static function getattendance($date){
+    global $conn;
+$sql="SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle from attendance join employee e on EmployeeId=ID where Day ='$date' ";
+$result=mysqli_query($conn,$sql);
+if(mysqli_num_rows($result)<=0){
+Employee::addnewdate($date);
+return Employee::getattendance($date);
+exit();
+}else{
+return $result;
+}
 
+}
+public static function addnewdate($date){
+    global $conn;
+    $employees=Employee::getAllEmployees();
+    foreach($employees as $emp){
+        $sql="insert into attendance (EmployeeId,Day,Status) values ($emp->ID,'$date',0)";
+        mysqli_query($conn,$sql);
+    }
+    
+}
     public function addEmployee($employee)
     {
         global $conn;
