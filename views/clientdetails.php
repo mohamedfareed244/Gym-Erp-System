@@ -71,7 +71,7 @@
                             $client = $Client->getClientByID($membership->clientId);
                             if($client) {
                             echo "<tr id='row-" . $membership->ID . "'>";
-                            echo "<td><a href='viewClientMembership.php?ID=" . $membership->ID . "'>" . $membership->ID . "</a></td>";
+                            echo "<td><a style='color:black; font-size:17px;' href='viewClientMembership.php?ID=" . $membership->ID . "'>" . $membership->ID . "</a></td>";
                             echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
                             echo '<td> ' . $client->getPhone() . ' </td>';
                             echo '<td>' . $membership->packageId . '</td>';
