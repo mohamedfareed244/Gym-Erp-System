@@ -16,19 +16,44 @@
 </head>
 
 <style>
-    #emailExists,#error,#success{
-        color:red;
-        font-size:16px;
-    }
+#emailExists,#error,#success{
+    color:red;
+    font-size:16px;
+}
+
+.col-lg-4 {
+    width: 33.3333%;
+}
+
+.signup-lbl {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gender-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-btn {
+    margin-left: 5px; 
+}
+
+.gender-lbl {
+    margin-right: 10px; 
+}
+
+#fname-error,#lname-error,#age-error,#gender-error,#email-error,#phoneno-error{
+    color:red;
+}
 </style>
 
 <body>
     <?php 
     session_start();
     require("partials/adminsidebar.php");
-   
     ?>
-
+    <script src="../public/js/addclient_validation.js"></script>
     <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
@@ -36,30 +61,42 @@
                     <h4>Add client</h4>
                 </div>
                 <hr>
-                <form method="POST" action="../Controllers/ClientController.php">
+                <form method="POST" action="../Controllers/ClientController.php" id="addclient-form">
                     <input type="hidden" name="action" value="addClient">
                     <div class="col-lg-4 col-md-12">
                         <label for="fname">First Name: </label>
                     </div>
                     <input type="text" name="fname" id="fname">
+                    <span id="fname-error"><?php echo isset($_SESSION["fnameErr"]) ? $_SESSION["fnameErr"] : ''; ?></span>
 
                     <div class="col-lg-4 col-md-12">
                         <label for="lname">Last Name: </label>
                     </div>
                     <input type="text" name="lname" id="lname">
+                    <span id="lname-error"><?php echo isset($_SESSION["lnameErr"]) ? $_SESSION["lnameErr"] : ''; ?></span>
+
                     <div class="col-lg-4 col-md-12">
                         <label for="lname">Phone: </label>
                     </div>
                     <input type="text" name="phone" id="phone">
+                    <span id="phoneno-error"><?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?></span>
+
                     <div class="col-lg-4 col-md-12">
                         <label for="age">Age: </label>
                     </div>
                     <input type="text" name="age" id="age">
+                    <span id="age-error"><?php echo isset($_SESSION["ageErr"]) ? $_SESSION["ageErr"] : ''; ?></span>
 
                     <div class="col-lg-4 col-md-12">
-                        <label for="gender">Gender: </label>
+                        <label class="signup-lbl" for="">Gender:</label>
+                        <div class="gender-container">
+                            <input type="radio" id="male" name="gender" value="male" class="radio-btn">
+                            <label for="male" class="gender-lbl">Male</label>
+                            <input type="radio" id="female" name="gender" value="female" class="radio-btn">
+                            <label for="female" class="gender-lbl">Female</label>
+                        </div>
                     </div>
-                    <input type="text" name="gender" id="gender">
+                    <span id="gender-error"><?php echo isset($_SESSION["genderErr"]) ? $_SESSION["genderErr"] : ''; ?></span>
 
                     <div class="col-lg-4 col-md-12">
                         <label for="weight">Weight: </label>
@@ -75,6 +112,8 @@
                         <label for="email">Email: </label>
                     </div>
                     <input type="email" name="email" id="email">
+                    <span id="email-error"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?></span>
+
                     <br>
                     <div class="col-lg-9 col-md-12">
                         <input type="submit" value="Add client" id="add-btn" style="margin-top:30px; margin-bottom:20px">
