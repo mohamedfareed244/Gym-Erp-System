@@ -29,10 +29,28 @@
     <?php require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/membershipsModel.php";
-    include_once "../Models/PackageModel.php";
+    include_once "../Models/ClassesModel.php";
 
-    $Client = new Client();
-    $memberships = Memberships::getAllMemberships();
+
+    if (isset($_GET['ID'])) {
+        $membershipID = $_GET['ID'];
+        $Membership = new Memberships();
+        $membership = $Membership->getMembershipByID($membershipID);
+        $Client = new Client();
+        $client = $Client->getClientByID($membership->clientId);
+        $Classes = new Classes();
+        $classes = $Classes->getClientClasses($membership->clientId);
+
+
+        if (!$Membership && count($classes) == 0) {
+            echo "Membership not found";
+            exit;
+        }
+    } else {
+        echo "Membership ID not found";
+        exit;
+    }
+
     ?>
     <script>
     var currentDate = new Date();
@@ -41,8 +59,7 @@
     </script>
     <div id="add-body" class="addbody">
         <div class="container">
-            <h2 class="table-title">Memberships:</h2>
-            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names..">
+            <h2 class="table-title"><?php echo $client->getFirstName() . ' ' . $client->getLastName() . "'s Membership: "; ?></h2>
             <div id="tablediv">
                 <table id="membershipsTable" class="view-table overflow-auto mh-10">
                     <hr>
@@ -66,109 +83,102 @@
                     </thead>
                     <tbody>
                         <?php
-                        if(count($memberships) > 0) {
-                        foreach ($memberships as $membership) {
-                            $client = $Client->getClientByID($membership->clientId);
-                            if($client) {
-                            echo "<tr id='row-" . $membership->ID . "'>";
-                            echo "<td><a href='viewClientMembership.php?ID=" . $membership->ID . "'>" . $membership->ID . "</a></td>";
-                            echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
-                            echo '<td> ' . $client->getPhone() . ' </td>';
-                            echo '<td>' . $membership->packageId . '</td>';
-                            echo '<td>' . $membership->startDate . '</td>';
-                            echo '<td class="endDate-' . $membership->ID . '">' . $membership->endDate . '</td>';
-                            echo '<td>' . $membership->visitsCount . '</td>';
-                            echo '<td>' . $membership->invitationsCount . '</td>';
-                            if ($membership->freezed == 0) {
-                                $Package = new Package();
-                                $package = $Package->getPackage($membership->packageId);
-                                echo '<td class="status-' . $membership->ID . ' bg">Active</td>';
-                                echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
+                        echo "<tr id='row-" . $membership->ID . "'>";
+                        echo "<td>" . $membership->ID . "</td>";
+                        echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
+                        echo '<td> ' . $client->getPhone() . ' </td>';
+                        echo '<td>' . $membership->packageId . '</td>';
+                        echo '<td>' . $membership->startDate . '</td>';
+                        echo '<td class="endDate-' . $membership->ID . '">' . $membership->endDate . '</td>';
+                        echo '<td>' . $membership->visitsCount . '</td>';
+                        echo '<td>' . $membership->invitationsCount . '</td>';
+                        if ($membership->freezed == 0) {
+                            $Package = new Package();
+                            $package = $Package->getPackage($membership->packageId);
+                            echo '<td class="status-' . $membership->ID . ' bg">Active</td>';
+                            echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
                                 '; ?>
-                        <div class="modal" id="datePickerModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
-                                    <div>
-                                        <label for="datepicker">Choose a Date:</label>
-                                        <input type="date" id="datepicker"
-                                            min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
-                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                                    </div>
-                                    <button class="btn btn-primary"
-                                        onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                            } else {
-                                echo '<td class="status-' . $membership->ID . ' bg">Freezed</td>';
-                                echo '<td><button id="unfreezeBtn-' . $membership->ID . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->ID . ')">Unfreeze</button></td>';
+                                                        <div class="modal" id="datePickerModal">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
+                                                                    <div>
+                                                                        <label for="datepicker">Choose a Date:</label>
+                                                                        <input type="date" id="datepicker"
+                                                                            min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
+                                                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                                                                    </div>
+                                                                    <button class="btn btn-primary"
+                                                                        onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                        } else {
+                            echo '<td class="status-' . $membership->ID . ' bg">Freezed</td>';
+                            echo '<td><button id="unfreezeBtn-' . $membership->ID . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->ID . ')">Unfreeze</button></td>';
 
-                            }
-                            echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
-                            echo '<td>' . $membership->inbodyCount . '</td>';
-                            // echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
-                            echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
-                        <div class="modal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                    <div>
-                                    <label >Are you sure you want to cancel this membership?</label>
-                                    </div>
-                                    <button class="btn btn-delete"
-                                        onclick='deleteMembership(<?php echo $membership->ID ?>)' style="background-color:red">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php echo '</tr>';
-                        }}}
-                        else 
-                        {
                         }
-                        ?>
+                        echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
+                        echo '<td>' . $membership->inbodyCount . '</td>';
+                        // echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
+                        echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>"; ?>
+                                    <div class="modal" id="deleteModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                                <div>
+                                                <label >Are you sure you want to cancel this membership?</label>
+                                                </div>
+                                                <button class="btn btn-delete"
+                                                    onclick='deleteMembership(<?php echo $membership->ID ?>)' style="background-color:red">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php echo '</tr>';
+                                    ?>
                     </tbody>
                 </table>
             </div>
             <hr>
-            <!-- <h2 class="table-title">Classes: </h2>
+            <h2 class="table-title">Classes: </h2>
+            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for classes..">
             <div id="tablediv">
-                <table class="view-table overflow-auto mh-10">
+                <table id="classesTable" class="view-table overflow-auto mh-10">
                     <thead>
                         <tr>
                             <th scope="col">Class Name</th>
                             <th scope="col"> Date </th>
                             <th scope="col">From</th>
                             <th scope="col">To </th>
-                            <th scope="col">Status </th>
+                            <!-- <th scope="col">Status </th> -->
                             <th scope="col">Class Instructor </th>
                             <th scope="col">Fees </th>
-                            <th scope="col">Paid </th>
+                            <!-- <th scope="col">Paid </th> -->
                             <th scope="col">Actions </th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($classes as $class) { ?>
                         <tr>
-                            <td>Yoga</td>
-                            <td>09-09-2023</td>
-                            <td>9:00pm</td>
-                            <td>11:00pm</td>
-                            <td class="bg-success text-white">Attended</td>
-                            <td>Mohamed fareed</td>
-                            <td>120</td>
-                            <td class="bg-danger">Not paid </td>
+                            <td><?php echo $class['className']; ?></td>
+                            <td><?php echo $class['Date']; ?></td>
+                            <td><?php echo $class['StartTime']; ?></td>
+                            <td><?php echo $class['EndTime']; ?></td>
+                            <td><?php echo $class['employeeName']; ?></td>
+                            <td><?php echo $class['Price']; ?></td>
                             <td>
                                 <button class="btn">Edit</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
+            <?php } ?>
 
                     </tbody>
                 </table>
             </div>
             <hr>
-            <h2 class="table-title">Financials: </h2>
+            <!-- <h2 class="table-title">Financials: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <table class="table">
@@ -210,10 +220,10 @@
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("searchBar");
         filter = input.value.toUpperCase();
-        table = document.getElementById("membershipsTable");
+        table = document.getElementById("classesTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
+            td = tr[i].getElementsByTagName("td")[0];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
