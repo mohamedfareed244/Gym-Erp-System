@@ -324,6 +324,24 @@ input[type="text"] {
   background-color: #9279cf;
 }
 
+.membershipBtn{
+  padding: 7px;
+  border: 0;
+  border-radius: 2px;
+  text-decoration: none;
+  width: 30px;
+  color: white;
+  background-color: #bcbcbc;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.membershipBtn:hover {
+  background-color: #5e747d;
+  color: white;
+  transition:  .3s ease;
+}
+
 
 @media (max-width: 660px) {
 

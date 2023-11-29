@@ -41,7 +41,7 @@
   ?>
   <div id="add-body" class="addbody">
     <div class="container">
-      <h2 class="table-title">Classes:</h2>
+      <h2 class="table-title">All Clients:</h2>
       <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for names.." style="width:100%;">
 
       <div id="tablediv">

@@ -168,7 +168,7 @@
                             <td><?php echo $class['employeeName']; ?></td>
                             <td><?php echo $class['Price']; ?></td>
                             <td>
-                                <button class="btn">Edit</button>
+                                <button class="btn">Cancel</button>
                                 <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
