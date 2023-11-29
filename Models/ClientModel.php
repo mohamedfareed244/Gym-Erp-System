@@ -287,4 +287,6 @@ class Client extends Model
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
         return $this->db->query($sql);
     }
+
+    
 }

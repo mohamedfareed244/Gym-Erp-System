@@ -417,5 +417,38 @@ class Memberships
         
     }
 
+    public function getClientAndMembership()
+    {
+        global $conn;
+        $isActivated='Activated';
+
+        $sql="SELECT client.ID,client.FirstName,client.LastName,package.Title,package.VisitsLimit,
+        membership.EndDate,membership.Freezed,membership.VisitsCount
+        FROM membership
+        INNER JOIN client ON client.ID = membership.ClientID
+        INNER JOIN PACKAGE ON package.ID = membership.PackageID
+        where membership.isActivated= '$isActivated'";
+
+        $result = mysqli_query($conn, $sql);
+
+        $results = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID' => $row['ID'],
+                    'FirstName' => $row['FirstName'],
+                    'LastName' => $row['LastName'],
+                    'Title' => $row['Title'],
+                    'VisitsLimit' => $row['VisitsLimit'],
+                    'EndDate' => $row['EndDate'],
+                    'Freezed' => $row['Freezed'],
+                    'VisitsCount' => $row['VisitsCount']
+                );
+            }
+            return $results;
+        }
+    }
+
 
 }

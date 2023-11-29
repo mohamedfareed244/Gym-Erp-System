@@ -16,7 +16,11 @@
 </head>
 
 <body>
-    <?php require("partials/adminsidebar.php") ?>
+    <?php require("partials/adminsidebar.php");
+    include_once "../Models/membershipsModel.php";
+    $memberships = new Memberships();
+    $membership=$memberships->getClientAndMembership(); ?>
+
     <div id="add-body" class="addbody">
         <div class="container">
             <div class="row">
@@ -53,16 +57,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($membership as $membership) : ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mohamed Fareed</td>
-                            <td>2 Months</td>
-                            <td>30-09-2023</td>
+                            <th scope="row"><?php echo $membership['ID'] ?></th>
+                            <td><?php echo $membership['FirstName'] . " " . $membership['LastName']; ?></td>
+                            <td><?php echo $membership['Title']; ?></td>
+                            <td><?php echo $membership['EndDate']; ?></td>
+                            <?php if($membership['Freezed'] == '0'){ ?>
+                            <td class="bg-info">UnFreezed</td>
+                            <?php } else { ?>
                             <td class="bg-info">Freezed</td>
-                            <td><b>20</b> from <b>30</b></td>
+                            <?php } ?>
+                            <td><b><?php echo $membership['VisitsCount'] ?></b> from <b><?php echo $membership['VisitsLimit'] ?></b></td>
                             <td> <button class="btn btn-success">Check In</button>
                             </td>
                         </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
