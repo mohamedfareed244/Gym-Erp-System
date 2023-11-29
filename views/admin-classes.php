@@ -55,76 +55,82 @@ span[id$="-err"],
     $results=$class->getallCoachesandClasses();
     ?>
     <div id="add-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td class="col"> ID </td>
-                    <td class="col"> Name </td>
-                    <td class="col"> Coach </td>
-                    <td class="col"> Coach's Phone Number</td>
+        <div class="container">
+            <h2 class="table-title">Clients:</h2>
+            <input type="text" id="searchBar" onkeyup="myFunction()" placeholder="Search for class names..">
 
-                    <td>Days</td>
-                    <td>Action </td>
+            <table class="table" id="classesTable">
+                <thead>
+                    <tr>
+                        <td class="col"> ID </td>
+                        <td class="col"> Name </td>
+                        <td class="col"> Coach </td>
+                        <td class="col"> Coach's Phone Number</td>
 
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach($results as $result):?>
-                <tr id="row_<?php echo $result['ClassID']; ?>">
-                    <td> <?php echo $result['ClassID'] ?> </td>
-                    <td> <?php echo $result['ClassName'] ?> </td>
-                    <td> <?php echo $result['CoachName'] ?></td>
-                    <td> <?php echo $result['PhoneNumber'] ?> </td>
-                    <td> <?php echo $result['Date'] ?> </td>
+                        <td>Days</td>
+                        <td>Action </td>
 
-                    <td><button id="add-btn" action="viewClients" >View Clients</button> 
-                    <button id="add-btn" style="background-color:red; color:white;" 
-                        data-classid="<?php echo $result['ClassID']; ?>"
-                        data-coachid="<?php echo $result['CoachID']; ?>"
-                        data-date="<?php echo $result['Date']; ?>"
-                        onclick='deleteClass(this)'>Delete</button>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <br>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($results as $result):?>
+                    <tr id="row_<?php echo $result['ClassID']; ?>">
+                        <td> <?php echo $result['ClassID'] ?> </td>
+                        <td> <?php echo $result['ClassName'] ?> </td>
+                        <td> <?php echo $result['CoachName'] ?></td>
+                        <td> <?php echo $result['PhoneNumber'] ?> </td>
+                        <td> <?php echo $result['Date'] ?> </td>
 
-        <h2 class="admin-classes-css">Add New Class: </h2>
-        <form method="post" autocomplete="off" action="../Controllers/ClassController.php" onsubmit="return validateAddForm()"
-            enctype="multipart/form-data">
-            <input type="hidden" name="action" value="addClass">
-            <div class="conatiner">
-                <div class="row">
-                    <div class="col-4">
-                        <label for="name">Name : </label>
+                        <td><button id="add-btn" action="viewClients">View Clients</button>
+                            <button id="add-btn" style="background-color:red; color:white;"
+                                data-classid="<?php echo $result['ClassID']; ?>"
+                                data-coachid="<?php echo $result['CoachID']; ?>"
+                                data-date="<?php echo $result['Date']; ?>" onclick='deleteClass(this)'>Delete</button>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <br>
+
+            <h2 class="admin-classes-css">Add New Class: </h2>
+            <form method="post" autocomplete="off" action="../Controllers/ClassController.php"
+                onsubmit="return validateAddForm()" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="addClass">
+                <div class="conatiner">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="name">Name : </label>
+                            <br>
+                            <input type="text" name="name" id="name">
+                        </div>
                         <br>
-                        <input type="text" name="name" id="name">
-                    </div>
-                    <br>
-                    <br>
-                    <span id="name-err"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
-                    <br>
-                    <div class="col-4">
-                        <label for="descr">Description : </label>
                         <br>
-                        <input type="text" name="descr" id="descr">
-                    </div>
-                    <br>
-                    <br>
-                    <span id="descr-err"><?php echo isset($_SESSION["descrErr"]) ? $_SESSION["descrErr"] : ''; ?></span>
-                    <br>
-                    <div class="col-4">
-                        <label for="image">Image : </label>
+                        <span
+                            id="name-err"><?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?></span>
                         <br>
-                        <input type="file" name="image" id="image">
-                    </div>
-                    <br>
-                    <br>
-                    <span id="img-err"><?php echo isset($_SESSION["imageErr"]) ? $_SESSION["imageErr"] : ''; ?></span>
-                    <br>
-                    <label for ="days">Select Day/s:</label>
-                <div class="col-m-8">
-                <?php
+                        <div class="col-4">
+                            <label for="descr">Description : </label>
+                            <br>
+                            <input type="text" name="descr" id="descr">
+                        </div>
+                        <br>
+                        <br>
+                        <span
+                            id="descr-err"><?php echo isset($_SESSION["descrErr"]) ? $_SESSION["descrErr"] : ''; ?></span>
+                        <br>
+                        <div class="col-4">
+                            <label for="image">Image : </label>
+                            <br>
+                            <input type="file" name="image" id="image">
+                        </div>
+                        <br>
+                        <br>
+                        <span
+                            id="img-err"><?php echo isset($_SESSION["imageErr"]) ? $_SESSION["imageErr"] : ''; ?></span>
+                        <br>
+                        <label for="days">Select Day/s:</label>
+                        <div class="col-m-8">
+                            <?php
                 // Get tomorrow's date
                     $tomorrow = date('Y-m-d', strtotime('+1 day'));
 
@@ -144,21 +150,22 @@ span[id$="-err"],
                     echo '<br>';
                 }
                 ?>
-                    <br>
+                            <br>
 
+                        </div>
+                        <br>
+                        <br>
+                        <span
+                            id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
+                        <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
+                    </div>
+                    <div class="col-m-4">
+                        <button id="add-btn">Add Class </button>
+                    </div>
+                    <br>
                 </div>
-                <br>
-                <br>
-                    <span id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
-                    <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
-                </div>
-                <div class="col-m-4">
-                    <button id="add-btn">Add Class </button>
-                </div>
-                <br>
-            </div>
-        </form>
-        <?php
+            </form>
+            <?php
         // Unset specific error messages
 unset(
     $_SESSION["nameErr"],
@@ -168,17 +175,17 @@ unset(
 );
 ?>
 
-        <br>
-        <hr>
-        <h2 class="admin-classes-css">Assign Class to Coach: </h2>
-        <form method="post" autocomplete="off" action="../Controllers/ClassController.php"
-            onsubmit="return validateAssignForm()">
-            <input type="hidden" name="action" value="assignCoachtoClass">
-            <label for="coaches"> Select The Coach : </label>
-            <select name="coaches" id="select-coaches">
-                <option value="">Select Coach </option>
+            <br>
+            <hr>
+            <h2 class="admin-classes-css">Assign Class to Coach: </h2>
+            <form method="post" autocomplete="off" action="../Controllers/ClassController.php"
+                onsubmit="return validateAssignForm()">
+                <input type="hidden" name="action" value="assignCoachtoClass">
+                <label for="coaches"> Select The Coach : </label>
+                <select name="coaches" id="select-coaches">
+                    <option value="">Select Coach </option>
 
-                <?php
+                    <?php
         include_once "../Models/employeeModel.php";
  
         $employee = new Employee();
@@ -189,23 +196,23 @@ unset(
         }
         ?>
 
-            </select>
+                </select>
 
 
-            <span id="coach-err"><?php echo isset($_SESSION["coachErr"]) ? $_SESSION["coachErr"] : ''; ?></span>
-            <br>
-            <hr>
-            <h3 class="admin-classes-css">Selected Coach Classes : </h3>
-            <div id="selectedCoachClasses">
-            </div>
-            <br>
-            <h3 class="admin-classes-css">Class Details : </h3>
-            <div class="conatiner">
-                <div class="row">
-                    <div class="col-4">
-                    <label for="classes"> Select The Class : </label>
-                    <br>
-                        <?php
+                <span id="coach-err"><?php echo isset($_SESSION["coachErr"]) ? $_SESSION["coachErr"] : ''; ?></span>
+                <br>
+                <hr>
+                <h3 class="admin-classes-css">Selected Coach Classes : </h3>
+                <div id="selectedCoachClasses">
+                </div>
+                <br>
+                <h3 class="admin-classes-css">Class Details : </h3>
+                <div class="conatiner">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="classes"> Select The Class : </label>
+                            <br>
+                            <?php
                            include_once "../Models/EmployeeModel.php";
 
                             $employee = new Employee();
@@ -222,73 +229,77 @@ unset(
 
                             
                         ?>
-                    </div>
+                        </div>
 
-                    <br>
-                    <br>
-                    <span id="class-err"><?php echo isset($_SESSION["classErr"]) ? $_SESSION["classErr"] : ''; ?></span>
-                    <br>
-                    <div class="col-4">
-                        <label for="from">From : </label>
                         <br>
-                        <input type="time" name="from" id="from">
+                        <br>
+                        <span
+                            id="class-err"><?php echo isset($_SESSION["classErr"]) ? $_SESSION["classErr"] : ''; ?></span>
+                        <br>
+                        <div class="col-4">
+                            <label for="from">From : </label>
+                            <br>
+                            <input type="time" name="from" id="from">
+                        </div>
+                        <br>
+                        <span
+                            id="from-err"><?php echo isset($_SESSION["fromErr"]) ? $_SESSION["fromErr"] : ''; ?></span>
+                        <br>
+                        <div class="col-4">
+                            <label for="to">To : </label>
+                            <br>
+                            <input type="time" name="to" id="to">
+                        </div>
+                        <br>
+                        <span id="to-err"><?php echo isset($_SESSION["toErr"]) ? $_SESSION["toErr"] : ''; ?></span>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="price-container">
+                        <div class="free-title">Free:</div>
+                        <div class="radio-buttons">
+                            <input type="radio" id="free" name="price" value="Free" class="radio-btn"
+                                onclick="hidePriceField()">
+                            <label for="limited" id="">Yes</label>
+
+                            <input type="radio" id="" name="price" value="NotFree" class="radio-btn"
+                                onclick="showPriceField()">
+                            <label for="unlimited" id="unlimited">No</label>
+                        </div>
+                        <span
+                            id="isFree-err"><?php echo isset($_SESSION["isFreeErr"]) ? $_SESSION["isFreeErr"] : ''; ?></span>
+                        <br>
+                        <div id="priceField" class="hidden">
+                            <label for="class-price">Price:</label>
+                            <br>
+                            <input type="number" id="classPrice" name="class-price">
+                        </div>
+                        <span
+                            id="price-err"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
+                        <br>
+                        <div class="col-4">
+                            <label for="attendants">Number of Attendants: </label>
+                            <br>
+                            <input type="number" name="attendants" id="attendants">
+                        </div>
+                        <br>
+                        <span
+                            id="attendants-err"><?php echo isset($_SESSION["attendantsErr"]) ? $_SESSION["attendantsErr"] : ''; ?></span>
                     </div>
                     <br>
-                    <span id="from-err"><?php echo isset($_SESSION["fromErr"]) ? $_SESSION["fromErr"] : ''; ?></span>
-                    <br>
-                    <div class="col-4">
-                        <label for="to">To : </label>
-                        <br>
-                        <input type="time" name="to" id="to">
+                    <span id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
+                    <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
+                    <div id="days-container">
+
+
                     </div>
-                    <br>
-                    <span id="to-err"><?php echo isset($_SESSION["toErr"]) ? $_SESSION["toErr"] : ''; ?></span>
-                    <br>
+                    <div class="col-m-4">
+                        <button id="add-btn">Submit </button>
+                    </div>
                     <br>
                 </div>
-                <div class="price-container">
-                    <div class="free-title">Free:</div>
-                    <div class="radio-buttons">
-                        <input type="radio" id="free" name="price" value="Free" class="radio-btn"
-                            onclick="hidePriceField()">
-                        <label for="limited" id="">Yes</label>
-
-                        <input type="radio" id="" name="price" value="NotFree" class="radio-btn"
-                            onclick="showPriceField()">
-                        <label for="unlimited" id="unlimited">No</label>
-                    </div>
-                    <span
-                        id="isFree-err"><?php echo isset($_SESSION["isFreeErr"]) ? $_SESSION["isFreeErr"] : ''; ?></span>
-                    <br>
-                    <div id="priceField" class="hidden">
-                        <label for="class-price">Price:</label>
-                        <br>
-                        <input type="number" id="classPrice" name="class-price">
-                    </div>
-                    <span id="price-err"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
-                    <br>
-                    <div class="col-4">
-                        <label for="attendants">Number of Attendants: </label>
-                        <br>
-                        <input type="number" name="attendants" id="attendants">
-                    </div>
-                    <br>
-                    <span id="attendants-err"><?php echo isset($_SESSION["attendantsErr"]) ? $_SESSION["attendantsErr"] : ''; ?></span>
-                </div>
-                <br>
-                <span id="days-err"><?php echo isset($_SESSION["daysErr"]) ? $_SESSION["daysErr"] : ''; ?></span>
-                <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>
-                <div id="days-container">
-
-
-                </div>
-                <div class="col-m-4">
-                    <button id="add-btn">Submit </button>
-                </div>
-                <br>
-            </div>
-        </form>
-
+            </form>
+        </div>
     </div>
     <?php
 // Unset specific error messages
@@ -318,58 +329,62 @@ unset(
 
 
     $(document).ready(function() {
-    // Attach change event to the select element
-    $('#select-classes').change(function() {
-        // Get the selected class ID
-        var classId = $(this).val();
+        // Attach change event to the select element
+        $('#select-classes').change(function() {
+            // Get the selected class ID
+            var classId = $(this).val();
 
-        // Check if a class is selected
-        if (classId !== '') {
-            // Use AJAX to fetch days for the selected class
-            $.ajax({
-                url: 'getClassDays.php', // Update the path to your PHP script
-                type: 'POST',
-                data: { classId: classId },
-                success: function(response) {
-                    // Update the days-container with the fetched days
-                    $('#days-container').html(response);
-                }
-            });
-        } else {
-            // If no class is selected, clear the days-container
-            $('#days-container').html('');
-        }
+            // Check if a class is selected
+            if (classId !== '') {
+                // Use AJAX to fetch days for the selected class
+                $.ajax({
+                    url: 'getClassDays.php', // Update the path to your PHP script
+                    type: 'POST',
+                    data: {
+                        classId: classId
+                    },
+                    success: function(response) {
+                        // Update the days-container with the fetched days
+                        $('#days-container').html(response);
+                    }
+                });
+            } else {
+                // If no class is selected, clear the days-container
+                $('#days-container').html('');
+            }
+        });
     });
-});
 
 
-$(document).ready(function() {
-    // Attach change event to the select element
-    $('#select-coaches').change(function() {
-        // Get the selected class ID
-        var coachId = $(this).val();
+    $(document).ready(function() {
+        // Attach change event to the select element
+        $('#select-coaches').change(function() {
+            // Get the selected class ID
+            var coachId = $(this).val();
 
-        // Check if a class is selected
-        if (coachId !== '') {
-            // Use AJAX to fetch days for the selected class
-            $.ajax({
-                url: 'getSelectedCoachClasses.php', // Update the path to your PHP script
-                type: 'POST',
-                data: {coachId: coachId },
-                success: function(response) {
-                    // Update the days-container with the fetched days
-                    $('#selectedCoachClasses').html(response);
-                }
-            });
-        } else {
-            // If no class is selected, clear the days-container
-            $('#selectedCoachClasses').html('');
-        }
+            // Check if a class is selected
+            if (coachId !== '') {
+                // Use AJAX to fetch days for the selected class
+                $.ajax({
+                    url: 'getSelectedCoachClasses.php', // Update the path to your PHP script
+                    type: 'POST',
+                    data: {
+                        coachId: coachId
+                    },
+                    success: function(response) {
+                        // Update the days-container with the fetched days
+                        $('#selectedCoachClasses').html(response);
+                    }
+                });
+            } else {
+                // If no class is selected, clear the days-container
+                $('#selectedCoachClasses').html('');
+            }
+        });
     });
-});
 
 
-function deleteClass(button) {
+    function deleteClass(button) {
         // Extract ClassID, CoachID, and Date from the data attributes
         var classID = button.getAttribute('data-classid');
         var coachID = button.getAttribute('data-coachid');
@@ -402,6 +417,27 @@ function deleteClass(button) {
             }
         });
     }
+
+
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchBar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("classesTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      // td = tr[i].getElementsByTagName("td")[7]; search based on phone numbers
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
     </script>
 
 </body>
