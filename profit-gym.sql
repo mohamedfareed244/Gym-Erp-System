@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 09:50 PM
+-- Generation Time: Nov 29, 2023 at 09:32 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -254,7 +254,7 @@ INSERT INTO `job_titles` (`Id`, `Name`) VALUES
 
 --
 -- Table structure for table `membership`
----
+--
 
 CREATE TABLE `membership` (
   `ID` int(11) NOT NULL,
@@ -276,7 +276,8 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
-(10, 45, 13, '2023-11-28', '2024-01-28', 0, 4, 2, 2, 20, 0, 'Activated');
+(10, 45, 13, '2023-11-28', '2024-01-28', 1, 4, 2, 2, 20, 0, 'Activated'),
+(11, 46, 14, '2023-11-29', '2024-02-29', 0, 5, 3, 3, 30, 0, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -518,7 +519,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -542,7 +543,7 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `package`
