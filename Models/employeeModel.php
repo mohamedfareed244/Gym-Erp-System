@@ -43,7 +43,7 @@ public $Img;
     }
 public static function getattendance($date){
     global $conn;
-$sql="SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle from attendance join employee e on EmployeeId=ID where Day ='$date' ";
+$sql="SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
 $result=mysqli_query($conn,$sql);
 if(mysqli_num_rows($result)<=0){
 Employee::addnewdate($date);
@@ -53,6 +53,11 @@ exit();
 return $result;
 }
 
+}
+public static function attendanceforemp($id,$status,$date){
+    global $conn;
+    $sql ="UPDATE attendance SET Status=$status where EmployeeId=$id and Day=$date";
+    mysqli_query($sql);
 }
 public static function addnewdate($date){
     global $conn;

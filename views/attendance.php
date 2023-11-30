@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="../public/js/attendance.js"></script>
 </head>
 
 <style>
@@ -31,6 +32,7 @@ echo $date->format('Y-m-d'); ?> </h2>
                 <table class="table overflow-auto mh-10">
                     <thead>
                         <tr>
+                        <th>ID:</th>
                             <th>Name:</th>
                             <th>Phone Number:</th>
                             <th>Email:</th>
@@ -38,34 +40,47 @@ echo $date->format('Y-m-d'); ?> </h2>
                             <th>Attendance:</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
-                        <?php 
-                      
-                        include_once "../Models/employeeModel.php";
                        
+                        <?php 
+           
+                        include_once "../Models/employeeModel.php";
+                        ini_set('display_errors', 1);
+                        error_reporting(E_ALL);
                         
                         $result=Employee::getattendance($date->format('Y-m-d'));
+
                         foreach($result as $emp){
                             echo "<tr>
+                            <td>".$emp["ID"]."</td>
                             <td>".$emp["Name"]."</td>
                             <td>".$emp["PhoneNumber"]."</td>
                             <td>".$emp["Email"]."</td>
                             <td>".$emp["JobTitle"]."</td>
-                            <td><input type='checkbox'  id='att' name='".$emp["PhoneNumber"]."' ".(!$emp['Status'] ? 'checked' : '').">
-                                <label for='att'></label><br>
+                            <td><input type='checkbox'  id='att' class= 'checkboxes' name='h".$emp["ID"]."' value ='".$emp["ID"]."'".($emp['Status'] ? 'checked' : '').">
+                                <label for='att'></label>
+                                <input type='hidden' class='hiddens' name='arr[]' value='".$emp["ID"]."'>
                             </td>
                         </tr>";
                     
                         }
+                    
                         ?>
-                        
+                     
                     </tbody>
+                    </form>
                 </table>
               
             </div>
+      <form action="../Controllers/attendance.php" method="POST" id="llk">
+
+      <input type="text" value="abc" name="sss">
+      <input type="submit" value="akmskams">
+      </form>
         </div>
         <div >
-                    <button id="savebtn">Save</button>
+                    <button id="savebtn" onclick ="save('<?php echo $date->format('Y-m-d'); ?>')">Save</button>
                 </div>
     </div>
   
