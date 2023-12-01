@@ -1,21 +1,30 @@
 function save(date){
 let form =document.getElementsByClassName("checkboxes");
 let hiddens=document.getElementsByClassName("hiddens");
-let formData = new FormData();
-for(let i=0;i<form.length;i++){
-    formData.append(form[i].name, form[i].value);
-    // g.appendChild(form[i].cloneNode(true));
-}
+let arr={};
+
 for(let i=0;i<hiddens.length;i++){
-    formData.append(hiddens[i].name, hiddens[i].value);
-    
+    let num=hiddens[i].value;
+    let str=`emp${num}`;
+   if(findinform(hiddens[i].value,form)){
+    arr[str]=1;
+    console.log(str);
+   }else{
+    arr[str]=0;
+    console.log(str);
+   }
+
 }
 
-formData.append("date", date);
+arr.date=date;
+
+console.log(arr);
+
 
     fetch("../Controllers/attendance.php", {
         method: "POST",
-        body: formData
+        headers:{"Content-Type": "application/json",},
+        body: JSON.stringify(arr)
     }).then(response => response.json())
     .then(data => {
         console.log("Response from server:", data);
@@ -27,4 +36,12 @@ formData.append("date", date);
 
 
 
+}
+function findinform(id,arr){
+    for(let i=0;i<arr.length;i++){
+        if(arr[i].value===id&&arr[i].checked){
+            return true;
+        }
+    }
+    return false;
 }

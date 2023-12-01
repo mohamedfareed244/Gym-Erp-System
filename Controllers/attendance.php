@@ -1,18 +1,24 @@
-<?php 
-if($_SERVER["REQUEST_METHOD"]==="POST"){
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     include_once "../Models/employeeModel.php";
-//     $employees=$_POST["arr"];
-//     foreach ($employees as $emp ){
-//         $str="h".$emp;
-//        if(isset($_POST[$str])){
-//         Employee::attendanceforemp($emp,1,$_POST["date"]);
-//        }else{
-//         Employee::attendanceforemp($emp,0,$_POST["date"]);
-//        }
-// }
-//  $x=json_encode($_POST["h1"]);
-    echo json_encode(["status" => $_POST["h1"].checked]);
 
-// Employee::attendanceforemp()
+    $json_data = file_get_contents("php://input");
+    $decoded_data = json_decode($json_data, true);
+$date=$decoded_data["date"];
+
+    foreach($decoded_data as $key=>$value){
+        // $x=$value;
+        if ($key !== "date") {
+           
+            $key=str_replace('emp', '', $key);
+
+          Employee::attendanceforemp($key, $value, $date);
+        }
+    }
+
+ 
+
+
+    echo json_encode(["status" => "success"]);
 }
 ?>

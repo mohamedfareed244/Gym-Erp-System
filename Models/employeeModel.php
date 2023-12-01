@@ -56,8 +56,10 @@ return $result;
 }
 public static function attendanceforemp($id,$status,$date){
     global $conn;
-    $sql ="UPDATE attendance SET Status=$status where EmployeeId=$id and Day=$date";
-    mysqli_query($sql);
+    $sql ="UPDATE attendance SET Status=$status where EmployeeId=$id and Day='$date'";
+    mysqli_query($conn,$sql);
+
+
 }
 public static function addnewdate($date){
     global $conn;
@@ -65,6 +67,7 @@ public static function addnewdate($date){
     foreach($employees as $emp){
         $sql="insert into attendance (EmployeeId,Day,Status) values ($emp->ID,'$date',0)";
         mysqli_query($conn,$sql);
+       
     }
     
 }
