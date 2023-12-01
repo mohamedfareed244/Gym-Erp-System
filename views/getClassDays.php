@@ -4,7 +4,8 @@ include_once "../Models/ClassesModel.php";
 if (isset($_POST['classId'])) {
     $classId = $_POST['classId'];
 
-    $days = Classes::getClassDaysById($classId);
+    $Classes=new Classes();
+    $days = $Classes->getClassDaysById($classId);
 
     $response = "";
     $response .= "<label for='days' style='font-size:16px;'> Select Day/s : </label>";

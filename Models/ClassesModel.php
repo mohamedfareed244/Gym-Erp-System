@@ -1,17 +1,17 @@
 <?php
+require_once("Model.php");
 
-
-include_once "../includes/dbh.inc.php";
+//include_once "../includes/dbh.inc.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
 if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
-    global $conn;
 
     $num = $_GET["x"];
 
     $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
 
-    $result = $conn->query($sql);
+    $result = $this->db->query($sql);
     $word = '';
     if (mysqli_num_rows($result) <= 0) {
         echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
@@ -34,22 +34,27 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
     }
     exit();
 }
-class Classes
+
+class Classes extends Model
 {
 
-    public $ID;
-    public $ClassID;
-    public $Date;
-    public $StartTime;
-    public $EndTime;
-    public $isFree;
-    public $Price;
-    public $CoachID;
-    public $NumOfAttendants;
-    public $AvailablePlaces;
+    private $ID;
+    private $ClassID;
+    private $Date;
+    private $StartTime;
+    private $EndTime;
+    private $isFree;
+    private $Price;
+    private $CoachID;
+    private $NumOfAttendants;
+    private $AvailablePlaces;
+
+    function __construct() {
+        $this->db = $this->connect();
+    }
 
     // Getters and Setters Start
-    public function getClassesID()
+    public function getID()
     {
         return $this->ID;
     }
@@ -100,12 +105,12 @@ class Classes
         $this->EndTime = $EndTime;
     }
 
-    public function getIsFree()
+    public function getisFree()
     {
         return $this->isFree;
     }
 
-    public function setIsFree($isFree)
+    public function setisFree($isFree)
     {
         $this->isFree = $isFree;
     }
@@ -152,13 +157,12 @@ class Classes
 
     // Getters and Setters End
 
-    public static function getAllClasses()
+    public function getAllClasses()
     {
-        global $conn;
 
         $sql = "SELECT * FROM class";
         // Perform the query
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         // Check if the query was successful
         if ($result) {
@@ -173,9 +177,8 @@ class Classes
         }
     }
 
-    public static function assignClass($class)
+    public function assignClass($class)
     {
-        global $conn;
 
         $ClassID = $class->ClassID;
         $Dates = $class->Date;
@@ -194,7 +197,7 @@ class Classes
             $sql = "INSERT INTO assignedclass (ClassID, Date, StartTime, EndTime, isFree, Price, CoachID,NumOfAttendants,AvailablePlaces) 
                     VALUES ('$ClassID', '$Date', '$StartTime', '$EndTime', '$isFree', '$Price', '$CoachID','$NumOfAttendants','$AvailablePlaces')";
 
-            $result = mysqli_query($conn, $sql);
+            $result = $this->db->query($sql);
 
             if (!$result) {
                 $finalresult = false; // If any query fails, set result to false
@@ -204,23 +207,22 @@ class Classes
         return $finalresult;
     }
 
-    public static function addClass($name, $descr, $imagePath, $days)
+    public function addClass($name, $descr, $imagePath, $days)
     {
-        global $conn; // Assuming you have a global database connection variable named $conn
 
         $sql = "INSERT INTO class (Name, Description, imgPath) VALUES ('$name', '$descr', '$imagePath')";
 
         // Execute the first query to insert the class
-        $result1 = mysqli_query($conn, $sql);
+        $result1 = $this->db->query($sql);
 
         // Check if the first query was successful
         if ($result1) {
-            $classId = mysqli_insert_id($conn);
+            $classId = $this->db->getConn()->insert_id;
 
             // Loop through the days and execute the second query for each day
             foreach ($days as $day) {
                 $mysql = "INSERT INTO class_days (ClassID, Day) VALUES ('$classId', '$day')";
-                $result2 = mysqli_query($conn, $mysql);
+                $result2 = $this->db->query($mysql);
 
                 // Check if the second query failed
                 if (!$result2) {
@@ -234,30 +236,26 @@ class Classes
     }
 
 
-    public static function getid($class)
+    public function getClassByID($class)
     {
-        global $conn;
         $sql = "SELECT ID FROM assignedclass WHERE ID='$class->ID'";
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         return $result;
     }
-    public static function getClassName($classID)
+    public function getClassName($classID)
     {
-        global $conn;
         $sql = "SELECT `Name` FROM class WHERE ID='$classID'";
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         return $result;
     }
 
-    public static function getClassDaysById($classId)
+    public function getClassDaysById($classId)
     {
-        global $conn; // Assuming you have a global database connection variable named $conn
-
         $sql = "SELECT Day FROM class_days WHERE ClassID = '$classId'";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $days = array();
 
@@ -272,8 +270,6 @@ class Classes
 
     public function updateClass($class)
     {
-        global $conn;
-
         $ClassID = $class->ClassID;
         $Date = $class->Date;
         $StartTime = $class->StartTime;
@@ -289,26 +285,22 @@ class Classes
         $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', CoachID='$CoachID' ,
             NumOfAttendants='$NumOfAttendants'
                     WHERE ID = $class_id";
-        return $conn->query($sql);
+        return $this->db->query($sql);
 
 
     }
 
     public function deleteClass($classID, $coachID, $date)
     {
-        global $conn;
-
         $sql = "DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";
 
-        return mysqli_query($conn, $sql);
+        return $this->db->query($sql);
 
     }
 
 
-    public static function getSelectedCoachClasses($coachID)
+    public function getSelectedCoachClasses($coachID)
     {
-        global $conn;
-
         $results = array();
 
         $sql = "SELECT assignedclass.CoachID,assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, class.Name
@@ -316,7 +308,7 @@ class Classes
         INNER JOIN class ON class.ID = assignedclass.ClassID 
         WHERE assignedclass.CoachID = '$coachID'";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -336,8 +328,6 @@ class Classes
 
     public function getallCoachesandClasses()
     {
-        global $conn;
-
         $results = array();
 
         $sql = "SELECT assignedclass.ClassID, assignedclass.Date, class.Name AS ClassName, assignedclass.CoachID,
@@ -346,7 +336,7 @@ class Classes
                 INNER JOIN class ON assignedclass.ClassID = class.ID 
                 INNER JOIN employee ON assignedclass.CoachID = employee.ID";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -367,15 +357,13 @@ class Classes
 
     public function getClassDetails()
     {
-        global $conn;
-
         $sql = "SELECT class.imgPath, class.Name AS className , assignedclass.CoachID AS CoachID, assignedclass.Date ,assignedclass.StartTime , assignedclass.EndTime, 
         assignedclass.NumOfAttendants , assignedclass.Price, assignedclass.ID AS assignedclassID, employee.Name AS employeeName ,assignedclass.AvailablePlaces
         FROM class
         INNER JOIN assignedclass ON class.ID = assignedclass.ClassID
         INNER JOIN employee ON employee.ID = assignedclass.CoachID";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -404,25 +392,24 @@ class Classes
 
     public function ReservationFreeClass($CoachID, $AssignedClassID, $ClientID)
     {
-        global $conn;
         $isActivated = "Activated";
 
         $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
-        $checkResult = mysqli_query($conn, $checkSql);
+        $checkResult = $this->db->query($checkSql);
 
         $alreadyExists = mysqli_num_rows($checkResult) > 0;
 
         if (!$alreadyExists) {
             $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
 
-            $result = mysqli_query($conn, $sql);
+            $result = $this->db->query($sql);
 
             if ($result) {
                 $sql1 = "UPDATE assignedclass
             SET AvailablePlaces= AvailablePlaces - 1
             WHERE assignedclass.ID = '$AssignedClassID'";
 
-                $insertResult = mysqli_query($conn, $sql1);
+                $insertResult =$this->db->query($sql1);
 
                 return array('inserted' => $insertResult, 'alreadyExists' => false);
             }
@@ -433,17 +420,16 @@ class Classes
 
     public function ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID)
     {
-        global $conn;
         $isActivated = "Not Activated";
 
         $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
-        $checkResult = mysqli_query($conn, $checkSql);
+        $checkResult = $this->db->query($checkSql);
 
         $alreadyExists = mysqli_num_rows($checkResult) > 0;
 
         if (!$alreadyExists) {
             $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
-            $insertResult = mysqli_query($conn, $sql);
+            $insertResult = $this->db->query($sql);
 
             return array('inserted' => $insertResult, 'alreadyExists' => false);
         } else {
@@ -451,10 +437,8 @@ class Classes
         }
     }
 
-    public static function getClientClassInfo()
+    public function getClientClassInfo()
     {
-        global $conn;
-
         $isActivated = "Activated";
 
         $sql = "SELECT class.Name AS className, assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, 
@@ -465,7 +449,7 @@ class Classes
         INNER JOIN `reserved class` ON `reserved class`.AssignedClassID = assignedclass.ID
         WHERE  `reserved class`.isActivated ='$isActivated' AND `reserved class`.ClientID = " . $_SESSION['ID'];
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -487,8 +471,6 @@ class Classes
     }
     public function getClientClasses($clientID)
     {
-        global $conn;
-
         $isActivated = "Activated";
 
         $sql = "SELECT class.Name AS className, assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, 
@@ -499,7 +481,7 @@ class Classes
         INNER JOIN `reserved class` ON `reserved class`.AssignedClassID = assignedclass.ID
         WHERE  `reserved class`.isActivated ='$isActivated' AND `reserved class`.ClientID = " . $clientID;
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -520,10 +502,8 @@ class Classes
         return false;
     }
 
-    public static function getClassRequests()
+    public function getClassRequests()
     {
-        global $conn;
-
         $isActivated = 'Not Activated';
 
         $sql = "SELECT client.ID,client.FirstName AS clientName,class.Name AS className, assignedclass.Date, assignedclass.StartTime,
@@ -536,7 +516,7 @@ class Classes
         INNER JOIN class ON class.ID = assignedclass.ClassID
         WHERE `reserved class`.isActivated = '$isActivated'";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -562,33 +542,29 @@ class Classes
 
     public function acceptClass($reservedClassID, $assignedClassID)
     {
-        global $conn;
-
         $isActivated = 'Activated';
 
         $sql = "UPDATE `reserved class`
         SET isActivated='$isActivated'
         WHERE ID = $reservedClassID";
 
-        if ($conn->query($sql)) {
+        if ($this->db->query($sql)) {
 
             $sql1 = "UPDATE assignedclass
         SET AvailablePlaces= AvailablePlaces - 1
         WHERE assignedclass.ID = '$assignedClassID'";
 
-            return $conn->query($sql1);
+            return $this->db->query($sql);
         }
     }
 
     public function declineClass($reservedClassID)
     {
-        global $conn;
-
         $sql = "DELETE 
         FROM `reserved class`
         WHERE ID = $reservedClassID";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
 
     }
 

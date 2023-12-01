@@ -28,7 +28,8 @@
 
     include_once "../Models/ClassesModel.php";
     
-    $classes = Classes::getClientClassInfo();
+    $Classes=new Classes();
+    $classes = $Classes->getClientClassInfo();
     
     include("partials/usersidebar.php");?>
 

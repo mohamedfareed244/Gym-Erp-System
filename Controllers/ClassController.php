@@ -1,10 +1,11 @@
 <?php
 
+require_once("Controller.php");
 include_once "../Models/ClassesModel.php";
 
 session_start();
 
-class ClassController{
+class ClassController extends Controller{
 
     public function assignCoachtoClass()
     {
@@ -80,22 +81,22 @@ class ClassController{
 
         $newclass = new Classes();
 
-        $newclass->ClassID=$classID;
-        $newclass->Date=$days;
-        $newclass->StartTime=$from;
-        $newclass->EndTime=$to;
-        $newclass->isFree=$isFree;
+        $newclass->setClassID($classID);
+        $newclass->setDate($days);
+        $newclass->setStartTime($from);
+        $newclass->setEndTime($to);
+        $newclass->setisFree($isFree);
 
         if($isFree="NotFree"){
-        $newclass->Price=$price;
+        $newclass->setPrice($price);
         }
 
-        $newclass->CoachID=$coachID;
-        $newclass->NumOfAttendants=$attendants;
+        $newclass->setCoachID($coachID);
+        $newclass->setNumOfAttendants($attendants);
 
         $result=$class->assignClass($newclass);
 
-        if($result && $result1)
+        if($result)
         {
             $success = "Class assigned to coach successfully";
             $_SESSION["success"] = $success;
@@ -179,12 +180,9 @@ class ClassController{
     }
 }
         
-public function handleImageUpload($name, $descr,$days)
+public function handleImageUpload($name, $descr, $days)
 {
-    global $conn;
-
     $imgErr = "";
-    $isValid = true;
 
     $uploadDir = "../public/Images/"; // Set your desired upload directory
     $uploadFile = $uploadDir . basename($_FILES["image"]["name"]);
@@ -192,40 +190,33 @@ public function handleImageUpload($name, $descr,$days)
 
     // Check if the file is an image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
-    if ($check !== false) {
-        // Check if the file already exists
-        if (file_exists($uploadFile)) {
-            $imgErr = "File already exists.";
-            $isValid = false;
-        } else {
-            // Check if the file type is allowed (you can customize this list)
-            if ($imageFileType == "jpg" || $imageFileType == "jpeg" || $imageFileType == "png" || $imageFileType == "gif") {
-                // Move the uploaded file to the desired directory
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFile)) {
-                    // File uploaded successfully
-                    // Insert the image information into the database
-                    $imagePath = "public/Images/" . basename($_FILES["image"]["name"]);
-                    $result = Classes::addClass($name, $descr, $imagePath,$days);
 
-                    if ($result) {
-                        return true;
-                    } else {
-                        // Delete the uploaded file if insertion into the database fails
-                        unlink($uploadFile);
-                        return false;
-                    }
-                } else {
-                    $imgErr = "Failed to upload image.";
-                    $isValid = false;
-                }
-            } else {
-                $imgErr = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
-                $isValid = false;
-            }
-        }
-    } else {
+    if ($check === false) {
         $imgErr = "File is not an image.";
-        $isValid = false;
+    } elseif (file_exists($uploadFile)) {
+        $imgErr = "File already exists.";
+    } elseif (!in_array($imageFileType, ["jpg", "jpeg", "png", "gif"])) {
+        $imgErr = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+    } else {
+        // Move the uploaded file to the desired directory
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFile)) {
+            // File uploaded successfully
+            $imagePath = "public/Images/" . basename($_FILES["image"]["name"]);
+
+            // Insert the image information into the database
+            $classes = new Classes();
+            $result = $classes->addClass($name, $descr, $imagePath, $days);
+
+            if ($result) {
+                return true;
+            } else {
+                // Delete the uploaded file if insertion into the database fails
+                unlink($uploadFile);
+                $imgErr = "Failed to insert image information into the database.";
+            }
+        } else {
+            $imgErr = "Failed to upload image.";
+        }
     }
 
     // Set the error message and return false if any validation fails
@@ -288,8 +279,8 @@ public function reserveClass()
 
 
 
-
-$controller = new ClassController();
+$model = new Classes();
+$controller = new ClassController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
