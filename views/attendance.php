@@ -71,13 +71,9 @@ echo $date->format('Y-m-d'); ?> </h2>
                     </tbody>
                     </form>
                 </table>
-              
+             
             </div>
-      <form action="../Controllers/attendance.php" method="POST" id="llk">
-
-      <input type="text" value="abc" name="sss">
-      <input type="submit" value="akmskams">
-      </form>
+  
         </div>
         <div >
                     <button id="savebtn" onclick ="save('<?php echo $date->format('Y-m-d'); ?>')">Save</button>
