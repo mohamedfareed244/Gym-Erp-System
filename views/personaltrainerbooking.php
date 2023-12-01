@@ -34,11 +34,12 @@
     <?php
     include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
     $ptpackage = new ptPackages();
     $ptmemberships = ptMemberships::getAllPtMemberships();
-    $coaches = Employee::getAllCoaches(); 
+    $Employee = new Employee();
+    $coaches = $Employee->getAllCoaches(); 
     $ptMembershipsInstance = new ptMemberships();
     $packages = $ptpackage->getAllPtPackagesforClient();
     ?>

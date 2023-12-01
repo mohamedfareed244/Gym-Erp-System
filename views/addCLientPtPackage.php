@@ -22,13 +22,14 @@
     require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
     // Get client information
     if (isset($_GET['ID'])) {
         $clientID = $_GET['ID'];
-        $Client = Client::getClientByID($clientID);
-        if (!$Client) {
+        $Client = new Client();
+        $client = $Client->getClientByID($clientID);
+        if (!$client) {
             echo "Client not found";
             exit;
         }
@@ -38,12 +39,13 @@
     }
 
     $packages = ptPackages::getActivePtPackagesForClient($clientID);
-    $employeesData = Employee::GetAllCoaches();
+    $Employee = new Employee();
+    $employeesData = $Employee->GetAllCoaches();
     ?>
 
     <div class="container py-5" style="padding-left:70px">
         <h2 class="coaches-title">Choose a Private Training Package for
-            <?php echo $Client->FirstName . ' ' . $Client->LastName; ?> :
+            <?php echo $Client->getFirstName() . ' ' . $Client->getLastName(); ?> :
         </h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">

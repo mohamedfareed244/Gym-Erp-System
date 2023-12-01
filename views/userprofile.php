@@ -47,7 +47,8 @@
     include_once "../Models/ClassesModel.php";
     
     $memberships = Memberships::getClientMembershipInfo();
-    $classes = Classes::getClientClassInfo();
+    $Classes = new Classes();
+    $classes = $Classes->getClientClassInfo();
 
     include("partials/usersidebar.php"); ?>
 

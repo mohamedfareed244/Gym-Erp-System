@@ -61,21 +61,22 @@
             include_once "../Models/hrmodel.php";
             $result = getjobtitles();
 
-            include_once "../Models/employeeModel.php";
+            include_once "../Models/EmployeeModel.php";
 
-            $allEmployees = Employee::getAllEmployees();
+            $Employee = new Employee();
+            $allEmployees = $Employee->getAllEmployees();
 
             foreach ($allEmployees as $employee) {
-              echo "<tr id='row-" . $employee->ID . "'>";
-              echo "<td>" . $employee->ID . "</td>";
-              echo "<td>" . $employee->Name . "</td>";
-              echo "<td>" . $employee->PhoneNumber . "</td>";
-              echo "<td>" . $employee->Email . "</td>";
-              echo "<td>" . $employee->Salary . "</td>";
-              echo "<td>" . $employee->Address . "</td>";
-              echo "<td>" . $employee->JobTitle . "</td>";
-              echo "<td>" . $employee->Name . "</td>";
-              echo "<td><a a href='editemployee.php?ID=" . $employee->ID . "' class=\"btn\">Edit</a>         ";
+              echo "<tr id='row-" . $employee->getID() . "'>";
+              echo "<td>" . $employee->getID() . "</td>";
+              echo "<td>" . $employee->getName() . "</td>";
+              echo "<td>" . $employee->getPhoneNumber() . "</td>";
+              echo "<td>" . $employee->getEmail() . "</td>";
+              echo "<td>" . $employee->getSalary() . "</td>";
+              echo "<td>" . $employee->getAddress() . "</td>";
+              echo "<td>" . $employee->getJobTitle() . "</td>";
+              echo "<td>" . $employee->getName() . "</td>";
+              echo "<td><a a href='editemployee.php?ID=" . $employee->getID() . "' class=\"btn\">Edit</a>         ";
               echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";
               ?>
               <div class="modal" id="deleteModal">
@@ -86,7 +87,7 @@
                                       <label >Are you sure you want to delete this employee?</label>
                                       </div>
                                       <button class="btn btn-delete"
-                                          onclick='deleteEmployee(<?php echo $employee->ID ?>)' style="background-color:red">Delete</button>
+                                          onclick='deleteEmployee(<?php echo $employee->getID() ?>)' style="background-color:red">Delete</button>
                                   </div>
                             </div>
                 </div>

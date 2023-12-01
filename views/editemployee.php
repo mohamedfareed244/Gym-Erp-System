@@ -25,12 +25,13 @@
                 <div class="col-12">
                     <h4>Update Employee's Information</h4>
                     <?php
-                    include_once("../Models/employeeModel.php");
+                    include_once("../Models/EmployeeModel.php");
 
                     if (isset($_GET['ID'])) {
                         $employeeID = $_GET['ID'];
 
-                        $employee = Employee::getEmployeeByID($employeeID);
+                        $Employee = new Employee();
+                        $employee = $Employee->getEmployeeByID($employeeID);
 
                         if (!$employee) {
                             echo "Employee not found";
@@ -47,15 +48,15 @@
                     <div class="col-lg-4 col-sm-12">
                         <label for="name">Name: </label>
                     </div>
-                    <input type="text" name="name" value="<?php echo $employee->Name; ?>">
+                    <input type="text" name="name" value="<?php echo $employee->getName(); ?>">
                     <div class="col-lg-4 col-sm-12">
                         <label for="name">Phone Number: </label>
                     </div>
-                    <input type="text" name="phoneNumber" value="<?php echo $employee->PhoneNumber; ?>">
+                    <input type="text" name="phoneNumber" value="<?php echo $employee->getPhoneNumber(); ?>">
                     <div class="col-lg-4 col-sm-12">
                         <label for="name">Email: </label>
                     </div>
-                    <input type="email" name="email" value="<?php echo $employee->Email; ?>">
+                    <input type="email" name="email" value="<?php echo $employee->getEmail(); ?>">
                     <div class="col-lg-4 col-sm-12">
                         <label for="jobs">Job Title :</label>
                     </div>
@@ -65,7 +66,7 @@
                         $result = getjobtitles();
 
                         foreach ($result as $title) {
-                            $selected = ($title["Name"] == $employee->JobTitle) ? "selected" : "";
+                            $selected = ($title["Name"] == $employee->getJobTitle()) ? "selected" : "";
                             echo "<option value='" . $title["Id"] . "' $selected> " . $title["Name"] . "</option>";
                         }
                         ?>
@@ -73,7 +74,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <label for="salary">Salary:</label>
                     </div>
-                    <input type="number" name="salary" min="1000" value="<?php echo $employee->Salary; ?>">
+                    <input type="number" name="salary" min="1000" value="<?php echo $employee->getSalary(); ?>">
                     <!-- Other form fields -->
 
                     <div class="col-lg-4 col-sm-12">
@@ -85,7 +86,7 @@
                     <div class="col-lg-12 col-sm-12">
                         <label for="address">Address:</label>
                     </div>
-                    <input type="text" id="emp-addr" name="address" style="margin-bottom:20px" value="<?php echo $employee->Address; ?>">
+                    <input type="text" id="emp-addr" name="address" style="margin-bottom:20px" value="<?php echo $employee->getAddress(); ?>">
                     <br>
 
                     <div class="col-lg-4 col-sm-12">
@@ -116,14 +117,14 @@
                                 echo "<p>Invalid email address</p>";
                                 exit();
                             }
-                            $employee->Name = $name;
-                            $employee->Email = $email;
-                            $employee->Salary = $salary;
-                            $employee->JobTitle = $jobTitle;
-                            $employee->Address = $address;
-                            $employee->PhoneNumber = $phoneNumber;
+                            $employee->setName($name);
+                            $employee->setEmail($email);
+                            $employee->setSalary($salary);
+                            $employee->setJobTitle($jobTitle);
+                            $employee->setAddress($address);
+                            $employee->setPhoneNumber($phoneNumber);
 
-                            $result = Employee::updateEmployee($employee);
+                            $result = $Employee->updateEmployee($employee);
 
                             if ($result) {
                                 echo "<p>Employee information updated successfully!</p>";

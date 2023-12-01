@@ -32,7 +32,7 @@
                     <?php
                     include_once "../Models/PackageModel.php";
                     include_once "../Models/ClientModel.php";
-                    include_once "../Models/employeeModel.php";
+                    include_once "../Models/EmployeeModel.php";
                     include_once "../Models/ClassesModel.php";
                     include_once "../Models/membershipsModel.php";
 
@@ -47,13 +47,15 @@
                     $packages = $packageModel->getAllPackagesforEmployee();
                     $numberOfPackages = count($packages);
 
-                    $allEmployees = Employee::getAllEmployees();
+                    $Employee = new Employee();
+                    $allEmployees = $Employee->getAllEmployees();
                     $numberOfEmployees = count($allEmployees);
 
-                    $allCoaches = Employee::GetAllCoaches();
+                    $allCoaches = $Employee->GetAllCoaches();
                     $numberOfCoaches = count($allCoaches);
 
-                    $allClasses = Classes::getAllClasses();
+                    $Classes = new Classes();
+                    $allClasses = $Classes->getAllClasses();
                     $numberOfClasses = count($allClasses);
                     ?>
 

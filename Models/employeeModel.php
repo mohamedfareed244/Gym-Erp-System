@@ -1,25 +1,121 @@
 <?php
 
-include_once "../includes/dbh.inc.php";
+require_once("Model.php");
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-class Employee
-{
-    public $ID;
-    public $Name;
-    public $Email;
-    public $Password;
-    public $Salary;
-    public $JobTitle;
-    public $Address;
-    public $PhoneNumber;
-public $Img;
-    public static function getAllEmployees()
-    {
-        global $conn;
 
+class Employee extends Model
+{
+    private $ID;
+    private $Name;
+    private $Email;
+    private $Password;
+    private $Salary;
+    private $JobTitle;
+    private $Address;
+    private $PhoneNumber;
+    private $Img;
+
+    function __construct() {
+        $this->db = $this->connect();
+    }
+
+    public function getID()
+    {
+        return $this->ID;
+    }
+
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
+
+    public function getName()
+    {
+        return $this->Name;
+    }
+
+    public function setName($Name)
+    {
+        $this->Name = $Name;
+    }
+
+    public function getEmail()
+    {
+        return $this->Email;
+    }
+
+    public function setEmail($Email)
+    {
+        $this->Email = $Email;
+    }
+
+    public function getPassword()
+    {
+        return $this->Password;
+    }
+
+    public function setPassword($Password)
+    {
+        $this->Password = $Password;
+    }
+
+    public function getSalary()
+    {
+        return $this->Salary;
+    }
+
+    public function setSalary($Salary)
+    {
+        $this->Salary = $Salary;
+    }
+
+    public function getJobTitle()
+    {
+        return $this->JobTitle;
+    }
+
+    public function setJobTitle($JobTitle)
+    {
+        $this->JobTitle = $JobTitle;
+    }
+
+    public function getAddress()
+    {
+        return $this->Address;
+    }
+
+    public function setAddress($Address)
+    {
+        $this->Address = $Address;
+    }
+
+    public function getPhoneNumber()
+    {
+        return $this->PhoneNumber;
+    }
+
+    public function setPhoneNumber($PhoneNumber)
+    {
+        $this->PhoneNumber = $PhoneNumber;
+    }
+
+    public function getImg()
+    {
+        return $this->Img;
+    }
+
+    public function setImg($Img)
+    {
+        $this->Img = $Img;
+    }
+
+
+    public function getAllEmployees()
+    {
         $sql = "SELECT * FROM employee";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         $employees = array();
 
@@ -41,10 +137,10 @@ public $Img;
 
         return $employees;
     }
-public static function getattendance($date){
-    global $conn;
+
+public function getattendance($date){
 $sql="SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
-$result=mysqli_query($conn,$sql);
+$result=$this->db->query($sql);
 if(mysqli_num_rows($result)<=0){
 Employee::addnewdate($date);
 return Employee::getattendance($date);
@@ -54,26 +150,23 @@ return $result;
 }
 
 }
-public static function attendanceforemp($id,$status,$date){
-    global $conn;
+public function attendanceforemp($id,$status,$date){
     $sql ="UPDATE attendance SET Status=$status where EmployeeId=$id and Day='$date'";
-    mysqli_query($conn,$sql);
+    return $this->db->query($sql);
 
 
 }
-public static function addnewdate($date){
-    global $conn;
+public function addnewdate($date){
     $employees=Employee::getAllEmployees();
     foreach($employees as $emp){
         $sql="insert into attendance (EmployeeId,Day,Status) values ($emp->ID,'$date',0)";
-        mysqli_query($conn,$sql);
+        return $this->db->query($sql);
        
     }
     
 }
     public function addEmployee($employee)
     {
-        global $conn;
 
         $name = $employee->Name;
         $Sal = $employee->Salary;
@@ -82,23 +175,24 @@ public static function addnewdate($date){
         $jobTitle = $employee->JobTitle;
         $Email = $employee->Email;
         $Password = $employee->Password;
-$Img=$employee->Img;
+        $Img=$employee->Img;
+
         $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password,Img) 
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password','$Img')";
-        return mysqli_query($conn, $sql);
+        return $this->db->query($sql);
     }
-    public static function getEmployeeByID($employeeID)
+
+    public function getEmployeeByID($employeeID)
     {
-        global $conn;
-
-        $employeeID = mysqli_real_escape_string($conn, $employeeID);
-
+        $employeeID = mysqli_real_escape_string($this->db->getConn(), $employeeID);
+    
         $sql = "SELECT * FROM employee WHERE ID = '$employeeID'";
-        $result = $conn->query($sql);
-
+        $result = $this->db->query($sql);
+    
         if ($result) {
-            $employeeData = $result->fetch_assoc();
-
+            $employeeData = $this->db->fetchRow($result);
+    
+            
             $employee = new Employee();
             $employee->ID = $employeeData['ID'];
             $employee->Name = $employeeData['Name'];
@@ -110,13 +204,14 @@ $Img=$employee->Img;
             $employee->PhoneNumber = $employeeData['PhoneNumber'];
 
             return $employee;
-        } else {
-            return null;
-        }
+         } else {
+                return null; // No data found for the given employeeID
+            }
     }
-    public static function updateEmployee($employee)
+    
+
+    public function updateEmployee($employee)
     {
-        global $conn;
 
         $name = $employee->Name;
         $Sal = $employee->Salary;
@@ -133,32 +228,28 @@ $Img=$employee->Img;
             $sql = "UPDATE employee SET Name='$name', Email='$Email', Password='$hashedPassword', Salary='$Sal', PhoneNumber='$phoneNumber', Address='$address', 
             JobTitle='$jobTitle'
                     WHERE ID = $employee_id";
-            return $conn->query($sql);
+            return $this->db->query($sql);
         } else {
             // Update with the new password
             $sql = $sql = "UPDATE employee SET Name='$name', Email='$Email', Salary='$Sal', PhoneNumber='$phoneNumber', Address='$address', 
             JobTitle='$jobTitle'
                     WHERE ID = $employee_id";
-            return $conn->query($sql);
+            return $this->db->query($sql);
         }
     }
 
     public function deleteEmployee()
     {
-        global $conn;
-
         $sql = "DELETE from employee where ID =" . $_SESSION['ID'];
 
-        return mysqli_query($conn, $sql);
+        return $this->db->query($sql);
     }
     
-    public static function deleteEmployeeById($employeeID)
+    public function deleteEmployeeById($employeeID)
     {
-        global $conn;
-
         $sql = "DELETE from employee where ID =" . $employeeID;
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
         if ($result) {
             return true;
         } else {
@@ -166,20 +257,16 @@ $Img=$employee->Img;
         }
     }
 
-    public static function checkExistingEmail($email)
+    public function checkExistingEmail($email)
     {
-        global $conn;
-
         $Email = "SELECT * FROM employee WHERE Email = '$email'";
 
-        $result = mysqli_query($conn, $Email);
+        $result = $this->db->query($Email);
         return mysqli_num_rows($result) > 0;
     }
 
-    public static function GetAllCoaches()
+    public function GetAllCoaches()
     {
-    global $conn;
-
     $results = array(); // Initialize the array
 
     $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName
@@ -188,7 +275,7 @@ $Img=$employee->Img;
             ON (job_titles.Name = 'Coach' OR job_titles.Name = 'Fitness-manager') 
             AND employee.JobTitle = job_titles.Id";
 
-    $result = mysqli_query($conn, $sql);
+    $result = $this->db->query($sql);
 
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -208,12 +295,12 @@ $Img=$employee->Img;
     }
 
 
-public static function GetAllClasses()
+public function GetAllClasses()
 {
     global $conn;
 
     $sql = "SELECT ID, Name FROM class";
-    $result = $conn->query($sql);
+    $result = $this->db->query($sql);
 
     if ($result) {
         $classes = $result->fetch_all(MYSQLI_ASSOC);

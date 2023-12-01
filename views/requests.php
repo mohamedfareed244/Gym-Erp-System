@@ -33,7 +33,8 @@
     include_once "../Models/ptMembershipsModel.php";
 
 
-    $classRequests=Classes::getClassRequests();
+    $Classes = new Classes();
+    $classRequests=$Classes->getClassRequests();
     $membershipRequests=Memberships::getMembershipRequests();
     $ptmembershipsRequests = ptMemberships::getPtMembershipRequests();
     ?>
