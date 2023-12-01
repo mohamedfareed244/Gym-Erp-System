@@ -8,17 +8,17 @@ for(let i=0;i<hiddens.length;i++){
     let str=`emp${num}`;
    if(findinform(hiddens[i].value,form)){
     arr[str]=1;
-    console.log(str);
+ 
    }else{
     arr[str]=0;
-    console.log(str);
+  
    }
 
 }
 
 arr.date=date;
 
-console.log(arr);
+
 
 
     fetch("../Controllers/attendance.php", {
