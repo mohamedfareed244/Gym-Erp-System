@@ -28,11 +28,12 @@
 <body>
     <?php require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/PackageModel.php";
 
     $Client = new Client();
-    $memberships = Memberships::getAllMemberships();
+    $Memberships = new Memberships();
+    $memberships = $Memberships->getAllMemberships();
     ?>
     <script>
     var currentDate = new Date();
@@ -68,22 +69,22 @@
                         <?php
                         if(count($memberships) > 0) {
                         foreach ($memberships as $membership) {
-                            $client = $Client->getClientByID($membership->clientId);
+                            $client = $Client->getClientByID($membership->getclientId());
                             if($client) {
-                            echo "<tr id='row-" . $membership->ID . "'>";
-                            echo "<td><a class='membershipBtn' style=' font-size:17px;' href='viewClientMembership.php?ID=" . $membership->ID . "'>" . $membership->ID . "</a></td>";
+                            echo "<tr id='row-" . $membership->getID() . "'>";
+                            echo "<td><a class='membershipBtn' style=' font-size:17px;' href='viewClientMembership.php?ID=" . $membership->getID() . "'>" . $membership->getID() . "</a></td>";
                             echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
                             echo '<td> ' . $client->getPhone() . ' </td>';
-                            echo '<td>' . $membership->packageId . '</td>';
-                            echo '<td>' . $membership->startDate . '</td>';
-                            echo '<td class="endDate-' . $membership->ID . '">' . $membership->endDate . '</td>';
-                            echo '<td>' . $membership->visitsCount . '</td>';
-                            echo '<td>' . $membership->invitationsCount . '</td>';
-                            if ($membership->freezed == 0) {
+                            echo '<td>' . $membership->getpackageId() . '</td>';
+                            echo '<td>' . $membership->getstartDate() . '</td>';
+                            echo '<td class="endDate-' . $membership->getID() . '">' . $membership->getendDate() . '</td>';
+                            echo '<td>' . $membership->getvisitsCount() . '</td>';
+                            echo '<td>' . $membership->getinvitationsCount() . '</td>';
+                            if ($membership->getfreezed() == 0) {
                                 $Package = new Package();
-                                $package = $Package->getPackage($membership->packageId);
-                                echo '<td class="status-' . $membership->ID . ' bg">Active</td>';
-                                echo '<td><button id="freezeBtn-' . $membership->ID . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
+                                $package = $Package->getPackage($membership->getpackageId());
+                                echo '<td class="status-' . $membership->getID() . ' bg">Active</td>';
+                                echo '<td><button id="freezeBtn-' . $membership->getID() . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
                                 '; ?>
                         <div class="modal" id="datePickerModal">
                             <div class="modal-dialog">
@@ -96,18 +97,18 @@
                                             max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
                                     </div>
                                     <button class="btn btn-primary"
-                                        onclick='freezeMembership(<?php echo $membership->ID ?>)'>Freeze</button>
+                                        onclick='freezeMembership(<?php echo $membership->getID() ?>)'>Freeze</button>
                                 </div>
                             </div>
                         </div>
                         <?php
                             } else {
-                                echo '<td class="status-' . $membership->ID . ' bg">Freezed</td>';
-                                echo '<td><button id="unfreezeBtn-' . $membership->ID . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->ID . ')">Unfreeze</button></td>';
+                                echo '<td class="status-' . $membership->getID() . ' bg">Freezed</td>';
+                                echo '<td><button id="unfreezeBtn-' . $membership->getID() . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->getID() . ')">Unfreeze</button></td>';
 
                             }
-                            echo '<td>' . $membership->privateTrainingSessionsCount . '</td>';
-                            echo '<td>' . $membership->inbodyCount . '</td>';
+                            echo '<td>' . $membership->getprivateTrainingSessionsCount() . '</td>';
+                            echo '<td>' . $membership->getinbodyCount() . '</td>';
                             // echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
                             echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
                         <div class="modal" id="deleteModal">
@@ -118,7 +119,7 @@
                                     <label >Are you sure you want to cancel this membership?</label>
                                     </div>
                                     <button class="btn btn-delete"
-                                        onclick='deleteMembership(<?php echo $membership->ID ?>)' style="background-color:red">Delete</button>
+                                        onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Delete</button>
                                 </div>
                             </div>
                         </div>

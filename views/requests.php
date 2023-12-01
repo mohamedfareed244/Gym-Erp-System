@@ -29,14 +29,16 @@
     <?php require("partials/adminsidebar.php");
     
     include_once "../Models/ClassesModel.php";
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ptMembershipsModel.php";
 
 
     $Classes = new Classes();
     $classRequests=$Classes->getClassRequests();
-    $membershipRequests=Memberships::getMembershipRequests();
-    $ptmembershipsRequests = ptMemberships::getPtMembershipRequests();
+    $Memberships= new Memberships();
+    $membershipRequests=$Memberships->getMembershipRequests();
+    $ptMemberships = new ptMemberships();
+    $ptmembershipsRequests = $ptMemberships->getPtMembershipRequests();
     ?>
 
     <div id="add-body" class="addbody">

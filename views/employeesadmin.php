@@ -58,12 +58,10 @@
           </thead>
           <tbody>
             <?php
-            include_once "../Models/hrmodel.php";
-            $result = getjobtitles();
-
             include_once "../Models/EmployeeModel.php";
-
             $Employee = new Employee();
+            $result = $Employee->getjobtitles();
+            
             $allEmployees = $Employee->getAllEmployees();
 
             foreach ($allEmployees as $employee) {

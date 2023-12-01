@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
     $json_data = file_get_contents("php://input");
     $decoded_data = json_decode($json_data, true);
@@ -12,7 +12,8 @@ $date=$decoded_data["date"];
            
             $key=str_replace('emp', '', $key);
 
-          Employee::attendanceforemp($key, $value, $date);
+          $Employee = new employee();
+          $Employee->attendanceforemp($key, $value, $date);
         }
     }
 

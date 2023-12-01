@@ -1,14 +1,16 @@
 <?php
 session_start();
 
-include_once "../Models/membershipsModel.php";
+require_once("Controller.php");
+include_once "../Models/MembershipsModel.php";
 
-class MembershipsController
+class MembershipsController extends Controller
 {
     public function addMembership()
     {
         $PackageID = $_POST["PackageID"];
-        $result = Memberships::addMembershipUserSide($PackageID);
+        $Memberships = new Memberships();
+        $result = $Memberships->addMembershipUserSide($PackageID);
 
         if ($result['alreadyThisMembershipExists']) {
             $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
@@ -36,7 +38,8 @@ class MembershipsController
 
         if ($freezeWeeks >= 1 && $freezeWeeks <= $remainingFreezeAttempts) {
             // Update freeze count on the server
-            $result = Memberships::freezeMembership($ClientID, $freezeWeeks);
+            $Memberships = new Memberships();
+            $result = $Memberships->freezeMembership($ClientID, $freezeWeeks);
 
             if ($result['success']) {
                 $_SESSION['freezeSuccess'][$ClientID] = "Membership frozen successfully.";
@@ -50,11 +53,13 @@ class MembershipsController
         header("Location: ../views/reqfreeze.php");
         exit();
     }
+
     public function unfreezeClientMembership()
     {
         $ClientID = $_SESSION["ID"];
 
-        $result = Memberships::unfreezeMembership($ClientID);
+        $Memberships= new Memberships();
+        $result = $Memberships->unfreezeMembership($ClientID);
 
         if ($result) {
             $_SESSION['unfreezeSuccess'][$ClientID] = "Membership unfrozen successfully.";
@@ -69,7 +74,8 @@ class MembershipsController
 
 }
 
-$controller = new MembershipsController();
+$model= new Memberships();
+$controller = new MembershipsController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
@@ -81,7 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "deleteMembership":
             if (isset($_POST["membershipID"])) {
                 $membershipID = $_POST["membershipID"];
-                $result = Memberships::deleteMembership($membershipID);
+                $Memberships= new Memberships();
+                $result = $Memberships->deleteMembership($membershipID);
                 if ($result) {
                     echo "success";
                 } else {
@@ -100,7 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $membershipID = $_POST["membershipID"];
                 $selectedDate = $_POST["selectedDate"];
-                $result = Memberships::freezeMembership($membershipID, $selectedDate);
+                $Memberships= new Memberships();
+                $result = $Memberships->freezeMembership($membershipID, $selectedDate);
                 if ($result) {
                     echo "success";
                 } else {
@@ -123,7 +131,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case "unfreezeClientMembership":
                 if (isset($_POST["membershipID"])) {
                     $membershipID = $_POST["membershipID"];
-                    $result = Memberships::unFreezeMembership($membershipID);
+                    $Memberships= new Memberships();
+                    $result = $Memberships->unFreezeMembership($membershipID);
                     if ($result) {
                         echo "success";
                     } else {
@@ -134,7 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case "checkinClient":
                 if (isset($_POST["clientID"])) {
                     $clientID = $_POST["clientID"];
-                    $result = Memberships::checkinClient($clientID);
+                    $Memberships= new Memberships();
+                    $result = $Memberships->checkinClient($clientID);
                     if ($result) {
                         echo "success";
                     } else {

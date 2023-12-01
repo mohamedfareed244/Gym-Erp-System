@@ -37,7 +37,8 @@
     include_once "../Models/EmployeeModel.php";
 
     $ptpackage = new ptPackages();
-    $ptmemberships = ptMemberships::getAllPtMemberships();
+    $ptMemberships = new ptMemberships();
+    $ptmemberships = $ptMemberships->getAllPtMemberships();
     $Employee = new Employee();
     $coaches = $Employee->getAllCoaches(); 
     $ptMembershipsInstance = new ptMemberships();

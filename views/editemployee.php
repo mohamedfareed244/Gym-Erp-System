@@ -62,8 +62,9 @@
                     </div>
                     <select name="jobTitle" id="jobs">
                         <?php
-                        include_once "../Models/hrmodel.php";
-                        $result = getjobtitles();
+                        include_once "../Models/EmployeeModel.php";
+                        $Employee = new Employee();
+                        $result = $Employee->getjobtitles();
 
                         foreach ($result as $title) {
                             $selected = ($title["Name"] == $employee->getJobTitle()) ? "selected" : "";

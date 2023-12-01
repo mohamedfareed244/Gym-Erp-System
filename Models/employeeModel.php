@@ -313,4 +313,18 @@ public function GetAllClasses()
     }
 }
 
+function getauth(){
+$sql="SELECT * FROM authority";
+
+$result=$this->db->query($sql);
+return $result;
+}
+function getjobtitles(){
+  
+    $sql="SELECT * FROM job_titles";
+    $result=$this->db->query($sql);
+ 
+    return $result;
+}
+
 }

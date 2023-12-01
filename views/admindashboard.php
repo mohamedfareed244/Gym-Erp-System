@@ -34,9 +34,10 @@
                     include_once "../Models/ClientModel.php";
                     include_once "../Models/EmployeeModel.php";
                     include_once "../Models/ClassesModel.php";
-                    include_once "../Models/membershipsModel.php";
+                    include_once "../Models/MembershipsModel.php";
 
-                    $allMemberships = Memberships::getAllMemberships();
+                    $Memberships= new Memberships();
+                    $allMemberships = $Memberships->getAllMemberships();
                     $numberOfMemberships = count($allMemberships);
 
                     $clientModel = new Client();

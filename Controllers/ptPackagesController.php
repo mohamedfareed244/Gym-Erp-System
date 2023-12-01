@@ -1,14 +1,12 @@
 <?php
 
-
+require_once("Controller.php");
 include_once "../Models/ptPackageModel.php";
 include_once "../Models/ptMembershipsModel.php";
 
-
 session_start();
 
-
-class ptPackController
+class ptPackController extends Controller
 {
 
     function AddptPackages()
@@ -56,10 +54,10 @@ class ptPackController
 
             $newptpackage = new ptPackages();
 
-            $newptpackage->Name = $name;
-            $newptpackage->NumOfSessions = $sessions;
-            $newptpackage->MinPackageMonths = $months;
-            $newptpackage->Price = $price;
+            $newptpackage->setName($name);
+            $newptpackage->setNumOfSessions($sessions);
+            $newptpackage->setMinPackageMonths($months);
+            $newptpackage->setPrice($price);
 
             $result = $ptpackage->addptPacks($newptpackage);
 
@@ -129,7 +127,8 @@ class ptPackController
     public function addPtMembership()
     {
         $PackageID = $_POST["PackageID"];
-        $result = ptMemberships::addPtMembershipUserSide($ClientID, $PackageID);
+        $ptMemberships = new ptMemberships();
+        $result = $ptMemberships->addPtMembershipUserSide($ClientID, $PackageID);
 
         if ($result['alreadyThisMembershipExists']) {
             $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
@@ -150,8 +149,8 @@ class ptPackController
 
 
 
-
-$controller = new ptPackController();
+$model = new ptPackages();
+$controller = new ptPackController($modal);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
@@ -172,7 +171,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $ptPackageId = $_POST["ptPackageId"];
                 $coachID = $_POST["coachID"];
 
-                $result = ptPackages::addPackageForClient($clientId, $ptPackageId, $coachID);
+                $ptPackages = new ptPackages();
+                $result = $ptPackages->addPackageForClient($clientId, $ptPackageId, $coachID);
                 if ($result) {
                     echo "success";
                 } else {
