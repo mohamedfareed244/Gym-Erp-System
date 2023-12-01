@@ -1,11 +1,12 @@
 <?php
 
-include_once "../Models/employeeModel.php";
+require_once("Controller.php");
+include_once "../Models/EmployeeModel.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-class EmployeeController
+class EmployeeController extends Controller
 {
 
     public function addEmployee()
@@ -106,14 +107,14 @@ if (!move_uploaded_file($tempFilePath, $destination)) {
         if ($isValid) {
 
             $newEmployee = new Employee();
-            $newEmployee->Name = $Name;
-            $newEmployee->PhoneNumber = $PhoneNumber;
-            $newEmployee->Email = $Email;
-            $newEmployee->JobTitle = $JobTitle;
-            $newEmployee->Salary = $Salary;
-            $newEmployee->Address = $Address;
-            $newEmployee->Password = $hashedPassword;
-            $newEmployee->Img=$destination;
+            $newEmployee->setName($Name);
+            $newEmployee->setPhoneNumber($PhoneNumber);
+            $newEmployee->setEmail($Email);
+            $newEmployee->setJobTitle($JobTitle);
+            $newEmployee->setSalary($Salary);
+            $newEmployee->setAddress($Address);
+            $newEmployee->setPassword($hashedPassword);
+            $newEmployee->setImg($destination);
 
             $result = $newEmployee->addEmployee($newEmployee);
 
@@ -142,8 +143,8 @@ if (!move_uploaded_file($tempFilePath, $destination)) {
 }
 
 
-
-$controller = new EmployeeController();
+$model = new Employee();
+$controller = new EmployeeController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
@@ -156,7 +157,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["employeeId"])) {
                 $employeeId = $_POST["employeeId"];
 
-                $result = Employee::deleteEmployeeByID($employeeId);
+                $Employee= new Employee();
+                $result = $Employee->deleteEmployeeByID($employeeId);
 
                 if ($result) {
                     echo "success";

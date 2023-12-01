@@ -22,13 +22,14 @@
     require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
     // Get client information
     if (isset($_GET['ID'])) {
         $clientID = $_GET['ID'];
-        $Client = Client::getClientByID($clientID);
-        if (!$Client) {
+        $Client = new Client();
+        $client = $Client->getClientByID($clientID);
+        if (!$client) {
             echo "Client not found";
             exit;
         }
@@ -37,13 +38,15 @@
         exit;
     }
 
-    $packages = ptPackages::getActivePtPackagesForClient($clientID);
-    $employeesData = Employee::GetAllCoaches();
+    $ptPackages = new ptPackages();
+    $packages = $ptPackages->getActivePtPackagesForClient($clientID);
+    $Employee = new Employee();
+    $employeesData = $Employee->GetAllCoaches();
     ?>
 
     <div class="container py-5" style="padding-left:70px">
         <h2 class="coaches-title">Choose a Private Training Package for
-            <?php echo $Client->FirstName . ' ' . $Client->LastName; ?> :
+            <?php echo $Client->getFirstName() . ' ' . $Client->getLastName(); ?> :
         </h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
@@ -52,19 +55,19 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
-                                <?php echo $package->Name; ?>
+                                <?php echo $package->getName(); ?>
                             </h4>
                             <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>
-                                <?php echo $package->NumOfSessions . " Sessions"; ?>
+                                <?php echo $package->getNumOfSessions() . " Sessions"; ?>
                             </h6>
                             <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>
-                                <?php echo $package->MinPackageMonths . " Months" ?>
+                                <?php echo $package->getMinPackageMonths() . " Months" ?>
                             </h6>
                             <h5 class="card-text" id="price">
-                                <?php echo "for L.E " . $package->Price ?>
+                                <?php echo "for L.E " . $package->getPrice() ?>
                             </h5>
                             <h5 class="card-text" id="Coaches">
-                                <select name="CoachName" class="form-select" id="coach<?php echo $package->ID; ?>">
+                                <select name="CoachName" class="form-select" id="coach<?php echo $package->getID(); ?>">
                                     <option value="">Choose a Coach</option>
                                     <?php
                                     foreach ($employeesData as $coach) {
@@ -72,11 +75,11 @@
                                     }
                                     ?>
                                 </select>
-                                <span class="text-danger" id="coaches-error<?php echo $package->ID; ?>"></span>
+                                <span class="text-danger" id="coaches-error<?php echo $package->getID(); ?>"></span>
                             </h5>
                             <br>
                             <div class="d-flex justify-content-around">
-                                <button class="btn btn-success" onclick="addPtPackage(<?php echo $package->ID ?>, <?php echo $clientID; ?>)">
+                                <button class="btn btn-success" onclick="addPtPackage(<?php echo $package->getID() ?>, <?php echo $clientID; ?>)">
                                     Add Package
                                 </button>
                             </div>

@@ -1,27 +1,90 @@
 <?php
 
 
-include_once "../includes/dbh.inc.php";
+require_once("Model.php");
 
-include_once "employeeModel.php";
+include_once "EmployeeModel.php";
 include_once "ClientModel.php";
-include_once "membershipsModel.php";
+include_once "MembershipsModel.php";
 
-class ptPackages
+class ptPackages extends Model
 {
-    public $ID;
-    public $Name;
-    public $NumOfSessions;
-    public $MinPackageMonths;
-    public $Price;
-    public $isActivated;
+    private $ID;
+    private $Name;
+    private $NumOfSessions;
+    private $MinPackageMonths;
+    private $Price;
+    private $isActivated;
+
+    function __construct() {
+        $this->db = $this->connect();
+    }
+
+    public function getID()
+    {
+        return $this->ID;
+    }
+
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
+
+    public function getName()
+    {
+        return $this->Name;
+    }
+
+    public function setName($Name)
+    {
+        $this->Name = $Name;
+    }
+
+    public function getNumOfSessions()
+    {
+        return $this->NumOfSessions;
+    }
+
+    public function setNumOfSessions($NumOfSessions)
+    {
+        $this->NumOfSessions = $NumOfSessions;
+    }
+
+    public function getMinPackageMonths()
+    {
+        return $this->MinPackageMonths;
+    }
+
+    public function setMinPackageMonths($MinPackageMonths)
+    {
+        $this->MinPackageMonths = $MinPackageMonths;
+    }
+
+    public function getPrice()
+    {
+        return $this->Price;
+    }
+
+    public function setPrice($Price)
+    {
+        $this->Price = $Price;
+    }
+
+    public function getIsActivated()
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated($isActivated)
+    {
+        $this->isActivated = $isActivated;
+    }
 
     public function getAllPtPackagesforEmployee()
     {
-        global $conn;
 
         $sql = "SELECT * FROM `private training package`";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             $ptpackages = $result->fetch_all(MYSQLI_ASSOC);
@@ -35,22 +98,21 @@ class ptPackages
         }
     }
 
-    public static function getActivePtPackagesForClient($clientID)
+    public function getActivePtPackagesForClient($clientID)
     {
-        global $conn;
-
         $currentDate = date("Y-m-d");
-        $clientMembership = Memberships::hasActiveMembership($clientID);
+        $Memberships = new Memberships();
+        $clientMembership = $Memberships->hasActiveMembership($clientID);
         if ($clientMembership) {
 
             $sql = "SELECT * FROM `private training package` WHERE `isActivated` = 'Activated'";
 
-            $result = $conn->query($sql);
+            $result = $this->db->query($sql);
             if ($result) {
-                $membership = Memberships::getMembership($clientID);
+                $membership = $Memberships->getMembership($clientID);
                 $packages = array();
                 while ($row = $result->fetch_assoc()) {
-                    if (strtotime($membership->endDate) >= strtotime($currentDate . " + " . $row['MinPackageMonths'] . " months")) {
+                    if (strtotime($membership->getendDate()) >= strtotime($currentDate . " + " . $row['MinPackageMonths'] . " months")) {
                         $package = new ptPackages();
                         $package->ID = $row["ID"];
                         $package->Name = $row["Name"];
@@ -68,8 +130,6 @@ class ptPackages
 
     public function addptPacks($ptPackage)
     {
-        global $conn;
-
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
@@ -78,32 +138,27 @@ class ptPackages
 
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
-        return $conn->query($sql);
+        return  $this->db->query($sql);
     }
 
 
     public function activatePtPackage($ptpackageID)
     {
-        global $conn;
-
         $sql = "UPDATE `private training package` SET isActivated='Activated' WHERE ID='$ptpackageID'";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
 
     public function deactivatePtPackage($ptpackageID)
     {
-        global $conn;
-
         $sql = "UPDATE `private training package` SET isActivated='Deactivated' WHERE ID='$ptpackageID'";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
     public function getUserPackageDetails($packageId)
     {
-        global $conn;
 
         if (!isset($_SESSION['clientID'])) {
             return null;
@@ -118,7 +173,7 @@ class ptPackages
                 INNER JOIN employee e ON ptm.CoachID = e.ID
                 WHERE c.ID = $clientId AND ptm.PrivateTrainingPackageID = $packageId";
 
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -143,11 +198,10 @@ class ptPackages
             return null;
         }
     }
-    public static function checkPtPackage($ptPackageID)
+    public function checkPtPackage($ptPackageID)
     {
-        global $conn;
         $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
             $found = true;
@@ -156,11 +210,10 @@ class ptPackages
             return $found;
         }
     }
-    public static function getPtPackage($ptPackageID)
+    public function getPtPackage($ptPackageID)
     {
-        global $conn;
         $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         if ($result) {
             $row = $result->fetch_assoc();
             $ptPackage = new PtPackages();
@@ -176,33 +229,35 @@ class ptPackages
         return null;
     }
 
-    public static function ExistingPtMembership($clientID)
+    public function ExistingPtMembership($clientID)
     {
-        global $conn;
-        $findClient = Client::checkClient($clientID);
+        $Client = new Client();
+        $findClient = $Client->checkClient($clientID);
         if ($findClient) {
             $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
-            $result = $conn->query($sql);
+            $result =  $this->db->query($sql);
             if ($result && $result->num_rows > 0) {
                 return true;
             }
         }
         return false;
     }
-    public static function addPackageForClient($clientID, $ptPackageID, $coachID)
+    public function addPackageForClient($clientID, $ptPackageID, $coachID)
     {
-        global $conn;
-        $findClient = Client::checkClient($clientID);
+        $Client = new Client();
+        $Employee = new Employee();
+        $findClient = $Client->checkClient($clientID);
         if ($findClient) {
-            $checkMembership = Memberships::hasActiveMembership($clientID);
+            $Memberships = new Memberships();
+            $checkMembership = $Memberships->hasActiveMembership($clientID);
             if ($checkMembership) {
-                $coach = Employee::getEmployeeByID($coachID);
+                $coach = $Employee->getEmployeeByID($coachID);
                 if ($coach != null) {
                     $ptPackage = ptPackages::getPtPackage($ptPackageID);
                     if ($ptPackage != null) {
                         $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount)
                         VALUES ('$clientID', '$coachID','$ptPackage->ID', '$ptPackage->NumOfSessions')";
-                        return mysqli_query($conn, $sql);
+                        return $this->db->query($sql);
                     }
                 }
             }
@@ -213,9 +268,8 @@ class ptPackages
 
     public function getAllPtPackagesforClient()
     {
-        global $conn;
         $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";
-        $result = $conn->query($sql);
+        $result =  $this->db->query($sql);
 
         if ($result) {
             $packages = $result->fetch_all(MYSQLI_ASSOC);

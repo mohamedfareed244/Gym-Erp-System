@@ -26,10 +26,11 @@
 
     session_start();
    
-   include_once "../Models/membershipsModel.php";
+   include_once "../Models/MembershipsModel.php";
    
    // Call the getClientMembershipInfo function
-   $memberships = Memberships::getClientMembershipInfo();
+   $Memberships = new Memberships();
+   $memberships = $Memberships->getClientMembershipInfo();
    
    
    include("partials/usersidebar.php");

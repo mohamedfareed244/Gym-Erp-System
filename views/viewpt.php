@@ -25,13 +25,14 @@
     <?php
     session_start();
     include("partials/usersidebar.php");
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
     include_once "../Models/ptMembershipsModel.php";
     ?>
 
 <?php
-                $ptMemberships = ptMemberships::getClientPtMembershipInfo();
+                $ptMemberships= new ptMemberships();
+                $ptMemberships = $ptMemberships->getClientPtMembershipInfo();
                 $ptPackages = new ptPackages();
                 // $clientID = $_SESSION["clientID"];
 

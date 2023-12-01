@@ -1,30 +1,153 @@
 <?php
 
-include_once "../includes/dbh.inc.php";
+require_once("Model.php");
+
 include_once "ClientModel.php";
 include_once "PackageModel.php";
 
-
-class Memberships
+class Memberships extends Model
 {
-    public $ID;
-    public $clientId;
-    public $packageId;
-    public $startDate;
-    public $endDate;
-    public $visitsCount;
-    public $invitationsCount;
-    public $inbodyCount;
-    public $privateTrainingSessionsCount;
-    public $freezeCount;
-    public $freezed;
-    public $isActivated;
+    private $ID;
+    private $clientId;
+    private $packageId;
+    private $startDate;
+    private $endDate;
+    private $visitsCount;
+    private $invitationsCount;
+    private $inbodyCount;
+    private $privateTrainingSessionsCount;
+    private $freezeCount;
+    private $freezed;
+    private $isActivated;
 
-    public static function getAllMemberships()
+    function __construct() {
+        $this->db = $this->connect();
+    }
+
+    public function getID()
     {
-        global $conn;
+        return $this->ID;
+    }
+
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
+
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId($clientId)
+    {
+        $this->clientId = $clientId;
+    }
+
+    public function getPackageId()
+    {
+        return $this->packageId;
+    }
+
+    public function setPackageId($packageId)
+    {
+        $this->packageId = $packageId;
+    }
+
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    public function getVisitsCount()
+    {
+        return $this->visitsCount;
+    }
+
+    public function setVisitsCount($visitsCount)
+    {
+        $this->visitsCount = $visitsCount;
+    }
+
+    public function getInvitationsCount()
+    {
+        return $this->invitationsCount;
+    }
+
+    public function setInvitationsCount($invitationsCount)
+    {
+        $this->invitationsCount = $invitationsCount;
+    }
+
+    public function getInbodyCount()
+    {
+        return $this->inbodyCount;
+    }
+
+    public function setInbodyCount($inbodyCount)
+    {
+        $this->inbodyCount = $inbodyCount;
+    }
+
+    public function getPrivateTrainingSessionsCount()
+    {
+        return $this->privateTrainingSessionsCount;
+    }
+
+    public function setPrivateTrainingSessionsCount($privateTrainingSessionsCount)
+    {
+        $this->privateTrainingSessionsCount = $privateTrainingSessionsCount;
+    }
+
+    public function getFreezeCount()
+    {
+        return $this->freezeCount;
+    }
+
+    public function setFreezeCount($freezeCount)
+    {
+        $this->freezeCount = $freezeCount;
+    }
+
+    public function getFreezed()
+    {
+        return $this->freezed;
+    }
+
+    public function setFreezed($freezed)
+    {
+        $this->freezed = $freezed;
+    }
+
+    public function getIsActivated()
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated($isActivated)
+    {
+        $this->isActivated = $isActivated;
+    }
+
+    public function getAllMemberships()
+    {
         $sql = "SELECT * FROM `membership`";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $memberships = array();
 
         if ($result->num_rows > 0) {
@@ -48,17 +171,15 @@ class Memberships
         return $memberships;
     }
 
-    public static function deleteMembership($membershipID)
+    public function deleteMembership($membershipID)
     {
-        global $conn;
         $sql = "DELETE from membership where ID =" . $membershipID;
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         return $result;
 
     }
-    public static function createMembership($clientId, $packageId)
+    public function createMembership($clientId, $packageId)
     {
-        global $conn;
         $isActivated = "Activated";
         $client = new Client();
         $package = new Package();
@@ -77,15 +198,14 @@ class Memberships
             $isActivated = 'Activated';
             $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
                                   VALUES ('$clientId', '$packageId', '$startDate', '$endDate', '0', '$numOfInv', '$numOfInb', '$privTrain','$freezeCount', '$freezed','$isActivated')";
-            return mysqli_query($conn, $sql);
+            return $this->db->query($sql);
         }
         return false;
     }
 
 
-    public static function addMembershipUserSide($packageId)
+    public function addMembershipUserSide($packageId)
     {
-        global $conn;
         $pck = new Package();
         $client = new Client();
         $isActivated = "Not Activated";
@@ -96,11 +216,11 @@ class Memberships
             $Package = $pck->getPackage($packageId);
 
             $check1Sql = "SELECT * FROM `membership` WHERE PackageID ='$packageId' AND ClientID = " . $_SESSION['ID'];
-            $check1Result = mysqli_query($conn, $check1Sql);
+            $check1Result = $this->db->query($check1Sql);
             $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
 
             $check2Sql = "SELECT * FROM `membership` WHERE ClientID = " . $_SESSION['ID'];
-            $check2Result = mysqli_query($conn, $check2Sql);
+            $check2Result =$this->db->query($check2Sql);
             $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
 
             if ($alreadyThisMembershipExists) {
@@ -118,21 +238,19 @@ class Memberships
                 $freezed = 0;
                 $sql = "INSERT INTO `membership` (ClientID, PackageID, StartDate, EndDate, VisitsCount, InvitationsCount, InbodyCount, PrivateTrainingSessionsCount, FreezeCount, Freezed, isActivated)
                     VALUES ('" . $_SESSION['ID'] . "', '$packageId', '$startDate', '$endDate', '0', '$numOfInv', '$numOfInb', '$privTrain', '$freezeCount', '$freezed' , '$isActivated')";
-                $insertResult = mysqli_query($conn, $sql);
+                $insertResult = $this->db->query($sql);
 
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
             }
         }
     }
 
-    public static function hasActiveMembership($clientId)
+    public function hasActiveMembership($clientId)
     {
-        global $conn;
-
         $currentDate = date("Y-m-d");
 
         $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate`";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
             $found = true;
@@ -140,13 +258,13 @@ class Memberships
         }
         return $found;
     }
-    public static function getMembershipByID($membershipID)
+
+    public function getMembershipByID($membershipID)
     {
-        global $conn;
 
         $sql = "SELECT * FROM `membership` WHERE `ID` = '$membershipID'";
 
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         if ($result) {
             $membershipData = $result->fetch_assoc();
             $membership = new Memberships();
@@ -166,15 +284,13 @@ class Memberships
         return null;
 
     }
-    public static function getMembership($clientId)
+    public function getMembership($clientId)
     {
-        global $conn;
-
         $currentDate = date("Y-m-d");
 
         $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId'";
 
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             $membershipData = $result->fetch_assoc();
@@ -204,10 +320,8 @@ class Memberships
     }
 
 
-    public static function getClientMembershipInfo()
+    public function getClientMembershipInfo()
     {
-        global $conn;
-
         $isActivated = "Activated";
 
         $sql = "SELECT package.Title, package.NumOfInvitations, package.NumOfInbodySessions, package.NumOfPrivateTrainingSessions,
@@ -217,7 +331,7 @@ class Memberships
             INNER JOIN membership ON package.ID = membership.PackageID 
             WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'];
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -243,9 +357,8 @@ class Memberships
 
     }
 
-    public static function freezeMembership($membershipId, $selectedDate)
+    public function freezeMembership($membershipId, $selectedDate)
     {
-        global $conn;
         $membership = Memberships::getMembershipByID($membershipId);
 
         if ($membership) {
@@ -262,19 +375,19 @@ class Memberships
             echo "New End Date: " . $newEndDate; // Debug statement
 
             $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$membership->freezeCount'-1 WHERE ID='$membershipId'";
-            $result = mysqli_query($conn, $sql);
+            $result = $this->db->query($sql);
 
             $freezeStartDate = date("Y-m-d");
 
             $sql2 = "INSERT INTO `scheduled_unfreeze` (membershipId, freezeEndDate, freezeStartDate, freezeCount) VALUES 
             ('$membership->ID','$freezeEndDate', '$freezeStartDate', '$membership->freezeCount'-1)";
 
-            $result2 = mysqli_query($conn, $sql2);
+            $result2 = $this->db->query($sql2);
 
             if ($result && $result2) {
                 echo "Update successful!";
             } else {
-                echo "Error updating record: " . mysqli_error($conn);
+                echo "Error updating record: " . mysqli_error($this->db->getConn());
             }
 
             return $result;
@@ -283,18 +396,16 @@ class Memberships
         }
     }
 
-    public static function getScheduledUnFreeze($membershipId)
+    public function getScheduledUnFreeze($membershipId)
     {
-        global $conn;
         $sql = "SELECT * FROM `scheduled_unfreeze` WHERE membershipId = '$membershipId'";
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row;
     }
 
-    public static function unFreezeMembership($membershipId)
+    public function unFreezeMembership($membershipId)
     {
-        global $conn;
         $membership = Memberships::getMembershipByID($membershipId);
 
         $scheduledUnFreeze = Memberships::getScheduledUnFreeze($membershipId);
@@ -318,25 +429,26 @@ class Memberships
                 $currentDate = date("Y-m-d");
                 echo 'NEW DATE', $newEndDate, " Current ", $currentDate, "  Days ", $days, '    ', $numOfMonths;
                 $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
-                $result = mysqli_query($conn, $sql);
+                $result = $this->db->query($sql);
 
                 $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
-                $result2 = mysqli_query($conn, $sql2);
+                $result2 = $this->db->query($sql2);
 
                 if ($result && $result2) {
                     echo "Update successful!";
                 } else {
-                    echo "Error updating record: " . mysqli_error($conn);
+                    echo "Error updating record: " . mysqli_error($this->db->getConn());
                 }
             } else if ($currDate >= $freezeEndDate) {
                 $sql = "UPDATE `membership` SET Freezed = 0 WHERE ID='$membershipId'";
-                $result = mysqli_query($conn, $sql);
+                $result = $this->db->query($sql);
                 $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
-                $result2 = mysqli_query($conn, $sql2);
+                $result2 = $this->db->query($sql2);
+
                 if ($result && $result2) {
                     echo "Update successful!";
                 } else {
-                    echo "Error updating record: " . mysqli_error($conn);
+                    echo "Error updating record: " . mysqli_error($this->db->getConn());
                 }
 
             }
@@ -346,9 +458,9 @@ class Memberships
             return false;
         }
     }
-    public static function getMembershipRequests()
+
+    public function getMembershipRequests()
     {
-        global $conn;
 
         $isActivated = "Not Activated";
 
@@ -358,7 +470,7 @@ class Memberships
         INNER JOIN package ON package.ID = membership.PackageID
         WHERE membership.isActivated = '$isActivated'";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -381,7 +493,6 @@ class Memberships
 
     public function acceptMembership($membershipID)
     {
-        global $conn;
 
         $isActivated = "Activated";
 
@@ -389,7 +500,7 @@ class Memberships
         SET isActivated='$isActivated' 
         WHERE ID = $membershipID";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
     public function calculateRemainingFreezeAttempts($userInput)
@@ -407,19 +518,17 @@ class Memberships
 
     private function updateFreezeCountInDatabase($newFreezeCount)
     {
-        global $conn;
         $sql = "UPDATE memberships SET freezeCount = $newFreezeCount WHERE ID = $this->ID";
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
         
         if (!$result) {
-            die("Error updating freezeCount: " . mysqli_error($conn));
+            die("Error updating freezeCount: " . mysqli_error($this->db->getConn()));
         }
         
     }
 
     public function getClientAndMembership()
     {
-        global $conn;
         $isActivated='Activated';
 
         $sql="SELECT client.ID,client.FirstName,client.LastName,package.Title,package.VisitsLimit,
@@ -430,7 +539,7 @@ class Memberships
         where membership.isActivated= '$isActivated' AND membership.EndDate > CURDATE() 
         AND (package.VisitsLimit = 0 OR (package.VisitsLimit > 0 AND package.VisitsLimit > membership.VisitsCount))";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -451,15 +560,13 @@ class Memberships
         }
     }
 
-    public static function checkinClient($clientID)
+    public function checkinClient($clientID)
     {
-        global $conn;
-
         $sql="UPDATE membership 
         SET VisitsCount = VisitsCount + 1
         WHERE ClientID = $clientID";
 
-        return mysqli_query($conn, $sql);
+        return $this->db->query($sql);
     }
 
 

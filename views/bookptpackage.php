@@ -27,12 +27,13 @@
     include("partials/usersidebar.php");
     include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
 
     $ptpackages = new ptPackages();
     $ptpacks = $ptpackages->getAllPtPackagesforClient();
-    $coaches = Employee::getAllCoaches();
+    $Employee = new Employee();
+    $coaches = $Employee->getAllCoaches();
     $ptMembershipsInstance = new ptMemberships();
 
 

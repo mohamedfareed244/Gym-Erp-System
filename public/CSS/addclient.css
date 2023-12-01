@@ -405,4 +405,21 @@ input[type="text"] {
   cursor: pointer;
 }
 
+
 /* Freeze Membership Modal End */
+/* Employees attendance  */
+#savebtn{
+margin-left: 5px;
+width: 100px;
+padding: 7px;
+color: white;
+background-color: black;
+border: none;
+border-radius: 12px;
+transition: .5s;
+}
+#savebtn:hover{
+  
+  transform: scale(1.05);
+  background-color: rgb(34, 33, 33);
+}

@@ -2,7 +2,7 @@
 
 require_once("Controller.php");
 require_once("../Models/PackageModel.php");
-include_once "../Models/membershipsModel.php";
+include_once "../Models/MembershipsModel.php";
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -200,7 +200,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $clientId = $_POST["membershipclientId"];
                 $packageId = $_POST["packageId"];
 
-                $result = Memberships::createMembership($clientId, $packageId);
+                $Memberships = new Memberships();
+                $result = $Memberships->createMembership($clientId, $packageId);
                 if ($result) {
                     echo "success";
                 } else {

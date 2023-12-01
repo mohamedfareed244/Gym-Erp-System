@@ -46,9 +46,10 @@
                     </thead>
                     <tbody>
                         <?php
-                        include_once "../Models/employeeModel.php";
+                        include_once "../Models/EmployeeModel.php";
 
-                        $employeesData = Employee::GetAllCoaches();
+                        $Employee = new Employee();
+                        $employeesData = $Employee->GetAllCoaches();
 
                         foreach ($employeesData as $coach) {
                             echo "<tr>

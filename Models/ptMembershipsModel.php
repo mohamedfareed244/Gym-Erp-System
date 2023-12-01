@@ -1,35 +1,100 @@
 <?php
-include_once "../includes/dbh.inc.php";
+
+require_once("Model.php");
 include_once "ptPackageModel.php";
 include_once "ClientModel.php";
 include_once "CoachesModel.php";
-include_once "employeeModel.php";
+include_once "EmployeeModel.php";
 
 
 
 
-class ptMemberships{
+class ptMemberships extends Model{
 
+    private $ID;
     private $ClientID;
     private	$CoachID;
     private	$PrivateTrainingPackageID;
-    public	$SessionsCount;
+    private	$SessionsCount;
     private	$isActivated;	 
 
+        function __construct() {
+            $this->db = $this->connect();
+        }
 
-    public static function getAllPtMemberships()
+        public function getID()
+        {
+            return $this->ID;
+        }
+    
+        public function setID($ID)
+        {
+            $this->ID = $ID;
+        }
+
+        public function getClientID()
+        {
+            return $this->ClientID;
+        }
+    
+        public function setClientID($ClientID)
+        {
+            $this->ClientID = $ClientID;
+        }
+ 
+        public function getCoachID()
+        {
+            return $this->CoachID;
+        }
+    
+        public function setCoachID($CoachID)
+        {
+            $this->CoachID = $CoachID;
+        }
+    
+        public function getPrivateTrainingPackageID()
+        {
+            return $this->PrivateTrainingPackageID;
+        }
+    
+        public function setPrivateTrainingPackageID($PrivateTrainingPackageID)
+        {
+            $this->PrivateTrainingPackageID = $PrivateTrainingPackageID;
+        }
+
+        public function getSessionsCount()
+        {
+            return $this->SessionsCount;
+        }
+    
+        public function setSessionsCount($SessionsCount)
+        {
+            $this->SessionsCount = $SessionsCount;
+        }
+
+        public function getIsActivated()
+        {
+            return $this->isActivated;
+        }
+    
+        public function setIsActivated($isActivated)
+        {
+            $this->isActivated = $isActivated;
+        }
+
+
+    public function getAllPtMemberships()
     {
-        global $conn;
         $sql = "SELECT * FROM `private training membership`";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
         $ptmemberships = array();
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $ptmembership = new ptMemberships();
                 $ptmembership->ID = $row['ID'];
-                $ptmembership->clientId = $row['ClientID'];
-                $ptmembership->coachid = $row['CoachID'];
+                $ptmembership->ClientID = $row['ClientID'];
+                $ptmembership->CoachID = $row['CoachID'];
                 $ptmembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
                 $ptmembership->SessionsCount = $row['SessionsCount'];
                 $ptmembership->isActivated = $row['isActivated'];
@@ -43,27 +108,23 @@ class ptMemberships{
 
     public function activatePtMembership($PrivateTrainingPackageID)
     {
-        global $conn;
 
         $sql = "UPDATE `private training membership` SET isActivated='Activated' WHERE ID='$PrivateTrainingPackageID'";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
 
     public function deactivatePtMembership($PrivateTrainingPackageID)
     {
-        global $conn;
-
         $sql = "UPDATE `private training membership` SET isActivated='Deactivated' WHERE ID='$PrivateTrainingPackageID'";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
    
-    public static function addPtMembershipUserSide($ptPackageID)
+    public  function addPtMembershipUserSide($ptPackageID)
     {
-        global $conn;
         $pck = new ptPackages();
         $client = new Client();
         $isActivated = "Not Activated";
@@ -74,11 +135,11 @@ class ptMemberships{
             $Package = $pck->getPtPackage($ptPackageID);
     
             $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$ptPackageID' AND ClientID = " . $_SESSION['ID'];
-            $check1Result = mysqli_query($conn, $check1Sql);
+            $check1Result =  $this->db->query($check1Sql);
             $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
     
             $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = " . $_SESSION['ID'];
-            $check2Result = mysqli_query($conn, $check2Sql);
+            $check2Result =  $this->db->query($check2Sql);
             $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
     
             if ($alreadyThisMembershipExists) {
@@ -87,14 +148,14 @@ class ptMemberships{
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
             } else {
                 $ClientID = $_SESSION['ID'];
-            $CoachID = $Package->CoachID;
-                $PrivateTrainingPackageID = $Package->PrivateTrainingPackageID;
-                $SessionsCount = $Package->SessionsCount;
-                $isActivated = $Package->isActivated;
+                $CoachID = $Package->getCoachID();
+                $PrivateTrainingPackageID = $Package->getPrivateTrainingPackageID();
+                $SessionsCount = $Package->getSessionsCount();
+                $isActivated = $Package->getisActivated();
     
                 $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
                         VALUES ('$ClientID', '$CoachID', '$PrivateTrainingPackageID', '$SessionsCount', '$isActivated')";
-                $insertResult = mysqli_query($conn, $sql);
+                $insertResult = $this->db->query($sql);
     
                 return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
             }
@@ -107,9 +168,8 @@ class ptMemberships{
 
 
 
-    public static function getClientPtMembershipInfo()
+    public function getClientPtMembershipInfo()
     {
-        global $conn;
     
         $isActivated = "Activated";
     
@@ -118,7 +178,7 @@ class ptMemberships{
                 INNER JOIN `private training membership` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
                 WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = " . $_SESSION['ID'];
     
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
     
         $results = array();
     
@@ -135,19 +195,18 @@ class ptMemberships{
         }
     }
 
-    public static function getPtMembershipByPackageID($packageID) {
-        global $conn;
+    public function getPtMembershipByPackageID($packageID) {
 
         $sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
             $ptMembership = new ptMemberships();
             $ptMembership->ID = $row['ID'];
-            $ptMembership->clientId = $row['ClientID'];
-            $ptMembership->coachid = $row['CoachID'];
+            $ptMembership->ClientID = $row['ClientID'];
+            $ptMembership->CoachID = $row['CoachID'];
             $ptMembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
             $ptMembership->SessionsCount = $row['SessionsCount'];
             $ptMembership->isActivated = $row['isActivated'];
@@ -156,15 +215,15 @@ class ptMemberships{
         }
     }
     
-    public static function getCoachNamesForPackage($packageID) {
-        global $conn;
+    public function getCoachNamesForPackage($packageID) {
 
-        $coaches = Employee::GetAllCoaches();
+        $Employee = new Employee();
+        $coaches = $Employee->GetAllCoaches();
 
         $coachNames = array();
 
         $sql = "SELECT CoachID FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
-        $result = $conn->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             while ($row = $result->fetch_assoc()) {
@@ -185,9 +244,8 @@ class ptMemberships{
     }
 
 
-    public static function getPtMembershipRequests()
+    public function getPtMembershipRequests()
     {
-        global $conn;
 
         $isActivated = "Not Activated";
 
@@ -197,7 +255,7 @@ class ptMemberships{
         INNER JOIN `private training package` ON package.ID = `private training membership`.PrivateTrainingPackageID
         WHERE `private training membership`.isActivated = '$isActivated'";
 
-        $result = mysqli_query($conn, $sql);
+        $result = $this->db->query($sql);
 
         $results = array();
 
@@ -223,15 +281,13 @@ class ptMemberships{
 
     public function acceptPtMembership($PrivateTrainingPackageID)
     {
-        global $conn;
-
         $isActivated = "Activated";
 
         $sql = "UPDATE `private training membership` 
         SET isActivated='$isActivated' 
         WHERE ID = $PrivateTrainingPackageID";
 
-        return $conn->query($sql);
+        return $this->db->query($sql);
     }
 
 }

@@ -43,11 +43,13 @@
     <?php 
     session_start();
    
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ClassesModel.php";
     
-    $memberships = Memberships::getClientMembershipInfo();
-    $classes = Classes::getClientClassInfo();
+    $Memberships= new Memberships();
+    $memberships = $Memberships->getClientMembershipInfo();
+    $Classes = new Classes();
+    $classes = $Classes->getClientClassInfo();
 
     include("partials/usersidebar.php"); ?>
 
