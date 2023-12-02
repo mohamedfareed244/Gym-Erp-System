@@ -246,10 +246,12 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
 
         $isActivated = "Not Activated";
 
-        $sql = "SELECT client.ID,client.FirstName,`private training package`.Name,`private training package`.NumOfSessions,`private training membership`.MinPackageMonths,`private training package`.Price,`private training membership`.SessionsCount,`private training membership`.isActivated,`private training membership`.PrivateTrainingPackageID AS membershipID
+        $sql = "SELECT client.ID AS ClientID,client.FirstName,Client.LastName,`private training package`.Name AS ptPackageName,`private training package`.NumOfSessions,
+        `private training package`.Price,`private training membership`.SessionsCount,`private training membership`.ID AS ptMembershipID ,employee.Name AS employeeName
         FROM `private training membership`
         INNER JOIN client ON client.ID = `private training membership`.ClientID
-        INNER JOIN `private training package` ON package.ID = `private training membership`.PrivateTrainingPackageID
+        INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID
+        INNER JOIN employee ON employee.ID = `private training membership`.CoachID
         WHERE `private training membership`.isActivated = '$isActivated'";
 
         $result = $this->db->query($sql);
@@ -259,16 +261,15 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
-                    'CliendID' => $row['CliendID'],
-                    'CoachID' => $row['CoachID'],
-                    'PrivateTrainingPackageID' => $row['PrivateTrainingPackageID'],
-                    'SessionsCount' => $row['SessionsCount'],
-                    'isActivated' => $row['isActivated'],
-                    'Name' => $row['Name'],
-                    'NumOfSessions' => $row['NumOfSessions'],
-                    'MinPackageMonths' => $row['MinPackageMonths'],
-                    'Price' => $row['Price'],
+                    'ClientID' => $row['ClientID'],
                     'FirstName' => $row['FirstName'],
+                    'LastName' => $row['LastName'],
+                    'ptPackageName' => $row['ptPackageName'],
+                    'NumOfSessions' => $row['NumOfSessions'],
+                    'Price' => $row['Price'],
+                    'SessionsCount' => $row['SessionsCount'],
+                    'ptMembershipID' => $row['ptMembershipID'],
+                    'employeeName'=> $row['employeeName']
 
                 );
             }

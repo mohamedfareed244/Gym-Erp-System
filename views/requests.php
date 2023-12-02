@@ -145,36 +145,36 @@
             </div>
             <br>
             <br>
-            <!-- <h2 class="table-title">Membership Requests: </h2>
+            <h2 class="table-title">PT Membership Requests: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <thead>
                         <tr>
                             <th scope="col">Client ID</th>
                             <th scope="col">Client Name</th>
-                            <th scope="col">Package Title</th>
-                            <th scope="col">Months</th>
-                            <th scope="col">StartDate</th>
-                            <th scope="col">EndDate</th>
+                            <th scope="col">Coach Name</th>
+                            <th scope="col">PT Package Title</th>
+                            <th scope="col">Sessions Count</th>
+                            <th scope="col">Number of Sessions</th>
                             <th scope="col">Price </th>
                             <th scope="col">Actions </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (is_array($membershipRequests) && !empty($membershipRequests)) {
-                            foreach ($membershipRequests as $membershipRequest): ?>
+                        <?php if (is_array($ptmembershipsRequests) && !empty($ptmembershipsRequests)) {
+                            foreach ($ptmembershipsRequests as $ptmembershipRequest): ?>
 
-                        <tr id="row_<?php echo $membershipRequest['membershipID']; ?>">
-                            <td><?php echo $membershipRequest['ID'] ?></td>
-                            <td><?php echo $membershipRequest['FirstName'] ?></td>
-                            <td><?php echo $membershipRequest['Title'] ?></td>
-                            <td><?php echo $membershipRequest['NumOfMonths'] ?></td>
-                            <td><?php echo $membershipRequest['StartDate'] ?></td>
-                            <td><?php echo $membershipRequest['EndDate'] ?></td>
-                            <td><?php echo $membershipRequest['Price'] ?></td>
+                        <tr id="row_<?php echo $ptmembershipRequest['ptMembershipID']; ?>">
+                            <td><?php echo $ptmembershipRequest['ClientID'] ?></td>
+                            <td><?php echo $ptmembershipRequest['FirstName'] . " " . $ptmembershipRequest['LastName'];  ?></td>
+                            <td><?php echo $ptmembershipRequest['employeeName'] ?></td>
+                            <td><?php echo $ptmembershipRequest['ptPackageName'] ?></td>
+                            <td><?php echo $ptmembershipRequest['SessionsCount'] ?></td>
+                            <td><?php echo $ptmembershipRequest['NumOfSessions'] ?></td>
+                            <td><?php echo $ptmembershipRequest['Price'] ?></td>
                             <td>
                                 <button class="btn"
-                                    data-membershipid="<?php echo $membershipRequest['membershipID']; ?>"
+                                    data-membershipid="<?php echo $ptmembershipRequest['ptMembershipID']; ?>"
                                     onclick='acceptMembership(this)'>Accept
                                 </button>
                             </td>
@@ -184,7 +184,7 @@
 
                     </tbody>
                 </table>
-            </div> -->
+            </div>
         </div>
     </div>
 
