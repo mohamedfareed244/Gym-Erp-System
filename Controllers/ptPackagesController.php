@@ -124,26 +124,6 @@ class ptPackController extends Controller
         exit();
     }
 
-    public function addPtMembership()
-    {
-        $PackageID = $_POST["PackageID"];
-        $ptMemberships = new ptMemberships();
-        $result = $ptMemberships->addPtMembershipUserSide($ClientID, $PackageID);
-
-        if ($result['alreadyThisMembershipExists']) {
-            $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
-        } else if ($result['alreadyAnotherMembershipExists']) {
-            $_SESSION['alreadyAnotherMembershipExists'][$PackageID] = "You are already subscribed to another package.";
-        } else if ($result['success']) {
-            $_SESSION['membershipsuccess'][$PackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
-        } else {
-            $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
-        }
-
-        header("Location: ../views/bookptpackage.php");
-        exit();
-    }
-
 }
 
 
@@ -179,9 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "failure";
                 }
             }
-            case "addPtMembership":
-                $controller->addPtMembership();
-                break;
+            // case "addPtMembership":
+            //     $controller->addPtMembership();
+            //     break;
         default:
             // Handle unknown action or display an error
             break;

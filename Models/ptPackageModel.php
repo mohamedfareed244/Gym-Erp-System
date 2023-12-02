@@ -287,15 +287,4 @@ class ptPackages extends Model
 
 }
 
-class clientPtPackage
-{
-    public $ClientID;
-    public $CoachID;
-
-    public $PrivateTrainingPackageID;
-
-    public $SessionsCount;
-
-}
-
 ?>

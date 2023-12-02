@@ -105,6 +105,47 @@ class ptMemberships extends Model{
         return $ptmemberships;
     }
 
+public function AddptMemberships($ptMembership, $PackageMinMonths)
+{
+    $ClientID = $ptMembership->ClientID;
+    $CoachID = $ptMembership->CoachID;
+    $Sessions = $ptMembership->SessionsCount;
+    $PackageID = $ptMembership->PrivateTrainingPackageID;
+    $isActivated = "Not Activated";
+
+    $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$PackageID' AND ClientID = '$ClientID'";
+    $check1Result = $this->db->query($check1Sql);
+    $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
+
+    $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = '$ClientID'";
+    $check2Result = $this->db->query($check2Sql);
+    $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
+
+    $check3Sql = "SELECT package.NumOfMonths, membership.PackageID
+                FROM package 
+                INNER JOIN membership ON package.ID = membership.PackageID
+                WHERE membership.ClientID = '$ClientID'";
+    $check3Result = $this->db->query($check3Sql);
+
+    if ($alreadyThisMembershipExists) {
+        return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false,'error' =>false);
+    } elseif ($alreadyAnotherMembershipExists) {
+        return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false,'error' => false);
+    } else {
+        if ($check3Result && $check3Result->num_rows > 0) {
+            $row = $check3Result->fetch_assoc();
+            $packageMonths = $row['NumOfMonths'];
+            if ($packageMonths >= $PackageMinMonths) {
+                $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
+                        VALUES ('$ClientID', '$CoachID', '$PackageID', '$Sessions', '$isActivated')";
+                $insertResult = $this->db->query($sql);
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult,'error' => false);
+            } else {
+                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => true);
+            }
+        }
+    }
+}
 
     public function activatePtMembership($PrivateTrainingPackageID)
     {
@@ -123,51 +164,6 @@ class ptMemberships extends Model{
     }
 
    
-    public  function addPtMembershipUserSide($ptPackageID)
-    {
-        $pck = new ptPackages();
-        $client = new Client();
-        $isActivated = "Not Activated";
-        $findClient = $client->checkClient($_SESSION['ID']); // Use $_SESSION['ID'] directly
-        $findPackage = $pck->checkPtPackage($ptPackageID);
-    
-        if ($findClient && $findPackage) {
-            $Package = $pck->getPtPackage($ptPackageID);
-    
-            $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$ptPackageID' AND ClientID = " . $_SESSION['ID'];
-            $check1Result =  $this->db->query($check1Sql);
-            $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
-    
-            $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = " . $_SESSION['ID'];
-            $check2Result =  $this->db->query($check2Sql);
-            $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
-    
-            if ($alreadyThisMembershipExists) {
-                return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false);
-            } elseif ($alreadyAnotherMembershipExists) {
-                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false);
-            } else {
-                $ClientID = $_SESSION['ID'];
-                $CoachID = $Package->getCoachID();
-                $PrivateTrainingPackageID = $Package->getPrivateTrainingPackageID();
-                $SessionsCount = $Package->getSessionsCount();
-                $isActivated = $Package->getisActivated();
-    
-                $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
-                        VALUES ('$ClientID', '$CoachID', '$PrivateTrainingPackageID', '$SessionsCount', '$isActivated')";
-                $insertResult = $this->db->query($sql);
-    
-                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult);
-            }
-        } else {
-            // Handle the case where either client or package is not found
-            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => 'Client or package not found');
-        }
-    }
-    
-
-
-
     public function getClientPtMembershipInfo()
     {
     

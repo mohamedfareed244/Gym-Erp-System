@@ -333,7 +333,7 @@ public function getCoachNameByID($CoachID)
 {
     $sql="SELECT Name
     FROM employee
-    where id = $CoachID";
+    where ID = $CoachID";
 
     $result=$this->db->query($sql);
  
