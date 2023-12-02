@@ -169,9 +169,10 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
     
         $isActivated = "Activated";
     
-        $sql = "SELECT `private training package`.Name, `private training package`.NumOfSessions, `private training package`.MinPackageMonths, `private training package`.Price
-                FROM `private training package`
-                INNER JOIN `private training membership` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
+        $sql = "SELECT `private training membership`.SessionsCount, `private training package`.NumOfSessions, `private training package`.Price,employee.Name
+                FROM `private training membership`
+                INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
+                INNER JOIN employee ON employee.ID = `private training membership`.CoachID
                 WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = " . $_SESSION['ID'];
     
         $result = $this->db->query($sql);
@@ -181,9 +182,9 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
-                    'Name' => $row['Name'],
+                    'SessionsCount' => $row['SessionsCount'],
                     'NumOfSessions' => $row['NumOfSessions'],
-                    'MinPackageMonths' => $row['MinPackageMonths'],
+                    'Name' => $row['Name'],
                     'Price' => $row['Price']
                 );
             }
