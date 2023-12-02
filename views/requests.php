@@ -174,8 +174,8 @@
                             <td><?php echo $ptmembershipRequest['Price'] ?></td>
                             <td>
                                 <button class="btn"
-                                    data-membershipid="<?php echo $ptmembershipRequest['ptMembershipID']; ?>"
-                                    onclick='acceptMembership(this)'>Accept
+                                    data-ptmembershipid="<?php echo $ptmembershipRequest['ptMembershipID']; ?>"
+                                    onclick='acceptptMembership(this)'>Accept
                                 </button>
                             </td>
                         </tr>
@@ -207,6 +207,36 @@
             data: {
                 action: 'acceptMembership',
                 membershipID : membershipID
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
+
+    function acceptptMembership(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var ptmembershipID = button.getAttribute('data-ptmembershipid');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + ptmembershipID ;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/ptMembershipsController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'acceptPtMembership',
+                ptmembershipID : ptmembershipID
             },
             success: function(response) {
                 // Handle the response from the controller if needed

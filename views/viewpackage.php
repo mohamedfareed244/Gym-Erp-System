@@ -35,14 +35,16 @@
    
    include("partials/usersidebar.php");
    ?>
+
+   <div class="greeting">
+        <p class="hello-pack"><i class="fas fa-box"></i> Your Package Details</p>
+    </div>
+    
    <?php
  if (is_array($memberships) && !empty($memberships)) {
  foreach ($memberships as $membership): ?>
     <div class="profile">
         
-        <div class="greeting">
-        <p class="hello-pack"><i class="fas fa-box"></i> Your Package Details</p>
-        </div>
         <div class="membership-details">
             <p class="currpackage">Current Package</p>
                 <div class="membership-title"><?php echo $membership['Title']; ?></div>

@@ -52,6 +52,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "addPtMembership":
             $controller->AddptMembership();
             break;
+        case "acceptPtMembership":
+                $ptmembershipID = $_POST['ptmembershipID'];
+    
+                $ptmembership = new ptMemberships();
+                $result = $ptmembership->acceptPtMembership($ptmembershipID);
+    
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
+                }
+                break;
         default:
             // Handle unknown action or display an error
             break;

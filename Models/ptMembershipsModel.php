@@ -169,7 +169,7 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
     
         $isActivated = "Activated";
     
-        $sql = "SELECT `private training membership`.SessionsCount, `private training package`.NumOfSessions, `private training package`.Price,employee.Name
+        $sql = "SELECT `private training membership`.SessionsCount, `private training package`.NumOfSessions, `private training package`.Price, employee.Name
                 FROM `private training membership`
                 INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
                 INNER JOIN employee ON employee.ID = `private training membership`.CoachID
