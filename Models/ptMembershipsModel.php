@@ -7,8 +7,6 @@ include_once "CoachesModel.php";
 include_once "EmployeeModel.php";
 
 
-
-
 class ptMemberships extends Model{
 
     private $ID;
