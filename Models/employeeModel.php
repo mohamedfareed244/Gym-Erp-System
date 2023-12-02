@@ -269,7 +269,7 @@ public function addnewdate($date){
     {
     $results = array(); // Initialize the array
 
-    $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName
+    $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName,employee.Img
             FROM employee  
             INNER JOIN job_titles 
             ON (job_titles.Name = 'Coach' OR job_titles.Name = 'Fitness-manager') 
@@ -286,7 +286,8 @@ public function addnewdate($date){
                 'PhoneNumber' => $row['PhoneNumber'],
                 'Salary' => $row['Salary'],
                 'Address' => $row['Address'],
-                'JobTitleName' => $row['JobTitleName']
+                'JobTitleName' => $row['JobTitleName'],
+                'Img' => $row['Img']
             );
         }
     }
@@ -313,18 +314,38 @@ public function GetAllClasses()
     }
 }
 
-function getauth(){
+public function getauth(){
 $sql="SELECT * FROM authority";
 
 $result=$this->db->query($sql);
 return $result;
 }
-function getjobtitles(){
+public function getjobtitles(){
   
     $sql="SELECT * FROM job_titles";
     $result=$this->db->query($sql);
  
     return $result;
 }
+
+
+public function getCoachNameByID($CoachID)
+{
+    $sql="SELECT Name
+    FROM employee
+    where id = $CoachID";
+
+    $result=$this->db->query($sql);
+ 
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row['Name'];
+    } else {
+        $name = null;
+    }
+
+    return $name;
+}
+
 
 }

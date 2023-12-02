@@ -25,7 +25,6 @@
     <?php
     session_start();
     include("partials/usersidebar.php");
-    include_once "../Models/ptMembershipsModel.php";
     include_once "../Models/ptPackageModel.php";
     include_once "../Models/EmployeeModel.php";
 
@@ -34,24 +33,19 @@
     $ptpacks = $ptpackages->getAllPtPackagesforClient();
     $Employee = new Employee();
     $coaches = $Employee->getAllCoaches();
-    $ptMembershipsInstance = new ptMemberships();
 
-
-    if (isset($_GET['coachID'])) {
-        $selectedTrainerID = $_GET['coachID'];
-    } else {
-        echo "Error: Coach ID not specified.";
-        exit();
+    if (isset($_GET['CoachID'])) {
+        $CoachID = $_GET['CoachID'];
     }
-
-    $selectedCoachName = $coaches[$selectedTrainerID]['Name'];
+    $CoachName=$Employee->getCoachNameByID($CoachID);
     ?>
+
 
     <div class="profile">
 
          <div class="greeting">
             <p class="class">Personal Trainer:</p>
-            <div class="class-title"><?php echo $selectedCoachName; ?></p></div>
+            <div class="class-title"><?php echo $CoachName; ?></p></div>
         </div> 
 
         <div class="reminders">
