@@ -18,23 +18,18 @@ for(let i=0;i<hiddens.length;i++){
 
 arr.date=date;
 
-
-
-
     fetch("../Controllers/attendance.php", {
         method: "POST",
         headers:{"Content-Type": "application/json",},
         body: JSON.stringify(arr)
     }).then(response => response.json())
     .then(data => {
-        console.log("Response from server:", data);
        
+        document.getElementById("modalmsg").style.display="block";
     })
     .catch(error => {
         console.error("Error:", error);
     });
-
-
 
 }
 function findinform(id,arr){
@@ -44,4 +39,7 @@ function findinform(id,arr){
         }
     }
     return false;
+}
+function closemsg(){
+document.getElementById("modalmsg").style.display="none";
 }
