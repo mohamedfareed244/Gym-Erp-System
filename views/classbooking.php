@@ -118,33 +118,6 @@
 </body>
 
 
-<!-- <script>
-function submitForm() {
-    const form = document.getElementById('reserveForm');
-    const formData = new FormData(form);
-
-    fetch('../Controllers/ClassController.php', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-    .then(response => response.text())
-    .then(data => {
-
-        // Change the URL without reloading the page
-        history.pushState({}, '', 'classbooking?reserveClass');
-    })
-    .catch(error => {
-        // Handle errors if any
-        console.error('Error:', error);
-    });
-}
-
-</script> -->
-
-
 <?php include("partials/footer.php") ?>
 
 

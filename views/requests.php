@@ -29,13 +29,16 @@
     <?php require("partials/adminsidebar.php");
     
     include_once "../Models/ClassesModel.php";
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ptMembershipsModel.php";
 
 
-    $classRequests=Classes::getClassRequests();
-    $membershipRequests=Memberships::getMembershipRequests();
-    $ptmembershipsRequests = ptMemberships::getPtMembershipRequests();
+    $Classes = new Classes();
+    $classRequests=$Classes->getClassRequests();
+    $Memberships= new Memberships();
+    $membershipRequests=$Memberships->getMembershipRequests();
+    $ptMemberships = new ptMemberships();
+    $ptmembershipsRequests = $ptMemberships->getPtMembershipRequests();
     ?>
 
     <div id="add-body" class="addbody">
@@ -142,37 +145,37 @@
             </div>
             <br>
             <br>
-            <!-- <h2 class="table-title">Membership Requests: </h2>
+            <h2 class="table-title">PT Membership Requests: </h2>
             <div id="tablediv">
                 <table class="view-table overflow-auto mh-10">
                     <thead>
                         <tr>
                             <th scope="col">Client ID</th>
                             <th scope="col">Client Name</th>
-                            <th scope="col">Package Title</th>
-                            <th scope="col">Months</th>
-                            <th scope="col">StartDate</th>
-                            <th scope="col">EndDate</th>
+                            <th scope="col">Coach Name</th>
+                            <th scope="col">PT Package Title</th>
+                            <th scope="col">Sessions Count</th>
+                            <th scope="col">Number of Sessions</th>
                             <th scope="col">Price </th>
                             <th scope="col">Actions </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (is_array($membershipRequests) && !empty($membershipRequests)) {
-                            foreach ($membershipRequests as $membershipRequest): ?>
+                        <?php if (is_array($ptmembershipsRequests) && !empty($ptmembershipsRequests)) {
+                            foreach ($ptmembershipsRequests as $ptmembershipRequest): ?>
 
-                        <tr id="row_<?php echo $membershipRequest['membershipID']; ?>">
-                            <td><?php echo $membershipRequest['ID'] ?></td>
-                            <td><?php echo $membershipRequest['FirstName'] ?></td>
-                            <td><?php echo $membershipRequest['Title'] ?></td>
-                            <td><?php echo $membershipRequest['NumOfMonths'] ?></td>
-                            <td><?php echo $membershipRequest['StartDate'] ?></td>
-                            <td><?php echo $membershipRequest['EndDate'] ?></td>
-                            <td><?php echo $membershipRequest['Price'] ?></td>
+                        <tr id="row_<?php echo $ptmembershipRequest['ptMembershipID']; ?>">
+                            <td><?php echo $ptmembershipRequest['ClientID'] ?></td>
+                            <td><?php echo $ptmembershipRequest['FirstName'] . " " . $ptmembershipRequest['LastName'];  ?></td>
+                            <td><?php echo $ptmembershipRequest['employeeName'] ?></td>
+                            <td><?php echo $ptmembershipRequest['ptPackageName'] ?></td>
+                            <td><?php echo $ptmembershipRequest['SessionsCount'] ?></td>
+                            <td><?php echo $ptmembershipRequest['NumOfSessions'] ?></td>
+                            <td><?php echo $ptmembershipRequest['Price'] ?></td>
                             <td>
                                 <button class="btn"
-                                    data-membershipid="<?php echo $membershipRequest['membershipID']; ?>"
-                                    onclick='acceptMembership(this)'>Accept
+                                    data-ptmembershipid="<?php echo $ptmembershipRequest['ptMembershipID']; ?>"
+                                    onclick='acceptptMembership(this)'>Accept
                                 </button>
                             </td>
                         </tr>
@@ -181,7 +184,7 @@
 
                     </tbody>
                 </table>
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -204,6 +207,36 @@
             data: {
                 action: 'acceptMembership',
                 membershipID : membershipID
+            },
+            success: function(response) {
+                // Handle the response from the controller if needed
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle errors if any
+                console.error(error);
+            }
+        });
+    }
+
+    function acceptptMembership(button) {
+        // Extract ClassID, CoachID, and Date from the data attributes
+        var ptmembershipID = button.getAttribute('data-ptmembershipid');
+
+        // Use JavaScript to remove the corresponding row
+        var rowId = 'row_' + ptmembershipID ;
+        var row = document.getElementById(rowId);
+        if (row) {
+            row.parentNode.removeChild(row);
+        }
+
+        // Use AJAX to send a request to your controller to delete the record from the backend
+        $.ajax({
+            url: '../Controllers/ptMembershipsController.php', // Update the path to your controller
+            type: 'POST',
+            data: {
+                action: 'acceptPtMembership',
+                ptmembershipID : ptmembershipID
             },
             success: function(response) {
                 // Handle the response from the controller if needed

@@ -30,6 +30,11 @@ class Client extends Model
         return $this->ID;
     }
 
+    public function setID($ID) {
+        $this->ID = $ID;
+    }
+
+
     public function setFirstName($FirstName) {
         $this->FirstName = $FirstName;
     }

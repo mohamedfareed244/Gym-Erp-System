@@ -26,22 +26,25 @@
 
     session_start();
    
-   include_once "../Models/membershipsModel.php";
+   include_once "../Models/MembershipsModel.php";
    
    // Call the getClientMembershipInfo function
-   $memberships = Memberships::getClientMembershipInfo();
+   $Memberships = new Memberships();
+   $memberships = $Memberships->getClientMembershipInfo();
    
    
    include("partials/usersidebar.php");
    ?>
+
+   <div class="greeting">
+        <p class="hello-pack"><i class="fas fa-box"></i> Your Package Details</p>
+    </div>
+    
    <?php
  if (is_array($memberships) && !empty($memberships)) {
  foreach ($memberships as $membership): ?>
     <div class="profile">
         
-        <div class="greeting">
-        <p class="hello-pack"><i class="fas fa-box"></i> Your Package Details</p>
-        </div>
         <div class="membership-details">
             <p class="currpackage">Current Package</p>
                 <div class="membership-title"><?php echo $membership['Title']; ?></div>

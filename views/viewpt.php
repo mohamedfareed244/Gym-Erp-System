@@ -25,67 +25,53 @@
     <?php
     session_start();
     include("partials/usersidebar.php");
-    include_once "../Models/membershipsModel.php";
-    include_once "../Models/ptPackageModel.php";
     include_once "../Models/ptMembershipsModel.php";
     ?>
 
-<?php
-                $ptMemberships = ptMemberships::getClientPtMembershipInfo();
-                $ptPackages = new ptPackages();
-                // $clientID = $_SESSION["clientID"];
+    <?php
+                $ptMemberships= new ptMemberships();
+                $PtMemberships = $ptMemberships->getClientPtMembershipInfo();
 
-                if (is_array($ptMemberships) && !empty($ptMemberships)) {
-                    foreach ($ptMemberships as $membership) {
-                        $ptPackageID = $membership['PrivateTrainingPackageID'];
-                        $ptPackageDetails = $ptPackages->getUserPackageDetails($ptPackageID);
-                        ?>
-    <div class="profile">
-        <div class="greeting">
-            <p class="hello-pt"><i class="fas fa-user"></i> Your Personal Trainer</p>
-        </div>
+                if (is_array($PtMemberships) && !empty($PtMemberships)) {
+                    foreach ($PtMemberships as $membership) { ?>
 
+    <div class="greeting">
+        <p class="hello-pack"><i class="fas fa-box"></i> Your PT Package Details</p>
+    </div>
+    <div style="height:700px;">
         <div class="reminders">
             <div class="reminder">
 
+                <p class='class'>Cuurent PT Package</p>
 
-                                <p class='class'>Personal Trainer:</p>
-                                <div class='class-title'><?php echo $ptPackageDetails->CoachName; ?></div>
+                <p class='class'>Personal Trainer:</p>
+                <div class='class-title'><?php echo $membership['Name']; ?></div>
 
-                                <p class='class'>PT Package:</p>
-                                <div class='class-title'><?php echo $membership->MinPackageMonths . " Months, " . $ptPackageDetails->NumOfSessions . " Sessions"; ?></div>
+                <div class='rem-info'>
+                    <p>Remaining Sessions:</p>
+                    <p class='actual-rem'>
+                        <?php echo $membership['SessionsCount'] . " Sessions of " . $membership['NumOfSessions']; ?>
+                    </p>
 
-                                <div class='rem-info'>
-                                    <p>Remaining Sessions:</p>
-                                    <p class='actual-rem'><?php echo $membership->SessionsCount . " Sessions of " . $ptPackageDetails->NumOfSessions; ?></p>
+                    <p>PT Fees:</p>
+                    <p class='actual-rem'><?php echo $membership['Price']; ?></p>
+                </div>
 
-                                    <p>PT Fees:</p>
-                                    <p class='actual-rem'><?php echo $membership->Price; ?></p>
-                                </div>
-                                <p>Working Days:</p>
-                            <p class="actual-rem"> Sat, Mon, Wed, Fri</p>
-
-                            <p>Working Hours:</p>
-                        <p class="actual-rem"> 10 AM - 5 PM</p>
-
-                        <?php
+                <?php
                     }
                 } else {
                     ?>
-                        <div class="no-package" style="height:1000px; margin-left:200px;">
-                            <p class="nopackage" style="font-size:24px;">No PT packages found.</p>
-                        </div>
-                    <?php
+                <div class="no-package" style="height:700px; margin-left:200px;">
+                    <p class="nopackage" style="font-size:24px;">No PT packages found.</p>
+                </div>
+                <?php
                 }
                 ?>
-              
+
             </div>
         </div>
     </div>
-
-    <script src="../public/js/slider.js"></script>
     <?php include("partials/footer.php") ?>
-    <script src="../public/js/index.js"></script>
 </body>
 
 </html>

@@ -34,10 +34,11 @@
 <body>
   <?php require("partials/adminsidebar.php");
   include_once "../Models/ClientModel.php";
-  include_once "../Models/membershipsModel.php";
+  include_once "../Models/MembershipsModel.php";
   $Client = new Client;
   $clients = $Client->getAllClients();
-  $memberships = memberships::getAllMemberships();
+  $Memberships = new Memberships();
+  $memberships = $Memberships->getAllMemberships();
   ?>
   <div id="add-body" class="addbody">
     <div class="container">
@@ -77,7 +78,7 @@
               $found = false;
               if ($memberships) {
                 foreach ($memberships as $membership) {
-                  if ($membership->clientId == $client->getID()) {
+                  if ($membership->getclientId() == $client->getID()) {
                     echo '<td><button class="btn" disabled>Add</button></td>';
                     echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
                     $found = true;

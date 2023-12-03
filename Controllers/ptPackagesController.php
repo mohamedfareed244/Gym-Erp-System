@@ -1,14 +1,12 @@
 <?php
 
-
+require_once("Controller.php");
 include_once "../Models/ptPackageModel.php";
 include_once "../Models/ptMembershipsModel.php";
 
-
 session_start();
 
-
-class ptPackController
+class ptPackController extends Controller
 {
 
     function AddptPackages()
@@ -56,10 +54,10 @@ class ptPackController
 
             $newptpackage = new ptPackages();
 
-            $newptpackage->Name = $name;
-            $newptpackage->NumOfSessions = $sessions;
-            $newptpackage->MinPackageMonths = $months;
-            $newptpackage->Price = $price;
+            $newptpackage->setName($name);
+            $newptpackage->setNumOfSessions($sessions);
+            $newptpackage->setMinPackageMonths($months);
+            $newptpackage->setPrice($price);
 
             $result = $ptpackage->addptPacks($newptpackage);
 
@@ -126,32 +124,13 @@ class ptPackController
         exit();
     }
 
-    public function addPtMembership()
-    {
-        $PackageID = $_POST["PackageID"];
-        $result = ptMemberships::addPtMembershipUserSide($ClientID, $PackageID);
-
-        if ($result['alreadyThisMembershipExists']) {
-            $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";
-        } else if ($result['alreadyAnotherMembershipExists']) {
-            $_SESSION['alreadyAnotherMembershipExists'][$PackageID] = "You are already subscribed to another package.";
-        } else if ($result['success']) {
-            $_SESSION['membershipsuccess'][$PackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
-        } else {
-            $_SESSION['fail'][$PackageID] = "Membership reservation failed.";
-        }
-
-        header("Location: ../views/bookptpackage.php");
-        exit();
-    }
-
 }
 
 
 
 
-
-$controller = new ptPackController();
+$model = new ptPackages();
+$controller = new ptPackController($modal);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";
@@ -172,16 +151,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $ptPackageId = $_POST["ptPackageId"];
                 $coachID = $_POST["coachID"];
 
-                $result = ptPackages::addPackageForClient($clientId, $ptPackageId, $coachID);
+                $ptPackages = new ptPackages();
+                $result = $ptPackages->addPackageForClient($clientId, $ptPackageId, $coachID);
                 if ($result) {
                     echo "success";
                 } else {
                     echo "failure";
                 }
             }
-            case "addPtMembership":
-                $controller->addPtMembership();
-                break;
+            // case "addPtMembership":
+            //     $controller->addPtMembership();
+            //     break;
         default:
             // Handle unknown action or display an error
             break;

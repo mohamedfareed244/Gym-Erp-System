@@ -18,11 +18,21 @@
 
 
     <style>
+    #confirm-package-button {
+        transform: translateX(-85px);
+    }
 
-#confirm-package-button {
-    transform: translateX(-85px);
-}
-        </style>
+    button {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        text-decoration: none;
+
+    }
+    </style>
 </head>
 
 <body>
@@ -32,65 +42,37 @@
     include("partials/usersidebar.php");
     ?>
     <?php
-    include_once "../Models/ptMembershipsModel.php";
-    include_once "../Models/ptPackageModel.php";
-    include_once "../Models/employeeModel.php";
+    include_once "../Models/EmployeeModel.php";
 
-    $ptpackage = new ptPackages();
-    $ptmemberships = ptMemberships::getAllPtMemberships();
-    $coaches = Employee::getAllCoaches(); 
-    $ptMembershipsInstance = new ptMemberships();
-    $packages = $ptpackage->getAllPtPackagesforClient();
+    $Employee = new Employee();
+    $coaches = $Employee->getAllCoaches(); 
     ?>
 
     <div class="container py-5">
         <h2 style="font-size: 26px;
-    font-weight: bolder;
-    text-transform: uppercase;
-    color: rgb(176, 37, 37);
-    letter-spacing: -1px;
-    margin-bottom:3%;">Coaches:</h2>
-        <div class="card-container">
-            <?php foreach ($coaches as $coachID => $coachName): ?>
-                <div class="card">
-                    <img src="../public/Images/coach3.jpg" class="imgslides">
-                    <?php if (isset($coachName['Name'])): ?>
-                        <h3><?php echo $coachName['Name']; ?></h3>
-                    <?php else: ?>
-                        <h3>Coach Name Not Available</h3>
-                    <?php endif; ?>
-
-                    <form method="post" action="bookptpack.php?coachID=<?php echo $coachID; ?>">
-                        <!-- <input type="hidden" name="selectedTrainerID" value="<?php echo $coachID; ?>"> -->
-                        <button type="submit" id="confirm-package-button">Request</button>
-                    </form>
-
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <p id="modal-message"></p>
-
-        <div id="myPopup" class="popup">
-            <div class="popup-content">
-                <span class="popup-close">&times;</span>
-                <p id="popup-confirm"></p>
-                <button id="popup-confirm-button">Yes</button>
-                <button id="popup-cancel-button">Cancel</button>
-                <p id="popup-message"></p>
+        font-weight: bolder;
+        text-transform: uppercase;
+        color: rgb(176, 37, 37);
+        letter-spacing: -1px;
+        margin-bottom: 3%;">Coaches:</h2>
+        <form method="get" action="bookptpackage.php">
+            <div class="card-container">
+                <?php foreach ($coaches as $coach): ?>
+                <button type="submit" name="CoachID" value="<?php echo $coach['CoachID']; ?>" class="card-button">
+                    <div class="card">
+                        <?php if (isset($coach)): ?>
+                        <img src="../<?php echo $coach['Img']; ?>" class="imgslides">
+                        <h3><?php echo $coach['Name']; ?></h3>
+                        <?php endif; ?>
+                    </div>
+                </button>
+                <?php endforeach; ?>
             </div>
-        </div>
+        </form>
     </div>
 
     <?php include("partials/footer.php") ?>
     <script src="../public/js/personaltrainer.js"></script>
-    <script>
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedTrainerID'])) {
-        echo 'window.location.href = "bookptpackage.php?coachID=' . $_POST['selectedTrainerID'] . '";';
-    }
-    ?>
-</script>
 </body>
 
 </html>

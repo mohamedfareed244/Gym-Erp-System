@@ -62,11 +62,12 @@ echo $date->format('Y-m-d'); ?> </h2>
                        
                         <?php 
            
-                        include_once "../Models/employeeModel.php";
+                        include_once "../Models/EmployeeModel.php";
                         ini_set('display_errors', 1);
                         error_reporting(E_ALL);
                         
-                        $result=Employee::getattendance($date->format('Y-m-d'));
+                        $Employee= new Employee();
+                        $result=$Employee->getattendance($date->format('Y-m-d'));
 
                         foreach($result as $emp){
                             echo "<tr>

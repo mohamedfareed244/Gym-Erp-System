@@ -43,11 +43,16 @@
     <?php 
     session_start();
    
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ClassesModel.php";
+    include_once "../Models/ptMembershipsModel.php";
     
-    $memberships = Memberships::getClientMembershipInfo();
-    $classes = Classes::getClientClassInfo();
+    $Memberships= new Memberships();
+    $memberships = $Memberships->getClientMembershipInfo();
+    $Classes = new Classes();
+    $classes = $Classes->getClientClassInfo();
+    $ptMemberships= new ptMemberships();
+    $PtMemberships = $ptMemberships->getClientPtMembershipInfo();
 
     include("partials/usersidebar.php"); ?>
 
@@ -103,6 +108,30 @@
         </div>
         <?php endforeach; ?>
         <?php } ?>
+
+        <?php
+         // Check if $memberships is an array before using foreach
+        if (is_array($PtMemberships) && !empty($PtMemberships)) {
+        foreach ($PtMemberships as $membership):
+            ?>
+        <div class="reminder">
+                <p class="ptsession">Current PT Package:</p>
+                <p class="ptsession-coach">Coach:</p>
+                <div class="ptsession-coachname"><?php echo $membership['Name']; ?></div>
+                <div class="dates">
+                    <div class="date">
+                        <p>Number Of sessions:</p>
+                        <div class="ptsession-date"><?php echo $membership['NumOfSessions']; ?></div>
+                    </div>
+                    <div class="time">
+                        <p>Sessions Count:</p>
+                        <div class="ptsession-time"><?php echo $membership['SessionsCount']; ?></div>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        <?php } ?>
+
         <?php
          // Check if $memberships is an array before using foreach
         if (is_array($classes) && !empty($classes)) { ?>
@@ -135,21 +164,6 @@
             </div>
             <?php endforeach; ?>
             <?php } ?>
-            <!-- <div class="reminder">
-                <p class="ptsession">Private training package:</p>
-                <p class="ptsession-coach">Coach:</p>
-                <div class="ptsession-coachname">Sara Khaled</div>
-                <div class="dates">
-                    <div class="date">
-                        <p>Date:</p>
-                        <div class="ptsession-date">26-10-2023</div>
-                    </div>
-                    <div class="time">
-                        <p>Time:</p>
-                        <div class="ptsession-time">1:30-3:00 p.m</div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 

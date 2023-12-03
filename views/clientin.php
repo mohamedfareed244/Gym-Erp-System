@@ -26,7 +26,7 @@
 
 <body>
     <?php require("partials/adminsidebar.php");
-    include_once "../Models/membershipsModel.php";
+    include_once "../Models/MembershipsModel.php";
     include_once "../Models/ClientModel.php";
     $memberships = new Memberships();
     $membership=$memberships->getClientAndMembership(); 

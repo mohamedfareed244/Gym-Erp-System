@@ -6,7 +6,8 @@ if (isset($_POST['coachId'])) {
     $coachId = $_POST['coachId'];
 
     // Call your function to get days by class ID
-    $results = Classes::getSelectedCoachClasses($coachId);
+    $Classes = new Classes();
+    $results = $Classes->getSelectedCoachClasses($coachId);
 
     $response = '';
     $response .= "<table class='table'>";

@@ -67,7 +67,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title"><?php echo $package['Title']; ?></h5>
+                            <h4 class="card-title"><?php echo $package['Title']; ?></h4>
                                 <input type="text" value="<?php echo $package['ID'];?>" name="PackageID"
                                     style="display:none;">
                                 <h6 class="card-text" id="visits"><i
@@ -121,13 +121,6 @@ unset($_SESSION["membershipsuccess"], $_SESSION["alreadyThisMembershipExists"], 
 
 </body>
 
-
-
-</body>
 <?php include("partials/footer.php") ?>
-
-
-
-
 
 </html>

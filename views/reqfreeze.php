@@ -50,17 +50,17 @@
 
         <div class="reminders">
             <?php
-            include_once "../Models/membershipsModel.php";
+            include_once "../Models/MembershipsModel.php";
             include_once "../Models/ClientModel.php";
             include_once "../Models/PackageModel.php";
 
             $memberships = new Memberships();
-            $membership = Memberships::getClientMembershipInfo();
+            $membership = $memberships->getClientMembershipInfo();
             $clientId = $_SESSION["ID"];
 
             if (!empty($membership)) :
                 foreach ($membership as $membershipp) :
-                    $membershipdetails = $memberships->getMembership($clientId);
+                    $membershipdetails = $membershipp->getMembership($clientId);
                     $pck = new Package();
                     $package = $pck->getPackage($membershipdetails->packageId);
                     ?>
