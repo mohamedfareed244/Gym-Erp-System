@@ -141,6 +141,7 @@ class Employee extends Model
 public function getattendance($date){
 $sql="SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
 $result=$this->db->query($sql);
+
 if(mysqli_num_rows($result)<=0){
 Employee::addnewdate($date);
 return Employee::getattendance($date);
@@ -160,10 +161,9 @@ public function addnewdate($date){
     $employees=Employee::getAllEmployees();
     foreach($employees as $emp){
         $sql="insert into attendance (EmployeeId,Day,Status) values ($emp->ID,'$date',0)";
-        return $this->db->query($sql);
-       
+     $this->db->query($sql);
     }
-    
+    return;
 }
     public function addEmployee($employee)
     {
