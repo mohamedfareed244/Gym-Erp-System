@@ -131,7 +131,7 @@ class ClientController extends Controller
 
             if ($result) {
                 // Data inserted successfully
-                header("Location: ../views/login.php");
+                header("Location: ../views/login.php?RegisteredSuccessfully");
                 exit();
             }
         }
@@ -144,7 +144,7 @@ class ClientController extends Controller
         $_SESSION["phonenoErr"] = $phonenoErr;
         $_SESSION["emailErr"] = $emailErr;
         $_SESSION["passwordErr"] = $passwordErr;
-        header("Location: ../views/register.php");
+        header("Location: ../views/register.php?fail");
         exit();
     }
 
@@ -251,7 +251,7 @@ class ClientController extends Controller
 
             if ($result) {
                 $_SESSION['AddedSuccess'] = "Account added sucessfully";
-                header("Location: ../views/addclient.php");
+                header("Location: ../views/addclient.php?AddedSuccessfully");
                 exit();
             }
         }
@@ -263,7 +263,7 @@ class ClientController extends Controller
         $_SESSION["genderErr"] = $genderErr;
         $_SESSION["phonenoErr"] = $phonenoErr;
         $_SESSION["emailErr"] = $emailErr;
-        header("Location: ../views/addclient.php");
+        header("Location: ../views/addclient.php?fail");
         exit();
     }
 
@@ -301,6 +301,7 @@ class ClientController extends Controller
                 $storedHashedPassword = $row["Password"];
                 if (password_verify($Password, $storedHashedPassword)) {
                     // Authentication successful
+                    $ID=$_SESSION["ID"];
                     $_SESSION["ID"] = $row["ID"];
                     $_SESSION["FName"] = $row["FirstName"];
                     $_SESSION["LName"] = $row["LastName"];
@@ -308,7 +309,7 @@ class ClientController extends Controller
                     $_SESSION["Age"] = $row["Age"];
                     $_SESSION["Gender"] = $row["Gender"];
                     $_SESSION["Email"] = $row["Email"];
-                    header("Location: ../views/userprofile.php");
+                    header("Location: ../views/userprofile.php?ID=$ID");
                     exit();
                 } else {
                     // Password is incorrect
@@ -325,7 +326,7 @@ class ClientController extends Controller
         $_SESSION["emailErr"] = $emailErr;
         $_SESSION["passwordErr"] = $passwordErr;
         $_SESSION["allErr"] = $allErr;
-        header("Location: ../views/login.php");
+        header("Location: ../views/login.php?fail");
         exit();
     }
 
@@ -408,7 +409,7 @@ class ClientController extends Controller
                 $_SESSION["LName"] = $lastname;
                 $_SESSION["Phone"] = $phone;
                 $_SESSION["Email"] = $email;
-                header("Location: ../views/userprofsettings.php");
+                header("Location: ../views/userprofsettings.php?UpdatedSuccessfully->Name=$firstname");
                 $_SESSION["succ"] = "Updated Successfully";
                 exit();
             }
@@ -420,7 +421,7 @@ class ClientController extends Controller
         $_SESSION["phonenoErr"] = $phonenoErr;
         $_SESSION["emailErr"] = $emailErr;
         $_SESSION["allErr"] = $allErr;
-        header("Location: ../views/userprofsettings.php");
+        header("Location: ../views/userprofsettings.php?fail");
         exit();
     }
 
@@ -435,7 +436,7 @@ class ClientController extends Controller
 
         if ($result) {
             session_destroy();
-            header("location:../views/index.php");
+            header("location:../views/index.php?DeletedSuccessfully");
         }
     }
 }

@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once("Model.php");
-include_once "../includes/dbh.inc.php";
 include_once "EmployeeModel.php";
 include_once "ClassesModel.php";
 include_once "ptPackageModel.php";

@@ -123,7 +123,7 @@ class EmployeeController extends Controller
                 $_SESSION["success"] = $success;
                 unset($_SESSION["imgerror"]);
                 // Data inserted successfully
-                header("Location: ../views/employeesadmin.php");
+                header("Location: ../views/employeesadmin.php?AddedSuccessfully");
                 exit();
             }
         }
@@ -137,7 +137,7 @@ class EmployeeController extends Controller
         $_SESSION["passwordErr"] = $passwordErr;
         $_SESSION["addressErr"] = $addressErr;
 
-        header("Location: ../views/employeesadmin.php");
+        header("Location: ../views/employeesadmin.php?fail");
         exit();
     }
 }

@@ -100,7 +100,7 @@ class ClassController extends Controller
             if ($result) {
                 $success = "Class assigned to coach successfully";
                 $_SESSION["success"] = $success;
-                header("Location: ../views/admin-classes.php");
+                header("Location: ../views/admin-classes.php?AssignedSuccessfully");
                 exit();
             }
         }
@@ -113,7 +113,7 @@ class ClassController extends Controller
         $_SESSION["priceErr"] = $priceErr;
         $_SEESION["attendantsErr"] = $attendantsErr;
         $_SESSION["success"] = $success;
-        header("Location: ../views/admin-classes.php");
+        header("Location: ../views/admin-classes.php?fail");
         exit();
     }
 
@@ -157,12 +157,12 @@ class ClassController extends Controller
             if ($result) {
                 // Image uploaded and inserted successfully
                 $_SESSION["success"] = "Class added successfully";
-                header("Location: ../views/admin-classes.php");
+                header("Location: ../views/admin-classes.php?AddedSuccessfully");
                 exit();
             } else {
                 // Handle the case where image upload or insertion fails
                 $_SESSION["imgErr"] = "Failed to upload image or insert into the database";
-                header("Location: ../views/admin-classes.php");
+                header("Location: ../views/admin-classes.php?FailedtoUploadImage");
                 exit();
             }
         } else {
@@ -171,7 +171,7 @@ class ClassController extends Controller
             $_SESSION["descrErr"] = $descrErr;
             $_SESSION["imgErr"] = $imgErr;
             $_SESSION["daysErr"] = $daysErr;
-            header("Location: ../views/admin-classes.php");
+            header("Location: ../views/admin-classes.php?fail");
             exit();
         }
     }
@@ -234,15 +234,15 @@ class ClassController extends Controller
 
             if ($result['inserted']) {
                 $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?ReservationSuccessful");
                 exit();
             } else if ($result['alreadyExists']) {
                 $_SESSION["alreadyExistsFree"][$AssignedClassID] = "You already booked this class.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?AlreadyBooked");
                 exit();
             } else {
                 $_SESSION["failToReserveFree"][$AssignedClassID] = "Class reservation failed.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?fail");
                 exit();
             }
         } else {
@@ -251,15 +251,15 @@ class ClassController extends Controller
             $result = $class->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
             if ($result['inserted']) {
                 $_SESSION["successNotFree"][$AssignedClassID] = "Class Request made. Please Visit Gym For Payment as places are limited.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?RequestSuccessful");
                 exit();
             } else if ($result['alreadyExists']) {
                 $_SESSION["alreadyExistsNotFree"][$AssignedClassID] = "You already booked this class.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?AlreadyBooked");
                 exit();
             } else {
                 $_SESSION["failToReserveNotFree"][$AssignedClassID] = "Class reservation failed.";
-                header("Location: ../views/classbooking.php");
+                header("Location: ../views/classbooking.php?fail");
                 exit();
             }
         }

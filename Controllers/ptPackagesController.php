@@ -64,7 +64,7 @@ class ptPackController extends Controller
             if ($result) {
                 $success = "PT Package added successfully";
                 $_SESSION["success"] = $success;
-                header("Location: ../views/addPTpackage.php");
+                header("Location: ../views/addPTpackage.php?AddedSuccessfully");
                 exit();
             }
         }
@@ -74,7 +74,7 @@ class ptPackController extends Controller
         $_SESSION["minMonthsErr"] = $minMonthsErr;
         $_SESSION["sessionsErr"] = $sessionsErr;
         $_SESSION["packagePriceErr"] = $packagePriceErr;
-        header("Location: ../views/addPTpackage.php");
+        header("Location: ../views/addPTpackage.php?fail");
         exit();
     }
 
@@ -90,13 +90,13 @@ class ptPackController extends Controller
             if ($result) {
                 $success = "PT Package activated successfully";
                 $_SESSION["success"] = $success;
+                header("Location: ../views/viewPTpackage.php?ActivatedSuccessfully->ID=$ptpackageId");
             } else {
                 $fail = "PT Package failed to activate";
                 $_SESSION["fail"] = $fail;
+                header("Location: ../views/viewPTpackage.php?fail");
             }
         }
-
-        header("Location: ../views/viewPTpackage.php");
         exit();
     }
 
@@ -112,13 +112,13 @@ class ptPackController extends Controller
             if ($result) {
                 $success = "PT Package deactivated successfully";
                 $_SESSION["success"] = $success;
+                header("Location: ../views/viewPTpackage.php?DeactivatedSuccessfully->ID=$ptpackageId");
             } else {
                 $fail = "PT Package failed to deactivate";
                 $_SESSION["fail"] = $fail;
+                header("Location: ../views/viewPTpackage.php?fail");
             }
         }
-
-        header("Location: ../views/viewPTpackage.php");
         exit();
     }
 }
@@ -156,11 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "failure";
                 }
             }
-            // case "addPtMembership":
-            //     $controller->addPtMembership();
-            //     break;
         default:
-            // Handle unknown action or display an error
             break;
     }
 }

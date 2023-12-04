@@ -113,7 +113,7 @@ class PackageController extends Controller
             if ($result) {
                 $success = "Package added successfully";
                 $_SESSION["success"] = $success;
-                header("Location: ../views/addPackageadmin.php");
+                header("Location: ../views/addPackageadmin.php?AddedSuccessfully");
                 exit();
             }
         }
@@ -127,7 +127,7 @@ class PackageController extends Controller
         $_SESSION["inbodyErr"] = $inbodyErr;
         $_SESSION["ptSessionErr"] = $ptSessionErr;
         $_SESSION["priceErr"] = $priceErr;
-        header("Location: ../views/addPackageadmin.php");
+        header("Location: ../views/addPackageadmin.php?fail");
         exit();
     }
 
@@ -143,13 +143,13 @@ class PackageController extends Controller
             if ($result) {
                 $success = "Package activated successfully";
                 $_SESSION["success"] = $success;
-                header("Location: ../views/viewpackagesadmin.php");
+                header("Location: ../views/viewpackagesadmin.php?ActivatedSuccessfully->ID=$packageId");
                 exit();
             }
 
             $fail = "Package failed to activate";
             $_SESSION["fail"] = $fail;
-            header("Location: ../views/viewpackagesadmin.php");
+            header("Location: ../views/viewpackagesadmin.php?fail");
             exit();
         }
     }
@@ -166,13 +166,13 @@ class PackageController extends Controller
             if ($result) {
                 $success = "Package deactivated successfully";
                 $_SESSION["success"] = $success;
-                header("Location: ../views/viewpackagesadmin.php");
+                header("Location: ../views/viewpackagesadmin.php?DeactivatedSuccessfully->ID=$packageId");
                 exit();
             }
 
             $fail = "Package failed to deactivate";
             $_SESSION["fail"] = $fail;
-            header("Location: ../views/viewpackagesadmin.php");
+            header("Location: ../views/viewpackagesadmin.php?fail");
             exit();
         }
     }
