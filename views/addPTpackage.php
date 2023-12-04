@@ -16,40 +16,41 @@
 </head>
 
 <style>
-    span[id$="-error"],#success {
+    span[id$="-error"],
+    #success {
         color: red;
         font-size: 16px;
     }
 </style>
 
 <body>
-<?php session_start(); ?>
-<!-- <script src="../public/js/addPtPackage.js"></script> -->
+    <?php session_start(); ?>
+    <!-- <script src="../public/js/addPtPackage.js"></script> -->
     <?php require("partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <h4>Add Private Training Package:</h2>
                 <hr>
                 <div class="pt row">
-                    <form  method="post" action="../Controllers/ptPackagesController.php" class="pt row" onsubmit="return validateForm()">
-                    <input type="hidden" name="action" value="addPtPackage">
+                    <form method="post" action="../Controllers/ptPackagesController.php" class="pt row" onsubmit="return validateForm()">
+                        <input type="hidden" name="action" value="addPtPackage">
                         <div class="col-lg-4 col-md-12">
                             <label for="package-name"> PT Package Name : </label>
                         </div>
                         <input type="text" name="package-name" id="package-name">
                         <span id="package-name-error"><?php echo isset($_SESSION["packageNameErr"]) ? $_SESSION["packageNameErr"] : ''; ?></span>
-                        
+
                         <div class="col-lg-4 col-md-12">
                             <label for="session-amount">Minimum Membership Months: </label>
                         </div>
-                        
+
                         <input type="number" name="package-min-months" id="package-min-months">
                         <span id="package-min-months-error"><?php echo isset($_SESSION["minMonthsErr"]) ? $_SESSION["minMonthsErr"] : ''; ?></span>
-                     
+
                         <div class="col-lg-4 col-md-12">
                             <label for="session-amount">Number of Sessions: </label>
                         </div>
-                        
+
                         <input type="number" name="package-sessions" id="package-sessions">
                         <span id="package-sessions-error"><?php echo isset($_SESSION["sessionsErr"]) ? $_SESSION["sessionsErr"] : ''; ?></span>
 
@@ -73,12 +74,12 @@
         </div>
     </div>
     <?php
-                    unset($_SESSION["packageNameErr"]);
-                    unset($_SESSION["minMonthsErr"]);
-                    unset($_SESSION["sessionsErr"]);
-                    unset($_SESSION["packagePriceErr"]);
-                    unset($_SESSION["success"]);
-                    ?>
+    unset($_SESSION["packageNameErr"]);
+    unset($_SESSION["minMonthsErr"]);
+    unset($_SESSION["sessionsErr"]);
+    unset($_SESSION["packagePriceErr"]);
+    unset($_SESSION["success"]);
+    ?>
 </body>
 
 </html>

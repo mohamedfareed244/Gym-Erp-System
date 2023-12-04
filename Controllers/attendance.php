@@ -16,10 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $Employee->attendanceforemp($key, $value, $date);
         }
     }
-
-
-
-
     echo json_encode(["status" => "success"]);
 }
 ?>

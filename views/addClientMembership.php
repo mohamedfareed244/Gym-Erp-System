@@ -58,80 +58,80 @@
 
             <?php foreach ($packages as $package) {
                 if ($package['isActivated'] == "Activated") { ?>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <?php echo $package['Title']; ?>
-                                    </h5>
-                                    <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['isVisitsLimited'] . " Visits"; ?>
-                                    </h6>
-                                    <?php if ($package['isVisitsLimited'] == 'limited') { ?>
-                                        <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i>
-                                            <?php echo $package['VisitsLimit'] . " Visits"; ?>
-                                        </h6>
-                                    <?php } ?>
-                                    <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfInvitations'] . " Invitations" ?>
-                                    </h6>
-                                    <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfInbodySessions'] . " Inbody Sessions" ?>
-                                    </h6>
-                                    <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>
-                                        <?php echo $package['NumOfPrivateTrainingSessions'] . " Private
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <?php echo $package['Title']; ?>
+                            </h5>
+                            <h6 class="card-text" id="visits"><i class="fa-regular fa-circle-check"></i>
+                                <?php echo $package['isVisitsLimited'] . " Visits"; ?>
+                            </h6>
+                            <?php if ($package['isVisitsLimited'] == 'limited') { ?>
+                            <h6 class="card-text" id="visitsnum"><i class="fa-regular fa-circle-check"></i>
+                                <?php echo $package['VisitsLimit'] . " Visits"; ?>
+                            </h6>
+                            <?php } ?>
+                            <h6 class="card-text" id="invitations"><i class="fa-regular fa-circle-check"></i>
+                                <?php echo $package['NumOfInvitations'] . " Invitations" ?>
+                            </h6>
+                            <h6 class="card-text" id="inbody"><i class="fa-regular fa-circle-check"></i>
+                                <?php echo $package['NumOfInbodySessions'] . " Inbody Sessions" ?>
+                            </h6>
+                            <h6 class="card-text" id="ptsessions"><i class="fa-regular fa-circle-check"></i>
+                                <?php echo $package['NumOfPrivateTrainingSessions'] . " Private
                                 Training Sessions" ?>
-                                    </h6>
-                                    <h5 class="card-text" id="price">
-                                        <?php echo "for L.E " . $package['Price'] ?>
-                                    </h5>
-                            </div>
-                            <?php
+                            </h6>
+                            <h5 class="card-text" id="price">
+                                <?php echo "for L.E " . $package['Price'] ?>
+                            </h5>
+                    </div>
+                    <?php
                             echo '<div class="d-flex justify-content-around mb-5">
                                 <button id="btn-" class="btn btn-success"
                                     onclick="activateMembership(' . $package['ID'] . ' , ' . $clientID . ' )">
                                     Activate Membership</button>'
-                                ?>
-                        </div>
-                    </div>
+                            ?>
                 </div>
-            <?php }
+            </div>
+        </div>
+        <?php }
             } ?>
     </div>
 
     </div>
     <script>
-        function activateMembership(packageId, clientId) {
-            $.ajax({
-                type: "POST",
-                url: "../Controllers/PackageController.php",
-                data: {
-                    action: "activateMembership",
-                    membershipclientId: clientId,
-                    packageId: packageId
-                },
-                success: function (response) {
-                    console.log(response);
-                    if (response === "success") {
-                        window.location.href = 'allclients.php';
-                    } else {
-                        var errorPopup = document.createElement('div');
-                        errorPopup.innerHTML = 'An error has occurred';
-                        errorPopup.className = 'error-popup';
-                        document.body.appendChild(errorPopup);
+    function activateMembership(packageId, clientId) {
+        $.ajax({
+            type: "POST",
+            url: "../Controllers/PackageController.php",
+            data: {
+                action: "activateMembership",
+                membershipclientId: clientId,
+                packageId: packageId
+            },
+            success: function(response) {
+                console.log(response);
+                if (response === "success") {
+                    window.location.href = 'allclients.php';
+                } else {
+                    var errorPopup = document.createElement('div');
+                    errorPopup.innerHTML = 'An error has occurred';
+                    errorPopup.className = 'error-popup';
+                    document.body.appendChild(errorPopup);
 
-                        // Trigger fade-out after a delay (e.g., 3 seconds)
-                        setTimeout(function () {
-                            errorPopup.classList.add('fade-out');
-                            setTimeout(function () {
-                                document.body.removeChild(errorPopup);
-                            }, 1000);
-                        }, 3000);
-                    }
+                    // Trigger fade-out after a delay (e.g., 3 seconds)
+                    setTimeout(function() {
+                        errorPopup.classList.add('fade-out');
+                        setTimeout(function() {
+                            document.body.removeChild(errorPopup);
+                        }, 1000);
+                    }, 3000);
                 }
-            })
+            }
+        })
 
-        }
+    }
     </script>
 </body>
 
