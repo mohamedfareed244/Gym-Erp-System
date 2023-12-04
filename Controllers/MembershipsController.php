@@ -58,7 +58,7 @@ class MembershipsController extends Controller
     {
         $ClientID = $_SESSION["ID"];
 
-        $Memberships= new Memberships();
+        $Memberships = new Memberships();
         $result = $Memberships->unfreezeMembership($ClientID);
 
         if ($result) {
@@ -70,11 +70,9 @@ class MembershipsController extends Controller
         header("Location: ../views/reqfreeze.php");
         exit();
     }
-
-
 }
 
-$model= new Memberships();
+$model = new Memberships();
 $controller = new MembershipsController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -87,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "deleteMembership":
             if (isset($_POST["membershipID"])) {
                 $membershipID = $_POST["membershipID"];
-                $Memberships= new Memberships();
+                $Memberships = new Memberships();
                 $result = $Memberships->deleteMembership($membershipID);
                 if ($result) {
                     echo "success";
@@ -99,15 +97,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "freezeMembership":
             $controller->freezeMembership();
             break;
-            case "unfreezeClientMembership":
-                $controller->unfreezeClientMembership();
-                break;
+        case "unfreezeClientMembership":
+            $controller->unfreezeClientMembership();
+            break;
         case "freezeClientMembership":
             if (isset($_POST["membershipID"]) && isset($_POST["selectedDate"])) {
 
                 $membershipID = $_POST["membershipID"];
                 $selectedDate = $_POST["selectedDate"];
-                $Memberships= new Memberships();
+                $Memberships = new Memberships();
                 $result = $Memberships->freezeMembership($membershipID, $selectedDate);
                 if ($result) {
                     echo "success";
@@ -128,32 +126,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "failure";
             }
             break;
-            case "unfreezeClientMembership":
-                if (isset($_POST["membershipID"])) {
-                    $membershipID = $_POST["membershipID"];
-                    $Memberships= new Memberships();
-                    $result = $Memberships->unFreezeMembership($membershipID);
-                    if ($result) {
-                        echo "success";
-                    } else {
-                        echo "failure";
-                    }
+        case "unfreezeClientMembership":
+            if (isset($_POST["membershipID"])) {
+                $membershipID = $_POST["membershipID"];
+                $Memberships = new Memberships();
+                $result = $Memberships->unFreezeMembership($membershipID);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
                 }
-                break;
-            case "checkinClient":
-                if (isset($_POST["clientID"])) {
-                    $clientID = $_POST["clientID"];
-                    $Memberships= new Memberships();
-                    $result = $Memberships->checkinClient($clientID);
-                    if ($result) {
-                        echo "success";
-                    } else {
-                        echo "failure";
-                    }
+            }
+            break;
+        case "checkinClient":
+            if (isset($_POST["clientID"])) {
+                $clientID = $_POST["clientID"];
+                $Memberships = new Memberships();
+                $result = $Memberships->checkinClient($clientID);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failure";
                 }
-                break;
-            default:
-                 break;
+            }
+            break;
+        default:
+            break;
     }
 }
 ?>

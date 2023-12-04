@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 
     public function addEmployee()
     {
-        $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = $imgerror= "";
+        $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = $imgerror = "";
         $isValid = true;
 
         if (empty($_POST["name"])) {
@@ -68,8 +68,8 @@ class EmployeeController extends Controller
             $passwordErr = "Password must be at least 6 characters long";
             $isValid = false;
         }
-        if(!isset($_FILES["image"])){
-            $imgerror="you have to choose image file ";
+        if (!isset($_FILES["image"])) {
+            $imgerror = "you have to choose image file ";
             $isValid = false;
         }
 
@@ -90,16 +90,16 @@ class EmployeeController extends Controller
         $Salary = htmlspecialchars($_POST["salary"]);
         $Address = htmlspecialchars($_POST["address"]);
         $Password = htmlspecialchars($_POST["password"]);
-        if ($isValid){
-        $uploadedFile = $_FILES["image"];
-$tempFilePath = $uploadedFile["tmp_name"];
-$fileExtension = pathinfo($uploadedFile["name"], PATHINFO_EXTENSION);
-$destination = "../public/Images/" .$PhoneNumber.".".$fileExtension;
+        if ($isValid) {
+            $uploadedFile = $_FILES["image"];
+            $tempFilePath = $uploadedFile["tmp_name"];
+            $fileExtension = pathinfo($uploadedFile["name"], PATHINFO_EXTENSION);
+            $destination = "../public/Images/" . $PhoneNumber . "." . $fileExtension;
 
-if (!move_uploaded_file($tempFilePath, $destination)) {
-    $imgerror=$destination;
-    $isValid=false;
-} 
+            if (!move_uploaded_file($tempFilePath, $destination)) {
+                $imgerror = $destination;
+                $isValid = false;
+            }
         }
         // Hash the password
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["employeeId"])) {
                 $employeeId = $_POST["employeeId"];
 
-                $Employee= new Employee();
+                $Employee = new Employee();
                 $result = $Employee->deleteEmployeeByID($employeeId);
 
                 if ($result) {
@@ -171,3 +171,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 }
+?>

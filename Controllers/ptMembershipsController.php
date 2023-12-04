@@ -17,14 +17,14 @@ class ptMembershipsController extends Controller
         $ptPackageSessions = $_POST['ptPackageSessions'];
         $PackageMinMonths = $_POST['PackageMinMonths'];
 
-        $ptMemberships= new ptMemberships();
+        $ptMemberships = new ptMemberships();
         $ptMemberships->setClientID($ClientID);
         $ptMemberships->setCoachID($CoachID);
         $ptMemberships->setPrivateTrainingPackageID($ptPackageID);
         $ptMemberships->setSessionsCount($ptPackageSessions);
 
         $ptMem = new ptMemberships();
-        $result=$ptMem->AddptMemberships($ptMemberships,$PackageMinMonths);
+        $result = $ptMem->AddptMemberships($ptMemberships, $PackageMinMonths);
 
         if ($result['alreadyThisMembershipExists']) {
             $_SESSION['alreadyThisptMembershipExists'][$ptPackageID] = "You already subscribed to this pt package.";
@@ -53,19 +53,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->AddptMembership();
             break;
         case "acceptPtMembership":
-                $ptmembershipID = $_POST['ptmembershipID'];
-    
-                $ptmembership = new ptMemberships();
-                $result = $ptmembership->acceptPtMembership($ptmembershipID);
-    
-                if ($result) {
-                    echo "success";
-                } else {
-                    echo "failure";
-                }
-                break;
+            $ptmembershipID = $_POST['ptmembershipID'];
+
+            $ptmembership = new ptMemberships();
+            $result = $ptmembership->acceptPtMembership($ptmembershipID);
+
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+            break;
         default:
-            // Handle unknown action or display an error
             break;
     }
 }

@@ -176,7 +176,6 @@ class PackageController extends Controller
             exit();
         }
     }
-
 }
 
 $model = new Package();
@@ -210,7 +209,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             break;
         default:
-            // Handle unknown action or display an error
             break;
     }
 }

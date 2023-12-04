@@ -245,17 +245,17 @@ class ClientController extends Controller
             $isValid = false;
         }
 
-        if($isValid){
-           
+        if ($isValid) {
+
             $result = $client->addClient($newClient);
-        
+
             if ($result) {
-                $_SESSION['AddedSuccess'] = "Account added sucessfully" ;
+                $_SESSION['AddedSuccess'] = "Account added sucessfully";
                 header("Location: ../views/addclient.php");
                 exit();
-                }
             }
-        
+        }
+
 
         $_SESSION["fnameErr"] = $fnameErr;
         $_SESSION["lnameErr"] = $lnameErr;
@@ -477,7 +477,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->addClient();
             break;
         default:
-            // Handle unknown action or display an error
             break;
     }
 }
+?>

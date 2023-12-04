@@ -67,8 +67,6 @@ class ptPackController extends Controller
                 header("Location: ../views/addPTpackage.php");
                 exit();
             }
-
-
         }
 
         // If the pt package addition was unsuccessful, redirect back to the form with error messages
@@ -123,7 +121,6 @@ class ptPackController extends Controller
         header("Location: ../views/viewPTpackage.php");
         exit();
     }
-
 }
 
 
