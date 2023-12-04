@@ -19,22 +19,6 @@
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-
-    <style>
-      
-#unfreeze-button{
-  background-color: transparent;
-  padding: 8px;
-  border: 1px solid rgb(51, 51, 51);
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-
-#unfreeze-button:hover {
-  background-color: rgb(51, 51, 51);
-  color: white;
-}
-      </style>
     <!--css/icons/boostrap/jquery/fonts/images end-->
 </head>
 

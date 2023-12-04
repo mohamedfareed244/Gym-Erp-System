@@ -9,6 +9,7 @@
   width: calc(100% - 220px);
   transition: all 0.5s ease;
 
+
 }
 
 .sidebar.close~.profile {
@@ -260,36 +261,15 @@ img {
   margin-right: 10px;
 }
 
-#freeze-button,
-#unfreeze-button,
-#freeze-weeks {
-  background-color: transparent;
-  padding: 8px;
-  border: 1px solid rgb(51, 51, 51);
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-
-#freeze-button:hover, 
-#unfreeze-button:hover {
-  background-color: rgb(51, 51, 51);
-  color: white;
-}
-
-#freeze-weeks {
-  padding-left: 30px;
-}
-
-
 .modal {
-  display: none;
+  display: none; 
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4); 
   overflow: auto;
 }
 
@@ -314,18 +294,17 @@ img {
   color: black;
 }
 
-#confirm-button {
-  position: relative;
-  left: 42%;
+#confirm-button{
+  position:relative;
+  left:42%;
 }
 
-#cancel-button {
-  position: relative;
-  left: 40%;
+#cancel-button{
+  position:relative;
+  left:40%;
 }
 
-#confirm-button,
-#cancel-button {
+#confirm-button, #cancel-button {
   background-color: #000000;
   color: white;
   padding: 10px 20px;
@@ -334,14 +313,12 @@ img {
   margin: 5px;
 }
 
-#confirm-button:hover,
-#cancel-button:hover {
+#confirm-button:hover, #cancel-button:hover {
   background-color: #424242;
 }
 
 #freeze-button,
-#unfreeze-button,
-#freeze-weeks {
+#freeze-weeks{
   background-color: transparent;
   padding: 8px;
   border: 1px solid rgb(62, 62, 62);
@@ -350,9 +327,11 @@ img {
   margin-top: 10px;
 }
 
-#freeze-button,
-#unfreeze-button,
-:hover {
+#freeze-button:hover {
+  background-color: rgb(62, 62, 62);
+  color: white;
+}
+#unfreeze-button:hover {
   background-color: rgb(62, 62, 62);
   color: white;
 }
@@ -361,32 +340,9 @@ img {
   width: 100px;
   text-align: center;
 }
-
 .error-message {
   color: red;
-  display: none;
+  display: none; 
   margin-top: 5px;
 }
 
-
-/* Freeze Membership Modal Start */
-#freezeModal {
-  display: none;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
-
-}
-
-.modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  
-}
-
-.close-btn {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Freeze Membership Modal End */
