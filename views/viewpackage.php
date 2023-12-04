@@ -23,10 +23,8 @@
 <body>
     <!-- usersidebar start -->
     <?php
-
-    session_start();
-   
-   include_once "../Models/MembershipsModel.php";
+    require_once 'sessionusercheck.php';
+    include_once "../Models/MembershipsModel.php";
    
    // Call the getClientMembershipInfo function
    $Memberships = new Memberships();
@@ -42,7 +40,11 @@
     
    <?php
  if (is_array($memberships) && !empty($memberships)) {
- foreach ($memberships as $membership): ?>
+ foreach ($memberships as $membership): 
+    $currentDate = strtotime(date("Y-m-d")); // Current date 
+
+    $membershipEndDate = strtotime($membership['EndDate']); // membership end date
+    if ($currentDate <= $membershipEndDate) : ?>
     <div class="profile">
         
         <div class="membership-details">
@@ -79,6 +81,7 @@
         </p>
 
     </div>
+    <?php endif; ?>
     <?php endforeach; ?>
     <?php } else{ ?>
         <div class="no-package" style="height:1000px; margin-left:200px;">

@@ -12,7 +12,9 @@
 }
 
 </style>
-
+<?php
+ require_once 'sessionusercheck.php';
+?>
 
 <div class="sidebar close">
         <div class="logo-details">

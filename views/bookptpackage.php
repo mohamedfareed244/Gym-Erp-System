@@ -47,7 +47,7 @@
     <!-- usersidebar start -->
 
     <?php
-    session_start();
+    require_once 'sessionusercheck.php';
     include("partials/usersidebar.php");
     include_once "../Models/ptPackageModel.php";
     include_once "../Models/EmployeeModel.php";

@@ -23,9 +23,7 @@
 <body>
     <!-- usersidebar start -->
     <?php
-
-    session_start();
-
+    require_once 'sessionusercheck.php';
     include_once "../Models/ClassesModel.php";
     
     $Classes=new Classes();
@@ -39,7 +37,18 @@
         <div class="greeting">
             <p class="hello-classes"><i class="fas fa-calendar"></i> Your Upcoming Classes</p>
         </div>
-        <?php foreach ($classes as $class): ?>
+        <?php foreach ($classes as $class): 
+            $startTime = new DateTime($class['StartTime']);
+            $endTime = new DateTime($class['EndTime']);
+                            
+            // Format the DateTime object as "H:i" (24-hour format)
+            $startformattedDate = $startTime->format("H:i");
+            $endformattedDate = $endTime->format("H:i");
+                
+            $currentDateTime = strtotime(date("Y-m-d H:i")); // Current date and time
+
+            $classStartDateTime = strtotime($class['Date'] . ' ' . $startformattedDate); // Class start date and time
+            if ($currentDateTime <= $classStartDateTime) : ?>
         <div class="reminders">
             <div class="reminder">
                 <p class="class">Class:</p>
@@ -75,6 +84,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <?php endforeach ?>
         <?php } else{ ?>
             <div class="no-class" style="height:1000px; margin-left:200px;">

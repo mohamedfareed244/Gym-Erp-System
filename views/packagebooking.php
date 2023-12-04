@@ -45,7 +45,8 @@
 <body>
     <!-- usersidebar start -->
     <?php 
-    session_start();
+    require_once 'sessionusercheck.php';
+
     include("partials/usersidebar.php");?>
     <?php include_once "../Models/PackageModel.php";
     $package = new Package();

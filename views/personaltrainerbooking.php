@@ -38,12 +38,10 @@
 <body>
     <!-- usersidebar start -->
     <?php
-    session_start();
+    require_once 'sessionusercheck.php';
     include("partials/usersidebar.php");
-    ?>
-    <?php
-    include_once "../Models/EmployeeModel.php";
 
+    include_once "../Models/EmployeeModel.php";
     $Employee = new Employee();
     $coaches = $Employee->getAllCoaches(); 
     ?>

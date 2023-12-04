@@ -27,8 +27,10 @@
  
 <body>
     <!-- usersidebar start -->
-    <?php session_start();
-    include("partials/usersidebar.php") ?>
+    <?php 
+    require_once 'sessionusercheck.php';
+    include("partials/usersidebar.php");
+    ?>
 
     <div class="container py-5" style="padding-bottom:300px;">
         <h2 style=" font-size: 26px;

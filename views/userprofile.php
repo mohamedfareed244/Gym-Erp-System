@@ -41,7 +41,7 @@
 <body>
     <!-- usersidebar start -->
     <?php 
-    session_start();
+    require_once 'sessionusercheck.php';
    
     include_once "../Models/MembershipsModel.php";
     include_once "../Models/ClassesModel.php";
@@ -91,7 +91,10 @@
          // Check if $memberships is an array before using foreach
         if (is_array($memberships) && !empty($memberships)) {
         foreach ($memberships as $membership):
-            ?>
+            $currentDate = strtotime(date("Y-m-d")); // Current date 
+
+            $membershipEndDate = strtotime($membership['EndDate']); // membership end date
+            if ($currentDate <= $membershipEndDate) : ?>
         <div class="membership-details">
             <p class="currpackage">Current Package:</p>
             <div class="membership-title"><?php echo $membership['Title']; ?></div>
@@ -106,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <?php endforeach; ?>
         <?php } ?>
 
@@ -113,6 +117,7 @@
          // Check if $memberships is an array before using foreach
         if (is_array($PtMemberships) && !empty($PtMemberships)) {
         foreach ($PtMemberships as $membership):
+            if( $membership['SessionsCount'] != 0) : ?>
             ?>
         <div class="reminder">
                 <p class="ptsession">Current PT Package:</p>
@@ -129,6 +134,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <?php endforeach; ?>
         <?php } ?>
 
@@ -137,7 +143,19 @@
         if (is_array($classes) && !empty($classes)) { ?>
         <h2 class="reminder-title"><i class='bx bxs-bell-ring'></i>REMINDER:</h2>
         <div class="reminders">
-            <?php foreach ($classes as $class): ?>
+            <?php foreach ($classes as $class):
+
+            $startTime = new DateTime($class['StartTime']);
+            $endTime = new DateTime($class['EndTime']);
+                            
+            // Format the DateTime object as "H:i" (24-hour format)
+            $startformattedDate = $startTime->format("H:i");
+            $endformattedDate = $endTime->format("H:i");
+                
+            $currentDateTime = strtotime(date("Y-m-d H:i")); // Current date and time
+
+            $classStartDateTime = strtotime($class['Date'] . ' ' . $startformattedDate); // Class start date and time
+            if ($currentDateTime <= $classStartDateTime) : ?>
             <div class="reminder">
                 <p class="class">Class:</p>
                 <div class="class-title"><?php echo $class['className']; ?></div>
@@ -149,19 +167,12 @@
                     <div class="time">
                         <p>Time:</p>
                         <div class="class-time">
-                            <?php
-                            $startTime = new DateTime($class['StartTime']);
-                            $endTime = new DateTime($class['EndTime']);
-                            
-                            // Format the DateTime object as "H:i" (24-hour format)
-                            $startformattedDate = $startTime->format("H:i");
-                            $endformattedDate = $endTime->format("H:i");
-
-                            echo $startformattedDate . " - " . $endformattedDate . " p.m"; ?>
+                            <?php echo $startformattedDate . " - " . $endformattedDate . " p.m"; ?>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <?php endforeach; ?>
             <?php } ?>
         </div>

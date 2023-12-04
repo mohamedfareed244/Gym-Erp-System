@@ -23,7 +23,7 @@
 <body>
     <!-- usersidebar start -->
     <?php
-    session_start();
+    require_once 'sessionusercheck.php';
     include("partials/usersidebar.php");
     include_once "../Models/ptMembershipsModel.php";
     ?>
@@ -33,7 +33,8 @@
                 $PtMemberships = $ptMemberships->getClientPtMembershipInfo();
 
                 if (is_array($PtMemberships) && !empty($PtMemberships)) {
-                    foreach ($PtMemberships as $membership) { ?>
+                    foreach ($PtMemberships as $membership) { 
+                    if( $membership['SessionsCount'] != 0) : ?>
 
     <div class="greeting">
         <p class="hello-pack"><i class="fas fa-box"></i> Your PT Package Details</p>
@@ -58,6 +59,7 @@
                 </div>
 
                 <?php
+                endif;
                     }
                 } else {
                     ?>
