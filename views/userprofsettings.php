@@ -25,11 +25,8 @@
 <body>
 
 <?php
-session_start();
-?>
-
-    <!-- usersidebar start -->
-    <?php include("partials/usersidebar.php") ?>
+    require_once 'sessionusercheck.php';
+    include("partials/usersidebar.php") ?>
 
     <div class="profile">
 

@@ -40,7 +40,8 @@
 
 <body>
     <!-- usersidebar start -->
-    <?php session_start();
+    <?php
+    require_once 'sessionusercheck.php';
     include("partials/usersidebar.php") ?>
 
 <div class="profile">
