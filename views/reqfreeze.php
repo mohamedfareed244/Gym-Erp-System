@@ -28,89 +28,87 @@
     require_once 'sessionusercheck.php';
     include("partials/usersidebar.php") ?>
 
-<div class="profile">
+    <div class="profile">
         <div class="greeting">
             <p class="hello-fz"><i class="fas fa-lock"></i>Freeze Membership</p>
         </div>
 
         <div class="reminders">
-            <?php
-            include_once "../Models/MembershipsModel.php";
-            include_once "../Models/ClientModel.php";
-            include_once "../Models/PackageModel.php";
+            <div class="reminder">
+                <?php
+                include_once "../Models/membershipsModel.php";
+                include_once "../Models/ClientModel.php";
+                include_once "../Models/PackageModel.php";
 
-            $memberships = new Memberships();
-            $membership = $memberships->getClientMembershipInfo();
-            $clientId = $_SESSION["ID"];
+                $memberships = new Memberships();
+                $clientId = $_SESSION["ID"];
+                $membershipdetails = $memberships->getMembership($clientId);
+                if ($membershipdetails->getIsActivated() == 'Activated') {
+                  $pck = new Package();
+                  $package = $pck->getPackage($membershipdetails->getPackageId());
+                  ?>
+                                  <script>
+                                      var currentDate = new Date();
+                                      var maxDate = new Date(currentDate);
+                                      maxDate.setMonth(currentDate.getMonth() + 3);
+                                  </script>
+                                  <p class="membership class">Package:</p>
+                                  <div class="class-title"><?php echo $package->getTitle(); ?></div>
 
-            if (!empty($membership)) :
-                foreach ($membership as $membershipp) :
-                    $membershipdetails = $membershipp->getMembership($clientId);
-                    $pck = new Package();
-                    $package = $pck->getPackage($membershipdetails->packageId);
-                    ?>
-                    <script>
-                        var currentDate = new Date();
-                        var maxDate = new Date(currentDate);
-                        maxDate.setMonth(currentDate.getMonth() + 3);
-                    </script>
-                    <div class="reminder">
-                        <p class="membership class">Package:</p>
-                        <div class="class-title"><?php echo $package->getTitle(); ?></div>
+                                  <div class="membership dates">
+                                      <div class="date">
+                                          <p>Start Date:</p>
+                                          <div class="start-date"><?php echo $membershipdetails->getStartDate(); ?></div>
+                                      </div>
+                                      <div class="date">
+                                          <p>End Date:</p>
+                                          <div class="end-date"><?php echo $membershipdetails->getEndDate(); ?></div>
+                                      </div>
+                                  </div>
 
-                        <div class="membership dates">
-                            <div class="date">
-                                <p>Start Date:</p>
-                                <div class="start-date"><?php echo $membershipdetails->startDate; ?></div>
-                            </div>
-                            <div class="date">
-                                <p>End Date:</p>
-                                <div class="end-date"><?php echo $membershipdetails->endDate; ?></div>
-                            </div>
-                        </div>
+                                  <div class="rem-info">
+                                      <p>Remaining Freeze Attempts:</p>
+                                      <p class="actual-rem" id="actual-rem">
+                                          <span id="remainingFreeze"><?php echo $membershipdetails->getFreezeCount() . " Attempts left from " ?></span>
+                                          <span id="package-freezelimit"> <?php echo $package->getFreezeLimit(); ?></span>
+                                      </p>
+                                  </div>
+                                  <div class="membershipStatus">
+                                  <p>Membership Status:</p>
+                                      </div>
+                                  <?php if ($membershipdetails->getFreezed() == 1) { ?>
+                    
+                                                  <p id="membershipStatus"class="actual-rem">Frozen</p>
+                                                            <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->getID(); ?>)'>Unfreeze</button>
+                                  <?php } else { ?>
+                      
+                                              <p id="membershipStatus" class="actual-rem"><?php echo $membershipdetails->getIsActivated(); ?></p>
 
-                        <div class="rem-info">
-                            <p>Remaining Freeze Attempts:</p>
-                            <p class="actual-rem" id="actual-rem">
-                                <?php echo $membershipdetails->freezeCount . " Days left from " . $package->getFreezeLimit(); ?>
-                            </p>
-                        </div>
-                        <div class="rem-info">
-                            <p>Membership Freeze Status:</p>
-                            <p class="actual-rem" id="freeze-stat"><?php echo ($membershipdetails->freezed == 0) ? 'Not Freezed' : 'Freezed'; ?></p>
-                        </div>
+                                              <div class="datePicking"  id="datePickerContainer">
+                                                <label for="datepicker">Choose a Date:</label>
+                                                <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                                              </div>
+                                              <button id="freeze-button" onclick='showModal()'>Freeze</button> 
+                                              <div class="modal" id="freezeModal">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                      <span class="close-btn" onclick="hideModal()">&times;</span>
+                                                          <div>
+                                                           <label id="modal-label" >Are you sure you want to freeze your membership?</label>
+                                                            </div>
+                                                            <button  id="confirm-button"
+                                                                                onclick='freezeMembership(<?php echo $membershipdetails->getID() ?>)'>Freeze</button>
+                                                                </div>
+                                                                    </div>
+                                                                </div>                   
+                                  <?php }
+                } else { ?>
+                    
+                                    <p class="hello-fz">Subscribe to a membership in order to access this feature</p>
+                  <?php } ?>
+            </div>
 
-                        <div class="rem-info">
-                            <p>Membership Status:</p>
-                            <p class="actual-rem"><?php echo $membershipdetails->isActivated; ?></p>
-                        </div>
-                        <?php if ($membershipdetails->freezed == 1) { ?>
-                            <button id="unfreeze-button" onclick='unfreezeMembership(<?php echo $membershipdetails->ID; ?>)'>Unfreeze</button>
-                        <?php } else { ?>
-                            <div class="datePicking">
-                                <label for="datepicker">Choose a Date:</label>
-                                <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                            </div>
-                            <button id="freeze-button" onclick='showModal()'>Freeze</button>
-                            <div class="modal" id="freezeModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <span class="close-btn" onclick="hideModal()">&times;</span>
-                                        <div>
-                                            <label id="modal-label">Are you sure you want to freeze your membership?</label>
-                                        </div>
-                                        <button id="confirm-button" onclick='freezeMembership(<?php echo $membershipdetails->ID ?>)'>Freeze</button>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <div class="no-package" style="height:1000px; margin-left:200px;">
-                    <p class="nopackage" style="font-size:24px;">You aren't subscribed to any package still.</p>
-                </div>
-            <?php endif; ?>
+            
         </div>
     </div>
 
@@ -118,6 +116,7 @@
         
 var freezebtn = document.getElementById("freeze-button");
 var datePicker = document.getElementById("datepicker");
+var freezeLimit =document.getElementById("package-freezelimit");
 
 function showModal() {
   var selectedDate = document.getElementById("datepicker").value;
@@ -140,8 +139,6 @@ function hideModal()
     $("#freezeModal").fadeOut();
 
 }
-
-
 function freezeMembership(membershipID) {
   var selectedDate = $("#datepicker").val();
   console.log(selectedDate);
@@ -156,16 +153,19 @@ function freezeMembership(membershipID) {
       membershipID: membershipID,
       selectedDate: selectedDate,
     },
-    success: function (response) {
-      console.log(response);
-
-      $("#freeze-stat").text("Freezed");
-
+    success: function (responseData) {
+      var response = JSON.parse(responseData);
+      $(".end-date").text(response.EndDate);
+      var remainingFreezeText = response.FreezeCount + " Attempts left from " + freezeLimit.textContent;
+      $("#remainingFreeze").text(remainingFreezeText);
+      $("#membershipStatus").text("Frozen");
       var unfreezeButton =
         '<button id="unfreeze-button" onclick="unfreezeMembership(' +
         membershipID +
         ')">Unfreeze</button>';
+      $("#datePickerContainer").fadeOut();
       $("#freeze-button").replaceWith(unfreezeButton);
+
     },
     error: function (xhr, status, error) {
       console.error("AJAX error: " + status + " - " + error);
@@ -174,8 +174,6 @@ function freezeMembership(membershipID) {
 
   hideModal();
 }
-
-
 
 function unfreezeMembership(membershipID) {
   console.log(membershipID);
@@ -186,29 +184,29 @@ function unfreezeMembership(membershipID) {
       action: "unfreezeClientMembership",
       membershipID: membershipID,
     },
-    success: function (response) {
-      console.log(response);
+    success: function (responseData) {
+            console.log("Response from server:", responseData);
 
-      $(".status").text("Active");
-
-      var freezeButton =
-        '<button id="freeze-button" class="" onclick="showModal()">Freeze</button>';
-      $("#unfreeze-button").replaceWith(freezeButton);
-      $("#freeze-stat").text("Not Freezed");
-
-      
-    },
-    error: function (xhr, status, error) {
-      console.error("AJAX error: " + status + " - " + error);
-    },
+            try {
+                var response = JSON.parse(responseData);
+                $(".end-date").text(response.EndDate);
+                $("#membershipStatus").text("Activated");
+                $("#datePickerContainer").show();
+                $("#remainingFreeze").text(response.FreezeCount + " Attempts left from " + freezeLimit.textContent);
+                var freezeButton = '<button id="freeze-button" class="" onclick="showModal()">Freeze</button>';
+                var confirmButton = ' <button  id="confirm-button"onclick"freezeMembership('+membershipID+')">Freeze</button>'
+                $("#unfreeze-button").replaceWith(freezeButton);
+            } catch (error) {
+                console.error("Error parsing JSON response: " + error);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error: " + status + " - " + error);
+        },
   });
 }
 
-
-
     </script>
-
-    <script src="../public/js/slider.js"></script>
 
     <?php include("partials/footer.php") ?>
 </body>

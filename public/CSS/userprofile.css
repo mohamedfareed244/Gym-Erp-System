@@ -8,8 +8,6 @@
   left: 220px;
   width: calc(100% - 220px);
   transition: all 0.5s ease;
-
-
 }
 
 .sidebar.close~.profile {
@@ -317,6 +315,7 @@ img {
   background-color: #424242;
 }
 
+#unfreeze-button,
 #freeze-button,
 #freeze-weeks{
   background-color: transparent;
