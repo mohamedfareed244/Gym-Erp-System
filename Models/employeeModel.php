@@ -17,7 +17,8 @@ class Employee extends Model
     private $PhoneNumber;
     private $Img;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
@@ -175,7 +176,7 @@ public function addnewdate($date){
         $jobTitle = $employee->JobTitle;
         $Email = $employee->Email;
         $Password = $employee->Password;
-        $Img=$employee->Img;
+        $Img = $employee->Img;
 
         $sql = "INSERT INTO employee (Name, Salary, Address, PhoneNumber, JobTitle, Email, Password,Img) 
                 VALUES ('$name', '$Sal', '$address', '$phoneNumber', '$jobTitle','$Email', '$Password','$Img')";
@@ -185,14 +186,14 @@ public function addnewdate($date){
     public function getEmployeeByID($employeeID)
     {
         $employeeID = mysqli_real_escape_string($this->db->getConn(), $employeeID);
-    
+
         $sql = "SELECT * FROM employee WHERE ID = '$employeeID'";
         $result = $this->db->query($sql);
-    
+
         if ($result) {
             $employeeData = $this->db->fetchRow($result);
-    
-            
+
+
             $employee = new Employee();
             $employee->ID = $employeeData['ID'];
             $employee->Name = $employeeData['Name'];
@@ -204,11 +205,11 @@ public function addnewdate($date){
             $employee->PhoneNumber = $employeeData['PhoneNumber'];
 
             return $employee;
-         } else {
-                return null; // No data found for the given employeeID
-            }
+        } else {
+            return null; // No data found for the given employeeID
+        }
     }
-    
+
 
     public function updateEmployee($employee)
     {
@@ -244,7 +245,7 @@ public function addnewdate($date){
 
         return $this->db->query($sql);
     }
-    
+
     public function deleteEmployeeById($employeeID)
     {
         $sql = "DELETE from employee where ID =" . $employeeID;
@@ -267,85 +268,87 @@ public function addnewdate($date){
 
     public function GetAllCoaches()
     {
-    $results = array(); // Initialize the array
+        $results = array(); // Initialize the array
 
-    $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName,employee.Img
+        $sql = "SELECT employee.ID, employee.Name, employee.Email, employee.PhoneNumber, employee.Salary, employee.Address, job_titles.Name AS JobTitleName,employee.Img
             FROM employee  
             INNER JOIN job_titles 
             ON (job_titles.Name = 'Coach' OR job_titles.Name = 'Fitness-manager') 
             AND employee.JobTitle = job_titles.Id";
 
-    $result = $this->db->query($sql);
+        $result = $this->db->query($sql);
 
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $results[] = array(
-                'CoachID' => $row['ID'],
-                'Name' => $row['Name'],
-                'Email' => $row['Email'],
-                'PhoneNumber' => $row['PhoneNumber'],
-                'Salary' => $row['Salary'],
-                'Address' => $row['Address'],
-                'JobTitleName' => $row['JobTitleName'],
-                'Img' => $row['Img']
-            );
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'CoachID' => $row['ID'],
+                    'Name' => $row['Name'],
+                    'Email' => $row['Email'],
+                    'PhoneNumber' => $row['PhoneNumber'],
+                    'Salary' => $row['Salary'],
+                    'Address' => $row['Address'],
+                    'JobTitleName' => $row['JobTitleName'],
+                    'Img' => $row['Img']
+                );
+            }
+        }
+
+        return $results;
+    }
+
+
+    public function GetAllClasses()
+    {
+        global $conn;
+
+        $sql = "SELECT ID, Name FROM class";
+        $result = $this->db->query($sql);
+
+        if ($result) {
+            $classes = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free_result();
+            $conn->close();
+            return $classes;
+        } else {
+            $conn->close();
+            return [];
         }
     }
 
-    return $results;
+    public function getauth()
+    {
+        $sql = "SELECT * FROM authority";
+
+        $result = $this->db->query($sql);
+        return $result;
+    }
+    public function getjobtitles()
+    {
+
+        $sql = "SELECT * FROM job_titles";
+        $result = $this->db->query($sql);
+
+        return $result;
     }
 
 
-public function GetAllClasses()
-{
-    global $conn;
-
-    $sql = "SELECT ID, Name FROM class";
-    $result = $this->db->query($sql);
-
-    if ($result) {
-        $classes = $result->fetch_all(MYSQLI_ASSOC);
-        $result->free_result();
-        $conn->close();
-        return $classes;
-    } else {
-        $conn->close();
-        return [];
-    }
-}
-
-public function getauth(){
-$sql="SELECT * FROM authority";
-
-$result=$this->db->query($sql);
-return $result;
-}
-public function getjobtitles(){
-  
-    $sql="SELECT * FROM job_titles";
-    $result=$this->db->query($sql);
- 
-    return $result;
-}
-
-
-public function getCoachNameByID($CoachID)
-{
-    $sql="SELECT Name
+    public function getCoachNameByID($CoachID)
+    {
+        $sql = "SELECT Name
     FROM employee
     where ID = $CoachID";
 
-    $result=$this->db->query($sql);
- 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $name = $row['Name'];
-    } else {
-        $name = null;
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $name = $row['Name'];
+        } else {
+            $name = null;
+        }
+
+        return $name;
     }
-
-    return $name;
 }
 
-
-}
+?>

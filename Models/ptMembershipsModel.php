@@ -7,78 +7,80 @@ include_once "CoachesModel.php";
 include_once "EmployeeModel.php";
 
 
-class ptMemberships extends Model{
+class ptMemberships extends Model
+{
 
     private $ID;
     private $ClientID;
-    private	$CoachID;
-    private	$PrivateTrainingPackageID;
-    private	$SessionsCount;
-    private	$isActivated;	 
+    private $CoachID;
+    private $PrivateTrainingPackageID;
+    private $SessionsCount;
+    private $isActivated;
 
-        function __construct() {
-            $this->db = $this->connect();
-        }
+    function __construct()
+    {
+        $this->db = $this->connect();
+    }
 
-        public function getID()
-        {
-            return $this->ID;
-        }
-    
-        public function setID($ID)
-        {
-            $this->ID = $ID;
-        }
+    public function getID()
+    {
+        return $this->ID;
+    }
 
-        public function getClientID()
-        {
-            return $this->ClientID;
-        }
-    
-        public function setClientID($ClientID)
-        {
-            $this->ClientID = $ClientID;
-        }
- 
-        public function getCoachID()
-        {
-            return $this->CoachID;
-        }
-    
-        public function setCoachID($CoachID)
-        {
-            $this->CoachID = $CoachID;
-        }
-    
-        public function getPrivateTrainingPackageID()
-        {
-            return $this->PrivateTrainingPackageID;
-        }
-    
-        public function setPrivateTrainingPackageID($PrivateTrainingPackageID)
-        {
-            $this->PrivateTrainingPackageID = $PrivateTrainingPackageID;
-        }
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
 
-        public function getSessionsCount()
-        {
-            return $this->SessionsCount;
-        }
-    
-        public function setSessionsCount($SessionsCount)
-        {
-            $this->SessionsCount = $SessionsCount;
-        }
+    public function getClientID()
+    {
+        return $this->ClientID;
+    }
 
-        public function getIsActivated()
-        {
-            return $this->isActivated;
-        }
-    
-        public function setIsActivated($isActivated)
-        {
-            $this->isActivated = $isActivated;
-        }
+    public function setClientID($ClientID)
+    {
+        $this->ClientID = $ClientID;
+    }
+
+    public function getCoachID()
+    {
+        return $this->CoachID;
+    }
+
+    public function setCoachID($CoachID)
+    {
+        $this->CoachID = $CoachID;
+    }
+
+    public function getPrivateTrainingPackageID()
+    {
+        return $this->PrivateTrainingPackageID;
+    }
+
+    public function setPrivateTrainingPackageID($PrivateTrainingPackageID)
+    {
+        $this->PrivateTrainingPackageID = $PrivateTrainingPackageID;
+    }
+
+    public function getSessionsCount()
+    {
+        return $this->SessionsCount;
+    }
+
+    public function setSessionsCount($SessionsCount)
+    {
+        $this->SessionsCount = $SessionsCount;
+    }
+
+    public function getIsActivated()
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated($isActivated)
+    {
+        $this->isActivated = $isActivated;
+    }
 
 
     public function getAllPtMemberships()
@@ -103,47 +105,47 @@ class ptMemberships extends Model{
         return $ptmemberships;
     }
 
-public function AddptMemberships($ptMembership, $PackageMinMonths)
-{
-    $ClientID = $ptMembership->ClientID;
-    $CoachID = $ptMembership->CoachID;
-    $Sessions = $ptMembership->SessionsCount;
-    $PackageID = $ptMembership->PrivateTrainingPackageID;
-    $isActivated = "Not Activated";
+    public function AddptMemberships($ptMembership, $PackageMinMonths)
+    {
+        $ClientID = $ptMembership->ClientID;
+        $CoachID = $ptMembership->CoachID;
+        $Sessions = $ptMembership->SessionsCount;
+        $PackageID = $ptMembership->PrivateTrainingPackageID;
+        $isActivated = "Not Activated";
 
-    $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$PackageID' AND ClientID = '$ClientID'";
-    $check1Result = $this->db->query($check1Sql);
-    $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
+        $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$PackageID' AND ClientID = '$ClientID'";
+        $check1Result = $this->db->query($check1Sql);
+        $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
 
-    $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = '$ClientID'";
-    $check2Result = $this->db->query($check2Sql);
-    $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
+        $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = '$ClientID'";
+        $check2Result = $this->db->query($check2Sql);
+        $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
 
-    $check3Sql = "SELECT package.NumOfMonths, membership.PackageID
+        $check3Sql = "SELECT package.NumOfMonths, membership.PackageID
                 FROM package 
                 INNER JOIN membership ON package.ID = membership.PackageID
                 WHERE membership.ClientID = '$ClientID'";
-    $check3Result = $this->db->query($check3Sql);
+        $check3Result = $this->db->query($check3Sql);
 
-    if ($alreadyThisMembershipExists) {
-        return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false,'error' =>false);
-    } elseif ($alreadyAnotherMembershipExists) {
-        return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false,'error' => false);
-    } else {
-        if ($check3Result && $check3Result->num_rows > 0) {
-            $row = $check3Result->fetch_assoc();
-            $packageMonths = $row['NumOfMonths'];
-            if ($packageMonths >= $PackageMinMonths) {
-                $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
+        if ($alreadyThisMembershipExists) {
+            return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => false);
+        } elseif ($alreadyAnotherMembershipExists) {
+            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false, 'error' => false);
+        } else {
+            if ($check3Result && $check3Result->num_rows > 0) {
+                $row = $check3Result->fetch_assoc();
+                $packageMonths = $row['NumOfMonths'];
+                if ($packageMonths >= $PackageMinMonths) {
+                    $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
                         VALUES ('$ClientID', '$CoachID', '$PackageID', '$Sessions', '$isActivated')";
-                $insertResult = $this->db->query($sql);
-                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult,'error' => false);
-            } else {
-                return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => true);
+                    $insertResult = $this->db->query($sql);
+                    return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult, 'error' => false);
+                } else {
+                    return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => true);
+                }
             }
         }
     }
-}
 
     public function activatePtMembership($PrivateTrainingPackageID)
     {
@@ -161,22 +163,22 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
         return $this->db->query($sql);
     }
 
-   
+
     public function getClientPtMembershipInfo()
     {
-    
+
         $isActivated = "Activated";
-    
+
         $sql = "SELECT `private training membership`.SessionsCount, `private training package`.NumOfSessions, `private training package`.Price, employee.Name
                 FROM `private training membership`
                 INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
                 INNER JOIN employee ON employee.ID = `private training membership`.CoachID
                 WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = " . $_SESSION['ID'];
-    
+
         $result = $this->db->query($sql);
-    
+
         $results = array();
-    
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $results[] = array(
@@ -190,7 +192,8 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
         }
     }
 
-    public function getPtMembershipByPackageID($packageID) {
+    public function getPtMembershipByPackageID($packageID)
+    {
 
         $sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
         $result = $this->db->query($sql);
@@ -209,8 +212,9 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
             return $ptMembership;
         }
     }
-    
-    public function getCoachNamesForPackage($packageID) {
+
+    public function getCoachNamesForPackage($packageID)
+    {
 
         $Employee = new Employee();
         $coaches = $Employee->GetAllCoaches();
@@ -267,7 +271,7 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
                     'Price' => $row['Price'],
                     'SessionsCount' => $row['SessionsCount'],
                     'ptMembershipID' => $row['ptMembershipID'],
-                    'employeeName'=> $row['employeeName']
+                    'employeeName' => $row['employeeName']
 
                 );
             }
@@ -285,7 +289,5 @@ public function AddptMemberships($ptMembership, $PackageMinMonths)
 
         return $this->db->query($sql);
     }
-
 }
-
-?>
+ ?>

@@ -16,7 +16,8 @@ class ptPackages extends Model
     private $Price;
     private $isActivated;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
@@ -261,7 +262,6 @@ class ptPackages extends Model
                     }
                 }
             }
-
         }
         return false;
     }
@@ -281,10 +281,6 @@ class ptPackages extends Model
             return [];
         }
     }
-
-    
-
-
 }
 
 ?>

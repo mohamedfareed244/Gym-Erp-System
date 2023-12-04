@@ -5,36 +5,6 @@ require_once("Model.php");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
-
-    $num = $_GET["x"];
-
-    $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
-
-    $result = $this->db->query($sql);
-    $word = '';
-    if (mysqli_num_rows($result) <= 0) {
-        echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
-    } else {
-        foreach ($result as $res) {
-            $word .= "<tr><td>";
-            $word .= $res["ID"];
-            $word .= "</td>";
-            $word .= "<td class='col'>";
-            $word .= $res["Name"];
-            $word .= "</td>";
-            $word .= " <td class='col'>";
-            $word .= $res["Phone"];
-            $word .= "</td>";
-
-            $word .= "<td class='col'> <input type='checkbox' name='' id=''> </td>
-        </tr>";
-        }
-        echo $word;
-    }
-    exit();
-}
-
 class Classes extends Model
 {
 
@@ -49,7 +19,8 @@ class Classes extends Model
     private $NumOfAttendants;
     private $AvailablePlaces;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
@@ -286,8 +257,6 @@ class Classes extends Model
             NumOfAttendants='$NumOfAttendants'
                     WHERE ID = $class_id";
         return $this->db->query($sql);
-
-
     }
 
     public function deleteClass($classID, $coachID, $date)
@@ -295,7 +264,6 @@ class Classes extends Model
         $sql = "DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";
 
         return $this->db->query($sql);
-
     }
 
 
@@ -323,7 +291,6 @@ class Classes extends Model
         }
 
         return $results;
-
     }
 
     public function getallCoachesandClasses()
@@ -351,7 +318,6 @@ class Classes extends Model
             }
             return $results;
         }
-
     }
 
 
@@ -385,9 +351,6 @@ class Classes extends Model
             }
             return $results;
         }
-
-
-
     }
 
     public function ReservationFreeClass($CoachID, $AssignedClassID, $ClientID)
@@ -409,7 +372,7 @@ class Classes extends Model
             SET AvailablePlaces= AvailablePlaces - 1
             WHERE assignedclass.ID = '$AssignedClassID'";
 
-                $insertResult =$this->db->query($sql1);
+                $insertResult = $this->db->query($sql1);
 
                 return array('inserted' => $insertResult, 'alreadyExists' => false);
             }
@@ -467,7 +430,6 @@ class Classes extends Model
             }
             return $results;
         }
-
     }
     public function getClientClasses($clientID)
     {
@@ -565,9 +527,36 @@ class Classes extends Model
         WHERE ID = $reservedClassID";
 
         return $this->db->query($sql);
-
     }
+}
 
+if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
 
+    $num = $_GET["x"];
+
+    $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
+
+    $result = $this->db->query($sql);
+    $word = '';
+    if (mysqli_num_rows($result) <= 0) {
+        echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
+    } else {
+        foreach ($result as $res) {
+            $word .= "<tr><td>";
+            $word .= $res["ID"];
+            $word .= "</td>";
+            $word .= "<td class='col'>";
+            $word .= $res["Name"];
+            $word .= "</td>";
+            $word .= " <td class='col'>";
+            $word .= $res["Phone"];
+            $word .= "</td>";
+
+            $word .= "<td class='col'> <input type='checkbox' name='' id=''> </td>
+        </tr>";
+        }
+        echo $word;
+    }
+    exit();
 }
 ?>
