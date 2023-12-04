@@ -318,7 +318,6 @@ class Memberships extends Model
         return false;
     }
 
-
     public function getClientMembershipInfo()
     {
         $isActivated = "Activated";
@@ -361,7 +360,6 @@ class Memberships extends Model
 
         if ($membership) {
             $freezeEndDate = date("Y-m-d", strtotime($selectedDate));
-            echo "Selected Date: ", $selectedDate, " Converted Freeze End Date: ", $freezeEndDate;
             $startDateTime = new DateTime();
             $endDateTime = new DateTime($selectedDate);
 
@@ -370,24 +368,20 @@ class Memberships extends Model
 
             $newEndDate = date("Y-m-d", strtotime($membership->endDate . " + " . $days . " days"));
 
-            echo "New End Date: " . $newEndDate; // Debug statement
-
             $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$membership->freezeCount'-1 WHERE ID='$membershipId'";
             $result = $this->db->query($sql);
 
             $freezeStartDate = date("Y-m-d");
 
-            $sql2 = "INSERT INTO `scheduled_unfreeze` (membershipId, freezeEndDate, freezeStartDate, freezeCount) VALUES 
+            $sql2 = "INSERT INTO `scheduled_unfreeze` (membership_id, freezeEndDate, freezeStartDate, freezeCount) VALUES 
             ('$membership->ID','$freezeEndDate', '$freezeStartDate', '$membership->freezeCount'-1)";
 
             $result2 = $this->db->query($sql2);
 
             if ($result && $result2) {
-                echo "Update successful!";
             } else {
-                echo "Error updating record: " . mysqli_error($this->db->getConn());
+                return false;
             }
-
             return $result;
         } else {
             return false;
@@ -396,7 +390,7 @@ class Memberships extends Model
 
     public function getScheduledUnFreeze($membershipId)
     {
-        $sql = "SELECT * FROM `scheduled_unfreeze` WHERE membershipId = '$membershipId'";
+        $sql = "SELECT * FROM `scheduled_unfreeze` WHERE `membership_id` = '$membershipId'";
         $result = $this->db->query($sql);
         $row = mysqli_fetch_assoc($result);
         return $row;
@@ -407,14 +401,11 @@ class Memberships extends Model
         $membership = Memberships::getMembershipByID($membershipId);
 
         $scheduledUnFreeze = Memberships::getScheduledUnFreeze($membershipId);
-        echo 'Scheduled Freeze End Date: ' . $scheduledUnFreeze['freezeEndDate'];
 
         if ($membership && $scheduledUnFreeze) {
             $currDate = new DateTime();
             $freezeStartDate = new DateTime($scheduledUnFreeze['freezeStartDate']);
             $freezeEndDate = new DateTime($scheduledUnFreeze['freezeEndDate']);
-            echo $freezeStartDate->format('Y-m-d'), "    END FREEZE ", $freezeEndDate->format('Y-m-d');
-
             if ($currDate < $freezeEndDate) {
                 $package = new Package();
                 $Package = $package->getPackage($membership->packageId);
@@ -425,28 +416,25 @@ class Memberships extends Model
                 $numOfMonths = $Package->getNumOfMonths();
                 $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$numOfMonths months +$days days"));
                 $currentDate = date("Y-m-d");
-                echo 'NEW DATE', $newEndDate, " Current ", $currentDate, "  Days ", $days, '    ', $numOfMonths;
                 $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
                 $result = $this->db->query($sql);
 
-                $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
+                $sql2 = "DELETE FROM scheduled_unfreeze WHERE `membership_id` = '$membershipId'";
                 $result2 = $this->db->query($sql2);
 
                 if ($result && $result2) {
-                    echo "Update successful!";
                 } else {
-                    echo "Error updating record: " . mysqli_error($this->db->getConn());
+                    return false;
                 }
             } else if ($currDate >= $freezeEndDate) {
                 $sql = "UPDATE `membership` SET Freezed = 0 WHERE ID='$membershipId'";
                 $result = $this->db->query($sql);
-                $sql2 = "DELETE FROM scheduled_unfreeze WHERE membershipId = '$membershipId'";
+                $sql2 = "DELETE FROM scheduled_unfreeze WHERE `membership_id` = '$membershipId'";
                 $result2 = $this->db->query($sql2);
 
                 if ($result && $result2) {
-                    echo "Update successful!";
                 } else {
-                    echo "Error updating record: " . mysqli_error($this->db->getConn());
+                    return false;
                 }
             }
             return $result;

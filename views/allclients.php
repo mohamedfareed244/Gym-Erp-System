@@ -33,13 +33,12 @@
 
 <body>
     <?php require("partials/adminsidebar.php");
-  include_once "../Models/ClientModel.php";
-  include_once "../Models/MembershipsModel.php";
-  $Client = new Client;
-  $clients = $Client->getAllClients();
-  $Memberships = new Memberships();
-  $memberships = $Memberships->getAllMemberships();
-  ?>
+    include_once "../Models/ClientModel.php";
+    include_once "../Models/MembershipsModel.php";
+    $Client = new Client;
+    $clients = $Client->getAllClients();
+    $Memberships = new Memberships();
+    ?>
     <div id="add-body" class="addbody">
         <div class="container">
             <h2 class="table-title">All Clients:</h2>
@@ -66,53 +65,44 @@
                     </thead>
                     <tbody>
                         <?php
-            foreach ($clients as $client) {
-              echo "<tr id='row-" . $client->getID() . "'>";
-              echo '<td> ' . $client->getID() . ' </td>';
-              echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
-              echo '<td> ' . $client->getEmail() . '</td>';
-              echo '<td> ' . $client->getAge() . '</td>';
-              echo '<td> ' . $client->getGender() . '</td>';
-              echo '<td> ' . $client->getWeight() . '</td>';
-              echo '<td> ' . $client->getHeight() . '</td>';
-              echo '<td> ' . $client->getPhone() . '</td>';
-              $found = false;
-              if ($memberships) {
-                foreach ($memberships as $membership) {
-                  if ($membership->getclientId() == $client->getID()) {
-                    echo '<td><button class="btn" disabled>Add</button></td>';
-                    echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
-                    $found = true;
-                    break;
-                  }
-                }
-              }
+                        foreach ($clients as $client) {
+                            echo "<tr id='row-" . $client->getID() . "'>";
+                            echo '<td> ' . $client->getID() . ' </td>';
+                            echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
+                            echo '<td> ' . $client->getEmail() . '</td>';
+                            echo '<td> ' . $client->getAge() . '</td>';
+                            echo '<td> ' . $client->getGender() . '</td>';
+                            echo '<td> ' . $client->getWeight() . '</td>';
+                            echo '<td> ' . $client->getHeight() . '</td>';
+                            echo '<td> ' . $client->getPhone() . '</td>';
+                            if ($client->HasMembership == 'Yes') {
+                                echo '<td><button class="btn" disabled>Add</button></td>';
+                                echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
+                            } else {
+                                echo '<td><a href="addclientmembership.php?ID=' . $client->getID() . '" class="btn">Add</a></td>';
+                                echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
 
-              if (!$found) {
-                echo '<td><a href="addclientmembership.php?ID=' . $client->getID() . '" class="btn">Add</a></td>';
-                echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
+                            }
 
-              }
-
-              echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";
-              echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>"; ?>
-                        <div class="modal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                    <div>
-                                        <label>Are you sure you want to delete this client?</label>
+                            echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";
+                            echo "<button class=\"btn btn-delete\" onclick='showDeleteModal(". $client->getID() .")'>Delete</button></td>"; ?>
+                             <div class="modal" id="deleteModal-<?php echo $client->getID(); ?>">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                        <div>
+                                            <label>Are you sure you want to delete this client?</label>
+                                        </div>
+                                        <button class="btn btn-delete"
+                                            onclick='deleteClient(<?php echo $client->getID() ?>)'
+                                            style="background-color:red">Delete</button>
                                     </div>
-                                    <button class="btn btn-delete"
-                                        onclick='deleteClient(<?php echo $client->getID() ?>)'
-                                        style="background-color:red">Delete</button>
                                 </div>
                             </div>
-                        </div>
-                        <?php
-                echo '</tr>';
-            }
-            ?>
+                            <?php
+                            echo '</tr>';
+                        }
+                        ?>
 
                     </tbody>
                 </table>
@@ -124,14 +114,14 @@
 
 </body>
 <script>
-function showDeleteModal() {
-    $('#deleteModal').fadeIn();
+ function showDeleteModal(clientId) {
+            $('#deleteModal-' + clientId).fadeIn();
+        }
 
-}
+        function hideDeleteModal(clientId) {
+            $('#deleteModal-' + clientId).fadeOut();
+        }
 
-function hideDeleteModal() {
-    $('#deleteModal').fadeOut();
-}
 
 function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -177,7 +167,7 @@ function deleteClient(clientId) {
             console.error("AJAX error: " + status + " - " + error);
         },
     });
-    hideDeleteModal();
+    hideDeleteModal(clientId);
 }
 </script>
 

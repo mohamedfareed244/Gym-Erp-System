@@ -21,6 +21,8 @@ class Client extends Model
     private $Weight;
     private $Email;
     private $Password;
+    public $HasMembership;
+    public $HasPtPackage;
 
     function __construct()
     {
@@ -177,7 +179,18 @@ class Client extends Model
 
     public function getAllClients()
     {
-        $sql = "SELECT * FROM `client`";
+        $sql = " SELECT
+            client.ID, client.FirstName, client.LastName, client.Email, client.Password, client.Phone, client.Age, client.Gender, client.Height,
+            client.Weight,
+            CASE WHEN membership.clientId IS NOT NULL THEN 'Yes' ELSE 'No' END AS HasMembership,
+            CASE WHEN ptPackage.clientId IS NOT NULL THEN 'Yes' ELSE 'No' END AS HasPtPackage
+        FROM
+            client
+        LEFT JOIN
+            `membership` AS membership ON client.ID = membership.clientId
+        LEFT JOIN
+            `private training membership` AS ptPackage ON client.ID = ptPackage.clientId";
+
         $result = $this->db->query($sql);
         $clients = array();
 
@@ -194,7 +207,8 @@ class Client extends Model
                 $client->Gender = $row['Gender'];
                 $client->Height = $row['Height'];
                 $client->Weight = $row['Weight'];
-
+                $client->HasMembership = $row['HasMembership'];
+                $client->HasPtPackage = $row['HasPtPackage'];
                 $clients[] = $client;
             }
         }
