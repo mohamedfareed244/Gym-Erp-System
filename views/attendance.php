@@ -23,6 +23,23 @@
 </style>
 
 <body>
+<div class="modal" tabindex="-1" role="dialog"  id="modalmsg">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Message : </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closemsg()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <p style="color:green;">Attendance saved successfully ! </p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
     <?php require("./partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
         <div class="container" style="margin-left:-4%; padding-left:50px" >
