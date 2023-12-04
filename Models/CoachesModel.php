@@ -11,7 +11,8 @@ include_once "ptPackageModel.php";
 class Coach extends Employee
 {
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
@@ -50,43 +51,6 @@ class Coach extends Employee
 
         return $assignedClasses;
     }
-
-    public function getPTSessions($employee)
-    {
-
-        if (empty($this->getID())) {
-            return [];
-        }
-
-        // $coachID = $this->ID;
-        $employee_id = $_SESSION['ID'];
-
-
-        $sql = "SELECT pts.* FROM 'private training membership'
-            INNER JOIN employee e ON pts.CoachID = e.ID
-            WHERE e.ID = $employee_id AND (e.JobTitle = 'Coach' OR e.JobTitle = 'Fitness Manager')";
-
-        $result = $this->db->query($sql);
-
-        $ptSessions = array();
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $ptSessionDetails = new clientPtPackage();
-                $ptSessionDetails->ClientID = $row['ClientID'];
-                $ptSessionDetails->CoachID = $row['CoachID'];
-                $ptSessionDetails->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
-                $ptSessionDetails->SessionsCount = $row['SessionsCount'];
-
-                $ptSessions[] = $ptSessionDetails;
-            }
-        }
-
-        return $ptSessions;
-    }
-
-
-
 
     public function getRegisteredPTClients($employee, $client)
     {
@@ -143,7 +107,6 @@ class Coach extends Employee
 
         $result = $this->db->query($sql);
         return $result;
-       
     }
     public function getclassnum($id)
     {
@@ -151,7 +114,5 @@ class Coach extends Employee
         $result = $this->db->query($sql);
         return $result;
     }
-
-
 }
 ?>

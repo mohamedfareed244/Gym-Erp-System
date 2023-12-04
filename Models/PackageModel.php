@@ -16,95 +16,118 @@ class Package extends Model
     private $Price;
     private $isActivated;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
-    
-    public function setID($ID) {
+
+    public function setID($ID)
+    {
         $this->ID = $ID;
     }
 
-    public function getID() {
+    public function getID()
+    {
         return $this->ID;
     }
-    public function setTitle($Title) {
+    public function setTitle($Title)
+    {
         $this->Title = $Title;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->Title;
     }
 
-    public function setNumOfMonths($NumOfMonths) {
+    public function setNumOfMonths($NumOfMonths)
+    {
         $this->NumOfMonths = $NumOfMonths;
     }
 
-    public function getNumOfMonths() {
+    public function getNumOfMonths()
+    {
         return $this->NumOfMonths;
     }
 
-    public function setIsVisitsLimited($isVisitsLimited) {
-            $this->isVisitsLimited = $isVisitsLimited;
-        }
-    
-    public function getIsVisitsLimited() {
-            return $this->isVisitsLimited;
-        }
+    public function setIsVisitsLimited($isVisitsLimited)
+    {
+        $this->isVisitsLimited = $isVisitsLimited;
+    }
 
-    public function setVisitsLimit($VisitsLimit) {
-            $this->VisitsLimit = $VisitsLimit;
-        }
+    public function getIsVisitsLimited()
+    {
+        return $this->isVisitsLimited;
+    }
 
-    public function getVisitsLimit() {
-            return $this->VisitsLimit;
-        }
+    public function setVisitsLimit($VisitsLimit)
+    {
+        $this->VisitsLimit = $VisitsLimit;
+    }
 
-    public function setFreezeLimit($FreezeLimit) {
-            $this->FreezeLimit = $FreezeLimit;
-        }
+    public function getVisitsLimit()
+    {
+        return $this->VisitsLimit;
+    }
 
-    public function getFreezeLimit() {
-            return $this->FreezeLimit;
-        }
+    public function setFreezeLimit($FreezeLimit)
+    {
+        $this->FreezeLimit = $FreezeLimit;
+    }
 
-    public function setNumOfInvitations($NumOfInvitations) {
-            $this->NumOfInvitations = $NumOfInvitations;
-        }
-  
-    public function getNumOfInvitations() {
-            return $this->NumOfInvitations;
-        }
-  
-    public function setNumOfInbodySessions($NumOfInbodySessions) {
-            $this->NumOfInbodySessions = $NumOfInbodySessions;
-        }
+    public function getFreezeLimit()
+    {
+        return $this->FreezeLimit;
+    }
 
-    public function getNumOfInbodySessions() {
-            return $this->NumOfInbodySessions;
-        }
+    public function setNumOfInvitations($NumOfInvitations)
+    {
+        $this->NumOfInvitations = $NumOfInvitations;
+    }
 
-    public function setNumOfPrivateTrainingSessions($NumOfPrivateTrainingSessions) {
-            $this->NumOfPrivateTrainingSessions = $NumOfPrivateTrainingSessions;
-        }
+    public function getNumOfInvitations()
+    {
+        return $this->NumOfInvitations;
+    }
 
-    public function getNumOfPrivateTrainingSessions() {
-            return $this->NumOfPrivateTrainingSessions;
-        }
+    public function setNumOfInbodySessions($NumOfInbodySessions)
+    {
+        $this->NumOfInbodySessions = $NumOfInbodySessions;
+    }
 
-    public function setPrice($Price) {
-            $this->Price = $Price;
-        }
+    public function getNumOfInbodySessions()
+    {
+        return $this->NumOfInbodySessions;
+    }
 
-    public function getPrice() {
-            return $this->Price;
-        }
+    public function setNumOfPrivateTrainingSessions($NumOfPrivateTrainingSessions)
+    {
+        $this->NumOfPrivateTrainingSessions = $NumOfPrivateTrainingSessions;
+    }
 
-    public function setIsActivated($isActivated) {
+    public function getNumOfPrivateTrainingSessions()
+    {
+        return $this->NumOfPrivateTrainingSessions;
+    }
+
+    public function setPrice($Price)
+    {
+        $this->Price = $Price;
+    }
+
+    public function getPrice()
+    {
+        return $this->Price;
+    }
+
+    public function setIsActivated($isActivated)
+    {
         $this->isActivated = $isActivated;
     }
 
-    public function getIsActivated() {
+    public function getIsActivated()
+    {
         return $this->isActivated;
     }
 
@@ -182,7 +205,7 @@ class Package extends Model
         if ($result && $result->num_rows > 0) {
             $packageData = $result->fetch_assoc();
             $package = new Package();
-            $package->ID = $packageData['ID'];  
+            $package->ID = $packageData['ID'];
             $package->NumOfMonths = $packageData['NumOfMonths'];
             $package->isVisitsLimited = $packageData['isVisitsLimited'];
             $package->FreezeLimit = $packageData['FreezeLimit'];
@@ -193,8 +216,7 @@ class Package extends Model
             $package->isActivated = $packageData['isActivated'];
 
             return $package;
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -211,21 +233,18 @@ class Package extends Model
         }
     }
 
-    
-public function getPackageFreezeLimit($PackageID)
-{
-    $sql = "SELECT `FreezeLimit` FROM `package` WHERE `ID`='$PackageID'";
-    $result = $this->db->query($sql);
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row['FreezeLimit'];
-    } else {
-        return 0; 
+    public function getPackageFreezeLimit($PackageID)
+    {
+        $sql = "SELECT `FreezeLimit` FROM `package` WHERE `ID`='$PackageID'";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['FreezeLimit'];
+        } else {
+            return 0;
+        }
     }
 }
-
-
-}
-
 ?>

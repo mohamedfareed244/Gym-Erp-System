@@ -20,7 +20,8 @@ class Memberships extends Model
     private $freezed;
     private $isActivated;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
@@ -176,7 +177,6 @@ class Memberships extends Model
         $sql = "DELETE from membership where ID =" . $membershipID;
         $result = $this->db->query($sql);
         return $result;
-
     }
     public function createMembership($clientId, $packageId)
     {
@@ -220,7 +220,7 @@ class Memberships extends Model
             $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
 
             $check2Sql = "SELECT * FROM `membership` WHERE ClientID = " . $_SESSION['ID'];
-            $check2Result =$this->db->query($check2Sql);
+            $check2Result = $this->db->query($check2Sql);
             $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
 
             if ($alreadyThisMembershipExists) {
@@ -282,7 +282,6 @@ class Memberships extends Model
             return $membership;
         }
         return null;
-
     }
     public function getMembership($clientId)
     {
@@ -311,7 +310,7 @@ class Memberships extends Model
             } else {
                 $membership = null;
             }
-            
+
 
             return $membership;
         }
@@ -354,7 +353,6 @@ class Memberships extends Model
             }
             return $results;
         }
-
     }
 
     public function freezeMembership($membershipId, $selectedDate)
@@ -450,10 +448,8 @@ class Memberships extends Model
                 } else {
                     echo "Error updating record: " . mysqli_error($this->db->getConn());
                 }
-
             }
             return $result;
-
         } else {
             return false;
         }
@@ -508,30 +504,29 @@ class Memberships extends Model
         if ($this->freezeCount !== null && $this->freezeCount > 0) {
             $remainingFreezeAttempts = max(0, $this->freezeCount - $userInput);
             $this->freezeCount = $remainingFreezeAttempts;
-    
+
             return $remainingFreezeAttempts;
         } else {
             return 0;
         }
     }
-    
+
 
     private function updateFreezeCountInDatabase($newFreezeCount)
     {
         $sql = "UPDATE memberships SET freezeCount = $newFreezeCount WHERE ID = $this->ID";
         $result = $this->db->query($sql);
-        
+
         if (!$result) {
             die("Error updating freezeCount: " . mysqli_error($this->db->getConn()));
         }
-        
     }
 
     public function getClientAndMembership()
     {
-        $isActivated='Activated';
+        $isActivated = 'Activated';
 
-        $sql="SELECT client.ID,client.FirstName,client.LastName,package.Title,package.VisitsLimit,
+        $sql = "SELECT client.ID,client.FirstName,client.LastName,package.Title,package.VisitsLimit,
         membership.EndDate,membership.Freezed,membership.VisitsCount
         FROM membership
         INNER JOIN client ON client.ID = membership.ClientID
@@ -562,12 +557,11 @@ class Memberships extends Model
 
     public function checkinClient($clientID)
     {
-        $sql="UPDATE membership 
+        $sql = "UPDATE membership 
         SET VisitsCount = VisitsCount + 1
         WHERE ClientID = $clientID";
 
         return $this->db->query($sql);
     }
-
-
 }
+?>

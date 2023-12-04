@@ -22,84 +22,104 @@ class Client extends Model
     private $Email;
     private $Password;
 
-    function __construct() {
+    function __construct()
+    {
         $this->db = $this->connect();
     }
 
-    public function getID() {
+    public function getID()
+    {
         return $this->ID;
     }
 
-    public function setID($ID) {
+    public function setID($ID)
+    {
         $this->ID = $ID;
     }
 
 
-    public function setFirstName($FirstName) {
+    public function setFirstName($FirstName)
+    {
         $this->FirstName = $FirstName;
     }
 
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->FirstName;
     }
 
-    public function setLastName($LastName) {
+    public function setLastName($LastName)
+    {
         $this->LastName = $LastName;
     }
 
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->LastName;
     }
 
-    public function setAge($Age) {
+    public function setAge($Age)
+    {
         $this->Age = $Age;
     }
 
-    public function getAge() {
+    public function getAge()
+    {
         return $this->Age;
     }
 
-    public function setGender($Gender) {
+    public function setGender($Gender)
+    {
         $this->Gender = $Gender;
     }
 
-    public function getGender() {
+    public function getGender()
+    {
         return $this->Gender;
     }
 
-    public function setPhone($Phone) {
+    public function setPhone($Phone)
+    {
         $this->Phone = $Phone;
     }
 
-    public function getPhone() {
+    public function getPhone()
+    {
         return $this->Phone;
     }
 
-    public function setHeight($Height) {
+    public function setHeight($Height)
+    {
         $this->Height = $Height;
     }
 
-    public function getHeight() {
+    public function getHeight()
+    {
         return $this->Height;
     }
 
-    public function setWeight($Weight) {
+    public function setWeight($Weight)
+    {
         $this->Weight = $Weight;
     }
 
-    public function getWeight() {
+    public function getWeight()
+    {
         return $this->Weight;
     }
 
-    public function setEmail($Email) {
+    public function setEmail($Email)
+    {
         $this->Email = $Email;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->Email;
     }
 
-    public function setPassword($Password) {
+    public function setPassword($Password)
+    {
         $this->Password = $Password;
     }
 
@@ -115,15 +135,15 @@ class Client extends Model
             return $found;
         }
     }
-    
+
     public function getClientByID($clientID)
     {
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
         $result = $this->db->query($sql);
-    
+
         if ($result && $result->num_rows > 0) {
             $clientData = $result->fetch_assoc();
-    
+
             $client = new Client();
             $client->ID = $clientData['ID'];
             $client->FirstName = $clientData['FirstName'];
@@ -135,13 +155,13 @@ class Client extends Model
             $client->Gender = $clientData['Gender'];
             $client->Height = $clientData['Height'];
             $client->Weight = $clientData['Weight'];
-    
+
             return $client;
         } else {
             return null;
         }
     }
-    
+
 
     public function deleteClientByID($clientID)
     {
@@ -205,7 +225,6 @@ class Client extends Model
         } catch (Exception $e) {
             echo $e;
         }
-
     }
 
     public function addClientUserSide($client)
@@ -229,7 +248,6 @@ class Client extends Model
         } catch (Exception $e) {
             echo $e;
         }
-
     }
 
     public function getClientid($client)
@@ -242,7 +260,7 @@ class Client extends Model
     {
         $sql = "SELECT * FROM client WHERE Email = '$email'";
         $result = $this->db->query($sql);
-		return $result->num_rows > 0;
+        return $result->num_rows > 0;
     }
 
     public function checkExistingPhone($phone)
@@ -250,7 +268,7 @@ class Client extends Model
 
         $sql = "SELECT * FROM client WHERE Phone = '$phone'";
         $result = $this->db->query($sql);
-		return $result->num_rows > 0;
+        return $result->num_rows > 0;
     }
 
     public function checkIfClientExists($email)
@@ -292,6 +310,5 @@ class Client extends Model
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
         return $this->db->query($sql);
     }
-
-    
 }
+?>
