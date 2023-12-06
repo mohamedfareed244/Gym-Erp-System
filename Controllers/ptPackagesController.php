@@ -123,13 +123,13 @@ class ptPackController extends Controller
     }
     public function addPtPackageForClient()
     {
-        if (isset($_POST["membershipclientId"]) && isset($_POST["ptPackageId"])) {
+        if (isset($_POST["membershipclientId"]) && isset($_POST["ptPackageId"]) && isset($_POST["coachID"])) {
             $clientId = $_POST["membershipclientId"];
             $ptPackageId = $_POST["ptPackageId"];
             $coachID = $_POST["coachID"];
 
-            $ptPackages = new ptPackages();
-            $result = $ptPackages->addPackageForClient($clientId, $ptPackageId, $coachID);
+            $ptPackages = new ptMemberships();
+            $result = $ptPackages->addPtMembership($clientId, $ptPackageId, $coachID);
             if ($result) {
                 echo "success";
             } else {
@@ -143,7 +143,7 @@ class ptPackController extends Controller
 
 
 $model = new ptPackages();
-$controller = new ptPackController($modal);
+$controller = new ptPackController($model);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = isset($_POST["action"]) ? $_POST["action"] : "";

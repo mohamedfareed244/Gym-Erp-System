@@ -84,7 +84,7 @@
             </div>
         </div> -->
         <div class="greeting">
-            <p class="hello">Hello <?php echo $_SESSION["FName"]; ?>! </p>
+            <p class="hello">Hello <?php echo $_SESSION["FName"] , ' ', $_SESSION["LName"]; ?>! </p>
         </div>
         <?php
         // Check if $memberships is an array before using foreach

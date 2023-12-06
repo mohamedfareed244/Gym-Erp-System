@@ -147,6 +147,66 @@ class ptMemberships extends Model
         }
     }
 
+    public function ExistingPtMembership($clientID)
+    {
+        $Client = new Client();
+        $findClient = $Client->checkClient($clientID);
+        if ($findClient) {
+            $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
+            $result = $this->db->query($sql);
+            if ($result && $result->num_rows > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function addPtMembership($clientID, $ptPackageID, $coachID)
+    {
+        $Client = new Client();
+        $Employee = new Employee();
+        $findClient = $Client->checkClient($clientID);
+        if ($findClient) {
+            $Memberships = new Memberships();
+            $checkMembership = $Memberships->hasActiveMembership($clientID);
+            if ($checkMembership) {
+                $coach = $Employee->getEmployeeByID($coachID);
+                if ($coach) {
+                    $ptPackage = new ptPackages();
+                    $ptPackage = $ptPackage->getPtPackage($ptPackageID);
+                    $ptID = $ptPackage->getID();
+                    $ptSessions = $ptPackage->getNumOfSessions();
+                    if ($ptPackage) {
+                        $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
+                        VALUES ('$clientID', '$coachID','$ptID', '$ptSessions', 'Activated')";
+                        return $this->db->query($sql);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // public function checkForExistingPtMembership($clientID)
+    // {
+    //     $sql = "SELECT * FROM `private training membership` WHERE ClientID = $clientID";
+    //     $result = $this->db->query($sql);
+
+    //     if ($result && $result->num_rows > 0) {
+    //         $row = $result->fetch_assoc();
+    //         $ptMembership = new ptMemberships();
+    //         $ptMembership->ID = $row['ID'];
+    //         $ptMembership->ClientID = $row['ClientID'];
+    //         $ptMembership->CoachID = $row['CoachID'];
+    //         $ptMembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
+    //         $ptMembership->SessionsCount = $row['SessionsCount'];
+    //         $ptMembership->isActivated = $row['isActivated'];
+
+    //         return $ptMembership;
+    //     }
+    //     return false;
+    // }
+
     public function activatePtMembership($PrivateTrainingPackageID)
     {
 
@@ -162,7 +222,6 @@ class ptMemberships extends Model
 
         return $this->db->query($sql);
     }
-
 
     public function getClientPtMembershipInfo()
     {
@@ -289,5 +348,6 @@ class ptMemberships extends Model
 
         return $this->db->query($sql);
     }
+
 }
- ?>
+?>

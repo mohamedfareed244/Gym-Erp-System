@@ -249,12 +249,14 @@ class Memberships extends Model
     {
         $currentDate = date("Y-m-d");
 
-        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId' AND '$currentDate' BETWEEN `StartDate` AND `EndDate`";
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId'";
         $result = $this->db->query($sql);
         $found = false;
         if ($result && $result->num_rows > 0) {
-            $found = true;
-            return $found;
+            $membership = $result->fetch_assoc();
+            if ($currentDate >= $membership['StartDate'] && $currentDate <= $membership['EndDate']) {
+                $found = true;
+            }
         }
         return $found;
     }

@@ -187,9 +187,9 @@ class Client extends Model
         FROM
             client
         LEFT JOIN
-            `membership` AS membership ON client.ID = membership.clientId
+            `membership` AS membership ON client.ID = membership.ClientID
         LEFT JOIN
-            `private training membership` AS ptPackage ON client.ID = ptPackage.clientId";
+            `private training membership` AS ptPackage ON client.ID = ptPackage.ClientID";
 
         $result = $this->db->query($sql);
         $clients = array();

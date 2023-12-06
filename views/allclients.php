@@ -75,13 +75,16 @@
                             echo '<td> ' . $client->getWeight() . '</td>';
                             echo '<td> ' . $client->getHeight() . '</td>';
                             echo '<td> ' . $client->getPhone() . '</td>';
-                            if ($client->HasMembership == 'Yes') {
+                            if ($client->HasMembership == 'Yes' && $client->HasPtPackage == 'No') {
                                 echo '<td><button class="btn" disabled>Add</button></td>';
                                 echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
-                            } else {
+                            } else if($client->HasPtPackage == 'Yes' && $client->HasMembership == 'Yes') {
+                                echo '<td><button class="btn" disabled>Add</button></td>';
+                                echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
+                            } else 
+                            {
                                 echo '<td><a href="addclientmembership.php?ID=' . $client->getID() . '" class="btn">Add</a></td>';
                                 echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
-
                             }
 
                             echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";

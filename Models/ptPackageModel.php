@@ -139,7 +139,7 @@ class ptPackages extends Model
 
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
-        return  $this->db->query($sql);
+        return $this->db->query($sql);
     }
 
 
@@ -236,14 +236,15 @@ class ptPackages extends Model
         $findClient = $Client->checkClient($clientID);
         if ($findClient) {
             $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
-            $result =  $this->db->query($sql);
+            $result = $this->db->query($sql);
             if ($result && $result->num_rows > 0) {
                 return true;
             }
         }
         return false;
     }
-    public function addPackageForClient($clientID, $ptPackageID, $coachID)
+
+    public function addPtMembership($clientID, $ptPackageID, $coachID)
     {
         $Client = new Client();
         $Employee = new Employee();
@@ -253,11 +254,14 @@ class ptPackages extends Model
             $checkMembership = $Memberships->hasActiveMembership($clientID);
             if ($checkMembership) {
                 $coach = $Employee->getEmployeeByID($coachID);
-                if ($coach != null) {
-                    $ptPackage = ptPackages::getPtPackage($ptPackageID);
-                    if ($ptPackage != null) {
-                        $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount)
-                        VALUES ('$clientID', '$coachID','$ptPackage->ID', '$ptPackage->NumOfSessions')";
+                if ($coach) {
+                    $ptPackage = new ptPackages();
+                    $ptPackage = $ptPackage->getPtPackage($ptPackageID);
+                    $ptID = $ptPackage->getID();
+                    $ptSessions = $ptPackage->getNumOfSessions();
+                    if ($ptPackage) {
+                        $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
+                        VALUES ('$clientID', '$coachID','$ptID', '$ptSessions', 'Activated')";
                         return $this->db->query($sql);
                     }
                 }
@@ -269,7 +273,7 @@ class ptPackages extends Model
     public function getAllPtPackagesforClient()
     {
         $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";
-        $result =  $this->db->query($sql);
+        $result = $this->db->query($sql);
 
         if ($result) {
             $packages = $result->fetch_all(MYSQLI_ASSOC);
