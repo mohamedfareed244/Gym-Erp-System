@@ -8,7 +8,6 @@ session_start();
 
 class EmployeeController extends Controller
 {
-
     public function addEmployee()
     {
         $nameErr = $phonenoErr = $jobTitleErr = $salaryErr = $emailErr = $passwordErr = $addressErr = $success = $imgerror = "";
@@ -140,6 +139,22 @@ class EmployeeController extends Controller
         header("Location: ../views/employeesadmin.php?fail");
         exit();
     }
+
+    public function deleteEmployee()
+    {
+        if (isset($_POST["employeeId"])) {
+            $employeeId = $_POST["employeeId"];
+
+            $Employee = new Employee();
+            $result = $Employee->deleteEmployeeByID($employeeId);
+
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+        }
+    }
 }
 
 
@@ -154,18 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->addEmployee();
             break;
         case "deleteEmployee":
-            if (isset($_POST["employeeId"])) {
-                $employeeId = $_POST["employeeId"];
-
-                $Employee = new Employee();
-                $result = $Employee->deleteEmployeeByID($employeeId);
-
-                if ($result) {
-                    echo "success";
-                } else {
-                    echo "failure";
-                }
-            }
+            $controller->deleteEmployee();
             break;
         default:
             break;

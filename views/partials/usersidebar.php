@@ -13,7 +13,7 @@
 
 </style>
 <?php
- require_once 'sessionusercheck.php';
+require_once 'sessionusercheck.php';
 ?>
 
 <div class="sidebar close">
@@ -128,28 +128,26 @@
                     <div class="home-content">
                       <i class='bx bx-menu'></i>
                     </div>
-                 </section>
+         </section>
 
 
 
-    <script>
-        let arrow=document.querySelectorAll(".arrow");
-        for(var i=0;i<arrow.length;i++)
-        {
-            arrow[i].addEventListener("click",(e)=>{
-                let arrowParent=e.target.parentElement.parentElement;
-                arrowParent.classList.toggle("showMenu");
+       <script>
+        let arrow = document.querySelectorAll(".arrow");
+arrow.forEach((arrowElement) => {
+    arrowElement.addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement;
+        arrowParent.classList.toggle("showMenu");
+        console.log(arrowParent);
+    });
+});
 
-                console.log(arrowParent);
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".bx-menu");
+console.log(sidebarBtn);
+sidebarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+});
 
-            });
-        }
-
-        let sidebar=document.querySelector(".sidebar");
-        let sidebarBtn=document.querySelector(".bx-menu");
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click",()=>{
-              sidebar.classList.toggle("close");
-        });
         
         </script>
