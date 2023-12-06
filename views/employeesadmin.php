@@ -61,7 +61,7 @@
             include_once "../Models/EmployeeModel.php";
             $Employee = new Employee();
             $result = $Employee->getjobtitles();
-            
+
             $allEmployees = $Employee->getAllEmployees();
 
             foreach ($allEmployees as $employee) {
@@ -77,20 +77,20 @@
               echo "<td><a a href='editemployee.php?ID=" . $employee->getID() . "' class=\"btn\">Edit</a>         ";
               echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";
               ?>
-              <div class="modal" id="deleteModal">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                      <div>
-                                      <label >Are you sure you want to delete this employee?</label>
-                                      </div>
-                                      <button class="btn btn-delete"
-                                          onclick='deleteEmployee(<?php echo $employee->getID() ?>)' style="background-color:red">Delete</button>
-                                  </div>
-                            </div>
-                </div>
-              <?php
-              echo "</tr>";
+                <div class="modal" id="deleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                        <div>
+                                        <label >Are you sure you want to delete this employee?</label>
+                                        </div>
+                                        <button class="btn btn-delete"
+                                            onclick='deleteEmployee(<?php echo $employee->getID() ?>)' style="background-color:red">Delete</button>
+                                    </div>
+                              </div>
+                  </div>
+                <?php
+                echo "</tr>";
             }
             ?>
           </tbody>
@@ -98,105 +98,10 @@
       </div>
       <br>
       <br>
-
-      <h4 class="coaches-title">Add Employee </h4>
-      <hr>
-      <div class="row">
-        <form class="row" method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php" enctype="multipart/form-data">
-          <input type="hidden" name="action" value="addEmployee">
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Name: </label>
-          </div>
-          <input type="text" name="name">
-          <span id="name-error">
-            <?php echo isset($_SESSION["nameErr"]) ? $_SESSION["nameErr"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Phone Number: </label>
-          </div>
-          <input type="text" name="phoneNumber">
-          <span id="phoneno-error">
-            <?php echo isset($_SESSION["phonenoErr"]) ? $_SESSION["phonenoErr"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Email: </label>
-          </div>
-          <input type="email" name="email">
-          <span id="email-error">
-            <?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Image: </label>
-          </div>
-          <input type="file" name="image">
-          <span id="email-error">
-            <?php echo isset($_SESSION["imgerror"]) ? $_SESSION["imgerror"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="jobs">Job Title :</label>
-          </div>
-          <select name="jobTitle" id="jobs">
-            <option value="">Select job</option>
-            <?php
-            foreach ($result as $title) {
-              echo "<option value='" . $title["Id"] . "'> " . $title["Name"] . "</option>";
-            }
-
-            ?>
-          </select>
-          <span id="jobTitle-error">
-            <?php echo isset($_SESSION["jobTitleErr"]) ? $_SESSION["jobTitleErr"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Salary: </label>
-          </div>
-          <input type="number" name="salary" min="1000">
-          <span id="salary-error">
-            <?php echo isset($_SESSION["salaryErr"]) ? $_SESSION["salaryErr"] : ''; ?>
-          </span>
-          <div class="col-lg-12 col-sm-12">
-            <label for="name">Address: </label>
-          </div>
-          <input type="text" name="address">
-          <span id="address-error">
-            <?php echo isset($_SESSION["addressErr"]) ? $_SESSION["addressErr"] : ''; ?>
-          </span>
-          <div class="col-lg-4 col-sm-12">
-            <label for="name">Password: </label>
-          </div>
-          <input type="password" name="password" style="margin-bottom:20px">
-          <span id="password-error">
-            <?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?>
-          </span>
-          <span id="success">
-            <?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?>
-          </span>
-          <br>
-          
-          <div class="col-lg-4 col-sm-12">
-            <input type="submit" value="Add Employee" id="add-btn">
-          </div>
-          <br>
-          <br>
-
-        </form>
-
-
-      </div>
+      
     </div>
   </div>
-  <?php
-  
-  // Unset all error session variables
-  unset($_SESSION["nameErr"]);
-  unset($_SESSION["phonenoErr"]);
-  unset($_SESSION["emailErr"]);
-  unset($_SESSION["jobTitleErr"]);
-  unset($_SESSION["salaryErr"]);
-  unset($_SESSION["addressErr"]);
-  unset($_SESSION["passwordErr"]);
-  unset($_SESSION["success"]);
-  ?>
+
   <script>
     
     function showDeleteModal() {

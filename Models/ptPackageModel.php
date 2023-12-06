@@ -230,46 +230,6 @@ class ptPackages extends Model
         return null;
     }
 
-    public function ExistingPtMembership($clientID)
-    {
-        $Client = new Client();
-        $findClient = $Client->checkClient($clientID);
-        if ($findClient) {
-            $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
-            $result = $this->db->query($sql);
-            if ($result && $result->num_rows > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function addPtMembership($clientID, $ptPackageID, $coachID)
-    {
-        $Client = new Client();
-        $Employee = new Employee();
-        $findClient = $Client->checkClient($clientID);
-        if ($findClient) {
-            $Memberships = new Memberships();
-            $checkMembership = $Memberships->hasActiveMembership($clientID);
-            if ($checkMembership) {
-                $coach = $Employee->getEmployeeByID($coachID);
-                if ($coach) {
-                    $ptPackage = new ptPackages();
-                    $ptPackage = $ptPackage->getPtPackage($ptPackageID);
-                    $ptID = $ptPackage->getID();
-                    $ptSessions = $ptPackage->getNumOfSessions();
-                    if ($ptPackage) {
-                        $sql = "INSERT INTO `private training membership` (ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
-                        VALUES ('$clientID', '$coachID','$ptID', '$ptSessions', 'Activated')";
-                        return $this->db->query($sql);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
     public function getAllPtPackagesforClient()
     {
         $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";

@@ -19,7 +19,7 @@
 
 <body>   
     <?php require("partials/adminsidebar.php"); ?>
-    <div id="add-body" class="addbody" style="background-color:white; height:100%; margin-top:-70px;">
+    <div id="add-body" class="addbody">
         <div id="content" class="content">
             <main>
                 <div class="head-title">
