@@ -75,19 +75,18 @@
               echo "<td>" . $employee->getJobTitle() . "</td>";
               echo "<td>" . $employee->getName() . "</td>";
               echo "<td><a a href='editemployee.php?ID=" . $employee->getID() . "' class=\"btn\">Edit</a>         ";
-              echo "<button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";
+              echo "<button class=\"btn btn-delete\" onclick='showDeleteModal(". $employee->getID() .")'>Delete</button></td>";
               ?>
-                <div class="modal" id="deleteModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                        <div>
-                                        <label >Are you sure you want to delete this employee?</label>
-                                        </div>
-                                        <button class="btn btn-delete"
-                                            onclick='deleteEmployee(<?php echo $employee->getID() ?>)' style="background-color:red">Delete</button>
-                                    </div>
-                              </div>
+                <div class="modal"  id="deleteModal-<?php echo $employee->getID(); ?>">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                          <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                               <div>
+                                  <label >Are you sure you want to delete this employee?</label>
+                                </div>
+                                <button class="btn btn-delete" onclick='deleteEmployee(<?php echo $employee->getID() ?>)' style="background-color:red">Delete</button>
+                        </div>
+                      </div>
                   </div>
                 <?php
                 echo "</tr>";
@@ -104,13 +103,14 @@
 
   <script>
     
-    function showDeleteModal() {
-        $('#deleteModal').fadeIn();
+    function showDeleteModal(employeeId) {
+            $('#deleteModal-' + employeeId).fadeIn();
+        }
 
-    }
-    function hideDeleteModal() {
-        $('#deleteModal').fadeOut();
-    }
+        function hideDeleteModal(employeeId) {
+            $('#deleteModal-' + employeeId).fadeOut();
+        }
+
     function myFunction() {
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("searchBar");
@@ -154,7 +154,7 @@
           console.error("AJAX error: " + status + " - " + error);
         },
       });
-      hideDeleteModal();
+      hideDeleteModal(employeeId);
     }
   </script>
 
