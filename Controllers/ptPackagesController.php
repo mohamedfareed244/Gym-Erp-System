@@ -121,6 +121,22 @@ class ptPackController extends Controller
         }
         exit();
     }
+    public function addPtPackageForClient()
+    {
+        if (isset($_POST["membershipclientId"]) && isset($_POST["ptPackageId"])) {
+            $clientId = $_POST["membershipclientId"];
+            $ptPackageId = $_POST["ptPackageId"];
+            $coachID = $_POST["coachID"];
+
+            $ptPackages = new ptPackages();
+            $result = $ptPackages->addPackageForClient($clientId, $ptPackageId, $coachID);
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+        }
+    }
 }
 
 
@@ -143,19 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->deactivatePtPackage();
             break;
         case "addPtPackageForClient":
-            if (isset($_POST["membershipclientId"]) && isset($_POST["ptPackageId"])) {
-                $clientId = $_POST["membershipclientId"];
-                $ptPackageId = $_POST["ptPackageId"];
-                $coachID = $_POST["coachID"];
-
-                $ptPackages = new ptPackages();
-                $result = $ptPackages->addPackageForClient($clientId, $ptPackageId, $coachID);
-                if ($result) {
-                    echo "success";
-                } else {
-                    echo "failure";
-                }
-            }
+            $controller->addPtPackageForClient();
         default:
             break;
     }

@@ -39,6 +39,19 @@ class ptMembershipsController extends Controller
         header("Location: ../views/bookptpackage.php?CoachID=$CoachID");
         exit();
     }
+    public function acceptMembership()
+    {
+        $ptmembershipID = $_POST['ptmembershipID'];
+
+        $ptmembership = new ptMemberships();
+        $result = $ptmembership->acceptPtMembership($ptmembershipID);
+
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failure";
+        }
+    }
 }
 
 
@@ -53,16 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->AddptMembership();
             break;
         case "acceptPtMembership":
-            $ptmembershipID = $_POST['ptmembershipID'];
-
-            $ptmembership = new ptMemberships();
-            $result = $ptmembership->acceptPtMembership($ptmembershipID);
-
-            if ($result) {
-                echo "success";
-            } else {
-                echo "failure";
-            }
+            $controller->acceptMembership();
             break;
         default:
             break;

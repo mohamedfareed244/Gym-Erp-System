@@ -264,6 +264,48 @@ class ClassController extends Controller
             }
         }
     }
+    public function deleteClass()
+    {
+        $classID = $_POST['classID'];
+        $coachID = $_POST['coachID'];
+        $date = $_POST['date'];
+
+        $class = new Classes();
+        $result = $class->deleteClass($classID, $coachID, $date);
+
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failure";
+        }
+    }
+    public function acceptClass()
+    {
+        $reservedClassID = $_POST['reservedClassID'];
+        $assignedClassID = $_POST['assignedClassID'];
+
+        $class = new Classes();
+        $result = $class->acceptClass($reservedClassID, $assignedClassID);
+
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failure";
+        }
+    }
+    public function declineClass()
+    {
+        $reservedClassID = $_POST['reservedClassID'];
+
+        $class = new Classes();
+        $result = $class->declineClass($reservedClassID);
+
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failure";
+        }
+    }
 }
 
 
@@ -287,43 +329,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->reserveClass();
             break;
         case "deleteClass":
-            $classID = $_POST['classID'];
-            $coachID = $_POST['coachID'];
-            $date = $_POST['date'];
-
-            $class = new Classes();
-            $result = $class->deleteClass($classID, $coachID, $date);
-
-            if ($result) {
-                echo "success";
-            } else {
-                echo "failure";
-            }
+            $controller->deleteClass();
             break;
         case "acceptClass":
-            $reservedClassID = $_POST['reservedClassID'];
-            $assignedClassID = $_POST['assignedClassID'];
-
-            $class = new Classes();
-            $result = $class->acceptClass($reservedClassID, $assignedClassID);
-
-            if ($result) {
-                echo "success";
-            } else {
-                echo "failure";
-            }
+            $controller->acceptClass();
             break;
         case "declineClass":
-            $reservedClassID = $_POST['reservedClassID'];
-
-            $class = new Classes();
-            $result = $class->declineClass($reservedClassID);
-
-            if ($result) {
-                echo "success";
-            } else {
-                echo "failure";
-            }
+            $controller->declineClass();
             break;
         default:
             break;

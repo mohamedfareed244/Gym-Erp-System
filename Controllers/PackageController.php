@@ -176,6 +176,21 @@ class PackageController extends Controller
             exit();
         }
     }
+    public function activateUserMembership()
+    {
+        if (isset($_POST["membershipclientId"]) && isset($_POST["packageId"])) {
+            $clientId = $_POST["membershipclientId"];
+            $packageId = $_POST["packageId"];
+
+            $Memberships = new Memberships();
+            $result = $Memberships->createMembership($clientId, $packageId);
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
+        }
+    }
 }
 
 $model = new Package();
@@ -195,18 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->deactivatePackage();
             break;
         case "activateMembership":
-            if (isset($_POST["membershipclientId"]) && isset($_POST["packageId"])) {
-                $clientId = $_POST["membershipclientId"];
-                $packageId = $_POST["packageId"];
-
-                $Memberships = new Memberships();
-                $result = $Memberships->createMembership($clientId, $packageId);
-                if ($result) {
-                    echo "success";
-                } else {
-                    echo "failure";
-                }
-            }
+            $controller->activateUserMembership();
             break;
         default:
             break;

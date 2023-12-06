@@ -301,7 +301,7 @@ class ClientController extends Controller
                 $storedHashedPassword = $row["Password"];
                 if (password_verify($Password, $storedHashedPassword)) {
                     // Authentication successful
-                    $ID=$_SESSION["ID"];
+                    $ID = $_SESSION["ID"];
                     $_SESSION["ID"] = $row["ID"];
                     $_SESSION["FName"] = $row["FirstName"];
                     $_SESSION["LName"] = $row["LastName"];
@@ -426,7 +426,7 @@ class ClientController extends Controller
     }
 
 
-    public function deleteClient()
+    public function deletUserAccount()
     {
 
         $client = new Client();
@@ -437,6 +437,22 @@ class ClientController extends Controller
         if ($result) {
             session_destroy();
             header("location:../views/index.php?DeletedSuccessfully");
+        }
+    }
+
+    public function deleteCLientAdminSide()
+    {
+        if (isset($_POST["clientId"])) {
+            $clientId = $_POST["clientId"];
+
+            $client = new Client();
+            $result = $client->deleteClientByID($clientId);
+
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failure";
+            }
         }
     }
 }
@@ -458,21 +474,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller->updateClientInfo();
             break;
         case "delete":
-            $controller->deleteClient();
+            $controller->deletUserAccount();
             break;
         case "deleteClient":
-            if (isset($_POST["clientId"])) {
-                $clientId = $_POST["clientId"];
-
-                $client = new Client();
-                $result = $client->deleteClientByID($clientId);
-
-                if ($result) {
-                    echo "success";
-                } else {
-                    echo "failure";
-                }
-            }
+            $controller->deleteCLientAdminSide();
             break;
         case "addClient":
             $controller->addClient();
