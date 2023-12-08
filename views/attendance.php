@@ -63,6 +63,7 @@ echo $date->format('Y-m-d'); ?> </h2>
                         <?php 
            
                         include_once "../Models/EmployeeModel.php";
+                        include_once "../Models/AttendanceModel.php";
                         ini_set('display_errors', 1);
                         error_reporting(E_ALL);
                         

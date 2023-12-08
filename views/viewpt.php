@@ -43,7 +43,7 @@
         <div class="reminders">
             <div class="reminder">
 
-                <p class='class'>Cuurent PT Package</p>
+                <p class='class'>Curent PT Package</p>
 
                 <p class='class'>Personal Trainer:</p>
                 <div class='class-title'><?php echo $membership['Name']; ?></div>

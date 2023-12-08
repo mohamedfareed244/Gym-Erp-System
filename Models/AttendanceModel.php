@@ -55,7 +55,7 @@ class Attendance extends Model
         $sql = "SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
         $result = $this->db->query($sql);
 
-        if (mysqli_num_rows($result) <= 0) {
+        if ($result->num_rows <= 0) {
             Attendance::addnewdate($date);
             return Attendance::getattendance($date);
             exit();
