@@ -13,6 +13,11 @@ class Classes extends Model
     private $Description;
     private $ImgPath;
 
+    function __construct()
+    {
+        $this->db = $this->connect();
+    }
+    
     public function setID($id)
     {
         $this->ID = $id;

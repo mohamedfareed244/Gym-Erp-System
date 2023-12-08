@@ -14,6 +14,11 @@ class ReservedClass extends Model
     private $Attended;
     private $isActivated;
 
+    function __construct()
+    {
+        $this->db = $this->connect();
+    }
+    
     public function setID($ID) {
         $this->ID = $ID;
     }
