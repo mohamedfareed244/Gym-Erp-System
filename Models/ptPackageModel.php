@@ -99,6 +99,22 @@ class ptPackages extends Model
         }
     }
 
+    public function getAllPtPackagesforClient()
+    {
+        $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";
+        $result = $this->db->query($sql);
+
+        if ($result) {
+            $packages = $result->fetch_all(MYSQLI_ASSOC);
+
+            $result->free_result();
+
+            return $packages;
+        } else {
+            return [];
+        }
+    }
+
     public function getActivePtPackagesForClient($clientID)
     {
         $currentDate = date("Y-m-d");

@@ -61,7 +61,7 @@
     if (isset($_GET['CoachID'])) {
         $CoachID = $_GET['CoachID'];
     }
-    $CoachName=$Employee->getCoachNameByID($CoachID);
+    $CoachName=$Coach->getCoachNameByID($CoachID);
     ?>
 
 
