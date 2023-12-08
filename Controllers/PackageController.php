@@ -183,7 +183,7 @@ class PackageController extends Controller
             $packageId = $_POST["packageId"];
 
             $Memberships = new Memberships();
-            $result = $Memberships->createMembership($clientId, $packageId);
+            $result = $Memberships->createMembershipEmployeeSide($clientId, $packageId);
             if ($result) {
                 echo "success";
             } else {

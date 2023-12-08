@@ -129,7 +129,7 @@ class ptPackController extends Controller
             $coachID = $_POST["coachID"];
 
             $ptPackages = new ptMemberships();
-            $result = $ptPackages->addPtMembership($clientId, $ptPackageId, $coachID);
+            $result = $ptPackages->addPtMembershipForClient($clientId, $ptPackageId, $coachID);
             if ($result) {
                 echo "success";
             } else {

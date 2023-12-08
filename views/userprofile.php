@@ -43,13 +43,13 @@
     require_once 'sessionusercheck.php';
 
     include_once "../Models/MembershipsModel.php";
-    include_once "../Models/ClassesModel.php";
+    include_once "../Models/ReservedClassModel.php";
     include_once "../Models/ptMembershipsModel.php";
 
     $Memberships = new Memberships();
     $memberships = $Memberships->getClientMembershipInfo();
-    $Classes = new Classes();
-    $classes = $Classes->getClientClassInfo();
+    $ReservedClasses = new ReservedClass();
+    $classes = $ReservedClasses->getClientClassInfo();
     $ptMemberships = new ptMemberships();
     $PtMemberships = $ptMemberships->getClientPtMembershipInfo();
 

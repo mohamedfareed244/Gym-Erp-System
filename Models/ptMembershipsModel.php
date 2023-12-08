@@ -161,7 +161,7 @@ class ptMemberships extends Model
         return false;
     }
 
-    public function addPtMembership($clientID, $ptPackageID, $coachID)
+    public function addPtMembershipForClient($clientID, $ptPackageID, $coachID)
     {
         $Client = new Client();
         $Employee = new Employee();
@@ -173,7 +173,7 @@ class ptMemberships extends Model
                 $coach = $Employee->getEmployeeByID($coachID);
                 if ($coach) {
                     $ptPackage = new ptPackages();
-                    $ptPackage = $ptPackage->getPtPackage($ptPackageID);
+                    $ptPackage = $ptPackage->getPtPackageByID($ptPackageID);
                     $ptID = $ptPackage->getID();
                     $ptSessions = $ptPackage->getNumOfSessions();
                     if ($ptPackage) {
@@ -185,42 +185,6 @@ class ptMemberships extends Model
             }
         }
         return false;
-    }
-
-    // public function checkForExistingPtMembership($clientID)
-    // {
-    //     $sql = "SELECT * FROM `private training membership` WHERE ClientID = $clientID";
-    //     $result = $this->db->query($sql);
-
-    //     if ($result && $result->num_rows > 0) {
-    //         $row = $result->fetch_assoc();
-    //         $ptMembership = new ptMemberships();
-    //         $ptMembership->ID = $row['ID'];
-    //         $ptMembership->ClientID = $row['ClientID'];
-    //         $ptMembership->CoachID = $row['CoachID'];
-    //         $ptMembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
-    //         $ptMembership->SessionsCount = $row['SessionsCount'];
-    //         $ptMembership->isActivated = $row['isActivated'];
-
-    //         return $ptMembership;
-    //     }
-    //     return false;
-    // }
-
-    public function activatePtMembership($PrivateTrainingPackageID)
-    {
-
-        $sql = "UPDATE `private training membership` SET isActivated='Activated' WHERE ID='$PrivateTrainingPackageID'";
-
-        return $this->db->query($sql);
-    }
-
-
-    public function deactivatePtMembership($PrivateTrainingPackageID)
-    {
-        $sql = "UPDATE `private training membership` SET isActivated='Deactivated' WHERE ID='$PrivateTrainingPackageID'";
-
-        return $this->db->query($sql);
     }
 
     public function getClientPtMembershipInfo()
@@ -249,56 +213,6 @@ class ptMemberships extends Model
             }
             return $results;
         }
-    }
-
-    public function getPtMembershipByPackageID($packageID)
-    {
-
-        $sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
-        $result = $this->db->query($sql);
-
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-
-            $ptMembership = new ptMemberships();
-            $ptMembership->ID = $row['ID'];
-            $ptMembership->ClientID = $row['ClientID'];
-            $ptMembership->CoachID = $row['CoachID'];
-            $ptMembership->PrivateTrainingPackageID = $row['PrivateTrainingPackageID'];
-            $ptMembership->SessionsCount = $row['SessionsCount'];
-            $ptMembership->isActivated = $row['isActivated'];
-
-            return $ptMembership;
-        }
-    }
-
-    public function getCoachNamesForPackage($packageID)
-    {
-
-        $Employee = new Employee();
-        $coaches = $Employee->GetAllCoaches();
-
-        $coachNames = array();
-
-        $sql = "SELECT CoachID FROM `private training membership` WHERE PrivateTrainingPackageID = $packageID";
-        $result = $this->db->query($sql);
-
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                $coachID = $row['CoachID'];
-
-                $coach = array_filter($coaches, function ($c) use ($coachID) {
-                    return $c['CoachID'] == $coachID;
-                });
-
-                if (!empty($coach)) {
-                    $coach = reset($coach);
-                    $coachNames[$coachID] = $coach['Name'];
-                }
-            }
-        }
-
-        return $coachNames;
     }
 
 

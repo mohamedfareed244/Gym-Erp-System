@@ -29,7 +29,7 @@
     <?php require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/MembershipsModel.php";
-    include_once "../Models/ClassesModel.php";
+    include_once "../Models/ReservedClassModel.php";
 
 
     if (isset($_GET['ID'])) {
@@ -38,8 +38,8 @@
         $membership = $Membership->getMembershipByID($membershipID);
         $Client = new Client();
         $client = $Client->getClientByID($membership->getclientId());
-        $Classes = new Classes();
-        $classes = $Classes->getClientClasses($membership->getclientId());
+        $ReservedClasses = new ReservedClass();
+        $classes = $ReservedClasses->getClientClasses($membership->getclientId());
 
 
         if (!$Membership && count($classes) == 0) {

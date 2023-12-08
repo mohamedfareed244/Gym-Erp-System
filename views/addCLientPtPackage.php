@@ -27,7 +27,7 @@
     require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/EmployeeModel.php";
+    include_once "../Models/CoachModel.php";
 
     // Get client information
     if (isset($_GET['ID'])) {
@@ -45,8 +45,8 @@
 
     $ptPackages = new ptPackages();
     $packages = $ptPackages->getActivePtPackagesForClient($clientID);
-    $Employee = new Employee();
-    $employeesData = $Employee->GetAllCoaches();
+    $Coach = new Coach();
+    $employeesData = $Coach->GetAllCoaches();
     ?>
 
     <div class="container py-5" style="padding-left:70px">

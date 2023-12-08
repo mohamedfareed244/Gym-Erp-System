@@ -24,7 +24,7 @@ session_start();
 require("partials/adminsidebar.php");
 include_once "../Models/EmployeeModel.php";
 $Employee = new Employee();
-$result = $Employee->getjobtitles();
+$result = $Employee->getJobTitles();
 ?>
   <script src="../public/js/addEmployee.js"></script>
 

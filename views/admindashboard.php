@@ -35,6 +35,7 @@
                     include_once "../Models/EmployeeModel.php";
                     include_once "../Models/ClassesModel.php";
                     include_once "../Models/MembershipsModel.php";
+                    include_once "../Models/CoachesModel.php";
 
                     $Memberships= new Memberships();
                     $allMemberships = $Memberships->getAllMemberships();
@@ -52,7 +53,8 @@
                     $allEmployees = $Employee->getAllEmployees();
                     $numberOfEmployees = count($allEmployees);
 
-                    $allCoaches = $Employee->GetAllCoaches();
+                    $Coach = new Coach();
+                    $allCoaches = $Coach->GetAllCoaches();
                     $numberOfCoaches = count($allCoaches);
 
                     $Classes = new Classes();

@@ -2,6 +2,8 @@
 
 require_once("Controller.php");
 include_once "../Models/ClassesModel.php";
+include_once "../Models/AssignedClassModel.php";
+include_once "../Models/ReservedClassModel.php";
 
 session_start();
 
@@ -78,9 +80,9 @@ class ClassController extends Controller
             $attendants = htmlspecialchars($_POST["attendants"]);
 
 
-            $class = new Classes();
+            $assignedclass = new AssignedClass();
 
-            $newclass = new Classes();
+            $newclass = new AssignedClass();
 
             $newclass->setClassID($classID);
             $newclass->setDate($days);
@@ -95,7 +97,7 @@ class ClassController extends Controller
             $newclass->setCoachID($coachID);
             $newclass->setNumOfAttendants($attendants);
 
-            $result = $class->assignClass($newclass);
+            $result = $assignedclass->assignClass($newclass);
 
             if ($result) {
                 $success = "Class assigned to coach successfully";
@@ -228,9 +230,9 @@ class ClassController extends Controller
         $ClientID = $_SESSION["ID"];
 
         if ($price == "0") {
-            $class = new Classes();
+            $reservedclass = new ReservedClass();
 
-            $result = $class->ReservationFreeClass($CoachID, $AssignedClassID, $ClientID);
+            $result = $reservedclass->ReservationFreeClass($CoachID, $AssignedClassID, $ClientID);
 
             if ($result['inserted']) {
                 $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
@@ -246,9 +248,9 @@ class ClassController extends Controller
                 exit();
             }
         } else {
-            $class = new Classes();
+            $reservedclass = new ReservedClass();
 
-            $result = $class->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
+            $result = $reservedclass->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
             if ($result['inserted']) {
                 $_SESSION["successNotFree"][$AssignedClassID] = "Class Request made. Please Visit Gym For Payment as places are limited.";
                 header("Location: ../views/classbooking.php?RequestSuccessful");
@@ -270,8 +272,8 @@ class ClassController extends Controller
         $coachID = $_POST['coachID'];
         $date = $_POST['date'];
 
-        $class = new Classes();
-        $result = $class->deleteClass($classID, $coachID, $date);
+        $assignedclass = new AssignedClass();
+        $result = $assignedclass->deleteClass($classID, $coachID, $date);
 
         if ($result) {
             echo "success";
@@ -284,8 +286,8 @@ class ClassController extends Controller
         $reservedClassID = $_POST['reservedClassID'];
         $assignedClassID = $_POST['assignedClassID'];
 
-        $class = new Classes();
-        $result = $class->acceptClass($reservedClassID, $assignedClassID);
+        $reservedclass = new ReservedClass();
+        $result = $reservedclass->acceptClass($reservedClassID, $assignedClassID);
 
         if ($result) {
             echo "success";
@@ -297,8 +299,8 @@ class ClassController extends Controller
     {
         $reservedClassID = $_POST['reservedClassID'];
 
-        $class = new Classes();
-        $result = $class->declineClass($reservedClassID);
+        $reservedclass = new ReservedClass();
+        $result = $reservedclass->declineClass($reservedClassID);
 
         if ($result) {
             echo "success";

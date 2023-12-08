@@ -178,7 +178,7 @@ class Memberships extends Model
         $result = $this->db->query($sql);
         return $result;
     }
-    public function createMembership($clientId, $packageId)
+    public function createMembershipEmployeeSide($clientId, $packageId)
     {
         $isActivated = "Activated";
         $client = new Client();
@@ -204,7 +204,7 @@ class Memberships extends Model
     }
 
 
-    public function addMembershipUserSide($packageId)
+    public function createMembershipUserSide($packageId)
     {
         $pck = new Package();
         $client = new Client();
@@ -285,7 +285,8 @@ class Memberships extends Model
         }
         return null;
     }
-    public function getMembership($clientId)
+
+    public function getMembershipByClientID($clientId) //byClientID
     {
         $currentDate = date("Y-m-d");
 
@@ -501,18 +502,7 @@ class Memberships extends Model
         }
     }
 
-
-    private function updateFreezeCountInDatabase($newFreezeCount)
-    {
-        $sql = "UPDATE memberships SET freezeCount = $newFreezeCount WHERE ID = $this->ID";
-        $result = $this->db->query($sql);
-
-        if (!$result) {
-            die("Error updating freezeCount: " . mysqli_error($this->db->getConn()));
-        }
-    }
-
-    public function getClientAndMembership()
+    public function getClientsAndTheirMembership()
     {
         $isActivated = 'Activated';
 

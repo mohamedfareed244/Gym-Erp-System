@@ -41,9 +41,9 @@
     require_once 'sessionusercheck.php';
     include("partials/usersidebar.php");
 
-    include_once "../Models/EmployeeModel.php";
-    $Employee = new Employee();
-    $coaches = $Employee->getAllCoaches(); 
+    include_once "../Models/CoachesModel.php";
+    $Coach = new Coach();
+    $coaches = $Coach->getAllCoaches(); 
     ?>
 
     <div class="container py-5">

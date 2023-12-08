@@ -36,13 +36,13 @@
         <div class="reminders">
             <div class="reminder">
                 <?php
-                include_once "../Models/membershipsModel.php";
+                include_once "../Models/MembershipsModel.php";
                 include_once "../Models/ClientModel.php";
                 include_once "../Models/PackageModel.php";
 
                 $memberships = new Memberships();
                 $clientId = $_SESSION["ID"];
-                $membershipdetails = $memberships->getMembership($clientId);
+                $membershipdetails = $memberships->getMembershipByClientID($clientId);
                 if ($membershipdetails->getIsActivated() == 'Activated') {
                   $pck = new Package();
                   $package = $pck->getPackage($membershipdetails->getPackageId());

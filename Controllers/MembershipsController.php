@@ -10,7 +10,7 @@ class MembershipsController extends Controller
     {
         $PackageID = $_POST["PackageID"];
         $Memberships = new Memberships();
-        $result = $Memberships->addMembershipUserSide($PackageID);
+        $result = $Memberships->createMembershipUserSide($PackageID);
 
         if ($result['alreadyThisMembershipExists']) {
             $_SESSION['alreadyThisMembershipExists'][$PackageID] = "You already subscribed to this package.";

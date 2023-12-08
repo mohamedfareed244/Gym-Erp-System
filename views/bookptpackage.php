@@ -50,13 +50,13 @@
     require_once 'sessionusercheck.php';
     include("partials/usersidebar.php");
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/EmployeeModel.php";
+    include_once "../Models/CoachesModel.php";
 
 
     $ptpackages = new ptPackages();
-    $ptpacks = $ptpackages->getAllPtPackagesforClient();
-    $Employee = new Employee();
-    $coaches = $Employee->getAllCoaches();
+    $ptpacks = $ptpackages->getActivePtPackagesForClient($_SESSION['ID']);
+    $Coach= new Coach();
+    $coaches = $Coach->getAllCoaches();
 
     if (isset($_GET['CoachID'])) {
         $CoachID = $_GET['CoachID'];

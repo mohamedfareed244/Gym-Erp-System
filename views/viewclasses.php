@@ -24,10 +24,10 @@
     <!-- usersidebar start -->
     <?php
     require_once 'sessionusercheck.php';
-    include_once "../Models/ClassesModel.php";
+    include_once "../Models/ReservedClassModel.php";
     
-    $Classes=new Classes();
-    $classes = $Classes->getClientClassInfo();
+    $ReservedClasses=new ReservedClass();
+    $classes = $ReservedClasses->getClientClassInfo();
     
     include("partials/usersidebar.php");?>
 

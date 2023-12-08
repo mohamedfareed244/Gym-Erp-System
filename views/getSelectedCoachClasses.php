@@ -1,13 +1,13 @@
 <?php
-include_once "../Models/ClassesModel.php";
+include_once "../Models/AssignedClassModel.php";
 
 // Check if classId is set in the POST request
 if (isset($_POST['coachId'])) {
     $coachId = $_POST['coachId'];
 
     // Call your function to get days by class ID
-    $Classes = new Classes();
-    $results = $Classes->getSelectedCoachClasses($coachId);
+    $AssignedClasses = new AssignedClass();
+    $results = $AssignedClasses->getSelectedCoachClasses($coachId);
 
     $response = '';
     $response .= "<table class='table'>";

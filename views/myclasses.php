@@ -56,7 +56,9 @@
     <!-- Assume that the coach id =4 till the sessions work  -->
     <?php
     include_once "../Models/CoachesModel.php";
- $result=Coach::getClassesForCoach(3);
+    include_once "../Models/ReservedClassModel.php";
+    $Coach = new Coach();
+ $result=$Coach->getClassesForCoach(3);
  if(mysqli_num_rows($result)<=0){
     echo "<h2> There Are no Available Classes </h2>";
     exit();
@@ -81,7 +83,8 @@
 
 foreach($result as $res){
     $timestamp = strtotime($res["Date"]);
-    $a=Coach::getclassnum($res["ID"]);
+    $ReservedClasses = new ReservedClass();
+    $a=$ReservedClasses->getclassnum($res["ID"]);
     $num;
     foreach($a as $b){
         $num=$b["num"];

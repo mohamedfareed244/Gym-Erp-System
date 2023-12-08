@@ -47,9 +47,13 @@
     ?>
 
     <script src="../public/js/addClass.js"></script>
-    <?php include_once "../Models/ClassesModel.php";
-    $class = new Classes();
-    $results = $class->getallCoachesandClasses();
+    <?php 
+    include_once "../Models/ClassesModel.php";
+    include_once "../Models/AssignedClassModel.php";
+    include_once "../Models/ReservedClassModel.php";
+
+    $assignedclass = new AssignedClass();
+    $results = $assignedclass->getallCoachesandClasses();
     ?>
     <div id="add-body">
         <div class="container">
@@ -174,10 +178,10 @@
                     <option value="">Select Coach </option>
 
                     <?php
-                    include_once "../Models/employeeModel.php";
+                    include_once "../Models/CoachesModel.php";
 
-                    $employee = new Employee();
-                    $employeesData = $employee->GetAllCoaches();
+                    $coach = new Coach();
+                    $employeesData = $coach->GetAllCoaches();
 
                     foreach ($employeesData as $coach) {
                         echo "<option value='" . $coach["CoachID"] . "'>" . $coach["Name"] . " </option>";
@@ -201,10 +205,10 @@
                             <label for="classes"> Select The Class : </label>
                             <br>
                             <?php
-                            include_once "../Models/EmployeeModel.php";
+                            include_once "../Models/ClassesModel.php";
 
-                            $employee = new Employee();
-                            $classes = $employee->GetAllClasses();
+                            $class = new Classes();
+                            $classes = $class->GetAllClasses();
 
                             echo "<select name='classes' id='select-classes'>";
                             echo "<option value=''>Select Class:</option>";

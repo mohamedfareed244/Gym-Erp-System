@@ -40,9 +40,9 @@
     letter-spacing: -1px;
     margin-bottom:3%;">Types:</h2>
         <div class="card-container">
-            <?php include_once "../Models/ClassesModel.php";
-            $class = new Classes();
-            $classDetails = $class->getClassDetails();?>
+            <?php include_once "../Models/AssignedClassModel.php";
+            $assignedclass = new AssignedClass();
+            $classDetails = $assignedclass->getAssignedClassDetails();?>
        
             <?php foreach($classDetails as $classDetail): 
             if($classDetail['AvailablePlaces'] != "0") { 

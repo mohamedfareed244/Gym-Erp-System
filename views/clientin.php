@@ -29,7 +29,7 @@
     include_once "../Models/MembershipsModel.php";
     include_once "../Models/ClientModel.php";
     $memberships = new Memberships();
-    $membership=$memberships->getClientAndMembership(); 
+    $membership=$memberships->getClientsAndTheirMembership(); 
 
     $clientModel = new Client();
     $clients = $clientModel -> getAllClients();

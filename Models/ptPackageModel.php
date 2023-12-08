@@ -110,7 +110,7 @@ class ptPackages extends Model
 
             $result = $this->db->query($sql);
             if ($result) {
-                $membership = $Memberships->getMembership($clientID);
+                $membership = $Memberships->getMembershipByClientID($clientID);
                 $packages = array();
                 while ($row = $result->fetch_assoc()) {
                     if (strtotime($membership->getendDate()) >= strtotime($currentDate . " + " . $row['MinPackageMonths'] . " months")) {
@@ -158,60 +158,7 @@ class ptPackages extends Model
         return $this->db->query($sql);
     }
 
-    public function getUserPackageDetails($packageId)
-    {
-
-        if (!isset($_SESSION['clientID'])) {
-            return null;
-        }
-
-        $clientId = $_SESSION['clientID'];
-
-        $sql = "SELECT c.*, ptm.SessionsCount, ppd.*, e.Name AS CoachName
-                FROM client c
-                INNER JOIN `private training membership` ptm ON c.ID = ptm.ClientID
-                INNER JOIN `private training package` ppd ON ptm.PrivateTrainingPackageID = ppd.ID
-                INNER JOIN employee e ON ptm.CoachID = e.ID
-                WHERE c.ID = $clientId AND ptm.PrivateTrainingPackageID = $packageId";
-
-        $result = $this->db->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-
-            $userPackageDetails = new stdClass();
-            $userPackageDetails->ClientID = $row['ID'];
-            $userPackageDetails->FirstName = $row['FirstName'];
-            $userPackageDetails->LastName = $row['LastName'];
-            $userPackageDetails->Age = $row['Age'];
-            $userPackageDetails->Email = $row['Email'];
-            $userPackageDetails->Phone = $row['Phone'];
-            $userPackageDetails->SessionsCount = $row['SessionsCount'];
-            $userPackageDetails->PackageID = $row['ID'];
-            $userPackageDetails->PackageName = $row['Name'];
-            $userPackageDetails->NumOfSessions = $row['NumOfSessions'];
-            $userPackageDetails->MinPackageMonths = $row['MinPackageMonths'];
-            $userPackageDetails->Price = $row['Price'];
-            $userPackageDetails->CoachName = $row['CoachName'];
-
-            return $userPackageDetails;
-        } else {
-            return null;
-        }
-    }
-    public function checkPtPackage($ptPackageID)
-    {
-        $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
-        $result = $this->db->query($sql);
-        $found = false;
-        if ($result && $result->num_rows > 0) {
-            $found = true;
-            return $found;
-        } else {
-            return $found;
-        }
-    }
-    public function getPtPackage($ptPackageID)
+    public function getPtPackageByID($ptPackageID)
     {
         $sql = "SELECT * FROM `private training package` WHERE ID='$ptPackageID'";
         $result = $this->db->query($sql);
@@ -230,21 +177,6 @@ class ptPackages extends Model
         return null;
     }
 
-    public function getAllPtPackagesforClient()
-    {
-        $sql = "SELECT * FROM `private training package` WHERE isActivated='Activated'";
-        $result = $this->db->query($sql);
-
-        if ($result) {
-            $packages = $result->fetch_all(MYSQLI_ASSOC);
-
-            $result->free_result();
-
-            return $packages;
-        } else {
-            return [];
-        }
-    }
 }
 
 ?>

@@ -28,13 +28,13 @@
 <body>
     <?php require("partials/adminsidebar.php");
     
-    include_once "../Models/ClassesModel.php";
+    include_once "../Models/ReservedClassModel.php";
     include_once "../Models/MembershipsModel.php";
     include_once "../Models/ptMembershipsModel.php";
 
 
-    $Classes = new Classes();
-    $classRequests=$Classes->getClassRequests();
+    $ReservedClasses = new ReservedClass();
+    $classRequests=$ReservedClasses->getClassRequests();
     $Memberships= new Memberships();
     $membershipRequests=$Memberships->getMembershipRequests();
     $ptMemberships = new ptMemberships();

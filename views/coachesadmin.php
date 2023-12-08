@@ -46,10 +46,10 @@
                     </thead>
                     <tbody>
                         <?php
-                        include_once "../Models/EmployeeModel.php";
+                        include_once "../Models/CoachesModel.php";
 
-                        $Employee = new Employee();
-                        $employeesData = $Employee->GetAllCoaches();
+                        $Coach = new Coach();
+                        $employeesData = $Coach->GetAllCoaches();
 
                         foreach ($employeesData as $coach) {
                             echo "<tr>
