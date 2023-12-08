@@ -111,7 +111,7 @@ View Clients
 </body>
 <script language='javascript'>
     function show(x){
-        fetch(`../Models/ClassesModel.php?x=${x}`)
+        fetch(`../Models/AssignedClassModel.php?x=${x}`)
         .then(response => {
             // Check if the response status is OK (status code 200)
             if (!response.ok) {

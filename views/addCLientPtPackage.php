@@ -27,7 +27,7 @@
     require("partials/adminsidebar.php");
     include_once "../Models/ClientModel.php";
     include_once "../Models/ptPackageModel.php";
-    include_once "../Models/CoachModel.php";
+    include_once "../Models/CoachesModel.php";
 
     // Get client information
     if (isset($_GET['ID'])) {
