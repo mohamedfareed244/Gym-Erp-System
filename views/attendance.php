@@ -66,8 +66,8 @@ echo $date->format('Y-m-d'); ?> </h2>
                         ini_set('display_errors', 1);
                         error_reporting(E_ALL);
                         
-                        $Employee= new Employee();
-                        $result=$Employee->getattendance($date->format('Y-m-d'));
+                        $Attendance= new Attendance();
+                        $result=$Attendance->getattendance($date->format('Y-m-d'));
 
                         foreach($result as $emp){
                             echo "<tr>

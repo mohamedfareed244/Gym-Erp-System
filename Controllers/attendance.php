@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $key = str_replace('emp', '', $key);
 
-            $Employee = new employee();
-            $Employee->attendanceforemp($key, $value, $date);
+            $Attendance = new Attendance();
+            $Attendance->attendanceforemp($key, $value, $date);
         }
     }
     echo json_encode(["status" => "success"]);

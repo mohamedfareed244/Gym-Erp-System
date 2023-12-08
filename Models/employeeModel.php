@@ -139,36 +139,6 @@ class Employee extends Model
         return $employees;
     }
 
-    public function getattendance($date)
-    {
-        $sql = "SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
-        $result = $this->db->query($sql);
-
-        if (mysqli_num_rows($result) <= 0) {
-            Employee::addnewdate($date);
-            return Employee::getattendance($date);
-            exit();
-        } else {
-            return $result;
-        }
-
-    }
-    public function attendanceforemp($id, $status, $date)
-    {
-        $sql = "UPDATE attendance SET Status=$status where EmployeeId=$id and Day='$date'";
-        return $this->db->query($sql);
-
-
-    }
-    public function addnewdate($date)
-    {
-        $employees = Employee::getAllEmployees();
-        foreach ($employees as $emp) {
-            $sql = "insert into attendance (EmployeeId,Day,Status) values ($emp->ID,'$date',0)";
-            $this->db->query($sql);
-        }
-        return;
-    }
     public function addEmployee($employee)
     {
 
@@ -321,6 +291,7 @@ class Employee extends Model
         $result = $this->db->query($sql);
         return $result;
     }
+    
     public function getjobtitles()
     {
 
