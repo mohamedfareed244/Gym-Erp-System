@@ -23,7 +23,8 @@
     #success,
     #fail,
     #alreadyExists1,
-    #alreadyExists2 {
+    #alreadyExists2,
+    #noActiveMembership {
         color: red;
         font-size: 16px;
         margin-left:30px;
@@ -54,7 +55,7 @@
 
 
     $ptpackages = new ptPackages();
-    $ptpacks = $ptpackages->getActivePtPackagesForClient($_SESSION['ID']);
+    $ptpacks = $ptpackages->getAllPtPackagesforClient();
     $Coach= new Coach();
     $coaches = $Coach->getAllCoaches();
 
@@ -77,7 +78,8 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-            <?php foreach ($ptpacks as $ptpackage): ?>
+            <?php if (!empty($ptpacks)) {
+             foreach ($ptpacks as $ptpackage): ?>
             <form method="post" autocomplete="off" id="addPtMembershipForm"
                 action="../Controllers/ptMembershipsController.php">
                 <input type="hidden" name="action" value="addPtMembership">
@@ -116,6 +118,9 @@
                                 <span id="alreadyExists2">
                                     <?php echo isset($_SESSION["alreadyAnotherptMembershipExists"][$ptpackage['ID']]) ? $_SESSION["alreadyAnotherptMembershipExists"][$ptpackage['ID']] : ''; ?>
                                 </span>
+                                <span id="noActiveMembership">
+                                    <?php echo isset($_SESSION["noActiveMembership"][$ptpackage['ID']]) ? $_SESSION["noActiveMembership"][$ptpackage['ID']] : ''; ?>
+                                </span>
                                 <span id="fail">
                                     <?php echo isset($_SESSION["ptfail"][$ptpackage['ID']]) ? $_SESSION["ptfail"][$ptpackage['ID']] : ''; ?>
                                 </span>
@@ -125,7 +130,12 @@
                 </div>
                 <br>
             </form>
-            <?php endforeach; ?>
+            <?php endforeach; 
+            } else {
+                echo '<div class="no-membership-message" style="color:#b83f3f; margin-left:45px; font-size:20px;">Sorry, you currently have no active membership to book a personal training package.</div>';
+            }
+            ?>
+
             <?php
     // Clear session variables after displaying messages for all packages
     unset($_SESSION["ptmembershipsuccess"], $_SESSION["alreadyThisptMembershipExists"], $_SESSION["alreadyAnotherptMembershipExists"], $_SESSION["ptfail"]);

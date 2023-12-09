@@ -32,7 +32,9 @@ class ptMembershipsController extends Controller
             $_SESSION['alreadyAnotherptMembershipExists'][$ptPackageID] = "You are already subscribed to another pt package.";
         } else if ($result['success']) {
             $_SESSION['ptmembershipsuccess'][$ptPackageID] = "Membership Request added. Please Visit Gym For Payment to activate your account.";
-        } else {
+        } else if($result['noActiveMembership']) {
+            $_SESSION['noActiveMembership'][$ptPackageID] = "You currently have no active membership to book a personal training package.";
+        }else {
             $_SESSION['ptfail'][$ptPackageID] = "You can't reserve this PT package as the minimum months required is greater than your normal membership months.";
         }
 

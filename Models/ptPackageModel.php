@@ -115,36 +115,6 @@ class ptPackages extends Model
         }
     }
 
-    public function getActivePtPackagesForClient($clientID)
-    {
-        $currentDate = date("Y-m-d");
-        $Memberships = new Memberships();
-        $clientMembership = $Memberships->hasActiveMembership($clientID);
-        if ($clientMembership) {
-
-            $sql = "SELECT * FROM `private training package` WHERE `isActivated` = 'Activated'";
-
-            $result = $this->db->query($sql);
-            if ($result) {
-                $membership = $Memberships->getMembershipByClientID($clientID);
-                $packages = array();
-                while ($row = $result->fetch_assoc()) {
-                    if (strtotime($membership->getendDate()) >= strtotime($currentDate . " + " . $row['MinPackageMonths'] . " months")) {
-                        $package = new ptPackages();
-                        $package->ID = $row["ID"];
-                        $package->Name = $row["Name"];
-                        $package->MinPackageMonths = $row["MinPackageMonths"];
-                        $package->NumOfSessions = $row["NumOfSessions"];
-                        $package->Price = $row["Price"];
-                        $packages[] = $package;
-                    }
-                }
-                return $packages;
-            }
-        }
-        return null;
-    }
-
     public function addptPacks($ptPackage)
     {
         $Name = $ptPackage->Name;

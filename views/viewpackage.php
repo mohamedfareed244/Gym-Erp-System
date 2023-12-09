@@ -75,10 +75,6 @@
 
             </div>
         </div>
-        <h2 class="reminder-title" style="padding-top: 50px">Package Summary:</h2>
-        <p class="pack-sum"> <?= "You're currently subscribed to the " . $membership['NumOfMonths'] . " Months membership package for " . $membership['Price'] . " L.E. You have full access to the gym facilities as you desire anytime. 
-        You're also free to attend as many classes as you'd prefer. Please, make sure to reserve first to secure your spot."; ?>
-        </p>
 
     </div>
     <?php endif; ?>

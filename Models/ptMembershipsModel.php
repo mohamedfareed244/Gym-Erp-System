@@ -113,35 +113,46 @@ class ptMemberships extends Model
         $PackageID = $ptMembership->PrivateTrainingPackageID;
         $isActivated = "Not Activated";
 
+        // check if client has active membership
+        $checkMembershipSql = "SELECT * FROM  membership WHERE ClientID = '$ClientID' AND isActivated = 'Activated'";
+        $checkMembershipResult = $this->db->query($checkMembershipSql);
+        $hasActiveMembership = mysqli_num_rows($checkMembershipResult) > 0;
+
+        // check if client already is subscribed to private training package
         $check1Sql = "SELECT * FROM `private training membership` WHERE PrivateTrainingPackageID ='$PackageID' AND ClientID = '$ClientID'";
         $check1Result = $this->db->query($check1Sql);
         $alreadyThisMembershipExists = mysqli_num_rows($check1Result) > 0;
 
+        // check if client is subscribed to any other private training package
         $check2Sql = "SELECT * FROM `private training membership` WHERE ClientID = '$ClientID'";
         $check2Result = $this->db->query($check2Sql);
         $alreadyAnotherMembershipExists = mysqli_num_rows($check2Result) > 0;
 
+        // get active membership number of months
         $check3Sql = "SELECT package.NumOfMonths, membership.PackageID
                 FROM package 
                 INNER JOIN membership ON package.ID = membership.PackageID
                 WHERE membership.ClientID = '$ClientID'";
         $check3Result = $this->db->query($check3Sql);
 
-        if ($alreadyThisMembershipExists) {
-            return array('alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => false);
+        if(!$hasActiveMembership){
+            return array('noActiveMembership' => true,'alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => false);
+        }else if ($alreadyThisMembershipExists) {
+            return array('noActiveMembership' => false,'alreadyThisMembershipExists' => true, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => false);
         } elseif ($alreadyAnotherMembershipExists) {
-            return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false, 'error' => false);
+            return array('noActiveMembership' => false,'alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => true, 'success' => false, 'error' => false);
         } else {
             if ($check3Result && $check3Result->num_rows > 0) {
                 $row = $check3Result->fetch_assoc();
                 $packageMonths = $row['NumOfMonths'];
+                // add membership if active membership's number of months is greater than or equal to private training ackage minimum number of months
                 if ($packageMonths >= $PackageMinMonths) {
                     $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
                         VALUES ('$ClientID', '$CoachID', '$PackageID', '$Sessions', '$isActivated')";
                     $insertResult = $this->db->query($sql);
-                    return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult, 'error' => false);
+                    return array('noActiveMembership' => false,'alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult, 'error' => false);
                 } else {
-                    return array('alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => true);
+                    return array('noActiveMembership' => false,'alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => false, 'error' => true);
                 }
             }
         }

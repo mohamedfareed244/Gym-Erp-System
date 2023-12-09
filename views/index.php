@@ -150,7 +150,7 @@
     <!-- reviews section -->
 
 
-    <section class="rsec">
+    <section class="rsec" style="margin-bottom:-31%;">
         <div class="rheading animate-on-scroll">
             <h1>What Our Clients Say</h1>
         </div>
