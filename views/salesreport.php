@@ -68,39 +68,8 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-
-                            <td>#1923P</td>
-                            <th scope="row">2 Months offer</th>
-                            <td>EGP 60000</td>
-                            <td>30</td>
-                          
-                        </tr>
-                        <tr>
-                        <td>#1923P</td>
-                            <th scope="row">2 Months offer</th>
-                            <td>EGP 60000</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                        <td>#1923P</td>
-                            <th scope="row">2 Months offer</th>
-                            <td>EGP 60000</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                        <td>#1923P</td>
-                            <th scope="row">2 Months offer</th>
-                            <td>EGP 60000</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                        <td>#1923P</td>
-                            <th scope="row">2 Months offer</th>
-                            <td>EGP 60000</td>
-                            <td>30</td>
-                        </tr>
+                    <tbody id="memberbody">
+                  
 </table>
 <div>
 </body>
