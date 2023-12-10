@@ -6,6 +6,9 @@ const salesData = {
 };
 
 function generateReport() {
+    let start_date=document.getElementById("startdate").value;
+    let end_date=document.getElementById("enddate").value;
+ 
     const reportContainer = document.getElementById("report-container");
     const tableContainer = document.getElementById("tablediv");
 

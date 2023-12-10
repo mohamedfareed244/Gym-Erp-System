@@ -33,12 +33,12 @@
    
     <div class="date-container-sales">
         <label class="date-label-sales">From:</label>
-        <input type="date" class="date-input">
+        <input type="date" class="date-input" id="startdate">
     </div>
 
     <div class="date-container-sales">
         <label class="date-label-sales">To:</label>
-        <input type="date" class="date-input">
+        <input type="date" class="date-input" id="enddate">
     </div>
 
 
@@ -105,7 +105,7 @@
 <div>
 </body>
 
-<script src="../public/js/generatereports.js"></script>
+<script src="../public/js/generatereports.js?v=<?php echo time();?>"></script>
 
 
 </html>
