@@ -13,7 +13,7 @@ function generateReport() {
                ,"end":end_date
                };
                console.log(`the date to be fgiytched ${data.start}`);
-                fetch("../Controllers/API/SalesReport.php" ,{
+                fetch("../Controllers/SalesReport.php" ,{
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json', // Adjust content type based on your API requirements
