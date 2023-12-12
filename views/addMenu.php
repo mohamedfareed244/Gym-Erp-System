@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,54 +29,22 @@
     <!-- include header -->
     <?php include("partials/header.php") ?>
 
+    <?php
+    require_once("../Controllers/Controller.php");
+    require_once("../Models/NavbarModel.php");
+    require_once("../Controllers/NavbarController.php");
+    ?>
     <div class="contact-container">
         <img src="img/shape.png" class="square" alt="" />
         <div class="contact-form1">
             <div class="contact-info">
                 <h3 class="contact-title">Menu item list</h3>
-                <p class="contact-text">
-                    Reach Out to Us for Support or Information
-                </p>
-
-                <div class="contact-info">
-                    <div class="contact-information">
-                        <img src="../public/Images/location.png" class="contact-icon" alt="" />
-                        <p>Mansoura, Egypt</p>
-                    </div>
-                    <div class="contact-information">
-                        <img src="../public/Images/email.png" class="contact-icon" alt="" />
-                        <p>profitgym@gmail.com</p>
-                    </div>
-                    <div class="contact-information">
-                        <img src="../public/Images/phone.png" class="contact-icon" alt="" />
-                        <p>011--------</p>
-                    </div>
-                </div>
-
-                <div class="contact-social-media">
-                    <p>Connect with us :</p>
-                    <div class="social-icons">
-                        <a href="#">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+</div>
             <div class="contact-form">
                 <span class="circle one"></span>
                 <span class="circle two"></span>
 
-                <form action="../views/index.php" autocomplete="off">
+                <form method="POST" action="../Controllers/NavbarController.php" autocomplete="off">
                     <h3 class="contact-title">Add a menu option</h3>
                     <div class="contact-input-container">
                         <input type="text" name="menu_name" class="contact-input" />

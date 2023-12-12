@@ -1,27 +1,38 @@
 <?php
 require_once("Controller.php");
-include_once "../Models/NavbarModel.php";
+require_once "../Models/NavbarModel.php";
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-session_start();
 
-class NavbarController extends Model{
+class NavbarController extends Controller {
 
-    function addnavbaritem(){
+    function addnavbaritem() {
         $navbarmodel = new navbarModel();
 
         if (isset($_POST['menu_submit'])) {
             $menu_name = $_POST['menu_name'];
             $menu_icon = $_POST['menu_icon'];
 
-            if($menu_name != '') {
+            var_dump($menu_name, $menu_icon);
+
+
+            echo "Menu Name: $menu_name, Menu Icon: $menu_icon";
+
+            if ($menu_name != '') {
                 $navbarmodel->setMenuItemName($menu_name);
                 $navbarmodel->setMenuItemIcon($menu_icon);
-                $navbarmodel->addNavbarItem();
-            }
 
-            echo json_encode(["status" => "success"]);
+                if ($navbarmodel->addNavbarItem()) {
+                    echo '<script> window.location = "addMenu.php"; </script>';
+                } else {
+                    echo '<div id="message-container" style="color: red;">Error adding menu item.</div>';
+                }
+                
+            } else {
+                echo '<script> alert("Menu name cannot be empty."); window.location = "addMenu.php"; </script>';
+                exit; // Stop execution after redirection
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 <?php
 require_once("Model.php");
 
-class navbar extends Model{
+class navbarModel extends Model
+{
     private $menu_id;
     private $menu_name;
     private $menu_icon;
@@ -54,16 +55,30 @@ class navbar extends Model{
     }
 
 
-    public function addNavbarItem(){
-        $menu_name = $this->menu_name;
-        $menu_icon = $this->menu_icon;
-    
-        $sql = "INSERT INTO `menu` (`menu_name`, `menu_icon`) 
-                VALUES ('$menu_name', '$menu_icon')";
-    
-        return $this->db->query($sql);
-    }
-    
-}
+    public function addNavbarItem($item)
+    {
+        try {
+            $menu_name = $item->menu_name;
+            $menu_icon = $item->menu_icon;
 
+            $sql = "INSERT INTO `menu` (`menu_name`, `menu_icon`) 
+            VALUES ('$menu_name', '$menu_icon')";
+
+            $db = new DBh(); 
+
+            $result = $db->query($sql);
+
+            if (!$result) {
+                echo "Error: " . $db->getConn()->error;
+            } else {
+                echo "Record added successfully";
+            }
+
+            return $result;
+
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
+}
 ?>
