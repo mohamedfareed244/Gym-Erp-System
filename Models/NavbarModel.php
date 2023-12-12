@@ -55,14 +55,12 @@ class navbarModel extends Model
     }
 
 
-    public function addNavbarItem($item)
+    public function addNavbarItem($name, $icon)
     {
-        try {
-            $menu_name = $item->menu_name;
-            $menu_icon = $item->menu_icon;
+           
 
             $sql = "INSERT INTO `menu` (`menu_name`, `menu_icon`) 
-            VALUES ('$menu_name', '$menu_icon')";
+            VALUES ('$name', '$icon')";
 
             $db = new DBh(); 
 
@@ -76,9 +74,6 @@ class navbarModel extends Model
 
             return $result;
 
-        } catch (Exception $e) {
-            echo $e;
-        }
     }
 }
 ?>
