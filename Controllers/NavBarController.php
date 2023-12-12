@@ -10,27 +10,32 @@ class NavbarController extends Controller {
     function addnavbaritem($name, $icon) {
         $navbarmodel = new navbarModel();
 
-        if (isset($_POST['menu_submit'])) {
-            $menu_name = $_POST['menu_name'];
-            $menu_icon = $_POST['menu_icon'];
+        $navbarmodel->setMenuItemName($name);
+        $navbarmodel->setMenuItemIcon($icon);
 
-
-            if ($menu_name != '') {
-                $navbarmodel->setMenuItemName($menu_name);
-                $navbarmodel->setMenuItemIcon($menu_icon);
-
-                
-                if ($navbarmodel->addNavbarItem($name, $icon)) {
-                    echo '<script> window.location = "addMenu.php"; </script>';
-                } else {
-                    echo '<div id="message-container" style="color: red;">Error adding menu item.</div>';
-                }
-                
-            } else {
-                echo '<script> alert("Menu name cannot be empty."); window.location = "addMenu.php"; </script>';
-                exit; // Stop execution after redirection
-            }
+        if ($navbarmodel->addNavbarItem($name, $icon)) {
+            echo '<script> window.location = "addMenu.php"; </script>';
+        } else {
+            echo '<div id="message-container" style="color: red;">Error adding menu item.</div>';
         }
+    }
+}
+
+$model = new navbarModel();
+$controller = new NavbarController($model);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = isset($_POST["action"]) ? $_POST["action"] : "";
+
+    switch ($action) {
+        case "addNavbarItem":
+            $name = isset($_POST["menu_name"]) ? $_POST["menu_name"] : "";
+            $icon = isset($_POST["menu_icon"]) ? $_POST["menu_icon"] : "";
+            
+            $controller->addnavbaritem($name, $icon);
+            break;
+        default:
+            break;
     }
 }
 ?>
