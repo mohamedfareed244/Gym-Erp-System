@@ -36,6 +36,11 @@
                     </a>
                 </li>
                 <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="../views/addMenu.php">
+                        Add
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/login.php">
                         <i class="ri-account-circle-line"></i>
                     </a>
