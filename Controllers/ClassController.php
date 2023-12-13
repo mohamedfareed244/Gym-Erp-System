@@ -101,7 +101,7 @@ class ClassController extends Controller
 
             if ($result) {
                 $success = "Class assigned to coach successfully";
-                $_SESSION["success"] = $success;
+                $_SESSION["assignsuccess"] = $success;
                 header("Location: ../views/admin-classes.php?AssignedSuccessfully");
                 exit();
             }
@@ -109,7 +109,7 @@ class ClassController extends Controller
         $_SESSION["classErr"] = $classErr;
         $_SESSION["fromErr"] = $fromErr;
         $_SESSION["toErr"] = $toErr;
-        $_SESSION["daysErr"] = $daysErr;
+        $_SESSION["assigndaysErr"] = $daysErr;
         $_SESSION["coachErr"] = $coachErr;
         $_SESSION["isFreeErr"] = $isFreeErr;
         $_SESSION["priceErr"] = $priceErr;
@@ -158,7 +158,7 @@ class ClassController extends Controller
 
             if ($result) {
                 // Image uploaded and inserted successfully
-                $_SESSION["success"] = "Class added successfully";
+                $_SESSION["addsuccess"] = "Class added successfully";
                 header("Location: ../views/admin-classes.php?AddedSuccessfully");
                 exit();
             } else {
@@ -172,7 +172,7 @@ class ClassController extends Controller
             $_SESSION["nameErr"] = $nameErr;
             $_SESSION["descrErr"] = $descrErr;
             $_SESSION["imgErr"] = $imgErr;
-            $_SESSION["daysErr"] = $daysErr;
+            $_SESSION["adddaysErr"] = $daysErr;
             header("Location: ../views/admin-classes.php?fail");
             exit();
         }

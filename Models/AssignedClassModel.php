@@ -261,10 +261,11 @@ class AssignedClass extends Model
         $results = array();
 
         $sql = "SELECT assignedclass.ClassID, assignedclass.Date, class.Name AS ClassName, assignedclass.CoachID,
-                employee.Name AS CoachName, employee.PhoneNumber
-                FROM assignedclass
-                INNER JOIN class ON assignedclass.ClassID = class.ID 
-                INNER JOIN employee ON assignedclass.CoachID = employee.ID";
+        employee.Name AS CoachName, employee.PhoneNumber
+        FROM assignedclass
+        INNER JOIN class ON assignedclass.ClassID = class.ID 
+        INNER JOIN employee ON assignedclass.CoachID = employee.ID
+        WHERE assignedclass.Date >= CURDATE()";
 
         $result = $this->db->query($sql);
 

@@ -63,6 +63,7 @@
                 <li><a href="../views/ptsessions.php">View Pt Clients </a></li>
                 <li><a href="../views/myptclients.php">My Pt Clients </a></li>
                 <li><a href="../views/admin-classes.php">View Classes</a></li>
+                <li><a href="../views/addClass.php">Add Classes</a></li>
                 <li><a href="../views/myclasses.php">My Classes</a></li>
             </ul>
         </li>
