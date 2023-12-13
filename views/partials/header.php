@@ -16,7 +16,6 @@ $menuHtml = $menuController->displayMenu();
             <ul class="navbar-nav ms-auto">
                 <?php echo $menuHtml; ?>
 
-
                 <!-- log in icon and page are separated -->
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/login.php">
@@ -43,7 +42,7 @@ $menuHtml = $menuController->displayMenu();
         }
     });
     document.addEventListener('DOMContentLoaded', function () {
-        var dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+        var dropdowns = document.querySelectorAll('.navbar-nav.ms-auto .dropdown');
 
         dropdowns.forEach(function (dropdown) {
             dropdown.addEventListener('click', function (event) {
