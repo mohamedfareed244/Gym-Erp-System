@@ -14,13 +14,41 @@ class MenuController extends Controller
     public function displayMenu()
     {
         $topLevelMenu = $this->menuModel->getMenuItems();
-        return $topLevelMenu;
+        return $this->buildMenu($topLevelMenu);
     }
 
     public function displaySubMenu($parentId)
     {
-        $subMenu = $this->menuModel->getMenuItemsByParentId($parentId);
-        return $subMenu;
+        $subMenuItems = $this->menuModel->getMenuItemsByParentId($parentId);
+        return $this->buildMenu($subMenuItems, $parentId);
+    }
+
+    private function buildMenu($menuItems, $parentId = NULL)
+    {
+        $html = '';
+
+        foreach ($menuItems as $menuItem) {
+            if ($menuItem['parent_id'] == $parentId) {
+                $menuLink = $menuItem['menu_link'];
+                $menuTitle = $menuItem['title'];
+                $menuId = $menuItem['id'];
+
+                $subMenu = $this->buildMenu($menuItems, $menuId);
+
+                if (!empty($subMenu)) {
+                    $html .= "<li class='nav-item me-3 me-lg-0'>";
+                    $html .= "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
+                    $html .= "<ul class='submenu'>$subMenu</ul>";
+                    $html .= "</li>";
+                } else {
+                    $html .= "<li class='nav-item me-3 me-lg-0'>";
+                    $html .= "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
+                    $html .= "</li>";
+                }
+            }
+        }
+
+        return $html;
     }
 }
 

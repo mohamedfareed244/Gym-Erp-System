@@ -2,8 +2,9 @@
 require_once "../Controllers/NavBarController.php";
 
 $menuController = new MenuController();
-$menuItems = $menuController->displayMenu();
+$menuHtml = $menuController->displayMenu();
 ?>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mask-custom shadow-0">
     <div class="navbar container">
         <a class="navbar-brand" style="color: rgb(231, 55, 55);" href="../views/index.php">Profit Gym</a>
@@ -11,36 +12,8 @@ $menuItems = $menuController->displayMenu();
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto"></ul>
-
-            <ul class="navbar-nav d-flex">
-                <?php
-                foreach ($menuItems as $menuItem) {
-                    $menuLink = $menuItem['menu_link'];
-                    $menuTitle = $menuItem['title'];
-                    $parentId = $menuItem['parent_id'];
-                    $menuId = $menuItem['id'];
-
-                    if ($parentId === NULL) {
-                        //without submenu
-                        echo "<li class='nav-item me-3 me-lg-0'>";
-                        echo "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
-
-                        // if the current item has a submenu
-                        $subMenuItems = $controller->displaySubMenu($menuId);
-                        if (!empty($subMenuItems)) {
-                            echo "<ul class='dropdown-menu .dropdown' aria-labelledby='navbarDropdown$parentId'>"; // Start the sublist
-                            foreach ($subMenuItems as $subMenuItem) {
-                                $subMenuLink = $subMenuItem['menu_link'];
-                                $subMenuTitle = $subMenuItem['title'];
-                                echo "<li><a class='dropdown-item' href='$subMenuLink'>$subMenuTitle</a></li>";
-                            }
-                            echo "</ul>";
-                        }
-                        echo "</li>"; // Close the top-level list item
-                    }
-                }
-                ?>
+            <ul class="navbar-nav me-auto">
+                <?php echo $menuHtml; ?>
 
                 <!-- stop here -->
                 <li class="nav-item me-3 me-lg-0">
