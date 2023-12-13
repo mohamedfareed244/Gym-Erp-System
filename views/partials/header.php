@@ -12,11 +12,28 @@ $menuHtml = $menuController->displayMenu();
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav me-auto">
+
+           
+
+
+            </ul>
+            <ul class="navbar-nav d-flex"">
+                <li class=" nav-item me-3 me-lg-0">
+                    
+
                 <?php echo $menuHtml; ?>
 
-                <!-- log in icon and page are separated -->
+               
+                </li>
+                
+
+                <!-- stop here -->
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="../views/addMenu.php">
+                        Add
+                    </a>
+                </li>
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/login.php">
                         <i class="ri-account-circle-line"></i>
@@ -26,10 +43,6 @@ $menuHtml = $menuController->displayMenu();
         </div>
     </div>
 </nav>
-
-<!-- Your script and jQuery/bootstrap scripts remain unchanged -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-w5pCm1vxiUcLvNzHZmsCjOWzIbY4hOaQ50zGCA2N0cE=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     window.addEventListener("scroll", function() {
         var navbar = document.querySelector(".navbar");
@@ -58,3 +71,7 @@ $menuHtml = $menuController->displayMenu();
         });
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-w5pCm1vxiUcLvNzHZmsCjOWzIbY4hOaQ50zGCA2N0cE=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
