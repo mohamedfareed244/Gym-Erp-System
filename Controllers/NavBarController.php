@@ -2,40 +2,36 @@
 require_once("Controller.php");
 require_once "../Models/NavbarModel.php";
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+class MenuController extends Controller
+{
+    private $menuModel;
 
-class NavbarController extends Controller {
+    public function __construct()
+    {
+        $this->menuModel = new MenuModel(new DBh());
+    }
 
-    function addnavbaritem($name, $icon) {
-        $navbarmodel = new navbarModel();
+    public function displayMenu()
+    {
+        $topLevelMenu = $this->menuModel->getMenuItems();
+        return $topLevelMenu;
+    }
 
-        $navbarmodel->setMenuItemName($name);
-        $navbarmodel->setMenuItemIcon($icon);
-
-        if ($navbarmodel->addNavbarItem($name, $icon)) {
-            echo '<script> window.location = "addMenu.php"; </script>';
-        } else {
-            echo '<div id="message-container" style="color: red;">Error adding menu item.</div>';
-        }
+    public function displaySubMenu($parentId)
+    {
+        $subMenu = $this->menuModel->getMenuItemsByParentId($parentId);
+        return $subMenu;
     }
 }
 
-$model = new navbarModel();
-$controller = new NavbarController($model);
+$controller = new MenuController();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $action = isset($_POST["action"]) ? $_POST["action"] : "";
-
-    switch ($action) {
-        case "addNavbarItem":
-            $name = isset($_POST["menu_name"]) ? $_POST["menu_name"] : "";
-            $icon = isset($_POST["menu_icon"]) ? $_POST["menu_icon"] : "";
-            
-            $controller->addnavbaritem($name, $icon);
-            break;
-        default:
-            break;
-    }
+if (isset($_GET['parent_id'])) {
+    $parentId = $_GET['parent_id'];
+    $menuItems = $controller->displaySubMenu($parentId);
+} else {
+    $menuItems = $controller->displayMenu();
 }
+
+include("partials/header.php");
 ?>

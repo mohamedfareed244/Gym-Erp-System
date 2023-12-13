@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 04:46 PM
+-- Generation Time: Dec 13, 2023 at 02:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -292,15 +292,28 @@ INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Table structure for table `menu_items`
 --
 
-CREATE TABLE `menu` (
-  `menu_id` int(50) NOT NULL,
-  `menu_name` varchar(50) NOT NULL,
-  `menu_icon` varchar(50) NOT NULL,
-  `menu_status` varchar(50) NOT NULL DEFAULT 'Enable'
+CREATE TABLE `menu_items` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `status` enum('enable','disable') DEFAULT 'enable',
+  `menu_link` varchar(50) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`id`, `title`, `status`, `menu_link`, `parent_id`) VALUES
+(1, 'Home', 'enable', '../views/index.php', NULL),
+(2, 'Classes', 'enable', '../views/classes.php', NULL),
+(3, 'Memberships', 'enable', '../views/memberships.php', NULL),
+(4, 'Facilities', 'enable', '../views/facilities.php', NULL),
+(5, 'About Us', 'enable', '../views/aboutus.php', NULL),
+(6, 'Contact Us', 'enable', '../views/contactus.php', 5);
 
 -- --------------------------------------------------------
 
@@ -485,10 +498,11 @@ ALTER TABLE `membership`
   ADD KEY `test2` (`PackageID`);
 
 --
--- Indexes for table `menu`
+-- Indexes for table `menu_items`
 --
-ALTER TABLE `menu`
-  ADD PRIMARY KEY (`menu_id`);
+ALTER TABLE `menu_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parent_id` (`parent_id`);
 
 --
 -- Indexes for table `package`
@@ -573,10 +587,10 @@ ALTER TABLE `membership`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `menu`
+-- AUTO_INCREMENT for table `menu_items`
 --
-ALTER TABLE `menu`
-  MODIFY `menu_id` int(50) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `menu_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `package`
@@ -611,6 +625,12 @@ ALTER TABLE `reserved class`
 --
 ALTER TABLE `employee authorities`
   ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `menu_items` (`id`);
 
 --
 -- Constraints for table `private training membership`

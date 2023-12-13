@@ -1,4 +1,9 @@
+<?php
+require_once "../Controllers/NavBarController.php";
 
+$menuController = new MenuController();
+$menuItems = $menuController->displayMenu();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mask-custom shadow-0">
     <div class="navbar container">
         <a class="navbar-brand" style="color: rgb(231, 55, 55);" href="../views/index.php">Profit Gym</a>
@@ -6,40 +11,38 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto"></ul>
 
-            </ul>
-            <ul class="navbar-nav d-flex"">
-                <li class=" nav-item me-3 me-lg-0">
-                <a class="nav-link" href="../views/index.php">
-                    Home
-                </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/classes.php">
-                        Classes
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/memberships.php">
-                        Memberships
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/facilities.php">
-                        Facilities
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/contactus.php">
-                        Contact us
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/addMenu.php">
-                        Add
-                    </a>
-                </li>
+            <ul class="navbar-nav d-flex">
+                <?php
+                foreach ($menuItems as $menuItem) {
+                    $menuLink = $menuItem['menu_link'];
+                    $menuTitle = $menuItem['title'];
+                    $parentId = $menuItem['parent_id'];
+                    $menuId = $menuItem['id'];
+
+                    if ($parentId === NULL) {
+                        //without submenu
+                        echo "<li class='nav-item me-3 me-lg-0'>";
+                        echo "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
+
+                        // if the current item has a submenu
+                        $subMenuItems = $controller->displaySubMenu($menuId);
+                        if (!empty($subMenuItems)) {
+                            echo "<ul class='dropdown-menu .dropdown' aria-labelledby='navbarDropdown$parentId'>"; // Start the sublist
+                            foreach ($subMenuItems as $subMenuItem) {
+                                $subMenuLink = $subMenuItem['menu_link'];
+                                $subMenuTitle = $subMenuItem['title'];
+                                echo "<li><a class='dropdown-item' href='$subMenuLink'>$subMenuTitle</a></li>";
+                            }
+                            echo "</ul>";
+                        }
+                        echo "</li>"; // Close the top-level list item
+                    }
+                }
+                ?>
+
+                <!-- stop here -->
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/login.php">
                         <i class="ri-account-circle-line"></i>
@@ -49,17 +52,23 @@
         </div>
     </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-w5pCm1vxiUcLvNzHZmsCjOWzIbY4hOaQ50zGCA2N0cE=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    window.addEventListener("scroll", function() {
-        var navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-            navbar.classList.remove("navbar-dark");
-            navbar.classList.add("navbar-light");
-        } else {
-            navbar.classList.remove("navbar-light");
-            navbar.classList.add("navbar-dark");
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+
+        dropdowns.forEach(function (dropdown) {
+            dropdown.addEventListener('click', function (event) {
+                event.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+        });
+
+        document.addEventListener('click', function () {
+            dropdowns.forEach(function (dropdown) {
+                dropdown.classList.remove('show');
+            });
+        });
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
