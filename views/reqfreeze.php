@@ -50,7 +50,10 @@
                                   <script>
                                       var currentDate = new Date();
                                       var maxDate = new Date(currentDate);
-                                      maxDate.setMonth(currentDate.getMonth() + 3);
+                                      function setDate(freezelimit)
+                                      {
+                                        maxDate.setMonth(currentDate.getDay() + freezeLimit);
+                                      }
                                   </script>
                                   <p class="membership class">Package:</p>
                                   <div class="class-title"><?php echo $package->getTitle(); ?></div>
@@ -67,10 +70,9 @@
                                   </div>
 
                                   <div class="rem-info">
-                                      <p>Remaining Freeze Attempts:</p>
+                                      <p>Remaining Freeze Duration:</p>
                                       <p class="actual-rem" id="actual-rem">
-                                          <span id="remainingFreeze"><?php echo $membershipdetails->getFreezeCount() . " Attempts left from " ?></span>
-                                          <span id="package-freezelimit"> <?php echo $package->getFreezeLimit(); ?></span>
+                                          <span id="remainingFreeze"><?php echo $membershipdetails->getFreezeCount() . " Days " ?></span>
                                       </p>
                                   </div>
                                   <div class="membershipStatus">
@@ -86,7 +88,7 @@
 
                                               <div class="datePicking"  id="datePickerContainer">
                                                 <label for="datepicker">Choose a Date:</label>
-                                                <input type="date" id="datepicker"  min="<?= date('Y-m-d', strtotime('+1 week')); ?>" max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
+                                                <input type="date" id="datepicker" min="<?= date('Y-m-d', strtotime('+3 day')); ?>" max="<?= date('Y-m-d', strtotime('+' . $membershipdetails->getFreezeCount() . 'day')); ?>">
                                               </div>
                                               <button id="freeze-button" onclick='showModal()'>Freeze</button> 
                                               <div class="modal" id="freezeModal">
@@ -156,7 +158,7 @@ function freezeMembership(membershipID) {
     success: function (responseData) {
       var response = JSON.parse(responseData);
       $(".end-date").text(response.EndDate);
-      var remainingFreezeText = response.FreezeCount + " Attempts left from " + freezeLimit.textContent;
+      var remainingFreezeText = response.FreezeCount + " Days ";
       $("#remainingFreeze").text(remainingFreezeText);
       $("#membershipStatus").text("Frozen");
       var unfreezeButton =
@@ -192,7 +194,7 @@ function unfreezeMembership(membershipID) {
                 $(".end-date").text(response.EndDate);
                 $("#membershipStatus").text("Activated");
                 $("#datePickerContainer").show();
-                $("#remainingFreeze").text(response.FreezeCount + " Attempts left from " + freezeLimit.textContent);
+                $("#remainingFreeze").text(response.FreezeCount + " Days");
                 var freezeButton = '<button id="freeze-button" class="" onclick="showModal()">Freeze</button>';
                 var confirmButton = ' <button  id="confirm-button"onclick"freezeMembership('+membershipID+')">Freeze</button>'
                 $("#unfreeze-button").replaceWith(freezeButton);
