@@ -22,6 +22,21 @@ class MenuController extends Controller
         $subMenuItems = $this->menuModel->getMenuItemsByParentId($parentId);
         return $this->buildMenu($subMenuItems, $parentId);
     }
+    private function buildSubMenu($menuItems, $parentId)
+    {
+        $html = '';
+        foreach ($menuItems as $menuItem) {
+            if ($menuItem['parent_id'] == $parentId) {
+                $menuLink = $menuItem['menu_link'];
+                $menuTitle = $menuItem['title'];
+                $menuId = $menuItem['id'];
+
+                $html .= "<a class='nav-link dropbtn' href='$menuLink'>$menuTitle</a>";
+            }
+        }
+
+        return $html;
+    }
 
     private function buildMenu($menuItems, $parentId = NULL)
     {
@@ -33,15 +48,20 @@ class MenuController extends Controller
                 $menuTitle = $menuItem['title'];
                 $menuId = $menuItem['id'];
 
-                $subMenu = $this->buildMenu($menuItems, $menuId);
+                $subMenu = $this->buildSubMenu($menuItems, $menuId);
 
                 if (!empty($subMenu)) {
-                    $html .= "<li class='nav-item me-3 me-lg-0'>";
-                    $html .= "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
-                    $html .= "<ul class='submenu'>$subMenu</ul>";
+                    $html .= '<li class="nav-item me-3 me-lg-0">';
+                    $html .= '<div class="dropdown">';
+                    $html .= "<a class='nav-link dropbtn' href='$menuLink'>";
+                    $html .= "$menuTitle";
+                    $html .= "</a>";
+                    $html .= '<div class="dropdown-content">';
+                    $html .= "$subMenu" ;
+                    $html .= "</div>";
                     $html .= "</li>";
                 } else {
-                    $html .= "<li class='nav-item me-3 me-lg-0'>";
+                    $html .= '<li class="nav-item me-3 me-lg-0">';
                     $html .= "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
                     $html .= "</li>";
                 }
@@ -50,7 +70,11 @@ class MenuController extends Controller
 
         return $html;
     }
+
 }
+
+
+
 
 $controller = new MenuController();
 
