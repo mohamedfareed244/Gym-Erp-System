@@ -54,7 +54,7 @@
                     </div>
                     <span id="lname-error"><?php echo isset($_SESSION["lnameErr"]) ? $_SESSION["lnameErr"] : ''; ?></span>
                     <div class="form-group">
-                        <label for="phoneno">Last Name:</label>
+                        <label for="phoneno">Phone Number:</label>
                         <input type="text" id="phone" name="phone" placeholder="Phone Number"
                             value="<?php echo isset( $_SESSION["Phone"] ) ?  $_SESSION["Phone"]  : ''; ?>">
                     </div>

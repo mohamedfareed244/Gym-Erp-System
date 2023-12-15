@@ -136,7 +136,7 @@ class EmployeeController extends Controller
         $_SESSION["passwordErr"] = $passwordErr;
         $_SESSION["addressErr"] = $addressErr;
 
-        header("Location: ../views/employeesadmin.php?fail");
+        header("Location: ../views/addemployee.php?fail");
         exit();
     }
 
@@ -180,7 +180,7 @@ class EmployeeController extends Controller
                     $_SESSION["Salary"] = $row["Salary"];
                     $_SESSION["Address"] = $row["Address"];
                     $_SESSION["JobTitle"] = $row["JobTitle"];
-                    $_SESSION['Password'] = $row["Password"];
+                    $_SESSION['Img'] = $row["Img"];
                     header("Location: ../views/admindashboard.php?ID=$ID");
                     exit();
                 } else {
@@ -199,6 +199,112 @@ class EmployeeController extends Controller
         $_SESSION["passwordErr"] = $passwordErr;
         $_SESSION["allErr"] = $allErr;
         header("Location: ../views/signin.php?fail");
+        exit();
+    }
+
+    function updateEmployeeInfo()
+    {
+
+        $isValid = true;
+        $nameErr = $phoneNumberErr = $emailErr = $addressErr = $imgErr = "";
+
+        $Name = $_POST["name"];
+        $Image = $_FILES["image"];
+        $PhoneNumber = $_POST["phonenumber"];
+        $Email = $_POST["email"];
+        $Address = $_POST["address"];
+        $Password = $_POST["password"];
+        $ConfirmPassword = $_POST["confpassword"];
+
+
+        if (empty($Name)) {
+            $nameErr = "Name is required";
+            $isValid = false;
+        } elseif (!preg_match("/^[a-zA-Z ]*$/", $Name)) {
+            $nameErr = "Only alphabets and white space are allowed";
+            $isValid = false;
+        }
+
+        if (empty($PhoneNumber)) {
+            $phoneNumberErr = "Phone Number is required";
+            $isValid = false;
+        } else {
+            $phoneRegex = '/^0\d{10}$/';
+            if (!preg_match($phoneRegex, $PhoneNumber)) {
+                $phoneNumberErr = "Invalid phone number format";
+                $isValid = false;
+            }
+        }
+
+        if (empty($Email)) {
+            $emailErr = "Email is required";
+            $isValid = false;
+        } elseif (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+            $isValid = false;
+        }
+
+        if (empty($Address)) {
+            $addressErr = "Address is required";
+            $isValid = false;
+        }
+
+        // Validate password
+        if (!empty($Password) && empty($ConfirmPassword)) {
+            $isValid = false;
+            $allErr = "Please confirm password.";
+        } else if ($Password != $ConfirmPassword) {
+            $isValid = false;
+            $allErr = "Password and Confirm password don't match.";
+        }
+
+        if ($isValid) {
+
+            $employee = new Employee();
+
+            $updatedEmployee = new Employee();
+            $updatedEmployee->setName($Name);
+            $updatedEmployee->setEmail($Email);
+            $updatedEmployee->setPhoneNumber($PhoneNumber);
+            $updatedEmployee->setPassword($Password);
+            $updatedEmployee->setAddress($Address);
+            
+            if (isset($Image['name']) && !empty($Image['name']) && !empty($Image['tmp_name'])) {
+                $tempFilePath = $Image["tmp_name"];
+                $fileExtension = pathinfo($Image["name"], PATHINFO_EXTENSION);
+                $destination = "../public/Images/" . $PhoneNumber . "." . $fileExtension;
+            
+                if (!move_uploaded_file($tempFilePath, $destination)) {
+                    $imgErr = "Saving Image failed";
+                    $isValid = false;
+                }
+                
+                $updatedEmployee->setImg($destination);
+            }            
+
+            $result = $employee->updateEmployee($updatedEmployee);
+
+
+            if ($result) {
+
+                $_SESSION["Name"] = $Name;
+                $_SESSION["Img"] = $destination;
+                $_SESSION["PhoneNumber"] = $PhoneNumber;
+                $_SESSION["Email"] = $Email;
+                $_SESSION["Address"] = $Address;
+                $_SESSION["success"] = "Updated Successfully";
+                header("Location: ../views/profile.php?UpdatedSuccessfully->Name=$Name");
+                exit();
+            }
+        }
+
+        // If there are validation errors or update fails, set session variables and redirect
+        $_SESSION["nameErr"] = $nameErr;
+        $_SESSION["imgErr"] = $imgErr;
+        $_SESSION["phonenoErr"] = $phoneNumberErr;
+        $_SESSION["emailErr"] = $emailErr;
+        $_SESSION["addressErr"] = $addressErr;
+        header("Location: ../views/profile.php?fail");
         exit();
     }
 
@@ -233,6 +339,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "login":
             $controller->login();
             break;
+        case "editEmployee":
+            $controller->updateEmployeeInfo();
+            break;
         case "deleteEmployee":
             $controller->deleteEmployee();
             break;
@@ -240,4 +349,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 }
-?>

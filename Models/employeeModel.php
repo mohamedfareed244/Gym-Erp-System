@@ -182,31 +182,32 @@ class Employee extends Model
 
     public function updateEmployee($employee)
     {
-
-        $name = $employee->Name;
-        $Sal = $employee->Salary;
-        $address = $employee->Address;
-        $phoneNumber = $employee->PhoneNumber;
-        $jobTitle = $employee->JobTitle;
+        $Name = $employee->Name;
+        $Address = $employee->Address;
+        $PhoneNumber = $employee->PhoneNumber;
         $Email = $employee->Email;
         $Password = $employee->Password;
-
-        $employee_id = $employee->ID;
-
+        $Image = $employee->Img;
+        $employee_id = $_SESSION['ID'];;
+    
         if (!empty($Password)) {
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-            $sql = "UPDATE employee SET Name='$name', Email='$Email', Password='$hashedPassword', Salary='$Sal', PhoneNumber='$phoneNumber', Address='$address', 
-            JobTitle='$jobTitle'
-                    WHERE ID = $employee_id";
+            $sql = "UPDATE employee SET Name='$Name', Email='$Email', Password='$hashedPassword', PhoneNumber='$PhoneNumber', Address='$Address'";
+            if (!empty($Image)) {
+                $sql .= ", Img='$Image'";
+            }
+            $sql .= " WHERE ID = $employee_id";
             return $this->db->query($sql);
         } else {
-            // Update with the new password
-            $sql = $sql = "UPDATE employee SET Name='$name', Email='$Email', Salary='$Sal', PhoneNumber='$phoneNumber', Address='$address', 
-            JobTitle='$jobTitle'
-                    WHERE ID = $employee_id";
+            $sql = "UPDATE employee SET Name='$Name', Email='$Email', PhoneNumber='$PhoneNumber', Address='$Address'";
+            if (!empty($Image)) {
+                $sql .= ", Img='$Image'";
+            }
+            $sql .= " WHERE ID = $employee_id";
             return $this->db->query($sql);
         }
     }
+    
 
     public function deleteEmployee()
     {
