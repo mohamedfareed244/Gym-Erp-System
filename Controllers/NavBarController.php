@@ -2,40 +2,88 @@
 require_once("Controller.php");
 require_once "../Models/NavbarModel.php";
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+class MenuController extends Controller
+{
+    private $menuModel;
 
-class NavbarController extends Controller {
+    public function __construct()
+    {
+        $this->menuModel = new MenuModel(new DBh());
+    }
 
-    function addnavbaritem($name, $icon) {
-        $navbarmodel = new navbarModel();
+    public function displayMenu()
+    {
+        $topLevelMenu = $this->menuModel->getMenuItems();
+        return $this->buildMenu($topLevelMenu);
+    }
 
-        $navbarmodel->setMenuItemName($name);
-        $navbarmodel->setMenuItemIcon($icon);
+    public function displaySubMenu($parentId)
+    {
+        $subMenuItems = $this->menuModel->getMenuItemsByParentId($parentId);
+        return $this->buildMenu($subMenuItems, $parentId);
+    }
+    private function buildSubMenu($menuItems, $parentId)
+    {
+        $html = '';
+        foreach ($menuItems as $menuItem) {
+            if ($menuItem['parent_id'] == $parentId) {
+                $menuLink = $menuItem['menu_link'];
+                $menuTitle = $menuItem['title'];
+                $menuId = $menuItem['id'];
 
-        if ($navbarmodel->addNavbarItem($name, $icon)) {
-            echo '<script> window.location = "addMenu.php"; </script>';
-        } else {
-            echo '<div id="message-container" style="color: red;">Error adding menu item.</div>';
+                $html .= "<a class='nav-link dropbtn' href='$menuLink'>$menuTitle</a>";
+            }
         }
+
+        return $html;
     }
+
+    private function buildMenu($menuItems, $parentId = NULL)
+    {
+        $html = '';
+
+        foreach ($menuItems as $menuItem) {
+            if ($menuItem['parent_id'] == $parentId) {
+                $menuLink = $menuItem['menu_link'];
+                $menuTitle = $menuItem['title'];
+                $menuId = $menuItem['id'];
+
+                $subMenu = $this->buildSubMenu($menuItems, $menuId);
+
+                if (!empty($subMenu)) {
+                    $html .= '<li class="nav-item me-3 me-lg-0">';
+                    $html .= '<div class="dropdown">';
+                    $html .= "<a class='nav-link dropbtn' href='$menuLink'>";
+                    $html .= "$menuTitle";
+                    $html .= "</a>";
+                    $html .= '<div class="dropdown-content">';
+                    $html .= "$subMenu" ;
+                    $html .= "</div>";
+                    $html .= "</li>";
+                } else {
+                    $html .= '<li class="nav-item me-3 me-lg-0">';
+                    $html .= "<a class='nav-link' href='$menuLink'>$menuTitle</a>";
+                    $html .= "</li>";
+                }
+            }
+        }
+
+        return $html;
+    }
+
 }
 
-$model = new navbarModel();
-$controller = new NavbarController($model);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $action = isset($_POST["action"]) ? $_POST["action"] : "";
 
-    switch ($action) {
-        case "addNavbarItem":
-            $name = isset($_POST["menu_name"]) ? $_POST["menu_name"] : "";
-            $icon = isset($_POST["menu_icon"]) ? $_POST["menu_icon"] : "";
-            
-            $controller->addnavbaritem($name, $icon);
-            break;
-        default:
-            break;
-    }
+
+$controller = new MenuController();
+
+if (isset($_GET['parent_id'])) {
+    $parentId = $_GET['parent_id'];
+    $menuItems = $controller->displaySubMenu($parentId);
+} else {
+    $menuItems = $controller->displayMenu();
 }
+
+include("partials/header.php");
 ?>

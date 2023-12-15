@@ -370,14 +370,16 @@ class Memberships extends Model
             $days = $interval->days;
 
             $newEndDate = date("Y-m-d", strtotime($membership->endDate . " + " . $days . " days"));
+            $newFreezeCount = $membership->freezeCount - $days;
 
-            $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$membership->freezeCount'-1 WHERE ID='$membershipId'";
+
+            $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 1, FreezeCount='$newFreezeCount' WHERE ID='$membershipId'";
             $result = $this->db->query($sql);
 
             $freezeStartDate = date("Y-m-d");
 
             $sql2 = "INSERT INTO `scheduled_unfreeze` (membership_id, freezeEndDate, freezeStartDate, freezeCount) VALUES 
-            ('$membership->ID','$freezeEndDate', '$freezeStartDate', '$membership->freezeCount'-1)";
+            ('$membership->ID','$freezeEndDate', '$freezeStartDate', '$newFreezeCount')";
 
             $result2 = $this->db->query($sql2);
 

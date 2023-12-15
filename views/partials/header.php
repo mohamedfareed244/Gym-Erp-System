@@ -1,4 +1,39 @@
+<?php
+require_once "../Controllers/NavBarController.php";
 
+$menuController = new MenuController();
+$menuHtml = $menuController->displayMenu();
+?>
+
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: .5 ease;
+
+backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, .15);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown:hover .dropdown-content {display: block;
+}
+
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mask-custom shadow-0">
     <div class="navbar container">
         <a class="navbar-brand" style="color: rgb(231, 55, 55);" href="../views/index.php">Profit Gym</a>
@@ -7,59 +42,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-
             </ul>
-            <ul class="navbar-nav d-flex"">
-                <li class=" nav-item me-3 me-lg-0">
-                <a class="nav-link" href="../views/index.php">
-                    Home
-                </a>
-                </li>
+            <ul class="navbar-nav d-flex">
+                <?php echo $menuHtml; ?>
                 <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/classes.php">
-                        Classes
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/memberships.php">
-                        Memberships
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/facilities.php">
-                        Facilities
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/contactus.php">
-                        Contact us
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="../views/addMenu.php">
-                        Add
-                    </a>
+                    <a class="nav-link" href="../views/addMenu.php">Add</a>
                 </li>
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="../views/login.php">
                         <i class="ri-account-circle-line"></i>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </div>
 </nav>
-<script>
-    window.addEventListener("scroll", function() {
-        var navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-            navbar.classList.remove("navbar-dark");
-            navbar.classList.add("navbar-light");
-        } else {
-            navbar.classList.remove("navbar-light");
-            navbar.classList.add("navbar-dark");
-        }
-    });
-</script>
+
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
