@@ -67,142 +67,68 @@
                     </thead>
                     <tbody>
                         <?php
-                        if(count($memberships) > 0) {
-                        foreach ($memberships as $membership) {
-                            $client = $Client->getClientByID($membership->getclientId());
-                            if($client) {
-                            echo "<tr id='row-" . $membership->getID() . "'>";
-                            echo "<td><a class='membershipBtn' style=' font-size:17px;' href='viewClientMembership.php?ID=" . $membership->getID() . "'>" . $membership->getID() . "</a></td>";
-                            echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
-                            echo '<td> ' . $client->getPhone() . ' </td>';
-                            echo '<td>' . $membership->getpackageId() . '</td>';
-                            echo '<td>' . $membership->getstartDate() . '</td>';
-                            echo '<td class="endDate-' . $membership->getID() . '">' . $membership->getendDate() . '</td>';
-                            echo '<td>' . $membership->getvisitsCount() . '</td>';
-                            echo '<td>' . $membership->getinvitationsCount() . '</td>';
-                            if ($membership->getfreezed() == 0) {
-                                $Package = new Package();
-                                $package = $Package->getPackage($membership->getpackageId());
-                                echo '<td class="status-' . $membership->getID() . ' bg">Active</td>';
-                                echo '<td><button id="freezeBtn-' . $membership->getID() . '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button></td>
-                                '; ?>
-                        <div class="modal" id="datePickerModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDatePickerModal()">&times;</span>
-                                    <div>
-                                        <label for="datepicker">Choose a Date:</label>
-                                        <input type="date" id="datepicker"
-                                            min="<?= date('Y-m-d', strtotime('+1 week')); ?>"
-                                            max="<?= date('Y-m-d', strtotime('+3 months')); ?>">
-                                    </div>
-                                    <button class="btn btn-primary"
-                                        onclick='freezeMembership(<?php echo $membership->getID() ?>)'>Freeze</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                            } else {
-                                echo '<td class="status-' . $membership->getID() . ' bg">Freezed</td>';
-                                echo '<td><button id="unfreezeBtn-' . $membership->getID() . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->getID() . ')">Unfreeze</button></td>';
+                        if (count($memberships) > 0) {
+                            foreach ($memberships as $membership) {
+                                $client = $Client->getClientByID($membership->getclientId());
+                                if ($client) {
+                                    echo "<tr id='row-" . $membership->getID() . "'>";
+                                    echo "<td><a class='membershipBtn' style=' font-size:17px;' href='viewClientMembership.php?ID=" . $membership->getID() . "'>" . $membership->getID() . "</a></td>";
+                                    echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
+                                    echo '<td> ' . $client->getPhone() . ' </td>';
+                                    echo '<td>' . $membership->getpackageId() . '</td>';
+                                    echo '<td>' . $membership->getstartDate() . '</td>';
+                                    echo '<td class="endDate-' . $membership->getID() . '">' . $membership->getendDate() . '</td>';
+                                    echo '<td>' . $membership->getvisitsCount() . '</td>';
+                                    echo '<td>' . $membership->getinvitationsCount() . '</td>';
+                                    if ($membership->getfreezed() == 0) {
 
+                                        echo '<td class="status-' . $membership->getID() . ' bg">Active</td>';
+                                        echo '<td><button id="freezeBtn-' . $membership->getID() . '" class="btn btn-freeze" onclick="showDatePickerModal(' . $membership->getID() . ')">Freeze</button></td>
+                                '; ?>
+                                                                        <div class="modal" id="datePickerModal-<?php echo $membership->getID() ?>">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <span class="close-btn" onclick="hideDatePickerModal(<?php echo $membership->getID() ?>)">&times;</span>
+                                                                                    <div>
+                                                                                        <label for="datepicker">Choose a Date:</label>
+                                                                                        <input type="date" id='datepicker-<?php echo $membership->getID() ?>' min="<?= date('Y-m-d', strtotime('+3 day')); ?>" max="<?= date('Y-m-d', strtotime('+' . $membership->getFreezeCount() . 'day')); ?>">
+                                                                                    </div>
+                                                                                    <button class="btn btn-primary"
+                                                                                        onclick='freezeMembership(<?php echo $membership->getID() ?>)'>Freeze</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php
+                                    } else {
+                                        echo '<td class="status-' . $membership->getID() . ' bg">Freezed</td>';
+                                        echo '<td><button id="unfreezeBtn-' . $membership->getID() . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->getID() . ')">Unfreeze</button></td>';
+
+                                    }
+                                    echo '<td>' . $membership->getprivateTrainingSessionsCount() . '</td>';
+                                    echo '<td>' . $membership->getinbodyCount() . '</td>';
+                                    echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>"; ?>
+                                                            <div class="modal" id="deleteModal">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                                                        <div>
+                                                                        <label >Are you sure you want to cancel this membership?</label>
+                                                                        </div>
+                                                                        <button class="btn btn-delete"
+                                                                            onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php echo '</tr>';
+                                }
                             }
-                            echo '<td>' . $membership->getprivateTrainingSessionsCount() . '</td>';
-                            echo '<td>' . $membership->getinbodyCount() . '</td>';
-                            // echo "<td><a a href='editclient.php?ID=" . $membership->ID . "' class=\"btn\">Edit</a>       ";
-                            echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>";?>
-                        <div class="modal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                    <div>
-                                    <label >Are you sure you want to cancel this membership?</label>
-                                    </div>
-                                    <button class="btn btn-delete"
-                                        onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php echo '</tr>';
-                        }}}
-                        else 
-                        {
+                        } else {
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
             <hr>
-            <!-- <h2 class="table-title">Classes: </h2>
-            <div id="tablediv">
-                <table class="view-table overflow-auto mh-10">
-                    <thead>
-                        <tr>
-                            <th scope="col">Class Name</th>
-                            <th scope="col"> Date </th>
-                            <th scope="col">From</th>
-                            <th scope="col">To </th>
-                            <th scope="col">Status </th>
-                            <th scope="col">Class Instructor </th>
-                            <th scope="col">Fees </th>
-                            <th scope="col">Paid </th>
-                            <th scope="col">Actions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Yoga</td>
-                            <td>09-09-2023</td>
-                            <td>9:00pm</td>
-                            <td>11:00pm</td>
-                            <td class="bg-success text-white">Attended</td>
-                            <td>Mohamed fareed</td>
-                            <td>120</td>
-                            <td class="bg-danger">Not paid </td>
-                            <td>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            <hr>
-            <h2 class="table-title">Financials: </h2>
-            <div id="tablediv">
-                <table class="view-table overflow-auto mh-10">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Package Name </th>
-                                <th scope="col"> Date </th>
-                                <th scope="col">Amount </th>
-                                <th scope="col">Paid </th>
-                                <th scope="col">Remain </th>
-                                <th scope="col">Due </th>
-                                <th scope="col">Sales </th>
-                                <th scope="col">Actions </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2 Months </td>
-                                <td>09-09-2023</td>
-                                <td>3000</td>
-                                <td>2000</td>
-                                <td>1000</td>
-                                <td>01-10-2023</td>
-                                <td>Mohamed fareed </td>
-                                <td>
-                                    <button class="btn">Edit</button>
-                                    <button class="btn btn-delete">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </div> -->
         </div>
     </div>
 
@@ -227,7 +153,7 @@
     }
 
     function freezeMembership(membershipID) {
-        var selectedDate = $('#datepicker').val();
+        var selectedDate = $('#datepicker-'+membershipID).val();
         console.log(selectedDate);
 
         console.log('Selected Date:', selectedDate);
@@ -240,10 +166,10 @@
                 membershipID: membershipID,
                 selectedDate: selectedDate,
             },
-            success: function(response) {
+            success: function(responseData) {
                 console.log(response);
-                var newEndDate = response.newEndDate;
-                $('#endDate-' + membershipID).text(newEndDate);
+                var response = JSON.parse(responseData);
+                $('.endDate-' + membershipID).text(response.EndDate);
 
                 $('.status-' + membershipID).text('Freezed');
 
@@ -257,7 +183,7 @@
             },
         });
 
-        hideDatePickerModal();
+        hideDatePickerModal(membershipID);
     }
 
     function unfreezeMembership(membershipID) {
@@ -269,9 +195,9 @@
                 action: "unfreezeClientMembership",
                 membershipID: membershipID,
             },
-            success: function(response) {
-                console.log(response);
-
+            success: function(responseData) {
+                var response = JSON.parse(responseData);
+                $('.endDate-' + membershipID).text(response.EndDate);
                 $('.status-' + membershipID).text('Active');
 
                 var freezeButton = '<button id="freezeBtn-' + membershipID +
@@ -284,12 +210,12 @@
         });
     }
 
-    function showDatePickerModal() {
-        $('#datePickerModal').fadeIn();
+    function showDatePickerModal(membership) {
+        $('#datePickerModal-'+membership).fadeIn();
 
     }
-    function hideDatePickerModal() {
-        $('#datePickerModal').fadeOut();
+    function hideDatePickerModal(membership) {
+        $('#datePickerModal-'+membership).fadeOut();
     }
     
     function showDeleteModal() {
