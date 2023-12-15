@@ -227,6 +227,12 @@ class Employee extends Model
         }
     }
 
+    public function checkIfEmployeeExists($email)
+    {
+        $sql = "SELECT * FROM employee WHERE Email = '$email'";
+        return $this->db->query($sql);
+    }
+
     public function checkExistingEmail($email)
     {
         $Email = "SELECT * FROM employee WHERE Email = '$email'";

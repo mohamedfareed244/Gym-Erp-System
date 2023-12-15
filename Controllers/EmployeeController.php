@@ -140,6 +140,68 @@ class EmployeeController extends Controller
         exit();
     }
 
+    public function login()
+    {
+        $emailErr = $passwordErr = $allErr = ""; // Initialize error variables
+
+        $employee = new Employee();
+
+        $isValid = true;
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+            $isValid = false;
+        }
+
+        if (empty($_POST["password"])) {
+            $passwordErr = "Password is required";
+            $isValid = false;
+        }
+
+
+
+
+        if ($isValid) {
+            // Validation successful, save data to the database
+            $Email = $_POST["email"];
+            $Password = $_POST["password"];
+
+            $result = $employee->checkIfEmployeeExists($Email);
+
+
+            if ($row = mysqli_fetch_array($result)) {
+                $storedHashedPassword = $row["Password"];
+                if (password_verify($Password, $storedHashedPassword)) {
+                    $ID = $row["ID"];
+                    $_SESSION["ID"] = $row["ID"];
+                    $_SESSION["Name"] = $row["Name"];
+                    $_SESSION["Email"] = $row["Email"];
+                    $_SESSION["PhoneNumber"] = $row["PhoneNumber"];
+                    $_SESSION["Salary"] = $row["Salary"];
+                    $_SESSION["Address"] = $row["Address"];
+                    $_SESSION["JobTitle"] = $row["JobTitle"];
+                    $_SESSION['Password'] = $row["Password"];
+                    header("Location: ../views/admindashboard.php?ID=$ID");
+                    exit();
+                } else {
+                    // Password is incorrect
+                    $passwordErr = "Incorrect password. Try Again.";
+                }
+            } else {
+                // Client does not exist
+                $allErr = "Wrong email and password. Try Again.";
+            }
+        }
+
+
+        // If the login was unsuccessful, redirect back to the login page with error messages
+        $_SESSION["emailErr"] = $emailErr;
+        $_SESSION["passwordErr"] = $passwordErr;
+        $_SESSION["allErr"] = $allErr;
+        header("Location: ../views/signin.php?fail");
+        exit();
+    }
+
     public function deleteEmployee()
     {
         if (isset($_POST["employeeId"])) {
@@ -167,6 +229,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($action) {
         case "addEmployee":
             $controller->addEmployee();
+            break;
+        case "login":
+            $controller->login();
             break;
         case "deleteEmployee":
             $controller->deleteEmployee();
