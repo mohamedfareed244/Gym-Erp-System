@@ -71,6 +71,38 @@ class Coach extends Employee
         return $result;
     }
 
+    public function getptMembershipsForCoach($coachID)
+    {
+        $isActivated = "Activated";
+
+        $sql = "SELECT client.FirstName AS clientFirstName , client.LastName AS clientLastName, `private training package`.Name AS ptPackageName, 
+        `private training package`.NumOfSessions, `private training package`.Price, `private training membership`.SessionsCount, `private training membership`.ID
+        FROM `private training membership`
+        INNER JOIN `private training package` ON `private training membership`.PrivateTrainingPackageID = `private training package`.ID 
+        INNER JOIN client ON `private training membership`.ClientID = client.ID
+        INNER JOIN employee ON `private training membership`.CoachID = employee.ID
+        WHERE `private training membership`.isActivated = '$isActivated' AND employee.ID='$coachID'";
+
+        $result = $this->db->query($sql);
+
+        $results = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'ID' => $row['ID'],
+                    'clientFirstName' => $row['clientFirstName'],
+                    'clientLastName' => $row['clientLastName'],
+                    'ptPackageName' => $row['ptPackageName'],
+                    'NumOfSessions' => $row['NumOfSessions'],
+                    'Price' => $row['Price'],
+                    'SessionsCount' => $row['SessionsCount'],
+                );
+            }
+            return $results;
+        }
+    }
+
 
 }
 ?>
