@@ -18,52 +18,64 @@ class ReservedClass extends Model
     {
         $this->db = $this->connect();
     }
-    
-    public function setID($ID) {
+
+    public function setID($ID)
+    {
         $this->ID = $ID;
     }
 
-    public function getID() {
+    public function getID()
+    {
         return $this->ID;
     }
 
-    public function setAssignedClassID($AssignedClassID) {
+    public function setAssignedClassID($AssignedClassID)
+    {
         $this->AssignedClassID = $AssignedClassID;
     }
 
-    public function getAssignedClassID() {
+    public function getAssignedClassID()
+    {
         return $this->AssignedClassID;
     }
 
-    public function setCoachID($CoachID) {
+    public function setCoachID($CoachID)
+    {
         $this->CoachID = $CoachID;
     }
 
-    public function getCoachID() {
+    public function getCoachID()
+    {
         return $this->CoachID;
     }
 
-    public function setClientID($ClientID) {
+    public function setClientID($ClientID)
+    {
         $this->ClientID = $ClientID;
     }
 
-    public function getClientID() {
+    public function getClientID()
+    {
         return $this->ClientID;
     }
 
-    public function setAttended($Attended) {
+    public function setAttended($Attended)
+    {
         $this->Attended = $Attended;
     }
 
-    public function getAttended() {
+    public function getAttended()
+    {
         return $this->Attended;
     }
 
-    public function setIsActivated($isActivated) {
+    public function setIsActivated($isActivated)
+    {
         $this->isActivated = $isActivated;
     }
 
-    public function getIsActivated() {
+    public function getIsActivated()
+    {
         return $this->isActivated;
     }
 
@@ -71,27 +83,32 @@ class ReservedClass extends Model
     {
         $isActivated = "Activated";
 
-        $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
-        $checkResult = $this->db->query($checkSql);
+        $checkSql1 = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
+        $checkResult1 = $this->db->query($checkSql1);
+        $alreadyExists = mysqli_num_rows($checkResult1) > 0;
 
-        $alreadyExists = mysqli_num_rows($checkResult) > 0;
+        $checkSql2 = "SELECT * FROM membership WHERE ClientID='$ClientID' AND isActivated='$isActivated'";
+        $checkResult2 = $this->db->query($checkSql2);
+        $hasActiveMembership = mysqli_num_rows($checkResult2) > 0;
 
-        if (!$alreadyExists) {
-            $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
+        if (!$alreadyExists && $hasActiveMembership) {
+            $sql = "INSERT INTO `reserved class` (AssignedClassID, CoachID, ClientID, isActivated) VALUES ('$AssignedClassID', '$CoachID', '$ClientID', '$isActivated')";
 
             $result = $this->db->query($sql);
 
             if ($result) {
                 $sql1 = "UPDATE assignedclass
-            SET AvailablePlaces= AvailablePlaces - 1
-            WHERE assignedclass.ID = '$AssignedClassID'";
+                 SET AvailablePlaces = AvailablePlaces - 1
+                 WHERE assignedclass.ID = '$AssignedClassID'";
 
                 $insertResult = $this->db->query($sql1);
 
-                return array('inserted' => $insertResult, 'alreadyExists' => false);
+                return array('inserted' => $insertResult, 'alreadyExists' => false, 'doesNotHaveActiveMembership' => false);
             }
-        } else {
-            return array('inserted' => false, 'alreadyExists' => true);
+        } elseif ($alreadyExists) {
+            return array('inserted' => false, 'alreadyExists' => true, 'doesNotHaveActiveMembership' => false);
+        } elseif (!$hasActiveMembership) {
+            return array('inserted' => false, 'alreadyExists' => false, 'doesNotHaveActiveMembership' => true);
         }
     }
 
@@ -99,18 +116,23 @@ class ReservedClass extends Model
     {
         $isActivated = "Not Activated";
 
-        $checkSql = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
-        $checkResult = $this->db->query($checkSql);
+        $checkSql1 = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
+        $checkResult1 = $this->db->query($checkSql1);
+        $alreadyExists = mysqli_num_rows($checkResult1) > 0;
 
-        $alreadyExists = mysqli_num_rows($checkResult) > 0;
+        $checkSql2 = "SELECT * FROM membership WHERE ClientID='$ClientID' AND isActivated='$isActivated'";
+        $checkResult2 = $this->db->query($checkSql2);
+        $hasActiveMembership = mysqli_num_rows($checkResult2) > 0;
 
-        if (!$alreadyExists) {
+        if (!$alreadyExists && $hasActiveMembership) {
             $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
             $insertResult = $this->db->query($sql);
 
-            return array('inserted' => $insertResult, 'alreadyExists' => false);
-        } else {
-            return array('inserted' => false, 'alreadyExists' => true);
+            return array('inserted' => $insertResult, 'alreadyExists' => false, 'doesNotHaveActiveMembership' => false);
+        } elseif ($alreadyExists) {
+            return array('inserted' => false, 'alreadyExists' => true, 'doesNotHaveActiveMembership' => false);
+        } elseif (!$hasActiveMembership) {
+            return array('inserted' => false, 'alreadyExists' => false, 'doesNotHaveActiveMembership' => true);
         }
     }
     public function getClientClassInfo()
@@ -249,4 +271,3 @@ class ReservedClass extends Model
         return $result;
     }
 }
-?>

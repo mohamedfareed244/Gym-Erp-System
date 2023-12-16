@@ -65,7 +65,10 @@ class Coach extends Employee
     public function getClassesForCoach($coachID)
     {
 
-        $sql = "SELECT c.Name,ac.StartTime,ac.EndTime,ac.Date,ac.CoachID,ac.ID from assignedclass ac join class c on ac.ClassID=c.ID  where ac.CoachID=$coachID";
+        $sql = "SELECT c.Name, ac.StartTime, ac.EndTime, ac.Date, ac.CoachID, ac.ID 
+        FROM assignedclass ac 
+        JOIN class c ON ac.ClassID = c.ID  
+        WHERE ac.CoachID = $coachID AND ac.Date >= CURDATE()";
 
         $result = $this->db->query($sql);
         return $result;
