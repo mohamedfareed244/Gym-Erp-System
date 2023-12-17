@@ -228,12 +228,12 @@ class ClassController extends Controller
         $CoachID = htmlspecialchars($_POST["coachid"]);
         $AssignedClassID = htmlspecialchars($_POST["assignedclassid"]);
         $ClientID = $_SESSION["ID"];
-
+    
         if ($price == "0") {
             $reservedclass = new ReservedClass();
-
+    
             $result = $reservedclass->ReservationFreeClass($CoachID, $AssignedClassID, $ClientID);
-
+    
             if ($result['inserted']) {
                 $_SESSION["successFree"][$AssignedClassID] = "Class reserved successfully.";
                 header("Location: ../views/classbooking.php?ReservationSuccessful");
@@ -242,6 +242,10 @@ class ClassController extends Controller
                 $_SESSION["alreadyExistsFree"][$AssignedClassID] = "You already booked this class.";
                 header("Location: ../views/classbooking.php?AlreadyBooked");
                 exit();
+            } else if ($result['doesNotHaveActiveMembership']) {
+                $_SESSION["doesNotHaveActiveMembershipFree"][$AssignedClassID] = "You must have an active membership to book a class.";
+                header("Location: ../views/classbooking.php?NoActiveMembership");
+                exit();
             } else {
                 $_SESSION["failToReserveFree"][$AssignedClassID] = "Class reservation failed.";
                 header("Location: ../views/classbooking.php?fail");
@@ -249,7 +253,7 @@ class ClassController extends Controller
             }
         } else {
             $reservedclass = new ReservedClass();
-
+    
             $result = $reservedclass->ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID);
             if ($result['inserted']) {
                 $_SESSION["successNotFree"][$AssignedClassID] = "Class Request made. Please Visit Gym For Payment as places are limited.";
@@ -258,6 +262,10 @@ class ClassController extends Controller
             } else if ($result['alreadyExists']) {
                 $_SESSION["alreadyExistsNotFree"][$AssignedClassID] = "You already booked this class.";
                 header("Location: ../views/classbooking.php?AlreadyBooked");
+                exit();
+            } else if ($result['doesNotHaveActiveMembership']) {
+                $_SESSION["doesNotHaveActiveMembershipNotFree"][$AssignedClassID] = "You must have an active membership to book a class.";
+                header("Location: ../views/classbooking.php?NoActiveMembership");
                 exit();
             } else {
                 $_SESSION["failToReserveNotFree"][$AssignedClassID] = "Class reservation failed.";
