@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit client | Profit</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/alert.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -43,7 +46,7 @@
                     exit;
                 }
                 ?>
-                <form method='POST'>
+                <form  id='editClientForm' >
                     <input type='hidden' name='type' value='form2'>
                     <div class='col-lg-4 col-md-12'>
                         <label for='client_id'>Client ID: </label>
@@ -90,42 +93,86 @@
                     <input type='email' name='email' id='email' value="<?php echo $Client->getEmail(); ?>">
                     <br>
                     <div class='col-lg-9 col-md-12'>
-                        <input type='submit' value='Edit' id='add-btn' style='margin-top:30px; margin-bottom:20px'>
+                        <button type='submit' id='add-btn' style='margin-top:30px; margin-bottom:20px' onclick='editClient()' >Edit</button>
                     </div>
-                </form>";
-                <?php
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    if ($_POST['type'] === 'form2') {
-                        $client_id = (int) $_POST['client_id'];
-                        $fname = $_POST['fname'];
-                        $lname = $_POST['lname'];
-                        $age = (int) $_POST['age'];
-                        $gender = $_POST['gender'];
-                        $weight = (float) $_POST['weight'];
-                        $height = (int) $_POST['height'];
-                        $email = $_POST['email'];
-                        $phone = $_POST['phone'];
-
-                        $sql = "UPDATE client
-                SET FirstName = '$fname', LastName = '$lname', Age = $age, Gender = '$gender', 
-                    Weight = $weight, Height = $height, Email = '$email', Phone = '$phone'
-                WHERE ID = $client_id ";
-
-                        if ($conn->query($sql) === true) {
-                            echo "Client information updated successfully.";
-                        } else {
-                            echo "Error: " . $sql . "<br>" . $conn->error;
-                        }
-
-                        $conn->close();
-                    }
-                }
-                ?>
+                </form>
+                <div class="alert hide"> 
+                        <span class="fas fa-check-circle"></span>
+                        <span class="msg"></span>
+                        <div class="close-btn">
+                            <span class="fas fa-times"></span>
+                        </div>
+        </div>
             </div>
         </div>
     </div>
-
-
 </body>
+<script>
+        function editClient(){
+            event.preventDefault();
+            var clientID = $('#client_id').val();
+            var firstName = $('#fname').val();
+            var lastName = $('#lname').val();
+            var age = $('#age').val();
+            var phone = $('#phone').val();
+            var gender = $('#gender').val();
+            var weight = $('#weight').val();
+            var height = $('#height').val();
+            var email = $('#email').val();
 
+        var client = {
+            client_id: clientID,
+            firstname: firstName,
+            lastname: lastName,
+            age: age,
+            phone: phone,
+            gender: gender,
+            weight: weight,
+            height: height,
+            email: email
+        };
+                $.ajax({
+                    type: "POST",
+                    url: "../Controllers/ClientController.php",
+                    data: {
+                        action: "editClientAdmin",
+                        clientInfo: client,
+                    }, 
+                    success: function (responseData) {
+                        
+                            $('.alert').addClass("show");
+                            $('.alert').removeClass("hide");
+                            $('.alert').addClass("showAlert");
+                            $('.msg').text("Client Updated successfully");
+                            setTimeout(function () {
+                                $('.alert').removeClass("show");
+                                $('.alert').addClass("hide");
+                            }, 5000);
+
+                            $('.close-btn').click(function () {
+                                $('.alert').removeClass("show");
+                                $('.alert').addClass("hide");
+                            });
+                        
+                        
+                    },
+                    error: function () {
+                        console.log("Something went wrong");
+                            $('.alert').addClass("show");
+                            $('.alert').removeClass("hide");
+                            $('.alert').addClass("showAlert");
+                            $('.msg').text("Error Editing CLient");
+                            setTimeout(function () {
+                                $('.alert').removeClass("show");
+                                $('.alert').addClass("hide");
+                            }, 5000);
+
+                            $('.close-btn').click(function () {
+                                $('.alert').removeClass("show");
+                                $('.alert').addClass("hide");
+                            });
+                    }
+                });
+            }
+    </script>
 </html>

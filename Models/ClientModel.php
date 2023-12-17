@@ -319,6 +319,60 @@ class Client extends Model
         }
     }
 
+    public function editClient($client)
+    {
+        $clientInfo = new Client();
+        $clientInfo = $clientInfo->getClientByID($client->ID);
+
+        if (!empty($client->FirstName)) {
+            $clientInfo->setFirstName($client->FirstName);
+        }
+
+        if (!empty($client->LastName)) {
+            $clientInfo->setLastName($client->LastName);
+        }
+
+        if (!empty($client->Phone)) {
+            $clientInfo->setPhone($client->Phone);
+        }
+
+        if (!empty($client->Email)) {
+            $clientInfo->setEmail($client->Email);
+        }
+
+        if (!empty($client->Weight)) {
+            $clientInfo->setWeight($client->Weight);
+        }
+
+        if (!empty($client->Height)) {
+            $clientInfo->setHeight($client->Height);
+        }
+        if (!empty($client->Age)) {
+            $clientInfo->setAge($client->Age);
+        }
+
+        $clientID = $client->ID;
+        $Fname = $clientInfo->FirstName;
+        $Lname = $clientInfo->LastName;
+        $Phone = $clientInfo->Phone;
+        $Email = $clientInfo->Email;
+        $Height = $clientInfo->Height;
+        $Weight = $clientInfo->Weight;
+        $Age = $clientInfo->Age;
+
+        $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone', Email='$Email' , Age='$Age', Weight='$Weight', Height = '$Height'
+                WHERE ID = $clientID";
+
+        $result = $this->db->query($sql);
+        if ($result) {
+            echo "Query executed successfully";
+        } else {
+            echo "Error executing query: " . $this->db->error;
+        }
+        return $result;
+    }
+
+
     public function deleteClient()
     {
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];

@@ -166,7 +166,6 @@ class ClientController extends Controller
             }
         }
 
-
         // Validate the "Last Name" field
         if (empty($_POST["lname"])) {
             $lnameErr = "Last Name is required";
@@ -256,7 +255,6 @@ class ClientController extends Controller
             }
         }
 
-
         $_SESSION["fnameErr"] = $fnameErr;
         $_SESSION["lnameErr"] = $lnameErr;
         $_SESSION["ageErr"] = $ageErr;
@@ -285,9 +283,6 @@ class ClientController extends Controller
             $passwordErr = "Password is required";
             $isValid = false;
         }
-
-
-
 
         if ($isValid) {
             // Validation successful, save data to the database
@@ -424,8 +419,86 @@ class ClientController extends Controller
         header("Location: ../views/userprofsettings.php?fail");
         exit();
     }
+    public function editClientAdmin()
+    {
+        $isValid = true;
+        $fnameErr = $lnameErr = $emailErr = $allErr = $phonenoErr = "";
+        if (isset($_POST['clientInfo'])) {
+            $clientInfo = $_POST['clientInfo'];
+            $ID = $clientInfo['client_id'];
+            $firstname = $clientInfo['firstname'];
+            $lastname = $clientInfo['lastname'];
+            $age = $clientInfo['age'];
+            $email = $clientInfo['email'];
+            $phone = $clientInfo['phone'];
+            $Weight = $clientInfo['weight'];
+            $Height = $clientInfo['height'];
+
+            if (!empty($firstname)) {
+                if (!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
+                    $fnameErr = "Only alphabets and white space are allowed";
+                    $isValid = false;
+                }
+            }
+            if (!empty($lastname)) {
+                if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
+                    $lnameErr = "Only alphabets and white space are allowed";
+                    $isValid = false;
+                }
+            }
+            if (!empty($email)) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $emailErr = "Invalid email format";
+                    $isValid = false;
+                }
+            }
+
+            if (!empty($_POST["phone"])) {
+                $phoneRegex = '/^0\d{10}$/';
+
+                if (!preg_match($phoneRegex, $_POST["phone"])) {
+                    $phonenoErr = "Invalid phone number format";
+                    $isValid = false;
+                }
+            }
+
+            if ($isValid) {
+                $client = new Client();
+
+                $updatedClient = new Client();
+                $updatedClient->setID($ID);
+                $updatedClient->setFirstName($firstname);
+                $updatedClient->setLastName($lastname);
+                $updatedClient->setPhone($phone);
+                $updatedClient->setAge($age);
+                $updatedClient->setEmail($email);
+                $updatedClient->setWeight($Weight);
+                $updatedClient->setHeight($Height);
 
 
+
+                $result = $client->editClient($updatedClient);
+
+                if ($result) {
+                    $response = [
+                        'status' => "success",
+                        'message' => "Updated Successfully",
+                    ];
+                }
+            }else{
+                $response = [
+                    'status' => "error",
+                    'message' => "error updating client details",
+                    'fnameErr'=> $fnameErr,
+                    'lnameErr' => $lnameErr,
+                    'phonenoErr' => $phonenoErr,
+                    'emailErr' => $emailErr,
+                ];
+            }
+            echo json_encode($response);
+        }
+
+    }
     public function deletUserAccount()
     {
 
@@ -472,6 +545,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "update":
             $controller->updateClientInfo();
+            break;
+        case "editClientAdmin":
+            $controller->editClientAdmin();
             break;
         case "delete":
             $controller->deletUserAccount();
