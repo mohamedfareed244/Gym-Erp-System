@@ -165,7 +165,10 @@ class Memberships extends Model
                 $membership->privateTrainingSessionsCount = $row['PrivateTrainingSessionsCount'];
                 $membership->freezeCount = $row['FreezeCount'];
                 $membership->freezed = $row['Freezed'];
-
+                if ($membership->freezed == 1) {
+                    $membership->dropScheduledUnfreeze($membership->ID);
+                    $membership->freezed = 0;
+                }
                 $memberships[] = $membership;
             }
         }
@@ -279,6 +282,10 @@ class Memberships extends Model
             $membership->inbodyCount = $membershipData["InvitationsCount"];
             $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
             $membership->freezeCount = $membershipData["FreezeCount"];
+            if ($membership->freezed == 1) {
+                $membership->dropScheduledUnfreeze($membershipID);
+                $membership->freezed = 0;
+            }
             $membership->freezed = $membershipData["Freezed"];
 
             return $membership;
@@ -309,6 +316,10 @@ class Memberships extends Model
                 $membership->privateTrainingSessionsCount = $membershipData["PrivateTrainingSessionsCount"];
                 $membership->freezeCount = $membershipData["FreezeCount"];
                 $membership->freezed = $membershipData["Freezed"];
+                if ($membership->freezed == 1) {
+                    $membership->dropScheduledUnfreeze($membership->ID);
+                    $membership->freezed = 0;
+                }
                 $membership->isActivated = $membershipData["isActivated"];
             } else {
                 $membership = null;
@@ -333,7 +344,7 @@ class Memberships extends Model
             WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'];
 
         $result = $this->db->query($sql);
-
+        
         $results = array();
 
         if ($result) {
@@ -352,6 +363,11 @@ class Memberships extends Model
                     'PrivateTrainingSessionsCount' => $row['PrivateTrainingSessionsCount'],
                     'FreezeCount' => $row['FreezeCount']
                 );
+                $membership = new Memberships();
+                $membership = $membership->getMembershipByClientID($_SESSION['ID']);
+                if ($membership->freezed == 1) {
+                    $membership->dropScheduledUnfreeze($membership->ID);
+                }
             }
             return $results;
         }
@@ -397,8 +413,12 @@ class Memberships extends Model
     {
         $sql = "SELECT * FROM `scheduled_unfreeze` WHERE `membership_id` = '$membershipId'";
         $result = $this->db->query($sql);
-        $row = mysqli_fetch_assoc($result);
-        return $row;
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            return false;
+        }
     }
 
     public function unFreezeMembership($membershipId)
@@ -420,7 +440,6 @@ class Memberships extends Model
                 // Calculate new end date by adding months and days
                 $numOfMonths = $Package->getNumOfMonths();
                 $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$numOfMonths months +$days days"));
-                $currentDate = date("Y-m-d");
                 $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
                 $result = $this->db->query($sql);
 
@@ -447,7 +466,18 @@ class Memberships extends Model
             return false;
         }
     }
-
+    public function dropScheduledUnfreeze($membershipId)
+    {
+        $scheduledUnFreeze = Memberships::getScheduledUnFreeze($membershipId);
+        $currDate = new DateTime();
+        $freezeEndDate = new DateTime($scheduledUnFreeze['freezeEndDate']);
+        if ($currDate >= $freezeEndDate) {
+            $sql = "UPDATE `membership` SET Freezed = 0 WHERE ID='$membershipId'";
+            $result = $this->db->query($sql);
+            $sql2 = "DELETE FROM scheduled_unfreeze WHERE `membership_id` = '$membershipId'";
+            $result2 = $this->db->query($sql2);
+        }
+    }
     public function getMembershipRequests()
     {
 
