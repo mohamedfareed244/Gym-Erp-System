@@ -15,6 +15,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/alert.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css"
@@ -115,7 +116,7 @@
                                                                         <label >Are you sure you want to cancel this membership?</label>
                                                                         </div>
                                                                         <button class="btn btn-delete"
-                                                                            onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Delete</button>
+                                                                            onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Cancel</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -256,7 +257,7 @@
                     var tableRow = document.getElementById('row-' + membershipID);
                     if (tableRow) {
                         tableRow.parentNode.removeChild(tableRow);
-                        showSuccessAlert("Deleted successfully", "#FF0000");
+                        // showSuccessAlert("Deleted successfully", "#FF0000");
                     } else {
                         console.log("Error.");
                     }
