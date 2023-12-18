@@ -27,31 +27,10 @@
   padding-bottom: 30px;
         }
 </style>
-<div id="viewclients">
-<i class="fa fa-close"  style="font-size:30px" id="close"></i>
-<table class="table">
-<thead>
-    <tr>
-
-        <td class="col"> CLient Id  </td>
-        <td class="col"> CLient Name</td>
-        <td class="col"> CLient Phone </td>
-        <td class="col"> Attend</td>
-    </tr>
-</thead>
-<tbody id="clienttable">
-    <tr>
-    <td class="col"> 2</td>
-    <td class="col"> Mohamed Fareed </td>
-    <td class="col"> 01210847059 </td>
-    <td class="col"> <input type="checkbox" name="" id=""> </td>
-    </tr>
-</tbody>
-</table>
-</div>
+<body>
 <?php require("partials/adminsidebar.php") ?>
 <div id="add-body">
-   <h2 class="coaches-title"> My Classes : </h2>
+   <h2 class="coaches-title"> My Upcoming Classes : </h2>
    <table class="table">
     <!-- Assume that the coach id =4 till the sessions work  -->
     <?php

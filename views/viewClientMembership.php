@@ -169,7 +169,6 @@
                             <td><?php echo $class['Price']; ?></td>
                             <td>
                                 <button class="btn">Cancel</button>
-                                <button class="btn btn-delete">Delete</button>
                             </td>
                         </tr>
             <?php } ?>

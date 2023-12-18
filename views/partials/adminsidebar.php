@@ -60,9 +60,10 @@
             <ul class="sub-menu">
                 <li><a class="link-name" href="../views/coachesadmin.php">Coaches</a></li>
                 <li><a href="../views/coachesadmin.php"> View Coaches </a></li>
-                <li><a href="../views/ptsessions.php">View Pt Clients </a></li>
+                <li><a href="../views/ptclients.php">View Pt Clients </a></li>
                 <li><a href="../views/myptclients.php">My Pt Clients </a></li>
                 <li><a href="../views/admin-classes.php">View Classes</a></li>
+                <li><a href="../views/addClass.php">Add Classes</a></li>
                 <li><a href="../views/myclasses.php">My Classes</a></li>
             </ul>
         </li>
@@ -187,7 +188,6 @@ for (var i = 0; i < arrow.length; i++) {
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bx-menu");
-console.log(sidebarBtn);
 sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });

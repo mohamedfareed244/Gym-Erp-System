@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 11:10 AM
+-- Generation Time: Dec 18, 2023 at 06:05 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -47,7 +47,7 @@ CREATE TABLE `assignedclass` (
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
 (5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 19),
 (6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 14),
-(7, 15, '2023-12-02', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8),
+(7, 15, '2023-12-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8),
 (8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
 
 -- --------------------------------------------------------
@@ -60,7 +60,7 @@ CREATE TABLE `attendance` (
   `EmployeeId` int(11) NOT NULL,
   `Day` date NOT NULL,
   `Status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `attendance`
@@ -72,7 +72,10 @@ INSERT INTO `attendance` (`EmployeeId`, `Day`, `Status`) VALUES
 (3, '2023-11-29', 0),
 (3, '2023-11-30', 0),
 (4, '2023-11-29', 0),
-(4, '2023-11-30', 0);
+(4, '2023-11-30', 0),
+(3, '2023-12-18', 0),
+(4, '2023-12-18', 0),
+(6, '2023-12-18', 0);
 
 -- --------------------------------------------------------
 
@@ -82,6 +85,7 @@ INSERT INTO `attendance` (`EmployeeId`, `Day`, `Status`) VALUES
 
 CREATE TABLE `authority` (
   `ID` int(11) NOT NULL,
+  `Header` varchar(50) NOT NULL,
   `FriendlyName` varchar(50) NOT NULL,
   `LinkAddress` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -90,24 +94,27 @@ CREATE TABLE `authority` (
 -- Dumping data for table `authority`
 --
 
-INSERT INTO `authority` (`ID`, `FriendlyName`, `LinkAddress`) VALUES
-(1, 'Dashboard', '../views/admindashboard.php'),
-(2, 'Add clients', '../views/addclient.php'),
-(3, 'edit clients', '../views/editclient.php'),
-(4, 'client details', '../views/clientdetails.php'),
-(5, 'client check-in', '../views/clientin.php'),
-(6, 'View Coaches', '../views/coachesadmin.php'),
-(7, 'View Pt Clients', '../views/ptsessions.php'),
-(8, 'View Classes', '../views/admin-classes.php'),
-(9, 'View Employees', '../views/employeesadmin.php'),
-(10, 'Attendance', '../views/attendance.php'),
-(11, 'Sales Report', '../views/salesreport.php'),
-(12, 'View Packages', '../views/viewpackagesadmin.php'),
-(13, 'Add Packages', '../views/addPackageadmin.php'),
-(14, 'View Private sessions', '../views/viewptadmin.php'),
-(15, 'Add Private sessions', '../views/addptadmin.php'),
-(16, 'my classes ', '../views/myclasses.php'),
-(17, 'my pt clients ', '../views/myptclients.php');
+INSERT INTO `authority` (`ID`, `Header`, `FriendlyName`, `LinkAddress`) VALUES
+(1, 'Dashboard', 'Dashboard', '../views/admindashboard.php'),
+(2, 'Clients', 'Add', '../views/addclient.php'),
+(3, 'Clients', 'Details', '../views/allclients.php'),
+(4, 'Clients', 'Memberships', '../views/clientdetails.php'),
+(5, 'Clients', 'Check in', '../views/clientin.php'),
+(6, 'Coaches', 'View Coaches', '../views/coachesadmin.php'),
+(7, 'Coaches', 'View Pt Clients', '../views/ptclients.php'),
+(8, 'Coaches', 'View Classes', '../views/admin-classes.php'),
+(9, 'HR', 'View Employees', '../views/employeesadmin.php'),
+(10, 'HR', 'Attendance', '../views/attendance.php'),
+(11, 'Admin', 'Sales Report', '../views/salesreport.php'),
+(12, 'Packages', 'View Packages', '../views/viewpackagesadmin.php'),
+(13, 'Packages', 'Add Package', '../views/addPackageadmin.php'),
+(16, 'Coaches', 'My Classes ', '../views/myclasses.php'),
+(17, 'Coaches', 'My Pt Clients ', '../views/myptclients.php'),
+(18, 'Coaches', 'Add Classes', '../views/addClass.php'),
+(19, 'HR', 'Add Employees', '../views/addEmployees.php'),
+(20, 'Packages', 'Add PT Package', '../views/addPTpackage.php'),
+(21, 'Packages', 'View PT Packages', '../views/viewPTpackage.php'),
+(22, 'Requests', 'Requests', '../views/requests.php');
 
 -- --------------------------------------------------------
 
@@ -223,9 +230,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`, `Img`) VALUES
-(1, 'mohamed', 'mohamedfareed429@gmail.com', 'mohamedfareed429@gmail.com', 1900, 'egypt', 'Sales Person', 'Mohamed', 'public/Images/user.jpeg'),
 (3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K', 'public/Images/user.jpeg'),
-(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q', 'public/Images/user.jpeg');
+(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q', 'public/Images/user.jpeg'),
+(6, 'Fatemah Hatem', 'fatemahhatem@gmail.com', '01045456789', 6000, 'Fifth Settlement', '3', '$2y$10$VC9KfmU1UbK7vk3GTTm6S.bVThJQPjHH3E1NXtsMTWx0l4l3Dn/pa', '../public/Images/01045456789.png');
 
 -- --------------------------------------------------------
 
@@ -235,8 +242,46 @@ INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address
 
 CREATE TABLE `employee authorities` (
   `ID` int(11) NOT NULL,
+  `JobTitleID` int(20) NOT NULL,
   `AuthorityID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee authorities`
+--
+
+INSERT INTO `employee authorities` (`ID`, `JobTitleID`, `AuthorityID`) VALUES
+(1, 4, 16),
+(2, 4, 17),
+(3, 3, 1),
+(4, 3, 2),
+(5, 3, 3),
+(6, 3, 4),
+(7, 3, 6),
+(8, 3, 7),
+(9, 3, 8),
+(10, 3, 9),
+(11, 3, 11),
+(12, 3, 12),
+(13, 3, 13),
+(14, 3, 18),
+(15, 3, 19),
+(16, 3, 20),
+(17, 3, 21),
+(18, 3, 22),
+(19, 5, 8),
+(20, 5, 7),
+(21, 5, 16),
+(22, 5, 17),
+(23, 1, 9),
+(24, 1, 10),
+(25, 1, 19),
+(26, 1, 6),
+(27, 2, 1),
+(28, 2, 2),
+(29, 2, 3),
+(30, 2, 4),
+(31, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -287,7 +332,34 @@ CREATE TABLE `membership` (
 
 INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
 (10, 45, 13, '2023-11-28', '2024-01-28', 1, 4, 2, 2, 20, 0, 'Activated'),
-(11, 46, 14, '2023-11-29', '2024-02-29', 0, 5, 3, 3, 30, 0, 'Activated');
+(11, 46, 14, '2023-11-29', '2024-02-29', 0, 5, 3, 3, 30, 0, 'Activated'),
+(12, 54, 14, '2023-12-16', '2024-03-16', 0, 5, 3, 3, 30, 0, 'Activated');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_items`
+--
+
+CREATE TABLE `menu_items` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `status` enum('enable','disable') DEFAULT 'enable',
+  `menu_link` varchar(50) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`id`, `title`, `status`, `menu_link`, `parent_id`) VALUES
+(1, 'Home', 'enable', '../views/index.php', NULL),
+(2, 'Classes', 'enable', '../views/classes.php', NULL),
+(3, 'Memberships', 'enable', '../views/memberships.php', NULL),
+(4, 'Facilities', 'enable', '../views/facilities.php', NULL),
+(5, 'About Us', 'enable', '../views/aboutus.php', NULL),
+(6, 'Contact Us', 'enable', '../views/contactus.php', 5);
 
 -- --------------------------------------------------------
 
@@ -340,7 +412,8 @@ CREATE TABLE `private training membership` (
 --
 
 INSERT INTO `private training membership` (`ID`, `ClientID`, `CoachID`, `PrivateTrainingPackageID`, `SessionsCount`, `isActivated`) VALUES
-(22, 45, 3, 9, 10, 'Activated');
+(22, 45, 3, 9, 10, 'Activated'),
+(23, 54, 3, 9, 10, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -454,8 +527,10 @@ ALTER TABLE `employee`
 -- Indexes for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `test` (`AuthorityID`),
-  ADD KEY `ID` (`ID`) USING BTREE;
+  ADD KEY `ID` (`ID`) USING BTREE,
+  ADD KEY `test30` (`JobTitleID`);
 
 --
 -- Indexes for table `job_titles`
@@ -470,6 +545,13 @@ ALTER TABLE `membership`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `test1` (`ClientID`),
   ADD KEY `test2` (`PackageID`);
+
+--
+-- Indexes for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parent_id` (`parent_id`);
 
 --
 -- Indexes for table `package`
@@ -521,7 +603,7 @@ ALTER TABLE `assignedclass`
 -- AUTO_INCREMENT for table `authority`
 --
 ALTER TABLE `authority`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -539,7 +621,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `employee authorities`
+--
+ALTER TABLE `employee authorities`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `job_titles`
@@ -551,7 +639,13 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `package`
@@ -563,7 +657,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `private training membership`
 --
 ALTER TABLE `private training membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `private training package`
@@ -585,7 +679,14 @@ ALTER TABLE `reserved class`
 -- Constraints for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `test30` FOREIGN KEY (`JobTitleID`) REFERENCES `job_titles` (`Id`);
+
+--
+-- Constraints for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `menu_items` (`id`);
 
 --
 -- Constraints for table `private training membership`

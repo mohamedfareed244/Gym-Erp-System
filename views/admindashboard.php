@@ -19,10 +19,10 @@
 
 <body>   
     <?php require("partials/adminsidebar.php"); ?>
-    <div id="add-body" class="addbody">
+    <div id="add-body" class="addbody" style="margin-left:-35px;">
         <div id="content" class="content">
             <main>
-                <div class="head-title">
+                <div class="head-title" style="margin-left:30px;">
                     <div class="left">
                         <h1>Dashboard</h1>
                     </div>
@@ -107,7 +107,7 @@
                 </ul>
 
 
-                <div class="table-data">
+                <div class="table-data" style="margin-left:10px;">
                     <div class="order">
                         <div class="head">
                             <h3>Recent Clients</h3>

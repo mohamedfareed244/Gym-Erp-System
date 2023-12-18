@@ -25,8 +25,7 @@
 </head>
 
 <body>
-    <?php session_start();
-    include("./partials/adminsidebar.php") ?>
+    <?php include("./partials/adminsidebar.php") ?>
     <div id="add-body" class="addbody">
 
         <div class="container">
@@ -38,6 +37,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Client Name</th>
+                            <th scope="col">Coach Name</th>
                             <th scope="col">PT Package Name</th>
                             <th scope="col">PT Package Number of Sessions</th>
                             <th scope="col">Sessions Count</th>
@@ -46,15 +46,16 @@
                     </thead>
                     <tbody>
                         <?php
-                        include_once "../Models/CoachesModel.php";
+                        include_once "../Models/ptMembershipsModel.php";
 
-                        $Coach = new Coach();
-                        $ptMembershipsData = $Coach->getptMembershipsForCoach($_SESSION['ID']);
+                        $PtMemberships = new ptMemberships();
+                        $ptMembershipsData = $PtMemberships->getAllPtMemberships();
 
                         foreach ($ptMembershipsData as $pt) {
                             echo "<tr>
                                <td>" . $pt["ID"] . "</td>
                                <td>" . $pt["clientFirstName"] . " " . $pt["clientLastName"] . "</td>
+                               <td>" . $pt["employeeName"] . "</td>
                                <td>" . $pt["ptPackageName"] . "</td>
                                <td>" . $pt["NumOfSessions"] . "</td>
                                <td>" . $pt["SessionsCount"] . "</td>

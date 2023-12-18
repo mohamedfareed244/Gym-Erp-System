@@ -13,7 +13,14 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+    <style>
+      #email-error,#password-error,#all-error{
+          color:red;
+      }
+      </style>
 </head>
+
+<?php session_start(); ?>
 <body>
 <section class="vh-100 gradient-custom" style="background:#f093fb; background:-webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
 background:linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));">
@@ -29,32 +36,37 @@ background:linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form>
-
+                <form autocomplete="off" method="post" id="login-form" action="../Controllers/EmployeeController.php">
+                <input type="hidden" name="action" value="login">
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                    <span class="h1 fw-bold mb-0">Profit</span>
+                    <span class="h1 fw-bold mb-0">Profit Gym</span>
                   </div>
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
                     <label class="form-label" for="form2Example17">Email address</label>
+                    <input type="email" id="form2Example17" class="form-control form-control-lg" name="email"/>
                   </div>
-
+                  <span id="email-error"><?php echo isset( $_SESSION["emailErr"] ) ?  $_SESSION["emailErr"]  : ''; ?></span>
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
                     <label class="form-label" for="form2Example27">Password</label>
+                    <input type="password" id="form2Example27" class="form-control form-control-lg" name="password"/>
                   </div>
-
+                  <span id="password-error"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ''; ?></span>
+                  <span id="all-error"><?php echo isset($_SESSION["allErr"]) ? $_SESSION["allErr"] : ''; ?></span>
                   <div class="pt-1 mb-4">
-                   <a href="profile.php"><button class="btn btn-dark btn-lg btn-block" type="button">Login</button></a> 
+                   <input type="submit" value="Login" class="btn btn-dark btn-lg btn-block" />
                   </div>
 
-                  <a class="small text-muted" href="#!">Forgot password?</a>
                
                 </form>
+                <?php
+            unset($_SESSION["emailErr"]);
+            unset($_SESSION["passwordErr"]);
+            unset($_SESSION["allErr"]);
+            ?>
 
               </div>
             </div>

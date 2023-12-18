@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../public/CSS/addpackage.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/addPackage.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css"
@@ -129,7 +129,7 @@ span[id$="-error"],
                     <div class="col-lg-4 col-md-12">
                         <label for="nationalid">Price : </label>
                     </div>
-                    <input type="number" name="price" id="price">
+                    <input type="number" name="price" id="price" style="margin-bottom:24px;">
                     <span
                         id="price-error"><?php echo isset($_SESSION["priceErr"]) ? $_SESSION["priceErr"] : ''; ?></span>
                     <span id="success"><?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?></span>

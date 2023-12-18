@@ -17,7 +17,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
-    #failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree {
+    #failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree,
+    #noActiveMembershipFree, #noActiveMembershipNotFree {
         color: red;
         font-size: 16px;
     }
@@ -90,9 +91,11 @@
                             <span id="successFree" style="color: green;"><?php echo isset($_SESSION["successFree"][$classDetail['assignedclassID']]) ? $_SESSION["successFree"][$classDetail['assignedclassID']] : ''; ?></span>
                             <span id="failFree"><?php echo isset($_SESSION["failToReserveFree"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserveFree"][$classDetail['assignedclassID']] : ''; ?></span>
                             <span id="alreadyExistsFree"><?php echo isset($_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="noActiveMembershipFree"><?php echo isset($_SESSION["doesNotHaveActiveMembershipFree"][$classDetail['assignedclassID']]) ? $_SESSION["doesNotHaveActiveMembershipFree"][$classDetail['assignedclassID']] : ''; ?></span>
                             <span id="successNotFree" style="color: green;"><?php echo isset($_SESSION["successNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["successNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
-                            <span id="failFree"><?php echo isset($_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="failNotFree"><?php echo isset($_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
                             <span id="alreadyExistsNotFree"><?php echo isset($_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
+                            <span id="noActiveMembershipNotFree"><?php echo isset($_SESSION["doesNotHaveActiveMembershipNotFree"][$classDetail['assignedclassID']]) ? $_SESSION["doesNotHaveActiveMembershipNotFree"][$classDetail['assignedclassID']] : ''; ?></span>
 
                         </div>
                     </div>
@@ -102,9 +105,11 @@
                         <?php
             unset(
     $_SESSION["alreadyExistsFree"][$classDetail['assignedclassID']],
+    $_SESSION["doesNotHaveActiveMembershipFree"][$classDetail['assignedclassID']],
     $_SESSION["failToReserveFree"][$classDetail['assignedclassID']],
     $_SESSION["successFree"][$classDetail['assignedclassID']],
     $_SESSION["alreadyExistsNotFree"][$classDetail['assignedclassID']],
+    $_SESSION["doesNotHaveActiveMembershipNotFree"][$classDetail['assignedclassID']],
     $_SESSION["failToReserveNotFree"][$classDetail['assignedclassID']],
     $_SESSION["successNotFree"][$classDetail['assignedclassID']]
 
