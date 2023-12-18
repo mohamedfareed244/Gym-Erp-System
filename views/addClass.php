@@ -72,6 +72,7 @@
                         <div class="col-m-8">
                             <?php
                              $Classes = new Classes();
+                             $tomorrow = date('Y-m-d', strtotime('+1 day'));
                              $Classes->generateDayCheckboxes($tomorrow, 7);
                             ?>
                             <br>

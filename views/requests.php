@@ -39,6 +39,7 @@
     $membershipRequests=$Memberships->getMembershipRequests();
     $ptMemberships = new ptMemberships();
     $ptmembershipsRequests = $ptMemberships->getPtMembershipRequests();
+    $assignedclass = new AssignedClass();
     ?>
 
     <div id="add-body" class="addbody">
@@ -111,12 +112,9 @@
                             <td><?php echo $classRequest['className']?></td>
                             <td><?php echo $classRequest['Date']?></td>
                             <?php
-                            $startTime = new DateTime($classRequest['StartTime']);
-                            $endTime = new DateTime($classRequest['EndTime']);
-                            
                             // Format the DateTime object as "H:i" (24-hour format)
-                            $startformattedDate = $startTime->format("H:i");
-                            $endformattedDate = $endTime->format("H:i");
+                            $startformattedDate = $assignedclass->getFormattedTime($classRequest['StartTime']);
+                            $endformattedDate = $assignedclass->getFormattedTime($classRequest['EndTime']);
                             ?>
                             <td><?php echo $startformattedDate?></td>
                             <td><?php echo $endformattedDate?></td>

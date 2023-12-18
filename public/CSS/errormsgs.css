@@ -1,0 +1,36 @@
+#emailExists,
+#success {
+    color: red;
+    font-size: 16px;
+}
+
+.col-lg-4 {
+    width: 33.3333%;
+}
+
+.signup-lbl {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gender-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-btn {
+    margin-left: 5px;
+}
+
+.gender-lbl {
+    margin-right: 10px;
+}
+
+#fname-error,
+#lname-error,
+#age-error,
+#gender-error,
+#email-error,
+#phoneno-error {
+    color: red;
+}

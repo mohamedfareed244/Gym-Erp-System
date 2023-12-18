@@ -10,6 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/errormsgs.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css"
@@ -17,47 +18,6 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
-<style>
-#emailExists,
-#success {
-    color: red;
-    font-size: 16px;
-}
-
-.col-lg-4 {
-    width: 33.3333%;
-}
-
-.signup-lbl {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.gender-container {
-    display: flex;
-    align-items: center;
-}
-
-.radio-btn {
-    margin-left: 5px;
-}
-
-.gender-lbl {
-    margin-right: 10px;
-}
-
-#fname-error,
-#lname-error,
-#age-error,
-#gender-error,
-#email-error,
-#phoneno-error {
-    color: red;
-}
-
-
-</style>
 
 <body>
     <?php 

@@ -16,24 +16,6 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
 
 
-    <style>
-    @media (max-width: 1084px) {
-        .reminders {
-            flex-wrap: wrap;
-
-            /* width:570px */
-        }
-
-        .membership-details {
-            width: 300px;
-        }
-
-        .slideshow-container {
-            display: none;
-        }
-    }
-    </style>
-
 </head>
 
 
@@ -57,32 +39,6 @@
 
 
     <div class="profile">
-        <!-- <div class="slideshow-container">
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 6</div>
-                <img src="../public/Images/free_weight.webp" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 6</div>
-                <img src="../public/Images/Gym-HD-Desktop.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 6</div>
-                <img src="../public/Images/infopic.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">4 / 6</div>
-                <img src="../public/Images/lockers.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">5 / 6</div>
-                <img src="../public/Images/Gym-Images.jpg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-            <div class="mySlides fade">
-                <div class="numbertext">6 / 6</div>
-                <img src="../public/Images/cardio_area.jpeg" class="imgslides" style="width:700px; height:450px;">
-            </div>
-        </div> -->
         <div class="greeting">
             <p class="hello">Hello <?php echo $_SESSION["FName"] , ' ', $_SESSION["LName"]; ?>! </p>
         </div>

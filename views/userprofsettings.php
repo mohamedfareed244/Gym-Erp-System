@@ -120,36 +120,7 @@ updateButton.addEventListener("click", function (event) {
 deleteButton.addEventListener("click", function (event) {
     actionInput.value = "delete";
 });
-// const updateButton = document.getElementById("update-profile-button");
 
-
-// const modal = document.getElementById("myModal");
-// const confirmationText = document.getElementById("confirmation-text");
-
-// function showpopup(message) {
-//     confirmationText.textContent = message;
-//     modal.style.display = "block";
-// }
-
-// function resetpopup() {
-//     modal.style.display = "none";
-//     confirmationText.textContent = '';
-// }
-
-// updateButton.addEventListener("click", function() {
-//     resetpopup();
-//     modal.style.display = "block";
-//     confirmationText.style.display = "block";
-//     confirmationText.textContent = "Updated Successfully";
-
-//     // Set a timer to hide the modal after 2 seconds (2000 milliseconds)
-//     setTimeout(function() {
-//         modal.style.display = "none";
-//         confirmationText.style.display = "none";
-//     }, 2000); // 2 seconds
-
-
-// });
 </script>
 
 

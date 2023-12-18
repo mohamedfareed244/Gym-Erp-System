@@ -211,7 +211,7 @@ class ReservedClass extends Model
         INNER JOIN assignedclass ON assignedclass.ID = `reserved class`.AssignedClassID
         INNER JOIN employee ON employee.ID = `reserved class`.CoachID
         INNER JOIN class ON class.ID = assignedclass.ClassID
-        WHERE `reserved class`.isActivated = '$isActivated'";
+        WHERE `reserved class`.isActivated = '$isActivated' ";
 
         $result = $this->db->query($sql);
 

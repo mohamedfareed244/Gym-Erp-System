@@ -345,3 +345,19 @@ img {
   margin-top: 5px;
 }
 
+@media (max-width: 1084px) {
+  .reminders {
+      flex-wrap: wrap;
+
+      /* width:570px */
+  }
+
+  .membership-details {
+      width: 300px;
+  }
+
+  .slideshow-container {
+      display: none;
+  }
+}
+
