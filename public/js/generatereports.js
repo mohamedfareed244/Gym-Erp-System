@@ -33,11 +33,12 @@ function generateReport() {
               .then(data => {
                 //inject the data in the table body 
                 
-               document.getElementById("memberbody").innerHTML=data.data;
+               document.getElementById("memberbody").innerHTML=data.packages;
+               document.getElementById("memberbody1").innerHTML=data.pt;
                const reportContent = `
                <h2>Generated Report</h2>
                <p class="bold-title">Date Range:</p> <p> ${start_date} to ${end_date}</p>
-               <p class="bold-title">Total Sales:</p> <p> EGP ${data.sum}</p>
+               <p class="bold-title">Total Sales:</p> <p> EGP ${data.sum_packages+data.sum_pt}</p>
               
            `;
            reportContainer.innerHTML = reportContent;

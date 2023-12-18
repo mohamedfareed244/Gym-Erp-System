@@ -58,6 +58,7 @@
     <div id="report-container" class="report-container"></div>
 
             <div id="tablediv">
+            <h3>normal Memberships : </h3>
                 <table class="table overflow-auto mh-10">
                     <thead>
                         <tr>
@@ -71,7 +72,21 @@
                     <tbody id="memberbody">
                   
 </table>
-<div>
+<h3>private Memberships : </h3>
+<table class="table overflow-auto mh-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">Package ID</th>
+                            <th scope="col">Package Name </th>
+                            <th scope="col">Sales</th>
+                            <th scope="col">No .  </th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="memberbody1">
+                  
+</table>
+</div>
 </body>
 
 <script src="../public/js/generatereports.js?v=<?php echo time();?>"></script>
