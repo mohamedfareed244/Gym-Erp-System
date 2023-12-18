@@ -97,12 +97,12 @@
                     </div>
                 </form>
                 <div class="alert hide"> 
-                        <span class="fas fa-check-circle"></span>
-                        <span class="msg"></span>
-                        <div class="close-btn">
-                            <span class="fas fa-times"></span>
-                        </div>
-        </div>
+                    <span class="fas fa-check-circle"></span>
+                    <span class="msg"></span>
+                    <div class="close-btn">
+                        <span class="fas fa-times"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
