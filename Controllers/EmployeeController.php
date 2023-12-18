@@ -308,6 +308,75 @@ class EmployeeController extends Controller
         exit();
     }
 
+    public function editEmployeeAdmin()
+    {
+        $isValid = true;
+        $nameErr = $emailErr  = $phonenoErr = "";
+        if (isset($_POST['employeeInfo'])) {
+            $employeeInfo = $_POST['employeeInfo'];
+            $ID = $employeeInfo['emp_id'];
+            $name = $employeeInfo['name'];
+            $email = $employeeInfo['email'];
+            $phone = $employeeInfo['phone'];
+            $salary = $employeeInfo['salary'];
+            $jobTitle = $employeeInfo['jobTitle'];
+            $address = $employeeInfo['address'];
+
+            if (!empty($name)) {
+                if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+                    $lnameErr = "Only alphabets and white space are allowed";
+                    $isValid = false;
+                }
+            }
+            if (!empty($email)) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $emailErr = "Invalid email format";
+                    $isValid = false;
+                }
+            }
+
+            if (!empty($_POST["phone"])) {
+                $phoneRegex = '/^0\d{10}$/';
+
+                if (!preg_match($phoneRegex, $_POST["phone"])) {
+                    $phonenoErr = "Invalid phone number format";
+                    $isValid = false;
+                }
+            }
+
+            if ($isValid) {
+                $employee = new Employee();
+
+                $updatedEmployee = new Employee();
+                $updatedEmployee->setID($ID);
+                $updatedEmployee->setName($name);
+                $updatedEmployee->setPhoneNumber($phone);
+                $updatedEmployee->setEmail($email);
+                $updatedEmployee->setAddress($address); 
+                $updatedEmployee->setSalary($salary);
+                $updatedEmployee->setJobTitle($jobTitle);
+
+                $result = $employee->updateEmployeeAdmin($updatedEmployee);
+
+                if ($result) {
+                    $response = [
+                        'status' => "success",
+                        'message' => "Updated Successfully",
+                    ];
+                }
+            }else{
+                $response = [
+                    'status' => "error",
+                    'message' => "error updating client details",
+                    'nameErr'=> $nameErr,
+                    'phonenoErr' => $phonenoErr,
+                    'emailErr' => $emailErr,
+                ];
+            }
+            echo json_encode($response);
+        }
+    }
+
     public function deleteEmployee()
     {
         if (isset($_POST["employeeId"])) {
@@ -341,6 +410,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "editEmployee":
             $controller->updateEmployeeInfo();
+            break;
+        case "editEmployeeAdmin":
+            $controller->editEmployeeAdmin();
             break;
         case "deleteEmployee":
             $controller->deleteEmployee();
