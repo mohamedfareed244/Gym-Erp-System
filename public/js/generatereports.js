@@ -38,7 +38,7 @@ function generateReport() {
                <h2>Generated Report</h2>
                <p class="bold-title">Date Range:</p> <p> ${start_date} to ${end_date}</p>
                <p class="bold-title">Total Sales:</p> <p> EGP ${data.sum}</p>
-               <p class="bold-title">Most Sold Memberships: </p> <p> ${salesData.mostSoldMemberships.join(", ")}</p>
+              
            `;
            reportContainer.innerHTML = reportContent;
            tableContainer.style.display = "block";
