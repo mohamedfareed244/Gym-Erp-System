@@ -86,3 +86,24 @@ margin-right:5%;
 #popup-confirm-button:hover,#popup-cancel-button:hover {
     background-color: #424242;
   }
+
+  #success,
+  #fail,
+  #alreadyExists1,
+  #alreadyExists2,
+  #noActiveMembership {
+      color: red;
+      font-size: 16px;
+      margin-left:30px;
+  }
+
+  .row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(270px, 1fr));
+  }
+
+  .col {
+      width: 70%;
+      box-sizing: border-box;
+      padding: 5px;
+  }

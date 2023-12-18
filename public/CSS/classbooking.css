@@ -62,3 +62,9 @@
     padding-bottom: 500px;
 
 }
+
+#failFree,#failNotFree,#alreadyExistsFree,#alreadyExistsNotFree,
+#noActiveMembershipFree, #noActiveMembershipNotFree {
+    color: red;
+    font-size: 16px;
+}

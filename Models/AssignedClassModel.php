@@ -190,7 +190,7 @@ class AssignedClass extends Model
         return $this->db->query($sql);
     }
 
-    
+
     public function deleteClass($classID, $coachID, $date)
     {
         $sql = "DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";
@@ -204,7 +204,8 @@ class AssignedClass extends Model
         assignedclass.NumOfAttendants , assignedclass.Price, assignedclass.ID AS assignedclassID, employee.Name AS employeeName ,assignedclass.AvailablePlaces
         FROM class
         INNER JOIN assignedclass ON class.ID = assignedclass.ClassID
-        INNER JOIN employee ON employee.ID = assignedclass.CoachID";
+        INNER JOIN employee ON employee.ID = assignedclass.CoachID
+        WHERE assignedclass.AvailablePlaces != '0'";
 
         $result = $this->db->query($sql);
 
@@ -284,7 +285,22 @@ class AssignedClass extends Model
         }
     }
 
+    // Function to get formatted start time
+    public function getFormattedStartTime($classDetail)
+    {
+        $startTime = new DateTime($classDetail['StartTime']);
+        $startformattedDate = $startTime->format("H:i");
+        return $startformattedDate;
+    }
 
+    // Function to determine if the class is in the future
+    public function isClassInFuture($classDetail)
+    {
+
+        $currentDateTime = strtotime(date("Y-m-d H:i")); // Current date and time
+        $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $this->getFormattedStartTime($classDetail)); // Class start date and time
+        return $currentDateTime <= $classStartDateTime;
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
@@ -316,4 +332,3 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
     }
     exit();
 }
-?>

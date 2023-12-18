@@ -19,28 +19,6 @@
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <style>
-    #success,
-    #fail,
-    #alreadyExists1,
-    #alreadyExists2,
-    #noActiveMembership {
-        color: red;
-        font-size: 16px;
-        margin-left:30px;
-    }
-
-    .row {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(270px, 1fr));
-    }
-
-    .col {
-        width: 70%;
-        box-sizing: border-box;
-        padding: 5px;
-    }
-    </style>
 
 </head>
 

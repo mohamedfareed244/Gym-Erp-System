@@ -18,41 +18,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<style>
-.coaches-title {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 27px;
-    text-transform: uppercase;
-    padding-top: 20px;
-    color: rgb(36, 34, 34);
-    /* padding-left: 40px; */
-    padding-bottom: 30px;
-}
-
-.visits-container {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-.visits-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.radio-buttons {
-    display: flex;
-}
-
-.hidden {
-    display: none;
-}
-
-span[id$="-error"],
-#success {
-    color: red;
-    font-size: 16px;
-}
-</style>
 
 <body>
     <?php session_start(); ?>
