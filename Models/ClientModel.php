@@ -366,9 +366,7 @@ class Client extends Model
         $result = $this->db->query($sql);
         if ($result) {
             echo "Query executed successfully";
-        } else {
-            echo "Error executing query: " . $this->db->error;
-        }
+        } 
         return $result;
     }
 

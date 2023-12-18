@@ -15,6 +15,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/alert.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css"
@@ -112,6 +113,13 @@
 
             </div>
             <hr>
+            <div class="alert hide" style="background-color:red"> 
+                    <span class="fas fa-check-circle"></span>
+                    <span class="msg"></span>
+                    <div class="close-btn" style="background-color:red">
+                        <span class="fas fa-times"></span>
+                    </div>
+                </div>
         </div>
     </div>
 
@@ -162,6 +170,14 @@ function deleteClient(clientId) {
                 } else {
                     console.log("Error.");
                 }
+                $('.alert').addClass("show");
+                            $('.alert').removeClass("hide");
+                            $('.alert').addClass("showAlert");
+                            $('.msg').text("Deleted successfully");
+                            setTimeout(function () {
+                                $('.alert').removeClass("show");
+                                $('.alert').addClass("hide");
+                            }, 5000);
             } else {
                 console.log("Error deleting client.");
             }

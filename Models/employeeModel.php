@@ -208,7 +208,62 @@ class Employee extends Model
         }
     }
     
-
+    public function updateEmployeeAdmin($employee)
+    {
+        $employeeInfo = new Employee();
+        $employeeInfo = $employeeInfo->getEmployeeByID($employee->ID);
+    
+        if (!empty($employee->Name)) {
+            $employeeInfo->setName($employee->Name);
+        }
+    
+        if (!empty($employee->Address)) {
+            $employeeInfo->setAddress($employee->Address);
+        }
+    
+        if (!empty($employee->PhoneNumber)) {
+            $employeeInfo->setPhoneNumber($employee->PhoneNumber);
+        }
+    
+        if (!empty($employee->Email)) {
+            $employeeInfo->setEmail($employee->Email);
+        }
+    
+        if (!empty($employee->Password)) {
+            $hashedPassword = password_hash($employee->Password, PASSWORD_DEFAULT);
+            $employeeInfo->setPassword($hashedPassword);
+        }
+    
+        if (!empty($employee->Img)) {
+            $employeeInfo->setImg($employee->Img);
+        }
+    
+        $employeeID = $employee->ID;
+        $name = $employeeInfo->getName();
+        $address = $employeeInfo->getAddress();
+        $phoneNumber = $employeeInfo->getPhoneNumber();
+        $email = $employeeInfo->getEmail();
+        $password = $employeeInfo->getPassword();
+        $img = $employeeInfo->getImg();
+    
+        $sql = "UPDATE employee SET Name='$name', Address='$address', PhoneNumber='$phoneNumber', Email='$email', Password='$password'";
+        
+        if (!empty($img)) {
+            $sql .= ", Img='$img'";
+        }
+    
+        $sql .= " WHERE ID = $employeeID";
+    
+        $result = $this->db->query($sql);
+        
+        if ($result) {
+            echo "Query executed successfully";
+        } else {
+        }
+    
+        return $result;
+    }
+    
     public function deleteEmployee()
     {
         $sql = "DELETE from employee where ID =" . $_SESSION['ID'];
