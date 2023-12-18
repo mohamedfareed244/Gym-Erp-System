@@ -4,7 +4,7 @@ require_once("Controller.php");
 include_once "../Models/EmployeeModel.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-session_start();
+if(session_status() === PHP_SESSION_NONE) session_start();
 
 class EmployeeController extends Controller
 {

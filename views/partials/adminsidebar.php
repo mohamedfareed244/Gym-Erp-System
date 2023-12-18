@@ -14,7 +14,7 @@
 </style> -->
 
 <?php 
-session_start();
+if(session_status() === PHP_SESSION_NONE) session_start();
 require "../Controllers/EmployeeController.php";
 $model = new Employee();
 $emp= new EmployeeController($model);
