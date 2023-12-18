@@ -15,24 +15,6 @@
     <script src="https://kit.fontawesome.com/3472d45ca0.js" crossorigin="anonymous"></script>
     <!--css/icons/boostrap/jquery/fonts/images end-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-
-    <style>
-    #confirm-package-button {
-        transform: translateX(-85px);
-    }
-
-    button {
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-        text-decoration: none;
-
-    }
-    </style>
 </head>
 
 <body>

@@ -235,10 +235,10 @@ class AssignedClass extends Model
     {
         $results = array();
 
-        $sql = "SELECT assignedclass.CoachID,assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, class.Name
+        $sql = "SELECT assignedclass.CoachID, assignedclass.Date, assignedclass.StartTime, assignedclass.EndTime, class.Name
         FROM assignedclass
         INNER JOIN class ON class.ID = assignedclass.ClassID 
-        WHERE assignedclass.CoachID = '$coachID'";
+        WHERE assignedclass.CoachID = '$coachID' AND assignedclass.Date > CURDATE()";
 
         $result = $this->db->query($sql);
 
@@ -286,10 +286,9 @@ class AssignedClass extends Model
     }
 
     // Function to get formatted start time
-    public function getFormattedStartTime($classDetail)
+    public function getFormattedTime($Time)
     {
-        $startTime = new DateTime($classDetail['StartTime']);
-        $startformattedDate = $startTime->format("H:i");
+        $startformattedDate = $Time->format("H:i");
         return $startformattedDate;
     }
 
@@ -298,7 +297,7 @@ class AssignedClass extends Model
     {
 
         $currentDateTime = strtotime(date("Y-m-d H:i")); // Current date and time
-        $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $this->getFormattedStartTime($classDetail)); // Class start date and time
+        $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $this->getFormattedTime($classDetail['StartTime'])); // Class start date and time
         return $currentDateTime <= $classStartDateTime;
     }
 }

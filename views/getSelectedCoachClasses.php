@@ -38,6 +38,7 @@ if (isset($_POST['coachId'])) {
         $response .= "<td>" . $endformattedDate . "</td>";
         $response .= "<td>" . $result['Date'] . "</td>";
         $response .= "</tr>";
+        
     }
     $response .= "</tbody>";
     $response .= "<br>";
