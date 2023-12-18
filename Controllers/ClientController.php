@@ -422,7 +422,7 @@ class ClientController extends Controller
     public function editClientAdmin()
     {
         $isValid = true;
-        $fnameErr = $lnameErr = $emailErr = $allErr = $phonenoErr = "";
+        $fnameErr = $lnameErr = $emailErr  = $phonenoErr = "";
         if (isset($_POST['clientInfo'])) {
             $clientInfo = $_POST['clientInfo'];
             $ID = $clientInfo['client_id'];

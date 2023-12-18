@@ -153,8 +153,7 @@
                                 $('.alert').removeClass("show");
                                 $('.alert').addClass("hide");
                             });
-                        
-                        
+                    
                     },
                     error: function () {
                         console.log("Something went wrong");
