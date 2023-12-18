@@ -19,9 +19,7 @@ require "../Controllers/EmployeeController.php";
 $model = new Employee();
 $emp= new EmployeeController($model);
 $result=$emp->get_emp_auth(3);
-foreach($result as $res){
-    echo $res["Header"];
-}
+
 ?>
 <div class="sidebar close">
 
