@@ -13,7 +13,16 @@
 
 </style> -->
 
-
+<?php 
+session_start();
+require "../Controllers/EmployeeController.php";
+$model = new Employee();
+$emp= new EmployeeController($model);
+$result=$emp->get_emp_auth(4);
+foreach($result as $res){
+    echo $res["Header"];
+}
+?>
 <div class="sidebar close">
 
     <div class="logo-details">

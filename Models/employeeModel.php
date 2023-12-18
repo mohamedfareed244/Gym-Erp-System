@@ -313,6 +313,12 @@ class Employee extends Model
 
         return $result;
     }
+    public function get_emp_auth($id){
+        $sql ="SELECT authority.Header,authority.FriendlyName,authority.LinkAddress FROM authority JOIN `employee authorities` as empauth on empauth.AuthorityID=authority.ID where empauth.JobTitleID =$id";
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
 
 }
 

@@ -392,6 +392,12 @@ class EmployeeController extends Controller
             }
         }
     }
+    public function get_emp_auth($id){
+        
+        $Employee = new Employee();
+            $result = $Employee->get_emp_auth($id);
+            return $result;
+    }
 }
 
 
