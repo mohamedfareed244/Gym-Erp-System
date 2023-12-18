@@ -437,10 +437,15 @@ class Memberships extends Model
                 $interval = $currDate->diff($freezeStartDate);
                 $days = $interval->days;
 
-                // Calculate new end date by adding months and days
+                $oldFreezeDuration = $freezeEndDate->diff($freezeStartDate);
+                $freezeDays = $oldFreezeDuration->days;
+                $newFreezeDuration = $days;
+                $difference = $freezeDays - $newFreezeDuration - 1;
+                $newFreezeCount = $membership->freezeCount + $difference;
+
                 $numOfMonths = $Package->getNumOfMonths();
                 $newEndDate = date("Y-m-d", strtotime($membership->startDate . " +$numOfMonths months +$days days"));
-                $sql = "UPDATE `membership` SET EndDate='$newEndDate', Freezed = 0 WHERE ID='$membershipId'";
+                $sql = "UPDATE `membership` SET EndDate='$newEndDate',FreezeCount = '$newFreezeCount', Freezed = 0 WHERE ID='$membershipId'";
                 $result = $this->db->query($sql);
 
                 $sql2 = "DELETE FROM scheduled_unfreeze WHERE `membership_id` = '$membershipId'";
