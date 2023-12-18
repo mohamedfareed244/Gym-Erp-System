@@ -24,9 +24,16 @@ class Report extends Model{
         return $sum;
     }
     function getsoldpt($start,$end){
-        $sql="Select `private training package`.Title , `private training package`.Name, `private training package`.Price ,count(`private training package`.ID) as total  FROM `private training package` join `private training membership`  on `private training package`.ID=`private training membership`.PrivateTrainingPackageID where `private training membership`.date BETWEEN '$start' AND '$end' 
-        GROUP BY `private training membership`.PrivateTrainingPackageID ";
+      
+        $sql="SELECT ptpck.ID, ptpck.Name, ptpck.Price, COUNT(ptpck.ID) as total  
+        FROM `private training package` ptpck
+        JOIN `private training membership` ptmem ON ptpck.ID = ptmem.PrivateTrainingPackageID 
+        WHERE ptmem.date BETWEEN '$start' AND '$end'
+        GROUP BY ptmem.PrivateTrainingPackageID;
+         ";
+    
        $result=$this->db->query($sql);
+   
        return $result;
     }
     function gettotalsalespt($start,$end){
@@ -40,4 +47,5 @@ class Report extends Model{
         return $sum;
     }
 }
+
 ?>
