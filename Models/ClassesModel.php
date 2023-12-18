@@ -131,7 +131,19 @@ class Classes extends Model
 
         return $days;
     }
-
+    
+    function generateDayCheckboxes($startDate, $numDays = 7)
+    {
+        for ($i = 0; $i < $numDays; $i++) {
+            $date = date('Y-m-d', strtotime("+$i day", strtotime($startDate)));
+            $dayName = date('l', strtotime($date));
+    
+            echo '<div class="form-check form-switch">';
+            echo '<input class="form-check-input" type="checkbox" id="flexSwitchCheck' . $i . '" name="days[]" value="' . $dayName . '">';
+            echo '<label class="form-check-label" for="flexSwitchCheck' . $i . '">' . $dayName . '</label>';
+            echo '</div>';
+        }
+    }
 
 }
 ?>

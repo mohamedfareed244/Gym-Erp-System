@@ -26,6 +26,7 @@
     <?php
     session_start();
     require("partials/adminsidebar.php");
+    include_once "../Models/ClassesModel.php";
     ?>
     <div id="add-body">
         <div class="container">
@@ -70,23 +71,8 @@
                         <label for="days">Select Day(s):</label>
                         <div class="col-m-8">
                             <?php
-                            // Get tomorrow's date
-                            $tomorrow = date('Y-m-d', strtotime('+1 day'));
-
-                            // Loop through the next 7 days
-                            for ($i = 0; $i < 7; $i++) {
-                                // Generate the date for each day
-                                $date = date('Y-m-d', strtotime("+$i day", strtotime($tomorrow)));
-
-                                // Get the day name
-                                $dayName = date('l', strtotime($date));
-
-                                // Display the day name and date
-                                echo '<div class="form-check form-switch">';
-                                echo '<input class="form-check-input" type="checkbox" id="flexSwitchCheck' . $i . '" name="days[]" value="' . $dayName . '">';
-                                echo '<label class="form-check-label" for="flexSwitchCheck' . $i . '">' . $dayName . '</label>';
-                                echo '</div>';
-                            }
+                             $Classes = new Classes();
+                             $Classes->generateDayCheckboxes($tomorrow, 7);
                             ?>
                             <br>
 
