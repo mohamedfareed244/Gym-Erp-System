@@ -39,7 +39,6 @@
 <table class="table">
 <thead>
     <tr>
-
         <td class="col"> CLient Id  </td>
         <td class="col"> CLient Name</td>
         <td class="col"> CLient Phone </td>

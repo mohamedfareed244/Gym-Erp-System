@@ -300,15 +300,20 @@ class AssignedClass extends Model
         $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $this->getFormattedTime($classDetail['StartTime'])); // Class start date and time
         return $currentDateTime <= $classStartDateTime;
     }
+    public function get_clients_inclass ($classnum){
+
+        $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$classnum";
+        $result = $this->db->query($sql);
+        return $result;
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
 
     $num = $_GET["x"];
 
-    $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
-
-    $result = $this->db->query($sql);
+$class=new AssignedClass();
+    $result = $class->get_clients_inclass($num);
     $word = '';
     if (mysqli_num_rows($result) <= 0) {
         echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
