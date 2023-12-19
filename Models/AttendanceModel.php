@@ -107,5 +107,4 @@ foreach($result as $res){
     }
     
 }
-$a=new Attendance();
-echo $a->countdays(2);
+

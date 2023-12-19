@@ -28,6 +28,10 @@
     <?php
     session_start();
     require("partials/adminsidebar.php");
+    require ("../Models/AttendanceModel.php");
+    $a=new Attendance();
+    //to get the total attended days in this month 
+    $counter=$a->countdays($_SESSION["ID"]);
     ?>
 
     <div id="add-body" class="addbody">
@@ -88,6 +92,7 @@
                         </div>
 
 
+
                         <div class="col-lg-4 col-sm-12">
                             <label for="name">Password: </label>
                         </div>
@@ -97,8 +102,10 @@
                             <label for="name">Confirm Password: </label>
                         </div>
                         <input type="password" name="confpassword" style="margin-bottom:20px">
-
-
+                        <div class="col-lg-4 col-sm-12">
+                            <label for="name">Attended days : </label>
+                        </div>
+                        <input type="text" name="counted_days" style="margin-bottom:20px" readonly value="<?php echo $counter?>">
 
                         <div id="success">
                             <?php echo isset($_SESSION["success"]) ? $_SESSION["success"] : ''; ?>
