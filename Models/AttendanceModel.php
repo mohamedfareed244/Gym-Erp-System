@@ -87,4 +87,25 @@ class Attendance extends Model
         }
         return;
     }
+    public function countdays($id){
+        date_default_timezone_set('Africa/Cairo');
+       
+       $date = new DateTime();
+
+$x=date('d')-1;
+$interval = new DateInterval('P'.$x.'D'); 
+$date->sub($interval);
+$currdate=date('Y-m-d');
+// Get the updated date
+$updatedDate = $date->format('Y-m-d');
+
+$sql ="select count(ID) as num from attendance where ID =$id and Day between '$updatedDate' and '$currdate' and status =1";
+$result=$this->db->query($sql);
+foreach($result as $res){
+    return $res["num"];
 }
+    }
+    
+}
+$a=new Attendance();
+echo $a->countdays(2);
