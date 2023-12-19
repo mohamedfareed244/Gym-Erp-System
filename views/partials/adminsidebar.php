@@ -70,6 +70,7 @@ $result = $emp->get_emp_auth(3);
 
         foreach ($result as $res) {
             if ($res["Header"] === 'Coaches') {
+               
                 if (!$coachesSectionOutput) {
                     echo "<li>
                 <div class='icon-link'>

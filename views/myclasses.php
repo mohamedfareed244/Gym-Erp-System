@@ -64,7 +64,7 @@
     include_once "../Models/CoachesModel.php";
     include_once "../Models/ReservedClassModel.php";
     $Coach = new Coach();
- $result=$Coach->getClassesForCoach(3);
+ $result=$Coach->getClassesForCoach($_SESSION["ID"]);
  if(mysqli_num_rows($result)<=0){
     echo "<h2> There Are no Available Classes </h2>";
     exit();
