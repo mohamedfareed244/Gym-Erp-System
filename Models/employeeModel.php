@@ -263,13 +263,6 @@ class Employee extends Model
     
         return $result;
     }
-    
-    public function deleteEmployee()
-    {
-        $sql = "DELETE from employee where ID =" . $_SESSION['ID'];
-
-        return $this->db->query($sql);
-    }
 
     public function deleteEmployeeById($employeeID)
     {
@@ -309,12 +302,6 @@ class Employee extends Model
     {
 
         $sql = "SELECT * FROM job_titles";
-        $result = $this->db->query($sql);
-
-        return $result;
-    }
-    public function get_emp_auth($id){
-        $sql ="SELECT authority.Header,authority.FriendlyName,authority.LinkAddress FROM authority JOIN `employee authorities` as empauth on empauth.AuthorityID=authority.ID where empauth.JobTitleID =$id";
         $result = $this->db->query($sql);
 
         return $result;

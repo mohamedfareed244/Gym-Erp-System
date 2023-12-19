@@ -170,20 +170,6 @@ class ptMemberships extends Model
         }
     }
 
-    public function ExistingPtMembership($clientID)
-    {
-        $Client = new Client();
-        $findClient = $Client->checkClient($clientID);
-        if ($findClient) {
-            $sql = "SELECT * FROM `private training memebrship` WHERE ClientID = $clientID";
-            $result = $this->db->query($sql);
-            if ($result && $result->num_rows > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public function addPtMembershipForClient($clientID, $ptPackageID, $coachID)
     {
         $Client = new Client();

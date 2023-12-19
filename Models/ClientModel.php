@@ -264,12 +264,6 @@ class Client extends Model
         }
     }
 
-    public function getClientid($client)
-    {
-        $sql = "SELECT ID FROM client WHERE Email='$client->Email'";
-        return $this->db->query($sql);
-    }
-
     public function checkExistingEmail($email)
     {
         $sql = "SELECT * FROM client WHERE Email = '$email'";
@@ -277,22 +271,9 @@ class Client extends Model
         return $result->num_rows > 0;
     }
 
-    public function checkExistingPhone($phone)
-    {
-
-        $sql = "SELECT * FROM client WHERE Phone = '$phone'";
-        $result = $this->db->query($sql);
-        return $result->num_rows > 0;
-    }
-
     public function checkIfClientExists($email)
     {
         $sql = "SELECT * FROM client WHERE Email = '$email'";
-        return $this->db->query($sql);
-    }
-    public function getclientbyphone($phone)
-    {
-        $sql = "SELECT * FROM client WHERE Phone = '$phone'";
         return $this->db->query($sql);
     }
 

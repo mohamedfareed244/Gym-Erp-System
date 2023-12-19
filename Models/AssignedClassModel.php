@@ -170,27 +170,6 @@ class AssignedClass extends Model
     }
 
 
-    public function updateAssignedClass($class)
-    {
-        $ClassID = $class->ClassID;
-        $Date = $class->Date;
-        $StartTime = $class->StartTime;
-        $EndTime = $class->EndTime;
-        $Price = $class->Price;
-        $CoachID = $class->CoachID;
-        $NumOfAttendants = $class->NumOfAttendants;
-
-
-        $class_id = $_SESSION['ID'];
-
-        // Update with the new password
-        $sql = "UPDATE assignedclass SET ClassID='$ClassID', Date='$Date', StartTime= '$StartTime', EndTime='$EndTime', Price='$Price', CoachID='$CoachID' ,
-            NumOfAttendants='$NumOfAttendants'
-                    WHERE ID = $class_id";
-        return $this->db->query($sql);
-    }
-
-
     public function deleteClass($classID, $coachID, $date)
     {
         $sql = "DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";
@@ -300,20 +279,15 @@ class AssignedClass extends Model
         $classStartDateTime = strtotime($classDetail['Date'] . ' ' . $this->getFormattedTime($classDetail['StartTime'])); // Class start date and time
         return $currentDateTime <= $classStartDateTime;
     }
-    public function get_clients_inclass ($classnum){
-
-        $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$classnum";
-        $result = $this->db->query($sql);
-        return $result;
-    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
 
     $num = $_GET["x"];
 
-$class=new AssignedClass();
-    $result = $class->get_clients_inclass($num);
+    $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
+
+    $result = $this->db->query($sql);
     $word = '';
     if (mysqli_num_rows($result) <= 0) {
         echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
