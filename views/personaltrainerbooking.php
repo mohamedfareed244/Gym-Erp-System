@@ -41,7 +41,7 @@
                 <button type="submit" name="CoachID" value="<?php echo $coach['CoachID']; ?>" class="card-button">
                     <div class="card">
                         <?php if (isset($coach)): ?>
-                        <img src="../<?php echo $coach['Img']; ?>" class="imgslides">
+                        <img src="<?php echo $coach['Img']; ?>" class="imgslides"style= "width:200px;">
                         <h3><?php echo $coach['Name']; ?></h3>
                         <?php endif; ?>
                     </div>

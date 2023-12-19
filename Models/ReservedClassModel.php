@@ -114,7 +114,7 @@ class ReservedClass extends Model
 
     public function ReservationNotFreeClass($CoachID, $AssignedClassID, $ClientID)
     {
-        $isActivated = "Not Activated";
+        $isActivated = "Activated";
 
         $checkSql1 = "SELECT * FROM `reserved class` WHERE AssignedClassID = '$AssignedClassID' AND CoachID = '$CoachID' AND ClientID = '$ClientID'";
         $checkResult1 = $this->db->query($checkSql1);
@@ -125,6 +125,7 @@ class ReservedClass extends Model
         $hasActiveMembership = mysqli_num_rows($checkResult2) > 0;
 
         if (!$alreadyExists && $hasActiveMembership) {
+            $isActivated = "Not Activated";
             $sql = "INSERT INTO `reserved class` (AssignedClassID,CoachID,ClientID,isActivated) VALUES ('$AssignedClassID','$CoachID','$ClientID','$isActivated')";
             $insertResult = $this->db->query($sql);
 
