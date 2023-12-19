@@ -1,6 +1,7 @@
 <?php
 
 require_once("Model.php");
+require_once("UsersModel.php");
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);

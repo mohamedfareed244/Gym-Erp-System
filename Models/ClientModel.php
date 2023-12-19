@@ -21,7 +21,8 @@ class Client extends Users implements Observer
     public $HasMembership;
     public $HasPtPackage;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -107,16 +108,16 @@ class Client extends Users implements Observer
             $clientData = $result->fetch_assoc();
 
             $client = new Client();
-            $client['ID'] = $clientData['ID'];
-            $client->FirstName = $clientData['FirstName'];
-            $client->LastName = $clientData['LastName'];
-            $client['Email'] = $clientData['Email'];
-            $client['Password'] = $clientData['Password'];
-            $client['PhoneNumber'] = $clientData['Phone'];
-            $client->Age = $clientData['Age'];
-            $client->Gender = $clientData['Gender'];
-            $client->Height = $clientData['Height'];
-            $client->Weight = $clientData['Weight'];
+            $client->setID($clientData['ID']);
+            $client->setFirstName($clientData['FirstName']);
+            $client->setLastName($clientData['LastName']);
+            $client->setEmail($clientData['Email']);
+            $client->setPassword($clientData['Password']);
+            $client->setPhoneNumber($clientData['Phone']);
+            $client->setAge($clientData['Age']);
+            $client->setGender($clientData['Gender']);
+            $client->setHeight($clientData['Height']);
+            $client->setWeight($clientData['Weight']);
 
             return $client;
         } else {
@@ -157,16 +158,16 @@ class Client extends Users implements Observer
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $client = new Client();
-                $client['ID'] = $row['ID'];
-                $client->FirstName = $row['FirstName'];
-                $client->LastName = $row['LastName'];
-                $client['Email'] = $row['Email'];
-                $client['Password'] = $row['Password'];
-                $client['PhoneNumber'] = $row['Phone'];
-                $client->Age = $row['Age'];
-                $client->Gender = $row['Gender'];
-                $client->Height = $row['Height'];
-                $client->Weight = $row['Weight'];
+                $client->setID($row['ID']);
+                $client->setFirstName($row['FirstName']);
+                $client->setLastName($row['LastName']);
+                $client->setEmail($row['Email']);
+                $client->setPassword($row['Password']);
+                $client->setPhoneNumber($row['Phone']);
+                $client->setAge($row['Age']);
+                $client->setGender($row['Gender']);
+                $client->setHeight($row['Height']);
+                $client->setWeight($row['Weight']);
                 $client->HasMembership = $row['HasMembership'];
                 $client->HasPtPackage = $row['HasPtPackage'];
                 $clients[] = $client;
@@ -179,16 +180,16 @@ class Client extends Users implements Observer
     public function addClient($client)
     {
         try {
-            $Fname = $client->FirstName;
-            $Lname = $client->LastName;
-            $Age = $client->Age;
-            $Gender = $client->Gender;
-            $Phone = $client->Phone;
-            $Height = $client->Height;
-            $Weight = $client->Weight;
-            $Email = $client->Email;
+            $Fname = $client->getFirstName();
+            $Lname = $client->getLastName();
+            $Age = $client->getAge();
+            $Gender = $client->getGender();
+            $Phone = $client->getPhoneNumber();
+            $Height = $client->getHeight();
+            $Weight = $client->getWeight();
+            $Email = $client->getEmail();
             $Password = ConfirmationMailer::generateRandomPassword();
-            $Phone = $client->Phone;
+            $Phone = $client->getPhoneNumber();
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
             $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
@@ -204,16 +205,16 @@ class Client extends Users implements Observer
     public function addClientUserSide($client)
     {
         try {
-            $Fname = $client->FirstName;
-            $Lname = $client->LastName;
-            $Age = $client->Age;
-            $Gender = $client->Gender;
-            $Phone = $client->Phone;
-            $Height = $client->Height;
-            $Weight = $client->Weight;
-            $Email = $client->Email;
-            $Password = $client->Password;
-            $Phone = $client->Phone;
+            $Fname = $client->getFirstName();
+            $Lname = $client->getLastName();
+            $Age = $client->getAge();
+            $Gender = $client->getGender();
+            $Phone = $client->getPhoneNumber();
+            $Height = $client->getHeight();
+            $Weight = $client->getWeight();
+            $Email = $client->getEmail();
+            $Password = $client->getPassword();
+            $Phone = $client->getPhoneNumber();
 
             $sql = "INSERT INTO client (FirstName, LastName, Age, Gender, Weight, Height, Email, Password,Phone) 
             VALUES ('$Fname', '$Lname', '$Age', '$Gender', '$Weight', '$Height', '$Email', '$Password','$Phone')";
@@ -239,11 +240,11 @@ class Client extends Users implements Observer
 
     public function updateClient($client)
     {
-        $Fname = $client->FirstName;
-        $Lname = $client->LastName;
-        $Phone = $client->Phone;
-        $Email = $client->Email;
-        $Password = $client->Password;
+        $Fname = $client->getFirstName();
+        $Lname = $client->getLastName();
+        $Phone = $client->getPhone();
+        $Email = $client->getEmail();
+        $Password = $client->getPassword();
 
         $user_id = $_SESSION['ID'];
         // Check if a new password is provided
@@ -263,43 +264,44 @@ class Client extends Users implements Observer
     public function editClient($client)
     {
         $clientInfo = new Client();
-        $clientInfo = $clientInfo->getClientByID($client->ID);
+        $clientInfo = $clientInfo->getClientByID($client->getID());
 
-        if (!empty($client->FirstName)) {
-            $clientInfo->setFirstName($client->FirstName);
+        if (!empty($client->getFirstName())) {
+            $clientInfo->setFirstName($client->getFirstName());
         }
 
-        if (!empty($client->LastName)) {
-            $clientInfo->setLastName($client->LastName);
+        if (!empty($client->getLastName())) {
+            $clientInfo->setLastName($client->getLastName());
         }
 
-        if (!empty($client->Phone)) {
-            $clientInfo->setPhoneNumber($client->Phone);
+        if (!empty($client->getPhoneNumber())) {
+            $clientInfo->setPhoneNumber($client->getPhoneNumber());
         }
 
-        if (!empty($client->Email)) {
-            $clientInfo->setEmail($client->Email);
+        if (!empty($client->getEmail())) {
+            $clientInfo->setEmail($client->getEmail());
         }
 
-        if (!empty($client->Weight)) {
-            $clientInfo->setWeight($client->Weight);
+        if (!empty($client->getWeight())) {
+            $clientInfo->setWeight($client->getWeight());
         }
 
-        if (!empty($client->Height)) {
-            $clientInfo->setHeight($client->Height);
+        if (!empty($client->getHeight())) {
+            $clientInfo->setHeight($client->getHeight());
         }
-        if (!empty($client->Age)) {
-            $clientInfo->setAge($client->Age);
+        if (!empty($client->getAge())) {
+            $clientInfo->setAge($client->getAge());
         }
 
-        $clientID = $client->ID;
-        $Fname = $clientInfo->FirstName;
-        $Lname = $clientInfo->LastName;
-        $Phone = $clientInfo['PhoneNumber'];
-        $Email = $clientInfo['Email'];
-        $Height = $clientInfo->Height;
-        $Weight = $clientInfo->Weight;
-        $Age = $clientInfo->Age;
+        $clientID = $client->getID();
+        $Fname = $clientInfo->getFirstName();
+        $Lname = $clientInfo->getLastName();
+        $Email = $clientInfo->getEmail();
+        $Height = $clientInfo->getHeight();
+        $Weight = $clientInfo->getWeight();
+        $Age = $clientInfo->getAge();
+        $Phone = $clientInfo->getPhoneNumber();
+        
 
         $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone', Email='$Email' , Age='$Age', Weight='$Weight', Height = '$Height'
                 WHERE ID = $clientID";
@@ -307,7 +309,7 @@ class Client extends Users implements Observer
         $result = $this->db->query($sql);
         if ($result) {
             echo "Query executed successfully";
-        } 
+        }
         return $result;
     }
 
@@ -337,4 +339,3 @@ class Client extends Users implements Observer
         }
     }
 }
-?>
