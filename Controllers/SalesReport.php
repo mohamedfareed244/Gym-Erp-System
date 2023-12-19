@@ -29,7 +29,31 @@ $word.="
     </td>
 </tr>";
 }
-$data=array('data'=>$word,'sum'=>$obj->gettotalsales($start,$end));
+$word2="";
+$result2=$obj->getsoldpt($start,$end);
+foreach($result2 as $res){
+   
+    $word2.="<tr>
+    <td>";
+    $word2.=$res["ID"];
+    $word2.="
+    </td>
+        <th scope='row'>";
+    
+       $word2.=$res["Name"];
+       $word2.="</th>
+        <td>EGP";
+        $word2.= $res["Price"];
+        
+        $word2.="</td>
+        <td>";
+        $word2.= $res["total"];
+        $word2.="
+        </td>
+    </tr>";
+    }
+
+$data=array('packages'=>$word,'sum_packages'=>$obj->gettotalsales($start,$end),'sum_pt'=>$obj->gettotalsalespt($start,$end),'pt'=>$word2);
 $jsonData = json_encode($data);
 
 

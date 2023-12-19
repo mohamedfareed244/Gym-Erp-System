@@ -15,6 +15,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
     <link rel="stylesheet" type="text/css" href="../public/CSS/addclient.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../public/CSS/alert.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" type="text/css"
@@ -85,23 +86,20 @@
                                         echo '<td class="status-' . $membership->getID() . ' bg">Active</td>';
                                         echo '<td><button id="freezeBtn-' . $membership->getID() . '" class="btn btn-freeze" onclick="showDatePickerModal(' . $membership->getID() . ')">Freeze</button></td>
                                 '; ?>
-                        <div class="modal" id="datePickerModal-<?php echo $membership->getID() ?>">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn"
-                                        onclick="hideDatePickerModal(<?php echo $membership->getID() ?>)">&times;</span>
-                                    <div>
-                                        <label for="datepicker">Choose a Date:</label>
-                                        <input type="date" id='datepicker-<?php echo $membership->getID() ?>'
-                                            min="<?= date('Y-m-d', strtotime('+3 day')); ?>"
-                                            max="<?= date('Y-m-d', strtotime('+' . $membership->getFreezeCount() . 'day')); ?>">
-                                    </div>
-                                    <button class="btn btn-primary"
-                                        onclick='freezeMembership(<?php echo $membership->getID() ?>)'>Freeze</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
+                                                                        <div class="modal" id="datePickerModal-<?php echo $membership->getID() ?>">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <span class="close-btn" onclick="hideDatePickerModal(<?php echo $membership->getID() ?>)">&times;</span>
+                                                                                    <div>
+                                                                                        <label for="datepicker">Choose a Date:</label>
+                                                                                        <input type="date" id='datepicker-<?php echo $membership->getID() ?>' min="<?= date('Y-m-d', strtotime('+3 day')); ?>" max="<?= date('Y-m-d', strtotime('+' . $membership->getFreezeCount() . 'day')); ?>">
+                                                                                    </div>
+                                                                                    <button class="btn btn-primary"
+                                                                                        onclick='freezeMembership(<?php echo $membership->getID() ?>)'>Freeze</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php
                                     } else {
                                         echo '<td class="status-' . $membership->getID() . ' bg">Freezed</td>';
                                         echo '<td><button id="unfreezeBtn-' . $membership->getID() . '" class="btn btn-unfreeze" onclick="unfreezeMembership(' . $membership->getID() . ')">Unfreeze</button></td>';
@@ -110,20 +108,19 @@
                                     echo '<td>' . $membership->getprivateTrainingSessionsCount() . '</td>';
                                     echo '<td>' . $membership->getinbodyCount() . '</td>';
                                     echo "<td><button class=\"btn btn-delete\" onclick='showDeleteModal()'>Delete</button></td>"; ?>
-                        <div class="modal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
-                                    <div>
-                                        <label>Are you sure you want to cancel this membership?</label>
-                                    </div>
-                                    <button class="btn btn-delete"
-                                        onclick='deleteMembership(<?php echo $membership->getID() ?>)'
-                                        style="background-color:red">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php echo '</tr>';
+                                                            <div class="modal" id="deleteModal">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <span class="close-btn" onclick="hideDeleteModal()">&times;</span>
+                                                                        <div>
+                                                                        <label >Are you sure you want to cancel this membership?</label>
+                                                                        </div>
+                                                                        <button class="btn btn-delete"
+                                                                            onclick='deleteMembership(<?php echo $membership->getID() ?>)' style="background-color:red">Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php echo '</tr>';
                                 }
                             }
                         } else {
@@ -133,6 +130,13 @@
                 </table>
             </div>
             <hr>
+            <div class="alert hide"> 
+                    <span class="fas fa-check-circle"></span>
+                    <span class="msg"></span>
+                    <div class="close-btn">
+                        <span class="fas fa-times"></span>
+                    </div>
+             </div>
         </div>
     </div>
 
@@ -157,7 +161,7 @@
     }
 
     function freezeMembership(membershipID) {
-        var selectedDate = $('#datepicker-' + membershipID).val();
+        var selectedDate = $('#datepicker-'+membershipID).val();
         console.log(selectedDate);
 
         console.log('Selected Date:', selectedDate);
@@ -181,6 +185,7 @@
                     '" class="btn btn-unfreeze" onclick="unfreezeMembership(' + membershipID +
                     ')">Unfreeze</button>';
                 $('#freezeBtn-' + membershipID).replaceWith(unfreezeButton);
+                showSuccessAlert("Frozen successfully");
             },
             error: function(xhr, status, error) {
                 console.error("AJAX error: " + status + " - " + error);
@@ -207,6 +212,7 @@
                 var freezeButton = '<button id="freezeBtn-' + membershipID +
                     '" class="btn btn-freeze" onclick="showDatePickerModal()">Freeze</button>';
                 $('#unfreezeBtn-' + membershipID).replaceWith(freezeButton);
+                showSuccessAlert("Unfrozen successfully");
             },
             error: function(xhr, status, error) {
                 console.error("AJAX error: " + status + " - " + error);
@@ -215,19 +221,17 @@
     }
 
     function showDatePickerModal(membership) {
-        $('#datePickerModal-' + membership).fadeIn();
+        $('#datePickerModal-'+membership).fadeIn();
 
     }
-
     function hideDatePickerModal(membership) {
-        $('#datePickerModal-' + membership).fadeOut();
+        $('#datePickerModal-'+membership).fadeOut();
     }
-
+    
     function showDeleteModal() {
         $('#deleteModal').fadeIn();
 
     }
-
     function hideDeleteModal() {
         $('#deleteModal').fadeOut();
     }
@@ -253,12 +257,14 @@
                     var tableRow = document.getElementById('row-' + membershipID);
                     if (tableRow) {
                         tableRow.parentNode.removeChild(tableRow);
+                        // showSuccessAlert("Deleted successfully", "#FF0000");
                     } else {
                         console.log("Error.");
                     }
                 } else {
                     console.log("Error deleting client.");
                 }
+                
             },
             error: function(xhr, status, error) {
                 console.error("AJAX error: " + status + " - " + error);
@@ -266,6 +272,19 @@
         });
         showDeleteModal();
     }
+    function showSuccessAlert(message, backgroundColor = "#4CAF50") {
+            $('.alert').removeClass("hide");
+            $('.alert').addClass("show");
+            $('.alert').addClass("showAlert");
+            $('.msg').text(message);
+            $('.alert').css("background-color", backgroundColor);
+            $('.alert .close-btn').css("background-color", backgroundColor);
+
+            setTimeout(function() {
+                $('.alert').removeClass("show");
+                $('.alert').addClass("hide");
+            }, 5000);
+        }
     </script>
 </body>
 
