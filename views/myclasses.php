@@ -39,9 +39,9 @@
 <table class="table">
 <thead>
     <tr>
-        <td class="col"> CLient Id  </td>
-        <td class="col"> CLient Name</td>
-        <td class="col"> CLient Phone </td>
+        <td class="col"> Client ID </td>
+        <td class="col"> Client Name</td>
+        <td class="col"> Client Phone Number </td>
         <td class="col"> Attend</td>
     </tr>
 </thead>

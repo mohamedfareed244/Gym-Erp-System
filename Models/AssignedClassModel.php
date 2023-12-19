@@ -126,6 +126,11 @@ class AssignedClass extends Model
         $this->AvailablePlaces = $AvailablePlaces;
     }
 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
     // Getters and Setters End
 
 
@@ -287,10 +292,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
 
     $sql = "SELECT c.ID,CONCAT(FirstName,'    ',LastName) as Name , Phone  from `client` c join `reserved class` on CLientID=c.ID where AssignedClassID=$num";
 
-    $result = $this->db->query($sql);
+    $assignedClass = new AssignedClass();
+    $result = $assignedClass->getDb()->query($sql);
     $word = '';
     if (mysqli_num_rows($result) <= 0) {
-        echo "<tr><td colspan='4'>NO CLients In This Class</td></tr>";
+        echo "<tr><td colspan='4'>No clients in this class</td></tr>";
     } else {
         foreach ($result as $res) {
             $word .= "<tr><td>";
@@ -310,3 +316,4 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET["x"])) {
     }
     exit();
 }
+
