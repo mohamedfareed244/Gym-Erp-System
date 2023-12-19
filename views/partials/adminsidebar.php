@@ -1,5 +1,9 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
+if(!isset($_SESSION["ID"])){
+header("Location: ../views/signin.php");
+exit();
+}
 require "../Controllers/EmployeeController.php";
 $model = new Employee();
 $emp = new EmployeeController($model);
@@ -217,7 +221,7 @@ $result = $emp->get_emp_auth(4);
                 </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link-name" href="../views/index.php">Logout</a></li>
+                <li><a class="link-name" href="../views/emp_logout.php">Logout</a></li>
             </ul>
         </li>
         <li>

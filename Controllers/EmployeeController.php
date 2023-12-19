@@ -181,7 +181,7 @@ class EmployeeController extends Controller
                     $_SESSION["Address"] = $row["Address"];
                     $_SESSION["JobTitle"] = $row["JobTitle"];
                     $_SESSION['Img'] = $row["Img"];
-                    header("Location: ../views/admindashboard.php?ID=$ID");
+                    header("Location: ../views/profile.php?ID=$ID");
                     exit();
                 } else {
                     // Password is incorrect
