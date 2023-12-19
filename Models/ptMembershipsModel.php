@@ -168,8 +168,9 @@ class ptMemberships extends Model
                 $packageMonths = $row['NumOfMonths'];
                 // add membership if active membership's number of months is greater than or equal to private training ackage minimum number of months
                 if ($packageMonths >= $PackageMinMonths) {
-                    $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated)
-                        VALUES ('$ClientID', '$CoachID', '$PackageID', '$Sessions', '$isActivated')";
+                    $current_date=date('Y-m-d');
+                    $sql = "INSERT INTO `private training membership`(ClientID, CoachID, PrivateTrainingPackageID, SessionsCount, isActivated,date)
+                        VALUES ('$ClientID', '$CoachID', '$PackageID', '$Sessions', '$isActivated','$current_date')";
                     $insertResult = $this->db->query($sql);
                     return array('noActiveMembership' => false,'alreadyThisMembershipExists' => false, 'alreadyAnotherMembershipExists' => false, 'success' => $insertResult, 'error' => false);
                 } else {
