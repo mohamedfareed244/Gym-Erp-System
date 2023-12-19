@@ -60,7 +60,7 @@ class Attendance extends Model
 
     public function getattendance($date)
     {
-        $sql = "SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=ID where Day ='$date' ";
+        $sql = "SELECT attendance.* ,e.Name,e.PhoneNumber,e.Email,e.JobTitle,e.ID from attendance join employee e on EmployeeId=e.ID where Day ='$date' ";
         $result = $this->db->query($sql);
 
         if ($result->num_rows <= 0) {
