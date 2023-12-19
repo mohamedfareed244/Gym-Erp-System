@@ -217,7 +217,7 @@ $JobTitle = $model->getJobTitleByID($_SESSION["JobTitle"]);
         </li>
         <li>
             <div class="icon-link">
-                <a href="#">
+                <a href="../views/emp_logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="link-name">Logout</span>
                 </a>

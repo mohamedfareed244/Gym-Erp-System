@@ -1,8 +1,5 @@
 <?php
 session_start();
-    session_destroy();
-    header("Location: ../views/signin.php");
-
-
-
+session_destroy();
+header("Location:signin.php");
 ?>
