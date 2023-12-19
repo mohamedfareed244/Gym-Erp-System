@@ -86,7 +86,7 @@
                         echo "<tr id='row-" . $membership->getID() . "'>";
                         echo "<td>" . $membership->getID() . "</td>";
                         echo '<td> ' . $client->getFirstName() . ' ' . $client->getLastName() . ' </td>';
-                        echo '<td> ' . $client->getPhone() . ' </td>';
+                        echo '<td> ' . $client->getPhoneNumber() . ' </td>';
                         echo '<td>' . $membership->getpackageId() . '</td>';
                         echo '<td>' . $membership->getstartDate() . '</td>';
                         echo '<td class="endDate-' . $membership->getID() . '">' . $membership->getendDate() . '</td>';

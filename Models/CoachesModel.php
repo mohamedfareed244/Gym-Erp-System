@@ -4,12 +4,13 @@ error_reporting(E_ALL);
 
 require_once("Model.php");
 include_once "EmployeeModel.php";
+include_once "StaffModel.php";
 include_once "ClassesModel.php";
 include_once "ptPackageModel.php";
 
 include_once "../views/send_pw_email.php";
 
-class Coach extends Employee implements Observer
+class Coach extends Staff implements Observer
 {
 
     public function __construct() {

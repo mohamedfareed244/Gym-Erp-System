@@ -75,7 +75,7 @@
                             echo '<td> ' . $client->getGender() . '</td>';
                             echo '<td> ' . $client->getWeight() . '</td>';
                             echo '<td> ' . $client->getHeight() . '</td>';
-                            echo '<td> ' . $client->getPhone() . '</td>';
+                            echo '<td> ' . $client->getPhoneNumber() . '</td>';
                             if ($client->HasMembership == 'Yes' && $client->HasPtPackage == 'No') {
                                 echo '<td><button class="btn" disabled>Add</button></td>';
                                 echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';

@@ -2,6 +2,7 @@
 
 require_once("Model.php");
 require_once("ObserverModel.php");
+require_once("UsersModel.php");
 
 // include_once "../includes/dbh.inc.php";
 include_once "../views/send_pw_email.php";
@@ -9,36 +10,20 @@ include_once "../views/send_pw_email.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-class Client extends Model implements Observer
+class Client extends Users implements Observer
 {
-    private $ID;
     private $FirstName;
     private $LastName;
     private $Age;
     private $Gender;
-    private $Phone;
     private $Height;
     private $Weight;
-    private $Email;
-    private $Password;
     public $HasMembership;
     public $HasPtPackage;
 
-    function __construct()
-    {
-        $this->db = $this->connect();
+    public function __construct() {
+        parent::__construct();
     }
-
-    public function getID()
-    {
-        return $this->ID;
-    }
-
-    public function setID($ID)
-    {
-        $this->ID = $ID;
-    }
-
 
     public function setFirstName($FirstName)
     {
@@ -80,16 +65,6 @@ class Client extends Model implements Observer
         return $this->Gender;
     }
 
-    public function setPhone($Phone)
-    {
-        $this->Phone = $Phone;
-    }
-
-    public function getPhone()
-    {
-        return $this->Phone;
-    }
-
     public function setHeight($Height)
     {
         $this->Height = $Height;
@@ -108,21 +83,6 @@ class Client extends Model implements Observer
     public function getWeight()
     {
         return $this->Weight;
-    }
-
-    public function setEmail($Email)
-    {
-        $this->Email = $Email;
-    }
-
-    public function getEmail()
-    {
-        return $this->Email;
-    }
-
-    public function setPassword($Password)
-    {
-        $this->Password = $Password;
     }
 
     public function checkClient($clientID)
@@ -147,12 +107,12 @@ class Client extends Model implements Observer
             $clientData = $result->fetch_assoc();
 
             $client = new Client();
-            $client->ID = $clientData['ID'];
+            $client['ID'] = $clientData['ID'];
             $client->FirstName = $clientData['FirstName'];
             $client->LastName = $clientData['LastName'];
-            $client->Email = $clientData['Email'];
-            $client->Password = $clientData['Password'];
-            $client->Phone = $clientData['Phone'];
+            $client['Email'] = $clientData['Email'];
+            $client['Password'] = $clientData['Password'];
+            $client['PhoneNumber'] = $clientData['Phone'];
             $client->Age = $clientData['Age'];
             $client->Gender = $clientData['Gender'];
             $client->Height = $clientData['Height'];
@@ -197,12 +157,12 @@ class Client extends Model implements Observer
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $client = new Client();
-                $client->ID = $row['ID'];
+                $client['ID'] = $row['ID'];
                 $client->FirstName = $row['FirstName'];
                 $client->LastName = $row['LastName'];
-                $client->Email = $row['Email'];
-                $client->Password = $row['Password'];
-                $client->Phone = $row['Phone'];
+                $client['Email'] = $row['Email'];
+                $client['Password'] = $row['Password'];
+                $client['PhoneNumber'] = $row['Phone'];
                 $client->Age = $row['Age'];
                 $client->Gender = $row['Gender'];
                 $client->Height = $row['Height'];
@@ -314,7 +274,7 @@ class Client extends Model implements Observer
         }
 
         if (!empty($client->Phone)) {
-            $clientInfo->setPhone($client->Phone);
+            $clientInfo->setPhoneNumber($client->Phone);
         }
 
         if (!empty($client->Email)) {
@@ -335,8 +295,8 @@ class Client extends Model implements Observer
         $clientID = $client->ID;
         $Fname = $clientInfo->FirstName;
         $Lname = $clientInfo->LastName;
-        $Phone = $clientInfo->Phone;
-        $Email = $clientInfo->Email;
+        $Phone = $clientInfo['PhoneNumber'];
+        $Email = $clientInfo['Email'];
         $Height = $clientInfo->Height;
         $Weight = $clientInfo->Weight;
         $Age = $clientInfo->Age;

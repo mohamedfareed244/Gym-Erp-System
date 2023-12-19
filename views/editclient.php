@@ -70,7 +70,7 @@
                     <div class='col-lg-4 col-md-12'>
                         <label for='phone'>Phone: </label>
                     </div>
-                    <input type='text' name='phone' id='phone' value="<?php echo $Client->getPhone(); ?>">
+                    <input type='text' name='phone' id='phone' value="<?php echo $Client->getPhoneNumber(); ?>">
 
                     <div class='col-lg-4 col-md-12'>
                         <label for='gender'>Gender: </label>

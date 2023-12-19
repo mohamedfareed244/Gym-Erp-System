@@ -135,7 +135,7 @@
                                     <td><?php echo $client->getEmail()?></td>
                                     <td><?php echo $client->getAge()?></td>
                                     <td><?php echo $client->getGender()?></td>
-                                    <td><?php echo $client->getPhone()?></td>
+                                    <td><?php echo $client->getPhoneNumber()?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

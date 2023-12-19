@@ -1,117 +1,17 @@
 <?php
 
 require_once("Model.php");
+require_once("StaffModel.php");
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-class Employee extends Model
+class Employee extends Staff
 {
-    private $ID;
-    private $Name;
-    private $Email;
-    private $Password;
-    private $Salary;
-    private $JobTitle;
-    private $Address;
-    private $PhoneNumber;
-    private $Img;
 
-    function __construct()
-    {
-        $this->db = $this->connect();
+    public function __construct() {
+        parent::__construct();
     }
-
-    public function getID()
-    {
-        return $this->ID;
-    }
-
-    public function setID($ID)
-    {
-        $this->ID = $ID;
-    }
-
-    public function getName()
-    {
-        return $this->Name;
-    }
-
-    public function setName($Name)
-    {
-        $this->Name = $Name;
-    }
-
-    public function getEmail()
-    {
-        return $this->Email;
-    }
-
-    public function setEmail($Email)
-    {
-        $this->Email = $Email;
-    }
-
-    public function getPassword()
-    {
-        return $this->Password;
-    }
-
-    public function setPassword($Password)
-    {
-        $this->Password = $Password;
-    }
-
-    public function getSalary()
-    {
-        return $this->Salary;
-    }
-
-    public function setSalary($Salary)
-    {
-        $this->Salary = $Salary;
-    }
-
-    public function getJobTitle()
-    {
-        return $this->JobTitle;
-    }
-
-    public function setJobTitle($JobTitle)
-    {
-        $this->JobTitle = $JobTitle;
-    }
-
-    public function getAddress()
-    {
-        return $this->Address;
-    }
-
-    public function setAddress($Address)
-    {
-        $this->Address = $Address;
-    }
-
-    public function getPhoneNumber()
-    {
-        return $this->PhoneNumber;
-    }
-
-    public function setPhoneNumber($PhoneNumber)
-    {
-        $this->PhoneNumber = $PhoneNumber;
-    }
-
-    public function getImg()
-    {
-        return $this->Img;
-    }
-
-    public function setImg($Img)
-    {
-        $this->Img = $Img;
-    }
-
 
     public function getAllEmployees()
     {
@@ -123,14 +23,14 @@ class Employee extends Model
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $employee = new Employee();
-                $employee->ID = $row['ID'];
-                $employee->Name = $row['Name'];
-                $employee->Email = $row['Email'];
-                $employee->Password = $row['Password'];
-                $employee->Salary = $row['Salary'];
-                $employee->JobTitle = $row['JobTitle'];
-                $employee->Address = $row['Address'];
-                $employee->PhoneNumber = $row['PhoneNumber'];
+                $employee['ID'] = $row['ID'];
+                $employee['Name'] = $row['Name'];
+                $employee['Email'] = $row['Email'];
+                $employee['Password'] = $row['Password'];
+                $employee['Salary'] = $row['Salary'];
+                $employee['JobTitle'] = $row['JobTitle'];
+                $employee['Address'] = $row['Address'];
+                $employee['PhoneNumber'] = $row['PhoneNumber'];
 
                 $employees[] = $employee;
             }
@@ -164,14 +64,14 @@ class Employee extends Model
         if ($result) {
             $employeeData = $this->db->fetchRow($result);
             $employee = new Employee();
-            $employee->ID = $employeeData['ID'];
-            $employee->Name = $employeeData['Name'];
-            $employee->Email = $employeeData['Email'];
-            $employee->Password = $employeeData['Password'];
-            $employee->Salary = $employeeData['Salary'];
-            $employee->JobTitle = $employeeData['JobTitle'];
-            $employee->Address = $employeeData['Address'];
-            $employee->PhoneNumber = $employeeData['PhoneNumber'];
+            $employee['ID'] = $employeeData['ID'];
+            $employee['Name'] = $employeeData['Name'];
+            $employee['Email'] = $employeeData['Email'];
+            $employee['Password'] = $employeeData['Password'];
+            $employee['Salary'] = $employeeData['Salary'];
+            $employee['JobTitle'] = $employeeData['JobTitle'];
+            $employee['Address'] = $employeeData['Address'];
+            $employee['PhoneNumber'] = $employeeData['PhoneNumber'];
             return $employee;
         } else {
             return null; 

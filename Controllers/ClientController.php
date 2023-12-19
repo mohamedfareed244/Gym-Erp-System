@@ -121,7 +121,7 @@ class ClientController extends Controller
             $newClient->setLastName($Lname);
             $newClient->setAge($Age);
             $newClient->setGender($Gender);
-            $newClient->setPhone($Phone);
+            $newClient->setPhoneNumber($Phone);
             $newClient->setHeight($Height);
             $newClient->setWeight($Weight);
             $newClient->setEmail($Email);
@@ -234,7 +234,7 @@ class ClientController extends Controller
         $newClient->setWeight((float) $_POST['weight']);
         $newClient->setHeight((int) $_POST['height']);
         $newClient->setEmail($_POST['email']);
-        $newClient->setPhone($_POST['phone']);
+        $newClient->setPhoneNumber($_POST['phone']);
 
         $client = new Client();
 
@@ -393,7 +393,7 @@ class ClientController extends Controller
             $updatedClient = new Client();
             $updatedClient->setFirstName($firstname);
             $updatedClient->setLastName($lastname);
-            $updatedClient->setPhone($phone);
+            $updatedClient->setPhoneNumber($phone);
             $updatedClient->setEmail($email);
             $updatedClient->setPassword($password);
 
@@ -469,7 +469,7 @@ class ClientController extends Controller
                 $updatedClient->setID($ID);
                 $updatedClient->setFirstName($firstname);
                 $updatedClient->setLastName($lastname);
-                $updatedClient->setPhone($phone);
+                $updatedClient->setPhoneNumber($phone);
                 $updatedClient->setAge($age);
                 $updatedClient->setEmail($email);
                 $updatedClient->setWeight($Weight);
