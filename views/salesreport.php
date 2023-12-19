@@ -64,8 +64,8 @@
                         <tr>
                             <th scope="col">Package ID</th>
                             <th scope="col">Package Name </th>
-                            <th scope="col">Sales</th>
-                            <th scope="col">No .  </th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Sales </th>
 
                         </tr>
                     </thead>
@@ -78,8 +78,8 @@
                         <tr>
                             <th scope="col">Package ID</th>
                             <th scope="col">Package Name </th>
-                            <th scope="col">Sales</th>
-                            <th scope="col">No .  </th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Sales  </th>
 
                         </tr>
                     </thead>

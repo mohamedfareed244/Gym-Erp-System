@@ -22,7 +22,7 @@ $result = $emp->get_emp_auth(3);
                 <span class='link-name'>" . $res["FriendlyName"] . "</span>
             </a>
             <ul class='sub-menu blank'>
-            <li><a class='link-name' href='" . $res["FriendlyName"] . "'>" . $res["FriendlyName"] . "</a></li>
+            <li><a class='link-name' href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>
             </ul>
         </li>";
             }
