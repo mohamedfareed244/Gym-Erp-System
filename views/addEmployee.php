@@ -39,6 +39,8 @@
       <div class="row">
         <div class="col-12">
           <h4>Add Employee</h4>
+          <hr>
+          <br>
           <form method="post" onsubmit="return validateForm()" action="../Controllers/EmployeeController.php" enctype="multipart/form-data">
             <input type="hidden" name="action" value="addEmployee">
             <div class="col-lg-4 col-sm-12">

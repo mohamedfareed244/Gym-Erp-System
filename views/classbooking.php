@@ -51,7 +51,7 @@
                     <div class="class-item">
                         <div class="class-info">
                             <p class="class-time"><strong>Time:</strong> <?php 
-                            echo $startformattedDate . " - " .  $endformattedDate ?></p> 
+    echo $assignedclass->getFormattedTime($classDetail['StartTime']) . " - " . $assignedclass->getFormattedTime($classDetail['EndTime']);?>
                             <p class="class-date"><strong>Date:</strong> <?php echo $classDetail['Date'] ?></p>
                             <p class="class-participants"><strong>Limit of Participants:</strong> <?php echo $classDetail['NumOfAttendants']?></p>
                             <p class="class-price"><strong>Price :</strong> <?php 

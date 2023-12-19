@@ -159,12 +159,12 @@ class ClassController extends Controller
             if ($result) {
                 // Image uploaded and inserted successfully
                 $_SESSION["addsuccess"] = "Class added successfully";
-                header("Location: ../views/admin-classes.php?AddedSuccessfully");
+                header("Location: ../views/addClass.php?AddedSuccessfully");
                 exit();
             } else {
                 // Handle the case where image upload or insertion fails
                 $_SESSION["imgErr"] = "Failed to upload image or insert into the database";
-                header("Location: ../views/admin-classes.php?FailedtoUploadImage");
+                header("Location: ../views/addClass.php?FailedtoUploadImage");
                 exit();
             }
         } else {
@@ -173,7 +173,7 @@ class ClassController extends Controller
             $_SESSION["descrErr"] = $descrErr;
             $_SESSION["imgErr"] = $imgErr;
             $_SESSION["adddaysErr"] = $daysErr;
-            header("Location: ../views/admin-classes.php?fail");
+            header("Location: ../views/addClass.php?fail");
             exit();
         }
     }

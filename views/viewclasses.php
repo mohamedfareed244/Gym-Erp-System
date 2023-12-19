@@ -24,6 +24,7 @@
     <?php
     require_once 'sessionusercheck.php';
     include_once "../Models/ReservedClassModel.php";
+    include_once "../Models/AssignedClassModel.php";
 
     $ReservedClasses = new ReservedClass();
     $classes = $ReservedClasses->getClientClassInfo();
@@ -54,8 +55,8 @@
                                     <p>Time:</p>
                                     <div class="class-time">
                                         <?php
-                                        $startformattedDate = $assignedclass->getFormattedTime($classRequest['StartTime']);
-                                        $endformattedDate = $assignedclass->getFormattedTime($classRequest['EndTime']);
+                                        $startformattedDate = $assignedclass->getFormattedTime($class['StartTime']);
+                                        $endformattedDate = $assignedclass->getFormattedTime($class['EndTime']);
                                         echo $startformattedDate . " - " . $endformattedDate . " p.m"; ?></div>
                                 </div>
 

@@ -264,10 +264,10 @@ class AssignedClass extends Model
         }
     }
 
-    // Function to get formatted start time
     public function getFormattedTime($Time)
     {
-        $startformattedDate = $Time->format("H:i");
+        $dateTime = new DateTime($Time);
+        $startformattedDate = $dateTime->format("H:i");
         return $startformattedDate;
     }
 

@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 require "../Controllers/EmployeeController.php";
 $model = new Employee();
 $emp = new EmployeeController($model);
-$result = $emp->get_emp_auth(1);
+$result = $emp->get_emp_auth(3);
 
 ?>
 <div class="sidebar close">
