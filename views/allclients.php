@@ -117,12 +117,10 @@
 </body>
 <script>
  function showDeleteModal(clientId) {
-            $('#deleteModal-' + clientId).fadeIn();
-        }
+            $('#deleteModal-' + clientId).fadeIn();}
 
-        function hideDeleteModal(clientId) {
-            $('#deleteModal-' + clientId).fadeOut();
-        }
+ function hideDeleteModal(clientId) {
+            $('#deleteModal-' + clientId).fadeOut();}
 
 
 function myFunction() {
@@ -146,11 +144,12 @@ function myFunction() {
 }
 
 function deleteClient(clientId) {
+    console.log("deleteee");
     $.ajax({
         type: "POST",
         url: "../Controllers/ClientController.php",
         data: {
-            action: "deleteClient",
+            action: "deleteClientAdmin",
             clientId: clientId,
         },
         success: function(response) {

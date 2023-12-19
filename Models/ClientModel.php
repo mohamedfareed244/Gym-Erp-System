@@ -18,7 +18,6 @@ class Client extends Users implements Observer
     private $Gender;
     private $Height;
     private $Weight;
-
     public $HasMembership;
     public $HasPtPackage;
 
@@ -86,7 +85,7 @@ class Client extends Users implements Observer
     {
         return $this->Weight;
     }
-    
+
     public function checkClient($clientID)
     {
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
@@ -127,17 +126,7 @@ class Client extends Users implements Observer
     }
 
 
-    public function deleteClientByID($clientID)
-    {
-        $sql = "DELETE from client where ID ='$clientID'";
 
-        $result = $this->db->query($sql);
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function getAllClients()
     {
@@ -302,7 +291,7 @@ class Client extends Users implements Observer
         $Weight = $clientInfo->getWeight();
         $Age = $clientInfo->getAge();
         $Phone = $clientInfo->getPhoneNumber();
-        
+
 
         $sql = "UPDATE client SET FirstName='$Fname', LastName='$Lname', Phone= '$Phone', Email='$Email' , Age='$Age', Weight='$Weight', Height = '$Height'
                 WHERE ID = $clientID";
@@ -317,10 +306,40 @@ class Client extends Users implements Observer
 
     public function deleteClient()
     {
+        $membership = new Memberships();
+        $clientID = $_SESSION['ID'];
+        $found = $membership->HasMembership($_SESSION['ID']);
+        if ($found) {
+            $membership = $membership->getMembershipByClientID($clientID);
+            $membership->deleteMembership($membership->getID());
+        }
+        $sql = "DELETE FROM reserved class where ClientID = '$clientID'";
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
         return $this->db->query($sql);
     }
+    public function deleteClientByID($clientID)
+    {
+        $membership = new Memberships();
+        $found = $membership->hasMembership($clientID);
+        if ($found) {
+            $membership = $membership->getMembershipByClientID($clientID);
+            $ptmembership = new ptMemberships();
+            $ptFound = $ptmembership->HasPtMembership($clientID);
+            if( $ptFound ) {    
+                $ptFound = $ptmembership->deletePTMembershipClient($clientID);
+            }
+            $membership->deleteMembership($membership->getID());
+        }
+        $sql1 = "DELETE FROM reserved class where ClientID = '$clientID'";
+        $sql = "DELETE from `client` where ID ='$clientID'";
 
+        $result = $this->db->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function update($message)
     {
         $clients = $this->getAllClients();

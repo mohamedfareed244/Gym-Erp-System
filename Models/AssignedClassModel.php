@@ -174,7 +174,6 @@ class AssignedClass extends Model
         return $result;
     }
 
-
     public function deleteClass($classID, $coachID, $date)
     {
         $sql = "DELETE FROM assignedclass where ClassID = '$classID' and CoachID = '$coachID' and Date = '$date'";

@@ -4,7 +4,7 @@ session_start();
 
 require_once("Controller.php");
 require_once("../Models/ClientModel.php");
-
+echo "entered controllers";
 class ClientController extends Controller
 {
 
@@ -515,8 +515,11 @@ class ClientController extends Controller
 
     public function deleteCLientAdminSide()
     {
+        echo "delete1";
         if (isset($_POST["clientId"])) {
+
             $clientId = $_POST["clientId"];
+        echo $clientId;
 
             $client = new Client();
             $result = $client->deleteClientByID($clientId);
@@ -552,7 +555,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "delete":
             $controller->deletUserAccount();
             break;
-        case "deleteClient":
+        case "deleteClientAdmin":
             $controller->deleteCLientAdminSide();
             break;
         case "addClient":
