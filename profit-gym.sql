@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 19, 2023 at 12:30 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Dec 19, 2023 at 12:53 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,17 +38,19 @@ CREATE TABLE `assignedclass` (
   `CoachID` int(10) NOT NULL,
   `NumOfAttendants` int(11) NOT NULL,
   `AvailablePlaces` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assignedclass`
 --
 
 INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `isFree`, `Price`, `CoachID`, `NumOfAttendants`, `AvailablePlaces`) VALUES
-(5, 12, '2023-12-01', '19:00:00', '20:30:00', 'Free', 0, 3, 20, 19),
-(6, 14, '2023-12-04', '17:30:00', '19:00:00', 'NotFree', 200, 4, 15, 14),
-(7, 15, '2023-12-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 8),
-(8, 15, '2023-11-30', '14:00:00', '15:30:00', 'Free', 0, 3, 10, 9);
+(1, 1, '2023-12-21', '20:30:00', '22:00:00', 'Free', 0, 3, 20, 20),
+(2, 1, '2023-12-24', '20:30:00', '22:00:00', 'Free', 0, 3, 20, 20),
+(3, 2, '2023-12-26', '11:30:00', '00:45:00', 'NotFree', 150, 3, 10, 10),
+(4, 6, '2023-12-26', '18:30:00', '20:00:00', 'NotFree', 200, 2, 10, 10),
+(5, 7, '2023-12-20', '17:30:00', '18:45:00', 'Free', 0, 2, 15, 13),
+(6, 5, '2023-12-24', '19:30:00', '20:30:00', 'Free', 0, 2, 20, 19);
 
 -- --------------------------------------------------------
 
@@ -57,25 +59,11 @@ INSERT INTO `assignedclass` (`ID`, `ClassID`, `Date`, `StartTime`, `EndTime`, `i
 --
 
 CREATE TABLE `attendance` (
+  `ID` int(11) NOT NULL,
   `EmployeeId` int(11) NOT NULL,
   `Day` date NOT NULL,
   `Status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`EmployeeId`, `Day`, `Status`) VALUES
-(1, '2023-11-29', 0),
-(1, '2023-11-30', 0),
-(3, '2023-11-29', 0),
-(3, '2023-11-30', 0),
-(4, '2023-11-29', 0),
-(4, '2023-11-30', 0),
-(3, '2023-12-18', 0),
-(4, '2023-12-18', 0),
-(6, '2023-12-18', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -88,7 +76,7 @@ CREATE TABLE `authority` (
   `Header` varchar(50) NOT NULL,
   `FriendlyName` varchar(50) NOT NULL,
   `LinkAddress` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `authority`
@@ -111,7 +99,7 @@ INSERT INTO `authority` (`ID`, `Header`, `FriendlyName`, `LinkAddress`) VALUES
 (16, 'Coaches', 'My Classes ', '../views/myclasses.php'),
 (17, 'Coaches', 'My Pt Clients ', '../views/myptclients.php'),
 (18, 'Coaches', 'Add Classes', '../views/addClass.php'),
-(19, 'HR', 'Add Employees', '../views/addEmployees.php'),
+(19, 'HR', 'Add Employees', '../views/addEmployee.php'),
 (20, 'Packages', 'Add PT Package', '../views/addPTpackage.php'),
 (21, 'Packages', 'View PT Packages', '../views/viewPTpackage.php'),
 (22, 'Requests', 'Requests', '../views/requests.php');
@@ -127,22 +115,22 @@ CREATE TABLE `class` (
   `Name` varchar(30) NOT NULL,
   `Description` varchar(500) NOT NULL,
   `imgPath` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `class`
 --
 
 INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
-(12, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
-(13, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
-(14, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness. It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
-(15, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
-(16, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
-(17, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
-(18, 'Parkour', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
-(19, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
-(20, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
+(1, 'Zumba', 'Zumba is a dance-based fitness class that incorporates Latin and international music. It combines energetic dance moves with cardiovascular exercises to create a fun and engaging workout.', 'public/Images/zumba2.jpg'),
+(2, 'Yoga', 'Yoga classes focus on improving flexibility, strength, and mental well-being through a combination of physical postures, breath control, and meditation.', 'public/Images/yoga.jpg'),
+(3, 'Pilates', 'Pilates focuses on core strength, flexibility, and overall body awareness. It involves precise movements and controlled breathing to improve posture and build long, lean muscles.', 'public/Images/pilates.jpg'),
+(4, 'Aqua Aerobics', 'Aqua aerobics takes traditional aerobic exercises into the pool. The water provides resistance, making it a low-impact yet effective workout that improves cardiovascular fitness and muscle strength.', 'public/Images/aerobics1.jpg'),
+(5, 'Mind-Body Fusion', 'Classes like Barre combine elements of ballet, Pilates, and yoga. They target small muscle groups through isometric movements, promoting strength, balance, and flexibility.', 'public/Images/mind.jpg'),
+(6, 'Circuit Training', 'Circuit training involves moving through a series of different exercises at stations with minimal rest. It combines strength and cardiovascular training for an efficient and effective workout.', 'public/Images/circuit.jpg'),
+(7, 'Parkour', 'Parkour classes teach participants to navigate obstacles and urban environments with fluid movements. It improves agility, strength, and spatial awareness.', 'public/Images/parkour.jpg'),
+(8, 'Strength and Conditioning', 'Strength and conditioning classes focus on improving overall athletic performance. They incorporate a mix of weightlifting, plyometrics, and agility drills to enhance strength and power.', 'public/Images/strength.jpg'),
+(9, 'Aerial Yoga', 'Aerial yoga combines traditional yoga poses with the use of silk hammocks suspended from the ceiling. It adds an element of suspension and flexibility, enhancing strength and balance.', 'public/Images/aerial.jpg');
 
 -- --------------------------------------------------------
 
@@ -153,27 +141,25 @@ INSERT INTO `class` (`ID`, `Name`, `Description`, `imgPath`) VALUES
 CREATE TABLE `class_days` (
   `ClassID` int(11) NOT NULL,
   `Day` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `class_days`
 --
 
 INSERT INTO `class_days` (`ClassID`, `Day`) VALUES
-(12, 'Friday'),
-(12, 'Tuesday'),
-(13, 'Sunday'),
-(13, 'Wednesday'),
-(14, 'Monday'),
-(15, 'Saturday'),
-(15, 'Thursday'),
-(16, 'Sunday'),
-(17, 'Wednesday'),
-(18, 'Monday'),
-(19, 'Saturday'),
-(20, 'Saturday'),
-(21, 'Saturday'),
-(21, 'Sunday');
+(1, 'Thursday'),
+(1, 'Sunday'),
+(2, 'Saturday'),
+(2, 'Tuesday'),
+(3, 'Wednesday'),
+(4, 'Friday'),
+(4, 'Saturday'),
+(5, 'Sunday'),
+(6, 'Tuesday'),
+(7, 'Wednesday'),
+(8, 'Saturday'),
+(9, 'Saturday');
 
 -- --------------------------------------------------------
 
@@ -192,20 +178,18 @@ CREATE TABLE `client` (
   `Email` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `Phone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`ID`, `FirstName`, `LastName`, `Age`, `Gender`, `Weight`, `Height`, `Email`, `Password`, `Phone`) VALUES
-(37, 'laila', 'nabil', 20, 'female', 0, 0, 'lailanabil@gmail.com', '$2y$10$VoPwyiscGCXCqbanwH9/nuBMSa3TmmF5tr.fs.7pzBsFkzLF8cezu', '01016542378'),
-(44, 'omar', 'omran', 25, 'male', 0, 0, 'omaromran@gmail.com', '$2y$10$FtrUm7owwXQpOH9CvunRge/eacZZR.S2QN2ZmI4zCFkeIrOHKv6ee', '01023876543'),
-(45, 'jana', 'omran', 20, 'female', 0, 0, 'janahani.nbis@gmail.com', '$2y$10$aVoXddxNbjd09/egCDebtOK2xmrK/YFxL23xA41vgh7WrjrYHGut2', '01091119866'),
-(46, 'rania', 'kamal', 40, 'female', 0, 0, 'raniakamal@gmail.com', '$2y$10$b2WpY5G/aA5pMDt5.D9ji.HcYd20c0yP05qKKFiAy6Oag1M3CLY0C', '01091119866'),
-(52, 'sara', 'khaled', 21, 'female', 0, 0, 'sarakhaled@gmail.com', '$2y$10$62KO.jACd81j6mRgIaSNjOIZuCtx3dtg0LsBvdbYANLa7YAtOkbMW', '01076532345'),
-(53, 'khaled', 'ahmed', 20, 'male', 0, 0, 'khaledahmed@gmail.com', '$2y$10$AZfylTeX0Tv1cVcKuWAJgu7EaibIpl1KlsJ33yYx9piHDYnCOSiCq', '01076547890'),
-(54, 'tara', 'emad', 24, 'female', 0, 0, 'taraemad@gmail.com', '$2y$10$QynZ.SLDqy7XdB.nj6B/wulHsV2vS.tHx/eUOKbEyHoNDEfl1x.yK', '01029876543');
+(1, 'Jana', 'Hani', 20, 'female', '0', '0', 'janahani.nbis@gmail.com', '$2y$10$6rfifOSwq3.zxmOMecimduSU5tISMgk5NbY5OJO9FkbjxNXUeTsCO', '01091119866'),
+(2, 'laila', 'nabil', 20, 'female', '0', '0', 'lailanabil@gmail.com', '$2y$10$h/17cxJykzL.PgytAoU8zOUsAaKH663Q/Mpke1.W61DW3tFsOHdEq', '01016542378'),
+(3, 'Malak', 'Helmy', 19, 'female', '0', '0', 'malakhelmy@gmail.com', '$2y$10$A40F17EUeNKg.SprRyQVJ.ku2qhjIB7bYXqtd9fGKB3qOqKlezMAq', '01054678921'),
+(4, 'Fatemah', 'Hatem', 20, 'female', '0', '0', 'fatemahhatem@gmail.com', '$2y$10$dkP2BzsaLAvTCUKtnlPe6eY71yeatJStJzJnUCPi22JQSI6drVp.a', '01023456789'),
+(5, 'Mohamed', 'Fareed', 20, 'male', '0', '0', 'mohamedfareed@gmail.com', '$2y$10$guqQVIeHmX5ZQWeetlbzQuVZLxn7z.XzmKN38n3gX8/znjxIXnVXC', '01032674590');
 
 -- --------------------------------------------------------
 
@@ -223,16 +207,18 @@ CREATE TABLE `employee` (
   `JobTitle` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `Img` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address`, `JobTitle`, `Password`, `Img`) VALUES
-(3, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 3000, 'Nasr City', '4', '$2y$10$I51zRdy5H37xXp0GR3MJyej3j7nys2phNDDvU/GTtag.nzchJ3X1K', 'public/Images/user.jpeg'),
-(4, 'Laila Nabil', 'lailanabil@gmail.com', '01108764532', 2000, 'Nasr City', '5', '$2y$10$KHQimzPxygAfLiwJgNc9MuzpjArfbTEqkgZ6afascIodNXs5bR/3q', 'public/Images/user.jpeg'),
-(6, 'Fatemah Hatem', 'fatemahhatem@gmail.com', '01045456789', 6000, 'Fifth Settlement', '3', '$2y$10$VC9KfmU1UbK7vk3GTTm6S.bVThJQPjHH3E1NXtsMTWx0l4l3Dn/pa', '../public/Images/01045456789.png');
+(1, 'Jana Hani', 'janahani.nbis@gmail.com', '01091119866', 5000, 'Nasr City', '3', '$2y$10$BtSQjyK9B7q/lE6VIr63PemDYW.rz5QZkTkPLFGfEB1ogLRwWIU42', '../public/Images/01091119866.jpg'),
+(2, 'Mohamed Fareed', 'mohamedfareed@gmail.com', '01072347856', 4000, 'Fifth Settlement', '4', '$2y$10$D7A9cTpxUCyBJMea97kZr.bW9XuI1OMAo6QEJ7kXAL9AmWS8kKotK', '../public/Images/01072347856.jpg'),
+(3, 'Malak Helmy', 'malakhelmy@gmail.com', '01045213489', 4500, 'Fifth Settlement', '5', '$2y$10$FpyUIBni7ED1BhxXRSXu7uFncS7P9qyO8iwUc2KwUVQN3g.XIelcm', '../public/Images/01045213489.jpg'),
+(4, 'Laila Nabil', 'lailanabil@gmail.com', '01026782390', 3500, 'Nasr City', '1', '$2y$10$VGtcfAm3Fi3XpDO6zP5roeXec2zJiBbp0XTJGwue3qtc5OrKShlJy', '../public/Images/01026782390.jpg'),
+(5, 'Fatemah Hatem', 'fatemahhatem@gmail.com', '01012876231', 2500, 'Fifth Settlement', '2', '$2y$10$y/fYHvWisGEInngA1TTOA.9wptLWtjqEIzD76EgfXfWZoOR0//y7m', '../public/Images/01012876231.jpg');
 
 -- --------------------------------------------------------
 
@@ -241,47 +227,46 @@ INSERT INTO `employee` (`ID`, `Name`, `Email`, `PhoneNumber`, `Salary`, `Address
 --
 
 CREATE TABLE `employee authorities` (
-  `ID` int(11) NOT NULL,
   `JobTitleID` int(20) NOT NULL,
   `AuthorityID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee authorities`
 --
 
-INSERT INTO `employee authorities` (`ID`, `JobTitleID`, `AuthorityID`) VALUES
-(1, 4, 16),
-(2, 4, 17),
-(3, 3, 1),
-(4, 3, 2),
-(5, 3, 3),
-(6, 3, 4),
-(7, 3, 6),
-(8, 3, 7),
-(9, 3, 8),
-(10, 3, 9),
-(11, 3, 11),
-(12, 3, 12),
-(13, 3, 13),
-(14, 3, 18),
-(15, 3, 19),
-(16, 3, 20),
-(17, 3, 21),
-(18, 3, 22),
-(19, 5, 8),
-(20, 5, 7),
-(21, 5, 16),
-(22, 5, 17),
-(23, 1, 9),
-(24, 1, 10),
-(25, 1, 19),
-(26, 1, 6),
-(27, 2, 1),
-(28, 2, 2),
-(29, 2, 3),
-(30, 2, 4),
-(31, 2, 5);
+INSERT INTO `employee authorities` (`JobTitleID`, `AuthorityID`) VALUES
+(4, 16),
+(4, 17),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 6),
+(3, 7),
+(3, 8),
+(3, 9),
+(3, 11),
+(3, 12),
+(3, 13),
+(3, 18),
+(3, 19),
+(3, 20),
+(3, 21),
+(3, 22),
+(5, 8),
+(5, 7),
+(5, 16),
+(5, 17),
+(1, 9),
+(1, 10),
+(1, 19),
+(1, 6),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5);
 
 -- --------------------------------------------------------
 
@@ -292,7 +277,7 @@ INSERT INTO `employee authorities` (`ID`, `JobTitleID`, `AuthorityID`) VALUES
 CREATE TABLE `job_titles` (
   `Id` int(11) NOT NULL,
   `Name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `job_titles`
@@ -324,16 +309,16 @@ CREATE TABLE `membership` (
   `FreezeCount` int(50) NOT NULL,
   `Freezed` tinyint(1) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `membership`
 --
 
 INSERT INTO `membership` (`ID`, `ClientID`, `PackageID`, `StartDate`, `EndDate`, `VisitsCount`, `InvitationsCount`, `InbodyCount`, `PrivateTrainingSessionsCount`, `FreezeCount`, `Freezed`, `isActivated`) VALUES
-(10, 45, 13, '2023-11-28', '2024-01-28', 1, 4, 2, 2, 20, 0, 'Activated'),
-(11, 46, 14, '2023-11-29', '2024-02-29', 0, 5, 3, 3, 30, 0, 'Activated'),
-(12, 54, 14, '2023-12-16', '2024-03-16', 0, 5, 3, 3, 30, 0, 'Activated');
+(1, 1, 1, '2023-12-19', '2024-01-19', 0, 2, 1, 1, 10, 0, 'Activated'),
+(2, 2, 2, '2023-12-19', '2024-02-19', 0, 4, 2, 2, 20, 0, 'Activated'),
+(3, 3, 4, '2023-12-19', '2024-06-19', 0, 5, 3, 3, 30, 0, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -347,7 +332,7 @@ CREATE TABLE `menu_items` (
   `status` enum('enable','disable') DEFAULT 'enable',
   `menu_link` varchar(50) NOT NULL,
   `parent_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `menu_items`
@@ -379,18 +364,18 @@ CREATE TABLE `package` (
   `NumOfPrivateTrainingSessions` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `package`
 --
 
 INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsLimit`, `FreezeLimit`, `NumOfInvitations`, `NumOfInbodySessions`, `NumOfPrivateTrainingSessions`, `Price`, `isActivated`) VALUES
-(12, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600, 'Deactivated'),
-(13, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800, 'Activated'),
-(14, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100, 'Activated'),
-(15, '4 Months + 2 Months Free', 6, 'unlimited', 0, 30, 5, 3, 3, 2500, 'Activated'),
-(16, '6 Months + 3 Months Free', 9, 'unlimited', 0, 70, 7, 6, 6, 3400, 'Activated');
+(1, '1 Month', 1, 'limited', 20, 10, 2, 1, 1, 600, 'Activated'),
+(2, '2 Months', 2, 'limited', 45, 20, 4, 2, 2, 800, 'Activated'),
+(3, '3 Months', 3, 'unlimited', 0, 30, 5, 3, 3, 1100, 'Activated'),
+(4, '4 Months + 2 Months Free', 6, 'unlimited', 0, 30, 5, 3, 3, 2500, 'Activated'),
+(5, '6 Months + 3 Months Free', 9, 'unlimited', 0, 70, 7, 6, 6, 3400, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -400,21 +385,21 @@ INSERT INTO `package` (`ID`, `Title`, `NumOfMonths`, `isVisitsLimited`, `VisitsL
 
 CREATE TABLE `private training membership` (
   `ID` int(11) NOT NULL,
-  `ClientID` int(50) NOT NULL,
-  `CoachID` int(50) NOT NULL,
-  `PrivateTrainingPackageID` int(50) NOT NULL,
+  `ClientID` int(11) NOT NULL,
+  `CoachID` int(11) NOT NULL,
+  `PrivateTrainingPackageID` int(11) NOT NULL,
   `SessionsCount` int(50) NOT NULL,
   `isActivated` varchar(30) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `private training membership`
 --
 
 INSERT INTO `private training membership` (`ID`, `ClientID`, `CoachID`, `PrivateTrainingPackageID`, `SessionsCount`, `isActivated`, `date`) VALUES
-(22, 45, 3, 9, 10, 'Activated', '2022-01-01'),
-(23, 54, 3, 9, 10, 'Activated', '0000-00-00');
+(1, 2, 2, 1, 10, 'Activated', '0000-00-00'),
+(2, 3, 2, 2, 30, 'Activated', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -429,20 +414,20 @@ CREATE TABLE `private training package` (
   `MinPackageMonths` int(50) NOT NULL,
   `Price` int(50) NOT NULL,
   `isActivated` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `private training package`
 --
 
 INSERT INTO `private training package` (`ID`, `Name`, `NumOfSessions`, `MinPackageMonths`, `Price`, `isActivated`) VALUES
-(9, 'Beginners', 10, 1, 1000, 'Activated'),
-(10, 'Intermediate', 30, 3, 2800, 'Activated'),
-(11, 'Advanced', 50, 6, 4300, 'Activated'),
-(12, 'For 1 Month', 15, 1, 1500, 'Activated'),
-(13, 'For 2 Months', 25, 2, 2400, 'Activated'),
-(14, 'For 3 Months', 35, 3, 3300, 'Activated'),
-(15, 'For 4 Months', 45, 4, 4200, 'Activated');
+(1, 'Beginners', 10, 1, 1000, 'Activated'),
+(2, 'Intermediate', 30, 3, 2800, 'Activated'),
+(3, 'Advanced', 50, 6, 4300, 'Activated'),
+(4, 'For 1 Month', 15, 1, 1500, 'Activated'),
+(5, 'For 2 Months', 25, 2, 2400, 'Activated'),
+(6, 'For 3 Months', 35, 3, 3300, 'Activated'),
+(7, 'For 4 Months', 45, 4, 4200, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -457,18 +442,18 @@ CREATE TABLE `reserved class` (
   `ClientID` int(50) NOT NULL,
   `Attended` varchar(20) NOT NULL,
   `isActivated` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reserved class`
 --
 
 INSERT INTO `reserved class` (`ID`, `AssignedClassID`, `CoachID`, `ClientID`, `Attended`, `isActivated`) VALUES
-(20, 5, 3, 45, '', 'Activated'),
-(21, 7, 3, 46, '', 'Activated'),
-(22, 8, 3, 46, '', 'Activated'),
-(23, 7, 3, 44, '', 'Activated'),
-(24, 6, 4, 45, '', 'Activated');
+(1, 5, 2, 1, '', 'Activated'),
+(2, 5, 2, 2, '', 'Activated'),
+(3, 4, 2, 2, '', 'Activated'),
+(4, 6, 2, 3, '', 'Activated'),
+(5, 3, 3, 3, '', 'Activated');
 
 -- --------------------------------------------------------
 
@@ -482,7 +467,7 @@ CREATE TABLE `scheduled_unfreeze` (
   `freezeEndDate` date NOT NULL,
   `freezeStartDate` date NOT NULL,
   `freezeCount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -492,7 +477,16 @@ CREATE TABLE `scheduled_unfreeze` (
 -- Indexes for table `assignedclass`
 --
 ALTER TABLE `assignedclass`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassID` (`ClassID`),
+  ADD KEY `CoachID` (`CoachID`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `EmployeeId` (`EmployeeId`);
 
 --
 -- Indexes for table `authority`
@@ -510,7 +504,7 @@ ALTER TABLE `class`
 -- Indexes for table `class_days`
 --
 ALTER TABLE `class_days`
-  ADD PRIMARY KEY (`ClassID`,`Day`);
+  ADD KEY `ClassID` (`ClassID`);
 
 --
 -- Indexes for table `client`
@@ -528,9 +522,7 @@ ALTER TABLE `employee`
 -- Indexes for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD PRIMARY KEY (`ID`),
   ADD KEY `test` (`AuthorityID`),
-  ADD KEY `ID` (`ID`) USING BTREE,
   ADD KEY `test30` (`JobTitleID`);
 
 --
@@ -544,8 +536,8 @@ ALTER TABLE `job_titles`
 --
 ALTER TABLE `membership`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `test1` (`ClientID`),
-  ADD KEY `test2` (`PackageID`);
+  ADD KEY `ClientID` (`ClientID`),
+  ADD KEY `PackageID` (`PackageID`);
 
 --
 -- Indexes for table `menu_items`
@@ -564,10 +556,7 @@ ALTER TABLE `package`
 -- Indexes for table `private training membership`
 --
 ALTER TABLE `private training membership`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `test3` (`ClientID`),
-  ADD KEY `test4` (`CoachID`),
-  ADD KEY `test5` (`PrivateTrainingPackageID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `private training package`
@@ -580,15 +569,16 @@ ALTER TABLE `private training package`
 --
 ALTER TABLE `reserved class`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `test8` (`AssignedClassID`),
-  ADD KEY `test9` (`ClientID`),
-  ADD KEY `test10` (`CoachID`);
+  ADD KEY `AssignedClassID` (`AssignedClassID`),
+  ADD KEY `ClientID` (`ClientID`),
+  ADD KEY `CoachID` (`CoachID`);
 
 --
 -- Indexes for table `scheduled_unfreeze`
 --
 ALTER TABLE `scheduled_unfreeze`
-  ADD KEY `fk-membership` (`membership_id`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `membership_id` (`membership_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -598,7 +588,13 @@ ALTER TABLE `scheduled_unfreeze`
 -- AUTO_INCREMENT for table `assignedclass`
 --
 ALTER TABLE `assignedclass`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `authority`
@@ -610,25 +606,19 @@ ALTER TABLE `authority`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `employee authorities`
---
-ALTER TABLE `employee authorities`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `job_titles`
@@ -640,7 +630,7 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
@@ -658,7 +648,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `private training membership`
 --
 ALTER TABLE `private training membership`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `private training package`
@@ -670,18 +660,50 @@ ALTER TABLE `private training package`
 -- AUTO_INCREMENT for table `reserved class`
 --
 ALTER TABLE `reserved class`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `scheduled_unfreeze`
+--
+ALTER TABLE `scheduled_unfreeze`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `assignedclass`
+--
+ALTER TABLE `assignedclass`
+  ADD CONSTRAINT `assignedclass_ibfk_1` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ID`),
+  ADD CONSTRAINT `assignedclass_ibfk_2` FOREIGN KEY (`CoachID`) REFERENCES `employee` (`ID`);
+
+--
+-- Constraints for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`EmployeeId`) REFERENCES `employee` (`ID`);
+
+--
+-- Constraints for table `class_days`
+--
+ALTER TABLE `class_days`
+  ADD CONSTRAINT `class_days_ibfk_1` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ID`);
+
+--
 -- Constraints for table `employee authorities`
 --
 ALTER TABLE `employee authorities`
-  ADD CONSTRAINT `test` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test30` FOREIGN KEY (`JobTitleID`) REFERENCES `job_titles` (`Id`);
+  ADD CONSTRAINT `employee authorities_ibfk_1` FOREIGN KEY (`AuthorityID`) REFERENCES `authority` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `employee authorities_ibfk_2` FOREIGN KEY (`JobTitleID`) REFERENCES `job_titles` (`Id`);
+
+--
+-- Constraints for table `membership`
+--
+ALTER TABLE `membership`
+  ADD CONSTRAINT `membership_ibfk_1` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`),
+  ADD CONSTRAINT `membership_ibfk_2` FOREIGN KEY (`PackageID`) REFERENCES `package` (`ID`);
 
 --
 -- Constraints for table `menu_items`
@@ -690,18 +712,18 @@ ALTER TABLE `menu_items`
   ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `menu_items` (`id`);
 
 --
--- Constraints for table `private training membership`
+-- Constraints for table `reserved class`
 --
-ALTER TABLE `private training membership`
-  ADD CONSTRAINT `test3` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test4` FOREIGN KEY (`CoachID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `test5` FOREIGN KEY (`PrivateTrainingPackageID`) REFERENCES `private training package` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reserved class`
+  ADD CONSTRAINT `reserved class_ibfk_1` FOREIGN KEY (`AssignedClassID`) REFERENCES `assignedclass` (`ID`),
+  ADD CONSTRAINT `reserved class_ibfk_2` FOREIGN KEY (`ClientID`) REFERENCES `client` (`ID`),
+  ADD CONSTRAINT `reserved class_ibfk_3` FOREIGN KEY (`CoachID`) REFERENCES `employee` (`ID`);
 
 --
 -- Constraints for table `scheduled_unfreeze`
 --
 ALTER TABLE `scheduled_unfreeze`
-  ADD CONSTRAINT `fk-membership` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
+  ADD CONSTRAINT `scheduled_unfreeze_ibfk_1` FOREIGN KEY (`membership_id`) REFERENCES `membership` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
