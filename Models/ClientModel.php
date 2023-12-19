@@ -18,6 +18,7 @@ class Client extends Users implements Observer
     private $Gender;
     private $Height;
     private $Weight;
+
     public $HasMembership;
     public $HasPtPackage;
 
@@ -85,7 +86,7 @@ class Client extends Users implements Observer
     {
         return $this->Weight;
     }
-
+    
     public function checkClient($clientID)
     {
         $sql = "SELECT * FROM client WHERE ID = '$clientID'";
@@ -128,7 +129,7 @@ class Client extends Users implements Observer
 
     public function deleteClientByID($clientID)
     {
-        $sql = "DELETE from client where ID =" . $clientID;
+        $sql = "DELETE from client where ID ='$clientID'";
 
         $result = $this->db->query($sql);
         if ($result) {
