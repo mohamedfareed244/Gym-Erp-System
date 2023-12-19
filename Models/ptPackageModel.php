@@ -5,6 +5,7 @@ require_once("Model.php");
 
 include_once "EmployeeModel.php";
 include_once "ClientModel.php";
+include_once "CoachesModel.php";
 include_once "MembershipsModel.php";
 
 
@@ -150,6 +151,7 @@ class ptPackages extends Model implements Subject
 
     public function addptPacks($ptPackage)
     {
+        
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
@@ -208,5 +210,12 @@ class ptPackages extends Model implements Subject
         }
     }
 }
+
+$ptPackages = new ptPackages();
+$coach = new Coach();
+$client = new Client();
+
+$ptPackages->addObserver($coach);
+$ptPackages->addObserver($client);
 
 ?>
