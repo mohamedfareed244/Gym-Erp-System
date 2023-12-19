@@ -87,7 +87,7 @@ class ConfirmationMailer
     public static function sendNewPtPackageNotification($toEmail, $packageName)
     {
         $mail = new PHPMailer(true);
-
+    
         try {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
@@ -96,10 +96,10 @@ class ConfirmationMailer
             $mail->Password = 'jseurqznpnbnpcrn';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-
+    
             $mail->setFrom('profitgym256@gmail.com', 'Profit Gym');
             $mail->addAddress($toEmail);
-
+    
             $mail->isHTML(true);
             $mail->Subject = 'New Private Training Package Added';
             $mail->Body = "
@@ -134,11 +134,14 @@ class ConfirmationMailer
                 </body>
                 </html>
             ";
-
+    
             $mail->send();
             return true;
         } catch (Exception $e) {
-            return false;
+            // Log the error or handle it as needed
+            error_log("Error sending email: " . $e->getMessage());
+            return false; // Propagate the failure status
         }
     }
+
 }

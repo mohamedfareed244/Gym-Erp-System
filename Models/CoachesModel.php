@@ -114,7 +114,7 @@ class Coach extends Employee implements Observer
 
         // Loop through each coach and send the notification
         foreach ($coaches as $coach) {
-            $toEmail = $coach->getEmail();
+            $toEmail = $coach['Email'];
 
             // Call your existing function to send the email notification
             $success = ConfirmationMailer::sendNewPtPackageNotification($toEmail, $message);

@@ -20,9 +20,16 @@ class ptPackages extends Model implements Subject
 
     private $observers = [];
 
+
     function __construct()
     {
         $this->db = $this->connect();
+        
+        $coach = new Coach();
+        $client = new Client();
+
+        $this->addObserver($coach);
+        $this->addObserver($client);
     }
 
     public function getID()
@@ -151,7 +158,7 @@ class ptPackages extends Model implements Subject
 
     public function addptPacks($ptPackage)
     {
-        
+
         $Name = $ptPackage->Name;
         $NumOfSessions = $ptPackage->NumOfSessions;
         $MinPackageMonths = $ptPackage->MinPackageMonths;
@@ -160,6 +167,7 @@ class ptPackages extends Model implements Subject
 
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
+
 
         $this->notifyObservers("New PT Package Added: " . $ptPackage->getName());
 
@@ -201,21 +209,15 @@ class ptPackages extends Model implements Subject
         return null;
     }
 
-    public function addObserver(Observer $observer){
+    public function addObserver(Observer $observer)
+    {
         $this->observers[] = $observer;
     }
-    public function notifyObservers($message){
+
+    public function notifyObservers($message)
+    {
         foreach ($this->observers as $observer) {
             $observer->update($message);
         }
     }
 }
-
-$ptPackages = new ptPackages();
-$coach = new Coach();
-$client = new Client();
-
-$ptPackages->addObserver($coach);
-$ptPackages->addObserver($client);
-
-?>

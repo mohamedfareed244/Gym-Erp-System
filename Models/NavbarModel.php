@@ -7,10 +7,9 @@ class MenuModel extends Model {
     private $menu_status;
     private $menu_link;
     private $parent_id; // Corrected variable name
-    protected $db;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->db = $this->connect();
     }
 
     public function getID() {
