@@ -16,6 +16,7 @@ class ptMemberships extends Model
     private $PrivateTrainingPackageID;
     private $SessionsCount;
     private $isActivated;
+    private $date;
 
     function __construct()
     {
@@ -32,6 +33,14 @@ class ptMemberships extends Model
         $this->ID = $ID;
     }
 
+    public function setdate($date)
+    {
+        $this->date = $date;
+    }
+    public function getdate($date)
+    {
+       return $this->date ;
+    }
     public function getClientID()
     {
         return $this->ClientID;
