@@ -1,6 +1,7 @@
 <?php
 
 require_once("Model.php");
+require_once("ObserverModel.php");
 
 // include_once "../includes/dbh.inc.php";
 include_once "../views/send_pw_email.php";
@@ -8,8 +9,7 @@ include_once "../views/send_pw_email.php";
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-
-class Client extends Model
+class Client extends Model implements Observer
 {
     private $ID;
     private $FirstName;
@@ -356,6 +356,25 @@ class Client extends Model
     {
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
         return $this->db->query($sql);
+    }
+
+    public function update($message)
+    {
+        $clients = $this->getAllClients();
+
+        // Loop through each client and send the notification
+        foreach ($clients as $client) {
+            $toEmail = $client->getEmail();
+
+            // Call your existing function to send the email notification
+            $success = ConfirmationMailer::sendNewPtPackageNotification($toEmail, $message);
+
+            if ($success) {
+                error_log("Email sent successfully for update ($message) to $toEmail");
+            } else {
+                error_log("Error sending email for update ($message) to $toEmail");
+            }
+        }
     }
 }
 ?>

@@ -7,7 +7,8 @@ include_once "EmployeeModel.php";
 include_once "ClientModel.php";
 include_once "MembershipsModel.php";
 
-class ptPackages extends Model
+
+class ptPackages extends Model implements Subject
 {
     private $ID;
     private $Name;
@@ -15,6 +16,8 @@ class ptPackages extends Model
     private $MinPackageMonths;
     private $Price;
     private $isActivated;
+
+    private $observers = [];
 
     function __construct()
     {
@@ -155,6 +158,9 @@ class ptPackages extends Model
 
         $sql = "INSERT INTO `private training package` (Name, NumOfSessions, MinPackageMonths, Price, isActivated) 
                 VALUES ('$Name', '$NumOfSessions', '$MinPackageMonths', '$Price','$isActivated')";
+
+        $this->notifyObservers("New PT Package Added: " . $ptPackage->getName());
+
         return $this->db->query($sql);
     }
 
@@ -193,6 +199,14 @@ class ptPackages extends Model
         return null;
     }
 
+    public function addObserver(Observer $observer){
+        $this->observers[] = $observer;
+    }
+    public function notifyObservers($message){
+        foreach ($this->observers as $observer) {
+            $observer->update($message);
+        }
+    }
 }
 
 ?>

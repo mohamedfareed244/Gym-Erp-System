@@ -7,7 +7,9 @@ include_once "EmployeeModel.php";
 include_once "ClassesModel.php";
 include_once "ptPackageModel.php";
 
-class Coach extends Employee
+include_once "../views/send_pw_email.php";
+
+class Coach extends Employee implements Observer
 {
 
     public function __construct() {
@@ -103,6 +105,25 @@ class Coach extends Employee
                 );
             }
             return $results;
+        }
+    }
+
+    public function update($message)
+    {
+        $coaches = $this->getAllCoaches();
+
+        // Loop through each coach and send the notification
+        foreach ($coaches as $coach) {
+            $toEmail = $coach->getEmail();
+
+            // Call your existing function to send the email notification
+            $success = ConfirmationMailer::sendNewPtPackageNotification($toEmail, $message);
+
+            if ($success) {
+                error_log("Email sent successfully for update ($message) to $toEmail");
+            } else {
+                error_log("Error sending email for update ($message) to $toEmail");
+            }
         }
     }
 
