@@ -180,7 +180,7 @@ class EmployeeController extends Controller
                     $_SESSION["Salary"] = $row["Salary"];
                     $_SESSION["Address"] = $row["Address"];
                     $_SESSION["JobTitle"] = $row["JobTitle"];
-                    $_SESSION['Img'] = $row["Img"];
+                    $_SESSION["Img"] = $row["Img"];
                     header("Location: ../views/profile.php?ID=$ID");
                     exit();
                 } else {
