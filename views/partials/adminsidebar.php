@@ -1,24 +1,9 @@
-<!-- <style>
-    ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(224, 224, 224);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(31, 31, 31);
-}
-
-</style> -->
-
-<?php 
-if(session_status() === PHP_SESSION_NONE) session_start();
+<?php
+if (session_status() === PHP_SESSION_NONE) session_start();
 require "../Controllers/EmployeeController.php";
 $model = new Employee();
-$emp= new EmployeeController($model);
-$result=$emp->get_emp_auth(3);
+$emp = new EmployeeController($model);
+$result = $emp->get_emp_auth(1);
 
 ?>
 <div class="sidebar close">
@@ -28,143 +13,190 @@ $result=$emp->get_emp_auth(3);
         <span class="logo-name" style="font-weight:300">Admin</span>
     </div>
     <ul class="nav-links">
-        <?php 
-        foreach($result as $res){
-          if ($res["Header"]==='Dashboard'){ 
-            echo "  <li>
-            <a href=".$res["LinkAddress"].">
+        <?php
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Dashboard') {
+                echo "  <li>
+            <a href=" . $res["LinkAddress"] . ">
                 <i class='bx bxs-grid-alt'></i>
-                <span class='link-name'>".$res["FriendlyName"]."</span>
+                <span class='link-name'>" . $res["FriendlyName"] . "</span>
             </a>
             <ul class='sub-menu blank'>
-                <li><a class='link-name' href='../views/admindashboard.php'>".$res["LinkAddress"]."</a></li>
+            <li><a class='link-name' href='" . $res["FriendlyName"] . "'>" . $res["FriendlyName"] . "</a></li>
             </ul>
         </li>";
-          }
+            }
         }
         ?>
-      
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class='fas fa-user-friends'></i>
-                    <span class="link-name">Clients</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="../views/clientdetails.php">Clients</a></li>
-                <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='Clients'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
+
+        <?php
+        $clientsSectionOutput = false;
+        $clientsLinks = [];
+
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Clients') {
+                if (!$clientsSectionOutput) {
+                    echo "<li>
+                <div class='icon-link'>
+                    <a href='#'>
+                        <i class='fas fa-user-friends'></i>
+                        <span class='link-name'>Clients</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class='sub-menu'>
+                <li><a class='link-name' href=''>" . $res["Header"] . "</a></li>";
+                    $clientsSectionOutput = true;
                 }
-                ?>
-                
-            </ul>
-        </li>
+
+                $clientsLinks[] = "<li><a href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>";
+            }
+        }
+
+        if ($clientsSectionOutput) {
+            echo implode("", $clientsLinks);
+            echo "</ul></li>";
+        }
+        ?>
 
 
-        <li>
-            <div class="icon-link">
-                <a href="../views/coachesadmin.php">
-                    <i class='fas fa-id-badge'></i>
-                    <span class="link-name">Coaches</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="../views/coachesadmin.php">Coaches</a></li>
-                <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='Coaches'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
-                }
-                ?>
-            </ul>
-        </li>
+        <?php
+        $coachesSectionOutput = false;
+        $coachesLinks = [];
 
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class='fa fa-building'></i>
-                    <span class="link-name">HR</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="#">HR </a></li>
-                <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='HR'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Coaches') {
+                if (!$coachesSectionOutput) {
+                    echo "<li>
+                <div class='icon-link'>
+                    <a href='#'>
+                        <i class='fas fa-id-badge'></i>
+                        <span class='link-name'>Coaches</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class='sub-menu'>
+                <li><a class='link-name' href=''>" . $res["Header"] . "</a></li>";
+                    $coachesSectionOutput = true;
                 }
-                ?>
-            </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class='fas fa-id-badge'></i>
-                    <span class="link-name">Admin</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="#">Admin </a></li>
-               
-                <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='Admin'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
-                }
-                ?>
-            </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-                <a href="#">
-                    <i class='bx bx-dumbbell' style="font-size:24px;" ></i>
-                    <span class="link-name">Packages</span>
-                </a>
-                <i class='bx bx-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link-name" href="#">Packages</a></li>
-                <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='Packages'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
-                }
-                ?>
 
-            </ul>
-        </li>
+                $coachesLinks[] = "<li><a href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>";
+            }
+        }
 
-        <li>
+        if ($coachesSectionOutput) {
+            echo implode("", $coachesLinks);
+            echo "</ul></li>";
+        }
+        ?>
 
-        
-            <div class="icon-link">
-                <a href="../views/requests.php">
-                    <i class='bx bx-info-circle' style="font-size:24px;" ></i>
-                    <span class="link-name">Requests</span>
-                </a>
-            </div>
-            <ul class="sub-menu blank">
-            <?php
-                foreach($result as $res){
-                    if ($res["Header"]==='Requests'){
-                        echo "<li><a href=".$res["LinkAddress"].">".$res["FriendlyName"]."</a></li>";
-                    } 
+        <?php
+        $hrSectionOutput = false;
+        $hrLinks = [];
+
+        foreach ($result as $res) {
+            if ($res["Header"] === 'HR') {
+                if (!$hrSectionOutput) {
+                    echo "<li>
+                <div class='icon-link'>
+                    <a href='#'>
+                        <i class='fa fa-building'></i>
+                        <span class='link-name'>HR</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class='sub-menu'>
+                    <li><a class='link-name' href=''>" . $res["Header"] . "</a></li>";
+                    $hrSectionOutput = true;
                 }
-                ?>
+
+                $hrLinks[] = "<li><a href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>";
+            }
+        }
+
+        if ($hrSectionOutput) {
+            echo implode("", $hrLinks);
+            echo "</ul></li>";
+        }
+        ?>
+
+
+        <?php
+        $adminSectionOutput = false;
+        $adminLinks = [];
+
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Admin') {
+                if (!$adminSectionOutput) {
+                    echo "<li>
+                <div class='icon-link'>
+                    <a href='#'>
+                        <i class='fas fa-id-badge'></i>
+                        <span class='link-name'>Admin</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class='sub-menu'>
+                    <li><a class='link-name' href=''>" . $res["Header"] . "</a></li>";
+                    $adminSectionOutput = true;
+                }
+
+                $adminLinks[] = "<li><a href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>";
+            }
+        }
+
+        if ($adminSectionOutput) {
+            echo implode("", $adminLinks);
+            echo "</ul></li>";
+        }
+        ?>
+        <?php
+        $packagesSectionOutput = false;
+        $packagesLinks = [];
+
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Packages') {
+                if (!$packagesSectionOutput) {
+                    echo "<li>
+                <div class='icon-link'>
+                    <a href='#'>
+                        <i class='bx bx-dumbbell' style='font-size:24px;'></i>
+                        <span class='link-name'>Packages</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class='sub-menu'>
+                    <li><a class='link-name' href=''>" . $res["Header"] . "</a></li>";
+                    $packagesSectionOutput = true;
+                }
+
+                $packagesLinks[] = "<li><a href='" . $res["LinkAddress"] . "'>" . $res["FriendlyName"] . "</a></li>";
+            }
+        }
+
+        if ($packagesSectionOutput) {
+            echo implode("", $packagesLinks);
+            echo "</ul></li>";
+        }
+        ?>
+
+
+
+        <?php
+        foreach ($result as $res) {
+            if ($res["Header"] === 'Requests') {
+                echo "  <li>
+            <a href=" . $res["LinkAddress"] . ">
+                <i class='bx bx-info-circle' style='font-size:24px;' ></i>
+                <span class='link-name'>" . $res["FriendlyName"] . "</span>
+            </a>
+            <ul class='sub-menu blank'>
+            <li><a class='link-name' href='" . $res["FriendlyName"] . "'>" . $res["FriendlyName"] . "</a></li>
             </ul>
-        </li>
+        </li>";
+            }
+        }
+        ?>
 
         <li>
             <div class="icon-link">
@@ -213,20 +245,20 @@ $result=$emp->get_emp_auth(3);
 
 
 <script>
-let arrow = document.querySelectorAll(".arrow");
-for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e) => {
-        let arrowParent = e.target.parentElement.parentElement;
-        arrowParent.classList.toggle("showMenu");
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;
+            arrowParent.classList.toggle("showMenu");
 
-        console.log(arrowParent);
+            console.log(arrowParent);
 
+        });
+    }
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
     });
-}
-
-let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".bx-menu");
-sidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-});
 </script>

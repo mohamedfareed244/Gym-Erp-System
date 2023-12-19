@@ -31,6 +31,7 @@
     include_once "../Models/ReservedClassModel.php";
     include_once "../Models/MembershipsModel.php";
     include_once "../Models/ptMembershipsModel.php";
+    include_once "../Models/AssignedClassModel.php";
 
 
     $ReservedClasses = new ReservedClass();
