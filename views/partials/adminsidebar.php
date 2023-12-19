@@ -7,14 +7,15 @@ exit();
 require "../Controllers/EmployeeController.php";
 $model = new Employee();
 $emp = new EmployeeController($model);
-$result = $emp->get_emp_auth(4);
+$result = $emp->get_emp_auth( $_SESSION["JobTitle"]);
+$JobTitle = $model->getJobTitleByID($_SESSION["JobTitle"]);
 
 ?>
 <div class="sidebar close">
 
     <div class="logo-details">
         <i class='bx bx-user-circle'></i>
-        <span class="logo-name" style="font-weight:300">Admin</span>
+        <span class="logo-name" style="font-weight:300"><?php echo $JobTitle ?></span>
     </div>
     <ul class="nav-links">
         <?php

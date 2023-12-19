@@ -9,7 +9,8 @@ error_reporting(E_ALL);
 class Employee extends Staff
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -17,9 +18,9 @@ class Employee extends Staff
     {
         $sql = "SELECT * FROM employee";
         $result = $this->db->query($sql);
-    
+
         $employees = array();
-    
+
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $employee = new Employee();
@@ -31,14 +32,14 @@ class Employee extends Staff
                 $employee->setJobTitle($row['JobTitle']);
                 $employee->setAddress($row['Address']);
                 $employee->setPhoneNumber($row['PhoneNumber']);
-    
+
                 $employees[] = $employee;
             }
         }
-    
+
         return $employees;
     }
-    
+
 
     public function addEmployee($employee)
     {
@@ -61,7 +62,7 @@ class Employee extends Staff
     {
         $sql = "SELECT * FROM employee WHERE ID = '$employeeID'";
         $result = $this->db->query($sql);
-    
+
         if ($result) {
             $employeeData = $this->db->fetchRow($result);
             $employee = new Employee();
@@ -75,11 +76,11 @@ class Employee extends Staff
             $employee->setPhoneNumber($employeeData['PhoneNumber']);
             return $employee;
         } else {
-            return null; 
+            return null;
             // No data found for the given employeeID
         }
     }
-    
+
 
     public function updateEmployee($employee)
     {
@@ -90,7 +91,7 @@ class Employee extends Staff
         $Password = $employee->getPassword();
         $Image = $employee->getImg();
         $employee_id = $_SESSION['ID'];
-    
+
         if (!empty($Password)) {
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
             $sql = "UPDATE employee SET Name='$Name', Email='$Email', Password='$hashedPassword', PhoneNumber='$PhoneNumber', Address='$Address'";
@@ -108,38 +109,38 @@ class Employee extends Staff
             return $this->db->query($sql);
         }
     }
-    
-    
+
+
     public function updateEmployeeAdmin($employee)
     {
         $employeeInfo = new Employee();
         $employeeInfo = $employeeInfo->getEmployeeByID($employee->getID());
-    
+
         if (!empty($employee->getName())) {
             $employeeInfo->setName($employee->getName());
         }
-    
+
         if (!empty($employee->getAddress())) {
             $employeeInfo->setAddress($employee->getAddress());
         }
-    
+
         if (!empty($employee->getPhoneNumber())) {
             $employeeInfo->setPhoneNumber($employee->getPhoneNumber());
         }
-    
+
         if (!empty($employee->getEmail())) {
             $employeeInfo->setEmail($employee->getEmail());
         }
-    
+
         if (!empty($employee->getPassword())) {
             $hashedPassword = password_hash($employee->getPassword(), PASSWORD_DEFAULT);
             $employeeInfo->setPassword($hashedPassword);
         }
-    
+
         if (!empty($employee->getImg())) {
             $employeeInfo->setImg($employee->getImg());
         }
-    
+
         $employeeID = $employee->getID();
         $name = $employeeInfo->getName();
         $address = $employeeInfo->getAddress();
@@ -147,24 +148,24 @@ class Employee extends Staff
         $email = $employeeInfo->getEmail();
         $password = $employeeInfo->getPassword();
         $img = $employeeInfo->getImg();
-    
+
         $sql = "UPDATE employee SET Name='$name', Address='$address', PhoneNumber='$phoneNumber', Email='$email', Password='$password'";
-    
+
         if (!empty($img)) {
             $sql .= ", Img='$img'";
         }
-    
+
         $sql .= " WHERE ID = $employeeID";
-    
+
         $result = $this->db->query($sql);
-    
+
         if ($result) {
             echo "Query executed successfully";
         } else {
         }
-    
+
         return $result;
-    }    
+    }
 
     public function deleteEmployeeById($employeeID)
     {
@@ -199,7 +200,7 @@ class Employee extends Staff
         $result = $this->db->query($sql);
         return $result;
     }
-    
+
     public function getJobTitles()
     {
 
@@ -209,13 +210,25 @@ class Employee extends Staff
         return $result;
     }
 
-    public function get_emp_auth($id){
-        $sql ="SELECT authority.Header,authority.FriendlyName,authority.LinkAddress FROM authority JOIN `employee authorities` as empauth on empauth.AuthorityID=authority.ID where empauth.JobTitleID =$id";
+    public function get_emp_auth($id)
+    {
+        $sql = "SELECT authority.Header,authority.FriendlyName,authority.LinkAddress FROM authority JOIN `employee authorities` as empauth on empauth.AuthorityID=authority.ID where empauth.JobTitleID =$id";
         $result = $this->db->query($sql);
 
         return $result;
     }
 
-}
+    public function getJobTitleByID($jobTitleID)
+    {
+        $sql = "SELECT Name FROM job_titles WHERE Id = '$jobTitleID'";
+        $result = $this->db->query($sql);
 
-?>
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $jobTitleName = $row['Name'];
+            return $jobTitleName;
+        } else {
+            return null;
+        }
+    }
+}
