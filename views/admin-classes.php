@@ -16,10 +16,28 @@
     <script src="../public/js/classes.js?v=<?php echo time(); ?>"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
 <body>
+<div id="viewclients">
+<i class="fa fa-close"  style="font-size:30px; color :black;" id="close"></i>
+<table class="table">
+
+<thead>
+    <tr>
+        <td class="col"> Client ID  </td>
+        <td class="col"> Client Name</td>
+        <td class="col"> Client Phone Number </td>
+        <td class="col"> Attend </td>
+    </tr>
+</thead>
+<tbody id="clienttable">
+
+</tbody>
+</table>
+</div>
     <?php
     session_start();
     require("partials/adminsidebar.php");
@@ -61,7 +79,7 @@
                             <td> <?php echo $result['PhoneNumber'] ?> </td>
                             <td> <?php echo $result['Date'] ?> </td>
 
-                            <td><button id="add-btn" action="viewClients">View Clients</button>
+                            <td><button id="add-btn"  onclick ="showss('<?php echo $result['ClassID'] ;?>')">View Clients</button>
                                 <button id="add-btn" style="background-color:red; color:white;" data-classid="<?php echo $result['ClassID']; ?>" data-coachid="<?php echo $result['CoachID']; ?>" data-date="<?php echo $result['Date']; ?>" onclick='deleteClass(this)'>Delete</button>
                         </tr>
                     <?php endforeach; ?>
@@ -70,7 +88,7 @@
             <br>
                     </div>
                     </div>
-    <script>
+    <script language="javascript">
 
 
         function deleteClass(button) {
@@ -126,7 +144,37 @@
                     }
                 }
             }
+
+        
         }
+        function showss(x) {
+                console.log("ind");
+        fetch(`../Models/AssignedClassModel.php?x=${x}`)
+            .then(response => {
+                // Check if the response status is OK (status code 200)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                // Parse the response as text
+                return response.text();
+            })
+            .then(htmlContent => {
+
+
+                // Update your view with the received HTML content
+                document.getElementById("clienttable").innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+        document.getElementById("viewclients").style.display = "block";
+
+
+    }
+    document.getElementById("close").addEventListener('click', function() {
+        document.getElementById("viewclients").style.display = "none";
+    });
     </script>
 
 </body>
