@@ -147,7 +147,7 @@
               console.log("Error: Row not found in the DOM.");
             }
           } else {
-            console.log("Error deleting employee.");
+            console.log("Error deleting employee." + response);
           }
         },
         error: function (xhr, status, error) {

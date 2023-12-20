@@ -180,6 +180,12 @@ class AssignedClass extends Model
 
         return $this->db->query($sql);
     }
+    public function deleteCoachesClass($coachID)
+    {
+        $sql = "DELETE FROM assignedclass where  CoachID = '$coachID'";
+
+        return $this->db->query($sql);
+    }
 
     public function getAssignedClassDetails()
     {

@@ -2,6 +2,7 @@
 
 require_once("Model.php");
 require_once("StaffModel.php");
+require_once("AssignedClassModel.php");
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -170,6 +171,9 @@ class Employee extends Staff
     public function deleteEmployeeById($employeeID)
     {
         $sql = "DELETE from employee where ID =" . $employeeID;
+        $sql1 = "DELETE FROM reserved class where CoachID = '$employeeID'";
+        $assignedClasses = new AssignedClass();
+        $assignedClasses = $assignedClasses->deleteCoachesClass($employeeID);
 
         $result = $this->db->query($sql);
         if ($result) {
