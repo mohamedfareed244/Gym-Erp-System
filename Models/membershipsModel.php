@@ -181,6 +181,12 @@ class Memberships extends Model
         $result = $this->db->query($sql);
         return $result;
     }
+    public function deleteMembershipClient($clientID)
+    {
+        $sql = "DELETE from membership where ClientID =" . $clientID;
+        $result = $this->db->query($sql);
+        return $result;
+    }
     public function createMembershipEmployeeSide($clientId, $packageId)
     {
         $isActivated = "Activated";
@@ -267,12 +273,8 @@ class Memberships extends Model
     {
         $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId'";
         $result = $this->db->query($sql);
-        if ($result) {
-            $found = true;
-        } else {
-            $found = false;
-        }
-        return $found;
+        
+        return $result;
     }
 
     public function getMembershipByID($membershipID)

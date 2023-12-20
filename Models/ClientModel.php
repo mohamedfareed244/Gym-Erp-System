@@ -3,6 +3,8 @@
 require_once("Model.php");
 require_once("ObserverModel.php");
 require_once("UsersModel.php");
+require_once("membershipsModel.php");
+require_once("ptMembershipsModel.php");
 
 // include_once "../includes/dbh.inc.php";
 include_once "../views/send_pw_email.php";
@@ -322,15 +324,15 @@ class Client extends Users implements Observer
         $membership = new Memberships();
         $found = $membership->hasMembership($clientID);
         if ($found) {
-            $membership = $membership->getMembershipByClientID($clientID);
             $ptmembership = new ptMemberships();
             $ptFound = $ptmembership->HasPtMembership($clientID);
             if( $ptFound ) {    
                 $ptFound = $ptmembership->deletePTMembershipClient($clientID);
             }
-            $membership->deleteMembership($membership->getID());
+            $membership = $membership->deleteMembershipClient($clientID);
         }
-        $sql1 = "DELETE FROM reserved class where ClientID = '$clientID'";
+        $sql1 = "DELETE FROM `reserved class` where ClientID = '$clientID'";
+        $result1 = $this->db->query($sql1);
         $sql = "DELETE from `client` where ID ='$clientID'";
 
         $result = $this->db->query($sql);

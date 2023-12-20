@@ -10,6 +10,7 @@
     <!--css/icons/boostrap/jquery/fonts/images start-->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/CSS/adminsidebar.css?v=<?php echo time(); ?>" type="text/css">
@@ -78,31 +79,32 @@
                             if ($client->HasMembership == 'Yes' && $client->HasPtPackage == 'No') {
                                 echo '<td><button class="btn" disabled>Add</button></td>';
                                 echo '<td><a href="addCLientPtPackage.php?ID=' . $client->getID() . '" class="btn btn-freeze">Add</a></td>';
-                            } else if ($client->HasPtPackage == 'Yes' && $client->HasMembership == 'Yes') {
+                            } else if($client->HasPtPackage == 'Yes' && $client->HasMembership == 'Yes') {
                                 echo '<td><button class="btn" disabled>Add</button></td>';
                                 echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
-                            } else {
+                            } else 
+                            {
                                 echo '<td><a href="addclientmembership.php?ID=' . $client->getID() . '" class="btn">Add</a></td>';
                                 echo '<td><button class="btn btn-freeze" disabled>Add</button></td>';
                             }
 
                             echo "<td><a href='editclient.php?ID=" . $client->getID() . "' class=\"btn\">Edit</a>       ";
-                            echo "<button class=\"btn btn-delete\" onclick='showDeleteModal(" . $client->getID() . ")'>Delete</button></td>"; ?>
-                                 <div class="modal" id="deleteModal-<?php echo $client->getID(); ?>">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <span class="close-btn" onclick="hideDeleteModal(<?php echo $client->getID() ?>)">&times;</span>
-                                            <div>
-                                                <label>Are you sure you want to delete this client?</label>
-                                            </div>
-                                            <button class="btn btn-delete"
-                                                onclick='deleteClient(<?php echo $client->getID() ?>)'
-                                                style="background-color:red">Delete</button>
+                            echo "<button class=\"btn btn-delete\" onclick='showDeleteModal(". $client->getID() .")'>Delete</button></td>"; ?>
+                             <div class="modal" id="deleteModal-<?php echo $client->getID(); ?>">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <span class="close-btn" onclick='hideDeleteModal(<?php echo $client->getID() ?>)'>&times;</span>
+                                        <div>
+                                            <label>Are you sure you want to delete this client?</label>
                                         </div>
+                                        <button class="btn btn-delete"
+                                            onclick='deleteClient(<?php echo $client->getID() ?>)'
+                                            style="background-color:red">Delete</button>
                                     </div>
                                 </div>
-                                <?php
-                                echo '</tr>';
+                            </div>
+                            <?php
+                            echo '</tr>';
                         }
                         ?>
 
@@ -111,16 +113,25 @@
 
             </div>
             <hr>
+            <div class="alert hide" style="background-color:red"> 
+                    <span class="fas fa-check-circle"></span>
+                    <span class="msg"></span>
+                    <div class="close-btn" style="background-color:red">
+                        <span class="fas fa-times"></span>
+                    </div>
+                </div>
         </div>
     </div>
 
 </body>
 <script>
  function showDeleteModal(clientId) {
-            $('#deleteModal-' + clientId).fadeIn();}
+            $('#deleteModal-' + clientId).fadeIn();
+        }
 
- function hideDeleteModal(clientId) {
-            $('#deleteModal-' + clientId).fadeOut();}
+        function hideDeleteModal(clientId) {
+            $('#deleteModal-' + clientId).fadeOut();
+        }
 
 
 function myFunction() {
@@ -144,7 +155,7 @@ function myFunction() {
 }
 
 function deleteClient(clientId) {
-    console.log("deleteee");
+    console.log("delete client " + clientId);
     $.ajax({
         type: "POST",
         url: "../Controllers/ClientController.php",
@@ -153,12 +164,14 @@ function deleteClient(clientId) {
             clientId: clientId,
         },
         success: function(response) {
+            
                 var tableRow = document.getElementById('row-' + clientId);
                 if (tableRow) {
                     tableRow.parentNode.removeChild(tableRow);
                 } else {
-                    console.log("Error."+ response);
+                    console.log("Error.");
                 }
+                
         },
         error: function(xhr, status, error) {
             console.error("AJAX error: " + status + " - " + error);

@@ -4,7 +4,6 @@ session_start();
 
 require_once("Controller.php");
 require_once("../Models/ClientModel.php");
-echo "entered controllers";
 class ClientController extends Controller
 {
 
@@ -422,7 +421,7 @@ class ClientController extends Controller
     public function editClientAdmin()
     {
         $isValid = true;
-        $fnameErr = $lnameErr = $emailErr  = $phonenoErr = "";
+        $fnameErr = $lnameErr = $emailErr = $phonenoErr = "";
         if (isset($_POST['clientInfo'])) {
             $clientInfo = $_POST['clientInfo'];
             $ID = $clientInfo['client_id'];
@@ -485,11 +484,11 @@ class ClientController extends Controller
                         'message' => "Updated Successfully",
                     ];
                 }
-            }else{
+            } else {
                 $response = [
                     'status' => "error",
                     'message' => "error updating client details",
-                    'fnameErr'=> $fnameErr,
+                    'fnameErr' => $fnameErr,
                     'lnameErr' => $lnameErr,
                     'phonenoErr' => $phonenoErr,
                     'emailErr' => $emailErr,
@@ -516,20 +515,19 @@ class ClientController extends Controller
     public function deleteCLientAdminSide()
     {
         echo "delete1";
-        if (isset($_POST["clientId"])) {
 
-            $clientId = $_POST["clientId"];
+        $clientId = $_POST["clientId"];
         echo $clientId;
 
-            $client = new Client();
-            $result = $client->deleteClientByID($clientId);
+        $client = new Client();
+        $result = $client->deleteClientByID($clientId);
 
-            if ($result) {
-                echo "success";
-            } else {
-                echo "failure";
-            }
+        if ($result) {
+            echo "success";
+        } else {
+            echo $result;
         }
+
     }
 }
 
@@ -564,5 +562,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         default:
             break;
     }
+
 }
 ?>
