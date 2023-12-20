@@ -234,7 +234,7 @@ class Client extends Users implements Observer
     {
         $Fname = $client->getFirstName();
         $Lname = $client->getLastName();
-        $Phone = $client->getPhone();
+        $Phone = $client->getPhoneNumber();
         $Email = $client->getEmail();
         $Password = $client->getPassword();
 
@@ -313,7 +313,9 @@ class Client extends Users implements Observer
         $found = $membership->HasMembership($_SESSION['ID']);
         if ($found) {
             $membership = $membership->getMembershipByClientID($clientID);
-            $membership->deleteMembership($membership->getID());
+            if ($membership) {
+                $membership->deleteMembership($membership->getID());
+            }
         }
         $sql = "DELETE FROM reserved class where ClientID = '$clientID'";
         $sql = "DELETE from client where ID =" . $_SESSION['ID'];
@@ -326,7 +328,7 @@ class Client extends Users implements Observer
         if ($found) {
             $ptmembership = new ptMemberships();
             $ptFound = $ptmembership->HasPtMembership($clientID);
-            if( $ptFound ) {    
+            if ($ptFound) {
                 $ptFound = $ptmembership->deletePTMembershipClient($clientID);
             }
             $membership = $membership->deleteMembershipClient($clientID);
