@@ -263,6 +263,17 @@ class Memberships extends Model
         }
         return $found;
     }
+    public function hasMembership($clientId)
+    {
+        $sql = "SELECT * FROM `membership` WHERE `ClientID` = '$clientId'";
+        $result = $this->db->query($sql);
+        if ($result) {
+            $found = true;
+        } else {
+            $found = false;
+        }
+        return $found;
+    }
 
     public function getMembershipByID($membershipID)
     {
@@ -344,7 +355,7 @@ class Memberships extends Model
             WHERE membership.isActivated = '$isActivated' AND membership.ClientID = " . $_SESSION['ID'];
 
         $result = $this->db->query($sql);
-        
+
         $results = array();
 
         if ($result) {

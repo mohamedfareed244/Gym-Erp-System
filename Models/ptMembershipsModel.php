@@ -205,6 +205,17 @@ class ptMemberships extends Model
         }
         return false;
     }
+    public function hasPtMembership($clientId)
+    {
+        $sql = "SELECT * FROM `private training membership` WHERE `ClientID` = '$clientId'";
+        $result = $this->db->query($sql);
+        if ($result) {
+            $found = true;
+        } else {
+            $found = false;
+        }
+        return $found;
+    }
 
     public function getClientPtMembershipInfo()
     {
@@ -216,6 +227,33 @@ class ptMemberships extends Model
                 INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
                 INNER JOIN employee ON employee.ID = `private training membership`.CoachID
                 WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = " . $_SESSION['ID'];
+
+        $result = $this->db->query($sql);
+
+        $results = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $results[] = array(
+                    'SessionsCount' => $row['SessionsCount'],
+                    'NumOfSessions' => $row['NumOfSessions'],
+                    'Name' => $row['Name'],
+                    'Price' => $row['Price']
+                );
+            }
+            return $results;
+        }
+    }
+    public function getClientPtMembership($clientID)
+    {
+
+        $isActivated = "Activated";
+
+        $sql = "SELECT `private training membership`.SessionsCount, `private training package`.NumOfSessions, `private training package`.Price, employee.Name
+                FROM `private training membership`
+                INNER JOIN `private training package` ON `private training package`.ID = `private training membership`.PrivateTrainingPackageID 
+                INNER JOIN employee ON employee.ID = `private training membership`.CoachID
+                WHERE `private training membership`.isActivated = '$isActivated' AND `private training membership`.ClientID = '$clientID'";
 
         $result = $this->db->query($sql);
 
@@ -280,6 +318,18 @@ class ptMemberships extends Model
         WHERE ID = $PrivateTrainingPackageID";
 
         return $this->db->query($sql);
+    }
+    public function deletePTMembership($ptmembershipID)
+    {
+        $sql = "DELETE from `private training membership` where ID =" . $ptmembershipID;
+        $result = $this->db->query($sql);
+        return $result;
+    }
+    public function deletePTMembershipClient($clientID)
+    {
+        $sql = "DELETE from `private training membership` where ClientID =" . $clientID;
+        $result = $this->db->query($sql);
+        return $result;
     }
 
 }
