@@ -2,7 +2,9 @@
 
 **GymERP** is a **dynamic and modular ERP system** designed to **fully manage gym operations**. Built with **PHP, Bootstrap, and MySQL**, it provides a **complete solution** for handling **memberships, class reservations, personal training, HR management, payroll, and role-based access**.  
 
-The system follows **role-based access control (RBAC)**, ensuring **each user (Admin, Coach, Client, Employee)** has specific privileges based on their role.  
+The system follows:  
+✅ **MVC Architecture** – Ensures **separation of concerns** for maintainability  
+✅ **Observer Design Pattern** – Used for **event-driven updates** (e.g., auto-updating salary calculations, notifying users about reservations)  
 
 ---
 
@@ -31,6 +33,10 @@ The system follows **role-based access control (RBAC)**, ensuring **each user (A
    - **Coach Panel** – Take class attendance and track training schedules  
    - **Client Panel** – View booked classes, personal trainers, and attendance history  
    - **Employee Panel** – Register clients, reserve memberships, and book classes  
+✅ **Event-Based Notifications** – Uses **Observer Pattern** to notify users about:  
+   - **Successful reservations**  
+   - **Class cancellations**  
+   - **Payroll updates**  
 ✅ **Responsive UI** – Built with **Bootstrap** for seamless usage across devices  
 
 ---
@@ -40,7 +46,8 @@ The system follows **role-based access control (RBAC)**, ensuring **each user (A
 - **Backend:** PHP (Laravel or Core PHP)  
 - **Frontend:** Bootstrap, CSS, JavaScript  
 - **Database:** MySQL  
-- **Architecture:** **Modular ERP Design** with **Role-Based Access Control (RBAC)**  
+- **Architecture:** **MVC Design Pattern**  
+- **Design Pattern:** **Observer Pattern** (Event-driven notifications & salary updates)  
 
 ---
 
